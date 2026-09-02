@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Patient report library | n1.care</title>
+  <meta name="description" content="Explore anonymised patient profiles with related health summaries, longitudinal reports, and focused clinical reviews.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23376361'/%3E%3Ctext x='6' y='22' fill='white' font-family='Arial' font-weight='700' font-size='16'%3En1%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="art-directions.css">
+  <link rel="stylesheet" href="marketing-pages.css">
+  <link rel="stylesheet" href="buttons.css">
+  <link rel="stylesheet" href="brand-tokens.css">
+  <link rel="stylesheet" href="smoked-birch-copper-patina.css">
+  <script defer src="marketing-pages.js"></script>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap");
+    :root { --ink:#202523; --teal:#376361; --bright:#48a9a6; --deep:#244b49; --cream:#f3ede2; --paper:#fffdf9; --mist:#c9d8d4; --muted:#64706c; --serif:Georgia,'Times New Roman',serif; --sans:'Work Sans',ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; }
+    * { box-sizing:border-box; }
+    html { background:var(--cream); scroll-behavior:smooth; }
+    body { margin:0; color:var(--ink); background:linear-gradient(180deg,#e6f0ed 0,#f3ede2 420px); font-family:var(--sans); }
+    button,input,select { font:inherit; }
+    a { color:inherit; }
+    .shell { width:min(1240px,calc(100% - 40px)); margin-inline:auto; }
+    .hero { display:grid; grid-template-columns:1.05fr .95fr; gap:clamp(40px,8vw,110px); align-items:end; padding:88px 0 68px; }
+    .eyebrow { margin:0 0 16px; color:#2f7773; font-size:10px; font-weight:800; letter-spacing:.15em; text-transform:uppercase; }
+    h1 { max-width:760px; margin:0; font:400 clamp(48px,7vw,82px)/.94 var(--serif); letter-spacing:-.045em; }
+    .hero-copy { max-width:540px; margin:0 0 4px; color:#56625e; font-size:16px; line-height:1.7; }
+    .consent-note { display:grid; grid-template-columns:38px 1fr; gap:13px; margin-top:24px; padding:16px; border:1px solid #b9cec9; border-radius:12px; color:#46524e; background:rgba(255,253,249,.72); font-size:11px; line-height:1.55; }
+    .consent-note i { width:38px; height:38px; display:grid; place-items:center; border-radius:10px; color:var(--deep); background:#dcecea; font-style:normal; }
+    .consent-note b { display:block; margin-bottom:3px; color:var(--deep); font-size:12px; }
+    .library { padding:32px 0 96px; }
+    .library-head { display:flex; align-items:end; justify-content:space-between; gap:28px; padding-bottom:20px; border-bottom:1px solid #bfc9c5; }
+    .library-head h2 { margin:0; font:400 34px/1.05 var(--serif); }
+    .count { color:var(--muted); font-size:12px; }
+    .toolbar { display:grid; grid-template-columns:minmax(220px,1fr) auto; gap:14px; align-items:center; padding:20px 0 16px; }
+    .search { position:relative; }
+    .search input { width:100%; min-height:44px; padding:0 14px 0 40px; border:1px solid #b9c8c4; border-radius:8px; color:var(--ink); background:rgba(255,253,249,.92); outline:none; }
+    .search::before { position:absolute; top:13px; left:15px; color:#62706b; content:'⌕'; font-size:18px; }
+    .search input:focus, select:focus { border-color:var(--bright); box-shadow:0 0 0 3px rgba(72,169,166,.15); }
+    select { min-height:44px; padding:0 36px 0 12px; border:1px solid #b9c8c4; border-radius:8px; color:var(--deep); background:var(--paper); }
+    .filters { display:flex; gap:7px; overflow:auto; padding:0 0 22px; scrollbar-width:none; }
+    .filters::-webkit-scrollbar { display:none; }
+    .filter { flex:none; padding:8px 11px; border:1px solid #b9c8c4; border-radius:999px; color:#57635f; background:rgba(255,253,249,.68); font-size:10px; font-weight:700; cursor:pointer; }
+    .filter.is-active { color:#fff; border-color:var(--teal); background:var(--teal); }
+    .people-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
+    .person { min-width:0; overflow:hidden; border:1px solid #c3d0cc; border-radius:18px; background:var(--paper); box-shadow:0 24px 54px -44px rgba(35,56,50,.55); }
+    .person-head { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:14px; align-items:center; padding:22px 22px 18px; border-bottom:1px solid #dbe3e0; background:linear-gradient(135deg,#f7faf8,#edf5f2); }
+    .person-avatar { width:54px; height:54px; display:grid; place-items:center; border-radius:50%; color:#fff; background:var(--teal); font-size:15px; font-weight:800; letter-spacing:.03em; }
+    .person-name span,.person-name b,.person-name small { display:block; }
+    .person-name span { color:#2f7773; font-size:9px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }
+    .person-name b { margin-top:4px; font:400 28px/1 var(--serif); letter-spacing:-.025em; }
+    .person-name small { margin-top:6px; color:#66736f; font-size:11px; }
+    .report-count { align-self:start; padding:6px 9px; border-radius:999px; color:#315957; background:#dcece8; font-size:9px; font-weight:800; white-space:nowrap; }
+    .person-context { padding:18px 22px 16px; }
+    .person-context p { max-width:610px; margin:0; color:#56625e; font-size:13px; line-height:1.6; }
+    .person-tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:13px; }
+    .person-tags span { padding:6px 8px; border:1px solid #c8d6d2; border-radius:999px; color:#465752; background:#f8faf9; font-size:9px; font-weight:700; }
+    .person-reports { margin:0 22px 22px; overflow:hidden; border:1px solid #d4dedb; border-radius:12px; background:#fff; }
+    .person-reports > header,.person-report { display:grid; grid-template-columns:minmax(0,1fr) 96px 74px; gap:12px; align-items:center; }
+    .person-reports > header { min-height:36px; padding:0 13px; color:#6a7672; background:#edf3f1; font-size:8px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+    .person-report { min-height:68px; padding:10px 13px; border-top:1px solid #e0e7e5; }
+    .person-report div b,.person-report div small { display:block; }
+    .person-report div b { color:#29332f; font-size:12px; }
+    .person-report div small { margin-top:4px; color:#68746f; font-size:9px; line-height:1.35; }
+    .person-report > span { color:#5d6b66; font-size:9px; }
+    .person-report button { padding:8px 9px; border:1px solid #aac2bc; border-radius:7px; color:var(--deep); background:#fff; font-size:9px; font-weight:800; cursor:pointer; }
+    .person-report button:hover { color:#fff; border-color:var(--teal); background:var(--teal); }
+    .report { min-height:270px; display:flex; flex-direction:column; padding:18px; border:1px solid #c9d3cf; border-radius:14px; background:var(--paper); box-shadow:0 18px 45px -40px rgba(35,56,50,.55); transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease; }
+    .report:hover { border-color:#8db7b0; box-shadow:0 22px 48px -34px rgba(35,56,50,.42); transform:translateY(-3px); }
+    .report-top { display:flex; align-items:center; justify-content:space-between; gap:10px; }
+    .report-type { color:#2f7773; font-size:8px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; }
+    .shared { display:flex; align-items:center; gap:5px; color:#55716b; font-size:8px; font-weight:700; }
+    .shared::before { width:6px; height:6px; border-radius:50%; background:#48a987; content:''; }
+    .report h3 { margin:34px 0 10px; font:400 24px/1.08 var(--serif); letter-spacing:-.02em; }
+    .report p { margin:0; color:#67716e; font-size:11px; line-height:1.55; }
+    .meta { display:grid; grid-template-columns:1fr 1fr; gap:7px; margin-top:auto; padding-top:24px; }
+    .meta span { padding:8px; border-radius:7px; color:#6a7470; background:#f1f4f2; font-size:8px; }
+    .meta b { display:block; margin-top:3px; color:#2d3935; font-size:10px; }
+    .open { width:100%; margin-top:11px; padding:9px; border:1px solid #b7c8c4; border-radius:7px; color:var(--deep); background:#fff; font-size:9px; font-weight:800; cursor:pointer; }
+    .open:hover { color:#fff; border-color:var(--teal); background:var(--teal); }
+    .more-wrap { display:flex; justify-content:center; padding-top:30px; }
+    .more { padding:12px 17px; border:1px solid var(--teal); border-radius:8px; color:#fff; background:var(--teal); font-size:11px; font-weight:800; cursor:pointer; }
+    .empty { grid-column:1/-1; padding:80px 20px; border:1px dashed #aebdb9; border-radius:14px; color:var(--muted); text-align:center; }
+    dialog { width:min(660px,calc(100% - 28px)); padding:0; overflow:hidden; border:1px solid #9fbdb7; border-radius:16px; background:var(--paper); box-shadow:0 40px 90px rgba(25,44,39,.32); }
+    dialog::backdrop { background:rgba(26,47,43,.58); backdrop-filter:blur(5px); }
+    .dialog-head { display:flex; align-items:center; justify-content:space-between; padding:18px 20px; color:#fff; background:var(--teal); }
+    .dialog-head b { font-family:var(--serif); font-size:20px; font-weight:400; }
+    .dialog-head button { width:32px; height:32px; border:1px solid rgba(255,255,255,.35); border-radius:7px; color:#fff; background:transparent; cursor:pointer; }
+    .dialog-body { padding:26px; }
+    .dialog-body h3 { margin:0; font:400 34px/1.05 var(--serif); }
+    .dialog-body p { color:#606b67; font-size:13px; line-height:1.65; }
+    .placeholder-sheet { margin-top:24px; padding:20px; border:1px solid #d4dedb; border-radius:10px; background:#f6f8f7; }
+    .placeholder-sheet span { display:block; height:7px; margin-top:9px; border-radius:9px; background:#dce6e3; }
+    .placeholder-sheet span:nth-child(2) { width:82%; }.placeholder-sheet span:nth-child(3) { width:64%; }.placeholder-sheet span:nth-child(4) { width:90%; }
+    footer.site-footer { padding:30px 0; color:#cfdfdc; background:#244b49; font-size:10px; }
+    .footer-row { display:flex; justify-content:space-between; gap:20px; }
+    @media (max-width:980px) { .people-grid{grid-template-columns:1fr} .hero{grid-template-columns:1fr;gap:26px} }
+    @media (max-width:620px) { .shell{width:min(100% - 28px,1240px)} .hero{padding:58px 0 42px}.toolbar{grid-template-columns:1fr}.person-head{grid-template-columns:1fr;padding:18px 16px 15px}.person-avatar{width:46px;height:46px;font-size:13px}.report-count{grid-column:1;justify-self:start}.person-context{padding:16px}.person-reports{margin:0 16px 16px}.person-reports>header{display:none}.person-report{grid-template-columns:minmax(0,1fr) auto}.person-report>span{display:none}.library-head{align-items:start;flex-direction:column;gap:8px}.footer-row{flex-direction:column} }
+  </style>
+</head>
+<body class="tonal marketing-page report-library-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <script src="site-header.js"></script>
+  <main id="main">
+    <section class="hero shell">
+      <div><p class="eyebrow">Patient report library · Sample</p><h1>Follow the person, not just the report.</h1></div>
+      <div><p class="hero-copy">Each profile brings one person’s related reports together. Move from their health summary to change over time and focused clinical reviews without losing the patient context.</p></div>
+    </section>
+    <section class="library shell" aria-labelledby="library-title">
+      <header class="library-head"><h2 id="library-title">Profiles and their reports</h2><span class="count" data-count>8 profiles · 28 reports</span></header>
+      <div class="toolbar"><label class="search"><span hidden>Search profiles and reports</span><input type="search" name="report-search" data-search placeholder="Search age, sex, health topics, or reports"></label><label><span hidden>Sort profiles</span><select name="report-sort" data-sort><option value="age">Age · youngest first</option><option value="reports">Most reports</option><option value="sources">Most source records</option></select></label></div>
+      <div class="filters" data-filters aria-label="Filter profiles by health focus"></div>
+      <div class="people-grid" data-grid></div>
+      <div class="more-wrap"><button class="more" type="button" data-more>Show more profiles</button></div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="shell footer-row"><span>Patient report library</span><span>Organised by patient</span></div></footer>
+  <dialog data-dialog><div class="dialog-head"><b>Report</b><button type="button" data-close aria-label="Close">×</button></div><div class="dialog-body"><p class="eyebrow" data-dialog-person>Patient</p><h3 data-dialog-title></h3><p data-dialog-copy></p><div class="placeholder-sheet" aria-label="Report preview"><b>Doctor-checked report</b><span></span><span></span><span></span><span></span></div></div></dialog>
+  <script>
+    (() => {
+      const people=[
+        {age:46,sex:'female',context:'Tracking cardiometabolic change after a new care plan, with repeat laboratory panels over two years.',focus:['Metabolic','Longitudinal','Supplements'],reports:[
+          {title:'Health Summary',type:'Complete record',date:'Aug 2026',sources:14,summary:'Current findings, history, open questions, and care priorities.'},
+          {title:'Health Over Time',type:'Longitudinal',date:'Aug 2026',sources:11,summary:'HbA1c, lipids, weight, and treatment changes across 24 months.'},
+          {title:'Supplement Review',type:'Focused review',date:'Jul 2026',sources:7,summary:'Current regimen, safety checks, and follow-up monitoring.'},
+          {title:'Metabolic Follow-up',type:'Custom brief',date:'Jun 2026',sources:9,summary:'Response since the care-plan change and remaining data gaps.'}]},
+        {age:55,sex:'male',context:'Reviewing blood pressure, lipid markers, medication changes, and cardiovascular risk context.',focus:['Cardiovascular','Longitudinal'],reports:[
+          {title:'Health Summary',type:'Complete record',date:'Aug 2026',sources:18,summary:'A single view of cardiovascular history and current priorities.'},
+          {title:'Cardiovascular Review',type:'Focused review',date:'Jul 2026',sources:12,summary:'Risk markers, treatment periods, and clinician-defined targets.'},
+          {title:'Health Over Time',type:'Longitudinal',date:'May 2026',sources:15,summary:'Blood pressure and lipid change around medication adjustments.'}]},
+        {age:34,sex:'female',context:'Connecting iron status, thyroid markers, symptoms, and care events without separating them into different records.',focus:['Women’s health','Endocrine','Longitudinal'],reports:[
+          {title:'Health Summary',type:'Complete record',date:'Aug 2026',sources:13,summary:'Relevant history, recent results, and questions for the next visit.'},
+          {title:'Iron Status Over Time',type:'Longitudinal',date:'Aug 2026',sources:10,summary:'Ferritin and related markers alongside symptoms and treatment.'},
+          {title:'Thyroid Review',type:'Focused review',date:'Jul 2026',sources:8,summary:'Thyroid results, ranges, medication history, and source checks.'},
+          {title:'Consultation Brief',type:'Custom brief',date:'Jun 2026',sources:11,summary:'A concise preparation view for a complex follow-up visit.'}]},
+        {age:42,sex:'male',context:'Placing genetic findings beside family history, biomarkers, and the clinical evidence that supports interpretation.',focus:['Genetics','Cardiovascular'],reports:[
+          {title:'Health Summary',type:'Complete record',date:'Aug 2026',sources:16,summary:'Clinical history and current findings with genetics in context.'},
+          {title:'Genetic Predisposition',type:'Genetics',date:'Jul 2026',sources:6,summary:'Selected variants, evidence strength, phenotype, and limitations.'},
+          {title:'Family Risk Review',type:'Focused review',date:'Jun 2026',sources:9,summary:'Family history, cardiovascular markers, and follow-up questions.'}]},
+        {age:53,sex:'female',context:'Following thyroid and metabolic markers through changing doses, symptoms, and repeat testing.',focus:['Endocrine','Metabolic','Longitudinal'],reports:[
+          {title:'Health Summary',type:'Complete record',date:'Aug 2026',sources:20,summary:'Current diagnoses, treatment history, and unresolved questions.'},
+          {title:'Endocrine Over Time',type:'Longitudinal',date:'Jul 2026',sources:17,summary:'Thyroid and metabolic markers aligned to dose changes.'},
+          {title:'Medication Review',type:'Focused review',date:'Jun 2026',sources:12,summary:'Current and past regimens, response, and monitoring plan.'}]},
+        {age:64,sex:'male',context:'Bringing a long record into one view before a complex consultation with several active care priorities.',focus:['Longitudinal','Cardiovascular','Metabolic'],reports:[
+          {title:'Health Summary',type:'Complete record',date:'Aug 2026',sources:26,summary:'A concise orientation to a long and complex patient history.'},
+          {title:'Five-year Timeline',type:'Longitudinal',date:'Aug 2026',sources:22,summary:'Major results, diagnoses, procedures, and treatment events.'},
+          {title:'Cardiometabolic Review',type:'Focused review',date:'Jul 2026',sources:18,summary:'Related cardiovascular and metabolic patterns in one report.'},
+          {title:'Consultation Priorities',type:'Custom brief',date:'Jul 2026',sources:20,summary:'Open questions and source-linked priorities for the next visit.'}]},
+        {age:37,sex:'female',context:'Reviewing supplement use against laboratory results, symptoms, and planned follow-up tests.',focus:['Supplements','Women’s health'],reports:[
+          {title:'Health Summary',type:'Complete record',date:'Aug 2026',sources:12,summary:'Health history, recent findings, and the current care plan.'},
+          {title:'Supplement Review',type:'Focused review',date:'Aug 2026',sources:9,summary:'Regimen, interactions, evidence, and planned monitoring.'},
+          {title:'Laboratory Follow-up',type:'Custom brief',date:'Jun 2026',sources:8,summary:'Results to repeat and the questions each test is intended to answer.'}]},
+        {age:58,sex:'male',context:'Understanding what changed before and after several medications were started, stopped, or adjusted.',focus:['Metabolic','Cardiovascular','Longitudinal'],reports:[
+          {title:'Health Summary',type:'Complete record',date:'Aug 2026',sources:19,summary:'Current health state with medication periods kept visible.'},
+          {title:'Medication Timeline',type:'Longitudinal',date:'Jul 2026',sources:15,summary:'Doses, start and stop dates, responses, and monitoring events.'},
+          {title:'Metabolic Review',type:'Focused review',date:'Jul 2026',sources:13,summary:'Laboratory change around each treatment period.'},
+          {title:'Safety Monitoring',type:'Custom brief',date:'May 2026',sources:10,summary:'Open monitoring items and source-linked follow-up plan.'}]}
+      ];
+      people.forEach(person=>{person.label=`${person.age}-year-old ${person.sex}`;});
+      const areas=[...new Set(people.flatMap(person=>person.focus))];
+      const grid=document.querySelector('[data-grid]');const filters=document.querySelector('[data-filters]');const search=document.querySelector('[data-search]');const sort=document.querySelector('[data-sort]');const count=document.querySelector('[data-count]');const more=document.querySelector('[data-more]');const dialog=document.querySelector('[data-dialog]');let active='All';let shown=6;
+      ['All',...areas].forEach(area=>{const button=document.createElement('button');button.type='button';button.className='filter'+(area==='All'?' is-active':'');button.textContent=area;button.addEventListener('click',()=>{active=area;shown=6;[...filters.children].forEach(item=>item.classList.toggle('is-active',item===button));render();});filters.appendChild(button);});
+      function sourceTotal(person){return person.reports.reduce((total,report)=>total+report.sources,0);}
+      function current(){const query=search.value.trim().toLowerCase();const result=people.filter(person=>(active==='All'||person.focus.includes(active))&&(!query||[person.label,person.age,person.sex,person.context,...person.focus,...person.reports.flatMap(report=>[report.title,report.type,report.summary])].join(' ').toLowerCase().includes(query)));return result.sort((a,b)=>sort.value==='reports'?b.reports.length-a.reports.length||a.age-b.age:sort.value==='sources'?sourceTotal(b)-sourceTotal(a):a.age-b.age);}
+      function openReport(person,report){dialog.querySelector('[data-dialog-person]').textContent=person.label;dialog.querySelector('[data-dialog-title]').textContent=report.title;dialog.querySelector('[data-dialog-copy]').textContent=report.summary;dialog.showModal();}
+      function render(){const list=current();const reportTotal=list.reduce((total,person)=>total+person.reports.length,0);count.textContent=`${list.length} ${list.length===1?'profile':'profiles'} · ${reportTotal} ${reportTotal===1?'report':'reports'}`;grid.innerHTML='';list.slice(0,shown).forEach(person=>{const card=document.createElement('article');card.className='person';card.innerHTML=`<header class="person-head"><div class="person-name"><span>Patient profile</span><b>${person.label}</b></div><span class="report-count">${person.reports.length} reports</span></header><div class="person-context"><p>${person.context}</p><div class="person-tags">${person.focus.map(area=>`<span>${area}</span>`).join('')}</div></div><div class="person-reports"><header><span>Report</span><span>Updated</span><span></span></header>${person.reports.map((report,index)=>`<article class="person-report"><div><b>${report.title}</b><small>${report.type} · ${report.sources} source records</small></div><span>${report.date}</span><button type="button" data-report-index="${index}" aria-label="Open ${report.title} for ${person.label}">Open →</button></article>`).join('')}</div>`;card.querySelectorAll('[data-report-index]').forEach(button=>button.addEventListener('click',()=>openReport(person,person.reports[Number(button.dataset.reportIndex)])));grid.appendChild(card);});if(!list.length)grid.innerHTML='<p class="empty">No profiles or reports match this search.</p>';more.hidden=shown>=list.length;}
+      search.addEventListener('input',()=>{shown=6;render();});sort.addEventListener('change',render);more.addEventListener('click',()=>{shown+=4;render();});dialog.querySelector('[data-close]').addEventListener('click',()=>dialog.close());dialog.addEventListener('click',event=>{if(event.target===dialog)dialog.close();});render();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,227 @@
+/* ==========================================================================
+   N1 primitive tokens — tier 1 of 3.
+
+   Raw values only. Nothing here carries meaning; nothing here should be
+   referenced by a component. Surfaces consume the semantic tier
+   (n1-semantic.css) instead, so that a value can change without every
+   consumer needing to know why.
+
+   Colour ramps are measured OKLCH at a fixed hue per family, so a step
+   reads as the same weight across families. The brand colours are steps
+   in these ramps, not exceptions to them:
+
+       wine  #852f48 -> rose-800     berry #a54559 -> rose-600
+       peach #ef9b77 -> apricot-300  green #17674f -> moss-600
+
+   Generated. Edit the generator, not this file.
+   ========================================================================== */
+
+:root {
+
+  /* Rose — brand. wine = 800, berry = 600. */
+  --n1-rose-50: #fdf2f4;
+  --n1-rose-100: #fde4e8;
+  --n1-rose-200: #f6cad2;
+  --n1-rose-300: #e7a6b2;
+  --n1-rose-400: #cb7487;
+  --n1-rose-500: #b7576d;
+  --n1-rose-600: #a5455d;
+  --n1-rose-700: #943850;
+  --n1-rose-800: #852f46;
+  --n1-rose-900: #662134;
+  --n1-rose-950: #451723;
+
+  /* Apricot — warm accent. peach = 300, blush = 100. */
+  --n1-apricot-50: #fff3ee;
+  --n1-apricot-100: #ebdbd4;
+  --n1-apricot-200: #eec3b1;
+  --n1-apricot-300: #ef9b77;
+  --n1-apricot-400: #de835b;
+  --n1-apricot-500: #c96c43;
+  --n1-apricot-600: #ac562e;
+  --n1-apricot-700: #8b4422;
+  --n1-apricot-800: #6b3319;
+  --n1-apricot-900: #4b2412;
+
+  /* Sand — the single warm neutral ramp. paper = 25, cream = 50,
+     line = 200, border = 500, muted = 600, ink = 950. */
+  --n1-sand-25: #fffaf4;
+  --n1-sand-50: #f7ece0;
+  --n1-sand-100: #e9ddd0;
+  --n1-sand-200: #d7cabc;
+  --n1-sand-300: #bcafa0;
+  --n1-sand-400: #9e8f7f;
+  --n1-sand-500: #897a69;
+  --n1-sand-600: #675a4b;
+  --n1-sand-700: #53483c;
+  --n1-sand-800: #3c342a;
+  --n1-sand-900: #2f271f;
+  --n1-sand-950: #28221b;
+  --n1-sand-975: #1d1711;
+
+  /* Moss — status: in range. */
+  --n1-moss-50: #eaf7f1;
+  --n1-moss-100: #d2ebe1;
+  --n1-moss-200: #afd9c7;
+  --n1-moss-400: #71b199;
+  --n1-moss-600: #16674f;
+  --n1-moss-700: #09523d;
+  --n1-moss-800: #093e2e;
+
+  /* Amber — status: borderline. */
+  --n1-amber-50: #fdf3e6;
+  --n1-amber-100: #f8e5cb;
+  --n1-amber-200: #eccb9e;
+  --n1-amber-400: #c89852;
+  --n1-amber-600: #a97416;
+  --n1-amber-700: #895c07;
+  --n1-amber-800: #4d2c00;
+
+  /* Clay — status: out of range / destructive. */
+  --n1-clay-50: #fff1ee;
+  --n1-clay-100: #fee0da;
+  --n1-clay-200: #f7c5ba;
+  --n1-clay-400: #e08672;
+  --n1-clay-600: #b3452f;
+  --n1-clay-700: #8e3321;
+  --n1-clay-800: #601d10;
+
+  /* Azure — status: informational. */
+  --n1-azure-50: #ecf5fd;
+  --n1-azure-100: #d6e9f9;
+  --n1-azure-200: #b2d4f2;
+  --n1-azure-400: #6aa8dc;
+  --n1-azure-600: #266ea4;
+  --n1-azure-700: #175785;
+  --n1-azure-800: #02375a;
+
+  /* Spacing — 4px base. Anything off this scale is a bug. */
+  --n1-space-1: 4px;   --n1-space-2: 8px;   --n1-space-3: 12px;
+  --n1-space-4: 16px;  --n1-space-5: 24px;  --n1-space-6: 32px;
+  --n1-space-7: 48px;  --n1-space-8: 72px;  --n1-space-9: 112px;
+
+  /* Radius — the sharp identity. A 2px button corner reads as a rendering
+     artefact rather than a decision, so controls are square and only the
+     larger containers soften. --n1-radius-full is for avatars and pills;
+     it must never reach a button.
+
+     The scale used to stop at 8px, which said nothing about the surfaces
+     that actually do soften — cards, panels, media frames. The marketing
+     pages filled that silence with sixteen hand-picked literals (10, 12,
+     13, 16, 18, 20, 22, 24, 26, 30…), so two cards of the same weight
+     could differ by 2px for no reason a reader could recover. The three
+     container steps below replace all of them. Every value is a multiple
+     of 4 like --n1-space, and each step is a size class, not a taste:
+
+       2xl  8px   bars, chips, small insets — a corner you notice only in aggregate
+       3xl  12px  small cards, tiles, thumbnails
+       4xl  20px  cards, panels, product surfaces — the workhorse
+       5xl  28px  full-bleed frames and media, where 20px reads tight
+
+     Radius is a function of the surface's footprint. If a new surface
+     doesn't obviously belong to one of these, it is probably the wrong
+     size, not in need of a new step. */
+  --n1-radius-none: 0px;
+  --n1-radius-sm:   0px;
+  --n1-radius-md:   0px;
+  --n1-radius-lg:   2px;
+  --n1-radius-xl:   4px;
+  --n1-radius-2xl:  8px;
+  --n1-radius-3xl:  12px;
+  --n1-radius-4xl:  20px;
+  --n1-radius-5xl:  28px;
+  --n1-radius-full: 9999px;
+
+  /* Type — 11px is the floor, on every surface. */
+  --n1-font-serif: "Source Serif 4 Variable", "Source Serif 4", Georgia, Cambria, serif;
+  --n1-font-sans:  "Work Sans", ui-sans-serif, system-ui, sans-serif;
+  --n1-font-mono:  ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --n1-text-display-1: clamp(40px, 6vw, 68px);
+  --n1-text-display-2: clamp(30px, 4vw, 46px);
+  --n1-text-heading-1: 28px;
+  --n1-text-heading-2: 21px;
+  --n1-text-heading-3: 17px;
+  --n1-text-body-lg:   17px;
+  --n1-text-body:      15px;
+  --n1-text-body-sm:   13px;
+  --n1-text-label:     11px;
+
+  --n1-leading-display-1: 1.04;  --n1-leading-display-2: 1.1;
+  --n1-leading-heading-1: 1.2;   --n1-leading-heading-2: 1.3;
+  --n1-leading-heading-3: 1.4;   --n1-leading-body-lg: 1.6;
+  --n1-leading-body: 1.55;       --n1-leading-body-sm: 1.5;
+  --n1-leading-label: 1.35;
+
+  --n1-tracking-display-1: -0.02em;  --n1-tracking-display-2: -0.015em;
+  --n1-tracking-heading-1: -0.01em;  --n1-tracking-heading-2: -0.005em;
+  --n1-tracking-body: 0em;           --n1-tracking-body-sm: 0.005em;
+  --n1-tracking-label: 0.12em;
+
+  /* Elevation — one warm shadow colour, derived from sand-950. In dark mode
+     depth comes from stepping the surface up the ramp, not from shadow. */
+  --n1-elev-0: none;
+  --n1-elev-1: 0 1px 2px rgba(40, 34, 27, 0.05);
+  --n1-elev-2: 0 2px 6px -1px rgba(40, 34, 27, 0.07);
+  --n1-elev-3: 0 8px 20px -6px rgba(40, 34, 27, 0.1);
+  --n1-elev-4: 0 18px 40px -14px rgba(40, 34, 27, 0.14);
+  --n1-elev-5: 0 40px 70px -30px rgba(40, 34, 27, 0.22);
+
+  /* Motion */
+  --n1-duration-fast: 120ms;
+  --n1-duration-base: 200ms;
+  --n1-duration-slow: 320ms;
+  --n1-ease-standard: cubic-bezier(0.2, 0.75, 0.25, 1);
+  --n1-ease-exit:     cubic-bezier(0.4, 0, 1, 1);
+}
+
+
+/* --------------------------------------------------------------------------
+   Marketing-site compatibility.
+
+   The static site consumes these names directly. They are aliases onto the
+   ramps above, so the two surfaces cannot drift: changing a ramp step
+   changes both. `.tonal` is carried because art-directions.css re-declares
+   the same names on `body.tonal` at equal specificity — this file must load
+   last to win. Retire these names once the static site reads the ramps.
+
+   All of these are load-bearing: --blush, --line, --muted and --green have
+   no other definition anywhere, and marketing-pages.css alone reads --muted
+   40 times and --line 77 times. Do not prune this list by inspection.
+
+   --line and --control-line are not interchangeable. --line is the
+   decorative hairline (sand-200, 1.38:1 on the page) and is correct for
+   separating content; a control's border is a component boundary and owes
+   3:1 under WCAG 1.4.11, which is --control-line (sand-500, 3.58:1). The
+   static contact form drew its inputs in --line and measured 1.58:1.
+
+   `--muted` here means muted TEXT, which is what the static site has always
+   meant by it. The component theme previously reused the same name for a
+   muted SURFACE — one name, two opposite jobs, and the wrong pairing
+   rendered body copy at 1.16:1. index.css no longer redeclares it; it maps
+   Tailwind's --color-muted from --surface-muted instead, so the collision is
+   gone without the fix depending on stylesheet order.
+   -------------------------------------------------------------------------- */
+
+:root,
+.tonal {
+  --wine: var(--n1-rose-800);
+  --berry: var(--n1-rose-600);
+  --peach: var(--n1-apricot-300);
+  --blush: var(--n1-apricot-100);
+  --cream: var(--n1-sand-50);
+  --paper: var(--n1-sand-25);
+  --ink: var(--n1-sand-950);
+  --line: var(--n1-sand-200);
+  --muted: var(--n1-sand-600);
+  --green: var(--n1-moss-600);
+  --control-line: var(--n1-sand-500);
+
+  /* Semantic Typography Color Tokens */
+  --font-heading: var(--ink);
+  --font-body: var(--ink);
+  --font-muted: var(--muted);
+  --font-accent: var(--wine);
+  --font-inverse: var(--cream);
+  --font-inverse-muted: var(--blush);
+}

@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#376361">
+<title>Anonymized report profile — n1.care</title>
+<meta name="description" content="Browse reports available for an anonymized patient profile.">
+<link rel="icon" href="assets/n1-logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="art-directions.css">
+<link rel="stylesheet" href="marketing-pages.css">
+<link rel="stylesheet" href="buttons.css">
+<link rel="stylesheet" href="brand-tokens.css">
+<link rel="stylesheet" href="smoked-birch-copper-patina.css">
+<style>
+.report-profile-page { color:#202523; background:#f3ede2; }
+.report-profile-main { min-height:72svh; padding:clamp(120px,12vw,176px) 0 clamp(72px,9vw,120px); }
+.report-profile-back { display:inline-flex; align-items:center; gap:8px; margin-bottom:clamp(36px,5vw,64px); color:#376361; font-size:12px; font-weight:750; text-decoration:none; }
+.report-profile-back:hover { color:#244b49; }
+.report-profile-hero { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:36px; align-items:end; padding-bottom:clamp(38px,5vw,64px); border-bottom:1px solid #bfc9c5; }
+.report-profile-identity { display:grid; grid-template-columns:minmax(0,1fr); align-items:center; }
+.report-profile-avatar { width:72px; height:72px; display:grid; place-items:center; border-radius:50%; color:#fff; background:#376361; font-size:18px; font-weight:800; letter-spacing:.04em; }
+.report-profile-hero .page-kicker { color:#2f7773; }
+.report-profile-hero h1 { margin:7px 0 10px; font:400 clamp(42px,5vw,68px)/.98 var(--serif); letter-spacing:-.035em; }
+.report-profile-hero p { max-width:720px; margin:0; color:#5f6b67; font-size:14px; line-height:1.65; }
+.report-profile-meta { min-width:170px; text-align:right; }
+.report-profile-meta b { display:block; font:400 30px/1 var(--serif); }
+.report-profile-meta span { display:block; margin-top:7px; color:#68746f; font-size:11px; }
+.report-profile-topics { display:flex; flex-wrap:wrap; gap:7px; margin-top:18px; }
+.report-profile-topics span { padding:6px 9px; border-radius:999px; color:#425752; background:#e2edea; font-size:9px; font-weight:750; }
+.report-profile-section { padding-top:clamp(44px,6vw,72px); }
+.report-profile-section-head { display:flex; align-items:end; justify-content:space-between; gap:24px; margin-bottom:24px; }
+.report-profile-section-head h2 { margin:0; font:400 clamp(30px,3.4vw,46px)/1.05 var(--serif); }
+.report-profile-section-head p { margin:0; color:#68746f; font-size:11px; }
+.report-profile-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+.report-profile-card { min-height:230px; display:flex; flex-direction:column; padding:26px; border:1px solid #c3d0cc; border-radius:15px; background:#fffdf9; }
+.report-profile-card > span { color:#2f7773; font-size:9px; font-weight:800; letter-spacing:.11em; text-transform:uppercase; }
+.report-profile-card h3 { margin:30px 0 10px; font:400 clamp(24px,2.4vw,34px)/1.05 var(--serif); }
+.report-profile-card p { max-width:560px; margin:0; color:#64706c; font-size:12px; line-height:1.55; }
+.report-profile-card footer { display:flex; align-items:center; justify-content:space-between; gap:16px; margin-top:auto; padding-top:28px; color:#68746f; font-size:10px; }
+.report-profile-card a { padding:9px 12px; border:1px solid #aac2bc; border-radius:7px; color:#244b49; background:#fff; font-size:10px; font-weight:800; text-decoration:none; white-space:nowrap; }
+.report-profile-card a:hover { color:#fff; border-color:#376361; background:#376361; }
+@media (max-width:720px) {
+  .report-profile-hero { grid-template-columns:1fr; }
+  .report-profile-identity { grid-template-columns:minmax(0,1fr); }
+  .report-profile-avatar { width:56px; height:56px; font-size:14px; }
+  .report-profile-meta { text-align:left; }
+  .report-profile-section-head { align-items:start; flex-direction:column; gap:8px; }
+  .report-profile-grid { grid-template-columns:1fr; }
+  .report-profile-card { min-height:210px; }
+}
+</style>
+<script defer src="marketing-pages.js"></script>
+</head>
+<body class="tonal marketing-page report-profile-page">
+<a class="skip-link" href="#main">Skip to content</a>
+<script src="site-header.js"></script>
+<main class="report-profile-main" id="main">
+<div class="shell">
+<a class="report-profile-back" href="reports.html#report-directory">← All anonymized reports</a>
+<header class="report-profile-hero" data-profile-hero></header>
+<section class="report-profile-section" aria-labelledby="available-reports-title">
+<div class="report-profile-section-head"><h2 id="available-reports-title">Available reports</h2><p data-report-count></p></div>
+<div class="report-profile-grid" data-profile-reports></div>
+</section>
+</div>
+</main>
+<script src="report-library.js"></script>
+<script src="report-profile.js"></script>
+<footer class="marketing-footer"><div class="shell"><div class="marketing-footer-top"><div class="marketing-footer-brand"><a href="index.html" aria-label="n1.care home"><span class="logo" aria-hidden="true"></span></a><p>Put health files in order. See what changed. Check each fact at its source.</p></div><div class="marketing-footer-links"><div><strong>For clinicians</strong><a href="clinicians.html#clinician-product-animation-title">How it works</a><a href="reports.html">Reports</a><a href="pricing.html">Pricing</a></div><div><strong>For</strong><a href="clinicians.html">For clinicians</a><a href="patients.html">For patients</a></div><div><strong>Explore</strong><a href="case-studies.html">Clinical workflows</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="https://app.n1.care/privacy-policy">Privacy</a><a href="https://app.n1.care/terms-of-service">Terms</a></div></div></div><div class="marketing-footer-bottom">© 2026 N1 Research, LLC</div></div></footer>
+</body>
+</html>

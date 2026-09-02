@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#376361">
+<title>Clinical reports — n1.care</title>
+<meta name="description" content="Explore four report formats, then browse reports organised around anonymised patient profiles.">
+<link rel="icon" href="assets/n1-logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="art-directions.css">
+<link rel="stylesheet" href="marketing-pages.css">
+<link rel="stylesheet" href="buttons.css">
+<link rel="stylesheet" href="brand-tokens.css">
+<link rel="stylesheet" href="smoked-birch-copper-patina.css">
+<style>
+.reports-page .report-carousel { min-height: 100svh; padding-top: clamp(118px,11vw,168px); padding-bottom: 12px; color: #202523; background: linear-gradient(180deg,#dfecea 0%,#eef3ef 48%,#f3ede2 100%); }
+.reports-page .report-carousel::before { width: 920px; height: 920px; background: radial-gradient(circle,rgba(255,253,249,.82),rgba(255,253,249,0) 68%); }
+.reports-page .report-carousel-head .eyebrow { color: #2f7773; }
+.reports-page .report-carousel-head h1 { margin: 0; color: #202523; font-family: var(--serif); font-size: clamp(2rem,4.4vw,3.1rem); font-weight: 400; line-height: 1.08; letter-spacing: -.01em; }
+.reports-page .report-carousel-head h1 em { color: #2f7773; font-style: italic; }
+.reports-page .report-carousel-head .report-carousel-sub { color: #5f6b67; }
+.reports-page .report-card[aria-hidden="true"] { pointer-events: none; }
+.reports-page .report-card.is-center { opacity: 1; filter: none; transform: none; }
+.reports-page .report-card.is-center:hover { transform: translateY(-2px); }
+.reports-page .report-card.is-left { transform: translateX(-52%) scale(.7); opacity: .86; filter: none; }
+.reports-page .report-card.is-right { transform: translateX(52%) scale(.7); opacity: .86; filter: none; }
+.reports-page .report-cover { border: 1px solid #a9c6c0; background: #fffdf9; box-shadow: 0 38px 70px -38px rgba(35,56,50,.35),0 14px 32px rgba(35,56,50,.12); }
+.reports-page .report-cover-head { color: #fffdf9; background: #244b49; }
+.reports-page .report-cover-no { color: #aaddd8; opacity: 1; }
+.reports-page .report-cover-title { color: #202523; }
+.reports-page .report-cover-desc { color: #565f5c; opacity: 1; }
+.reports-page .report-cover-foot,.reports-page .thumb-meta { border-color: #dce5e2; }
+.reports-page .report-thumb { border-color: #d2dedb; background: #fffdf9; box-shadow: 0 12px 26px -18px rgba(35,56,50,.28); }
+.reports-page .thumb-row .dot.ok { background: #48a9a6; }
+.reports-page .thumb-row .dot.warn { background: #b8684d; }
+.reports-page .thumb-row b { color: #2f7773; }
+.reports-page .thumb-biomarker-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-top: 2px; color: #64706c; font-size: 7px; }
+.reports-page .thumb-biomarker-head b { color: #202523; font-size: 10px; }
+.reports-page .thumb-biomarker-head em { color: #64706c; font-size: 7px; font-style: normal; }
+.reports-page .thumb-biomarker-spark { width: 100%; height: 70px; overflow: visible; }
+.reports-page .thumb-biomarker-spark .sp-grid { fill: none; stroke: #dce5e2; stroke-width: 1; stroke-dasharray: 3 3; }
+.reports-page .thumb-biomarker-spark .sp-band { fill: rgba(34,197,94,.1); }
+.reports-page .thumb-biomarker-spark .sp-bound { fill: none; stroke: #22c55e; stroke-width: 1.5; stroke-dasharray: 6 4; stroke-opacity: .5; }
+.reports-page .thumb-biomarker-spark .sp-line { fill: none; stroke: #0d7377; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.reports-page .thumb-biomarker-spark .sp-point { fill: #0d7377; stroke: #0d7377; stroke-width: 2; }
+.reports-page .thumb-biomarker-spark .sp-point.is-outlier { fill: #ef4444; stroke: #ef4444; }
+.reports-page .thumb-timeline { position: relative; display: grid; gap: 6px; margin-top: 8px; padding-left: 15px; }
+.reports-page .thumb-timeline::before { position: absolute; top: 8px; bottom: 8px; left: 4px; width: 1px; background: #b9d1cc; content: ""; }
+.reports-page .thumb-timeline-item { position: relative; min-height: 39px; display: grid; grid-template-columns: 58px minmax(0,1fr) auto; gap: 7px; align-items: center; padding: 6px 7px; border: 1px solid #dce5e2; border-radius: 7px; background: #fff; }
+.reports-page .thumb-timeline-item::before { position: absolute; top: 50%; left: -15px; width: 7px; height: 7px; border: 2px solid #fffdf9; border-radius: 50%; background: #2f7773; box-shadow: 0 0 0 1px #8fb8b1; content: ""; transform: translateY(-50%); }
+.reports-page .thumb-timeline-item.is-latest { border-color: #9fc8c1; background: #eef7f4; }
+.reports-page .thumb-timeline-item time { color: #70807b; font-size: 7px; font-weight: 700; }
+.reports-page .thumb-timeline-item b,.reports-page .thumb-timeline-item small { display: block; }
+.reports-page .thumb-timeline-item b { color: #293531; font-size: 8px; }
+.reports-page .thumb-timeline-item small { margin-top: 2px; color: #75817d; font-size: 7px; }
+.reports-page .thumb-timeline-item > em { color: #2f7773; font-size: 8px; font-style: normal; font-weight: 800; }
+.reports-page .report-cover-link { color: #fffdf9; background: #376361; text-decoration: none; }
+.reports-page .report-cover-link:hover { color: #fffdf9; background: #244b49; }
+.reports-page .report-nav { border-color: #9ebdb7; color: #244b49; background: rgba(255,253,249,.88); box-shadow: 0 9px 22px rgba(35,56,50,.12); }
+.reports-page .report-nav:hover { border-color: #376361; color: #fff; background: #376361; }
+.reports-page .report-dot { position: relative; width: 28px; height: 28px; background: transparent; }
+.reports-page .report-dot::before { position: absolute; inset: 10px; border-radius: 50%; background: #afc7c2; content: ""; transition: background .3s,transform .3s; }
+.reports-page .report-dot.is-active { background: transparent; transform: none; }
+.reports-page .report-dot.is-active::before { background: #2f7773; transform: scale(1.18); }
+.reports-page .report-carousel-foot { margin-top: 12px; }
+.reports-library { padding: clamp(20px,2.4vw,32px) 0 96px; color: #202523; background: #f3ede2; }
+.reports-library .library-head { display:flex; align-items:end; justify-content:space-between; gap:28px; padding-bottom:20px; border-bottom:1px solid #bfc9c5; }
+.reports-library .library-head h2 { margin:0; font:400 clamp(32px,3.1vw,44px)/1.05 var(--serif); }
+.reports-library .count { color:#64706c; font-size:12px; }
+.reports-library .toolbar { display:grid; grid-template-columns:minmax(220px,1fr) 230px; gap:14px; align-items:center; padding:20px 0 16px; }
+.reports-library .search { position:relative; }
+.reports-library .search input { width:100%; min-height:44px; padding:0 14px 0 40px; border:1px solid #b9c8c4; border-radius:8px; color:#202523; background:rgba(255,253,249,.92); outline:none; }
+.reports-library .search::before { position:absolute; top:13px; left:15px; color:#62706b; content:'⌕'; font-size:18px; }
+.reports-library .search input:focus,.reports-library select:focus { border-color:#48a9a6; box-shadow:0 0 0 3px rgba(72,169,166,.15); }
+.reports-library select { width:100%; min-height:44px; padding:0 36px 0 12px; border:1px solid #b9c8c4; border-radius:8px; color:#244b49; background:#fffdf9; }
+.reports-library .filters { display:flex; gap:7px; overflow:auto; padding:0 0 22px; scrollbar-width:none; }
+.reports-library .filters::-webkit-scrollbar { display:none; }
+.reports-library .filter { flex:none; padding:8px 11px; border:1px solid #b9c8c4; border-radius:999px; color:#57635f; background:rgba(255,253,249,.68); font-size:10px; font-weight:700; cursor:pointer; }
+.reports-library .filter.is-active { color:#fff; border-color:#376361; background:#376361; }
+.reports-library .toolbar,.reports-library .filters,.reports-library .directory-footer { display:none; }
+.reports-library .people-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; align-items:stretch; margin-top:28px; }
+.reports-library .person { min-width:0; overflow:hidden; border:1px solid #c3d0cc; border-radius:16px; background:#fffdf9; box-shadow:0 20px 46px -40px rgba(35,56,50,.5); transition:background-color .2s ease,transform .2s ease; }
+.reports-library .person:hover { background:rgba(255,253,249,.62); }
+.reports-library .person-select { width:100%; min-height:270px; display:flex; flex-direction:column; padding:22px; border:0; color:inherit; background:transparent; text-align:left; text-decoration:none; cursor:pointer; }
+.reports-library .person-head { display:grid; grid-template-columns:minmax(0,1fr); align-items:center; }
+.reports-library .person-avatar { width:34px; height:34px; display:grid; place-items:center; border-radius:50%; color:#315957; background:#dceae6; font-size:9px; font-weight:800; letter-spacing:.03em; }
+.reports-library .person-name span,.reports-library .person-name b,.reports-library .person-name small { display:block; }
+.reports-library .person-name span { color:#2f7773; font-size:7px; font-weight:800; letter-spacing:.11em; text-transform:uppercase; }
+.reports-library .person-name b { font:400 20px/1 var(--serif); letter-spacing:-.025em; }
+.reports-library .person-name small { margin-top:4px; color:#66736f; font-size:8px; }
+.reports-library .person-context { display:block; margin-top:18px; }
+.reports-library .person-context p { display:-webkit-box; overflow:hidden; margin:0; color:#64706c; font-size:10px; line-height:1.45; -webkit-box-orient:vertical; -webkit-line-clamp:3; }
+.reports-library .person-card-foot { width:100%; display:grid; justify-items:start; gap:10px; margin-top:auto; padding-top:20px; }
+.reports-library .person-report-list { display:flex; flex-wrap:wrap; gap:6px; margin-top:15px; }
+.reports-library .person-report-list span { padding:5px 7px; border:1px solid #cad8d4; border-radius:7px; color:#40534e; background:#f4f8f6; font-size:8px; font-weight:700; }
+.reports-library .person-tags { min-width:0; display:flex; gap:4px; overflow:hidden; }
+.reports-library .person-tags span { max-width:100px; overflow:hidden; flex:none; padding:4px 6px; border-radius:999px; color:#52625d; background:#e6eeeb; font-size:7px; font-weight:700; text-overflow:ellipsis; white-space:nowrap; }
+.reports-library .report-count { flex:none; color:#244b49; font-size:8px; font-weight:800; white-space:nowrap; }
+.reports-library .directory-footer { display:flex; align-items:center; justify-content:space-between; gap:20px; padding-top:24px; }
+.reports-library .directory-footer span { color:#64706c; font-size:11px; }
+.reports-library .directory-more { min-height:40px; padding:0 16px; border:1px solid #9eb8b2; border-radius:8px; color:#244b49; background:rgba(255,253,249,.72); font-size:10px; font-weight:800; cursor:pointer; }
+.reports-library .directory-more:hover { color:#fff; border-color:#376361; background:#376361; }
+.reports-library .empty { grid-column:1/-1; padding:80px 20px; border:1px dashed #aebdb9; border-radius:14px; color:#64706c; text-align:center; }
+@media (min-width:801px) {
+  .reports-page .report-carousel-stage { padding: 24px 0 34px; }
+  .reports-page .report-track { height: 464px; }
+  .reports-page .report-card { width: 720px; margin-left: -360px; }
+  .reports-page .report-cover { height: 464px; }
+  .reports-page .report-nav.prev { left: max(14px,calc(50% - 400px)); }
+  .reports-page .report-nav.next { right: max(14px,calc(50% - 400px)); }
+}
+@media (max-width:800px) {
+  .reports-page .report-carousel { padding-top: 100px; }
+  .reports-page .report-carousel-head h1 { font-size: 1.9rem; }
+  .reports-page .report-card.is-left { transform: translateX(-48%) translateZ(-120px) scale(.84); }
+  .reports-page .report-card.is-right { transform: translateX(48%) translateZ(-120px) scale(.84); }
+}
+@media (max-width:1180px) { .reports-library .people-grid { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+@media (max-width:980px) { .reports-library .people-grid { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+@media (max-width:800px) { .reports-library .people-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media (max-width:620px) {
+  .reports-library .library-head { align-items:start; flex-direction:column; gap:8px; }
+  .reports-library .toolbar { grid-template-columns:1fr; }
+  .reports-library .people-grid { grid-template-columns:1fr; column-gap:0; }
+  .reports-library .person-select { min-height:86px; padding:12px 6px; }
+  .reports-library .person-head { grid-template-columns:32px minmax(0,1fr); gap:8px; }
+  .reports-library .person-avatar { width:32px; height:32px; font-size:9px; }
+  .reports-library .person-name b { font-size:17px; }
+  .reports-library .person-name span { font-size:6px; }
+  .reports-library .person-context,.reports-library .person-tags { display:none; }
+  .reports-library .person-tags span { max-width:72px; }
+  .reports-library .report-count { font-size:7px; }
+  .reports-library .directory-footer { align-items:flex-start; flex-direction:column; }
+}
+</style>
+<script defer src="marketing-pages.js">
+</script>
+</head>
+<body class="tonal marketing-page reports-page">
+<a class="skip-link" href="#main">Skip to content</a>
+<script src="site-header.js"></script>
+<main id="main">
+<section class="report-carousel" id="report-types" aria-labelledby="reports-title">
+<div class="shell">
+<div class="report-carousel-head">
+<p class="eyebrow">Pre-built or custom reports</p>
+<h1 id="reports-title">Build the right report<br><em>for each patient.</em></h1>
+<p class="report-carousel-sub">Bring key records, trends, and sources into one clear view. Start with a validated template or build your own.</p>
+</div>
+<div class="report-carousel-stage" role="region" aria-roledescription="carousel" aria-label="Sample reports">
+<button class="report-nav prev" type="button" aria-label="Previous report">‹</button>
+<div class="report-track">
+<article class="report-card is-center" id="report-panel-1" data-index="0" role="tabpanel" aria-labelledby="report-tab-1" aria-hidden="false">
+<div class="report-cover">
+<header class="report-cover-head"><span class="report-cover-tag">Health Summary</span><span class="report-cover-no">01 / 04</span></header>
+<div class="report-cover-body">
+<div class="report-thumb is-summary" aria-hidden="true"><div class="thumb-body">
+<div class="thumb-kicker"><span>Clinical overview</span><b>Source checked</b></div>
+<div class="thumb-row"><i class="dot ok"></i><span class="nm">Cardiovascular</span><b>Stable</b></div>
+<div class="thumb-row"><i class="dot warn"></i><span class="nm">Metabolic</span><b>Watch</b></div>
+<div class="thumb-row"><i class="dot ok"></i><span class="nm">Hepatic</span><b>Stable</b></div>
+<div class="thumb-row"><i class="dot warn"></i><span class="nm">Endocrine</span><b>Watch</b></div>
+<div class="thumb-row"><i class="dot ok"></i><span class="nm">Renal</span><b>Stable</b></div>
+<div class="thumb-biomarker-head"><span>HbA1c trend</span><b>6.4%</b><em>6 readings</em></div>
+<svg class="thumb-spark thumb-biomarker-spark" viewBox="0 0 320 92" preserveAspectRatio="none"><rect class="sp-band" x="20" y="55" width="292" height="24" rx="2"></rect><path class="sp-bound" d="M20 55H312M20 79H312"></path><g class="sp-grid"><path d="M20 18H312M20 37H312"></path></g><path class="sp-line" d="M20,20 C69,27 119,32 178,40 S260,57 312,67"></path><circle class="sp-point is-outlier" cx="20" cy="20" r="4"></circle><circle class="sp-point is-outlier" cx="69" cy="27" r="4"></circle><circle class="sp-point is-outlier" cx="119" cy="32" r="4"></circle><circle class="sp-point is-outlier" cx="178" cy="40" r="4"></circle><circle class="sp-point" cx="234" cy="52" r="4"></circle><circle class="sp-point" cx="312" cy="67" r="4"></circle></svg>
+<div class="thumb-meta">45 biomarkers · clinician review</div>
+</div></div>
+<div class="report-cover-text"><h2 class="report-cover-title">The whole record, made clear.</h2><p class="report-cover-desc">A short view of 45 markers, key trends, next steps, and gaps.</p><div class="report-cover-proof"><i>✓</i><span>45 markers · Sources attached</span></div></div>
+</div>
+<footer class="report-cover-foot"><a class="report-cover-link" href="Health_summary_demo-1.html">Open full report ↗</a></footer>
+</div>
+</article>
+<article class="report-card" id="report-panel-2" data-index="1" role="tabpanel" aria-labelledby="report-tab-2" aria-hidden="true">
+<div class="report-cover">
+<header class="report-cover-head"><span class="report-cover-tag">Health Over Time</span><span class="report-cover-no">02 / 04</span></header>
+<div class="report-cover-body">
+<div class="report-thumb is-trend" aria-hidden="true"><div class="thumb-body">
+<div class="thumb-kicker"><span>Patient timeline</span><b>2018–2026</b></div>
+<div class="thumb-timeline">
+<div class="thumb-timeline-item"><time>Mar 2023</time><span><b>HbA1c reviewed</b><small>Example Laboratory 01 · Page 3</small></span><em>7.1%</em></div>
+<div class="thumb-timeline-item"><time>Nov 2024</time><span><b>Treatment updated</b><small>Metformin plan confirmed</small></span><em>Plan</em></div>
+<div class="thumb-timeline-item is-latest"><time>Mar 2025</time><span><b>HbA1c improved</b><small>Source-linked result</small></span><em>6.4%</em></div>
+<div class="thumb-timeline-item"><time>Aug 2026</time><span><b>Health Summary</b><small>Clinician reviewed</small></span><em>Report</em></div>
+</div>
+<div class="thumb-meta">Tests, treatment, and reports in one timeline</div>
+</div></div>
+<div class="report-cover-text"><h2 class="report-cover-title">See what changed over time.</h2><p class="report-cover-desc">Track each test, check its lab range, and open the source.</p><div class="report-cover-proof"><i>✓</i><span>6 readings · Each point source-linked</span></div></div>
+</div>
+<footer class="report-cover-foot"><a class="report-cover-link" href="LHR_demo-1.html">Open full report ↗</a></footer>
+</div>
+</article>
+<article class="report-card" id="report-panel-3" data-index="2" role="tabpanel" aria-labelledby="report-tab-3" aria-hidden="true">
+<div class="report-cover">
+<header class="report-cover-head"><span class="report-cover-tag">Supplement Review</span><span class="report-cover-no">03 / 04</span></header>
+<div class="report-cover-body">
+<div class="report-thumb is-supplement" aria-hidden="true"><div class="thumb-body">
+<div class="thumb-kicker"><span>Current regimen</span><b>2 items</b></div>
+<div class="thumb-safety-row"><span><i>VD</i><b>Vitamin D3</b><small>2,000 IU daily</small></span><em class="is-clear">In range</em></div>
+<div class="thumb-safety-row"><span><i>MG</i><b>Magnesium</b><small>200 mg daily</small></span><em>Check dose</em></div>
+<div class="thumb-biomarker-head"><span>Vitamin D trend</span><b>71 nmol/L</b><em>6 readings</em></div>
+<svg class="thumb-spark thumb-biomarker-spark" viewBox="0 0 320 72" preserveAspectRatio="none"><g class="sp-grid"><path d="M20 16H312M20 36H312M20 56H312"></path></g><path class="sp-line" d="M20,55 C69,46 119,51 178,30 S260,20 312,12"></path><circle class="sp-point is-outlier" cx="20" cy="55" r="4"></circle><circle class="sp-point is-outlier" cx="119" cy="51" r="4"></circle><circle class="sp-point" cx="312" cy="12" r="4"></circle></svg>
+<div class="thumb-monitor-plan"><i>↻</i><span><b>Monitoring plan</b><small>Re-test Vitamin D + magnesium</small></span><em>12 weeks</em></div>
+<div class="thumb-meta">Safety review · clinician approval</div>
+</div></div>
+<div class="report-cover-text"><h2 class="report-cover-title">Check the full supplement plan.</h2><p class="report-cover-desc">Check each dose, test, drug mix, and follow-up plan before sign-off.</p><div class="report-cover-proof"><i>✓</i><span>Safety checks · Approval required</span></div></div>
+</div>
+<footer class="report-cover-foot"><a class="report-cover-link" href="Supplement_demo-_1_-1.html">Open full report ↗</a></footer>
+</div>
+</article>
+<article class="report-card" id="report-panel-4" data-index="3" role="tabpanel" aria-labelledby="report-tab-4" aria-hidden="true">
+<div class="report-cover">
+<header class="report-cover-head"><span class="report-cover-tag">Genetic Predisposition</span><span class="report-cover-no">04 / 04</span></header>
+<div class="report-cover-body">
+<div class="report-thumb is-genetic" aria-hidden="true"><div class="thumb-body">
+<div class="thumb-kicker"><span>Screening-grade view</span><b>116 conclusions</b></div>
+<div class="thumb-genetic-summary"><span><b>7</b><small>mechanisms</small></span><span><b>0</b><small>confirmed pathogenic</small></span></div>
+<div class="thumb-genetic-row"><span><b>Cardiovascular</b><small>Calcium phenotype present</small></span><em>Partially expressed</em></div>
+<div class="thumb-genetic-row"><span><b>Hepatobiliary</b><small>Fatty liver + gallstones</small></span><em>Partially expressed</em></div>
+<div class="thumb-gene-cloud"><span>CDKN2B-AS1</span><span>PNPLA3</span><span>ABCB4</span><span>MUC5B</span></div>
+</div></div>
+<div class="report-cover-text"><h2 class="report-cover-title">See how gene variants relate to the patient’s health.</h2><p class="report-cover-desc">Group key variants by how they affect the body, then check them against current results.</p><div class="report-cover-proof"><i>✓</i><span>116 conclusions · Phenotype weighted</span></div></div>
+</div>
+<footer class="report-cover-foot"><a class="report-cover-link" href="Genetic-Predisposition.html">Open full report ↗</a></footer>
+</div>
+</article>
+</div>
+<button class="report-nav next" type="button" aria-label="Next report">›</button>
+</div>
+<div class="report-carousel-foot">
+<div class="report-dots" role="tablist" aria-label="Choose report">
+<button class="report-dot is-active" id="report-tab-1" type="button" role="tab" data-index="0" aria-selected="true" aria-controls="report-panel-1" aria-label="Health Summary" tabindex="0"></button>
+<button class="report-dot" id="report-tab-2" type="button" role="tab" data-index="1" aria-selected="false" aria-controls="report-panel-2" aria-label="Health Over Time Report" tabindex="-1"></button>
+<button class="report-dot" id="report-tab-3" type="button" role="tab" data-index="2" aria-selected="false" aria-controls="report-panel-3" aria-label="Supplement Report" tabindex="-1"></button>
+<button class="report-dot" id="report-tab-4" type="button" role="tab" data-index="3" aria-selected="false" aria-controls="report-panel-4" aria-label="Genetic Predisposition Report" tabindex="-1"></button>
+</div>
+</div>
+</div>
+</section>
+<section class="reports-library" id="report-directory" aria-labelledby="library-title">
+<div class="shell">
+<header class="library-head"><h2 id="library-title">Six anonymised patients</h2><span class="count" data-count>6 profiles · 21 reports</span></header>
+<div class="toolbar"><label class="search"><span hidden>Search profiles and reports</span><input type="search" name="report-search" data-search placeholder="Search age, sex, health topics, or reports"></label><label><span hidden>Sort profiles</span><select name="report-sort" data-sort><option value="age">Age · youngest first</option><option value="reports">Most reports</option><option value="sources">Most source records</option></select></label></div>
+<div class="filters" data-filters aria-label="Filter profiles by health focus"></div>
+<div class="people-grid" data-grid></div>
+<div class="directory-footer"><span data-visible-count>Showing 20 of 50 profiles</span><button class="directory-more" type="button" data-more>Show 20 more</button></div>
+</div>
+</section>
+</main>
+<script>
+(function () {
+  var stage = document.querySelector('.report-carousel-stage');
+  if (!stage) return;
+  var cards = Array.prototype.slice.call(stage.querySelectorAll('.report-card'));
+  var dots = Array.prototype.slice.call(document.querySelectorAll('.report-dot'));
+  var previous = stage.querySelector('.report-nav.prev');
+  var next = stage.querySelector('.report-nav.next');
+  var active = 0;
+  var timer = null;
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function render() {
+    cards.forEach(function (card, index) {
+      var offset = (index - active + cards.length) % cards.length;
+      card.classList.toggle('is-center', offset === 0);
+      card.classList.toggle('is-right', offset === 1);
+      card.classList.toggle('is-left', offset === cards.length - 1);
+      card.classList.toggle('is-hidden', offset > 1 && offset < cards.length - 1);
+      card.setAttribute('aria-hidden', offset === 0 ? 'false' : 'true');
+      card.inert = offset !== 0;
+    });
+    dots.forEach(function (dot, index) {
+      var selected = index === active;
+      dot.classList.toggle('is-active', selected);
+      dot.setAttribute('aria-selected', selected ? 'true' : 'false');
+      dot.setAttribute('tabindex', selected ? '0' : '-1');
+    });
+  }
+  function go(index) { active = (index + cards.length) % cards.length; render(); }
+  function stop() { if (timer) clearInterval(timer); timer = null; }
+  function start() { stop(); if (!reducedMotion && !document.hidden) timer = setInterval(function () { go(active + 1); }, 6800); }
+
+  previous.addEventListener('click', function () { go(active - 1); start(); });
+  next.addEventListener('click', function () { go(active + 1); start(); });
+  dots.forEach(function (dot, index) {
+    dot.addEventListener('click', function () { go(index); start(); });
+    dot.addEventListener('keydown', function (event) {
+      var target = null;
+      if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') target = index - 1;
+      if (event.key === 'ArrowRight' || event.key === 'ArrowDown') target = index + 1;
+      if (event.key === 'Home') target = 0;
+      if (event.key === 'End') target = cards.length - 1;
+      if (target === null) return;
+      event.preventDefault();
+      go(target);
+      dots[active].focus();
+    });
+  });
+  stage.addEventListener('mouseenter', stop);
+  stage.addEventListener('mouseleave', start);
+  stage.addEventListener('focusin', stop);
+  stage.addEventListener('focusout', function (event) { if (!stage.contains(event.relatedTarget)) start(); });
+  document.addEventListener('visibilitychange', function () { if (document.hidden) stop(); else start(); });
+  render();
+  start();
+})();
+</script>
+<script src="report-library.js"></script>
+<footer class="marketing-footer">
+<div class="shell">
+<div class="marketing-footer-top">
+<div class="marketing-footer-brand">
+<a href="index.html" aria-label="n1.care home">
+<span class="logo" aria-hidden="true">
+</span>
+</a>
+<p>Put health files in order. See what changed. Check each fact at its source.</p>
+</div>
+<div class="marketing-footer-links">
+<div>
+<strong>For clinicians</strong>
+<a href="clinicians.html#clinician-product-animation-title">How it works</a>
+<a href="reports.html">Reports</a>
+<a href="pricing.html">Pricing</a>
+</div>
+<div>
+<strong>For</strong>
+<a href="clinicians.html">For clinicians</a>
+<a href="patients.html">For patients</a>
+</div>
+<div>
+<strong>Explore</strong>
+<a href="case-studies.html">Clinical workflows</a>
+<a href="about.html">About</a>
+<a href="contact.html">Contact</a>
+<a href="https://app.n1.care/privacy-policy">Privacy</a>
+<a href="https://app.n1.care/terms-of-service">Terms</a>
+</div>
+</div>
+</div>
+<div class="marketing-footer-bottom">© 2026 N1 Research, LLC</div>
+</div>
+</footer>
+</body>
+</html>

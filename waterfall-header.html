@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#172421">
+  <title>n1.care — Health data you can trust</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --cream: #f7ece0;
+      --ink: #171817;
+      --page: min(1180px, calc(100vw - 64px));
+      --ease: cubic-bezier(.2, .75, .25, 1);
+      font-family: "Work Sans", Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html, body { min-height: 100%; }
+    body { margin: 0; color: #fff; background: #172421; }
+    a { color: inherit; }
+    .hero { position: relative; min-height: 640px; height: 100svh; overflow: hidden; isolation: isolate; background: #172421; }
+    .hero-media { position: absolute; inset: 0; }
+    .hero-media { z-index: -2; }
+    .hero-media video { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center; transform: scale(1.015); animation: settle 18s var(--ease) both; }
+    .site-nav { position: absolute; z-index: 3; top: 0; left: 0; width: 100%; }
+    .nav-inner { width: 100%; min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 32px; padding: 14px 32px; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 720; letter-spacing: -.035em; text-decoration: none; text-shadow: 0 2px 16px rgba(0,0,0,.34); }
+    .brand-mark { width: 36px; height: 36px; display: block; overflow: hidden; border-radius: 8px; box-shadow: 0 7px 24px rgba(0,0,0,.18); }
+    .nav-menu { display: flex; align-items: center; gap: clamp(18px,2.2vw,34px); font-size: 13px; font-weight: 630; text-shadow: 0 2px 16px rgba(0,0,0,.42); }
+    .nav-menu > a { text-decoration: none; transition: opacity 160ms ease; }
+    .nav-menu > a:hover { opacity: .72; }
+    .nav-actions { display: flex; align-items: center; gap: 20px; }
+    .button { min-height: 42px; display: inline-flex; align-items: center; justify-content: center; padding: 0 18px; border: 1px solid var(--cream); border-radius: 4px; color: var(--ink); background: var(--cream); font-weight: 740; text-decoration: none; text-shadow: none; transition: transform 180ms var(--ease), background-color 180ms ease; }
+    .button:hover { opacity: 1 !important; transform: translateY(-1px); background: #fff; }
+    .hero-content { position: absolute; z-index: 2; left: 50%; bottom: clamp(34px,6vh,64px); width: var(--page); transform: translateX(-50%); }
+    .eyebrow { margin: 0 0 17px; font-size: 11px; font-weight: 760; letter-spacing: .16em; text-transform: uppercase; text-shadow: 0 2px 14px rgba(0,0,0,.5); }
+    h1 { max-width: 1060px; margin: 0; font-size: clamp(52px,6.2vw,86px); font-weight: 410; line-height: .98; letter-spacing: -.052em; text-wrap: balance; text-shadow: 0 4px 30px rgba(0,0,0,.3); }
+    .hero-content > * { animation: reveal-copy 1.05s var(--ease) 1s both; }
+    .hero-meta { width: 100%; display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-top: clamp(28px,4.5vh,48px); }
+    .hero-note { margin: 0; font-size: 13px; font-weight: 630; letter-spacing: .01em; text-shadow: 0 2px 14px rgba(0,0,0,.56); }
+    .hero-note::after { width: 7px; height: 7px; display: inline-block; margin: 0 0 3px 11px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; content: ""; transform: rotate(45deg); }
+    @keyframes settle { from { transform: scale(1.045); } to { transform: scale(1.015); } }
+    @keyframes reveal-copy { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+    @media (max-width: 900px) {
+      :root { --page: calc(100vw - 40px); }
+      .nav-inner { padding-inline: 20px; }
+      .nav-menu > a:not(.button), .nav-actions > a:first-child { display: none; }
+      .hero-content { bottom: 30px; }
+      h1 { max-width: 720px; font-size: clamp(48px,10vw,76px); }
+    }
+    @media (max-width: 560px) {
+      .hero { min-height: 620px; }
+      .hero-media video { object-position: 58% center; }
+      .brand-name, .nav-menu { display: none; }
+      .eyebrow { margin-bottom: 12px; }
+      h1 { max-width: 410px; font-size: clamp(46px,13.8vw,66px); line-height: 1; }
+      .hero-meta { margin-top: 28px; }
+      .hero-note { font-size: 12px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-media video { animation: none; }
+      .hero-content > * { opacity: 1; transform: none; animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero" aria-labelledby="hero-title">
+    <div class="hero-media" aria-hidden="true">
+      <video id="hero-video" autoplay muted loop playsinline preload="metadata" poster="assets/videos/trust-poster.jpg">
+        <source src="assets/videos/trust-compilation-mobile.mp4" type="video/mp4" media="(max-width: 640px)">
+        <source src="assets/videos/trust-compilation.mp4" type="video/mp4">
+      </video>
+    </div>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <div class="nav-inner">
+        <a class="brand" href="index.html" aria-label="n1.care home">
+          <svg class="brand-mark" viewBox="0 0 64 64" role="img" aria-hidden="true">
+            <rect width="64" height="64" rx="13" fill="#0d7377"/>
+            <path fill="#e6fff7" d="M17 28.2h6.1v3.3c1.6-2.7 4-4.1 7-4.1 5.1 0 8 3.1 8 8.7V48h-6.6V37.6c0-3.1-1.1-4.7-3.6-4.7-2.8 0-4.2 1.9-4.2 5.5V48H17V28.2Zm27.6-4.1c2.7-.4 4.4-1.9 5.1-4.1h4.8v28h-6.6V29.5h-3.3v-5.4Z"/>
+          </svg>
+          <span class="brand-name">n1.care</span>
+        </a>
+        <div class="nav-menu">
+          <a href="clinicians.html">For clinicians</a>
+          <a href="patients.html">For patients</a>
+          <a href="reports.html">Reports</a>
+          <div class="nav-actions">
+            <a href="https://app.n1.care/login">Log in</a>
+            <a class="button" href="https://app.n1.care/signup">Start free trial</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="hero-content">
+      <p class="eyebrow">Secure AI for clinicians</p>
+      <h1 id="hero-title">Health data<br>you can trust.</h1>
+      <div class="hero-meta"><p class="hero-note">A clearer view of every patient</p></div>
+    </div>
+  </header>
+  <script>
+    const video = document.querySelector('#hero-video');
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) video.pause();
+  </script>
+</body>
+</html>

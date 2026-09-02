@@ -1,0 +1,1035 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#376361">
+<title>n1 for clinicians — n1.care</title>
+<meta name="description" content="See how clinicians use n1 to prepare a source-linked patient history for review, reporting, and controlled sharing.">
+<link rel="icon" href="assets/n1-logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="art-directions.css">
+<link rel="stylesheet" href="marketing-pages.css">
+<link rel="stylesheet" href="buttons.css">
+<link rel="stylesheet" href="brand-tokens.css">
+<link rel="stylesheet" href="smoked-birch-copper-patina.css">
+<link rel="stylesheet" href="product-tour-harness.css?v=20260828-13">
+<link rel="stylesheet" href="approval-demo.css?v=20260827-1">
+<style>
+.clinicians-page { --type-body: clamp(15px,calc(14.2px + .16vw),17px); --type-body-sm: clamp(14px,calc(13.4px + .12vw),15px); --type-label: clamp(11px,calc(10.5px + .08vw),12px); }
+.tonal-close .close-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 14px; }
+.clinician-product-chapter .product-hero-copy { width: min(820px,100%); }
+@media (min-width: 721px) {
+  .clinician-product-chapter .product-hero-inner { width: min(1720px,calc(100% - 120px)); }
+}
+.clinician-product-chapter .product-page-name { display: block; margin-bottom: 18px; color: var(--teal); font: 700 12px/1.2 var(--sans); letter-spacing: .16em; text-transform: uppercase; }
+.clinician-product-chapter .product-hero-title-heading { max-width: 820px; margin: 0 auto; color: var(--ink); font: 400 clamp(44px,4.6vw,68px)/1.04 var(--serif); letter-spacing: -.035em; text-wrap: balance; }
+.product-page.clinician-product-chapter .product-hero-story .page-kicker { margin-bottom: 20px; color: var(--teal); font-size: 14px; font-weight: 800; letter-spacing: .14em; }
+.product-page.clinician-product-chapter .product-hero-story h2 { font-size: clamp(25px,2.15vw,34px); line-height: 1.08; text-wrap: balance; }
+.clinician-product-chapter .product-hero-story p:empty { display: none; }
+.clinician-patient-management .patient-showcase { margin-top: 0; }
+@media (min-width: 821px) {
+  .clinician-patient-management .patient-showcase-stage { min-height: 720px; }
+  .clinician-patient-management .patient-showcase-app { width: min(1040px,90%); min-height: 560px; }
+  .clinician-patient-management .patient-showcase-appbar { height: 72px; padding-right: 30px; padding-left: 30px; }
+  .clinician-patient-management .patient-showcase-appbar > span { font-size: 15px; }
+  .clinician-patient-management .patient-showcase-appbar > i { font-size: 11px; }
+  .clinician-patient-management .patient-showcase-views { height: 430px; }
+  .clinician-patient-management .patient-showcase-view { padding: 32px 38px; }
+  .clinician-patient-management .patient-showcase-view > header span { font-size: 11px; }
+  .clinician-patient-management .patient-showcase-view > header h3 { font-size: 30px; }
+  .clinician-patient-management .patient-showcase-view > header > b,
+  .clinician-patient-management .patient-showcase-view > header > button,
+  .clinician-patient-management .patient-showcase-view > header > i { font-size: 11px; }
+  .clinician-patient-management .patient-showcase-toolbar > * { font-size: 11px; }
+  .clinician-patient-management .patient-showcase-table > header { font-size: 10px; }
+  .clinician-patient-management .patient-showcase-table article { font-size: 12px; }
+  .clinician-patient-management .patient-showcase-table article b { font-size: 12px; }
+  .clinician-patient-management .patient-showcase-table article small { font-size: 9px; }
+  .clinician-patient-management .patient-showcase-table article em,
+  .clinician-patient-management .patient-showcase-table article u { font-size: 10px; }
+  .clinician-patient-management .patient-showcase-invite-layout label,
+  .clinician-patient-management .patient-showcase-share-layout label { font-size: 10px; }
+  .clinician-patient-management .patient-showcase-invite-layout label em,
+  .clinician-patient-management .patient-showcase-share-layout label em { font-size: 11px; }
+  .clinician-patient-management .patient-showcase-invite-layout form > small,
+  .clinician-patient-management .patient-showcase-share-layout aside > small { font-size: 10px; }
+  .clinician-patient-management .patient-showcase-invite-layout button,
+  .clinician-patient-management .patient-showcase-share-layout aside > b,
+  .clinician-patient-management .patient-showcase-share-layout aside > button { font-size: 11px; }
+  .clinician-patient-management .patient-showcase-share-layout > article h4 { font-size: 30px; }
+  .clinician-patient-management .patient-showcase-share-layout > article p,
+  .clinician-patient-management .patient-showcase-share-layout > article div { font-size: 11px; }
+  .clinician-patient-management .patient-showcase-progress span,
+  .clinician-patient-management .patient-showcase-progress button { font-size: 10px; }
+}
+.doctor-hero { min-height: 100svh; position: relative; display: flex; align-items: flex-end; padding: 130px 0 clamp(44px,6vh,72px); overflow: hidden; color: #fff; background: #42544d; }
+.doctor-hero-media { position: absolute; inset: 0; }
+.doctor-hero-media video { width: 100%; height: 100%; display: block; object-fit: cover; object-position: 54% center; }
+.doctor-hero-media::after { position: absolute; inset: 0; background: linear-gradient(180deg,rgba(13,22,20,.16) 0,transparent 32%,rgba(13,22,20,.08) 52%,rgba(10,18,16,.78) 100%),linear-gradient(90deg,rgba(13,22,20,.22),transparent 48%); content: ''; }
+.doctor-hero-layout { width: 100%; position: relative; z-index: 1; }
+.doctor-hero-copy { width: 100%; max-width: 1100px; margin-right: auto; margin-left: 0; }
+.doctor-hero h1 { max-width: 1100px; margin: 0; color: #fff; font-family: var(--sans); font-size: clamp(54px,5.55vw,80px); font-weight: 400; line-height: 1.02; letter-spacing: -.045em; text-wrap: balance; text-shadow: 0 3px 24px rgba(0,0,0,.24); }
+.doctor-hero-stop { width: .12em; height: .12em; display: inline-block; margin: 0 0 .08em .09em; border-radius: 0; background: #48a9a6; box-shadow: 0 2px 10px rgba(0,0,0,.16); transform: none; }
+.doctor-hero-scroll { display: inline-flex; align-items: center; gap: 11px; margin-top: clamp(34px,5vh,54px); color: #fff; font-size: 15px; font-weight: 700; text-shadow: 0 2px 12px rgba(0,0,0,.45); }
+.doctor-hero-scroll::after { width: 7px; height: 7px; margin-top: -4px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; content: ''; transform: rotate(45deg); }
+.doctor-hero-credit { position: absolute; z-index: 2; right: 20px; bottom: 18px; margin: 0; color: rgba(255,255,255,.82); font-size: 8px; letter-spacing: .04em; text-shadow: 0 1px 5px rgba(0,0,0,.55); }
+.prepared-story { height: 360svh; position: relative; margin-top: clamp(50px,7vw,96px); }
+.clinician-prepared-block .prepared-story { margin-top: 0; }
+.prepared-story-card { width: min(700px,100%,calc((100svh - 220px)*1.56)); aspect-ratio: 1.56; position: relative; z-index: 2; grid-column: 2; grid-row: 1; justify-self: center; overflow: visible; transform: translate3d(0,var(--story-y,0),0) scale(var(--story-scale,1)); transform-origin: center; will-change: transform; }
+.prepared-story-card::before { display: none; }
+.prepared-story-frame { width: 100%; height: 100%; position: relative; overflow: hidden; border: 1px solid #bfd1cc; border-radius: clamp(28px,3vw,48px); background: #eef3f0; }
+.prepared-story-media { position: absolute; inset: 0; overflow: hidden; background: linear-gradient(135deg,#f7f4ed 0%,#eef3f0 56%,#e4efec 100%); }
+.prepared-story-ui { position: absolute; z-index: 2; inset: 0; display: grid; place-items: center; padding: clamp(24px,4vw,58px); }
+.prepared-story-state { width: min(580px,100%); position: relative; padding: clamp(20px,2.4vw,30px); border: 1px solid rgba(71,86,78,.12); border-radius: var(--n1-radius-4xl); background: rgba(255,253,249,.94); }
+.story-ui-head { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding-bottom: 16px; border-bottom: 1px solid #deddd8; }
+.story-ui-head div { display: flex; align-items: center; gap: 10px; }
+.story-ui-avatar { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; color: #f7f4ed; background: #376361; font-size: 8px; font-weight: 800; }
+.story-ui-head b, .story-ui-head small { display: block; }
+.story-ui-head b { color: #282c29; font-size: 11px; }
+.story-ui-head small { margin-top: 3px; color: #7a7e7a; font-size: 8px; }
+.story-ui-head > span { color: #2f7773; font-size: 8px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.story-extract-body { min-height: 166px; position: relative; margin-top: 13px; overflow: hidden; }
+.story-extract-stage { position: absolute; inset: 0; opacity: 0; }
+.story-extract-start { display: grid; align-content: center; justify-items: center; gap: 13px; opacity: 1; }
+.story-extract-file { width: min(330px,90%); display: flex; align-items: center; gap: 11px; padding: 12px; border: 1px solid #d4dfdc; border-radius: 11px; background: #f8faf9; text-align: left; }
+.story-extract-file > i { width: 34px; height: 39px; display: grid; flex: 0 0 auto; place-items: center; border-radius: 7px; color: #fff; background: #b76c58; font-size: 7px; font-style: normal; font-weight: 800; }
+.story-extract-file span { min-width: 0; flex: 1; }
+.story-extract-file b,.story-extract-file small { display: block; }
+.story-extract-file b { color: #35403c; font-size: 10px; }
+.story-extract-file small { margin-top: 3px; color: #7a7e7a; font-size: 7px; }
+.story-extract-button { position: relative; min-width: 154px; min-height: 34px; display: grid; place-items: center; border-radius: 9px; color: #fff; background: #376361; font-size: 8px; font-weight: 800; }
+.story-extract-pointer { position: absolute; z-index: 2; right: -13px; bottom: -11px; color: #244b49; filter: drop-shadow(0 2px 2px rgba(255,255,255,.9)); font: 400 20px/1 var(--sans); transform: rotate(-20deg); }
+.story-extract-typing { display: grid; align-content: center; justify-items: center; gap: 14px; }
+.story-extract-scan { width: min(390px,92%); padding: 20px; border: 1px solid #c8d8d4; border-radius: 12px; background: #f3f8f6; }
+.story-extract-scan > span { display: block; color: #75817c; font-size: 7px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.story-extract-typed { width: 0; max-width: 100%; display: block; margin: 11px auto 0; overflow: hidden; color: #2d413c; border-right: 1px solid #2f7773; font: 400 15px/1.25 var(--serif); white-space: nowrap; }
+.story-extract-scanbar { height: 5px; margin-top: 16px; overflow: hidden; border-radius: 999px; background: #d8e4e0; }
+.story-extract-scanbar i { width: 0; height: 100%; display: block; border-radius: inherit; background: #48a9a6; }
+.story-extract-results { display: grid; grid-template-rows: auto minmax(0,1fr); }
+.story-extract-result-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 7px; }
+.story-extract-result-head span { display: flex; align-items: center; gap: 7px; color: #34433e; font-size: 9px; font-weight: 800; }
+.story-extract-result-head i { width: 18px; height: 18px; display: grid; place-items: center; border-radius: 50%; color: #fff; background: #48a9a6; font-size: 9px; font-style: normal; }
+.story-extract-result-head small { color: #74807b; font-size: 7px; }
+.story-data-table { overflow: hidden; border: 1px solid #d9e2df; border-radius: 10px; background: #fff; }
+.story-data-row { display: grid; grid-template-columns: 92px minmax(0,1fr) 52px; align-items: center; min-height: 22px; padding: 0 9px; border-top: 1px solid #e7ebe9; }
+.story-data-row:first-child { border-top: 0; }
+.story-data-row > span { color: #2f7773; font-size: 7px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; }
+.story-data-row > b { overflow: hidden; color: #39433f; font-size: 8px; text-overflow: ellipsis; white-space: nowrap; }
+.story-data-row > small { color: #78817d; font-size: 7px; text-align: right; }
+.story-record-ready { display: flex; align-items: center; gap: 11px; margin-top: 18px; color: #4c5450; font-size: 11px; }
+.story-record-ready i { width: 18px; height: 18px; display: grid; place-items: center; border-radius: 50%; color: #fff; background: #48a9a6; font-size: 9px; font-style: normal; }
+.story-records-grid { display: grid; grid-template-columns: repeat(4,1fr); margin-top: 16px; overflow: hidden; border: 1px solid #dcdbd6; border-radius: var(--n1-radius-2xl); }
+.story-records-grid div { padding: 13px 10px; border-left: 1px solid #dcdbd6; }
+.story-records-grid div:first-child { border-left: 0; }
+.story-records-grid span, .story-records-grid b { display: block; }
+.story-records-grid span { color: #858783; font-size: 7px; letter-spacing: .06em; text-transform: uppercase; }
+.story-records-grid b { margin-top: 6px; color: #303431; font: 400 18px/1 var(--serif); }
+.story-upload-zone { min-height: 124px; position: relative; margin-top: 18px; overflow: hidden; border: 1px dashed #8fb4ae; border-radius: 14px; color: #315e5a; background: #f2f8f6; text-align: center; }
+.story-upload-stage { position: absolute; inset: 0; display: grid; align-content: center; justify-items: center; gap: 7px; padding: 18px; }
+.story-upload-choose { opacity: 1; }
+.story-upload-selected,.story-upload-complete { opacity: 0; }
+.story-upload-choose > i,.story-upload-complete > i { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 10px; color: #fff; background: #376361; font: 700 18px/1 var(--sans); }
+.story-upload-selected { width: min(330px,calc(100% - 30px)); right: auto; left: 50%; justify-items: stretch; padding: 18px 0; text-align: left; transform: translateX(-50%); }
+.story-upload-selected-row { display: flex; align-items: center; gap: 11px; }
+.story-upload-selected-row > i { width: 35px; height: 40px; display: grid; flex: 0 0 auto; place-items: center; border-radius: 7px; color: #fff; background: #b76c58; font-size: 7px; font-style: normal; font-weight: 800; letter-spacing: .06em; }
+.story-upload-selected-row span { min-width: 0; flex: 1; }
+.story-upload-selected-row b,.story-upload-selected-row small { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.story-upload-selected-row b { color: #35403c; font-size: 10px; }
+.story-upload-meter { height: 5px; margin-top: 4px; overflow: hidden; border-radius: 999px; background: #d8e4e0; }
+.story-upload-meter span { width: 0; height: 100%; display: block; border-radius: inherit; background: #48a9a6; }
+.story-upload-status { display: flex; justify-content: space-between; color: #667772 !important; }
+.story-upload-complete > i { border-radius: 50%; background: #48a9a6; }
+.story-upload-zone b { font-size: 12px; }
+.story-upload-zone small { color: #77827e; font-size: 8px; }
+.story-upload-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+.story-upload-actions span { padding: 10px; border: 1px solid #d4dfdc; border-radius: 9px; color: #65716d; background: #fff; font-size: 8px; text-align: center; }
+.story-upload-actions b { margin-right: 4px; color: #2f7773; }
+.story-change-title { display: flex; justify-content: space-between; gap: 18px; margin-top: 18px; }
+.story-change-title span { color: #2f7773; font-size: 8px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.story-change-title span em { display: inline-block; margin-left: 8px; color: #75817c; font-size: 7px; font-style: normal; font-weight: 650; letter-spacing: .03em; text-transform: none; }
+.story-change-title b { color: #303431; font: 400 19px/1 var(--serif); }
+.story-change-chart { height: 128px; position: relative; margin-top: 10px; pointer-events: auto; }
+.story-change-chart svg { width: 100%; height: 100%; display: block; overflow: visible; pointer-events: auto; }
+.story-chart-grid line { stroke: #e7ebe9; stroke-width: 1; }
+.story-chart-reference { fill: rgba(72,169,166,.12); }
+.story-chart-reference-edge { stroke: #48a9a6; stroke-width: 1.2; stroke-dasharray: 5 4; opacity: .7; }
+.story-chart-axis text { fill: #7b8581; font: 7px/1 var(--sans); }
+.story-chart-range-label { fill: #39756f; font: 700 7px/1 var(--sans); }
+.story-chart-line { fill: none; stroke: #376361; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.story-chart-point { cursor: pointer; outline: none; transition: fill .2s ease,stroke .2s ease,r .2s ease; }
+.story-chart-point.is-outside { fill: #c76250; stroke: #fffdf9; stroke-width: 2.5px; }
+.story-chart-point:hover,.story-chart-point:focus { r: 8px; fill: #244b49; stroke: #fffdf9; stroke-width: 3px; }
+.story-chart-point:focus-visible { filter: drop-shadow(0 0 4px rgba(72,169,166,.65)); }
+.story-chart-tooltip { width: 150px; max-width: calc(100% - 12px); box-sizing: border-box; position: absolute; z-index: 5; left: clamp(75px,var(--tip-x,50%),calc(100% - 75px)); top: var(--tip-y,50%); padding: 9px 10px; color: #f7f4ed; border-radius: 9px; background: #244b49; box-shadow: 0 9px 24px rgba(36,75,73,.2); opacity: 0; pointer-events: none; transform: translate(-50%,calc(-100% - 10px)) translateY(4px); transition: opacity .18s ease,transform .18s ease; }
+.story-chart-tooltip.is-visible { opacity: 1; transform: translate(-50%,calc(-100% - 10px)) translateY(0); }
+.story-chart-tooltip.is-below { transform: translate(-50%,10px) translateY(-4px); }
+.story-chart-tooltip.is-visible.is-below { transform: translate(-50%,10px) translateY(0); }
+.story-chart-tooltip b,.story-chart-tooltip small { display: block; }
+.story-chart-tooltip b { font-size: 9px; }
+.story-chart-tooltip small { margin-top: 3px; color: #cce0dc; font-size: 7px; line-height: 1.35; }
+.story-review-finding { margin-top: 18px; }
+.story-review-finding > span, .story-source-card span { color: #2f7773; font-size: 8px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; }
+.story-review-finding h3 { max-width: 390px; margin: 7px 0 0; color: #292d2a; font: 400 clamp(20px,2vw,26px)/1.04 var(--serif); }
+.story-review-finding p { margin: 10px 0 0; color: #626662; font-size: 10px; line-height: 1.5; }
+.story-source-card { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-top: 18px; padding: 13px 14px; border: 1px solid #82aaa5; border-radius: var(--n1-radius-2xl); color: #325e5b; background: #e8f1ef; }
+.story-source-card b, .story-source-card small { display: block; }
+.story-source-card b { margin-top: 4px; font-size: 9px; }
+.story-source-card small { color: #607772; font-size: 8px; white-space: nowrap; }
+.story-report-title { display: flex; align-items: end; justify-content: space-between; gap: 18px; margin-top: 18px; }
+.story-report-title span { color: #2f7773; font-size: 8px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; }
+.story-report-title b { color: #303431; font: 400 21px/1 var(--serif); }
+.story-report-summary { margin-top: 15px; padding: 14px; border: 1px solid #d9e2df; border-radius: 11px; background: #f8faf9; }
+.story-report-summary > span { color: #73807b; font-size: 7px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.story-report-summary p { margin: 7px 0 0; color: #35403c; font: 400 13px/1.42 var(--serif); }
+.story-report-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 7px; margin-top: 10px; }
+.story-report-grid span { padding: 9px; border-radius: 8px; color: #737d79; background: #eef4f2; font-size: 7px; }
+.story-report-grid b { display: block; margin-top: 4px; color: #29332f; font-size: 10px; }
+.story-report-source { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 11px; padding-top: 10px; border-top: 1px solid #dce3e0; color: #5e6d68; font-size: 8px; }
+.story-report-source b { color: #2f7773; font-size: 8px; }
+.story-report-open { min-height: 34px; display: inline-flex; align-items: center; margin-top: 13px; padding: 0 12px; border-radius: 8px; color: #fff; background: #376361; font-size: 8px; font-weight: 800; text-decoration: none; pointer-events: auto; }
+.story-report-open:hover { background: #244b49; }
+.story-report-window { position: relative; margin-top: 12px; overflow: hidden; border: 1px solid #cfdbd7; border-radius: 12px; background: #fff; box-shadow: 0 10px 26px rgba(30,42,38,.06); }
+.story-report-scroll { height: 210px; box-sizing: border-box; overflow-x: hidden; overflow-y: auto; padding: 17px 18px 34px; color: #37413d; background: #fff; pointer-events: auto; overscroll-behavior: contain; scrollbar-color: #8db3ad #eef3f1; scrollbar-width: thin; }
+.story-report-scroll::-webkit-scrollbar { width: 7px; }
+.story-report-scroll::-webkit-scrollbar-track { background: #eef3f1; }
+.story-report-scroll::-webkit-scrollbar-thumb { border: 2px solid #eef3f1; border-radius: 999px; background: #8db3ad; }
+.story-report-cover > span { color: #2f7773; font-size: 7px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; }
+.story-report-cover h4 { margin: 7px 0 4px; color: #202523; font: 400 24px/1 var(--serif); }
+.story-report-cover > p { margin: 0; color: #6b7672; font-size: 8px; }
+.story-report-meta { display: grid; grid-template-columns: repeat(3,1fr); gap: 5px; margin-top: 13px; }
+.story-report-meta span { padding: 7px; border: 1px solid #dfe6e3; border-radius: 7px; color: #69746f; background: #f8faf9; font-size: 7px; }
+.story-report-meta b { display: block; margin-top: 3px; color: #2f3a36; font-size: 9px; }
+.story-report-section { padding: 17px 0; border-top: 1px solid #e0e6e3; }
+.story-report-section:first-of-type { margin-top: 17px; }
+.story-report-section > small { color: #2f7773; font-size: 7px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.story-report-section h5 { margin: 5px 0 8px; color: #202523; font: 400 17px/1.08 var(--serif); }
+.story-report-section p { margin: 0; color: #586560; font-size: 9px; line-height: 1.55; }
+.story-report-markers { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 6px; margin-top: 11px; }
+.story-report-markers span { padding: 8px; border-radius: 7px; background: #eef4f2; }
+.story-report-markers small,.story-report-markers b,.story-report-markers em { display: block; }
+.story-report-markers small { color: #6c7a75; font-size: 6px; }
+.story-report-markers b { margin-top: 4px; color: #293530; font-size: 10px; }
+.story-report-markers em { margin-top: 3px; color: #2f7773; font-size: 6px; font-style: normal; }
+.story-report-system { display: grid; grid-template-columns: 1fr auto; gap: 8px; padding: 8px 0; border-top: 1px solid #e7ebe9; }
+.story-report-system:first-of-type { border-top: 0; }
+.story-report-system b { color: #34403c; font-size: 9px; }
+.story-report-system span { color: #697570; font-size: 7px; }
+.story-report-system em { color: #2d8069; font-size: 7px; font-style: normal; font-weight: 800; }
+.story-report-recommendations { display: grid; gap: 7px; }
+.story-report-recommendations div { padding: 9px; border-left: 3px solid #48a9a6; background: #edf6f4; }
+.story-report-recommendations b { display: block; color: #30403b; font-size: 8px; }
+.story-report-recommendations p { margin-top: 3px; font-size: 8px; }
+.story-report-provenance { display: block; padding-top: 14px; color: #77827e; border-top: 1px solid #e0e6e3; font-size: 7px; line-height: 1.45; }
+.story-report-cue { position: absolute; right: 10px; bottom: 8px; padding: 5px 8px; color: #fff; border-radius: 999px; background: rgba(36,75,73,.9); font-size: 7px; font-weight: 800; pointer-events: none; transition: opacity .2s ease; }
+.story-report-window.is-scrolled .story-report-cue { opacity: 0; }
+.prepared-story-step.is-active:first-child .story-upload-zone { animation: story-upload-zone-in .65s cubic-bezier(.22,1,.36,1) both; }
+.prepared-story-step.is-active:first-child .story-upload-choose { animation: story-upload-choose 6.2s .35s ease-in-out infinite; }
+.prepared-story-step.is-active:first-child .story-upload-selected { animation: story-upload-selected 6.2s .35s ease-in-out infinite; }
+.prepared-story-step.is-active:first-child .story-upload-complete { animation: story-upload-complete 6.2s .35s ease-in-out infinite; }
+.prepared-story-step.is-active:first-child .story-upload-meter span { animation: story-upload-progress 6.2s .35s cubic-bezier(.22,.75,.28,1) infinite; }
+.prepared-story-step.is-active:first-child .story-upload-actions span { animation: story-control-in .5s .65s ease-out both; }
+.prepared-story-step.is-active:first-child .story-upload-actions span + span { animation-delay: .9s; }
+.prepared-story-step.is-active:first-child .story-upload-actions span:first-child { animation: story-upload-step-one 6.2s .35s ease-in-out infinite; }
+.prepared-story-step.is-active:first-child .story-upload-actions span:last-child { animation: story-upload-step-two 6.2s .35s ease-in-out infinite; }
+.prepared-story-step.is-active:nth-child(2) .story-extract-start { animation: story-extract-start 7.4s .25s ease-in-out infinite; }
+.prepared-story-step.is-active:nth-child(2) .story-extract-pointer { animation: story-extract-click 7.4s .25s cubic-bezier(.22,1,.36,1) infinite; }
+.prepared-story-step.is-active:nth-child(2) .story-extract-typing { animation: story-extract-typing 7.4s .25s ease-in-out infinite; }
+.prepared-story-step.is-active:nth-child(2) .story-extract-typed { animation: story-extract-type 7.4s .25s steps(32,end) infinite; }
+.prepared-story-step.is-active:nth-child(2) .story-extract-scanbar i { animation: story-extract-progress 7.4s .25s cubic-bezier(.22,.75,.28,1) infinite; }
+.prepared-story-step.is-active:nth-child(2) .story-extract-results { animation: story-extract-results 7.4s .25s ease-in-out infinite; }
+.prepared-story-step.is-active:nth-child(3) .story-change-chart path { stroke-dasharray: 700; animation: story-line-draw 1.35s .2s cubic-bezier(.3,.1,.2,1) both; }
+.prepared-story-step.is-active:nth-child(3) .story-change-chart circle { transform-box: fill-box; transform-origin: center; animation: story-point-in .42s cubic-bezier(.18,1.45,.4,1) both; }
+.prepared-story-step.is-active:nth-child(3) .story-change-chart circle:nth-child(1) { animation-delay: .35s; }
+.prepared-story-step.is-active:nth-child(3) .story-change-chart circle:nth-child(2) { animation-delay: .78s; }
+.prepared-story-step.is-active:nth-child(3) .story-change-chart circle:nth-child(3) { animation-delay: 1.22s; }
+.prepared-story-step.is-active:nth-child(3) .story-change-chart text { animation: story-content-in .45s 1.15s ease-out both; }
+.prepared-story-step.is-active:nth-child(4) .story-report-summary { animation: story-content-in .55s .2s ease-out both; }
+.prepared-story-step.is-active:nth-child(4) .story-report-grid span { animation: story-stat-in .45s ease-out both; }
+.prepared-story-step.is-active:nth-child(4) .story-report-grid span:nth-child(1) { animation-delay: .55s; }
+.prepared-story-step.is-active:nth-child(4) .story-report-grid span:nth-child(2) { animation-delay: .7s; }
+.prepared-story-step.is-active:nth-child(4) .story-report-grid span:nth-child(3) { animation-delay: .85s; }
+.prepared-story-step.is-active:nth-child(4) .story-report-source { animation: story-content-in .48s 1.05s ease-out both; }
+.prepared-story-step.is-active:nth-child(4) .story-report-open { animation: story-report-ready .55s 1.3s cubic-bezier(.18,1.35,.4,1) both; }
+@keyframes story-upload-zone-in { from { opacity: .35; transform: scale(.975); } to { opacity: 1; transform: scale(1); } }
+@keyframes story-upload-choose { 0%,22% { opacity: 1; transform: translateY(0) scale(1); } 29%,96% { opacity: 0; transform: translateY(-6px) scale(.98); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes story-upload-selected { 0%,23% { opacity: 0; transform: translate(-50%,7px); } 31%,66% { opacity: 1; transform: translate(-50%,0); } 73%,100% { opacity: 0; transform: translate(-50%,-6px); } }
+@keyframes story-upload-complete { 0%,67% { opacity: 0; transform: translateY(7px) scale(.96); } 76%,92% { opacity: 1; transform: translateY(0) scale(1); } 100% { opacity: 0; transform: translateY(-5px) scale(.98); } }
+@keyframes story-upload-progress { 0%,27% { width: 0; } 66%,100% { width: 100%; } }
+@keyframes story-upload-step-one { 0%,25% { color: #244b49; border-color: #73a7a1; background: #e8f1ef; box-shadow: 0 0 0 2px rgba(72,169,166,.12); } 32%,100% { color: #65716d; border-color: #d4dfdc; background: #fff; box-shadow: none; } }
+@keyframes story-upload-step-two { 0%,29% { color: #65716d; border-color: #d4dfdc; background: #fff; box-shadow: none; } 37%,72% { color: #244b49; border-color: #73a7a1; background: #e8f1ef; box-shadow: 0 0 0 2px rgba(72,169,166,.12); } 80%,100% { color: #65716d; border-color: #d4dfdc; background: #fff; box-shadow: none; } }
+@keyframes story-extract-start { 0%,24% { opacity: 1; transform: translateY(0); } 31%,96% { opacity: 0; transform: translateY(-5px); } 100% { opacity: 1; transform: translateY(0); } }
+@keyframes story-extract-click { 0%,7% { opacity: 0; transform: translate(18px,12px) rotate(-20deg); } 13%,19% { opacity: 1; transform: translate(0,0) rotate(-20deg); } 21% { opacity: 1; transform: translate(0,0) rotate(-20deg) scale(.78); } 24%,100% { opacity: 0; transform: translate(0,0) rotate(-20deg) scale(.78); } }
+@keyframes story-extract-typing { 0%,25% { opacity: 0; transform: translateY(6px); } 33%,59% { opacity: 1; transform: translateY(0); } 66%,100% { opacity: 0; transform: translateY(-5px); } }
+@keyframes story-extract-type { 0%,29% { width: 0; } 52%,100% { width: 31ch; } }
+@keyframes story-extract-progress { 0%,29% { width: 0; } 60%,100% { width: 100%; } }
+@keyframes story-extract-results { 0%,60% { opacity: 0; transform: translateY(7px); } 69%,94% { opacity: 1; transform: translateY(0); } 100% { opacity: 0; transform: translateY(-4px); } }
+@keyframes story-control-in { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes story-content-in { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes story-check-in { from { opacity: 0; transform: scale(.5) rotate(-12deg); } to { opacity: 1; transform: scale(1) rotate(0); } }
+@keyframes story-stat-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes story-line-draw { from { stroke-dashoffset: 700; } to { stroke-dashoffset: 0; } }
+@keyframes story-point-in { from { opacity: 0; transform: scale(0); } to { opacity: 1; transform: scale(1); } }
+@keyframes story-report-ready { from { opacity: 0; transform: translateY(5px) scale(.94); } to { opacity: 1; transform: translateY(0) scale(1); } }
+.prepared-story-steps { height: calc(100svh - 88px); position: sticky; top: 88px; }
+.prepared-story-step { position: absolute; inset: 0; display: grid; grid-template-columns: minmax(250px,360px) minmax(0,1fr); grid-template-rows: 1fr; align-items: center; gap: clamp(32px,3vw,56px); padding: clamp(40px,7svh,72px) 0; box-sizing: border-box; pointer-events: none; }
+.prepared-story-step:nth-child(1) { z-index: 4; }
+.prepared-story-step:nth-child(2) { z-index: 3; }
+.prepared-story-step:nth-child(3) { z-index: 2; }
+.prepared-story-step:nth-child(4) { z-index: 1; }
+.prepared-story-copy { width: 100%; max-width: 360px; z-index: 1; grid-column: 1; grid-row: 1; justify-self: start; visibility: hidden; text-align: left; opacity: 0; transform: translateY(16px); will-change: opacity,transform; }
+.prepared-story-copy.is-current { visibility: visible; animation: prepared-story-title-in .62s cubic-bezier(.22,1,.36,1) both; }
+@keyframes prepared-story-title-in { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+.prepared-story-copy span { color: #2f7773; font-size: 9px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.prepared-story-copy h3 { margin: 12px 0 0; color: #202523; font: 400 clamp(36px,3.15vw,50px)/1.02 var(--serif); letter-spacing: -.04em; text-wrap: balance; }
+.prepared-story-copy p { max-width: 360px; margin: 13px 0 0; color: #767a76; font-size: 14px; line-height: 1.5; }
+.prepared-story-footer { display: flex; justify-content: center; margin-top: 42px; position: relative; z-index: 3; }
+@media (max-width: 1100px) {
+  .prepared-story-step { grid-template-columns: 1fr; grid-template-rows: auto auto; align-content: center; gap: clamp(18px,2vw,28px); padding-bottom: clamp(64px,9svh,82px); }
+  .prepared-story-card { width: min(700px,74%,calc((100svh - 220px)*1.56)); grid-column: 1; grid-row: 2; justify-self: center; }
+  .prepared-story-copy { width: min(760px,88%); max-width: none; grid-column: 1; grid-row: 1; justify-self: center; text-align: center; }
+  .prepared-story-copy p { margin-right: auto; margin-left: auto; }
+}
+.prepared-story-footer .text-link { color: #2f7773; }
+.signoff-edit { width: 100%; min-height: 94px; box-sizing: border-box; margin-top: 8px; padding: 14px 15px; border: 1px solid #b8cbc6; border-radius: 12px; color: #2d3734; background: #fff; font: 500 13px/1.55 var(--sans); transition: border-color .35s ease,box-shadow .35s ease; }
+.clinician-inline-review { padding: clamp(84px,9vw,132px) 0; background: #dfefeb; }
+.clinician-inline-grid { display: grid; grid-template-columns: minmax(300px,.68fr) minmax(620px,1.32fr); gap: clamp(48px,6vw,104px); align-items: center; }
+.clinician-inline-copy h2 { max-width: 560px; margin: 18px 0 0; color: #202523; font: 400 clamp(48px,5vw,76px)/.98 var(--serif); letter-spacing: -.04em; text-wrap: balance; }
+.clinician-inline-copy p { max-width: 470px; margin: 28px 0 0; color: #596762; font-size: var(--type-body); line-height: 1.65; }
+.clinician-review-canvas { position: relative; min-height: 570px; padding: 34px; overflow: hidden; border: 1px solid #aec9c3; border-radius: 28px; background: rgba(255,255,255,.36); box-shadow: 0 26px 70px -48px rgba(31,67,60,.55); pointer-events: none; }
+.clinician-review-report { min-height: 470px; padding: 30px 32px; border: 1px solid #c6d5d1; border-radius: 19px; background: #fffdf9; transition: opacity .25s ease; }
+.clinician-review-canvas:not(.is-approved) .clinician-review-report { opacity: .44; }
+.clinician-review-report > header { display: flex; align-items: start; justify-content: space-between; gap: 24px; padding-bottom: 22px; border-bottom: 1px solid #d8dfdc; }
+.clinician-review-report small,.clinician-review-report b { display: block; }
+.clinician-review-report small { color: #64726d; font-size: 9px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.clinician-review-report header b { margin-top: 7px; color: #29312f; font: 400 28px/1 var(--serif); }
+.clinician-review-report header > span:last-child { padding: 8px 11px; border-radius: 999px; color: #815c21; background: #fff0c9; font-size: 9px; font-weight: 800; }
+.clinician-review-report h3 { margin: 28px 0 13px; color: #2f7773; font-size: 11px; letter-spacing: .11em; text-transform: uppercase; }
+.clinician-review-report p { margin: 0; color: #38423f; font: 400 19px/1.45 var(--serif); }
+.clinician-review-report mark { color: #234d49; background: #d6ebe6; }
+.clinician-review-report > div { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 32px; }
+.clinician-review-report > div span { padding: 12px; border: 1px solid #dbe3e0; border-radius: 9px; color: #697570; background: #f8faf9; font-size: 9px; }
+.clinician-review-report > div b { margin-top: 5px; color: #2f3b37; font-size: 10px; }
+.clinician-inline-editor { position: absolute; right: 18px; bottom: 18px; width: min(610px,calc(100% - 36px)); box-sizing: border-box; padding: 20px; border: 1px solid #98c6bd; border-radius: 17px; background: #fff; box-shadow: 0 24px 58px rgba(31,57,52,.22); transition: transform .4s cubic-bezier(.22,.8,.28,1),border-color .35s ease; }
+.clinician-inline-editor > header { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+.clinician-inline-editor > header b { color: #26302d; font: 400 25px/1 var(--serif); }
+.clinician-inline-editor > header span { color: #547069; font-size: 9px; font-weight: 800; }
+.clinician-inline-source { display: grid; grid-template-columns: 1fr 1fr 1.35fr; gap: 8px; margin-top: 16px; }
+.clinician-inline-source span { padding: 10px; border-radius: 8px; color: #697570; background: #eef6f3; font-size: 8px; }
+.clinician-inline-source b { display: block; margin-top: 4px; color: #2c4741; font-size: 9px; }
+.clinician-inline-editor label { display: block; margin-top: 14px; color: #53615c; font-size: 9px; font-weight: 800; }
+.clinician-inline-editor .signoff-edit { min-height: 78px; margin-top: 7px; }
+.clinician-inline-editor footer { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 13px; }
+.clinician-inline-editor footer span { color: #71807a; font-size: 9px; }
+.clinician-inline-editor .signoff-approve { min-height: 40px; display: inline-flex; align-items: center; padding: 0 16px; border-radius: 9px; color: #fff; background: #376361; font: 800 10px var(--sans); }
+.clinician-review-canvas.is-reviewing .clinician-inline-editor { transform: translateY(-4px); }
+.clinician-review-canvas.is-reviewing .signoff-edit { border-color: #48a9a6; box-shadow: 0 0 0 4px rgba(72,169,166,.1); }
+.clinician-review-canvas.is-reviewing mark { animation: signoff-mark-pulse 1.15s ease-in-out infinite alternate; }
+.clinician-review-canvas.is-approved .clinician-review-report header > span:last-child { color: #22654e; background: #e4f4eb; }
+.clinician-review-canvas.is-approved .clinician-inline-editor { border-color: #76b69f; }
+.clinician-review-canvas.is-approved .clinician-inline-editor .signoff-approve { color: #22654e; background: #dff1e7; }
+@keyframes signoff-mark-pulse { from { background: #d6ebe6; } to { background: #bfe1d9; } }
+.clinician-whitelabel { padding: clamp(84px,9vw,132px) 0; overflow: hidden; background: #f7f4ed; }
+.whitelabel-grid { display: grid; grid-template-columns: minmax(300px,.68fr) minmax(580px,1.32fr); gap: clamp(48px,6vw,104px); align-items: center; }
+.whitelabel-copy { max-width: 510px; }
+.whitelabel-copy h2 { max-width: 500px; margin: 18px 0 0; color: #202523; font: 400 clamp(48px,5vw,76px)/.98 var(--serif); letter-spacing: -.04em; text-wrap: balance; }
+.whitelabel-copy > p:last-of-type { max-width: 470px; margin: 26px 0 0; color: #596762; font-size: var(--type-body); line-height: 1.65; }
+.whitelabel-points { display: grid; gap: 0; margin: 34px 0 0; padding: 0; border-top: 1px solid #cbd7d3; list-style: none; }
+.whitelabel-points li { display: grid; grid-template-columns: minmax(120px,.72fr) minmax(0,1.28fr); gap: 18px; padding: 17px 0; border-bottom: 1px solid #cbd7d3; }
+.whitelabel-points b { color: #244b49; font-size: 12px; }
+.whitelabel-points span { color: #697570; font-size: 12px; line-height: 1.5; }
+.whitelabel-preview { --wl-primary: #5b466d; --wl-primary-dark: #443352; --wl-accent: #d7846f; --wl-soft: #f0e8f5; min-height: 580px; position: relative; display: flex; align-items: center; padding: 42px; overflow: hidden; border: 1px solid #c9b7d2; border-radius: 28px; background: linear-gradient(145deg,#ebe2f0,#f8eee9); box-shadow: 0 28px 70px -48px rgba(70,51,82,.52); }
+.whitelabel-preview::before { width: 420px; height: 420px; position: absolute; top: -210px; right: -140px; border-radius: 50%; background: rgba(215,132,111,.16); content: ''; animation: whitelabel-orbit 8s ease-in-out infinite; }
+.whitelabel-settings { width: 218px; position: absolute; z-index: 3; top: 50%; left: 24px; box-sizing: border-box; padding: 18px; border: 1px solid #b7ccc7; border-radius: 16px; background: rgba(255,253,249,.97); box-shadow: 0 22px 48px rgba(35,56,50,.16); transform: translateY(-50%); }
+.whitelabel-settings > header { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding-bottom: 13px; border-bottom: 1px solid #dde5e2; }
+.whitelabel-settings > header b { color: #29332f; font-size: 11px; }
+.whitelabel-settings > header span { display: flex; align-items: center; gap: 5px; color: var(--wl-primary); font-size: 7px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.whitelabel-settings > header span::before { width: 5px; height: 5px; border-radius: 50%; background: var(--wl-accent); content: ''; animation: whitelabel-live 1.4s ease-in-out infinite; }
+.whitelabel-setting { margin-top: 15px; }
+.whitelabel-setting > span { display: block; margin-bottom: 7px; color: #77817d; font-size: 7px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.whitelabel-logo-choice { display: flex; align-items: center; gap: 9px; padding: 9px; border: 1px solid #d9e2df; border-radius: 9px; background: #f8faf9; }
+.whitelabel-logo-choice i,.whitelabel-portal-logo { display: grid; place-items: center; border-radius: 8px; color: #fff; background: var(--wl-primary); font-style: normal; font-weight: 800; }
+.whitelabel-logo-choice i { width: 28px; height: 28px; font-size: 8px; }
+.whitelabel-logo-choice svg,.whitelabel-portal-logo svg { width: 62%; height: 62%; display: block; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.whitelabel-logo-choice b { display: block; color: #34403c; font-size: 9px; }
+.whitelabel-logo-choice small { display: block; margin-top: 2px; color: #7a8580; font-size: 7px; }
+.whitelabel-swatches { display: flex; gap: 7px; }
+.whitelabel-swatches i { width: 24px; height: 24px; box-sizing: border-box; border: 3px solid #fff; border-radius: 50%; background: var(--wl-primary); box-shadow: 0 0 0 1px #ae9ab8; }
+.whitelabel-swatches i:nth-child(2) { background: var(--wl-accent); }
+.whitelabel-swatches i:nth-child(3) { background: var(--wl-soft); }
+.whitelabel-swatches i:first-child { animation: whitelabel-swatch 8s ease-in-out infinite; }
+.whitelabel-domain { padding: 9px 10px; overflow: hidden; border: 1px solid #d9e2df; border-radius: 8px; color: #4e615b; background: #f8faf9; font-size: 7px; text-overflow: ellipsis; white-space: nowrap; }
+.whitelabel-price { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 9px 10px; border: 1px solid #d9e2df; border-radius: 8px; color: #4e615b; background: #f8faf9; font-size: 7px; }
+.whitelabel-price b { color: var(--wl-primary); font-size: 12px; }
+.whitelabel-pointer { width: 18px; height: 22px; position: absolute; z-index: 4; top: 163px; left: 44px; color: var(--wl-primary-dark); filter: drop-shadow(0 2px 3px rgba(31,24,36,.25)); opacity: 0; animation: whitelabel-pointer 8s cubic-bezier(.22,.8,.28,1) infinite; }
+.whitelabel-pointer svg { width: 100%; height: 100%; display: block; fill: #fff; stroke: currentColor; stroke-width: 1.5; }
+.whitelabel-portal { width: min(610px,calc(100% - 132px)); min-height: 466px; position: relative; z-index: 2; display: flex; flex-direction: column; margin-left: auto; overflow: hidden; border: 1px solid #c9bcd0; border-radius: 20px; background: #fffdf9; box-shadow: 0 28px 58px rgba(70,51,82,.15); animation: whitelabel-portal 8s ease-in-out infinite; }
+.whitelabel-portal > header { min-height: 62px; display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 0 22px; border-bottom: 1px solid #dbe3e0; }
+.whitelabel-portal-brand { display: flex; align-items: center; gap: 10px; }
+.whitelabel-portal-logo { width: 34px; height: 34px; font-size: 9px; }
+.whitelabel-portal-brand b,.whitelabel-portal-brand small { display: block; }
+.whitelabel-portal-brand b { color: #29332f; font-size: 11px; }
+.whitelabel-portal-brand small { margin-top: 2px; color: #77817d; font-size: 7px; }
+.whitelabel-secure { color: var(--wl-primary); font-size: 7px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; }
+.whitelabel-report { flex: 1; padding: 26px 28px 22px; }
+.whitelabel-report > header { display: flex; align-items: end; justify-content: space-between; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid #dbe3e0; }
+.whitelabel-report > header span,.whitelabel-report > header b { display: block; }
+.whitelabel-report > header span { color: var(--wl-primary); font-size: 7px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.whitelabel-report > header h3 { margin: 6px 0 0; color: #26302d; font: 400 26px/1 var(--serif); }
+.whitelabel-report > header b { margin-top: 5px; color: #6b7772; font-size: 8px; }
+.whitelabel-report-status { padding: 8px 10px; border-radius: 999px; color: var(--wl-primary-dark) !important; background: var(--wl-soft); font-size: 7px !important; animation: whitelabel-status 8s ease-in-out infinite; }
+.whitelabel-report-summary { margin-top: 20px; padding: 15px; border-radius: 10px; background: var(--wl-soft); }
+.whitelabel-report-summary span { color: var(--wl-primary); font-size: 7px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.whitelabel-report-summary p { margin: 7px 0 0; color: #43504c; font: 400 13px/1.45 var(--serif); }
+.whitelabel-report-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-top: 12px; }
+.whitelabel-report-grid span { padding: 11px; border: 1px solid #dbe3e0; border-radius: 8px; color: #74807b; font-size: 7px; }
+.whitelabel-report-grid b { display: block; margin-top: 5px; color: #2d3834; font-size: 10px; }
+.whitelabel-report-footer { margin-top: auto; padding: 12px 22px; border-top: 1px solid #dbe3e0; color: #6b7873; background: #f7faf8; font-size: 7px; text-align: right; }
+.whitelabel-revenue-toast { min-width: 230px; position: absolute; z-index: 5; right: 20px; bottom: 20px; display: grid; grid-template-columns: 34px 1fr auto; gap: 10px; align-items: center; padding: 13px 14px; border: 1px solid rgba(91,70,109,.18); border-radius: 13px; color: #3d3146; background: rgba(255,253,249,.98); box-shadow: 0 18px 45px rgba(62,43,74,.22); opacity: 0; transform: translateY(18px) scale(.96); animation: whitelabel-revenue 8s cubic-bezier(.22,.8,.28,1) infinite; }
+.whitelabel-revenue-toast > i { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 10px; color: #fff; background: var(--wl-accent); font-style: normal; font-weight: 800; }
+.whitelabel-revenue-toast b,.whitelabel-revenue-toast small { display: block; }
+.whitelabel-revenue-toast b { font-size: 10px; }
+.whitelabel-revenue-toast small { margin-top: 3px; color: #76697d; font-size: 7px; }
+.whitelabel-revenue-toast > strong { color: var(--wl-primary); font-size: 15px; }
+@keyframes whitelabel-live { 0%,100% { opacity: .4; transform: scale(.8); } 50% { opacity: 1; transform: scale(1.2); } }
+@keyframes whitelabel-orbit { 0%,100% { transform: translate3d(0,0,0); } 50% { transform: translate3d(-45px,38px,0); } }
+@keyframes whitelabel-swatch { 0%,18%,100% { transform: scale(1); box-shadow: 0 0 0 1px #ae9ab8; } 25%,38% { transform: scale(1.15); box-shadow: 0 0 0 3px rgba(91,70,109,.25); } }
+@keyframes whitelabel-pointer { 0%,8%,100% { opacity: 0; transform: translate(0,18px); } 14% { opacity: 1; transform: translate(0,0); } 28% { opacity: 1; transform: translate(4px,0); } 38% { opacity: 0; transform: translate(4px,0) scale(.86); } }
+@keyframes whitelabel-portal { 0%,18%,100% { transform: translateY(0); } 27% { transform: translateY(-4px); } 38% { transform: translateY(0); } }
+@keyframes whitelabel-status { 0%,46%,100% { transform: scale(1); } 54% { transform: scale(1.08); } 62% { transform: scale(1); } }
+@keyframes whitelabel-revenue { 0%,48%,100% { opacity: 0; transform: translateY(18px) scale(.96); } 57%,82% { opacity: 1; transform: translateY(0) scale(1); } 90% { opacity: 0; transform: translateY(-8px) scale(.98); } }
+.whitelabel-grid { grid-template-columns: minmax(580px,1.32fr) minmax(300px,.68fr); }
+.whitelabel-preview { min-height: 620px; box-sizing: border-box; padding: 40px 38px 86px; }
+.whitelabel-copy { justify-self: end; }
+.whitelabel-pointer { display: none; }
+.whitelabel-settings,.whitelabel-portal,.whitelabel-report-status,.whitelabel-swatches i { animation: none; }
+.whitelabel-settings,.whitelabel-portal { transition: width .7s cubic-bezier(.22,1,.36,1),opacity .45s ease,transform .7s cubic-bezier(.22,1,.36,1); }
+.whitelabel-settings { left: 18px; transform: translateY(-54%); }
+.whitelabel-portal { width: min(610px,calc(100% - 120px)); min-height: 462px; transform: translateX(0); }
+.whitelabel-report-footer { min-height: 48px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; gap: 12px; text-align: left; }
+.whitelabel-report-footer button { min-height: 30px; padding: 0 11px; border: 0; border-radius: 7px; color: #fff; background: var(--wl-primary); cursor: pointer; font: 800 8px/1 var(--sans); }
+.whitelabel-share-layer { position: absolute; z-index: 6; inset: 30px 30px 74px; display: grid; place-items: center; border-radius: 20px; background: rgba(244,239,246,.72); opacity: 0; visibility: hidden; pointer-events: none; backdrop-filter: blur(2px); transition: opacity .45s ease,visibility 0s .45s; }
+.whitelabel-share-dialog { width: min(440px,82%); box-sizing: border-box; padding: 22px; border: 1px solid #cbbfd0; border-radius: 15px; background: #fffdf9; box-shadow: 0 28px 60px -30px rgba(56,40,65,.55); transform: translateY(14px) scale(.98); transition: transform .55s cubic-bezier(.22,1,.36,1); }
+.whitelabel-share-dialog > header { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; padding-bottom: 15px; border-bottom: 1px solid #e1dce3; }
+.whitelabel-share-dialog header b { color: #2e2732; font-size: 15px; }
+.whitelabel-share-dialog header p { margin: 5px 0 0; color: #776e7b; font-size: 9px; }
+.whitelabel-share-dialog header > i { color: #847a87; font-size: 13px; font-style: normal; }
+.whitelabel-share-form { display: grid; gap: 13px; padding: 17px 0 4px; }
+.whitelabel-share-form label { display: grid; gap: 6px; color: #554d59; font-size: 8px; font-weight: 800; }
+.whitelabel-share-form label > small { display: inline; color: #8c838f; font-size: inherit; font-weight: 500; }
+.whitelabel-share-form label > span,.whitelabel-share-form label > em { min-height: 44px; display: flex; align-items: center; gap: 10px; box-sizing: border-box; padding: 9px 10px; border: 1px solid #ddd6df; border-radius: 8px; color: #4f4653; background: #faf8fa; font-size: 9px; font-style: normal; font-weight: 500; }
+.whitelabel-share-form label > span > i { width: 28px; height: 28px; display: grid; place-items: center; flex: 0 0 28px; border-radius: 50%; color: #fff; background: var(--wl-primary); font-size: 7px; font-style: normal; font-weight: 800; }
+.whitelabel-share-form label > span b,.whitelabel-share-form label > span small { display: block; }
+.whitelabel-share-form label > span b { color: #3d3541; font-size: 9px; }
+.whitelabel-share-form label > span small { margin-top: 2px; color: #8a818d; font-size: 7px; }
+.whitelabel-share-form > p { margin: 0; color: #7d7380; font-size: 8px; line-height: 1.45; }
+.whitelabel-share-dialog > footer { display: flex; justify-content: flex-end; gap: 8px; margin-top: 15px; padding-top: 14px; border-top: 1px solid #e1dce3; }
+.whitelabel-share-dialog footer button { min-height: 32px; padding: 0 11px; border: 1px solid #d8d0da; border-radius: 7px; color: #574e5b; background: #fff; font: 700 8px/1 var(--sans); }
+.whitelabel-share-dialog footer button:last-child { border-color: var(--wl-primary); color: #fff; background: var(--wl-primary); }
+.whitelabel-share-success { display: none; padding: 31px 10px 23px; text-align: center; }
+.whitelabel-share-success > i { width: 42px; height: 42px; display: grid; place-items: center; margin: 0 auto 13px; border-radius: 50%; color: #fff; background: #4aaa80; font-size: 18px; font-style: normal; }
+.whitelabel-share-success b { display: block; color: #342c38; font-size: 15px; }
+.whitelabel-share-success p { margin: 7px 0 0; color: #776e7b; font-size: 9px; }
+.whitelabel-demo-progress { position: absolute; z-index: 8; right: 32px; bottom: 22px; left: 72px; display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 8px; }
+.whitelabel-demo-progress button { min-width: 0; padding: 9px 0 0; border: 0; border-top: 3px solid rgba(91,70,109,.18); color: #75697c; background: transparent; cursor: pointer; font: 800 7px/1.2 var(--sans); text-align: left; transition: color .25s ease,border-color .25s ease; }
+.whitelabel-demo-progress button.is-complete { border-color: #c9aabb; }
+.whitelabel-demo-progress button.is-active { border-color: var(--wl-primary); color: var(--wl-primary-dark); }
+.whitelabel-demo-toggle { position: absolute; z-index: 9; bottom: 14px; left: 18px; width: 38px; height: 38px; display: grid; place-items: center; border: 1px solid rgba(91,70,109,.55); border-radius: 50%; color: var(--wl-primary-dark); background: rgba(255,253,249,.88); cursor: pointer; font-size: 12px; }
+.whitelabel-demo-cursor { width: 21px; height: 25px; position: absolute; z-index: 10; color: var(--wl-primary-dark); filter: drop-shadow(0 2px 3px rgba(31,24,36,.25)); pointer-events: none; transition: left .9s cubic-bezier(.22,1,.36,1),top .9s cubic-bezier(.22,1,.36,1),opacity .25s ease,transform .16s ease; }
+.whitelabel-demo-cursor svg { width: 100%; height: 100%; display: block; fill: #fff; stroke: currentColor; stroke-width: 1.5; }
+.whitelabel-demo-cursor.is-clicking { transform: scale(.78) translateY(2px); }
+[data-whitelabel-next] { transition: transform .16s ease,box-shadow .16s ease; }
+[data-whitelabel-next].is-demo-click { box-shadow: 0 0 0 5px rgba(91,70,109,.14); transform: scale(.96); }
+[data-whitelabel-demo][data-phase="0"] .whitelabel-demo-cursor { top: 246px; left: 93px; }
+[data-whitelabel-demo][data-phase="1"] .whitelabel-demo-cursor { top: 501px; left: calc(100% - 112px); }
+[data-whitelabel-demo][data-phase="2"] .whitelabel-demo-cursor { top: 458px; left: calc(50% + 118px); }
+[data-whitelabel-demo][data-phase="3"] .whitelabel-demo-cursor { opacity: 0; }
+[data-whitelabel-demo][data-phase="1"] .whitelabel-settings,[data-whitelabel-demo][data-phase="2"] .whitelabel-settings,[data-whitelabel-demo][data-phase="3"] .whitelabel-settings { opacity: 0; transform: translate(-26px,-54%) scale(.97); pointer-events: none; }
+[data-whitelabel-demo][data-phase="1"] .whitelabel-portal,[data-whitelabel-demo][data-phase="2"] .whitelabel-portal,[data-whitelabel-demo][data-phase="3"] .whitelabel-portal { width: calc(100% - 16px); transform: translateX(-8px); }
+[data-whitelabel-demo][data-phase="2"] .whitelabel-share-layer,[data-whitelabel-demo][data-phase="3"] .whitelabel-share-layer { opacity: 1; visibility: visible; pointer-events: auto; transition-delay: 0s; }
+[data-whitelabel-demo][data-phase="2"] .whitelabel-share-dialog,[data-whitelabel-demo][data-phase="3"] .whitelabel-share-dialog { transform: none; }
+[data-whitelabel-demo][data-phase="3"] .whitelabel-share-dialog > header,[data-whitelabel-demo][data-phase="3"] .whitelabel-share-form,[data-whitelabel-demo][data-phase="3"] .whitelabel-share-dialog > footer { display: none; }
+[data-whitelabel-demo][data-phase="3"] .whitelabel-share-success { display: block; }
+.clinician-voices { padding: clamp(72px,8vw,116px) 0; scroll-margin-top: 120px; background: #e8f1ef; }
+.voices-heading { display: block; margin-bottom: 60px; }
+.voices-heading .eyebrow { margin: 0 0 22px; color: #2a2b2a; font-size: 11px; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; }
+.voices-heading h2 { max-width: 650px; margin: 0; color: #171817; font-family: var(--serif); font-size: clamp(40px,5vw,62px); font-weight: 400; line-height: 1; letter-spacing: -.03em; text-wrap: balance; }
+.clinician-quote-trio { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 18px; align-items: stretch; }
+.clinician-quote-card { position: relative; min-height: 500px; display: flex; flex-direction: column; overflow: hidden; padding: 18px; border: 1px solid #c9d8d4; border-radius: 20px; background: #fffdf9; box-shadow: 0 20px 50px -38px rgba(35,56,50,.42); }
+.clinician-quote-card:nth-child(2) { color: #f7f4ed; border-color: #376361; background: #376361; transform: translateY(-18px); box-shadow: 0 30px 60px -36px rgba(35,56,50,.62); }
+.clinician-quote-card figure { position: relative; width: calc(100% + 36px); height: 210px; flex: none; margin: -18px -18px 0; overflow: hidden; border-radius: 0; background: #e5ebe8; }
+.clinician-quote-card:nth-child(2) figure { height: 236px; }
+.clinician-quote-card figure img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center 28%; filter: none; transition: transform .7s cubic-bezier(.22,.8,.28,1); }
+.clinician-quote-card:hover figure img { transform: scale(1.025); }
+.clinician-quote-card blockquote { position: relative; flex: 1; display: flex; flex-direction: column; margin: 0; padding: 38px 18px 10px; }
+.clinician-quote-card blockquote::before { position: absolute; top: 16px; left: 16px; color: #48a9a6; font: 400 38px/1 var(--serif); content: '“'; }
+.clinician-quote-card:nth-child(2) blockquote::before { color: #91d7d1; }
+.clinician-quote-card blockquote p { margin: 0; color: #202523; font: 400 clamp(15px,1.2vw,18px)/1.4 var(--serif); letter-spacing: -.015em; text-wrap: pretty; }
+.clinician-quote-card blockquote p::after { content: '”'; }
+.clinician-quote-card:nth-child(2) blockquote p { color: #fffdf9; }
+.clinician-quote-card footer { margin-top: auto; padding-top: 32px; text-align: right; }
+.clinician-quote-card cite { display: block; color: #244b49; font-size: 12px; font-style: normal; font-weight: 800; }
+.clinician-quote-card:nth-child(2) cite { color: #d9eeeb; }
+.clinician-quote-card small { display: block; margin-top: 7px; color: #68736f; font-size: 11px; line-height: 1.5; }
+.clinician-quote-card:nth-child(2) small { color: #c6dcda; }
+.featured-clinician { display: grid; grid-template-columns: minmax(330px,.74fr) minmax(0,1.26fr); min-height: 570px; overflow: hidden; border: 1px solid #376361; border-radius: 26px; color: #fffdf9; background: #376361; }
+.featured-clinician figure { min-height: 100%; margin: 0; background: #dce8e5; }
+.featured-clinician img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: 62% center; }
+.featured-clinician-copy { display: flex; flex-direction: column; justify-content: center; padding: clamp(40px,5.5vw,76px); }
+.featured-clinician-copy > span, .supporting-voices-head span { color: #91d7d1; font-size: var(--type-label); font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+.featured-clinician blockquote { margin: 24px 0 30px; }
+.featured-clinician blockquote::before { display: block; height: 32px; color: #91d7d1; font: 400 48px/1 var(--serif); content: '“'; }
+.featured-clinician blockquote p { margin: 0; color: #fffdf9; font: 400 clamp(25px,calc(21px + .9vw),38px)/1.28 var(--serif); letter-spacing: -.018em; text-wrap: pretty; }
+.featured-clinician blockquote p::after { content: '”'; }
+.featured-clinician footer { padding-top: 19px; border-top: 1px solid rgba(255,255,255,.22); text-align: right; }
+.featured-clinician cite, .portrait-clinician cite { display: block; font-style: normal; font-weight: 800; }
+.featured-clinician cite { color: #d9eeeb; font-size: 14px; }
+.featured-clinician small { display: block; margin-top: 5px; color: #bdd6d2; font-size: 12px; }
+.featured-clinician a { min-height: 42px; display: inline-flex; align-items: center; margin-top: 18px; padding: 0 16px; border-radius: 8px; color: #244b49; background: #d9eeeb; font-size: 12px; font-weight: 800; text-decoration: none; }
+.supporting-voices-head { display: flex; align-items: end; justify-content: space-between; gap: 32px; margin: 54px 0 20px; padding-bottom: 17px; border-bottom: 1px solid #b8cbc6; }
+.supporting-voices-head span { color: #2f7773; }
+.supporting-voices-head p { max-width: 600px; margin: 0; color: #62706b; font-size: var(--type-body-sm); line-height: 1.6; }
+.portrait-clinicians { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 20px; }
+.portrait-clinician { display: grid; grid-template-columns: minmax(190px,.72fr) minmax(0,1.28fr); min-height: 360px; overflow: hidden; border: 1px solid #bfd1cc; border-radius: 20px; background: #fffdf9; }
+.portrait-clinician figure { margin: 0; background: #dfe9e6; }
+.portrait-clinician img { width: 100%; height: 100%; display: block; object-fit: cover; }
+.portrait-clinician blockquote { display: flex; flex-direction: column; margin: 0; padding: 30px; }
+.portrait-clinician blockquote::before { height: 28px; color: #48a9a6; font: 400 42px/1 var(--serif); content: '“'; }
+.portrait-clinician p { margin: 6px 0 26px; color: #29302d; font: 400 clamp(20px,calc(18px + .35vw),24px)/1.37 var(--serif); letter-spacing: -.014em; text-wrap: pretty; }
+.portrait-clinician p::after { content: '”'; }
+.portrait-clinician footer { margin-top: auto; padding-top: 15px; border-top: 1px solid #d5dfdc; text-align: right; }
+.portrait-clinician cite { color: #244b49; font-size: 13px; }
+.portrait-clinician small { display: block; margin-top: 4px; color: #74807c; font-size: 11px; }
+@media (max-width: 1050px) { .clinician-inline-grid,.whitelabel-grid { grid-template-columns: 1fr; } .clinician-inline-copy h2,.whitelabel-copy h2 { max-width: 720px; } .whitelabel-copy { max-width: 720px; justify-self: start; } .whitelabel-preview { width: min(780px,100%); box-sizing: border-box; margin: 0 auto; } .clinician-quote-trio { grid-template-columns: 1fr 1fr; } .clinician-quote-card:first-child { grid-column: 1 / -1; min-height: 330px; } .clinician-quote-card:nth-child(2) { transform: none; } .portrait-clinician { grid-template-columns: 1fr; } .portrait-clinician figure { height: 270px; } }
+@media (max-width: 820px) { .voices-heading, .featured-clinician, .portrait-clinicians, .clinician-quote-trio { grid-template-columns: 1fr; } .clinician-quote-card:first-child { grid-column: auto; } .clinician-quote-card { min-height: 0; } .featured-clinician figure { min-height: 390px; } .portrait-clinician { grid-template-columns: minmax(160px,.64fr) minmax(0,1.36fr); } }
+@media (max-width: 980px) { .clinician-quote-trio { grid-template-columns: 1fr; gap: 16px; } .clinician-quote-card, .clinician-quote-card:first-child { min-height: 0; padding: 14px; } .clinician-quote-card:nth-child(2) { transform: none; } .clinician-quote-card figure, .clinician-quote-card:nth-child(2) figure { width: calc(100% + 28px); height: 220px; margin: -14px -14px 0; } }
+@media (max-width: 820px) { .doctor-hero { min-height: 100svh; align-items: flex-end; } .doctor-hero-media video { object-position: 60% center; } .doctor-hero-copy { width: 100%; max-width: 650px; margin-left: 0; } .prepared-story { height: 330svh; margin-top: 44px; } .prepared-story-step { gap: 24px; padding: 0 0 64px; } .prepared-story-card { grid-column: 1; grid-row: 2; width: calc(100% - 22px); aspect-ratio: 1.18; justify-self: center; } .prepared-story-copy, .prepared-story-step:nth-child(n) .prepared-story-copy { width: min(650px,calc(100% - 42px)); max-width: none; grid-column: 1; grid-row: 1; justify-self: center; margin: 0; padding: 0; border: 0; background: none; text-align: center; } .prepared-story-ui { padding: 28px; } .prepared-story-state { width: min(530px,84%); } }
+@media (max-width: 620px) { .doctor-hero { min-height: max(680px,100svh); padding: 120px 0 48px; } .doctor-hero-media video { object-position: 64% center; } .doctor-hero h1 { max-width: 360px; font-size: 48px; line-height: 1.03; } .doctor-hero-scroll { margin-top: 30px; font-size: 13px; } .doctor-hero-credit { right: 12px; bottom: 10px; } .prepared-story-step { gap: 10px; } .prepared-story-card { width: 100%; aspect-ratio: .94; } .prepared-story-frame { border-radius: 27px; } .prepared-story-copy, .prepared-story-step:nth-child(n) .prepared-story-copy { width: calc(100% - 28px); padding: 0; } .prepared-story-copy h3 { font-size: 27px; } .prepared-story-copy p { font-size: 12px; } .prepared-story-ui { padding: 16px; } .prepared-story-state { width: 88%; padding: 18px; } .story-ui-head > span { display: none; } .story-records-grid { grid-template-columns: repeat(2,1fr); } .story-records-grid div:nth-child(3) { border-left: 0; } .story-records-grid div:nth-child(n+3) { border-top: 1px solid #dcdbd6; } .story-change-chart { height: 102px; } .story-source-card { align-items: flex-start; flex-direction: column; gap: 7px; } .story-source-card small { white-space: normal; } .clinician-voices { scroll-margin-top: 168px; } .featured-clinician figure { min-height: 310px; } .featured-clinician-copy { padding: 30px 24px 32px; } .featured-clinician blockquote p { font-size: 25px; } .supporting-voices-head { align-items: flex-start; flex-direction: column; } .portrait-clinician { grid-template-columns: 1fr; } .portrait-clinician figure { height: 260px; } .portrait-clinician blockquote { padding: 26px 22px; } }
+@media (max-width: 620px) { .prepared-story-step:nth-child(4) .prepared-story-state { width: 100%; box-sizing: border-box; padding: 14px; } .story-report-scroll { padding-right: 14px; padding-left: 14px; } .story-report-section p { font-size: 9.5px; } }
+@media (max-width: 620px) { .clinician-review-canvas { min-height: 610px; padding: 12px; border-radius: 20px; } .clinician-review-report { min-height: 520px; padding: 22px 18px; } .clinician-review-report > div { grid-template-columns: 1fr; } .clinician-inline-editor { right: 8px; bottom: 8px; width: calc(100% - 16px); padding: 16px; } .clinician-inline-source { grid-template-columns: 1fr 1fr; } .clinician-inline-source span:last-child { grid-column: 1 / -1; } .clinician-inline-editor footer { align-items: stretch; flex-direction: column; } .clinician-inline-editor .signoff-approve { width: 100%; box-sizing: border-box; justify-content: center; } }
+@media (max-width: 620px) { .whitelabel-copy h2 { font-size: 44px; } .whitelabel-points li { grid-template-columns: 1fr; gap: 5px; } .whitelabel-preview { min-height: 550px; display: flex; padding: 18px 14px 72px; border-radius: 20px; } .whitelabel-settings { width: 188px; top: 47%; left: 8px; transform: translateY(-54%); } .whitelabel-setting { margin-top: 11px; } .whitelabel-portal { width: calc(100% - 58px); min-height: 414px; margin: 0 0 0 auto; border-radius: 16px; } .whitelabel-portal > header { padding: 0 14px; } .whitelabel-report { padding: 20px 14px 16px; } .whitelabel-report > header { align-items: flex-start; } .whitelabel-report > header h3 { font-size: 22px; } .whitelabel-report-grid { grid-template-columns: repeat(3,1fr); } .whitelabel-report-grid span { padding: 8px 5px; } .whitelabel-report-footer { align-items: flex-end; flex-direction: column; padding: 10px 14px; } .whitelabel-report-footer > span { display: none; } .whitelabel-share-layer { inset: 14px 10px 65px; } .whitelabel-share-dialog { width: calc(100% - 18px); padding: 18px; } .whitelabel-demo-progress { right: 12px; bottom: 17px; left: 52px; gap: 5px; } .whitelabel-demo-progress button { font-size: 6px; } .whitelabel-demo-toggle { bottom: 10px; left: 8px; width: 34px; height: 34px; } [data-whitelabel-demo][data-phase="0"] .whitelabel-demo-cursor { top: 215px; left: 67px; } [data-whitelabel-demo][data-phase="1"] .whitelabel-demo-cursor { top: 434px; left: calc(100% - 76px); } [data-whitelabel-demo][data-phase="2"] .whitelabel-demo-cursor { top: 411px; left: calc(100% - 84px); } [data-whitelabel-demo][data-phase="1"] .whitelabel-portal,[data-whitelabel-demo][data-phase="2"] .whitelabel-portal,[data-whitelabel-demo][data-phase="3"] .whitelabel-portal { width: 100%; transform: none; } }
+@media (max-width: 720px) { .clinician-product-chapter .product-hero-title-heading { font-size: 42px; } }
+@media (prefers-reduced-motion: reduce) { .prepared-story-media, .prepared-story-state, .prepared-story-copy { transition: none !important; } .prepared-story-copy.is-current { opacity: 1; transform: none; animation: none; } .prepared-story-step.is-active .prepared-story-state * { animation: none !important; } .story-extract-start,.story-extract-typing { display: none; } .story-extract-results { opacity: 1; transform: none; } .whitelabel-preview::before,.whitelabel-swatches i,.whitelabel-pointer,.whitelabel-portal,.whitelabel-report-status,.whitelabel-revenue-toast,.whitelabel-settings > header span::before { animation: none !important; } .whitelabel-revenue-toast { opacity: 1; transform: none; } .whitelabel-pointer { display: none; } }
+</style>
+<script defer src="marketing-pages.js">
+</script>
+<script defer src="product-tour-harness.js?v=20260828-10"></script>
+</head>
+<body class="tonal tonal-motion marketing-page clinicians-page">
+<a class="skip-link" href="#main">Skip to content</a>
+<script src="site-header.js"></script>
+<main id="main">
+<header class="page-hero doctor-hero">
+<div class="doctor-hero-media" aria-hidden="true">
+<video data-autoplay muted loop playsinline preload="auto"><source src="assets/videos/clinician-documentary-warm.mp4" type="video/mp4"></video>
+</div>
+<div class="shell doctor-hero-layout">
+<div class="doctor-hero-copy">
+<h1>More time for the work<br>only you can do<span class="sr-only">.</span><span class="doctor-hero-stop" aria-hidden="true"></span></h1>
+<a class="doctor-hero-scroll" href="#clinician-product-animation-title">Scroll to see how</a>
+</div>
+</div>
+<p class="doctor-hero-credit">Concept footage · AI-generated</p>
+</header>
+<div class="product-page clinician-product-chapter">
+  <header class="page-hero product-hero clinician-product-hero" data-product-hero-scroll aria-labelledby="clinician-product-animation-title">
+    <div class="product-hero-sticky">
+    <div class="shell product-hero-inner">
+      <div class="product-hero-copy">
+        <span class="product-page-name">How it works</span>
+        <h2 class="product-hero-title-heading" id="clinician-product-animation-title">Page by page.</h2>
+      </div>
+      <div class="product-hero-story">
+        <span class="page-kicker">How it works</span>
+        <h2>Page by page.</h2>
+        <p></p>
+      </div>
+      <div class="product-hero-window" aria-hidden="true">
+        <div class="product-hero-bar">
+          <span class="product-hero-brand"><b>n1.</b>care</span>
+          <div class="product-hero-person"><i>JD</i><span><b>John Doe</b><small>Patient record</small></span></div>
+          <div class="product-hero-actions"><b>＋ Add patient</b><span><i></i>Encrypted record</span><em>♧</em></div>
+        </div>
+        <div class="product-hero-app">
+          <aside class="product-hero-sidebar">
+            <span>Overview</span><b class="is-active"><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>Dashboard</b><span>Documents</span><b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8M16 13H8M16 17H8"/></svg>Medical Records</b><b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3v16a2 2 0 0 0 2 2h16M18 17V9M13 17V5M8 17v-3"/></svg>Reports</b><span>Clinical data</span><b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg>Biomarkers</b><b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 2v2M5 2v2M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1M8 15a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="10" r="2"/></svg>Diagnoses</b><b><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2M12 11h4M12 16h4M8 11h.01M8 16h.01"/></svg>Procedures</b><b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m10 16 1.5 1.5M14 8l-1.5-1.5M15 2c-1.798 1.998-2.518 3.995-2.807 5.993M16.5 10.5l1 1M17 6l-2.891-2.891M2 15c6.667-6 13.333 0 20-6M20 9l.891.891M3.109 14.109 4 15M6.5 12.5l1 1M7 18l2.891 2.891M9 22c1.798-1.998 2.518-3.995 2.807-5.993"/></svg>Genetics</b><span>Treatment</span><b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7ZM8.5 8.5l7 7"/></svg>Medications</b><b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10ZM2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>Supplements</b>
+          </aside>
+          <div class="product-hero-records">
+            <div class="product-hero-records-head"><div><small>JOHN DOE · 14 RECORDS</small><strong>Medical Records</strong></div><b>＋ Upload Records</b></div>
+            <div class="product-hero-records-empty"></div>
+            <aside class="product-hero-upload">
+              <header><b><i>↑</i>Upload records</b><span>×</span></header>
+              <div class="product-hero-upload-body">
+                <div class="product-hero-upload-drop">＋ Drop or click to add more files</div>
+                <div class="product-hero-upload-file"><i>PDF</i><span><b>example-laboratory-01-mar-2025.pdf</b><small>12 pages · 2.4 MB</small></span><em>×</em></div>
+                <div class="product-hero-upload-file"><i>PDF</i><span><b>consult-note-2025.pdf</b><small>6 pages · 1.1 MB</small></span><em>×</em></div>
+                <div class="product-hero-upload-file"><i>PDF</i><span><b>cardiac-ct-2024.pdf</b><small>18 pages · 3.8 MB</small></span><em>×</em></div>
+                <footer><span>3 files · 36 pages · 7.3 MB</span><b class="product-hero-upload-button">↑ Upload 3 records</b></footer>
+              </div>
+              <div class="product-hero-processing">
+                <span class="product-hero-processing-icon">✓</span>
+                <strong class="product-hero-processing-title">Preparing your records</strong>
+                <p class="product-hero-processing-lead">The files stay connected to everything n1 finds.</p>
+                <div class="product-hero-processing-list">
+                  <span data-upload-state="0"><i></i>Checking files</span>
+                  <span data-upload-state="1"><i></i>Reading records</span>
+                  <span data-upload-state="2"><i></i>Organising health data</span>
+                  <span data-upload-state="3"><i></i>Linking findings to sources</span>
+                </div>
+                <b class="product-hero-processing-ready">3 records ready for review</b>
+              </div>
+            </aside>
+            <div class="product-hero-records-table"><span>Record</span><span>Type</span><span>Uploaded</span><span>Status</span></div>
+            <div class="product-hero-records-table row"><span><b>Example Laboratory 01</b><small>example-laboratory-01-mar-2025.pdf</small></span><span>Lab report</span><span>2025-Mar-14</span><span>Ready</span></div>
+            <div class="product-hero-records-table row"><span><b>Cardiology consult</b><small>consult-note-2025.pdf</small></span><span>Consult note</span><span>2025-Mar-11</span><span>Ready</span></div>
+            <div class="product-hero-records-table row"><span><b>Example Imaging Centre 01</b><small>cardiac-ct-2024.pdf</small></span><span>Imaging</span><span>2024-Nov-22</span><span>Ready</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </header>
+<section class="page-section paper clinician-patient-management">
+<div class="shell">
+      <section class="patient-showcase" aria-labelledby="patient-showcase-title">
+        <header class="patient-showcase-head">
+          <span class="page-kicker">Patient management</span>
+          <h2 id="patient-showcase-title">Share and manage patients seamlessly.</h2>
+          <p>Keep each patient space private. Invite the patient when needed, and share only the reports you approve.</p>
+        </header>
+
+        <div class="patient-showcase-stage" data-patient-showcase aria-label="Patient management walkthrough">
+          <div class="patient-showcase-app patient-platform-demo">
+            <header class="patient-platform-topbar">
+              <b class="patient-platform-brand"><strong>n1.</strong>care</b>
+              <div class="patient-platform-selector"><i>JD</i><span><small>Patient</small><b>John Doe</b></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></div>
+              <div class="patient-platform-actions"><button type="button">＋ Add patient</button><span><i></i>Encrypted record</span><em>♧</em></div>
+            </header>
+            <div class="patient-platform-shell">
+              <aside class="patient-platform-sidebar" aria-label="Platform navigation">
+                <span>Overview</span><b><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>Dashboard</b>
+                <span>Documents</span><b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8l6 6v12a2 2 0 0 1-2 2z"/><path d="M14 2v6h6"/></svg>Medical Records</b><b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3v16a2 2 0 0 0 2 2h16M18 17V9M13 17V5M8 17v-3"/></svg>Reports</b>
+                <span>Clinical data</span><b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12h-3l-3 9L9 3l-3 9H2"/></svg>Biomarkers</b><b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 2v2M5 2v2M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1M8 15a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="10" r="2"/></svg>Diagnoses</b>
+                <span>Treatment</span><b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7ZM8.5 8.5l7 7"/></svg>Medications</b>
+                <span>People</span><b class="is-active"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>Patients</b>
+              </aside>
+
+              <div class="patient-showcase-views patient-platform-content">
+                <section class="patient-showcase-view patient-platform-list is-active" data-patient-showcase-view="0">
+                  <header><div><h3>Patients</h3><span>3 patients</span></div><div class="patient-platform-action-menu"><button type="button">Actions⌄</button><aside><span>⇩ <b>Export all data</b></span><button type="button" data-patient-showcase-next>＋ <b>Add patient</b></button></aside></div></header>
+                  <div class="patient-platform-toolbar"><span>⌕&nbsp;&nbsp; Search by name or email…</span><label>Patients Per Page&nbsp;&nbsp;<b>25⌄</b></label><label>1–3 of 3&nbsp;&nbsp; ‹ &nbsp;›</label></div>
+                  <div class="patient-platform-table">
+                    <header><span>□ &nbsp; Patient ↕</span><span>Last activity ↕</span><span>Age ↕</span><span>Sex ↕</span><span></span></header>
+                    <article><span><i>JR</i><b>Jamie Rivera</b></span><em>Aug 28, 2026</em><em>40</em><em>Female</em><button type="button">•••</button></article>
+                    <article><span><i>JD</i><b>John Doe<u aria-label="On platform"></u></b></span><em>Aug 26, 2026</em><em>52</em><em>Male</em><button type="button">•••</button></article>
+                    <article><span><i>AR</i><b>Ana Ruiz</b></span><em>Aug 21, 2026</em><em>36</em><em>Female</em><button type="button">•••</button></article>
+                  </div>
+                </section>
+
+                <section class="patient-showcase-view patient-platform-modal-view" data-patient-showcase-view="1" hidden>
+                  <div class="patient-platform-page-ghost" aria-hidden="true"></div>
+                  <article class="patient-platform-modal patient-platform-add-modal">
+                    <header><div><h3>Add New Patient</h3><p>Enter patient details to create a new record.</p></div><i>×</i></header>
+                    <div class="patient-platform-form-grid">
+                      <label>First Name<em>Jamie</em></label><label>Last Name<em>Rivera</em></label>
+                      <label>Date of Birth<em>12 Mar 1986 <span>▣</span></em></label><label>Gender<em>Female <span>⌄</span></em></label>
+                      <label>Weight (kg)<em>68</em></label><label>Height (cm)<em>168</em></label>
+                    </div>
+                    <footer><button type="button">Cancel</button><button type="button" data-patient-showcase-next>＋ Add Patient</button></footer>
+                  </article>
+                </section>
+
+                <section class="patient-showcase-view patient-platform-modal-view" data-patient-showcase-view="2" hidden>
+                  <div class="patient-platform-page-ghost" aria-hidden="true"></div>
+                  <article class="patient-platform-modal patient-platform-invite-modal">
+                    <header><div><h3>Invite Jamie to n1.care?</h3><p>Send an email so they can access their own data. The platform is free for patients, and inviting them does not affect your billing. You can also do this later from the patient list.</p></div><i>×</i></header>
+                    <label>Patient's email<em>jamie.rivera@example.com</em></label>
+                    <footer><button type="button">Skip for now</button><button type="button" data-patient-showcase-next>✉ &nbsp;Send Invite</button></footer>
+                  </article>
+                </section>
+
+                <section class="patient-showcase-view patient-platform-list patient-platform-ready" data-patient-showcase-view="3" hidden>
+                  <div class="patient-platform-toast"><i>✓</i><span><b>Invitation sent to Jamie!</b><small>The patient can now create their account.</small></span></div>
+                  <header><div><h3>Patients</h3><span>4 patients</span></div><button type="button">Actions⌄</button></header>
+                  <div class="patient-platform-toolbar"><span>⌕&nbsp;&nbsp; Search by name or email…</span><label>Patients Per Page&nbsp;&nbsp;<b>25⌄</b></label><label>1–4 of 4&nbsp;&nbsp; ‹ &nbsp;›</label></div>
+                  <div class="patient-platform-table">
+                    <header><span>□ &nbsp; Patient ↕</span><span>Last activity ↕</span><span>Age ↕</span><span>Sex ↕</span><span></span></header>
+                    <article class="is-new" data-patient-showcase-next><span><i>JR</i><b>Jamie Rivera<u aria-label="Invite sent"></u></b></span><em>Just now</em><em>40</em><em>Female</em><button type="button">•••</button></article>
+                    <article><span><i>JD</i><b>John Doe<u aria-label="On platform"></u></b></span><em>Aug 26, 2026</em><em>52</em><em>Male</em><button type="button">•••</button></article>
+                    <article><span><i>AR</i><b>Ana Ruiz</b></span><em>Aug 21, 2026</em><em>36</em><em>Female</em><button type="button">•••</button></article>
+                  </div>
+                </section>
+              </div>
+            </div>
+            <div class="patient-showcase-progress" aria-label="Patient management walkthrough steps"><button class="is-active" type="button" data-patient-showcase-step="0">Patient list</button><button type="button" data-patient-showcase-step="1">Add patient</button><button type="button" data-patient-showcase-step="2">Optional invite</button><button type="button" data-patient-showcase-step="3">Patient ready</button></div>
+          </div>
+          <span class="patient-showcase-cursor" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 3.5 19.2 12l-6.5 1.2 3.8 6.1-2.8 1.7-3.7-6.2-4 5.1z"/></svg></span>
+          <button class="patient-showcase-toggle" type="button" aria-label="Pause patient management walkthrough">Ⅱ</button>
+        </div>
+
+        <div class="patient-showcase-points">
+          <article><h3>One space per patient</h3><p>Keep records, checks and reports in the right patient workspace.</p></article>
+          <article><h3>Invite only when needed</h3><p>A patient account is optional. Send a secure invite when you want to share.</p></article>
+          <article><h3>Control every report</h3><p>Only approved reports can be shared. See access or turn it off at any time.</p></article>
+        </div>
+      </section>
+</div>
+</section>
+</div>
+<section class="approval-summary" aria-labelledby="approval-title">
+  <div class="shell">
+        <header class="approval-copy">
+          <p class="eyebrow">Clinician review</p>
+          <h2 id="approval-title">Edit and approve.</h2>
+          <p class="approval-copy-intro">Check the source before you share the report.</p>
+        </header>
+    <div class="approval-demo" role="group" aria-label="A Health Summary moving through clinician review, approval, and sharing">
+      <article class="approval-report">
+        <header><span><small>Health Summary</small><b>Draft for review</b></span><i>In review</i></header>
+        <div class="approval-report-body">
+          <div class="approval-report-meta" aria-label="Sample report details"><span>Patient<b>John Doe</b></span><span>Records reviewed<b>3 source files</b></span><span>Report date<b>14 Mar 2025</b></span></div>
+          <small>Executive summary</small>
+          <p id="approvalSummary">The latest records have been reviewed against the patient’s own ranges. <mark id="approvalSelection">LDL cholesterol remains above the patient-specific target despite improvement since the previous review.</mark></p>
+          <p class="approval-summary-detail">The report also brings together recent biomarker trends, the current plan, and suggested follow-up. Each finding remains linked to its source for clinical review.</p>
+          <div class="approval-report-sections">
+            <section class="approval-report-section" aria-label="Key findings"><b>Key findings</b><div class="approval-report-list"><span>LDL cholesterol<strong>116 mg/dL · High</strong></span><span>HbA1c<strong>6.4% · Improving</strong></span><span>Vitamin D<strong>71 nmol/L</strong></span></div></section>
+            <section class="approval-report-section" aria-label="Current plan"><b>Current plan</b><ul class="approval-report-plan"><li>Review LDL alongside ApoB and cardiovascular risk.</li><li>Continue the current metabolic plan.</li><li>Repeat selected biomarkers in 12 weeks.</li></ul></section>
+          </div>
+          <div class="approval-report-sources" aria-label="Source records"><span>Example Laboratory 01 · p.3 ↗</span><span>Cardiology consult · p.2 ↗</span><span>Example Imaging Centre 01 · p.1 ↗</span></div>
+          <aside class="approval-edit" aria-label="Rewrite selected report text">
+            <header><b>Refine selected text</b><span>Clinician controlled</span></header>
+            <div class="approval-edit-workspace">
+              <span class="approval-edit-field-label">Ask AI</span>
+              <div class="approval-ai-prompt"><span data-approval-prompt></span><i aria-hidden="true"></i></div>
+              <span class="approval-edit-field-label">Preview</span>
+              <div class="approval-edit-result"><span data-approval-result>Waiting for an instruction…</span><i aria-hidden="true"></i><em class="approval-manual-badge">Manual edit</em></div>
+            </div>
+            <footer><span data-approval-status>Only the highlighted sentence will change</span><button class="approval-apply" type="button">Accept change</button></footer>
+          </aside>
+        </div>
+        <footer class="approval-report-share"><span><i>✓</i>Edits saved</span><button class="approval-share-button" type="button" aria-haspopup="dialog" aria-expanded="false">Share with patient</button><span class="approval-share-cursor" aria-hidden="true"><svg viewBox="0 0 18 22"><path d="M2 2v16l4.2-4.2 3.2 6.2 3-1.5-3.1-6.1H15L2 2Z"></path></svg></span></footer>
+      </article>
+      <div class="approval-share-modal" aria-hidden="true">
+        <div class="approval-share-dialog" role="dialog" aria-modal="true" aria-label="Share Health Summary with patient">
+          <header><b><i>✉</i>Share with patient</b><p>Email “Health Summary” to the patient.</p></header>
+          <div class="approval-share-success"><b>✓ Report shared</b><span>John Doe has been notified by email.</span></div>
+          <div class="approval-share-form">
+            <div class="approval-share-recipient"><b>John Doe</b><small>On the platform</small></div>
+            <span class="approval-share-label">Message to patient <i>(optional)</i></span>
+            <div class="approval-share-note"><span data-approval-share-note></span><i aria-hidden="true"></i></div>
+          </div>
+          <footer><button type="button">Cancel</button><button class="approval-send-button" type="button">✉&nbsp; Send</button></footer>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="clinician-whitelabel" id="white-label" aria-labelledby="whitelabel-title">
+  <div class="shell whitelabel-grid">
+    <div class="whitelabel-preview" data-whitelabel-demo aria-label="Animated white-label report configuration and patient sharing walkthrough">
+      <aside class="whitelabel-settings" aria-hidden="true">
+        <header><b>Brand &amp; pricing</b><span>Live preview</span></header>
+        <div class="whitelabel-setting"><span>Practice logo</span><div class="whitelabel-logo-choice"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6 5.6 18.4"/><circle cx="12" cy="12" r="3.2"/></svg></i><div><b>Example Practice</b><small>Primary identity</small></div></div></div>
+        <div class="whitelabel-setting"><span>Brand colours</span><div class="whitelabel-swatches"><i></i><i></i><i></i></div></div>
+        <div class="whitelabel-setting"><span>Patient domain</span><div class="whitelabel-domain">reports.example-practice.example</div></div>
+        <div class="whitelabel-setting"><span>Patient report price</span><div class="whitelabel-price"><span>Health Summary</span><b>$49</b></div></div>
+        <i class="whitelabel-pointer"><svg viewBox="0 0 18 22" aria-hidden="true"><path d="M2 2v16l4.2-4.2 3.2 6.2 3-1.5-3.1-6.1H15L2 2Z"/></svg></i>
+      </aside>
+      <article class="whitelabel-portal">
+        <header><div class="whitelabel-portal-brand"><i class="whitelabel-portal-logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6 5.6 18.4"/><circle cx="12" cy="12" r="3.2"/></svg></i><span><b>Example Practice</b><small>Patient portal</small></span></div><span class="whitelabel-secure">Private &amp; secure</span></header>
+        <div class="whitelabel-report">
+          <header><span><span>Approved report</span><h3>Health Summary</h3><b>Jamie Rivera · 14 March 2025</b></span><span class="whitelabel-report-status">Ready to share</span></header>
+          <div class="whitelabel-report-summary"><span>Overview</span><p>Your recent records have been organised into the changes, context and follow-up points selected by your care team.</p></div>
+          <div class="whitelabel-report-grid"><span>Findings<b>6 reviewed</b></span><span>Trends<b>4 updated</b></span><span>Sources<b>14 linked</b></span></div>
+        </div>
+        <footer class="whitelabel-report-footer"><span>Prepared for Example Practice · Powered securely by n1</span><button type="button" data-whitelabel-next>Share with patient</button></footer>
+      </article>
+
+      <div class="whitelabel-share-layer" aria-hidden="true">
+        <article class="whitelabel-share-dialog" role="dialog" aria-modal="true" aria-label="Share Health Summary with patient">
+          <header><div><b>Share Health Summary</b><p>Send the approved report to your patient.</p></div><i>×</i></header>
+          <div class="whitelabel-share-form">
+            <label>Patient<span><i>JR</i><b>Jamie Rivera<small>jamie.rivera@example.com</small></b></span></label>
+            <label>Message <small>(optional)</small><em>Your Health Summary from Example Practice is ready to view.</em></label>
+            <p>Jamie will receive a secure link to this approved version.</p>
+          </div>
+          <div class="whitelabel-share-success"><i>✓</i><b>Report shared with Jamie</b><p>The patient has been notified by email.</p></div>
+          <footer><button type="button">Cancel</button><button type="button" data-whitelabel-next>✉&nbsp; Send report</button></footer>
+        </article>
+      </div>
+
+      <i class="whitelabel-demo-cursor" aria-hidden="true"><svg viewBox="0 0 18 22"><path d="M2 2v16l4.2-4.2 3.2 6.2 3-1.5-3.1-6.1H15L2 2Z"/></svg></i>
+      <div class="whitelabel-demo-progress" aria-label="White-label report walkthrough steps"><button class="is-active" type="button" data-whitelabel-step="0">Configure brand</button><button type="button" data-whitelabel-step="1">Branded report</button><button type="button" data-whitelabel-step="2">Share setup</button><button type="button" data-whitelabel-step="3">Report shared</button></div>
+      <button class="whitelabel-demo-toggle" type="button" aria-label="Pause white-label walkthrough">Ⅱ</button>
+    </div>
+    <header class="whitelabel-copy">
+      <p class="eyebrow">White-label revenue</p>
+      <h2 id="whitelabel-title">Your brand.<br>Your reports.<br>A new revenue stream.</h2>
+      <p>Turn approved reports into a service patients can choose to pay for. Set your own price, edit every report, and deliver the full experience under your practice name, colours and patient-facing domain.</p>
+      <ul class="whitelabel-points">
+        <li><b>Report revenue</b><span>Set your own price and charge patients for reports when it suits your model.</span></li>
+        <li><b>Your reports</b><span>Edit the content and present every approved report under your practice brand.</span></li>
+        <li><b>Patient touchpoints</b><span>Keep the portal, emails and reports consistent with your practice.</span></li>
+        <li><b>Custom access</b><span>Use a patient-facing domain your practice controls.</span></li>
+      </ul>
+    </header>
+  </div>
+</section>
+<section class="clinician-voices" id="clinician-voices" aria-labelledby="clinician-voices-title">
+<div class="shell">
+<header class="voices-heading">
+<div><p class="eyebrow">In doctors’ words</p><h2 id="clinician-voices-title">How n1 helps<br>in practice.</h2></div>
+</header>
+<div class="clinician-quote-trio">
+<article class="clinician-quote-card"><figure><img src="assets/testimonial-daniel-mercer-illustrative.webp" alt="Clinician portrait" width="1448" height="1086" loading="lazy" decoding="async"></figure><blockquote><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus feugiat, erat vitae faucibus posuere, magna nibh aliquet lorem, sed tempor justo tellus eget sapien. Aliquam erat volutpat, sed luctus nibh viverra.</p><footer><cite>Dr Morgan Doe, MD</cite></footer></blockquote></article>
+<article class="clinician-quote-card"><figure><img src="assets/testimonial-elena-vasquez-illustrative.webp" alt="Clinician portrait" width="1448" height="1086" loading="lazy" decoding="async"></figure><blockquote><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent feugiat velit sed nisl posuere, vitae interdum sapien feugiat. Donec ullamcorper lorem ac justo commodo. Maecenas non urna vitae arcu malesuada interdum.</p><footer><cite>Dr Riley Doe, MD</cite></footer></blockquote></article>
+<article class="clinician-quote-card"><figure><img src="assets/testimonial-lindsay-ledwich-illustrative.webp" alt="Clinician portrait" width="1448" height="1086" loading="lazy" decoding="async"></figure><blockquote><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vitae neque vel magna luctus aliquam. Integer posuere sem at justo consequat, sed facilisis erat dictum. Sed aliquam erat volutpat, quisque feugiat sapien.</p><footer><cite>Dr Casey Doe, MD</cite></footer></blockquote></article>
+</div>
+</div>
+</section>
+<section class="pricing-faq" aria-labelledby="clinician-faq-title">
+<div class="shell pricing-faq-layout">
+<header class="pricing-faq-head">
+<span class="page-kicker">Clinician FAQ</span>
+<h2 id="clinician-faq-title">Questions about using n1.</h2>
+<p>Short answers about records, reports, clinical review, sharing, and privacy.</p>
+<a class="text-link" href="https://calendly.com/leah-n1/n1-care-discovery-call">Ask us in a walkthrough →</a>
+</header>
+<div class="pricing-faq-list">
+<details><summary><span>What can I upload?</span><i aria-hidden="true"></i></summary><p>You can add health PDFs, TXT files, and supported CSV or TSV files. n1 also supports selected raw gene files.</p></details>
+<details><summary><span>What happens after I upload a file?</span><i aria-hidden="true"></i></summary><p>n1 checks each file, reads the content, and sorts each item by type and date. Every result keeps a link to its source.</p></details>
+<details><summary><span>Can I check each result against the original file?</span><i aria-hidden="true"></i></summary><p>Yes. Open the file, page, date, and range behind a result. You can correct the record before you use it in a report.</p></details>
+<details><summary><span>Can I make a custom report?</span><i aria-hidden="true"></i></summary><p>Yes. Start with a built-in report or describe the report you need. Choose the reader, records, units, and detail before n1 makes the draft.</p></details>
+<details><summary><span>Who approves the final report?</span><i aria-hidden="true"></i></summary><p>You do. Every report starts as a draft. A clinician checks the sources, edits the text, and approves the version that can be shared.</p></details>
+<details><summary><span>How do patient invites work?</span><i aria-hidden="true"></i></summary><p>A doctor can create a patient space and invite the patient to claim it. A patient can also ask a doctor to connect. The link only turns on after the invite is accepted.</p></details>
+<details><summary><span>How is patient data protected?</span><i aria-hidden="true"></i></summary><p>Files use encryption when they move and while they are stored. You can hide names, stop source files from being stored, or pick a storage region. <a href="contact.html?intent=security">Ask about the controls →</a></p></details>
+<details><summary><span>Can I try n1 before I sign up?</span><i aria-hidden="true"></i></summary><p>Yes. <a href="https://app.n1.care/demo">Try the live demo</a> with no sign-up, <a href="https://app.n1.care/signup">start a free trial</a>, or <a href="https://calendly.com/leah-n1/n1-care-discovery-call">book a walkthrough</a>.</p></details>
+</div>
+</div>
+</section>
+<section class="tonal-close" id="contact"><div class="shell"><h2>See the full picture for each patient.</h2><div class="close-actions"><a class="button" href="https://app.n1.care/signup">Start free trial <span aria-hidden="true">→</span></a><a class="button secondary" href="https://calendly.com/leah-n1/n1-care-discovery-call">Book a walkthrough</a></div></div></section>
+</main>
+<footer class="marketing-footer">
+<div class="shell">
+<div class="marketing-footer-top">
+<div class="marketing-footer-brand">
+<a href="index.html" aria-label="n1.care home">
+<span class="logo" aria-hidden="true">
+</span>
+</a>
+<p>Put health files in order. See what changed. Check each fact at its source.</p>
+</div>
+<div class="marketing-footer-links">
+<div>
+<strong>For clinicians</strong>
+<a href="clinicians.html#clinician-product-animation-title">How it works</a>
+<a href="reports.html">Reports</a>
+<a href="pricing.html">Pricing</a>
+</div>
+<div>
+<strong>For</strong>
+<a href="clinicians.html">For clinicians</a>
+<a href="patients.html">For patients</a>
+</div>
+<div>
+<strong>Explore</strong>
+<a href="case-studies.html">Clinical workflows</a>
+<a href="about.html">About</a>
+<a href="contact.html">Contact</a>
+<a href="https://app.n1.care/privacy-policy">Privacy</a>
+<a href="https://app.n1.care/terms-of-service">Terms</a>
+</div>
+</div>
+</div>
+<div class="marketing-footer-bottom">© 2026 N1 Research, LLC</div>
+</div>
+</footer>
+<script>
+(() => {
+  document.querySelectorAll('.story-change-chart').forEach((chart) => {
+    const tooltip = chart.querySelector('.story-chart-tooltip');
+    const points = [...chart.querySelectorAll('.story-chart-point')];
+    if (!tooltip || !points.length) return;
+    chart.querySelector('svg')?.removeAttribute('aria-hidden');
+
+    const showPoint = (point) => {
+      const chartRect = chart.getBoundingClientRect();
+      const pointRect = point.getBoundingClientRect();
+      const x = pointRect.left + pointRect.width / 2 - chartRect.left;
+      const y = pointRect.top + pointRect.height / 2 - chartRect.top;
+      tooltip.querySelector('b').textContent = `${point.dataset.value} HbA1c`;
+      tooltip.querySelector('small').textContent = `${point.dataset.date} · ${point.dataset.source}`;
+      tooltip.style.setProperty('--tip-x', `${x}px`);
+      tooltip.style.setProperty('--tip-y', `${y}px`);
+      tooltip.classList.toggle('is-below', y < 54);
+      tooltip.classList.add('is-visible');
+      tooltip.setAttribute('aria-hidden', 'false');
+    };
+
+    const hidePoint = () => {
+      tooltip.classList.remove('is-visible');
+      tooltip.setAttribute('aria-hidden', 'true');
+    };
+
+    points.forEach((point) => {
+      point.addEventListener('pointerenter', () => showPoint(point));
+      point.addEventListener('pointerleave', hidePoint);
+      point.addEventListener('focus', () => showPoint(point));
+      point.addEventListener('blur', hidePoint);
+      point.addEventListener('click', () => showPoint(point));
+      point.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') hidePoint();
+      });
+    });
+  });
+
+  document.querySelectorAll('.story-report-window').forEach((windowElement) => {
+    const scroller = windowElement.querySelector('.story-report-scroll');
+    if (!scroller) return;
+    scroller.addEventListener('scroll', () => {
+      windowElement.classList.toggle('is-scrolled', scroller.scrollTop > 8);
+    }, { passive: true });
+
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const storyStep = windowElement.closest('.prepared-story-step');
+    const holdAtStart = 900;
+    const travelTime = 7000;
+    const holdAtEnd = 1500;
+    const cycleTime = holdAtStart + travelTime + holdAtEnd;
+    let cycleStartedAt = 0;
+    let pauseStartedAt = 0;
+    let isHovered = false;
+    let isFocused = false;
+    let manualPauseUntil = 0;
+
+    const pauseForInteraction = () => {
+      manualPauseUntil = performance.now() + 4000;
+    };
+    scroller.addEventListener('pointerenter', () => { isHovered = true; });
+    scroller.addEventListener('pointerleave', () => { isHovered = false; });
+    scroller.addEventListener('focusin', () => { isFocused = true; });
+    scroller.addEventListener('focusout', () => { isFocused = false; });
+    scroller.addEventListener('pointerdown', pauseForInteraction, { passive: true });
+    scroller.addEventListener('wheel', pauseForInteraction, { passive: true });
+
+    const autoScroll = (time) => {
+      const isActive = storyStep?.classList.contains('is-active');
+      if (!isActive || document.hidden) {
+        cycleStartedAt = 0;
+        pauseStartedAt = 0;
+        if (scroller.scrollTop > 0) scroller.scrollTop = 0;
+        requestAnimationFrame(autoScroll);
+        return;
+      }
+
+      const isPaused = isHovered || isFocused || time < manualPauseUntil;
+      if (isPaused) {
+        if (!pauseStartedAt) pauseStartedAt = time;
+        requestAnimationFrame(autoScroll);
+        return;
+      }
+      if (pauseStartedAt && cycleStartedAt) cycleStartedAt += time - pauseStartedAt;
+      pauseStartedAt = 0;
+      if (!cycleStartedAt) cycleStartedAt = time;
+
+      const elapsed = (time - cycleStartedAt) % cycleTime;
+      const maxScroll = Math.max(0, scroller.scrollHeight - scroller.clientHeight);
+      if (elapsed < holdAtStart) {
+        scroller.scrollTop = 0;
+      } else if (elapsed < holdAtStart + travelTime) {
+        const linear = (elapsed - holdAtStart) / travelTime;
+        const eased = linear < .5 ? 2 * linear * linear : 1 - Math.pow(-2 * linear + 2, 2) / 2;
+        scroller.scrollTop = maxScroll * eased;
+      } else {
+        scroller.scrollTop = maxScroll;
+      }
+      requestAnimationFrame(autoScroll);
+    };
+    requestAnimationFrame(autoScroll);
+  });
+
+  const story = document.querySelector('.prepared-story');
+  if (!story) return;
+
+  const steps = [...story.querySelectorAll('.prepared-story-step')];
+  const titleCopies = steps.map((step) => step.querySelector('.prepared-story-copy'));
+  let activeTitleIndex = 0;
+  titleCopies.forEach((copy, index) => copy.setAttribute('aria-hidden', String(index !== activeTitleIndex)));
+  steps.forEach((step, index) => step.classList.toggle('is-active', index === activeTitleIndex));
+  let storyTop = 0;
+  let storyDistance = 1;
+  let ticking = false;
+
+  const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+
+  const measure = () => {
+    storyTop = story.getBoundingClientRect().top + window.scrollY;
+    storyDistance = Math.max(1, story.offsetHeight - window.innerHeight);
+  };
+
+  const render = () => {
+    const progress = clamp((window.scrollY - storyTop) / storyDistance, 0, 1);
+    const position = progress * (steps.length - 1);
+    const lift = window.innerHeight * 1.18;
+    const transitionProgress = position < steps.length - 1 ? position % 1 : 0;
+    const fanProgress = clamp(transitionProgress / .45, 0, 1);
+    const fan = Math.sin(fanProgress * Math.PI);
+    const depthOffset = (window.innerWidth <= 820 ? 14 : 16) + fan * (window.innerWidth <= 820 ? 5 : 6);
+    const depthScale = .018 + fan * .006;
+
+    const nextTitleIndex = clamp(Math.round(position), 0, steps.length - 1);
+    if (nextTitleIndex !== activeTitleIndex) {
+      titleCopies.forEach((copy, index) => {
+        const isCurrent = index === nextTitleIndex;
+        copy.classList.toggle('is-current', isCurrent);
+        copy.setAttribute('aria-hidden', String(!isCurrent));
+        steps[index].classList.toggle('is-active', isCurrent);
+      });
+      activeTitleIndex = nextTitleIndex;
+    }
+
+    steps.forEach((step, index) => {
+      const card = step.querySelector('.prepared-story-card');
+      const phase = position - index;
+      let y;
+      let scale;
+
+      if (phase >= 0) {
+        const exitPhase = clamp((phase - .18) / .82, 0, 1.25);
+        y = -exitPhase * lift;
+        scale = 1;
+      } else {
+        const depth = clamp(-phase, 0, 2);
+        y = depth * depthOffset;
+        scale = 1 - depth * depthScale;
+      }
+
+      card.style.setProperty('--story-y', `${y.toFixed(2)}px`);
+      card.style.setProperty('--story-scale', scale.toFixed(4));
+    });
+
+    ticking = false;
+  };
+
+  const requestRender = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(render);
+  };
+
+  const remeasure = () => {
+    measure();
+    requestRender();
+  };
+
+  window.addEventListener('scroll', requestRender, { passive: true });
+  window.addEventListener('resize', remeasure);
+  measure();
+  render();
+})();
+
+</script>
+<script src="approval-demo.js?v=20260827-1"></script>
+</body>
+</html>

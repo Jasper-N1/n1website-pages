@@ -1,0 +1,702 @@
+@import url("site-layout.css");
+@import url("site-nav.css");
+
+/* Brand tokens live in brand-tokens.css (synced from n1-design-system). */
+
+html { background: var(--cream); }
+body.marketing-page { color: var(--ink); background: var(--cream); }
+.marketing-page main { min-height: 70vh; }
+.marketing-page .shell { width: var(--n1-page-width); }
+
+.marketing-nav { position: fixed; z-index: 80; inset: 0 0 auto; height: 64px; padding-top: 12px; color: var(--cream); background: transparent; transition: color .25s ease; }
+/* Container radius, matching .tonal-motion .nav-inner: the top of the scale,
+   not a pill. Keeping these two navbars on the same value is what makes the
+   marketing pages and the homepage read as one product. */
+.marketing-page .marketing-nav-inner { width: var(--n1-nav-surface-width); padding-right: var(--n1-nav-surface-inset); padding-left: var(--n1-nav-surface-inset); }
+.marketing-nav-inner { min-height: 56px; display: grid; grid-template-columns: minmax(0,1fr) auto minmax(0,1fr); align-items: center; gap: 24px; padding: 8px 20px; border-radius: var(--n1-radius-2xl); background: #376361; box-shadow: 0 12px 30px rgba(23,24,23,.18); transition: background-color .25s ease, box-shadow .25s ease; }
+.marketing-nav .logo { width: 88px; color: currentColor; }
+.marketing-page .marketing-nav-inner,
+.marketing-nav.is-open .marketing-menu {
+  --button-bg: var(--cream);
+  --button-fg: var(--ink);
+  --button-border: var(--cream);
+  --button-bg-hover: var(--paper);
+  --button-fg-hover: var(--ink);
+  --button-border-hover: var(--paper);
+  --button-secondary-fg: var(--cream);
+  --button-focus: var(--cream);
+}
+.marketing-nav.is-over-dark { color: var(--ink); }
+.marketing-nav.is-over-dark .marketing-nav-inner { background: color-mix(in srgb, var(--cream) 96%, transparent); box-shadow: 0 12px 30px rgba(23,24,23,.22); }
+.marketing-nav.is-over-dark .marketing-nav-inner {
+  --button-bg: var(--ink);
+  --button-fg: var(--cream);
+  --button-border: var(--ink);
+  --button-bg-hover: var(--deep);
+  --button-fg-hover: var(--cream);
+  --button-border-hover: var(--deep);
+  --button-secondary-fg: var(--ink);
+  --button-focus: var(--ink);
+}
+.marketing-menu { display: contents; }
+.marketing-links { display: flex; align-items: center; justify-self: center; gap: 22px; font-size: 15px; }
+.marketing-links a { padding: 0; }
+.marketing-links a[aria-current="page"] { color: #d3e7e3; }
+.marketing-nav.is-over-dark .marketing-links a[aria-current="page"] { color: #2f7773; }
+.marketing-actions { display: flex; justify-self: end; justify-content: flex-end; align-items: center; gap: 10px; font-size: 15px; }
+.marketing-actions .login-link { min-height: 40px; display: inline-flex; align-items: center; }
+.marketing-actions .login-link,
+.marketing-actions .button { flex: none; white-space: nowrap; }
+.marketing-page .marketing-actions .button { min-height: 40px; padding: 8px 18px; font-size: 14px; }
+.marketing-toggle { width: 44px; height: 44px; display: none; place-items: center; border: 1px solid currentColor; border-radius: 50%; color: inherit; background: transparent; cursor: pointer; }
+.marketing-toggle span, .marketing-toggle::before, .marketing-toggle::after { width: 17px; height: 1px; display: block; background: currentColor; content: ""; }
+.marketing-toggle span { margin: 4px 0; }
+
+/* The Product hero is a light, continuous canvas, so its initial navigation
+   uses that canvas instead of placing a second coloured slab on top. Geometry
+   remains identical to the floating bar; once the hero has passed, the shared
+   scrolled treatment takes over without moving a single item. */
+.product-page .marketing-nav:not(.is-past-hero) { color: var(--ink); }
+.product-page .marketing-nav:not(.is-past-hero) .marketing-nav-inner { background: transparent; box-shadow: none; }
+.product-page .marketing-nav:not(.is-past-hero) .logo { color: #376361; }
+.product-page .marketing-nav:not(.is-past-hero) .marketing-links a[aria-current="page"] { color: #2f7773; }
+.product-page .marketing-nav:not(.is-past-hero) .marketing-nav-inner {
+  --button-bg: var(--ink);
+  --button-fg: var(--cream);
+  --button-border: var(--ink);
+  --button-bg-hover: var(--deep);
+  --button-fg-hover: var(--cream);
+  --button-border-hover: var(--deep);
+  --button-secondary-fg: var(--ink);
+  --button-focus: var(--ink);
+}
+
+.page-hero { padding: clamp(88px,10vw,145px) 0 clamp(72px,8vw,110px); }
+.page-hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(54px,8vw,120px); align-items: end; }
+.page-kicker { display: block; margin-bottom: 24px; color: var(--wine); font-size: 11px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
+.page-hero h1 { max-width: 850px; margin: 0; font-family: var(--serif); font-size: clamp(54px,6.4vw,88px); font-weight: 400; line-height: .94; letter-spacing: -.04em; }
+.page-hero h1 em { color: var(--wine); font-style: normal; }
+.page-hero-copy { max-width: 570px; padding-bottom: 8px; }
+.page-hero-copy > p { margin: 0; color: var(--muted); font-size: clamp(17px,1.5vw,20px); line-height: 1.65; }
+.page-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
+
+
+/* Photography and footage band.
+   The clinical stock we hold is cool and blue-white; this site is cream, blush
+   and wine. Dropped in ungraded it reads as pasted-in stock, so a band gets the
+   same treatment .tonal-lab already gives the homepage — ink ground, footage
+   warmed and held under full opacity, wine scrim over it — and the two surfaces
+   read as one system rather than two. The copy sits *on* the scrim, so a band is
+   a section of the page and not an illustration parked beside one. Every band
+   carries a .media-credit (defined in art-directions.css): this is concept
+   footage, and the page says so rather than implying it is an n1 customer. */
+.page-media { position: relative; overflow: hidden; border-radius: var(--n1-radius-5xl); color: var(--cream); background: var(--ink); }
+.page-media video, .page-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .82; filter: none; }
+/* Two ramps, and the split of labour matters. The vertical one carries the
+   legibility — it is under the copy and does the contrast work. The horizontal
+   one is only shaping, so it stays light: pushed harder it swallowed the
+   subject of the shot, which on these frames is the whole point of using
+   footage at all. Copy sits where the two overlap, so cream on this lands far
+   past 4.5:1 even against a blown-out white pixel. */
+.page-media::after { position: absolute; inset: 0; background: linear-gradient(92deg, rgba(23,24,23,.86), rgba(23,24,23,.12) 62%), linear-gradient(0deg, rgba(23,24,23,.78), transparent 56%); content: ""; }
+/* The credit is positioned against the frame, not laid out in the copy, so the
+   copy has to leave room for it rather than push it. At full width the padding
+   does that on its own; as it shrinks the last line of the paragraph drops into
+   the credit's row and the two read as one sentence. The floor is what the
+   credit occupies (16px offset + its line) plus a line of clearance. */
+.page-media-copy { min-height: clamp(370px,44vw,540px); position: relative; z-index: 2; display: flex; flex-direction: column; justify-content: flex-end; gap: 18px; padding: clamp(32px,4.5vw,62px); padding-bottom: max(clamp(32px,4.5vw,62px), 56px); }
+.page-media-copy .page-kicker { margin-bottom: 0; color: var(--peach); }
+.page-media-copy h2 { max-width: 660px; margin: 0; font-family: var(--serif); font-size: clamp(32px,3.8vw,54px); font-weight: 400; line-height: 1.02; letter-spacing: -.03em; text-wrap: balance; }
+/* One step below cream so the paragraph sits under the headline rather than
+   level with it — the token, not a hand-mixed near-match. */
+.page-media-copy p { max-width: 530px; margin: 0; color: var(--n1-sand-100); font-size: 15px; line-height: 1.65; }
+/* A band directly under the hero hugs it — the hero's own bottom padding is
+   already the gap, and a second one reads as a dropped section. */
+.page-hero + .media-section { padding-top: 0; }
+
+.page-section { padding: clamp(76px,9vw,128px) 0; }
+.product-page .page-section { padding: clamp(72px,7vw,104px) 0; }
+.product-page .page-hero { padding-top: clamp(76px,8vw,118px); padding-bottom: clamp(68px,7vw,96px); }
+.page-section.paper { background: var(--paper); }
+.page-section.blush { background: var(--blush); }
+.section-head { max-width: none; margin: 0 0 52px; text-align: left; }
+.section-head.split { display: grid; grid-template-columns: 1fr .8fr; gap: clamp(45px,8vw,110px); align-items: end; }
+.section-head .page-kicker { margin-bottom: 17px; }
+.section-head h2 { max-width: 770px; margin: 0; font-family: var(--serif); font-size: clamp(42px,5vw,68px); font-weight: 400; line-height: .98; letter-spacing: -.035em; }
+.section-head h2 em { color: var(--wine); font-style: normal; }
+.dark .section-head h2 em { color: var(--peach); }
+.dark .page-kicker { color: var(--peach); }
+.section-head > p, .section-head > div:last-child > p { max-width: 610px; margin: 0; color: var(--muted); font-size: 16px; line-height: 1.65; }
+.dark .section-head > p, .dark .section-head > div:last-child > p { color: #d1cbc4; }
+
+.workflow { display: grid; grid-template-columns: repeat(4, 1fr); overflow: hidden; border: 1px solid var(--line); border-radius: var(--n1-radius-4xl); background: var(--paper); }
+.workflow-step { min-height: 360px; display: flex; flex-direction: column; padding: 30px; border-left: 1px solid var(--line); }
+.workflow-step:first-child { border-left: 0; }
+.workflow-step > span { color: var(--wine); font-family: var(--serif); font-size: 14px; }
+.workflow-step h3 { margin: 46px 0 12px; font-family: var(--serif); font-size: 28px; font-weight: 400; line-height: 1.05; }
+.workflow-step p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
+.workflow-visual { min-height: 96px; position: relative; margin-top: auto; overflow: hidden; border: 1px solid var(--line); border-radius: var(--n1-radius-2xl); background: #fffaf2; }
+.workflow-visual.files { display: flex; align-items: end; justify-content: center; gap: 8px; padding: 16px 16px 0; }
+.workflow-visual.files i { width: 52px; height: 66px; display: grid; place-items: center; border: 1px solid #cabbb1; border-radius: var(--n1-radius-xl) var(--n1-radius-xl) 0 0; color: var(--wine); background: #fff; font-size: 9px; font-style: normal; font-weight: 700; }
+.workflow-visual.files i:nth-child(2) { height: 54px; }
+.workflow-visual.files i:nth-child(3) { height: 43px; }
+.workflow-visual.fields { display: flex; flex-wrap: wrap; align-content: center; gap: 7px; padding: 16px; }
+.workflow-visual.fields i { padding: 7px 9px; border-radius: 999px; color: var(--wine); background: #f0ded8; font-size: 9px; font-style: normal; }
+.workflow-visual.timeline { display: flex; align-items: center; justify-content: space-around; padding: 0 18px; }
+.workflow-visual.timeline::before { position: absolute; right: 24px; left: 24px; top: 50%; height: 1px; background: #c1b2a2; content: ""; }
+.workflow-visual.timeline i { position: relative; width: 12px; height: 12px; border: 3px solid #fffaf2; border-radius: 50%; background: var(--wine); box-shadow: 0 0 0 1px var(--wine); }
+.workflow-visual.report { padding: 15px 74px 15px 16px; }
+.workflow-visual.report i { height: 5px; display: block; margin: 8px 0; border-radius: var(--n1-radius-xl); background: #dfd2c8; }
+.workflow-visual.report i:nth-child(2) { width: 78%; }
+.workflow-visual.report i:nth-child(3) { width: 58%; }
+.workflow-visual.report b { position: absolute; right: 12px; bottom: 12px; padding: 6px 8px; border-radius: 999px; color: var(--green); background: #deeee7; font-size: 8px; }
+
+.product-stage { display: grid; grid-template-columns: .78fr 1.22fr; overflow: hidden; border: 1px solid var(--line); border-radius: var(--n1-radius-4xl); background: var(--paper); box-shadow: 0 28px 60px rgba(54,34,42,.09); }
+.product-stage-copy { padding: clamp(38px,5vw,68px); background: var(--blush); }
+.product-stage-copy h2 { margin: 0; font-family: var(--serif); font-size: clamp(38px,4.5vw,58px); font-weight: 400; line-height: 1; }
+.product-stage-copy p { margin: 22px 0 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
+.product-stage-list { display: grid; gap: 0; margin-top: 35px; }
+.product-stage-list div { display: grid; grid-template-columns: 34px 1fr; gap: 12px; padding: 15px 0; border-top: 1px solid #cbbab3; font-size: 13px; }
+.product-stage-list b { color: var(--wine); }
+.product-stage-visual { display: grid; align-items: center; padding: clamp(30px,5vw,68px); background: radial-gradient(circle at 50% 45%, #f5d8ce, #f4eddf 70%); }
+.app-frame { overflow: hidden; border: 1px solid var(--line); border-radius: var(--n1-radius-4xl); background: #fffdf8; box-shadow: 0 25px 55px rgba(62,37,47,.17); }
+.app-frame-bar { display: flex; justify-content: space-between; padding: 13px 17px; border-bottom: 1px solid var(--line); color: var(--wine); font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.app-frame-body { padding: 26px; }
+.app-patient { display: flex; align-items: center; gap: 12px; padding-bottom: 20px; border-bottom: 1px solid var(--line); }
+.app-patient i { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 50%; color: var(--cream); background: var(--wine); font-size: 11px; font-style: normal; }
+.app-patient strong, .app-patient small { display: block; }
+.app-patient strong { font-family: var(--serif); font-size: 22px; font-weight: 400; }
+.app-patient small { margin-top: 3px; color: var(--muted); font-size: 10px; }
+.app-row { display: grid; grid-template-columns: 1fr auto; gap: 16px; padding: 15px 0; border-bottom: 1px solid #e6dbd0; color: var(--muted); font-size: 12px; }
+.app-row:last-child { border-bottom: 0; }
+.app-row b { color: var(--wine); }
+
+.capability-table { display: grid; grid-template-columns: repeat(3,1fr); overflow: hidden; border: 1px solid var(--line); border-radius: var(--n1-radius-4xl); background: var(--paper); }
+.feature-chapter { display: grid; grid-template-columns: 90px 1fr 1fr; gap: 50px; padding: 42px 0; border-bottom: 1px solid var(--line); align-items: start; }
+.capability-table .feature-chapter { min-height: 350px; display: flex; flex-direction: column; gap: 0; padding: 32px; border-right: 1px solid var(--line); border-bottom: 0; }
+.capability-table .feature-chapter:last-child { border-right: 0; }
+.feature-chapter > span { color: var(--wine); font-family: var(--serif); font-size: 16px; }
+.feature-chapter h3 { margin: 0; font-family: var(--serif); font-size: clamp(30px,3.3vw,45px); font-weight: 400; line-height: 1.02; }
+.feature-chapter p { max-width: 570px; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
+.feature-chapter ul { display: grid; gap: 13px; margin: 30px 0 0; padding: 0; color: var(--muted); font-size: 13px; line-height: 1.55; list-style: none; }
+.feature-chapter li { position: relative; padding-left: 17px; }
+.feature-chapter li::before { position: absolute; left: 0; top: .62em; width: 5px; height: 5px; border-radius: 50%; background: var(--wine); content: ""; }
+
+.clinician-review { display: grid; grid-template-columns: .82fr 1.18fr; overflow: hidden; border: 1px solid var(--line); border-radius: var(--n1-radius-4xl); background: var(--paper); box-shadow: 0 24px 55px rgba(48,29,37,.08); }
+.clinical-questions { display: grid; align-content: center; padding: clamp(28px,4vw,56px); background: var(--blush); }
+.clinical-questions article { display: grid; grid-template-columns: 34px 1fr; gap: 16px; padding: 28px 0; border-top: 1px solid #cbbab3; }
+.clinical-questions article:first-child { border-top: 0; }
+.clinical-questions article > span { color: var(--wine); font-family: var(--serif); font-size: 14px; }
+.clinical-questions h3 { margin: 0 0 9px; font-family: var(--serif); font-size: 28px; font-weight: 400; }
+.clinical-questions p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
+.clinician-report { min-width: 0; padding: clamp(24px,4vw,50px); background: radial-gradient(circle at 50% 40%,#f5d8ce,#f4eddf 72%); }
+.clinician-report-bar { display: flex; justify-content: space-between; gap: 20px; padding: 13px 16px; border: 1px solid var(--line); border-bottom: 0; border-radius: var(--n1-radius-3xl) var(--n1-radius-3xl) 0 0; color: var(--wine); background: #fffdf8; font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.clinician-report-viewport { height: 500px; overflow: hidden; border: 1px solid var(--line); background: #fff; box-shadow: 0 22px 48px rgba(62,37,47,.14); }
+.clinician-report-viewport iframe { width: 166.67%; height: 840px; border: 0; transform: scale(.6); transform-origin: top left; pointer-events: none; }
+.clinician-report .text-link { display: inline-block; margin-top: 18px; color: var(--wine); font-size: 12px; font-weight: 700; }
+.control-boundary { display: grid; grid-template-columns: .78fr 1.22fr; gap: clamp(50px,8vw,120px); align-items: start; }
+.control-boundary h2 { max-width: 520px; margin: 0; font-family: var(--serif); font-size: clamp(40px,4.5vw,60px); font-weight: 400; line-height: 1; }
+.boundary-list { border-top: 1px solid var(--line); }
+.boundary-list p { display: grid; grid-template-columns: 120px 1fr; gap: 24px; margin: 0; padding: 21px 0; border-bottom: 1px solid var(--line); font-size: 13px; line-height: 1.55; }
+.boundary-list b { color: var(--wine); }
+.boundary-list span { color: var(--muted); }
+.patient-report { display: grid; grid-template-columns: 1.18fr .82fr; overflow: hidden; border: 1px solid var(--line); border-radius: var(--n1-radius-4xl); background: var(--cream); box-shadow: 0 24px 55px rgba(48,29,37,.08); }
+.patient-report-preview { min-width: 0; padding: clamp(24px,4vw,50px); background: radial-gradient(circle at 50% 40%,#f5d8ce,#f4eddf 72%); }
+.patient-report-notes { display: flex; flex-direction: column; justify-content: center; padding: clamp(30px,5vw,64px); background: var(--blush); }
+.patient-report-notes p { display: grid; gap: 6px; margin: 0; padding: 20px 0; border-top: 1px solid #cbbab3; }
+.patient-report-notes p:first-of-type { border-top: 0; }
+.patient-report-notes b { color: var(--wine); font-size: 14px; }
+.patient-report-notes span { color: var(--muted); font-size: 13px; line-height: 1.55; }
+.patient-report-notes .text-link { margin-top: 18px; color: var(--wine); font-size: 12px; font-weight: 700; }
+.patient-steps { display: grid; grid-template-columns: repeat(3,1fr); overflow: hidden; border: 1px solid var(--line); border-radius: var(--n1-radius-4xl); background: var(--paper); }
+.patient-steps article { min-height: 260px; padding: 30px; border-left: 1px solid var(--line); }
+.patient-steps article:first-child { border-left: 0; }
+.patient-steps article > span { color: var(--wine); font-family: var(--serif); }
+.patient-steps h3 { margin: 42px 0 12px; font-family: var(--serif); font-size: 27px; font-weight: 400; line-height: 1.08; }
+.patient-steps p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
+.lab-flow { display: grid; grid-template-columns: repeat(4,1fr); overflow: hidden; border: 1px solid var(--line); border-radius: var(--n1-radius-4xl); background: var(--paper); }
+.lab-flow article { min-height: 260px; position: relative; padding: 30px; border-left: 1px solid var(--line); }
+.lab-flow article:first-child { border-left: 0; }
+.lab-flow article:not(:last-child)::after { position: absolute; z-index: 2; right: -12px; top: 50%; width: 22px; height: 22px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 50%; color: var(--wine); background: var(--paper); content: "→"; font-size: 10px; }
+.lab-flow article > span, .lab-deliverables article > span { color: var(--wine); font-size: 9px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+.lab-flow h3 { margin: 46px 0 12px; font-family: var(--serif); font-size: 27px; font-weight: 400; line-height: 1.08; }
+.lab-flow p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
+.lab-scope { display: grid; grid-template-columns: 140px 1fr; gap: 24px; margin-top: 16px; padding: 22px 26px; border-radius: var(--n1-radius-3xl); background: var(--blush); }
+.lab-scope b { color: var(--wine); font-size: 11px; text-transform: uppercase; letter-spacing: .1em; }
+.lab-scope p { max-width: 930px; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
+.lab-proof { display: grid; grid-template-columns: 1fr 150px 1fr; align-items: stretch; overflow: hidden; border: 1px solid var(--line); border-radius: var(--n1-radius-4xl); background: var(--paper); box-shadow: 0 24px 55px rgba(48,29,37,.08); }
+.lab-report-page, .lab-timeline { min-height: 340px; padding: clamp(30px,4vw,52px); }
+.lab-report-page > span, .lab-timeline > span { display: block; color: var(--wine); font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.lab-report-page > small { display: block; margin-top: 8px; color: var(--muted); }
+.lab-report-page dl { margin: 54px 0 0; }
+.lab-report-page dl div { display: flex; justify-content: space-between; padding: 14px 0; border-top: 1px solid var(--line); }
+.lab-report-page dt, .lab-report-page dd { margin: 0; font-size: 13px; }
+.lab-report-page dd { color: var(--wine); font-weight: 700; }
+.lab-proof-link { display: grid; place-content: center; gap: 12px; text-align: center; background: var(--blush); }
+.lab-proof-link i { width: 54px; height: 1px; margin: auto; background: var(--wine); }
+.lab-proof-link b { color: var(--wine); font-size: 9px; letter-spacing: .08em; text-transform: uppercase; }
+.lab-timeline strong { display: block; margin-top: 40px; font-family: var(--serif); font-size: 30px; font-weight: 400; }
+.lab-timeline svg { width: 100%; height: 130px; overflow: visible; }
+.lab-timeline path { fill: none; stroke: var(--wine); stroke-width: 2; }
+.lab-timeline circle { fill: var(--wine); }
+.lab-timeline > div { display: flex; justify-content: space-between; color: var(--muted); }
+.lab-deliverables { display: grid; grid-template-columns: repeat(2,1fr); overflow: hidden; border: 1px solid #cbbab3; border-radius: var(--n1-radius-4xl); background: rgba(255,250,242,.55); }
+.lab-deliverables article { min-height: 290px; padding: 34px; border-left: 1px solid #cbbab3; }
+.lab-deliverables article:first-child { border-left: 0; }
+.lab-deliverables ul { display: grid; gap: 14px; margin: 34px 0 0; padding: 0; color: var(--muted); font-size: 13px; line-height: 1.55; list-style: none; }
+.lab-deliverables li { position: relative; padding-left: 17px; }
+.lab-deliverables li::before { position: absolute; left: 0; top: .6em; width: 5px; height: 5px; border-radius: 50%; background: var(--wine); content: ""; }
+
+.report-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.report-tile { min-width: 0; overflow: hidden; border: 1px solid var(--line); border-radius: var(--n1-radius-4xl); background: var(--paper); box-shadow: 0 20px 45px rgba(48,29,37,.08); }
+.report-preview { height: 340px; position: relative; overflow: hidden; border-bottom: 1px solid var(--line); background: #e9ddd6; }
+.report-preview iframe { width: 180%; height: 610px; border: 0; transform: scale(.56); transform-origin: top left; pointer-events: none; }
+.report-tile-body { min-height: 230px; display: flex; flex-direction: column; padding: 26px; }
+.report-tile-body > span { color: var(--wine); font-size: 9px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+.report-tile h3 { margin: 18px 0 10px; font-family: var(--serif); font-size: 28px; font-weight: 400; }
+.report-tile p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
+.report-details { display: grid; gap: 12px; margin: 0; }
+.report-details div { display: grid; grid-template-columns: 58px 1fr; gap: 12px; }
+.report-details dt { color: var(--wine); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
+.report-details dd { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+.report-lifecycle { display: grid; grid-template-columns: repeat(3,1fr); overflow: hidden; border: 1px solid var(--line); border-radius: var(--n1-radius-4xl); background: var(--paper); }
+.report-lifecycle article { min-height: 240px; padding: 30px; border-left: 1px solid var(--line); }
+.report-lifecycle article:first-child { border-left: 0; }
+.report-lifecycle article > span { color: var(--wine); font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.report-lifecycle h3 { margin: 42px 0 12px; font-family: var(--serif); font-size: 28px; font-weight: 400; }
+.report-lifecycle p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
+.compliance-controls { display: grid; grid-template-columns: repeat(2,1fr); overflow: hidden; border: 1px solid var(--line); border-radius: var(--n1-radius-4xl); background: var(--paper); }
+.compliance-controls article { min-height: 300px; padding: clamp(30px,4vw,48px); border-left: 1px solid var(--line); }
+.compliance-controls article:first-child { border-left: 0; }
+.compliance-controls article > span { color: var(--wine); font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.compliance-controls h3 { margin: 44px 0 16px; font-family: var(--serif); font-size: clamp(27px,3vw,38px); font-weight: 400; line-height: 1.08; }
+.compliance-controls p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.65; }
+.clinical-boundary { margin: 16px 0 0; padding: 20px 24px; border-radius: var(--n1-radius-3xl); color: var(--muted); background: var(--blush); font-size: 13px; line-height: 1.6; }
+.privacy-modes { display: grid; grid-template-columns: repeat(3,1fr); overflow: hidden; margin-bottom: 28px; border: 1px solid #cbbab3; border-radius: var(--n1-radius-4xl); background: rgba(255,250,242,.58); }
+.privacy-modes article { min-height: 230px; padding: clamp(26px,3.5vw,42px); border-left: 1px solid #cbbab3; }
+.privacy-modes article:first-child { border-left: 0; }
+.privacy-modes article > span { color: var(--wine); font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.privacy-modes h3 { margin: 38px 0 13px; font-family: var(--serif); font-size: clamp(25px,2.6vw,34px); font-weight: 400; line-height: 1.06; }
+.privacy-modes p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.65; }
+.security-table { overflow: hidden; border: 1px solid #cbbab3; border-radius: var(--n1-radius-4xl); background: rgba(255,250,242,.58); }
+.security-table > div { display: grid; grid-template-columns: 210px 1fr; gap: 28px; padding: 20px 24px; border-top: 1px solid #cbbab3; font-size: 13px; line-height: 1.55; }
+.security-table > div:first-child { border-top: 0; }
+.security-table b { color: var(--wine); }
+.security-table span { color: var(--muted); }
+.legal-links { display: flex; flex-wrap: wrap; gap: 22px; margin-top: 22px; color: var(--wine); font-size: 12px; font-weight: 700; }
+.report-tile .text-link { margin-top: auto; padding-top: 25px; color: var(--wine); font-size: 12px; font-weight: 700; }
+.report-library-entry { display: flex; justify-content: center; margin-top: 34px; }
+
+.compliance-demo { display: grid; grid-template-columns: .88fr 1.12fr; overflow: hidden; border: 1px solid var(--line); border-radius: var(--n1-radius-4xl); background: var(--paper); }
+.compliance-finding { padding: clamp(38px,5vw,64px); color: var(--cream); background: var(--wine); }
+.compliance-finding small, .compliance-source small { display: block; margin-bottom: 28px; font-size: 10px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+.compliance-finding h3 { margin: 0; font-family: var(--serif); font-size: clamp(32px,4vw,48px); font-weight: 400; line-height: 1.05; }
+.compliance-source { padding: clamp(38px,5vw,64px); }
+.compliance-source small { color: var(--wine); }
+.source-page { padding: 24px; border: 1px solid var(--line); border-radius: var(--n1-radius-3xl); background: #fffdf8; }
+.source-page-head { display: flex; justify-content: space-between; gap: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 11px; }
+.source-page p { margin: 22px 0 0; font-size: 14px; line-height: 1.7; }
+.source-page mark { padding: 2px 4px; color: var(--wine); background: #f6d5c5; }
+
+.control-list { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--line); }
+.control-list article { min-height: 200px; padding: 34px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.control-list article:nth-child(2n) { border-right: 0; }
+.control-list b { display: block; margin-bottom: 12px; color: var(--wine); font-size: 15px; }
+.control-list p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.65; }
+
+.pricing-basis { grid-template-columns: repeat(3, 1fr); }
+.pricing-basis article { min-height: 180px; }
+.pricing-basis article:nth-child(2n) { border-right: 1px solid var(--line); }
+.pricing-basis article:last-child { border-right: 0; }
+.pricing-estimate-callout { display: flex; align-items: center; justify-content: space-between; gap: 48px; margin-top: 28px; padding: 30px 34px; border: 1px solid var(--line); border-radius: var(--n1-radius-4xl); background: var(--cream); }
+.pricing-estimate-callout h3 { margin: 10px 0 6px; font-family: var(--serif); font-size: clamp(26px, 2.5vw, 38px); font-weight: 400; }
+.pricing-estimate-callout p { max-width: 620px; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
+.pricing-estimate-callout .button { flex: 0 0 auto; }
+
+.pricing-faq { padding: clamp(72px, 8vw, 112px) 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: #f3f7f5; }
+.pricing-faq-layout { display: grid; grid-template-columns: minmax(240px, .72fr) minmax(0, 1.28fr); gap: clamp(48px, 7vw, 108px); align-items: start; }
+.pricing-faq-head { position: sticky; top: 118px; }
+.pricing-faq-head .page-kicker { display: block; margin-bottom: 17px; }
+.pricing-faq-head h2 { max-width: 470px; margin: 0; font-family: var(--serif); font-size: clamp(40px, 4.6vw, 62px); font-weight: 400; line-height: 1; letter-spacing: -.035em; }
+.pricing-faq-head p { max-width: 440px; margin: 20px 0 0; color: var(--muted); font-size: 14px; line-height: 1.65; }
+.pricing-faq-head .text-link { display: inline-block; margin-top: 24px; color: var(--wine); font-size: 13px; font-weight: 700; }
+.pricing-faq-list { border-top: 1px solid var(--line); }
+.pricing-faq-list details { border-bottom: 1px solid var(--line); }
+.pricing-faq-list summary { min-height: 78px; display: flex; align-items: center; justify-content: space-between; gap: 24px; color: var(--ink); cursor: pointer; list-style: none; font-size: clamp(17px, 1.5vw, 21px); line-height: 1.3; }
+.pricing-faq-list summary::-webkit-details-marker { display: none; }
+.pricing-faq-list summary i { position: relative; width: 28px; height: 28px; flex: 0 0 28px; border: 1px solid var(--wine); border-radius: 50%; transition: background-color .2s ease, transform .25s ease; }
+.pricing-faq-list summary i::before, .pricing-faq-list summary i::after { position: absolute; top: 50%; left: 50%; width: 9px; height: 1px; background: var(--wine); content: ""; transform: translate(-50%, -50%); }
+.pricing-faq-list summary i::after { transform: translate(-50%, -50%) rotate(90deg); }
+.pricing-faq-list details[open] summary { color: var(--wine); }
+.pricing-faq-list details[open] summary i { background: rgba(55, 99, 97, .12); transform: rotate(45deg); }
+.pricing-faq-list details > p { max-width: 720px; margin: -2px 0 0; padding: 0 54px 26px 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
+.pricing-faq-list details > p a { color: var(--wine); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+
+/* PLACEHOLDER PRICING. Every number on pricing.html is indicative and none of it
+   is commercially signed off — the doctor figures are read out of
+   billing-service's plan catalog and the patient figures do not exist yet at
+   all. .plan-card carries a .is-placeholder variant so a tier whose price is
+   genuinely unknown cannot be styled to look settled, and .pricing-flag states
+   it in words above the grid. Both must stay until real prices are agreed. */
+.pricing-flag { display: flex; align-items: baseline; gap: 16px; margin-bottom: 26px; padding: 15px 20px; border: 1px solid #cbbab3; border-radius: var(--n1-radius-3xl); background: var(--blush); }
+.pricing-flag b { flex: 0 0 auto; color: var(--wine); font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.pricing-flag span { color: var(--muted); font-size: 13px; line-height: 1.6; }
+
+/* Same frame as .report-tile — paper ground, hairline, 4xl radius — so a price
+   card reads as a sibling of the other bordered panels rather than a new idiom.
+   The featured tier swaps ground to blush the way .clinical-questions does:
+   emphasis by ground, not by shadow or scale. */
+.plan-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.plan-card { min-width: 0; display: flex; flex-direction: column; padding: 30px; border: 1px solid var(--line); border-radius: var(--n1-radius-4xl); background: var(--paper); }
+.plan-card.is-featured { border-color: #cbbab3; background: var(--blush); }
+.plan-card > span { color: var(--wine); font-size: 9px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+.plan-card h3 { margin: 38px 0 0; font-family: var(--serif); font-size: 30px; font-weight: 400; line-height: 1.05; }
+/* Scoped to .plan-card rather than left bare: the price is a <p> inside the
+   card, so a bare .plan-price (0,1,0) loses to .plan-card > p (0,1,1) below and
+   the price silently renders at body size. */
+.plan-card .plan-price { display: flex; align-items: baseline; flex-wrap: wrap; gap: 7px; margin: 16px 0 0; color: var(--ink); font-family: var(--serif); font-size: clamp(34px, 3.4vw, 44px); line-height: 1; letter-spacing: -.025em; }
+.plan-card .plan-price small { color: var(--muted); font-family: var(--sans); font-size: 12px; font-weight: 400; letter-spacing: 0; }
+/* A price that does not exist is set in the body face at body size, so it reads
+   as a sentence about a gap rather than as a number. */
+.plan-card.is-placeholder .plan-price { color: var(--muted); font-family: var(--sans); font-size: 15px; line-height: 1.45; letter-spacing: 0; }
+.plan-card > p { margin: 15px 0 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
+.plan-included { display: grid; gap: 12px; margin: 26px 0 0; padding: 24px 0 0; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; line-height: 1.5; list-style: none; }
+.plan-card.is-featured .plan-included { border-top-color: #cbbab3; }
+.plan-included li { position: relative; padding-left: 17px; }
+.plan-included li::before { position: absolute; left: 0; top: .55em; width: 5px; height: 5px; border-radius: 50%; background: var(--wine); content: ""; }
+.plan-included b { color: var(--wine); }
+.plan-card .text-link { margin-top: auto; padding-top: 26px; color: var(--wine); font-size: 12px; font-weight: 700; }
+.plan-footnote { margin: 22px 0 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
+
+.workflow-disclosure { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-bottom: 20px; padding: 15px 18px; border: 1px solid var(--line); border-radius: var(--n1-radius-3xl); background: var(--cream); }
+.workflow-disclosure span { color: var(--wine); font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.workflow-disclosure p { margin: 0; color: var(--muted); font-size: 12px; }
+.case-workflows { overflow: hidden; border: 1px solid var(--line); border-radius: var(--n1-radius-4xl); background: var(--paper); }
+.case-workflow { display: grid; grid-template-columns: .9fr 1.1fr; min-height: 620px; border-top: 1px solid var(--line); }
+.case-workflow:first-child { border-top: 0; }
+.case-workflow.reverse .case-workflow-copy { order: 2; border-right: 0; border-left: 1px solid var(--line); }
+.case-workflow.reverse .case-artifact { order: 1; }
+.case-workflow-copy { display: flex; flex-direction: column; justify-content: center; padding: clamp(34px,4.5vw,66px); border-right: 1px solid var(--line); }
+.case-workflow-copy h2 { max-width: 560px; margin: 18px 0 28px; font-family: var(--serif); font-size: clamp(34px,4vw,54px); font-weight: 400; line-height: 1; }
+.case-workflow-copy dl { display: grid; gap: 0; margin: 0; }
+.case-workflow-copy dl div { display: grid; grid-template-columns: 126px 1fr; gap: 18px; padding: 11px 0; border-top: 1px solid var(--line); }
+.case-workflow-copy dt { color: var(--wine); font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.case-workflow-copy dd { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.55; }
+.case-workflow-copy .text-link { display: inline-block; align-self: flex-start; margin-top: 24px; color: var(--wine); font-size: 12px; font-weight: 700; }
+.case-artifact { min-width: 0; position: relative; overflow: hidden; padding: 58px 38px 38px; background: radial-gradient(circle at 50% 42%,#f5d8ce,#f4eddf 72%); }
+.case-artifact iframe { width: 155%; height: 830px; border: 0; background: #fff; box-shadow: 0 22px 48px rgba(62,37,47,.14); transform: scale(.65); transform-origin: top left; pointer-events: none; }
+.artifact-label { position: absolute; z-index: 1; top: 24px; left: 38px; color: var(--wine); font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.sharing-artifact { display: flex; flex-direction: column; justify-content: center; }
+.sharing-panel { overflow: hidden; border: 1px solid var(--line); border-radius: var(--n1-radius-4xl); background: #fffdf8; box-shadow: 0 22px 48px rgba(62,37,47,.14); }
+.sharing-panel > div { display: flex; justify-content: space-between; gap: 24px; padding: 18px 22px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+.sharing-panel > div:first-child { border-top: 0; }
+.sharing-panel .sharing-panel-head { color: var(--ink); background: var(--cream); }
+.sharing-panel b { color: var(--wine); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
+.sharing-panel strong { color: var(--ink); font-weight: 600; }
+.sharing-panel button { width: calc(100% - 44px); margin: 8px 22px 22px; padding: 14px; border: 0; color: var(--cream); background: var(--wine); font: inherit; font-size: 11px; font-weight: 700; opacity: .68; }
+.sharing-artifact > p { margin: 14px 0 0; color: var(--muted); font-size: 10px; text-align: center; }
+.workflow-boundary { display: grid; grid-template-columns: 220px 1fr; gap: 40px; padding: 30px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.workflow-boundary span { color: var(--wine); font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.workflow-boundary p { max-width: 760px; margin: 0; color: var(--muted); font-size: 15px; line-height: 1.6; }
+
+.principle-commitments { display: grid; grid-template-columns: repeat(2,1fr); overflow: hidden; border: 1px solid var(--line); border-radius: var(--n1-radius-4xl); background: var(--paper); }
+.principle-commitment { min-height: 390px; display: flex; flex-direction: column; padding: clamp(30px,4vw,50px); border-right: 1px solid var(--line); border-top: 1px solid var(--line); }
+.principle-commitment:nth-child(-n+2) { border-top: 0; }
+.principle-commitment:nth-child(2n) { border-right: 0; }
+.principle-commitment > span { color: var(--wine); font-family: var(--serif); font-size: 16px; }
+.principle-commitment h3 { max-width: 470px; margin: 28px 0 24px; font-family: var(--serif); font-size: clamp(30px,3vw,42px); font-weight: 400; line-height: 1.02; }
+.principle-commitment dl { display: grid; gap: 0; margin: 0; }
+.principle-commitment dl div { display: grid; grid-template-columns: 62px 1fr; gap: 16px; padding: 11px 0; border-top: 1px solid var(--line); }
+.principle-commitment dt { color: var(--wine); font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.principle-commitment dd { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.55; }
+.principle-commitment .text-link { align-self: flex-start; margin-top: auto; padding-top: 24px; color: var(--wine); font-size: 12px; font-weight: 700; }
+.principle-questions { display: grid; grid-template-columns: repeat(4,1fr); margin: 0; padding: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); list-style: none; }
+.principle-questions li { min-height: 150px; display: flex; flex-direction: column; justify-content: space-between; gap: 28px; padding: 28px; border-left: 1px solid var(--line); font-family: var(--serif); font-size: 22px; line-height: 1.15; }
+.principle-questions li:first-child { border-left: 0; }
+.principle-questions span { color: var(--wine); font-family: var(--sans); font-size: 9px; font-weight: 700; letter-spacing: .1em; }
+
+/* Team grid.
+   The headshots arrive in two forms: most are a cut-out subject on a pale
+   circular disc, a few are full-bleed portraits. Masking every one to a circle
+   is what makes the set read as one set rather than two — it is also the single
+   place --n1-radius-full belongs outside pills and badges. The paper ground
+   behind the mask sits under the disc images so their near-white edge lands on
+   a surface rather than on cream, and the hairline ring gives the circle the
+   same defined edge every other container on this site has.
+   Auto-fill rather than a fixed column count: 24 people is a number that
+   changes, and a grid that reflows keeps the last row from stranding. */
+.team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(128px, 1fr)); gap: 40px 28px; }
+.team-member { display: flex; flex-direction: column; gap: 14px; }
+/* height: auto is load-bearing — the intrinsic width/height attributes on the
+   img are presentational hints, and without it the height hint wins over
+   aspect-ratio and the portrait renders at its full pixel height. */
+.team-member img { width: 100%; height: auto; aspect-ratio: 1; display: block; border: 1px solid var(--line); border-radius: var(--n1-radius-full); background: var(--paper); object-fit: cover; }
+.team-member b { color: var(--ink); font-size: 13px; font-weight: 700; line-height: 1.25; }
+.team-member span { display: block; margin-top: 4px; color: var(--muted); font-size: 11px; line-height: 1.45; }
+
+/* Photographs of the actual team, so they are shown plainly rather than run
+   through the .page-media treatment, which darkens an image to carry copy over
+   it. */
+/* Three settings n1 is used in, shown as photographs rather than described. The
+   stock we hold is cool and blue-white against a cream and wine page, so it gets
+   the same warming grade .page-media applies to the footage bands — without the
+   scrim, because no copy sits over these. The caption names the setting; it does
+   not name a person or put words in anyone's mouth, and the strip carries a
+   credit for the same reason the footage bands do. */
+/* Capped short of the shell on purpose. At full width each frame is over 400px
+   and three head-and-shoulders shots in a row read as a testimonial wall, which
+   is the one thing these photographs must not imply. */
+.practice-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(18px, 2.4vw, 30px); max-width: 900px; }
+.practice-strip figure { margin: 0; }
+.practice-strip img { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; display: block; border: 1px solid var(--line); border-radius: var(--n1-radius-4xl); background: var(--paper); filter: none; }
+.practice-strip figcaption { margin-top: 16px; }
+.practice-strip b { display: block; color: var(--ink); font-size: 13px; font-weight: 700; }
+.practice-strip span { display: block; margin-top: 6px; color: var(--muted); font-size: 13px; line-height: 1.65; }
+.practice-credit { margin: clamp(26px, 3vw, 38px) 0 0; color: var(--muted); font-size: 11px; line-height: 1.5; }
+/* Stacked, the frame would run the full column and a single face would fill the
+   screen. Capped so it stays the size it is in the row. */
+@media (max-width: 860px) { .practice-strip { grid-template-columns: 1fr; gap: 30px; } .practice-strip img { max-width: 280px; } }
+
+.team-photo { margin: 0 0 clamp(34px, 4vw, 54px); }
+/* Cropped to a band rather than left at the source 16:9 — at full shell width a
+   16:9 frame is taller than the viewport and reads as a hero, which this is not.
+   The faces sit on the horizontal centre line, so a centred vertical crop keeps
+   them. .is-inset sits in a narrow aside where the full frame is already small,
+   so it keeps its natural ratio. height: auto for the same reason as
+   .team-member img — without it the height attribute beats aspect-ratio. */
+.team-photo img { width: 100%; height: auto; aspect-ratio: 12 / 5; object-fit: cover; display: block; border: 1px solid var(--line); border-radius: var(--n1-radius-5xl); background: var(--paper); }
+.team-photo figcaption { margin-top: 13px; color: var(--muted); font-size: 12px; line-height: 1.5; }
+.team-photo.is-inset { margin-bottom: 28px; }
+.team-photo.is-inset img { aspect-ratio: auto; height: auto; border-radius: var(--n1-radius-4xl); }
+@media (max-width: 760px) { .team-photo img { aspect-ratio: 4 / 3; } }
+
+.contact-conversion { display: grid; grid-template-columns: minmax(0,1.25fr) minmax(300px,.75fr); overflow: hidden; border: 1px solid var(--line); border-radius: var(--n1-radius-4xl); background: var(--paper); }
+.contact-form-wrap { padding: clamp(34px,5vw,64px); border-right: 1px solid var(--line); }
+.contact-form-head h2 { max-width: 600px; margin: 16px 0 38px; font-family: var(--serif); font-size: clamp(34px,4vw,52px); font-weight: 400; line-height: 1; }
+#contact-form { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 22px 18px; }
+.contact-field { display: flex; flex-direction: column; gap: 8px; }
+.contact-field:nth-child(n+5), .contact-privacy, #contact-form > .button, .contact-status { grid-column: 1/-1; }
+.contact-field label { color: var(--ink); font-size: 11px; font-weight: 700; }
+.contact-field label span { color: var(--muted); font-weight: 400; }
+/* --control-line, not --line: an input's border is a component boundary and
+   owes 3:1 (WCAG 1.4.11). The decorative hairline measured 1.58:1 here. */
+.contact-field input, .contact-field select, .contact-field textarea { width: 100%; min-height: 48px; box-sizing: border-box; padding: 12px 13px; border: 1px solid var(--control-line); border-radius: var(--n1-radius-xl); color: var(--ink); background: #fffdf8; font: inherit; font-size: 14px; }
+.contact-field textarea { min-height: 150px; resize: vertical; line-height: 1.55; }
+.contact-field input:focus, .contact-field select:focus, .contact-field textarea:focus { outline: 2px solid var(--wine); outline-offset: 2px; }
+.contact-field [aria-invalid="true"] { border-color: #a52929; }
+.field-help { margin: 0; color: var(--muted); font-size: 11px; }
+.patient-warning { padding: 11px 13px; border-left: 3px solid var(--peach); color: var(--ink); background: var(--cream); font-size: 11px; line-height: 1.5; }
+.form-honeypot { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.contact-privacy { margin: -2px 0 0; color: var(--muted); font-size: 11px; line-height: 1.55; }
+.contact-privacy a, .contact-status a { color: var(--wine); text-decoration: underline; }
+#contact-form > .button { justify-self: start; }
+.contact-status { min-height: 18px; color: var(--muted); font-size: 12px; }
+.contact-status.error { padding: 12px 14px; border-left: 3px solid #a52929; color: #672323; background: #f9e7e2; }
+.contact-success { min-height: 480px; align-content: center; }
+.contact-success h2 { margin: 18px 0 12px; font-family: var(--serif); font-size: clamp(36px,4vw,54px); font-weight: 400; }
+.contact-success p { max-width: 580px; color: var(--muted); line-height: 1.6; }
+.contact-next { padding: clamp(34px,4vw,52px); background: var(--cream); }
+.contact-next ol { margin: 34px 0 0; padding: 0; border-top: 1px solid var(--line); list-style: none; }
+.contact-next li { display: grid; grid-template-columns: 34px 1fr; gap: 14px; padding: 20px 0; border-bottom: 1px solid var(--line); }
+.contact-next li span { color: var(--wine); font-size: 9px; font-weight: 700; }
+.contact-next li p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.55; }
+.contact-fallback { margin-top: 38px; padding: 22px; border: 1px solid var(--line); border-radius: var(--n1-radius-3xl); background: var(--paper); }
+.contact-fallback b { color: var(--wine); font-size: 12px; }
+.contact-fallback p { margin: 8px 0 0; color: var(--muted); font-size: 12px; line-height: 1.55; }
+.contact-fallback a { color: var(--wine); font-weight: 700; }
+.contact-selfserve { display: flex; align-items: center; justify-content: space-between; gap: 30px; margin-top: 32px; padding: 26px 30px; border: 1px solid var(--line); border-radius: var(--n1-radius-4xl); background: var(--paper); }
+.contact-selfserve b { color: var(--wine); font-size: 13px; }
+.contact-selfserve p { margin: 6px 0 0; color: var(--muted); font-size: 12px; }
+
+.page-close { padding: clamp(88px,10vw,145px) 0; color: var(--cream); text-align: center; background: var(--berry); }
+.page-close h2 { max-width: 900px; margin: 0 auto; font-family: var(--serif); font-size: clamp(44px,5.5vw,72px); font-weight: 400; line-height: .98; }
+.page-close p { max-width: 590px; margin: 23px auto 0; color: #ede2d6; font-size: 15px; line-height: 1.65; }
+.page-close .page-actions { justify-content: center; }
+
+.marketing-footer { padding: 68px 0 30px; color: var(--cream); background: var(--ink); }
+.marketing-footer-top { display: grid; grid-template-columns: 1fr 1.2fr; gap: 70px; padding-bottom: 60px; }
+.marketing-footer-brand .logo { color: var(--cream); }
+.marketing-footer-brand p { max-width: 410px; margin: 18px 0 0; color: #cdc7c0; font-size: 13px; line-height: 1.7; }
+.marketing-footer-links { display: grid; grid-template-columns: repeat(3, 1fr); gap: 35px; }
+.marketing-footer-links strong { display: block; margin-bottom: 20px; color: var(--peach); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
+.marketing-footer-links a { display: block; margin-top: 13px; color: #d7d2cb; font-size: 13px; }
+.marketing-footer-bottom { padding-top: 27px; border-top: 1px solid #47413a; color: #bcb6af; font-size: 11px; }
+
+@media (max-width: 1280px) {
+  .marketing-page .shell { width: var(--n1-page-width); }
+  .marketing-page .marketing-nav-inner { width: var(--n1-nav-surface-width); }
+  .marketing-nav-inner { position: relative; display: flex; grid-template-columns: none; justify-content: space-between; }
+  .marketing-toggle { display: grid; }
+  .marketing-menu { display: none; }
+  .marketing-nav.is-open .marketing-menu { position: absolute; top: 54px; right: 0; left: 0; display: block; padding: 18px; border-radius: var(--n1-radius-4xl); color: var(--cream); background: #376361; box-shadow: 0 24px 45px rgba(42,27,33,.25); }
+  .marketing-nav.is-open .marketing-links { display: grid; gap: 0; font-size: 15px; }
+  .marketing-nav.is-open .marketing-links a { padding: 14px 3px; border-bottom: 1px solid rgba(244,237,223,.16); }
+  .marketing-nav.is-open .marketing-links a:last-child { border-bottom: 0; }
+  .marketing-nav.is-open .marketing-actions { width: 100%; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); justify-content: stretch; justify-self: stretch; gap: 10px; margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(244,237,223,.16); font-size: 15px; }
+  .marketing-nav.is-open .marketing-actions .button { font-size: 14px; }
+  .product-page .marketing-nav.is-open:not(.is-past-hero) .marketing-links a[aria-current="page"] { color: #d3e7e3; }
+  .marketing-nav.is-open .marketing-actions .login-link { grid-column: 1 / -1; justify-content: center; border: 1px solid rgba(244,237,223,.45); border-radius: var(--n1-radius-2xl); }
+}
+
+@media (max-width: 980px) {
+  .page-hero-grid, .section-head.split, .product-stage, .compliance-demo, .marketing-footer-top, .clinician-review, .control-boundary, .patient-report { grid-template-columns: 1fr; }
+  .page-hero-grid { align-items: start; }
+  .page-hero-copy { padding-bottom: 0; }
+  .workflow { grid-template-columns: repeat(2, 1fr); }
+  .plan-grid { grid-template-columns: repeat(2, 1fr); }
+  .workflow-step:nth-child(3) { border-left: 0; border-top: 1px solid var(--line); }
+  .workflow-step:nth-child(4) { border-top: 1px solid var(--line); }
+  .feature-chapter { grid-template-columns: 50px 1fr; }
+  .feature-chapter p { grid-column: 2; }
+  .clinician-report-viewport { height: 430px; }
+  .patient-steps { grid-template-columns: 1fr; }
+  .lab-flow { grid-template-columns: repeat(2,1fr); }
+  .lab-flow article:nth-child(3) { border-left: 0; border-top: 1px solid var(--line); }
+  .lab-flow article:nth-child(4) { border-top: 1px solid var(--line); }
+  .lab-flow article::after { display: none !important; }
+  .lab-proof { grid-template-columns: 1fr; }
+  .lab-proof-link { min-height: 84px; }
+  .report-lifecycle { grid-template-columns: 1fr; }
+  .report-lifecycle article { min-height: 0; border-left: 0; border-top: 1px solid var(--line); }
+  .report-lifecycle article:first-child { border-top: 0; }
+  .compliance-controls { grid-template-columns: 1fr; }
+  .compliance-controls article { min-height: 0; border-left: 0; border-top: 1px solid var(--line); }
+  .compliance-controls article:first-child { border-top: 0; }
+  .privacy-modes { grid-template-columns: 1fr; }
+  .privacy-modes article { min-height: 0; border-left: 0; border-top: 1px solid #cbbab3; }
+  .privacy-modes article:first-child { border-top: 0; }
+  .patient-steps article { min-height: 0; border-left: 0; border-top: 1px solid var(--line); }
+  .patient-steps article:first-child { border-top: 0; }
+  .capability-table { grid-template-columns: 1fr; }
+  .capability-table .feature-chapter { min-height: 0; border-right: 0; border-bottom: 1px solid var(--line); }
+  .capability-table .feature-chapter:last-child { border-bottom: 0; }
+  .report-grid { grid-template-columns: 1fr; }
+  .contact-conversion { grid-template-columns: 1fr; }
+  .contact-form-wrap { border-right: 0; border-bottom: 1px solid var(--line); }
+  .case-workflow { grid-template-columns: 1fr; }
+  .case-workflow.reverse .case-workflow-copy, .case-workflow-copy { order: 1; border-right: 0; border-bottom: 1px solid var(--line); border-left: 0; }
+  .case-workflow.reverse .case-artifact, .case-artifact { order: 2; min-height: 500px; }
+  .report-preview { height: 460px; }
+  .report-preview iframe { width: 140%; height: 820px; transform: scale(.72); }
+  .principle-questions { grid-template-columns: repeat(2,1fr); }
+  .principle-questions li:nth-child(3) { border-top: 1px solid var(--line); border-left: 0; }
+  .principle-questions li:nth-child(4) { border-top: 1px solid var(--line); }
+}
+
+@media (max-width: 900px) {
+  .marketing-page .marketing-nav-inner { width: var(--n1-nav-surface-width); }
+}
+
+@media (max-width: 620px) {
+  .marketing-page .shell { width: var(--n1-page-width); }
+  .marketing-page .marketing-nav-inner { width: var(--n1-nav-surface-width); }
+  .plan-grid { grid-template-columns: 1fr; }
+  .pricing-flag { flex-direction: column; gap: 8px; }
+  .marketing-nav-inner { min-height: 60px; }
+  .marketing-nav.is-open .marketing-actions { grid-template-columns: 1fr; }
+  .marketing-nav.is-open .marketing-actions .login-link { grid-column: auto; }
+  .page-hero { padding: 70px 0 64px; }
+  .page-hero h1 { font-size: 45px; }
+  .product-page .page-hero { padding: 58px 0 56px; }
+  .product-page .page-hero h1 { font-size: 42px; }
+  .page-hero-copy > p { font-size: 16px; }
+  .page-section { padding: 66px 0; }
+  .section-head { margin-bottom: 35px; }
+  .section-head h2 { font-size: 39px; }
+  .product-page .page-section { padding: 54px 0; }
+  .product-page .section-head h2 { font-size: 36px; }
+  .clinicians-page .page-hero h1 { font-size: 41px; }
+  .clinicians-page .page-section { padding: 56px 0; }
+  .patients-page .page-hero h1 { font-size: 41px; }
+  .patients-page .page-section { padding: 56px 0; }
+  .labs-page .page-hero h1 { font-size: 41px; }
+  .labs-page .page-section { padding: 56px 0; }
+  .reports-page .page-hero h1 { font-size: 41px; }
+  .reports-page .page-section { padding: 56px 0; }
+  .compliance-page .page-hero h1 { font-size: 41px; }
+  .compliance-page .page-section { padding: 56px 0; }
+  .workflow, .control-list { grid-template-columns: 1fr; }
+  .principle-commitments { grid-template-columns: 1fr; }
+  .principle-commitment:nth-child(n) { min-height: 0; border-top: 1px solid var(--line); border-right: 0; }
+  .principle-commitment:first-child { border-top: 0; }
+  .principle-commitment .text-link { margin-top: 20px; padding-top: 0; }
+  .principle-questions { grid-template-columns: 1fr; }
+  .principle-questions li:nth-child(n) { min-height: 0; border-top: 1px solid var(--line); border-left: 0; }
+  .principle-questions li:first-child { border-top: 0; }
+  .workflow-step:nth-child(n), .control-list article:nth-child(n) { min-height: 0; border-left: 0; border-right: 0; border-top: 1px solid var(--line); }
+  .workflow-step:first-child, .control-list article:first-child { border-top: 0; }
+  .pricing-basis article:nth-child(n) { border-right: 0; }
+  .pricing-estimate-callout { align-items: stretch; flex-direction: column; gap: 22px; padding: 26px; }
+  .pricing-estimate-callout .button { align-self: flex-start; }
+  .pricing-faq-layout { grid-template-columns: 1fr; gap: 42px; }
+  .pricing-faq-head { position: static; }
+  .pricing-faq-head h2 { font-size: 42px; }
+  .pricing-faq-list summary { min-height: 72px; gap: 18px; font-size: 17px; }
+  .pricing-faq-list details > p { padding: 0 44px 24px 0; font-size: 13px; }
+  .workflow-step h3 { margin-top: 25px; }
+  .product-page .workflow-step { min-height: 0; display: grid; grid-template-columns: minmax(0,1fr) 104px; grid-template-rows: auto auto 1fr; gap: 0 16px; padding: 24px; }
+  .product-page .workflow-step > span, .product-page .workflow-step h3, .product-page .workflow-step p { grid-column: 1; }
+  .product-page .workflow-step h3 { margin: 12px 0 8px; font-size: 25px; }
+  .product-page .workflow-visual { width: 104px; min-height: 92px; grid-column: 2; grid-row: 1 / 4; align-self: center; margin: 0; }
+  .product-page .workflow-visual.files { gap: 3px; padding-inline: 7px; }
+  .product-page .workflow-visual.files i { width: 27px; font-size: 7px; }
+  .product-page .workflow-visual.fields { padding: 9px; }
+  .product-page .workflow-visual.fields i { padding: 5px 6px; font-size: 7px; }
+  .product-page .workflow-visual.report { padding-right: 12px; }
+  .product-page .workflow-visual.report b { right: 7px; bottom: 7px; }
+  .product-stage-copy, .product-stage-visual { padding: 28px; }
+  .feature-chapter { grid-template-columns: 36px 1fr; gap: 18px; padding: 32px 0; }
+  .report-preview { height: 320px; }
+  .report-preview iframe { width: 180%; height: 610px; transform: scale(.56); }
+  .compliance-finding, .compliance-source { padding: 30px; }
+  .clinician-report { padding: 20px; }
+  .clinician-report-bar { flex-direction: column; gap: 4px; }
+  .clinician-report-viewport { height: 320px; }
+  .clinician-report-viewport iframe { width: 200%; height: 650px; transform: scale(.5); }
+  .boundary-list p { grid-template-columns: 1fr; gap: 5px; }
+  .patient-report-preview { padding: 20px; }
+  .workflow-disclosure { align-items: flex-start; flex-direction: column; gap: 5px; }
+  #contact-form { grid-template-columns: 1fr; }
+  .contact-field:nth-child(n), .contact-privacy, #contact-form > .button, .contact-status { grid-column: 1; }
+  .contact-form-wrap, .contact-next { padding: 28px 22px; }
+  .contact-form-head h2 { margin-bottom: 30px; font-size: 36px; }
+  .contact-selfserve { align-items: flex-start; flex-direction: column; }
+  .case-workflow { min-height: 0; }
+  .case-workflow-copy { padding: 30px 24px; }
+  .case-workflow-copy h2 { margin-bottom: 22px; font-size: 36px; }
+  .case-workflow-copy dl div { grid-template-columns: 1fr; gap: 5px; }
+  .case-workflow.reverse .case-artifact, .case-artifact { min-height: 360px; padding: 50px 20px 20px; }
+  .case-artifact iframe { width: 190%; height: 620px; transform: scale(.53); }
+  .artifact-label { top: 20px; left: 20px; }
+  .workflow-boundary { grid-template-columns: 1fr; gap: 12px; }
+  .patient-report-notes { padding: 28px; }
+  .patient-steps h3 { margin-top: 18px; }
+  .patients-page .page-actions .button { width: 100%; }
+  .security-table > div { grid-template-columns: 1fr; gap: 6px; }
+  .lab-flow { grid-template-columns: 1fr; }
+  .lab-flow article:nth-child(n) { min-height: 0; border-left: 0; border-top: 1px solid var(--line); }
+  .lab-flow article:first-child { border-top: 0; }
+  .lab-flow h3 { margin-top: 18px; }
+  .lab-scope, .lab-deliverables { grid-template-columns: 1fr; }
+  .lab-deliverables article { min-height: 0; border-left: 0; border-top: 1px solid #cbbab3; }
+  .lab-deliverables article:first-child { border-top: 0; }
+  .lab-report-page, .lab-timeline { min-height: 0; }
+  .source-page-head { flex-direction: column; gap: 5px; }
+  .marketing-footer-top { gap: 50px; }
+  .marketing-footer-links { grid-template-columns: 1fr; gap: 28px; }
+  .page-close { padding: 82px 0; }
+  .page-close h2 { font-size: 42px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  /* `animation-fill-mode: forwards` is load-bearing: without it the .01ms run
+     completes and the element snaps back to its base rule, which for anything
+     that animates *into* view is opacity 0. */
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-fill-mode: forwards !important;
+    transition-duration: .01ms !important;
+  }
+}

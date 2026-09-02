@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#376361">
+<title>About n1.care — doctors and engineers building trusted AI</title>
+<meta name="description" content="Meet the doctors, researchers, designers, and engineers building source-linked AI for clearer patient records and more useful time in care.">
+<link rel="icon" href="assets/n1-logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="art-directions.css">
+<link rel="stylesheet" href="marketing-pages.css">
+<link rel="stylesheet" href="buttons.css">
+<link rel="stylesheet" href="brand-tokens.css">
+<link rel="stylesheet" href="smoked-birch-copper-patina.css">
+<style>
+:root { --about-ink:#202523; --about-muted:#62706b; --about-line:#c8d2ce; --about-paper:#f7f4ed; --about-mint:#e7efec; --about-green:#376361; }
+.about-page { color:var(--about-ink); background:var(--about-paper); }
+.about-display { margin:0; font:400 clamp(44px,5.2vw,76px)/.97 var(--serif); letter-spacing:-.048em; text-wrap:balance; }
+.about-opening { min-height:100svh; position:relative; display:flex; align-items:flex-end; overflow:hidden; padding:clamp(152px,17vw,218px) 0 clamp(64px,7vw,96px); color:#fff; background:#172421 url("assets/videos/log-crossing-wide-poster.jpg") center/cover no-repeat; }
+.about-opening-media { position:absolute; inset:0; }
+.about-opening-media video { width:100%; height:100%; display:block; object-fit:cover; object-position:center 58%; }
+.about-opening::before { position:absolute; z-index:1; inset:0; background:linear-gradient(180deg,rgba(12,24,21,.08) 26%,rgba(12,24,21,.25) 58%,rgba(12,24,21,.82) 100%); content:""; }
+.about-opening .shell { position:relative; z-index:2; }
+.about-opening h1 { max-width:1120px; margin:0; color:#fff; font:400 clamp(66px,8.4vw,124px)/.9 var(--serif); letter-spacing:-.06em; text-shadow:0 2px 28px rgba(8,18,16,.22); }
+.about-opening p { max-width:620px; margin:18px 0 0; color:rgba(255,255,255,.9); font-size:clamp(19px,1.7vw,25px); line-height:1.4; }
+.about-mission { padding:clamp(92px,12vw,170px) 0; border-top:1px solid var(--about-line); background:#fffdf9; }
+.about-mission > .shell { width:min(1820px,calc(100% - 80px)); max-width:none; }
+.about-editorial-grid { display:grid; grid-template-columns:minmax(0,1fr); align-items:start; }
+.about-mission h2 { max-width:none; font-size:clamp(36px,3.35vw,50px); line-height:1.06; }
+.about-mission-note { max-width:650px; margin:34px 0 0 auto; color:var(--about-muted); font-size:15px; line-height:1.72; }
+.about-gallery { padding:0 0 clamp(100px,12vw,170px); background:#fffdf9; }
+.about-gallery-grid { height:clamp(610px,65vw,860px); display:grid; grid-template-columns:1.05fr .82fr .72fr; grid-template-rows:1.08fr .92fr; gap:12px; }
+.about-gallery figure { position:relative; margin:0; overflow:hidden; border-radius:24px; background:#d8e3df; }
+.about-gallery figure:first-child { grid-row:1 / span 2; }
+.about-gallery figure:nth-child(2) { grid-column:2 / span 2; }
+.about-gallery img { width:100%; height:100%; display:block; object-fit:cover; transition:transform .7s cubic-bezier(.22,.8,.28,1); }
+.about-gallery figure:hover img { transform:scale(1.012); }
+.about-gallery figcaption { position:absolute; right:12px; bottom:12px; max-width:calc(100% - 24px); padding:7px 10px; border-radius:999px; color:#fff; background:rgba(25,48,43,.7); backdrop-filter:blur(8px); font-size:8px; }
+.about-vision { padding:clamp(100px,12vw,176px) 0; background:var(--about-paper); }
+.about-vision-head { text-align:center; }
+.about-vision-quote { max-width:1080px; margin:0 auto; }
+.about-vision-quote p { margin:0; color:#171817; font:400 clamp(34px,4.3vw,58px)/1.1 var(--serif); letter-spacing:-.03em; text-wrap:balance; }
+.about-vision-quote cite { display:block; margin-top:24px; color:#45635f; font-size:10px; font-style:normal; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }
+.about-vision-copy { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(36px,7vw,108px); margin:clamp(60px,8vw,104px) 0 0 calc(18% + 68px); }
+.about-vision-copy p { margin:0; color:var(--about-muted); font-size:14px; line-height:1.75; }
+.about-timeline { margin-top:clamp(78px,10vw,132px); padding-top:30px; border-top:1px solid var(--about-line); }
+.about-timeline ol { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); margin:0; padding:0; list-style:none; }
+.about-timeline li { min-height:130px; padding:0 26px; border-left:1px solid var(--about-line); }
+.about-timeline li:first-child { padding-left:0; border-left:0; }
+.about-timeline time { color:#2f7773; font-size:9px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; }
+.about-timeline b { display:block; margin-top:22px; font:400 clamp(20px,2vw,28px)/1.05 var(--serif); }
+.about-timeline span { display:block; max-width:230px; margin-top:9px; color:var(--about-muted); font-size:10px; line-height:1.55; }
+.about-story { padding:clamp(90px,10vw,142px) 0; color:#fff; background:#171a19; }
+.about-story-head { display:grid; grid-template-columns:1fr; align-items:start; margin-bottom:clamp(42px,6vw,74px); }
+.about-story h2 { max-width:860px; color:#fff; }
+.about-story-media { position:relative; height:clamp(500px,58vw,790px); margin:0; overflow:hidden; background:#29332f; }
+.about-story-media img { width:100%; height:100%; display:block; object-fit:cover; }
+.about-story-media::after { position:absolute; inset:45% 0 0; background:linear-gradient(transparent,rgba(17,23,21,.78)); content:""; }
+.about-story-card { width:min(520px,calc(100% - 40px)); position:absolute; z-index:2; right:clamp(20px,5vw,70px); bottom:clamp(22px,5vw,70px); padding:clamp(24px,3vw,40px); color:var(--about-ink); background:#fffdf9; }
+.about-story-card span { color:#2f7773; font-size:9px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }
+.about-story-card h3 { margin:18px 0 12px; font:400 clamp(30px,3.4vw,48px)/.98 var(--serif); letter-spacing:-.04em; }
+.about-story-card p { margin:0; color:var(--about-muted); font-size:13px; line-height:1.65; }
+.about-story-points { display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid #404744; border-bottom:1px solid #404744; }
+.about-story-points article { min-height:205px; padding:30px; border-left:1px solid #404744; }
+.about-story-points article:first-child { padding-left:0; border-left:0; }
+.about-story-points span { color:#89aaa0; font-size:9px; font-weight:800; letter-spacing:.12em; }
+.about-story-points h3 { margin:38px 0 11px; color:#fff; font:400 clamp(23px,2.4vw,32px)/1 var(--serif); }
+.about-story-points p { max-width:340px; margin:0; color:#aeb9b5; font-size:12px; line-height:1.65; }
+.about-people { padding:clamp(100px,12vw,176px) 0; background:#fffdf9; }
+.about-people-head { display:grid; grid-template-columns:.36fr 1.1fr .54fr; gap:clamp(38px,6vw,96px); align-items:end; }
+.about-people-head p { margin:0 0 3px; color:var(--about-muted); font-size:14px; line-height:1.7; }
+.about-leads { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; margin-top:clamp(46px,6vw,74px); }
+.about-lead-card { position:relative; min-width:0; margin:0; overflow:hidden; background:#e2eae7; }
+.about-lead-card img { width:100%; aspect-ratio:.86; display:block; object-fit:cover; object-position:center top; }
+.about-lead-card figcaption { min-height:78px; padding:17px 18px; background:var(--about-paper); }
+.about-lead-card b,.about-lead-card span { display:block; }
+.about-lead-card b { font:400 20px/1.05 var(--serif); }
+.about-lead-card span { margin-top:7px; color:var(--about-muted); font-size:9px; line-height:1.4; }
+.about-whole-team { padding:clamp(92px,11vw,158px) 0; background:var(--about-mint); }
+.about-whole-team-head { display:grid; grid-template-columns:.36fr 1.64fr; gap:clamp(42px,8vw,128px); align-items:start; }
+.about-whole-team h2 { max-width:800px; }
+.about-team-orbit { width:min(780px,82vw); aspect-ratio:1; position:relative; margin:clamp(58px,7vw,96px) auto 0; border:1px solid #aebfba; border-radius:50%; }
+.about-team-orbit::before,.about-team-orbit::after { position:absolute; border:1px solid rgba(92,122,114,.26); border-radius:50%; content:""; }
+.about-team-orbit::before { inset:14%; }
+.about-team-orbit::after { inset:31%; }
+.about-orbit-centre { position:absolute; z-index:2; inset:38%; display:grid; place-items:center; border-radius:50%; color:#fff; background:var(--about-green); text-align:center; }
+.about-orbit-centre b { font:400 clamp(24px,3vw,42px)/.95 var(--serif); }
+.about-team-orbit ul { position:absolute; inset:0; margin:0; padding:0; list-style:none; }
+.about-team-orbit li { --angle:calc(var(--i) * 25.714deg - 90deg); position:absolute; z-index:3; top:50%; left:50%; transform:rotate(var(--angle)) translateX(calc(min(390px,41vw) - 28px)) rotate(calc(var(--angle) * -1)); }
+.about-team-orbit li span { width:56px; height:56px; display:grid; place-items:center; border:1px solid #a8bdb7; border-radius:50%; color:#284f4d; background:#fffdf9; font-size:8px; font-weight:800; text-align:center; box-shadow:0 9px 24px rgba(35,66,58,.08); }
+.about-directory { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:clamp(34px,5vw,66px) clamp(18px,3vw,42px); margin-top:clamp(54px,7vw,88px); padding-top:clamp(42px,5vw,64px); border-top:1px solid #b6c7c2; }
+.about-person { min-width:0; color:var(--about-ink); text-align:center; text-decoration:none; }
+.about-person img { width:86%; height:auto; aspect-ratio:1; display:block; margin:0 auto; border:1px solid #b7c8c3; border-radius:50%; object-fit:cover; object-position:center top; background:#fff; }
+.about-person b,.about-person span { display:block; }
+.about-person b { margin-top:16px; font:400 19px/1.08 var(--serif); }
+.about-person span { margin:8px auto 0; color:#2f7773; font-size:9px; font-weight:700; letter-spacing:.06em; line-height:1.4; text-transform:uppercase; }
+.about-person img,.about-person b { transition:transform .3s ease,color .2s ease; }
+.about-person:hover img { transform:translateY(-4px); }
+.about-person:hover b { color:#2f7773; }
+.about-locations { padding:clamp(100px,12vw,176px) 0; background:var(--about-paper); }
+.about-locations-head { display:grid; grid-template-columns:.36fr 1.64fr; gap:clamp(42px,8vw,128px); }
+.about-location-grid { display:grid; grid-template-columns:1.15fr .85fr; margin-top:clamp(50px,7vw,86px); }
+.about-location { min-height:clamp(430px,44vw,620px); position:relative; overflow:hidden; background:#d9e5e1; }
+.about-location img { width:100%; height:100%; display:block; object-fit:cover; }
+.about-location::after { position:absolute; inset:45% 0 0; background:linear-gradient(transparent,rgba(21,39,35,.78)); content:""; }
+.about-location-copy { position:absolute; z-index:2; right:26px; bottom:25px; left:26px; color:#fff; }
+.about-location-copy span { font-size:9px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; }
+.about-location-copy h3 { margin:10px 0 8px; font:400 clamp(30px,3vw,44px)/.98 var(--serif); }
+.about-location-copy p { max-width:410px; margin:0; color:rgba(255,255,255,.82); font-size:11px; line-height:1.55; }
+.about-next { padding:clamp(100px,12vw,176px) 0; background:#fffdf9; }
+.about-next-head { display:grid; grid-template-columns:1fr; }
+.about-next-list { margin-top:clamp(50px,6vw,76px); border-top:1px solid var(--about-line); }
+.about-next-list a { display:grid; grid-template-columns:1fr auto auto; gap:28px; align-items:center; min-height:94px; border-bottom:1px solid var(--about-line); color:var(--about-ink); text-decoration:none; }
+.about-next-list b { font:400 clamp(23px,2.4vw,32px)/1 var(--serif); }
+.about-next-list span { color:var(--about-muted); font-size:11px; }
+.about-next-list i { color:#2f7773; font-size:18px; font-style:normal; transition:transform .2s ease; }
+.about-next-list a:hover i { transform:translateX(5px); }
+.about-close { padding:0 0 clamp(100px,12vw,170px); background:#fffdf9; }
+.about-close-card { display:grid; justify-items:center; gap:30px; padding:clamp(54px,7vw,92px) clamp(28px,6vw,76px); border:1px solid #c6d7d2; border-radius:clamp(24px,3vw,38px); color:#202523; background:#eef3f0; text-align:center; }
+.about-close-card h2 { max-width:820px; margin:0; color:#202523; font:400 clamp(38px,4.6vw,64px)/1.02 var(--serif); letter-spacing:-.04em; text-wrap:balance; }
+.about-close-card .button { min-height:50px; padding-inline:22px; color:#fff; border-color:#244b49; border-radius:11px; background:#244b49; }
+@media(max-width:960px) {
+  .about-editorial-grid,.about-vision-head,.about-story-head,.about-whole-team-head,.about-locations-head,.about-next-head { grid-template-columns:1fr; gap:26px; }
+  .about-vision-copy { margin-left:0; }
+  .about-people-head { grid-template-columns:1fr; gap:24px; align-items:start; }
+  .about-leads { grid-template-columns:repeat(2,1fr); }
+  .about-directory { grid-template-columns:repeat(3,1fr); }
+  .about-location-grid { grid-template-columns:1fr; }
+  .about-location { min-height:480px; }
+}
+@media(max-width:700px) {
+  .about-mission > .shell { width:calc(100% - 32px); }
+  .about-opening { min-height:100svh; padding:130px 0 54px; }
+  .about-opening-media video { object-position:center 58%; }
+  .about-opening h1 { font-size:clamp(56px,17vw,74px); }
+  .about-gallery-grid { height:auto; grid-template-columns:1fr; grid-template-rows:none; }
+  .about-gallery figure:nth-child(n) { grid-column:auto; grid-row:auto; aspect-ratio:1.28; }
+  .about-gallery figure:first-child { aspect-ratio:1; }
+  .about-vision-copy { grid-template-columns:1fr; gap:24px; }
+  .about-timeline ol { grid-template-columns:1fr 1fr; }
+  .about-timeline li { min-height:150px; padding:22px; border-top:1px solid var(--about-line); }
+  .about-timeline li:nth-child(odd) { padding-left:0; border-left:0; }
+  .about-story-media { height:600px; }
+  .about-story-points { grid-template-columns:1fr; }
+  .about-story-points article,.about-story-points article:first-child { min-height:0; padding:28px 0; border-top:1px solid #404744; border-left:0; }
+  .about-story-points article:first-child { border-top:0; }
+  .about-story-points h3 { margin-top:22px; }
+  .about-leads { gap:8px; }
+  .about-lead-card figcaption { min-height:92px; padding:14px; }
+  .about-lead-card b { font-size:17px; }
+  .about-team-orbit { width:90vw; }
+  .about-team-orbit li { transform:rotate(var(--angle)) translateX(calc(45vw - 24px)) rotate(calc(var(--angle) * -1)); }
+  .about-team-orbit li span { width:48px; height:48px; font-size:7px; }
+  .about-directory { grid-template-columns:repeat(2,1fr); gap:34px 12px; }
+  .about-location { min-height:390px; }
+  .about-next-list a { grid-template-columns:1fr auto; gap:14px; padding:18px 0; }
+  .about-next-list span { grid-column:1; grid-row:2; }
+  .about-next-list i { grid-column:2; grid-row:1 / span 2; }
+  .about-close-card { gap:24px; }
+}
+@media(prefers-reduced-motion:reduce) { .about-gallery img,.about-next-list i { transition:none; } }
+</style>
+<script defer src="marketing-pages.js"></script>
+</head>
+<body class="tonal marketing-page about-page">
+<a class="skip-link" href="#main">Skip to content</a>
+<script src="site-header.js"></script>
+<main id="main">
+<header class="about-opening" id="top-scroll"><div class="about-opening-media" aria-hidden="true"><video data-autoplay autoplay muted loop playsinline preload="metadata" poster="assets/videos/log-crossing-wide-poster.jpg"><source src="assets/videos/log-crossing-portrait.mp4" type="video/mp4" media="(max-width: 640px)"><source src="assets/videos/log-crossing-wide.mp4?v=20260831-1" type="video/mp4"></video></div><div class="shell"><h1>Doctors + engineers</h1><p>Building AI you can trust.</p></div></header>
+<section class="about-mission" aria-labelledby="about-mission-title"><div class="shell about-editorial-grid"><div><h2 class="about-display" id="about-mission-title">Our mission is to give doctors and patients AI they can trust. Better decisions, more human care, and longer, healthier lives.</h2></div></div></section>
+<section class="about-gallery" aria-label="Inside n1"><div class="shell about-gallery-grid">
+<figure><img src="assets/team-life/n1-team-building.webp" alt="n1 colleagues reviewing work together at a laptop" width="1200" height="675" decoding="async"></figure>
+<figure><img src="assets/team-life/n1-product-review.webp" alt="The n1 team reviewing the product together" width="1200" height="675" loading="lazy" decoding="async"></figure>
+<figure><img src="assets/team-life/n1-clinical-collaboration.webp" alt="n1 colleagues collaborating on clinical work" width="1200" height="675" loading="lazy" decoding="async"></figure>
+<figure><img src="assets/team-life/n1-team-conversation.webp" alt="n1 colleagues in conversation" width="1200" height="675" loading="lazy" decoding="async"></figure>
+</div></section>
+<section class="about-vision" aria-labelledby="about-vision-title"><div class="shell"><header class="about-vision-head"><h2 class="sr-only" id="about-vision-title">What n1 calls trusted AI</h2><blockquote class="about-vision-quote"><p>“AI earns a place in care when its work is useful, its limits are clear, and people can check what it says.”</p><cite>n1</cite></blockquote></header></div></section>
+<section class="about-story" aria-labelledby="about-story-title"><div class="shell"><header class="about-story-head"><h2 class="about-display" id="about-story-title">AI should support the conversation—not take it over.</h2></header><figure class="about-story-media"><img src="assets/team-life/n1-founder-workshop.webp" alt="Jean-Yves Sireau and the n1 team reviewing the product" width="1200" height="675" loading="lazy" decoding="async"></figure><div class="about-story-points"><article><span>01 · Record</span><h3>Bring the history together</h3><p>Laboratory results, imaging, notes, medicines, and genetics sit in one organised view.</p></article><article><span>02 · Evidence</span><h3>Keep every source close</h3><p>Each finding links back to the record it came from, ready for review.</p></article><article><span>03 · Care</span><h3>Clinician approval at every step</h3><p>The clinician reviews, edits, and approves the AI’s work before it is used in care.</p></article></div></div></section>
+<section class="about-people" aria-labelledby="about-people-title"><div class="shell"><header class="about-people-head"><h2 class="about-display" id="about-people-title">The people building n1.</h2><p>Doctors, researchers, designers, and engineers working together to make health data more useful and care more human.</p></header><div class="about-directory">
+<a class="about-person" href="https://hk.linkedin.com/in/jeanyvessireau" target="_blank" rel="noopener noreferrer"><img src="assets/team/jean-yves-sireau.webp" alt="Jean-Yves Sireau" width="500" height="500" loading="lazy"><b>Jean-Yves Sireau</b><span>LinkedIn ↗</span></a>
+<a class="about-person" href="https://www.linkedin.com/in/leah-elise" target="_blank" rel="noopener noreferrer"><img src="assets/team/leah-elise.webp" alt="Leah Elise" width="500" height="500" loading="lazy"><b>Leah Elise</b><span>LinkedIn ↗</span></a>
+<a class="about-person" href="https://nl.linkedin.com/in/jaspermiddendorp" target="_blank" rel="noopener noreferrer"><img src="assets/team/jasper-middendorp.webp" alt="Jasper Middendorp" width="500" height="500" loading="lazy"><b>Jasper Middendorp</b><span>LinkedIn ↗</span></a>
+<a class="about-person" href="https://my.linkedin.com/in/arvktr" target="_blank" rel="noopener noreferrer"><img src="assets/team/arun-venkataraman.webp" alt="Arun Venkataraman" width="500" height="500" loading="lazy"><b>Arun Venkataraman</b><span>LinkedIn ↗</span></a>
+<a class="about-person" href="https://my.linkedin.com/in/neshalinisathiabalan" target="_blank" rel="noopener noreferrer"><img src="assets/team/neshalini-sathiabalan.webp" alt="Neshalini Sathiabalan" width="500" height="500" loading="lazy"><b>Neshalini Sathiabalan</b><span>LinkedIn ↗</span></a>
+<a class="about-person" href="https://my.linkedin.com/in/lau-siew-mei" target="_blank" rel="noopener noreferrer"><img src="assets/team/siew-mei-lau.webp" alt="Lau Siew Mei" width="500" height="500" loading="lazy"><b>Lau Siew Mei</b><span>LinkedIn ↗</span></a>
+<a class="about-person" href="https://my.linkedin.com/in/junantannn" target="_blank" rel="noopener noreferrer"><img src="assets/team/jun-an-tan.webp" alt="Jun An Tan" width="500" height="500" loading="lazy"><b>Jun An Tan</b><span>LinkedIn ↗</span></a>
+<a class="about-person" href="https://my.linkedin.com/in/yousuf-sarfraz" target="_blank" rel="noopener noreferrer"><img src="assets/team/yousuf-sarfraz.webp" alt="Yousuf Sarfraz" width="500" height="500" loading="lazy"><b>Yousuf Sarfraz</b><span>LinkedIn ↗</span></a>
+<a class="about-person" href="https://in.linkedin.com/in/paawan-purdhani" target="_blank" rel="noopener noreferrer"><img src="assets/team/paawan-purdhani.webp" alt="Paawan Purdhani" width="500" height="500" loading="lazy"><b>Paawan Purdhani</b><span>LinkedIn ↗</span></a>
+<a class="about-person" href="https://in.linkedin.com/in/darpanbafana" target="_blank" rel="noopener noreferrer"><img src="assets/team/darpan-bafana.webp" alt="Darpan Bafana" width="500" height="500" loading="lazy"><b>Darpan Bafana</b><span>LinkedIn ↗</span></a>
+<a class="about-person" href="https://www.linkedin.com/in/aniruddha-deshpande" target="_blank" rel="noopener noreferrer"><img src="assets/team/aniruddha-deshpande.webp" alt="Aniruddha Deshpande" width="500" height="500" loading="lazy"><b>Aniruddha Deshpande</b><span>LinkedIn ↗</span></a>
+<a class="about-person" href="https://nl.linkedin.com/in/coen-elferink-35a344104" target="_blank" rel="noopener noreferrer"><img src="assets/team/coen-elferink.webp" alt="Coen Elferink" width="500" height="500" loading="lazy"><b>Coen Elferink</b><span>LinkedIn ↗</span></a>
+<a class="about-person" href="https://www.linkedin.com/in/umar-shah" target="_blank" rel="noopener noreferrer"><img src="assets/team/umar-shah.webp" alt="Umar Shah" width="500" height="500" loading="lazy"><b>Umar Shah</b><span>LinkedIn ↗</span></a>
+<a class="about-person" href="https://www.linkedin.com/in/dannette-kallay-0b180b204" target="_blank" rel="noopener noreferrer"><img src="assets/team/dannette-kallay.webp" alt="Dr Dannette Kallay" width="500" height="500" loading="lazy"><b>Dr Dannette Kallay</b><span>LinkedIn ↗</span></a>
+</div></div></section>
+<section class="about-next" aria-labelledby="about-next-title"><div class="shell"><header class="about-next-head"><h2 class="about-display" id="about-next-title">See what we are building</h2></header><div class="about-next-list">
+<a href="clinicians.html"><b>For clinicians</b><span>Prepare with a complete, source-linked record</span><i>→</i></a>
+<a href="patients.html"><b>For patients</b><span>Understand and share your health history</span><i>→</i></a>
+<a href="reports.html"><b>Reports</b><span>See the report types n1 can prepare</span><i>→</i></a>
+<a href="Health_summary_demo-1.html"><b>Health summary</b><span>Open a source-linked report</span><i>→</i></a>
+</div></div></section>
+<section class="about-close"><div class="shell"><div class="about-close-card"><h2>Better context. More time for care.</h2><a class="button" href="contact.html">Talk with us <span aria-hidden="true">→</span></a></div></div></section>
+</main>
+<footer class="marketing-footer"><div class="shell"><div class="marketing-footer-top"><div class="marketing-footer-brand"><a href="index.html" aria-label="n1.care home"><span class="logo" aria-hidden="true"></span></a><p>Put health files in order. See what changed. Check each fact at its source.</p></div><div class="marketing-footer-links"><div><strong>For clinicians</strong><a href="clinicians.html#clinician-product-animation-title">How it works</a><a href="reports.html">Reports</a><a href="pricing.html">Pricing</a></div><div><strong>For</strong><a href="clinicians.html">For clinicians</a><a href="patients.html">For patients</a></div><div><strong>Explore</strong><a href="case-studies.html">Clinical workflows</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="https://app.n1.care/privacy-policy">Privacy</a><a href="https://app.n1.care/terms-of-service">Terms</a></div></div></div><div class="marketing-footer-bottom">© 2026 N1 Research, LLC</div></div></footer>
+</body>
+</html>

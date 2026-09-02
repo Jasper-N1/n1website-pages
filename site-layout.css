@@ -1,0 +1,15 @@
+/* Site-wide alignment tokens.
+   Change these values here to update every public page and navigation bar. */
+:root {
+  --n1-page-content-max: 1320px;
+  --n1-page-gutter-min: 19px;
+  --n1-nav-surface-inset: clamp(11px,1.25vw,18px);
+  --n1-page-width: min(
+    var(--n1-page-content-max),
+    calc(100% - var(--n1-page-gutter-min) - var(--n1-page-gutter-min))
+  );
+  --n1-nav-surface-width: min(
+    calc(var(--n1-page-content-max) + var(--n1-nav-surface-inset) + var(--n1-nav-surface-inset)),
+    calc(100% - var(--n1-page-gutter-min) - var(--n1-page-gutter-min) + var(--n1-nav-surface-inset) + var(--n1-nav-surface-inset))
+  );
+}

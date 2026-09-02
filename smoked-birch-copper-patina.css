@@ -1,0 +1,163 @@
+/*
+ * Smoked Birch & Copper Patina
+ *
+ * Palette layer for the marketing subpages. The homepage carries the more
+ * detailed, direction-specific treatment from design 19; this file extends
+ * the same semantic colours to every page linked from it.
+ */
+
+:root,
+.tonal {
+  --wine: #2a2b2a;
+  --berry: #376361;
+  --peach: #48a9a6;
+  --blush: #d3e7e3;
+  --cream: #f3ede2;
+  --paper: #fbf9f5;
+  --ink: #171817;
+  --line: #c7c2b9;
+  --muted: #6a6864;
+  --green: #d4b483;
+  --control-line: #96938c;
+
+  --n1-sand-25: #fbf9f5;
+  --n1-sand-50: #f3ede2;
+  --n1-sand-100: #d3e7e3;
+  --n1-sand-200: #c7c2b9;
+  --n1-sand-300: #b5b0a7;
+  --n1-sand-400: #a29e96;
+  --n1-sand-500: #96938c;
+  --n1-sand-600: #6a6864;
+  --n1-sand-700: #52514e;
+  --n1-sand-800: #3b3c3a;
+  --n1-sand-900: #2a2b2a;
+  --n1-sand-950: #171817;
+  --n1-sand-975: #111211;
+}
+
+html,
+body.marketing-page {
+  color: #171817;
+  background: #f3ede2;
+}
+
+.marketing-nav {
+  background: transparent;
+}
+
+.marketing-nav-inner {
+  background: #376361;
+  box-shadow: 0 18px 35px rgba(23, 24, 23, 0.16);
+}
+
+.marketing-nav.is-open .marketing-menu {
+  background: #376361;
+  box-shadow: 0 18px 35px rgba(23, 24, 23, 0.16);
+}
+
+.marketing-links a[aria-current="page"] { color: #d3e7e3; }
+.marketing-nav.is-over-dark .marketing-links a[aria-current="page"] { color: #2f7773; }
+
+.page-media::after {
+  background:
+    linear-gradient(92deg, rgba(23, 24, 23, 0.90), rgba(23, 24, 23, 0.16) 62%),
+    linear-gradient(0deg, rgba(23, 24, 23, 0.82), transparent 56%);
+}
+
+.page-media video,
+.page-media img,
+.practice-strip img {
+  filter: none;
+}
+
+.workflow-visual,
+.app-frame,
+.clinician-report-bar,
+.source-page,
+.sharing-panel,
+.contact-field input,
+.contact-field select,
+.contact-field textarea {
+  background: #fbf9f5;
+}
+
+.workflow-visual.fields i,
+.source-page mark {
+  color: #2a2b2a;
+  background: #d3e7e3;
+}
+
+.workflow-visual.timeline::before,
+.workflow-visual.report i,
+.app-row,
+.product-stage-list div,
+.clinical-questions article,
+.patient-report-notes p,
+.security-table,
+.security-table > div,
+.pricing-flag,
+.plan-card.is-featured,
+.plan-card.is-featured .plan-included {
+  border-color: #c7c2b9;
+}
+
+.product-stage-visual,
+.clinician-report,
+.patient-report-preview,
+.case-artifact {
+  background: radial-gradient(circle at 50% 42%, #d3e7e3, #f3ede2 72%);
+}
+
+.workflow-visual.report b {
+  color: #376361;
+  background: #d3e7e3;
+}
+
+.dark,
+.page-close {
+  color: #f3ede2;
+  background: #376361;
+}
+
+.dark .section-head > p,
+.dark .section-head > div:last-child > p,
+.page-close p {
+  color: #d3e7e3;
+}
+
+.page-close h2 { color: #fff; }
+
+.marketing-footer {
+  color: #f3ede2;
+  background: #171817;
+}
+
+.marketing-footer-brand p,
+.marketing-footer-links a,
+.marketing-footer-bottom {
+  color: #c7c2b9;
+}
+
+.marketing-footer-bottom { border-color: rgba(199, 194, 185, .28); }
+
+.compliance-finding {
+  color: #f3ede2;
+  background: #2a2b2a;
+}
+
+.lab-proof-link,
+.sharing-panel button {
+  color: #f3ede2;
+  background: #2a2b2a;
+}
+
+.team-member img,
+.team-photo img,
+.practice-strip img {
+  border-color: #c7c2b9;
+}
+
+::selection {
+  color: #171817;
+  background: #48a9a6;
+}

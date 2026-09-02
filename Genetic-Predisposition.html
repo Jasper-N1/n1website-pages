@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#376361">
+<title>Genetic Predisposition — n1.care sample report</title>
+<meta name="description" content="An n1.care genetic predisposition report showing screening-grade variants alongside the measured phenotype.">
+<link rel="icon" href="assets/n1-logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="report-theme.css">
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; color: var(--n1-text); }
+  a { color: inherit; }
+  .sample-banner { padding: 10px 20px; color: #244b49; background: #dcece8; border-bottom: 1px solid #b8cdc8; font-size: 10px; font-weight: 700; letter-spacing: .1em; text-align: center; text-transform: uppercase; }
+  .report-header { padding: 48px 0 34px; border-bottom: 1px solid var(--n1-border); background: var(--n1-surface); }
+  .report-shell { width: min(1180px, calc(100% - 40px)); margin-inline: auto; }
+  .brand { display: inline-flex; align-items: center; gap: 8px; color: #244b49; font-size: 23px; text-decoration: none; letter-spacing: -.04em; }
+  .brand i { width: 31px; height: 31px; display: grid; place-items: center; border-radius: 8px; color: #fff; background: #376361; font-size: 12px; font-style: normal; font-weight: 800; letter-spacing: -.05em; }
+  .report-eyebrow { margin: 30px 0 10px; color: #2f7773; font-size: 10px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+  h1 { margin: 0; color: #202523; font-size: clamp(38px, 5vw, 62px); font-weight: 500; line-height: 1.02; letter-spacing: -.045em; }
+  .meta-pills { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 24px; }
+  .meta-pill { display: inline-flex; align-items: center; gap: 6px; padding: 7px 9px; border: 1px solid #d7e2df; border-radius: 999px; color: #46514e; background: #f3f6f4; font-size: 10px; }
+  .meta-pill b { color: #2f7773; font-size: 8px; letter-spacing: .08em; text-transform: uppercase; }
+  .profile-summary { display: grid; grid-template-columns: 1.45fr repeat(3, minmax(130px,.55fr)); gap: 12px; margin-top: 30px; padding-top: 24px; border-top: 3px solid #2f7773; }
+  .profile-copy, .summary-stat { padding: 17px; border: 1px solid #d3dfdc; border-radius: 12px; background: #fff; }
+  .profile-copy strong { display: block; margin-bottom: 7px; color: #244b49; font-size: 13px; }
+  .profile-copy p { margin: 0; color: #596560; font-size: 12px; line-height: 1.65; }
+  .summary-stat { display: flex; flex-direction: column; justify-content: space-between; min-height: 112px; }
+  .summary-stat span { color: #6c7873; font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+  .summary-stat b { color: #244b49; font-size: 27px; line-height: 1; }
+  .summary-stat small { color: #74807b; font-size: 9px; }
+  .report-layout { display: grid; grid-template-columns: 245px minmax(0, 1fr); gap: 28px; align-items: start; padding: 34px 0 80px; }
+  .report-nav { position: sticky; top: 20px; padding: 14px; border: 1px solid #d2dedb; border-radius: 14px; background: #fffdf9; box-shadow: 0 10px 28px rgba(35,56,50,.05); }
+  .report-nav > b { display: block; padding: 5px 8px 12px; color: #2f7773; font-size: 9px; letter-spacing: .12em; text-transform: uppercase; }
+  .report-nav a { display: block; padding: 8px; border-radius: 7px; color: #596560; font-size: 10px; line-height: 1.3; text-decoration: none; transition: color .2s ease, background .2s ease; }
+  .report-nav a:hover { color: #244b49; background: #edf5f3; }
+  .report-nav a.is-active { color: #fff; background: #376361; }
+  .report-content { display: grid; gap: 18px; min-width: 0; }
+  .report-section { width: 100%; min-width: 0; scroll-margin-top: 20px; padding: clamp(24px, 4vw, 38px); border: 1px solid #d2dedb; border-radius: 16px; background: #fffdf9; box-shadow: 0 12px 34px rgba(35,56,50,.055); }
+  .section-kicker { margin: 0 0 9px; color: #2f7773; font-size: 9px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+  .report-section h2 { margin: 0; color: #202523; font-size: clamp(25px, 3vw, 35px); font-weight: 500; line-height: 1.08; letter-spacing: -.025em; }
+  .section-intro { margin: 15px 0 0; color: #4f5c57; font-size: 13px; line-height: 1.72; }
+  .verdict { margin-top: 22px; padding: 17px 18px; border: 1px solid #9dcec8; border-radius: 11px; background: #e9f4f2; }
+  .verdict > span, .takeaway > span { display: block; margin-bottom: 6px; color: #2f7773; font-size: 8px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+  .verdict b { display: inline-flex; margin-bottom: 7px; padding: 5px 8px; border-radius: 999px; color: #244b49; background: #d5eae6; font-size: 10px; text-transform: capitalize; }
+  .verdict p, .takeaway p { margin: 0; color: #46534f; font-size: 12px; line-height: 1.65; }
+  .phenotype { margin-top: 24px; }
+  .phenotype-head { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 7px; }
+  .phenotype-head h3 { margin: 0; color: #26312e; font-size: 15px; font-weight: 600; }
+  .state-pill, .status-pill, .significance-pill, .gene-pill { display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; white-space: nowrap; }
+  .state-pill { padding: 5px 8px; color: #8a5d19; background: #fff1cf; font-size: 8px; font-weight: 700; text-transform: capitalize; }
+  .state-pill.optimal { color: #237554; background: #e5f5eb; }
+  .state-pill.concern { color: #a44738; background: #f8e8e3; }
+  .phenotype > p { margin: 0 0 13px; color: #66716d; font-size: 11px; line-height: 1.6; }
+  .marker-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+  .marker-table th { padding: 8px 9px; color: #60736d; background: #eef3f2; font-size: 8px; font-weight: 700; letter-spacing: .07em; text-align: left; text-transform: uppercase; }
+  .marker-table td { padding: 9px; border-bottom: 1px solid #e2e9e6; color: #45514d; font-size: 10px; vertical-align: middle; }
+  .marker-table th:first-child { width: 34%; }
+  .marker-table th:last-child { width: 18%; }
+  .status-pill { min-width: 62px; padding: 5px 7px; color: #2d7958; background: #e3f2e9; font-size: 8px; font-weight: 700; }
+  .status-pill.high, .status-pill.low { color: #aa4337; background: #f9e7e3; }
+  .status-pill.na { color: #697570; background: #eef1f0; }
+  .variant-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; margin-top: 20px; }
+  .variant-grid.two { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .variant-card { min-width: 0; padding: 14px; border: 1px solid #d7e2df; border-radius: 11px; background: #fff; }
+  .variant-head { display: flex; align-items: center; justify-content: space-between; gap: 7px; }
+  .gene-pill { padding: 6px 9px; color: #fff; background: #376361; font-size: 10px; font-weight: 800; letter-spacing: .02em; }
+  .significance-pill { padding: 5px 7px; color: #6c4c1f; background: #fff0cf; font-size: 7px; font-weight: 800; text-transform: uppercase; }
+  .significance-pill.conflicting { color: #874d3c; background: #f8e8e2; }
+  .significance-pill.benign { color: #2d7958; background: #e5f4eb; }
+  .genetic-pills { display: flex; flex-wrap: wrap; gap: 5px; margin: 11px 0; }
+  .genetic-pills span { padding: 5px 7px; border: 1px solid #cfe0dc; border-radius: 999px; color: #4b635e; background: #f2f7f5; font-size: 7.5px; font-weight: 650; }
+  .variant-id { overflow-wrap: anywhere; color: #72807b; font-size: 8px; line-height: 1.45; }
+  .variant-card p { margin: 10px 0 0; color: #4f5c57; font-size: 10px; line-height: 1.6; }
+  .takeaway { margin-top: 20px; padding: 17px 18px; border-left: 4px solid #48a9a6; border-radius: 0 10px 10px 0; background: #edf6f4; }
+  .safety-note { margin-top: 20px; padding: 16px; border: 1px solid #ebcaaa; border-radius: 11px; color: #6e4b2c; background: #fff7e9; }
+  .safety-note b { display: block; margin-bottom: 5px; color: #895624; font-size: 11px; }
+  .safety-note p { margin: 0; font-size: 10px; line-height: 1.6; }
+  .drug-table td:first-child { color: #244b49; font-weight: 700; }
+  .priority-list { display: grid; gap: 10px; margin: 20px 0 0; padding: 0; list-style: none; counter-reset: priority; }
+  .priority-list li { display: grid; grid-template-columns: 31px 1fr; gap: 11px; align-items: start; padding: 13px; border: 1px solid #d7e2df; border-radius: 10px; background: #fff; color: #4e5b56; font-size: 11px; line-height: 1.55; counter-increment: priority; }
+  .priority-list li::before { width: 31px; height: 31px; display: grid; place-items: center; border-radius: 50%; color: #fff; background: #376361; content: counter(priority); font-size: 9px; font-weight: 800; }
+  .priority-list b { display: block; margin-bottom: 3px; color: #26322e; }
+  .report-footer { padding: 30px 0; color: #dcebe8; background: #376361; }
+  .report-footer-row { display: flex; justify-content: space-between; gap: 25px; }
+  .report-footer p { max-width: 850px; margin: 0; font-size: 9px; line-height: 1.65; }
+  .report-footer b { flex: none; font-size: 10px; }
+  @media (max-width: 960px) {
+    .profile-summary { grid-template-columns: repeat(3,1fr); }
+    .profile-copy { grid-column: 1 / -1; }
+    .report-layout { grid-template-columns: 1fr; }
+    .report-nav { position: static; display: flex; overflow-x: auto; gap: 5px; scrollbar-width: none; }
+    .report-nav::-webkit-scrollbar { display: none; }
+    .report-nav > b { display: none; }
+    .report-nav a { flex: none; border: 1px solid #d7e2df; }
+  }
+  @media (max-width: 700px) {
+    .report-shell { width: min(100% - 24px,1180px); }
+    .report-header { padding-top: 30px; }
+    .profile-summary { grid-template-columns: 1fr; }
+    .profile-copy { grid-column: auto; }
+    .summary-stat { min-height: 86px; }
+    .variant-grid, .variant-grid.two { grid-template-columns: minmax(0,1fr); }
+    .marker-table { display: block; overflow-x: auto; white-space: nowrap; }
+    .marker-table th:first-child { width: auto; }
+    .phenotype-head, .report-footer-row { align-items: flex-start; flex-direction: column; }
+    .report-section { padding: 22px 17px; }
+  }
+</style>
+<link rel="stylesheet" href="report-demo-shell.css">
+<script defer src="report-demo-shell.js"></script>
+</head>
+<body>
+<div class="sample-banner">Screening evidence only · clinician review required</div>
+<header class="report-header">
+  <div class="report-shell">
+    <a class="brand" href="index.html#reports"><i>n1</i><span>n1.care</span></a>
+    <p class="report-eyebrow">Predisposition by biological mechanism, weighted against biomarkers</p>
+    <h1>Genetic Predisposition</h1>
+    <div class="meta-pills"><span class="meta-pill"><b>Patient</b>55-year-old male</span><span class="meta-pill"><b>Sex</b>Male</span><span class="meta-pill"><b>Latest labs</b>Jun 2026</span><span class="meta-pill"><b>Report</b>Aug 2026</span><span class="meta-pill"><b>Units</b>SI units</span></div>
+  </div>
+</header>
+<div class="report-shell report-layout">
+  <nav class="report-nav" aria-label="Report contents"><b>Report contents</b><a href="#profile">Patient profile</a><a href="#cardiovascular">Cardiovascular</a><a href="#hepatic">Hepatic fat</a><a href="#biliary">Biliary transport</a><a href="#metabolic">Glucose &amp; adiposity</a><a href="#coagulation">Coagulation</a><a href="#inflammation">Inflammation</a><a href="#pulmonary">Pulmonary</a><a href="#drug-response">Drug response</a><a href="#other-variants">Other variants</a><a href="#pathogenic">Pathogenic findings</a><a href="#priorities">Priorities</a><a href="#methods">Methods</a></nav>
+  <main class="report-content">
+    <section class="report-section" id="profile">
+      <p class="section-kicker">00 · Report overview</p><h2>Patient profile</h2>
+      <div class="profile-summary">
+        <div class="profile-copy"><strong>Genotype in clinical context</strong><p>The clearest genotype–phenotype alignment is cardiovascular and hepatobiliary. Several susceptibility alleles accompany an out-of-range coronary calcium score, while PNPLA3 and ABCB4 findings align with recorded fatty-liver and gallstone phenotypes. All genetic calls remain screening-grade and require clinical confirmation.</p></div>
+        <div class="summary-stat"><span>Genetic conclusions</span><b>116</b><small>reviewed in context</small></div>
+        <div class="summary-stat"><span>Mechanisms</span><b>7</b><small>phenotype weighted</small></div>
+        <div class="summary-stat"><span>Confirmed pathogenic</span><b>0</b><small>in this dataset</small></div>
+      </div>
+    </section>
+    <section class="report-section" id="cardiovascular">
+      <p class="section-kicker">01 · Biological mechanism</p><h2>Atherosclerotic susceptibility and lipid handling</h2><p class="section-intro">Three CDKN2B-AS1 risk-factor alleles indicate a modest population-level susceptibility to coronary artery disease. These alleles do not diagnose atherosclerosis or quantify individual risk. Their relevance comes from the measured coronary calcium phenotype.</p>
+      <div class="verdict"><span>Verdict</span><b>Partially expressed</b><p>The coronary calcium score is out of range, while current LDL cholesterol, apolipoprotein B, and lipoprotein(a) remain within their laboratory ranges. This separates established structural plaque from the current circulating lipid burden.</p></div>
+      <div class="phenotype"><div class="phenotype-head"><h3>Current atherosclerotic and lipid phenotype</h3><span class="state-pill">Watch</span></div><p>Favourable lipid measurements do not negate the documented calcified plaque phenotype.</p><table class="marker-table"><thead><tr><th>Marker</th><th>Result</th><th>Reference</th><th>Status</th></tr></thead><tbody><tr><td>Coronary Artery Calcium Score</td><td>19.0</td><td>Not provided</td><td><span class="status-pill na">Recorded</span></td></tr><tr><td>LDL Cholesterol</td><td>1.1 mmol/L</td><td>&lt;2.6</td><td><span class="status-pill">In range</span></td></tr><tr><td>Apolipoprotein B</td><td>0.5 g/L</td><td>0.46–1.74</td><td><span class="status-pill">In range</span></td></tr><tr><td>Lipoprotein(a)</td><td>37.0 nmol/L</td><td>&lt;90.0</td><td><span class="status-pill">In range</span></td></tr></tbody></table></div>
+      <div class="variant-grid"><article class="variant-card"><div class="variant-head"><span class="gene-pill">CDKN2B-AS1</span><span class="significance-pill">Risk factor</span></div><div class="genetic-pills"><span>AG</span><span>Heterozygous</span><span>9p21</span></div><div class="variant-id">NC_000009.12:g.22096056A&gt;G</div><p>Population-level susceptibility marker only; standard cardiovascular risk assessment still applies.</p></article><article class="variant-card"><div class="variant-head"><span class="gene-pill">CDKN2B-AS1</span><span class="significance-pill">Risk factor</span></div><div class="genetic-pills"><span>CG</span><span>Heterozygous</span><span>9p21</span></div><div class="variant-id">NC_000009.12:g.22125504G&gt;C</div><p>Evidence is limited and this finding should not be used for clinical decisions in isolation.</p></article><article class="variant-card"><div class="variant-head"><span class="gene-pill">CDKN2B-AS1</span><span class="significance-pill">Risk factor</span></div><div class="genetic-pills"><span>AG</span><span>Heterozygous</span><span>9p21</span></div><div class="variant-id">NC_000009.12:g.22098575A&gt;G</div><p>Manage cardiovascular risk using standard guidelines and the measured phenotype.</p></article></div>
+      <div class="takeaway"><span>Takeaway</span><p>Anchor management to standard cardiovascular assessment and the documented coronary calcium phenotype. Do not add the linked 9p21 variants together to create an extra genetic-risk estimate.</p></div>
+    </section>
+
+    <section class="report-section" id="hepatic">
+      <p class="section-kicker">02 · Biological mechanism</p><h2>Hepatic fat handling</h2><p class="section-intro">The PNPLA3 p.Ile148Met allele supports increased susceptibility to hepatic steatosis through altered hepatocyte lipid handling. It is a predisposition rather than a diagnosis, but it is concordant with the recorded fatty-liver phenotype.</p>
+      <div class="verdict"><span>Verdict</span><b>Partially expressed</b><p>Fatty liver is present in the record. Current ALT and GGT remain within range, supporting steatosis without biochemical evidence of active hepatocellular or cholestatic injury.</p></div>
+      <div class="phenotype"><div class="phenotype-head"><h3>Current liver biochemistry</h3><span class="state-pill">Watch</span></div><table class="marker-table"><thead><tr><th>Marker</th><th>Result</th><th>Reference</th><th>Status</th></tr></thead><tbody><tr><td>Alanine Aminotransferase (ALT)</td><td>28.0 u/L</td><td>10.0–49.0</td><td><span class="status-pill">In range</span></td></tr><tr><td>Gamma-Glutamyl Transferase</td><td>15.0 u/L</td><td>&lt;73.0</td><td><span class="status-pill">In range</span></td></tr></tbody></table></div>
+      <div class="variant-grid two"><article class="variant-card"><div class="variant-head"><span class="gene-pill">PNPLA3</span><span class="significance-pill conflicting">Conflicting</span></div><div class="genetic-pills"><span>CG</span><span>Heterozygous</span><span>p.Ile148Met</span></div><div class="variant-id">NM_025225.3(PNPLA3):c.444C&gt;G</div><p>ClinVar classifications conflict. Follow standard metabolic and hepatic assessment rather than genotype-directed action.</p></article></div>
+      <div class="takeaway"><span>Takeaway</span><p>Imaging, fibrosis measures, and metabolic context—not genotype alone—should determine disease severity. Normal ALT and GGT cannot stage fatty liver by themselves.</p></div>
+    </section>
+
+    <section class="report-section" id="biliary">
+      <p class="section-kicker">03 · Biological mechanism</p><h2>Biliary phospholipid transport</h2><p class="section-intro">The ABCB4 p.Arg590Gln variant may impair phosphatidylcholine transport and promote lithogenic bile. This is relevant to the recorded gallstone phenotype, but conflicting ClinVar classifications preclude causal attribution.</p>
+      <div class="verdict"><span>Verdict</span><b>Partially expressed</b><p>Gallstone disease is documented, while bilirubin, alkaline phosphatase, and GGT are within range. There is no current biochemical evidence of obstruction or cholestatic injury.</p></div>
+      <div class="phenotype"><div class="phenotype-head"><h3>Current cholestatic profile</h3><span class="state-pill">Watch</span></div><table class="marker-table"><thead><tr><th>Marker</th><th>Result</th><th>Reference</th><th>Status</th></tr></thead><tbody><tr><td>Total Bilirubin</td><td>11.0 µmol/L</td><td>&lt;22.0</td><td><span class="status-pill">In range</span></td></tr><tr><td>Alkaline Phosphatase</td><td>54.0 u/L</td><td>46.0–116.0</td><td><span class="status-pill">In range</span></td></tr><tr><td>Gamma-Glutamyl Transferase</td><td>15.0 u/L</td><td>&lt;73.0</td><td><span class="status-pill">In range</span></td></tr></tbody></table></div>
+      <div class="variant-grid two"><article class="variant-card"><div class="variant-head"><span class="gene-pill">ABCB4</span><span class="significance-pill conflicting">Conflicting</span></div><div class="genetic-pills"><span>CT</span><span>Heterozygous</span><span>p.Arg590Gln</span></div><div class="variant-id">NM_000443.4(ABCB4):c.1769G&gt;A</div><p>Treat this as a possible modifier of the known gallstone phenotype, not a confirmed monogenic diagnosis.</p></article></div>
+      <div class="takeaway"><span>Takeaway</span><p>Keep assessment phenotype-led and use standard biliary clinical findings and biochemical markers. The conflicting variant classification does not support genotype-directed management.</p></div>
+    </section>
+
+    <section class="report-section" id="metabolic">
+      <p class="section-kicker">04 · Biological mechanism</p><h2>Glucose regulation and adiposity</h2><p class="section-intro">Variants in FTO, IGF2BP2, SLC30A8, and UCP2 support modest polygenic tendencies toward higher adiposity or type 2 diabetes susceptibility. None is individually diagnostic or treatment-directing.</p>
+      <div class="verdict"><span>Verdict</span><b>Compensated</b><p>Fasting glucose, HbA1c, insulin, and measured BMI are within range. Historical isolated abnormalities suggest intermittent metabolic stress, so the underlying tendency cannot be considered entirely absent.</p></div>
+      <div class="phenotype"><div class="phenotype-head"><h3>Current metabolic phenotype</h3><span class="state-pill optimal">Optimal</span></div><table class="marker-table"><thead><tr><th>Marker</th><th>Result</th><th>Reference</th><th>Status</th></tr></thead><tbody><tr><td>Fasting Glucose</td><td>4.7 mmol/L</td><td>3.0–5.4</td><td><span class="status-pill">In range</span></td></tr><tr><td>HbA1c</td><td>37.0 mmol/mol</td><td>Not provided</td><td><span class="status-pill na">Recorded</span></td></tr><tr><td>Insulin</td><td>15.2 uIU/mL</td><td>3.0–25.0</td><td><span class="status-pill">In range</span></td></tr><tr><td>Body Mass Index</td><td>21.0 kg/m²</td><td>Not provided</td><td><span class="status-pill na">Recorded</span></td></tr></tbody></table></div>
+      <div class="variant-grid"><article class="variant-card"><div class="variant-head"><span class="gene-pill">FTO</span><span class="significance-pill">Risk factor</span></div><div class="genetic-pills"><span>CC</span><span>Homozygous</span></div><p>Modest association with higher BMI; no genotype-specific action is indicated.</p></article><article class="variant-card"><div class="variant-head"><span class="gene-pill">IGF2BP2</span><span class="significance-pill">Risk factor</span></div><div class="genetic-pills"><span>GT</span><span>Heterozygous</span></div><p>Limited-evidence type 2 diabetes susceptibility marker.</p></article><article class="variant-card"><div class="variant-head"><span class="gene-pill">SLC30A8</span><span class="significance-pill benign">Benign / risk</span></div><div class="genetic-pills"><span>CT</span><span>Heterozygous</span></div><p>Contextual metabolic marker; not clinically actionable by itself.</p></article><article class="variant-card"><div class="variant-head"><span class="gene-pill">UCP2</span><span class="significance-pill">Risk factor</span></div><div class="genetic-pills"><span>CT</span><span>Heterozygous</span></div><p>Limited association with altered metabolic traits; no treatment action.</p></article></div>
+      <div class="takeaway"><span>Takeaway</span><p>Continue phenotype-led metabolic surveillance. The weak individual susceptibility alleles do not override the reassuring current measurements.</p></div>
+    </section>
+
+    <section class="report-section" id="coagulation">
+      <p class="section-kicker">05 · Biological mechanism</p><h2>Intrinsic coagulation pathway</h2><p class="section-intro">The homozygous F12 intronic variant has conflicting pathogenicity classifications. The measured phenotype is directionally discordant with classic factor XII deficiency.</p>
+      <div class="verdict"><span>Verdict</span><b>Unconfirmed</b><p>Current aPTT is shortened rather than prolonged, while factor VIII activity is elevated. This is the opposite direction from the expected screening phenotype of clinically relevant factor XII deficiency.</p></div>
+      <div class="phenotype"><div class="phenotype-head"><h3>Intrinsic-pathway phenotype</h3><span class="state-pill concern">Concerning</span></div><table class="marker-table"><thead><tr><th>Marker</th><th>Result</th><th>Reference</th><th>Status</th></tr></thead><tbody><tr><td>Activated Partial Thromboplastin Time</td><td>20.1 s</td><td>22.9–32.1</td><td><span class="status-pill low">Low</span></td></tr><tr><td>Factor VIII Coagulant Activity</td><td>162.4%</td><td>50.0–150.0</td><td><span class="status-pill high">High</span></td></tr></tbody></table></div>
+      <div class="variant-grid two"><article class="variant-card"><div class="variant-head"><span class="gene-pill">F12</span><span class="significance-pill conflicting">Conflicting</span></div><div class="genetic-pills"><span>AA</span><span>Homozygous</span><span>Intronic</span></div><div class="variant-id">NM_000505.4(F12):c.1251-9C&gt;A</div><p>Do not alter management based on this screening call alone.</p></article></div>
+      <div class="takeaway"><span>Takeaway</span><p>Confirm the coagulation phenotype itself. The shortened aPTT should not be attributed to the F12 call without direct factor XII activity testing.</p></div>
+    </section>
+
+    <section class="report-section" id="inflammation">
+      <p class="section-kicker">06 · Biological mechanism</p><h2>Inflammatory signalling and autoimmunity</h2><p class="section-intro">Variants in NFKBIL1, IL1B, IL6, and TNF support only a weak tendency toward altered inflammatory signalling. None is diagnostic of rheumatoid arthritis or another inflammatory disorder.</p>
+      <div class="verdict"><span>Verdict</span><b>Partially expressed</b><p>Rheumatoid factor is persistently out of range, but current hs-CRP and ESR are within range and no rheumatoid arthritis diagnosis is recorded.</p></div>
+      <div class="phenotype"><div class="phenotype-head"><h3>Current inflammatory phenotype</h3><span class="state-pill">Watch</span></div><table class="marker-table"><thead><tr><th>Marker</th><th>Result</th><th>Reference</th><th>Status</th></tr></thead><tbody><tr><td>Rheumatoid Factor</td><td>15.3 iu/mL</td><td>&lt;14.0</td><td><span class="status-pill high">High</span></td></tr><tr><td>High Sensitivity CRP</td><td>0.2 mg/L</td><td>&lt;3.1</td><td><span class="status-pill">In range</span></td></tr><tr><td>ESR</td><td>5.0 mm/h</td><td>0.0–20.0</td><td><span class="status-pill">In range</span></td></tr></tbody></table></div>
+      <div class="variant-grid"><article class="variant-card"><div class="variant-head"><span class="gene-pill">NFKBIL1</span><span class="significance-pill">Risk factor</span></div><div class="genetic-pills"><span>AT</span><span>Heterozygous</span></div><p>Limited association with rheumatoid arthritis; do not guide decisions independently.</p></article><article class="variant-card"><div class="variant-head"><span class="gene-pill">IL1B</span><span class="significance-pill">Risk factor</span></div><div class="genetic-pills"><span>AA</span><span>Homozygous</span></div><p>Trait-level inflammatory marker without a specific clinical action.</p></article><article class="variant-card"><div class="variant-head"><span class="gene-pill">IL6 · TNF</span><span class="significance-pill">Risk factor</span></div><div class="genetic-pills"><span>GG / AG</span><span>Trait level</span></div><p>Limited-evidence cytokine associations; phenotype remains primary.</p></article></div>
+      <div class="takeaway"><span>Takeaway</span><p>Use clinical context for the isolated rheumatoid factor elevation. Normal hs-CRP and ESR do not support active systemic inflammation at the measured time.</p></div>
+    </section>
+
+    <section class="report-section" id="pulmonary">
+      <p class="section-kicker">07 · Biological mechanism</p><h2>Pulmonary fibrosis susceptibility</h2><p class="section-intro">A heterozygous MUC5B promoter variant supports increased susceptibility to idiopathic pulmonary fibrosis. It is common enough that many carriers never develop disease and it is not diagnostic.</p>
+      <div class="verdict"><span>Verdict</span><b>Unconfirmed</b><p>Available FEV1 and FVC are within range, with no spirometric evidence of an obstructive or restrictive deficit. These results do not exclude early interstitial disease.</p></div>
+      <div class="phenotype"><div class="phenotype-head"><h3>Available pulmonary function</h3><span class="state-pill optimal">Information</span></div><table class="marker-table"><thead><tr><th>Marker</th><th>Result</th><th>Reference</th><th>Status</th></tr></thead><tbody><tr><td>FEV1</td><td>4.61 L</td><td>3.07</td><td><span class="status-pill na">Recorded</span></td></tr><tr><td>FVC</td><td>5.25 L</td><td>3.83</td><td><span class="status-pill na">Recorded</span></td></tr></tbody></table></div>
+      <div class="variant-grid two"><article class="variant-card"><div class="variant-head"><span class="gene-pill">MUC5B</span><span class="significance-pill benign">Benign / risk</span></div><div class="genetic-pills"><span>GT</span><span>Heterozygous</span><span>Promoter</span></div><div class="variant-id">NC_000011.10:g.1219991G&gt;T</div><p>A susceptibility marker, not evidence of current pulmonary fibrosis.</p></article></div>
+      <div class="takeaway"><span>Takeaway</span><p>Further evaluation should be driven by symptoms, examination, or clinically indicated pulmonary testing—not genotype alone.</p></div>
+    </section>
+
+    <section class="report-section" id="drug-response">
+      <p class="section-kicker">08 · Pharmacogenomics</p><h2>Drug response</h2><p class="section-intro">Potentially relevant signals involve CYP2C19, CYP3A5, warfarin pathways, UGT1A1, and NAT2. None supports a dose change for the current medicines. Complete star-allele or haplotype panels are required before assigning most metabolizer phenotypes.</p>
+      <div class="variant-grid two"><article class="variant-card"><div class="variant-head"><span class="gene-pill">CYP2C19</span><span class="significance-pill">Drug response</span></div><div class="genetic-pills"><span>AG</span><span>Heterozygous</span><span>Screening call</span></div><p>Obtain a dedicated CYP2C19 diplotype before genotype-guided prescribing for clopidogrel, PPIs, SSRIs, or TCAs.</p></article><article class="variant-card"><div class="variant-head"><span class="gene-pill">CYP3A5</span><span class="significance-pill">Drug response</span></div><div class="genetic-pills"><span>CC</span><span>Homozygous</span><span>Screening call</span></div><p>Confirm with a clinical pharmacogenomic panel before using this result for tacrolimus dosing.</p></article></div>
+      <div class="safety-note"><b>Screening calls are not prescribing genotypes</b><p>Medication should not be changed solely on the basis of matched raw-DNA rows. Dedicated clinical pharmacogenomic confirmation is required before acting.</p></div>
+      <div class="phenotype"><table class="marker-table drug-table"><thead><tr><th>Drug or class</th><th colspan="3">Confirmation before genotype-guided use</th></tr></thead><tbody><tr><td>Clopidogrel / PPIs / SSRIs / TCAs</td><td colspan="3">Dedicated CYP2C19 PGx diplotype</td></tr><tr><td>Warfarin</td><td colspan="3">Complete panel including CYP2C9, then validated dosing calculator and INR</td></tr><tr><td>Irinotecan / atazanavir</td><td colspan="3">Dedicated UGT1A1 panel</td></tr><tr><td>Hydralazine</td><td colspan="3">Complete NAT2 haplotype</td></tr></tbody></table></div>
+      <div class="takeaway"><span>Takeaway</span><p>No genotype-supported change is established for the current medication list. Confirm the relevant drug-specific panel before future use of an implicated drug.</p></div>
+    </section>
+
+    <section class="report-section" id="other-variants">
+      <p class="section-kicker">09 · Clinical genetics</p><h2>Other clinically significant variants</h2><p class="section-intro">ATM and BRCA1 findings have uncertain or conflicting classifications. They must not be managed as confirmed pathogenic variants or hereditary cancer diagnoses.</p>
+      <div class="variant-grid"><article class="variant-card"><div class="variant-head"><span class="gene-pill">ATM</span><span class="significance-pill conflicting">Conflicting</span></div><div class="genetic-pills"><span>CT</span><span>Heterozygous</span><span>p.Val410Ala</span></div><p>Evidence is insufficient to confirm cancer risk. Use family history and standard screening.</p></article><article class="variant-card"><div class="variant-head"><span class="gene-pill">BRCA1</span><span class="significance-pill conflicting">Conflicting</span></div><div class="genetic-pills"><span>CC</span><span>Homozygous</span><span>p.Glu1038Ala</span></div><p>Do not manage as a confirmed pathogenic variant; seek clinical genetics review when indicated.</p></article><article class="variant-card"><div class="variant-head"><span class="gene-pill">BRCA1</span><span class="significance-pill conflicting">VUS</span></div><div class="genetic-pills"><span>CC</span><span>Homozygous</span><span>p.Ser1613Arg</span></div><p>Follow personal and family history rather than this uncertain screening result.</p></article></div>
+      <div class="takeaway"><span>Takeaway</span><p>Cancer surveillance should be based on age, sex, personal history, and pedigree. Clinical hereditary-cancer testing is appropriate only when standard criteria are met.</p></div>
+    </section>
+
+    <section class="report-section" id="pathogenic">
+      <p class="section-kicker">10 · High-severity review</p><h2>Pathogenic findings</h2><p class="section-intro">No clinically confirmed pathogenic variant is established in the available screening data. One CDKN2B/CDKN2B-AS1 row carries the internally mixed classification “Likely pathogenic; protective” and cannot support disease attribution.</p>
+      <div class="variant-grid two"><article class="variant-card"><div class="variant-head"><span class="gene-pill">CDKN2B · CDKN2B-AS1</span><span class="significance-pill conflicting">Mixed classification</span></div><div class="genetic-pills"><span>AA</span><span>Homozygous</span><span>Confirmation required</span></div><div class="variant-id">NM_004936.4(CDKN2B):c.*2619C&gt;T</div><p>The served significance includes both “likely pathogenic” and “protective.” Orthogonal clinical confirmation and specialist review are required before any action.</p></article></div>
+      <div class="safety-note"><b>High-severity confirmation required</b><p>Do not use this row to change surveillance or draw implications for family members. Matched variant screening is not equivalent to diagnostic sequencing.</p></div>
+      <div class="takeaway"><span>Takeaway</span><p>The absence of a confirmed pathogenic result in this dataset is not a confirmed negative hereditary-disease screen.</p></div>
+    </section>
+
+    <section class="report-section" id="priorities">
+      <p class="section-kicker">11 · Summary</p><h2>Priorities</h2><p class="section-intro">The measured phenotype remains the primary basis for care. Genetic findings refine questions; they do not replace standard assessment or clinical confirmation.</p>
+      <ol class="priority-list"><li><div><b>Anchor cardiovascular care to the phenotype</b>Use the abnormal coronary calcium result and standard clinical indications, not additive genetic-risk arithmetic.</div></li><li><div><b>Continue phenotype-led monitoring</b>Follow liver and biliary status, metabolic markers, coagulation findings, inflammatory context, and pulmonary symptoms.</div></li><li><div><b>Confirm before acting</b>Clinically confirm any variant proposed for action, especially the mixed CDKN2B/CDKN2B-AS1 row.</div></li><li><div><b>Use drug-specific pharmacogenomics</b>Obtain a complete validated panel before prescribing an affected medication using genetic guidance.</div></li></ol>
+    </section>
+
+    <section class="report-section" id="methods">
+      <p class="section-kicker">12 · Report basis</p><h2>Methods and limitations</h2><p class="section-intro">This review covered 116 served genetic conclusions together with available biomarkers, diagnoses, procedures, medications, and supplements. Raw-DNA calls are screening-grade and require clinical confirmation. Biomarkers were interpreted using the laboratory’s authoritative range status.</p>
+      <div class="safety-note"><b>Screening evidence only</b><p>Susceptibility alleles indicate tendencies rather than diagnoses. Metabolizer phenotypes require complete validated haplotypes. Normal biomarkers do not exclude future disease or structurally present disease that is biochemically silent. Limitations include incomplete variant coverage, absent phasing, treatment-modified measurements, and phenotype tests that may be insensitive to early disease.</p></div>
+    </section>
+  </main>
+</div>
+<footer class="report-footer"><div class="report-shell report-footer-row"><p>This report It is informational decision-support only and does not constitute medical advice, diagnosis, or treatment. Verify findings against source records and apply independent professional judgement before acting.</p><b>Genetic Predisposition · 55-year-old male · Aug 2026</b></div></footer>
+<script>
+  (() => {
+    const links = [...document.querySelectorAll('.report-nav a')];
+    const sections = links.map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean);
+    const setActive = id => links.forEach(link => link.classList.toggle('is-active', link.getAttribute('href') === '#' + id));
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(entries => {
+        const visible = entries.filter(entry => entry.isIntersecting).sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) setActive(visible.target.id);
+      }, { rootMargin: '-15% 0px -70% 0px', threshold: [0,.15,.35] });
+      sections.forEach(section => observer.observe(section));
+    }
+    if (sections[0]) setActive(sections[0].id);
+  })();
+</script>
+</body>
+</html>

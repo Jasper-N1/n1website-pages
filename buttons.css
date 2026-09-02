@@ -1,0 +1,103 @@
+/* ==========================================================================
+   n1 launch button system — single source of truth.
+
+   Loaded by every launch page (homepage + marketing subpages) after
+   art-directions.css and marketing-pages.css, so it owns all button
+   look-and-feel. Layout-only rules (margin, width, grid placement)
+   stay in marketing-pages.css.
+
+   Anatomy follows shadcn/ui's Button: one base class, semantic color
+   tokens, a short variant list, and a size scale. Dark surfaces
+   (wine/berry) flip the --button-* tokens instead of adding
+   per-context colour rules.
+
+   Variants: .button (primary) · .button.secondary
+   Sizes:    .button.sm (nav) · default · .button.lg (forms)
+   ========================================================================== */
+
+.tonal {
+  --button-bg: var(--wine);
+  --button-fg: var(--cream);
+  --button-border: var(--wine);
+  --button-bg-hover: var(--berry);
+  --button-fg-hover: var(--cream);
+  --button-border-hover: var(--berry);
+  --button-secondary-fg: var(--wine);
+  --button-focus: var(--berry);
+}
+
+/* Dark surfaces invert the primary: cream button on wine/berry.
+   The homepage nav sits on the wine hero until scrolled; its scroll-phase
+   overrides in motion.html re-colour it after this.
+   `.tonal .nav`, not `.tonal-motion .nav`: art-directions.css sets
+   `.tonal .nav { color: var(--cream) }`, so the nav is on a dark ground in this
+   direction whether or not the page is a motion variant. Scoped to the motion
+   pages alone, the static homepage's nav CTA resolved to a wine button on the
+   wine hero and lost its chrome entirely — only the label showed. */
+.tonal .nav,
+.marketing-nav-inner,
+.tonal-hero,
+.tonal-close,
+.page-close {
+  --button-bg: var(--cream);
+  --button-fg: var(--wine);
+  --button-border: var(--cream);
+  --button-bg-hover: var(--paper);
+  --button-fg-hover: var(--wine);
+  --button-border-hover: var(--paper);
+  --button-secondary-fg: var(--cream);
+  --button-focus: var(--cream);
+}
+
+.tonal .button {
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 19px;
+  border: 1px solid var(--button-border);
+  border-radius: var(--n1-radius-2xl);
+  color: var(--button-fg);
+  background: var(--button-bg);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .2s ease, color .2s ease, border-color .2s ease, transform .2s ease;
+}
+
+.tonal .button:hover {
+  color: var(--button-fg-hover);
+  background: var(--button-bg-hover);
+  border-color: var(--button-border-hover);
+  transform: translateY(-2px);
+}
+
+.tonal .button:focus-visible { outline: 2px solid var(--button-focus); outline-offset: 3px; }
+
+.tonal .button:disabled,
+.tonal .button[aria-disabled="true"] {
+  opacity: .55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Secondary: quiet outline in the surface's accent colour. */
+.tonal .button.secondary {
+  color: var(--button-secondary-fg);
+  background: transparent;
+  border-color: currentColor;
+}
+
+.tonal .button.secondary:hover {
+  color: var(--button-secondary-fg);
+  background: color-mix(in srgb, currentColor 9%, transparent);
+  border-color: currentColor;
+}
+
+/* Sizes */
+.tonal .button.sm { min-height: 40px; padding: 8px 16px; font-size: 12px; gap: 8px; }
+.tonal .button.lg { min-height: 48px; padding: 12px 24px; font-size: 14px; }
+
+/* Nav buttons share the compact --n1-radius-2xl corner used by other CTAs. */
