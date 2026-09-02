@@ -2624,6 +2624,7 @@
       background: #fffdf5;
     }
     .home-trust-header .tonal-hero-video {
+      inset: 100px 0 0;
       z-index: -2;
       overflow: hidden;
       background: #fffdf5 !important;
@@ -2634,9 +2635,9 @@
     }
     .home-trust-header .tonal-hero-video video {
       width: 100%;
-      height: calc(100% - 100px);
+      height: 100%;
       display: block;
-      margin: 100px 0 0;
+      margin: 0;
       object-fit: cover;
       object-position: center center;
       filter: saturate(.86) contrast(.94) brightness(1.06) sepia(.06);
@@ -2892,6 +2893,7 @@
       }
     }
     @media (max-width: 700px) {
+      .home-trust-header .tonal-hero-video { inset: 0; }
       .home-trust-header .tonal-scroll-sequence,
       .home-trust-header .tonal-hero {
         min-height: max(620px,100svh) !important;
