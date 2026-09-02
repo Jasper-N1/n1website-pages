@@ -54,8 +54,10 @@
     let isHovered = false;
     let isFocused = false;
     let manualPauseUntil = 0;
+    let isManuallyControlled = false;
 
     const pauseForInteraction = () => {
+      isManuallyControlled = true;
       manualPauseUntil = performance.now() + 4000;
     };
     scroller.addEventListener('pointerenter', () => { isHovered = true; });
@@ -70,12 +72,13 @@
       if (!isActive || document.hidden) {
         cycleStartedAt = 0;
         pauseStartedAt = 0;
+        isManuallyControlled = false;
         if (scroller.scrollTop > 0) scroller.scrollTop = 0;
         requestAnimationFrame(autoScroll);
         return;
       }
 
-      const isPaused = isHovered || isFocused || time < manualPauseUntil;
+      const isPaused = isHovered || isFocused || isManuallyControlled || time < manualPauseUntil;
       if (isPaused) {
         if (!pauseStartedAt) pauseStartedAt = time;
         requestAnimationFrame(autoScroll);

@@ -113,8 +113,8 @@
 .story-report-source b { color: #2f7773; font-size: 8px; }
 .story-report-open { min-height: 34px; display: inline-flex; align-items: center; margin-top: 13px; padding: 0 12px; border-radius: 8px; color: #fff; background: #376361; font-size: 8px; font-weight: 800; text-decoration: none; pointer-events: auto; }
 .story-report-open:hover { background: #244b49; }
-.story-report-window { position: relative; margin-top: 12px; overflow: hidden; border: 1px solid #cfdbd7; border-radius: 12px; background: #fff; box-shadow: 0 10px 26px rgba(30,42,38,.06); }
-.prepared-story-step:nth-child(4) .story-report-window { margin-top: 0; }
+.story-report-window { position: relative; margin-top: 12px; overflow: hidden; border: 0; border-radius: 0; background: #fff; box-shadow: none; pointer-events: auto; }
+.prepared-story-step:nth-child(4) .story-report-window { width: 100%; margin-top: 0; }
 .story-report-scroll { height: 210px; box-sizing: border-box; overflow-x: hidden; overflow-y: auto; padding: 17px 18px 34px; color: #37413d; background: #fff; pointer-events: auto; overscroll-behavior: contain; scrollbar-color: #8db3ad #eef3f1; scrollbar-width: thin; }
 .story-report-scroll::-webkit-scrollbar { width: 7px; }
 .story-report-scroll::-webkit-scrollbar-track { background: #eef3f1; }
