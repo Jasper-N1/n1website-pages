@@ -2606,7 +2606,7 @@
   <style>
     /* N1 Hero 2 homepage header. */
     .home-trust-header .tonal-scroll-sequence {
-      height: calc(100svh + 168px) !important;
+      height: calc(168px + max(100svh, 56.25vw)) !important;
       min-height: 808px;
     }
     .home-trust-header .tonal-scroll-sticky {
@@ -2637,11 +2637,11 @@
       height: calc(100% - 168px);
       display: block;
       margin: 168px 0 0;
-      object-fit: cover;
+      object-fit: contain;
       object-position: center center;
       filter: saturate(.86) contrast(.94) brightness(1.06) sepia(.06);
-      transform: scale(1.01);
-      animation: home-trust-settle 18s cubic-bezier(.2,.75,.25,1) both;
+      transform: none;
+      animation: none;
     }
     .home-trust-header .tonal-hero-video::before,
     .home-trust-header .tonal-scroll-sequence.is-engaged .tonal-hero-video::before {
@@ -2942,7 +2942,7 @@
       .home-trust-header .tonal-hero-video video {
         display: block;
         animation: none !important;
-        transform: scale(1.01);
+        transform: none;
       }
       .home-trust-header .tonal-copy-block {
         opacity: 1;
