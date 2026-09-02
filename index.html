@@ -3412,7 +3412,7 @@
          place on this page that wants air rather than another panel. -->
     <section class="tonal-lab" id="method" aria-labelledby="lab-title">
       <div class="tonal-lab-frame">
-        <video data-autoplay muted loop playsinline preload="metadata" poster="assets/videos/prepared-conversation-workspace-poster.jpg" aria-hidden="true"><source src="assets/videos/prepared-conversation-workspace.mp4" type="video/mp4"></video>
+        <video id="prepared-conversation-video" muted loop playsinline preload="metadata" poster="assets/videos/prepared-conversation-workspace-poster.jpg" aria-hidden="true"><source src="assets/videos/prepared-conversation-workspace.mp4" type="video/mp4"></video>
         <div class="tonal-lab-copy">
           <div><p class="eyebrow">More time for patients</p><h2 id="lab-title">Walk into every conversation<br><em>prepared.</em></h2></div>
         </div>
@@ -3729,6 +3729,35 @@
       if (event.matches) homeTrustVideo.pause();
       else homeTrustVideo.play().catch(() => {});
     });
+
+    // Keep the closing clinician film on its poster until the user reaches it.
+    (function () {
+      var video = document.querySelector('#prepared-conversation-video');
+      var section = document.querySelector('.tonal-lab');
+      if (!video || !section || reduceMotion) return;
+
+      function resetVideo() {
+        video.pause();
+        try { video.currentTime = 0; } catch (error) {}
+      }
+
+      resetVideo();
+      document.addEventListener('visibilitychange', function () {
+        if (document.hidden) video.pause();
+      });
+
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (entries) {
+          if (entries[0].isIntersecting && !document.hidden) {
+            video.play().catch(function () {});
+          } else {
+            resetVideo();
+          }
+        }, { threshold: .2 }).observe(section);
+      } else {
+        video.play().catch(function () {});
+      }
+    })();
 
     // Begin in view, hold the completed hand, then hold the completed AI before looping.
     (function () {
