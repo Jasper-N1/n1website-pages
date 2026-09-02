@@ -2607,7 +2607,7 @@
     /* N1 Hero 2 homepage header. */
     .home-trust-header .tonal-scroll-sequence {
       height: 100svh !important;
-      min-height: min(640px,100svh);
+      min-height: 640px;
     }
     .home-trust-header .tonal-scroll-sticky {
       position: relative !important;
@@ -2617,14 +2617,13 @@
     .home-trust-header .tonal-hero {
       width: 100%;
       height: 100%;
-      min-height: min(640px,100svh) !important;
+      min-height: 640px !important;
       display: block;
       padding: 0 !important;
       isolation: isolate;
       background: #fffdf5;
     }
     .home-trust-header .tonal-hero-video {
-      inset: 0;
       z-index: -2;
       overflow: hidden;
       background: #fffdf5 !important;
@@ -2635,14 +2634,14 @@
     }
     .home-trust-header .tonal-hero-video video {
       width: 100%;
-      height: calc(100% - 150px);
+      height: calc(100% - 168px);
       display: block;
-      margin: 150px 0 0;
+      margin: 168px 0 0;
       object-fit: cover;
       object-position: center center;
       filter: saturate(.86) contrast(.94) brightness(1.06) sepia(.06);
-      transform: none;
-      animation: none;
+      transform: scale(1.01);
+      animation: home-trust-settle 18s cubic-bezier(.2,.75,.25,1) both;
     }
     .home-trust-header .tonal-hero-video::before,
     .home-trust-header .tonal-scroll-sequence.is-engaged .tonal-hero-video::before {
@@ -2893,7 +2892,6 @@
       }
     }
     @media (max-width: 700px) {
-      .home-trust-header .tonal-hero-video { inset: 0; }
       .home-trust-header .tonal-scroll-sequence,
       .home-trust-header .tonal-hero {
         min-height: max(620px,100svh) !important;
@@ -2944,7 +2942,7 @@
       .home-trust-header .tonal-hero-video video {
         display: block;
         animation: none !important;
-        transform: none;
+        transform: scale(1.01);
       }
       .home-trust-header .tonal-copy-block {
         opacity: 1;
