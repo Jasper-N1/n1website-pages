@@ -451,6 +451,19 @@
 [data-whitelabel-demo][data-phase="2"] .whitelabel-share-dialog,[data-whitelabel-demo][data-phase="3"] .whitelabel-share-dialog { transform: none; }
 [data-whitelabel-demo][data-phase="3"] .whitelabel-share-dialog > header,[data-whitelabel-demo][data-phase="3"] .whitelabel-share-form,[data-whitelabel-demo][data-phase="3"] .whitelabel-share-dialog > footer { display: none; }
 [data-whitelabel-demo][data-phase="3"] .whitelabel-share-success { display: block; }
+.clinician-reveal-section { height: 320svh; position: relative; background: #172722; }
+.clinician-reveal-sticky { height: 100svh; min-height: 680px; position: sticky; top: 0; overflow: hidden; }
+.clinician-reveal-layer { position: absolute; inset: 0; overflow: hidden; clip-path: inset(var(--reveal-top,0%) 0 0); will-change: clip-path; }
+.clinician-reveal-layer img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center; }
+.clinician-reveal-layer::after { position: absolute; inset: 0; background: linear-gradient(90deg,rgba(16,26,23,.86) 0,rgba(16,26,23,.57) 32%,rgba(16,26,23,.08) 68%); content: ''; }
+.clinician-reveal-copy { width: min(620px,calc(100% - 48px)); position: absolute; z-index: 2; top: 50%; left: clamp(24px,7vw,116px); color: #fff; transform: translateY(-50%); }
+.clinician-reveal-copy > span { color: #79d0c9; font-size: 11px; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; }
+.clinician-reveal-copy h1,.clinician-reveal-copy h2 { max-width: 610px; margin: 18px 0 0; color: #fff; font: 400 clamp(46px,5vw,78px)/.96 var(--serif); letter-spacing: -.04em; text-wrap: balance; }
+.clinician-reveal-copy p { max-width: 525px; margin: 24px 0 0; color: rgba(255,255,255,.88); font-size: clamp(15px,1.35vw,19px); line-height: 1.55; }
+.clinician-reveal-pill { display: inline-flex; margin-top: 28px; padding: 10px 15px; border-radius: 999px; color: #173b37; background: #d8efeb; font-size: 10px; font-weight: 800; }
+.clinician-reveal-counter { position: absolute; z-index: 3; right: clamp(24px,5vw,74px); bottom: clamp(26px,5vh,58px); display: flex; gap: 8px; }
+.clinician-reveal-counter i { width: 34px; height: 3px; border-radius: 4px; background: rgba(255,255,255,.38); }
+.clinician-reveal-counter i.is-active { background: #fff; }
 .clinician-voices { padding: clamp(72px,8vw,116px) 0; scroll-margin-top: 120px; background: #e8f1ef; }
 .voices-heading { display: block; margin-bottom: 60px; }
 .voices-heading .eyebrow { margin: 0 0 22px; color: #2a2b2a; font-size: 11px; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; }
@@ -510,6 +523,7 @@
 @media (max-width: 620px) { .clinician-review-canvas { min-height: 610px; padding: 12px; border-radius: 20px; } .clinician-review-report { min-height: 520px; padding: 22px 18px; } .clinician-review-report > div { grid-template-columns: 1fr; } .clinician-inline-editor { right: 8px; bottom: 8px; width: calc(100% - 16px); padding: 16px; } .clinician-inline-source { grid-template-columns: 1fr 1fr; } .clinician-inline-source span:last-child { grid-column: 1 / -1; } .clinician-inline-editor footer { align-items: stretch; flex-direction: column; } .clinician-inline-editor .signoff-approve { width: 100%; box-sizing: border-box; justify-content: center; } }
 @media (max-width: 620px) { .whitelabel-copy h2 { font-size: 44px; } .whitelabel-points li { grid-template-columns: 1fr; gap: 5px; } .whitelabel-preview { min-height: 550px; display: flex; padding: 18px 14px 72px; border-radius: 20px; } .whitelabel-settings { width: 188px; top: 47%; left: 8px; transform: translateY(-54%); } .whitelabel-setting { margin-top: 11px; } .whitelabel-portal { width: calc(100% - 58px); min-height: 414px; margin: 0 0 0 auto; border-radius: 16px; } .whitelabel-portal > header { padding: 0 14px; } .whitelabel-report { padding: 20px 14px 16px; } .whitelabel-report > header { align-items: flex-start; } .whitelabel-report > header h3 { font-size: 22px; } .whitelabel-report-grid { grid-template-columns: repeat(3,1fr); } .whitelabel-report-grid span { padding: 8px 5px; } .whitelabel-report-footer { align-items: flex-end; flex-direction: column; padding: 10px 14px; } .whitelabel-report-footer > span { display: none; } .whitelabel-share-layer { inset: 14px 10px 65px; } .whitelabel-share-dialog { width: calc(100% - 18px); padding: 18px; } .whitelabel-demo-progress { right: 12px; bottom: 17px; left: 52px; gap: 5px; } .whitelabel-demo-progress button { font-size: 6px; } .whitelabel-demo-toggle { bottom: 10px; left: 8px; width: 34px; height: 34px; } [data-whitelabel-demo][data-phase="0"] .whitelabel-demo-cursor { top: 215px; left: 67px; } [data-whitelabel-demo][data-phase="1"] .whitelabel-demo-cursor { top: 434px; left: calc(100% - 76px); } [data-whitelabel-demo][data-phase="2"] .whitelabel-demo-cursor { top: 411px; left: calc(100% - 84px); } [data-whitelabel-demo][data-phase="1"] .whitelabel-portal,[data-whitelabel-demo][data-phase="2"] .whitelabel-portal,[data-whitelabel-demo][data-phase="3"] .whitelabel-portal { width: 100%; transform: none; } }
 @media (max-width: 720px) { .clinician-product-chapter .product-hero-title-heading { font-size: 42px; } }
+@media (max-width: 850px) { .clinician-reveal-copy { top: auto; bottom: 82px; transform: none; } .clinician-reveal-copy h1,.clinician-reveal-copy h2 { font-size: clamp(42px,12vw,62px); } .clinician-reveal-layer img { object-position: 63% center; } .clinician-reveal-layer:nth-child(2) img { object-position: 66% center; } .clinician-reveal-layer:nth-child(3) img { object-position: 64% center; } .clinician-reveal-layer::after { background: linear-gradient(0deg,rgba(14,26,22,.91) 0,rgba(14,26,22,.55) 46%,rgba(14,26,22,.08) 78%); } }
 @media (prefers-reduced-motion: reduce) { .prepared-story-media, .prepared-story-state, .prepared-story-copy { transition: none !important; } .prepared-story-copy.is-current { opacity: 1; transform: none; animation: none; } .prepared-story-step.is-active .prepared-story-state * { animation: none !important; } .story-extract-start,.story-extract-typing { display: none; } .story-extract-results { opacity: 1; transform: none; } .whitelabel-preview::before,.whitelabel-swatches i,.whitelabel-pointer,.whitelabel-portal,.whitelabel-report-status,.whitelabel-revenue-toast,.whitelabel-settings > header span::before { animation: none !important; } .whitelabel-revenue-toast { opacity: 1; transform: none; } .whitelabel-pointer { display: none; } }
 </style>
 <script defer src="marketing-pages.js">
@@ -520,18 +534,23 @@
 <a class="skip-link" href="#main">Skip to content</a>
 <script src="site-header.js"></script>
 <main id="main">
-<header class="page-hero doctor-hero">
-<div class="doctor-hero-media" aria-hidden="true">
-<video data-autoplay muted loop playsinline preload="metadata" poster="assets/videos/clinician-documentary-warm-poster.jpg"><source src="assets/videos/clinician-documentary-warm.mp4" type="video/mp4"></video>
+<section class="clinician-reveal-section" data-clinician-reveal aria-label="From the complete record to a better clinical conversation">
+<div class="clinician-reveal-sticky">
+<article class="clinician-reveal-layer" data-clinician-reveal-layer>
+<img src="assets/clinician-story-records.webp" alt="A clinician reviewing records beside a laptop in a private study" loading="eager" fetchpriority="high" decoding="async">
+<div class="clinician-reveal-copy"><span>See the whole record</span><h1>Bring the history into one clear view.</h1><p>Years of reports, results, notes, medicines, and genetics become one organized, source-linked record.</p><b class="clinician-reveal-pill">The full context, without the reconstruction</b></div>
+</article>
+<article class="clinician-reveal-layer" data-clinician-reveal-layer>
+<img src="assets/clinician-story-evidence.webp" alt="Two clinicians reviewing evidence together in a private workspace" loading="lazy" decoding="async">
+<div class="clinician-reveal-copy"><span>Check the evidence</span><h2>Review every finding with confidence.</h2><p>Open the original file and page behind each claim, then edit anything that needs clinical judgment.</p><b class="clinician-reveal-pill">You remain the final reviewer</b></div>
+</article>
+<article class="clinician-reveal-layer" data-clinician-reveal-layer>
+<img src="assets/clinician-story-conversation.webp" alt="A clinician and patient having a focused conversation in a calm private room" loading="lazy" decoding="async">
+<div class="clinician-reveal-copy"><span>Stay present</span><h2>Walk into the conversation prepared.</h2><p>Spend less time reconstructing the record and more time discussing what matters with the patient.</p><b class="clinician-reveal-pill">More useful time for care</b></div>
+</article>
+<div class="clinician-reveal-counter" aria-hidden="true"><i class="is-active"></i><i></i><i></i></div>
 </div>
-<div class="shell doctor-hero-layout">
-<div class="doctor-hero-copy">
-<h1>More time for the work<br>only you can do<span class="sr-only">.</span><span class="doctor-hero-stop" aria-hidden="true"></span></h1>
-<a class="doctor-hero-scroll" href="#clinician-product-animation-title">Scroll to see how</a>
-</div>
-</div>
-<p class="doctor-hero-credit">Concept footage · AI-generated</p>
-</header>
+</section>
 <div class="product-page clinician-product-chapter">
   <header class="page-hero product-hero clinician-product-hero" data-product-hero-scroll aria-labelledby="clinician-product-animation-title">
     <div class="product-hero-sticky">
@@ -1030,6 +1049,45 @@
   render();
 })();
 
+</script>
+<script>
+(() => {
+  const story = document.querySelector('[data-clinician-reveal]');
+  if (!story) return;
+  const layers = [...story.querySelectorAll('[data-clinician-reveal-layer]')];
+  const counters = [...story.querySelectorAll('.clinician-reveal-counter i')];
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const clamp = value => Math.min(1, Math.max(0, value));
+  const smoothstep = value => value * value * (3 - 2 * value);
+  let top = 0;
+  let distance = 1;
+  let ticking = false;
+  const measure = () => {
+    top = story.getBoundingClientRect().top + window.scrollY;
+    distance = Math.max(1, story.offsetHeight - window.innerHeight);
+  };
+  const render = () => {
+    const progress = reducedMotion.matches ? 1 : clamp((window.scrollY - top) / distance);
+    layers.forEach((layer, index) => {
+      const reveal = index === 0 ? 1 : smoothstep(clamp((progress - (index - 1) / (layers.length - 1)) * (layers.length - 1)));
+      layer.style.setProperty('--reveal-top', `${((1 - reveal) * 100).toFixed(2)}%`);
+    });
+    const active = Math.min(layers.length - 1, Math.floor(progress * layers.length));
+    counters.forEach((counter, index) => counter.classList.toggle('is-active', index === active));
+    ticking = false;
+  };
+  const requestRender = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(render);
+  };
+  const remeasure = () => { measure(); requestRender(); };
+  window.addEventListener('scroll', requestRender, { passive: true });
+  window.addEventListener('resize', remeasure);
+  reducedMotion.addEventListener?.('change', remeasure);
+  measure();
+  render();
+})();
 </script>
 <script src="approval-demo.js?v=20260827-1"></script>
 </body>
