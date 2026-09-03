@@ -27,7 +27,7 @@
 .about-opening h1 { max-width:1120px; margin:0; color:#fff; font:400 clamp(66px,8.4vw,124px)/.9 var(--serif); letter-spacing:-.06em; text-shadow:0 2px 28px rgba(8,18,16,.22); }
 .about-opening p { max-width:620px; margin:18px 0 0; color:rgba(255,255,255,.9); font-size:clamp(19px,1.7vw,25px); line-height:1.4; }
 .about-mission { padding:clamp(92px,12vw,170px) 0; border-top:1px solid var(--about-line); background:#fffdf9; }
-.about-mission > .shell { width:min(1820px,calc(100% - 80px)); max-width:none; }
+.about-mission > .shell { width:var(--n1-page-width); }
 .about-editorial-grid { display:grid; grid-template-columns:minmax(0,1fr); align-items:start; }
 .about-mission h2 { max-width:none; font-size:clamp(36px,3.35vw,50px); line-height:1.06; }
 .about-mission-note { max-width:650px; margin:34px 0 0 auto; color:var(--about-muted); font-size:15px; line-height:1.72; }
@@ -135,7 +135,6 @@
   .about-location { min-height:480px; }
 }
 @media(max-width:700px) {
-  .about-mission > .shell { width:calc(100% - 32px); }
   .about-opening { min-height:100svh; padding:130px 0 54px; background-image:url("assets/videos/log-crossing-portrait-first-frame.webp"); }
   .about-opening-media { background-image:url("assets/videos/log-crossing-portrait-first-frame.webp"); }
   .about-opening-media video { object-position:center 58%; }
