@@ -81,20 +81,20 @@
 
     const fields = new FormData(form);
     const selectedIntent = Object.hasOwn(intents, fields.get('intent')) ? fields.get('intent') : 'walkthrough';
-    const organisation = String(fields.get('organisation') || '').trim();
+    const organization = String(fields.get('organization') || '').trim();
     const message = String(fields.get('message') || '').trim();
     const payload = {
       name: String(fields.get('name') || '').trim(),
       email: String(fields.get('email') || '').trim(),
       type: String(fields.get('type') || ''),
-      message: `Enquiry: ${intents[selectedIntent].label}\nOrganisation: ${organisation || 'Not provided'}\n\n${message}`,
+      message: `Inquiry: ${intents[selectedIntent].label}\nOrganization: ${organization || 'Not provided'}\n\n${message}`,
       website: String(fields.get('website') || ''),
     };
 
     const originalLabel = submitButton.textContent;
     submitButton.disabled = true;
-    submitButton.textContent = 'Sending enquiry…';
-    status.textContent = 'Sending your enquiry.';
+    submitButton.textContent = 'Sending inquiry…';
+    status.textContent = 'Sending your inquiry.';
 
     const controller = new AbortController();
     const timeout = window.setTimeout(() => controller.abort(), 10000);
@@ -110,7 +110,7 @@
 
       form.hidden = true;
       success.hidden = false;
-      successCopy.textContent = `We’ll reply to ${payload.email}. If that address is incorrect, send another enquiry.`;
+      successCopy.textContent = `We’ll reply to ${payload.email}. If that address is incorrect, send another inquiry.`;
       success.focus();
     } catch (_error) {
       status.className = 'contact-status error';
@@ -128,7 +128,7 @@
     form.hidden = false;
     success.hidden = true;
     submitButton.disabled = false;
-    submitButton.textContent = 'Send enquiry';
+    submitButton.textContent = 'Send inquiry';
     status.textContent = '';
     form.querySelector('#contact-name')?.focus();
   });

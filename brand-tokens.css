@@ -6,8 +6,8 @@
    (n1-semantic.css) instead, so that a value can change without every
    consumer needing to know why.
 
-   Colour ramps are measured OKLCH at a fixed hue per family, so a step
-   reads as the same weight across families. The brand colours are steps
+   Color ramps are measured OKLCH at a fixed hue per family, so a step
+   reads as the same weight across families. The brand colors are steps
    in these ramps, not exceptions to them:
 
        wine  #852f48 -> rose-800     berry #a54559 -> rose-600
@@ -101,7 +101,7 @@
   --n1-space-7: 48px;  --n1-space-8: 72px;  --n1-space-9: 112px;
 
   /* Radius — the sharp identity. A 2px button corner reads as a rendering
-     artefact rather than a decision, so controls are square and only the
+     artifact rather than a decision, so controls are square and only the
      larger containers soften. --n1-radius-full is for avatars and pills;
      it must never reach a button.
 
@@ -158,7 +158,7 @@
   --n1-tracking-body: 0em;           --n1-tracking-body-sm: 0.005em;
   --n1-tracking-label: 0.12em;
 
-  /* Elevation — one warm shadow colour, derived from sand-950. In dark mode
+  /* Elevation — one warm shadow color, derived from sand-950. In dark mode
      depth comes from stepping the surface up the ramp, not from shadow. */
   --n1-elev-0: none;
   --n1-elev-1: 0 1px 2px rgba(40, 34, 27, 0.05);

@@ -9,7 +9,7 @@
    Anatomy follows shadcn/ui's Button: one base class, semantic color
    tokens, a short variant list, and a size scale. Dark surfaces
    (wine/berry) flip the --button-* tokens instead of adding
-   per-context colour rules.
+   per-context color rules.
 
    Variants: .button (primary) · .button.secondary
    Sizes:    .button.sm (nav) · default · .button.lg (forms)
@@ -28,7 +28,7 @@
 
 /* Dark surfaces invert the primary: cream button on wine/berry.
    The homepage nav sits on the wine hero until scrolled; its scroll-phase
-   overrides in motion.html re-colour it after this.
+   overrides in motion.html re-color it after this.
    `.tonal .nav`, not `.tonal-motion .nav`: art-directions.css sets
    `.tonal .nav { color: var(--cream) }`, so the nav is on a dark ground in this
    direction whether or not the page is a motion variant. Scoped to the motion
@@ -83,7 +83,7 @@
   transform: none;
 }
 
-/* Secondary: quiet outline in the surface's accent colour. */
+/* Secondary: quiet outline in the surface's accent color. */
 .tonal .button.secondary {
   color: var(--button-secondary-fg);
   background: transparent;

@@ -63,7 +63,7 @@
     'Following related biomarkers, treatments, and open questions over time.',
     'Bringing records from several providers into one source-linked timeline.',
     'Checking current priorities against past results and care events.',
-    'Organising a long record around the findings that need follow-up.'
+    'Organizing a long record around the findings that need follow-up.'
   ];
   const focusedReport = {
     Metabolic: 'Metabolic Review',
@@ -146,7 +146,7 @@
     list.slice(0, shown).forEach((person) => {
       const card = document.createElement('article');
       card.className = 'person';
-      card.innerHTML = `<a class="person-select" href="report-profile.html?person=${person.id}" aria-label="Open reports for ${person.label}"><span class="person-head"><span class="person-name"><b>${person.label}</b><small>Anonymised patient</small></span></span><span class="person-context"><p>${person.context}</p></span><span class="person-report-list">${person.reports.map((report) => `<span>${report.title}</span>`).join('')}</span><span class="person-card-foot"><span class="person-tags">${person.focus.map((area) => `<span>${area}</span>`).join('')}</span><span class="report-count">Open ${person.reports.length} reports →</span></span></a>`;
+      card.innerHTML = `<a class="person-select" href="report-profile.html?person=${person.id}" aria-label="Open reports for ${person.label}"><span class="person-head"><span class="person-name"><b>${person.label}</b><small>Anonymized patient</small></span></span><span class="person-context"><p>${person.context}</p></span><span class="person-report-list">${person.reports.map((report) => `<span>${report.title}</span>`).join('')}</span><span class="person-card-foot"><span class="person-tags">${person.focus.map((area) => `<span>${area}</span>`).join('')}</span><span class="report-count">Open ${person.reports.length} reports →</span></span></a>`;
       grid.appendChild(card);
     });
     if (!list.length) grid.innerHTML = '<p class="empty">No profiles or reports match this search.</p>';
