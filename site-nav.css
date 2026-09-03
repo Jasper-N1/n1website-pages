@@ -96,8 +96,8 @@
 .site-nav-v2.nav:not(.is-past-hero) .nav-links,
 .site-nav-v2.nav:not(.is-past-hero) .nav-actions {
   font-family: "Work Sans",ui-sans-serif,system-ui,sans-serif !important;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 550;
   letter-spacing: .005em;
   text-shadow: 0 1px 12px rgba(5,16,14,.26);
 }
@@ -336,8 +336,8 @@
 .site-nav-v2.nav:not(.is-past-hero) .nav-links,
 .site-nav-v2.nav:not(.is-past-hero) .nav-actions {
   color: #303734;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 550;
   text-shadow: none !important;
 }
 
