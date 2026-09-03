@@ -93,6 +93,7 @@
 .about-team-orbit li { --angle:calc(var(--i) * 25.714deg - 90deg); position:absolute; z-index:3; top:50%; left:50%; transform:rotate(var(--angle)) translateX(calc(min(390px,41vw) - 28px)) rotate(calc(var(--angle) * -1)); }
 .about-team-orbit li span { width:56px; height:56px; display:grid; place-items:center; border:1px solid #a8bdb7; border-radius:50%; color:#284f4d; background:#fffdf9; font-size:10px; font-weight:800; text-align:center; box-shadow:0 9px 24px rgba(35,66,58,.08); }
 .about-directory { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:clamp(34px,5vw,66px) clamp(18px,3vw,42px); margin-top:clamp(54px,7vw,88px); padding-top:clamp(42px,5vw,64px); border-top:1px solid #b6c7c2; }
+.about-person.is-row-start { grid-column:1; }
 .about-person { min-width:0; color:var(--about-ink); text-align:center; text-decoration:none; }
 .about-person img { width:86%; height:auto; aspect-ratio:1; display:block; margin:0 auto; border:1px solid #b7c8c3; border-radius:50%; object-fit:cover; object-position:center top; background:#fff; }
 .about-person b,.about-person span { display:block; }
@@ -156,6 +157,7 @@
   .about-team-orbit li { transform:rotate(var(--angle)) translateX(calc(45vw - 24px)) rotate(calc(var(--angle) * -1)); }
   .about-team-orbit li span { width:48px; height:48px; font-size:7px; }
   .about-directory { grid-template-columns:repeat(2,1fr); gap:34px 12px; }
+  .about-person.is-row-start { grid-column:auto; }
   .about-location { min-height:390px; }
   .about-next-list a { grid-template-columns:1fr auto; gap:14px; padding:18px 0; }
   .about-next-list span { grid-column:1; grid-row:2; }
@@ -190,9 +192,9 @@
 <a class="about-person" href="https://www.linkedin.com/in/umar-shah" target="_blank" rel="noopener noreferrer"><img src="assets/team/umar-shah.webp" alt="Umar Shah" width="500" height="500" loading="lazy"><b>Umar Shah</b><span>LinkedIn ↗</span></a>
 <a class="about-person" href="https://nl.linkedin.com/in/coen-elferink-35a344104" target="_blank" rel="noopener noreferrer"><img src="assets/team/coen-elferink.webp" alt="Coen Elferink" width="500" height="500" loading="lazy"><b>Coen Elferink</b><span>LinkedIn ↗</span></a>
 <a class="about-person" href="https://in.linkedin.com/in/darpanbafana" target="_blank" rel="noopener noreferrer"><img src="assets/team/darpan-bafana.webp" alt="Darpan Bafana" width="500" height="500" loading="lazy"><b>Darpan Bafana</b><span>LinkedIn ↗</span></a>
-<a class="about-person" href="https://my.linkedin.com/in/yousuf-sarfraz" target="_blank" rel="noopener noreferrer"><img src="assets/team/yousuf-sarfraz.webp" alt="Yousuf Sarfraz" width="500" height="500" loading="lazy"><b>Yousuf Sarfraz</b><span>LinkedIn ↗</span></a>
 <a class="about-person" href="https://my.linkedin.com/in/neshalinisathiabalan" target="_blank" rel="noopener noreferrer"><img src="assets/team/neshalini-sathiabalan.webp" alt="Neshalini Sathiabalan" width="500" height="500" loading="lazy"><b>Neshalini Sathiabalan</b><span>LinkedIn ↗</span></a>
 <a class="about-person" href="https://my.linkedin.com/in/lau-siew-mei" target="_blank" rel="noopener noreferrer"><img src="assets/team/siew-mei-lau.webp" alt="Lau Siew Mei" width="500" height="500" loading="lazy"><b>Lau Siew Mei</b><span>LinkedIn ↗</span></a>
+<a class="about-person is-row-start" href="https://my.linkedin.com/in/yousuf-sarfraz" target="_blank" rel="noopener noreferrer"><img src="assets/team/yousuf-sarfraz.webp" alt="Yousuf Sarfraz" width="500" height="500" loading="lazy"><b>Yousuf Sarfraz</b><span>LinkedIn ↗</span></a>
 <a class="about-person" href="https://my.linkedin.com/in/junantannn" target="_blank" rel="noopener noreferrer"><img src="assets/team/jun-an-tan.webp" alt="Jun An Tan" width="500" height="500" loading="lazy"><b>Jun An Tan</b><span>LinkedIn ↗</span></a>
 <a class="about-person" href="https://in.linkedin.com/in/paawan-purdhani" target="_blank" rel="noopener noreferrer"><img src="assets/team/paawan-purdhani.webp" alt="Paawan Purdhani" width="500" height="500" loading="lazy"><b>Paawan Purdhani</b><span>LinkedIn ↗</span></a>
 </div></div></section>
