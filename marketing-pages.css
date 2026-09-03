@@ -684,6 +684,23 @@ body.marketing-page { color: var(--ink); background: var(--cream); }
   .source-page-head { flex-direction: column; gap: 5px; }
   .marketing-footer-top { gap: 50px; }
   .marketing-footer-links { grid-template-columns: 1fr; gap: 28px; }
+  .marketing-footer-links strong { margin-bottom: 8px; }
+  .marketing-footer-links a {
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    margin-top: 0;
+  }
+  /* Keep form controls at 16px on phones so iOS does not zoom the page when a
+     visitor focuses a field. */
+  .contact-field input,
+  .contact-field select,
+  .contact-field textarea { font-size: 16px; }
+  .text-link {
+    min-height: 44px;
+    display: inline-flex !important;
+    align-items: center;
+  }
   .page-close { padding: 82px 0; }
   .page-close h2 { font-size: 42px; }
 }

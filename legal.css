@@ -31,4 +31,7 @@
   .legal-nav { position: static; columns: 2; }
   .legal-nav strong { column-span: all; }
 }
-@media (max-width: 520px) { .legal-nav { columns: 1; } }
+@media (max-width: 520px) {
+  .legal-nav { columns: 1; padding: 14px 0; }
+  .legal-nav a { min-height: 44px; display: flex; align-items: center; padding: 0; }
+}
