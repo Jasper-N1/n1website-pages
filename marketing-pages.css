@@ -514,10 +514,10 @@ body.marketing-page { color: var(--ink); background: var(--cream); }
 .page-close .page-actions { justify-content: center; }
 
 .marketing-footer { padding: 68px 0 30px; color: var(--cream); background: var(--ink); }
-.marketing-footer-top { display: grid; grid-template-columns: 1fr 1.2fr; gap: 70px; padding-bottom: 60px; }
+.marketing-footer-top { display: grid; grid-template-columns: minmax(280px,.8fr) minmax(0,1.6fr); gap: 70px; padding-bottom: 60px; }
 .marketing-footer-brand .logo { color: var(--cream); }
 .marketing-footer-brand p { max-width: 410px; margin: 18px 0 0; color: #cdc7c0; font-size: 13px; line-height: 1.7; }
-.marketing-footer-links { display: grid; grid-template-columns: repeat(3, 1fr); gap: 35px; }
+.marketing-footer-links { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 28px; }
 .marketing-footer-links strong { display: block; margin-bottom: 20px; color: var(--peach); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
 .marketing-footer-links a { display: block; margin-top: 13px; color: #d7d2cb; font-size: 13px; }
 .marketing-footer-bottom { padding-top: 27px; border-top: 1px solid #47413a; color: #bcb6af; font-size: 11px; }
