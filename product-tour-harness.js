@@ -845,12 +845,13 @@
     const toggle = whiteLabelDemo.querySelector('.whitelabel-demo-toggle');
     const cursor = whiteLabelDemo.querySelector('.whitelabel-demo-cursor');
     const shareLayer = whiteLabelDemo.querySelector('.whitelabel-share-layer');
-    const dwellTimes = [3600,4300,5200,3600];
+    const dwellTimes = [1800,2400,2700,2100];
     let phase = reducedMotion ? 1 : 0;
     let timer = 0;
     let clickTimer = 0;
     let paused = false;
     let inView = false;
+    let entering = true;
 
     const renderWhiteLabel = (next) => {
       phase = (next + controls.length) % controls.length;
@@ -870,16 +871,18 @@
       cursor?.classList.remove('is-clicking');
       whiteLabelDemo.querySelectorAll('.is-demo-click').forEach((item) => item.classList.remove('is-demo-click'));
     };
-    const startWhiteLabel = () => {
+    const startWhiteLabel = (initialDelay) => {
       stopWhiteLabel();
       if (!inView || paused || reducedMotion || document.hidden) return;
       timer = window.setTimeout(() => {
         timer = 0;
-        const action = phase === 1
-          ? whiteLabelDemo.querySelector('.whitelabel-report-footer [data-whitelabel-next]')
-          : phase === 2
-            ? whiteLabelDemo.querySelector('.whitelabel-share-dialog [data-whitelabel-next]')
-            : null;
+        const action = phase === 0
+          ? whiteLabelDemo.querySelector('.whitelabel-swatches i:first-child')
+          : phase === 1
+            ? whiteLabelDemo.querySelector('.whitelabel-report-footer [data-whitelabel-next]')
+            : phase === 2
+              ? whiteLabelDemo.querySelector('.whitelabel-share-dialog [data-whitelabel-next]')
+              : null;
         action?.classList.add('is-demo-click');
         cursor?.classList.add('is-clicking');
         clickTimer = window.setTimeout(() => {
@@ -889,7 +892,7 @@
           renderWhiteLabel(phase + 1);
           startWhiteLabel();
         }, 430);
-      }, dwellTimes[phase]);
+      }, initialDelay ?? dwellTimes[phase] ?? 2200);
     };
     const setWhiteLabelPaused = (next) => {
       paused = next;
@@ -910,10 +913,15 @@
     renderWhiteLabel(phase);
     if ('IntersectionObserver' in window) {
       const observer = new IntersectionObserver(([entry]) => {
-        inView = entry.isIntersecting && entry.intersectionRatio >= .25;
-        if (inView) startWhiteLabel();
-        else stopWhiteLabel();
-      }, { threshold: [0,.25,.5], rootMargin: '-6% 0px -8% 0px' });
+        inView = entry.isIntersecting && entry.intersectionRatio >= .12;
+        if (inView) {
+          startWhiteLabel(entering ? 850 : undefined);
+          entering = false;
+        } else {
+          stopWhiteLabel();
+          entering = true;
+        }
+      }, { threshold: [0,.12,.35], rootMargin: '8% 0px -4% 0px' });
       observer.observe(whiteLabelDemo);
     } else {
       inView = true;
