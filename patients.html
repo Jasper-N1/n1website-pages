@@ -131,6 +131,7 @@
 .patient-mini-chart .range { fill: #dff2e8; }
 .patient-mini-chart .line { fill: none; stroke: #2f7773; stroke-width: 2; }
 .patient-mini-chart circle { fill: #fffdf9; stroke: #2f7773; stroke-width: 2; }
+.patient-mini-chart circle.is-outlier { fill: #c76250; stroke: #c76250; }
 .patient-record-files { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; padding-top: 12px; }
 .patient-record-files span { display: grid; gap: 5px; place-items: center; padding: 9px 4px; border-radius: 10px; color: #5f6863; background: #f1f5f3; font-size: 8.5px; }
 .patient-record-files b { color: #2f7773; font-size: 14px; }
@@ -352,7 +353,7 @@
 
 <article class="patient-data-widget widget-labs" data-sx="-120" data-sy="240" data-ex="-114" data-ey="30" data-ss="1" data-es=".82" data-delay=".11" data-arc-x="38" data-arc-y="-32" data-rotate="5" data-tilt-y="-10">
 <div class="patient-widget-head"><div class="patient-widget-title"><span class="patient-widget-icon">⌁</span><div><b>Laboratory results</b></div></div><span class="patient-widget-tag">Trend</span></div>
-<div class="patient-widget-value"><div><strong>6.4%</strong><small>HbA1c · 2025</small></div><svg class="patient-mini-chart" viewBox="0 0 92 38" aria-hidden="true"><rect class="range" x="0" y="16" width="92" height="13" rx="4"></rect><path class="line" d="M4 6 L31 11 L59 19 L88 25"></path><circle cx="4" cy="6" r="3"></circle><circle cx="31" cy="11" r="3"></circle><circle cx="59" cy="19" r="3"></circle><circle cx="88" cy="25" r="3"></circle></svg></div>
+<div class="patient-widget-value"><div><strong>6.4%</strong><small>HbA1c · 2025</small></div><svg class="patient-mini-chart" viewBox="0 0 92 38" role="img" aria-label="HbA1c improving from 7.1% to 6.4%; all four readings remain above the 4.0 to 5.6% reference range"><rect class="range" x="0" y="29" width="92" height="7" rx="3"></rect><path class="line" d="M4 6 L31 11 L59 18 L88 24"></path><circle class="is-outlier" cx="4" cy="6" r="3"></circle><circle class="is-outlier" cx="31" cy="11" r="3"></circle><circle class="is-outlier" cx="59" cy="18" r="3"></circle><circle class="is-outlier" cx="88" cy="24" r="3"></circle></svg></div>
 </article>
 
 <article class="patient-data-widget widget-medications" data-sx="420" data-sy="10" data-ex="114" data-ey="-95" data-ss="1.04" data-es=".82" data-delay=".06" data-arc-x="42" data-arc-y="-48" data-rotate="6" data-tilt-y="-14">

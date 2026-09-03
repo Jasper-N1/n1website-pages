@@ -1544,8 +1544,7 @@
     .trace-evidence-chart { width: 100%; height: 58px; display: block; overflow: visible; }
     .trace-evidence-chart .sp-grid { fill: none; stroke: #dce5e2; stroke-width: 1; stroke-dasharray: 3 3; }
     .trace-evidence-chart .sp-line { stroke-dasharray: 230; stroke-dashoffset: 0; }
-    .trace-evidence-chart .sp-point { stroke-width: 1 !important; }
-    .trace-evidence-chart .sp-point.is-latest { fill: #fff !important; stroke: #0d7377 !important; stroke-width: 1.5 !important; }
+    .trace-evidence-chart .sp-point { fill: #ef4444 !important; stroke: #ef4444 !important; stroke-width: 1 !important; }
     .trace-evidence-table { display: grid; align-content: start; border-top: 1px solid #d8e3df; }
     .trace-evidence-row { display: grid !important; grid-template-columns: 1fr auto auto; gap: 7px; padding: 3px 0; border-bottom: 1px solid #e3e9e7; opacity: 1; }
     .trace-evidence-row time { color: #65736e; font-size: 6.5px; }
@@ -3479,8 +3478,8 @@
                       <div class="thumb-row"><i class="dot ok"></i><span class="nm">Hepatic</span><b>Stable</b></div>
                       <div class="thumb-row"><i class="dot warn"></i><span class="nm">Endocrine</span><b>Watch</b></div>
                       <div class="thumb-row"><i class="dot ok"></i><span class="nm">Renal</span><b>Stable</b></div>
-                      <div class="thumb-biomarker-head"><span>HbA1c trend</span><b>6.4%</b><em>6 readings</em></div>
-                      <svg class="thumb-spark thumb-biomarker-spark" viewBox="0 0 320 92" preserveAspectRatio="none"><rect class="sp-band" x="20" y="55" width="292" height="24" rx="2"></rect><path class="sp-bound" d="M20 55H312M20 79H312"></path><g class="sp-grid"><path d="M20 18H312M20 37H312"></path></g><path class="sp-line" d="M20,20 C24.08,20.58 60.67,25.33 69,27 C77.33,28.67 109.75,31.92 119,32 C128.25,32.08 168.58,37.5 178,40 C187.42,42.5 225.33,49.42 234,52 C242.67,54.58 307.17,65.58 312,67"></path><circle class="sp-point is-outlier" cx="20" cy="20" r="4"></circle><circle class="sp-point is-outlier" cx="69" cy="27" r="4"></circle><circle class="sp-point is-outlier" cx="119" cy="32" r="4"></circle><circle class="sp-point is-outlier" cx="178" cy="40" r="4"></circle><circle class="sp-point" cx="234" cy="52" r="4"></circle><circle class="sp-point" cx="312" cy="67" r="4"></circle></svg>
+                      <div class="thumb-biomarker-head"><span>HbA1c trend · reference 4.0–5.6%</span><b>6.4%</b><em>6 readings</em></div>
+                      <svg class="thumb-spark thumb-biomarker-spark" viewBox="0 0 320 92" preserveAspectRatio="none" aria-label="HbA1c improving from 7.1% to 6.4%; all six readings remain above the 4.0 to 5.6% reference range"><rect class="sp-band" x="20" y="55" width="292" height="24" rx="2"></rect><path class="sp-bound" d="M20 55H312M20 79H312"></path><g class="sp-grid"><path d="M20 18H312M20 37H312"></path></g><path class="sp-line" d="M20,20 L69,23 L119,27 L178,31 L234,38 L312,45"></path><circle class="sp-point is-outlier" cx="20" cy="20" r="4"></circle><circle class="sp-point is-outlier" cx="69" cy="23" r="4"></circle><circle class="sp-point is-outlier" cx="119" cy="27" r="4"></circle><circle class="sp-point is-outlier" cx="178" cy="31" r="4"></circle><circle class="sp-point is-outlier" cx="234" cy="38" r="4"></circle><circle class="sp-point is-outlier" cx="312" cy="45" r="4"></circle></svg>
                       <div class="thumb-meta">45 biomarkers · clinician review</div>
                     </div>
                   </div>
@@ -3527,8 +3526,8 @@
                       <div class="thumb-kicker"><span>Current regimen</span><b>2 items</b></div>
                       <div class="thumb-safety-row"><span><i>VD</i><b>Vitamin D3</b><small>2,000 IU daily</small></span><em class="is-clear">In range</em></div>
                       <div class="thumb-safety-row"><span><i>MG</i><b>Magnesium</b><small>200 mg daily</small></span><em>Check dose</em></div>
-                      <div class="thumb-biomarker-head"><span>Vitamin D trend</span><b>71 nmol/L</b><em>6 readings</em></div>
-                      <svg class="thumb-spark thumb-biomarker-spark thumb-supp-spark" viewBox="0 0 320 72" preserveAspectRatio="none" aria-label="Vitamin D rising across six readings"><g class="sp-grid"><path d="M20 16H312M20 36H312M20 56H312"></path></g><path class="sp-line" d="M20,55 C33,53 54,45 69,46 C84,47 104,53 119,51 C134,49 162,32 178,30 C194,28 217,25 234,23 C251,21 293,13 312,12"></path><circle class="sp-point is-outlier" cx="20" cy="55" r="4"></circle><circle class="sp-point is-outlier" cx="69" cy="46" r="4"></circle><circle class="sp-point is-outlier" cx="119" cy="51" r="4"></circle><circle class="sp-point is-outlier" cx="178" cy="30" r="4"></circle><circle class="sp-point is-outlier" cx="234" cy="23" r="4"></circle><circle class="sp-point is-outlier" cx="312" cy="12" r="4"></circle></svg>
+                      <div class="thumb-biomarker-head"><span>25-OH vitamin D · reference 50–125 nmol/L</span><b>71 nmol/L</b><em>6 readings</em></div>
+                      <svg class="thumb-spark thumb-biomarker-spark thumb-supp-spark" viewBox="0 0 320 72" preserveAspectRatio="none" aria-label="25-OH vitamin D rising from 42 to 71 nmol/L; the first three readings are below the 50 to 125 nmol/L reference range and the latest three are within it"><rect class="sp-band" x="20" y="15" width="292" height="37.5" rx="2"></rect><path class="sp-bound" d="M20 15H312M20 52.5H312"></path><g class="sp-grid"><path d="M20 15H312M20 35H312M20 55H312"></path></g><path class="sp-line" d="M20,56.5 L69,53.5 L119,54.5 L178,48.5 L234,45.5 L312,42"></path><circle class="sp-point is-outlier" cx="20" cy="56.5" r="4"></circle><circle class="sp-point is-outlier" cx="69" cy="53.5" r="4"></circle><circle class="sp-point is-outlier" cx="119" cy="54.5" r="4"></circle><circle class="sp-point" cx="178" cy="48.5" r="4"></circle><circle class="sp-point" cx="234" cy="45.5" r="4"></circle><circle class="sp-point" cx="312" cy="42" r="4"></circle></svg>
                       <div class="thumb-monitor-plan"><i aria-hidden="true">↻</i><span><b>Monitoring plan</b><small>Re-test Vitamin D + magnesium</small></span><em>12 weeks · 2025-Jun-06</em></div>
                       <div class="thumb-meta">Safety review · clinician approval</div>
                     </div>
@@ -4850,10 +4849,10 @@
       if (!panel) return;
       var markerData = {
         hba1c: {
-          name: 'HbA1c', latest: '6.4%', change: '−0.7', reference: '4.0–7.2%',
+          name: 'HbA1c', latest: '6.4%', change: '−0.7', reference: '4.0–5.6%',
           customReference: [4.0, 6.8],
           direction: 'Moving down', arrow: '↘',
-          note: 'HbA1c fell across six tests. Earlier results are above the custom range.',
+          note: 'HbA1c fell across six tests. All readings remain above the stated reference range.',
           points: [
             { value: 7.3, label: '7.3%', date: '2020-Sep-18', source: 'Example Laboratory 01 · page 3' },
             { value: 7.2, label: '7.2%', date: '2021-Jun-24', source: 'Example Laboratory 02 · page 2' },
@@ -4890,9 +4889,9 @@
           ]
         },
         vitd: {
-          name: 'Vitamin D', latest: '71 nmol/L', change: '+9', reference: '75–250 nmol/L',
+          name: '25-OH vitamin D', latest: '71 nmol/L', change: '+9', reference: '50–125 nmol/L',
           direction: 'Moving up', arrow: '↗',
-          note: 'Vitamin D rose across six tests. The latest value remains just below the stated range.',
+          note: '25-OH vitamin D rose across six tests. The latest value is within the stated range.',
           points: [
             { value: 48, label: '48 nmol/L', date: '2020-Sep-18', source: 'Example Laboratory 01 · page 4' },
             { value: 55, label: '55 nmol/L', date: '2021-Jun-24', source: 'Example Laboratory 02 · page 3' },
