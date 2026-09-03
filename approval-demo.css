@@ -1,6 +1,6 @@
 .approval-summary { padding: 96px 0; background: #e8f0ee; }
-.approval-demo { position: relative; display: grid; grid-template-columns: 1.12fr .88fr; overflow: hidden; margin-bottom: 30px; border: 1px solid #b8cbc6; border-radius: 22px; background: #fff; box-shadow: 0 24px 55px rgba(35,56,50,.09); }
-.approval-report { min-height: 0; position: relative; display: flex; flex-direction: column; padding: clamp(30px,4vw,52px); overflow: hidden; border-right: 1px solid #d4dfdc; background: #fff; }
+.approval-demo { position: relative; display: grid; grid-template-columns: minmax(0,1fr); overflow: hidden; margin-bottom: 30px; border: 1px solid #b8cbc6; border-radius: 22px; background: #fff; box-shadow: 0 24px 55px rgba(35,56,50,.09); }
+.approval-report { min-width: 0; min-height: 0; position: relative; display: flex; flex-direction: column; padding: clamp(30px,4vw,52px); overflow: hidden; background: #fff; }
 .approval-report::after { position: absolute; z-index: 5; inset: 0; visibility: hidden; background: rgba(28,43,39,.24); opacity: 0; content: ''; pointer-events: none; transition: visibility 0s linear .28s,opacity .28s ease; }
 .approval-report.is-editing::after { visibility: visible; opacity: 1; transition-delay: 0s; }
 .approval-report > header { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding-bottom: 20px; border-bottom: 1px solid #dce4e1; }
