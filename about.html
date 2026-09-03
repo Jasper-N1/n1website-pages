@@ -8,7 +8,8 @@
 <title>About n1.care — doctors and engineers building trusted AI</title>
 <meta name="description" content="Meet the doctors, researchers, designers, and engineers building source-linked AI for clearer patient records and more useful time in care.">
 <link rel="icon" href="assets/n1-logo.svg" type="image/svg+xml">
-<link rel="preload" as="image" href="assets/videos/log-crossing-wide-poster.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="assets/videos/log-crossing-wide-first-frame.webp" type="image/webp" media="(min-width: 641px)" fetchpriority="high">
+<link rel="preload" as="image" href="assets/videos/log-crossing-portrait-first-frame.webp" type="image/webp" media="(max-width: 640px)" fetchpriority="high">
 <link rel="stylesheet" href="art-directions.css">
 <link rel="stylesheet" href="marketing-pages.css">
 <link rel="stylesheet" href="buttons.css">
@@ -18,8 +19,8 @@
 :root { --about-ink:#202523; --about-muted:#62706b; --about-line:#c8d2ce; --about-paper:#f7f4ed; --about-mint:#e7efec; --about-green:#376361; }
 .about-page { color:var(--about-ink); background:var(--about-paper); }
 .about-display { margin:0; font:400 clamp(44px,5.2vw,76px)/.97 var(--serif); letter-spacing:-.048em; text-wrap:balance; }
-.about-opening { min-height:100svh; position:relative; display:flex; align-items:flex-end; overflow:hidden; padding:clamp(152px,17vw,218px) 0 clamp(64px,7vw,96px); color:#fff; background:#172421 url("assets/videos/log-crossing-wide-poster.jpg") center/cover no-repeat; }
-.about-opening-media { position:absolute; inset:0; }
+.about-opening { min-height:100svh; position:relative; display:flex; align-items:flex-end; overflow:hidden; padding:clamp(152px,17vw,218px) 0 clamp(64px,7vw,96px); color:#fff; background:#172421 url("assets/videos/log-crossing-wide-first-frame.webp") center/cover no-repeat; }
+.about-opening-media { position:absolute; inset:0; background:#172421 url("assets/videos/log-crossing-wide-first-frame.webp") center/cover no-repeat; }
 .about-opening-media video { width:100%; height:100%; display:block; object-fit:cover; object-position:center 58%; }
 .about-opening::before { position:absolute; z-index:1; inset:0; background:linear-gradient(180deg,rgba(12,24,21,.08) 26%,rgba(12,24,21,.25) 58%,rgba(12,24,21,.82) 100%); content:""; }
 .about-opening .shell { position:relative; z-index:2; }
@@ -135,7 +136,8 @@
 }
 @media(max-width:700px) {
   .about-mission > .shell { width:calc(100% - 32px); }
-  .about-opening { min-height:100svh; padding:130px 0 54px; }
+  .about-opening { min-height:100svh; padding:130px 0 54px; background-image:url("assets/videos/log-crossing-portrait-first-frame.webp"); }
+  .about-opening-media { background-image:url("assets/videos/log-crossing-portrait-first-frame.webp"); }
   .about-opening-media video { object-position:center 58%; }
   .about-opening h1 { font-size:clamp(56px,17vw,74px); }
   .about-gallery-grid { height:auto; grid-template-columns:1fr; grid-template-rows:none; }

@@ -8,7 +8,7 @@
 <title>n1 for patients — n1.care</title>
 <meta name="description" content="Upload your records, review results over time, choose how files are handled, and share a source-linked report when you decide.">
 <link rel="icon" href="assets/n1-logo.svg" type="image/svg+xml">
-<link rel="preload" as="image" href="assets/videos/patient-seashore-poster.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="assets/videos/patient-seashore-first-frame.webp" type="image/webp" fetchpriority="high">
 <link rel="stylesheet" href="art-directions.css">
 <link rel="stylesheet" href="marketing-pages.css">
 <link rel="stylesheet" href="buttons.css">
@@ -24,7 +24,7 @@
 .patients-page .nav-toggle[aria-expanded="true"]::before { transform: translateY(6px) rotate(45deg); }
 .patients-page .nav-toggle[aria-expanded="true"]::after { transform: translateY(-6px) rotate(-45deg); }
 .patient-hero.patient-hero-photo { min-height: 100svh; position: relative; display: flex; align-items: flex-end; padding: 130px 0 clamp(44px,6vh,72px); overflow: hidden; color: #fff; background: #687b72; }
-.patient-hero-media { position: absolute; inset: 0; }
+.patient-hero-media { position: absolute; inset: 0; background: #687b72 url("assets/videos/patient-seashore-first-frame.webp") 50% center/cover no-repeat; }
 .patient-hero-media video { width: 100%; height: 100%; display: block; object-fit: cover; object-position: 50% center; }
 .patient-hero-media::after { position: absolute; inset: 0; background: linear-gradient(180deg,rgba(17,33,29,.16) 0,transparent 32%,rgba(16,27,24,.08) 52%,rgba(13,22,20,.72) 100%), linear-gradient(90deg,rgba(17,28,25,.25),transparent 48%); content: ''; }
 .patient-hero-layout { width: 100%; position: relative; z-index: 1; }
