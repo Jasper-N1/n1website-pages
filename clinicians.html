@@ -472,6 +472,8 @@
 .voices-heading .eyebrow { margin: 0 0 22px; color: #2a2b2a; font-size: 11px; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; }
 .voices-heading h2 { max-width: 650px; margin: 0; color: #171817; font-family: var(--serif); font-size: clamp(40px,5vw,62px); font-weight: 400; line-height: 1; letter-spacing: -.03em; text-wrap: balance; }
 .clinician-quote-trio { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 18px; align-items: stretch; }
+.clinician-voices .workflow-stories-more { display: flex; flex-wrap: wrap; gap: 12px 28px; margin-top: 28px; }
+.clinician-voices .workflow-stories-more a { color: #285e5a; font-size: 13px; font-weight: 750; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
 .clinician-quote-card { position: relative; min-height: 500px; display: flex; flex-direction: column; overflow: hidden; padding: 18px; border: 1px solid #c9d8d4; border-radius: 20px; background: #fffdf9; box-shadow: 0 20px 50px -38px rgba(35,56,50,.42); }
 .clinician-quote-card:nth-child(2) { color: #f7f4ed; border-color: #376361; background: #376361; transform: translateY(-18px); box-shadow: 0 30px 60px -36px rgba(35,56,50,.62); }
 .clinician-quote-card figure { position: relative; width: calc(100% + 36px); height: 210px; flex: none; margin: -18px -18px 0; overflow: hidden; border-radius: 0; background: #e5ebe8; }
@@ -809,6 +811,7 @@
 <article class="clinician-quote-card"><figure><img src="assets/testimonial-elena-vasquez-illustrative.webp" alt="Clinician portrait" width="1448" height="1086" loading="lazy" decoding="async"></figure><blockquote><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent feugiat velit sed nisl posuere, vitae interdum sapien feugiat. Donec ullamcorper lorem ac justo commodo. Maecenas non urna vitae arcu malesuada interdum.</p><footer><cite>Dr Riley Doe, MD</cite></footer></blockquote></article>
 <article class="clinician-quote-card"><figure><img src="assets/testimonial-lindsay-ledwich-illustrative.webp" alt="Clinician portrait" width="1448" height="1086" loading="lazy" decoding="async"></figure><blockquote><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vitae neque vel magna luctus aliquam. Integer posuere sem at justo consequat, sed facilisis erat dictum. Sed aliquam erat volutpat, quisque feugiat sapien.</p><footer><cite>Dr Casey Doe, MD</cite></footer></blockquote></article>
 </div>
+<div class="workflow-stories-more"><a href="clinician-interview-dannette-kallay.html">Read Dr Dannette Kallay’s interview →</a><a href="clinician-interview-maya-chen.html">Read the clinical workflow interview →</a></div>
 </div>
 </section>
 <section class="pricing-faq" aria-labelledby="clinician-faq-title">
@@ -820,13 +823,13 @@
 <a class="text-link" href="https://calendly.com/leah-n1/n1-care-discovery-call">Ask us in a walkthrough →</a>
 </header>
 <div class="pricing-faq-list">
-<details><summary><span>What can I upload?</span><i aria-hidden="true"></i></summary><p>You can add health PDFs, TXT files, and supported CSV or TSV files. n1 also supports selected raw gene files.</p></details>
+<details><summary><span>What can I upload?</span><i aria-hidden="true"></i></summary><p>You can upload health records as PDFs and supported TXT, CSV, or TSV files. These can include laboratory and imaging reports, clinical notes, medication lists, and genetic reports provided as readable documents. n1 extracts facts such as results, dates, units, reference ranges, diagnoses, medications, and procedures, with each item linked to its source. Raw genetic data files are not currently supported.</p></details>
 <details><summary><span>What happens after I upload a file?</span><i aria-hidden="true"></i></summary><p>n1 checks each file, reads the content, and sorts each item by type and date. Every result keeps a link to its source.</p></details>
 <details><summary><span>Can I check each result against the original file?</span><i aria-hidden="true"></i></summary><p>Yes. Open the file, page, date, and range behind a result. You can correct the record before you use it in a report.</p></details>
 <details><summary><span>Can I make a custom report?</span><i aria-hidden="true"></i></summary><p>Yes. Start with a built-in report or describe the report you need. Choose the reader, records, units, and detail before n1 makes the draft.</p></details>
 <details><summary><span>Who approves the final report?</span><i aria-hidden="true"></i></summary><p>You do. Every report starts as a draft. A clinician checks the sources, edits the text, and approves the version that can be shared.</p></details>
 <details><summary><span>How do patient invites work?</span><i aria-hidden="true"></i></summary><p>A doctor can create a patient space and invite the patient to claim it. A patient can also ask a doctor to connect. The link only turns on after the invite is accepted.</p></details>
-<details><summary><span>How is patient data protected?</span><i aria-hidden="true"></i></summary><p>Files use encryption when they move and while they are stored. You can hide names, stop source files from being stored, or pick a storage region. <a href="contact.html?intent=security">Ask about the controls →</a></p></details>
+<details><summary><span>How is patient data protected?</span><i aria-hidden="true"></i></summary><p>Files use encryption when they move and while they are stored. You can hide names, stop source files from being stored, or pick a storage region. <a href="compliance.html">Review security and compliance →</a></p></details>
 <details><summary><span>Can I try n1 before I sign up?</span><i aria-hidden="true"></i></summary><p>Yes. <a href="https://app.n1.care/demo">Try the live demo</a> with no sign-up, <a href="https://app.n1.care/signup">start a free trial</a>, or <a href="https://calendly.com/leah-n1/n1-care-discovery-call">book a walkthrough</a>.</p></details>
 </div>
 </div>
@@ -860,6 +863,7 @@
 <a href="case-studies.html">Clinical workflows</a>
 <a href="about.html">About</a>
 <a href="contact.html">Contact</a>
+<a href="compliance.html">Security &amp; compliance</a>
 <a href="privacy.html">Privacy</a>
 <a href="terms.html">Terms</a>
 </div>
