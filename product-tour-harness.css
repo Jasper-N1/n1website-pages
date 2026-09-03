@@ -366,7 +366,7 @@
 .patient-showcase-appbar > span { color: #475652; font-size: 13px; font-weight: 800; }
 .patient-showcase-appbar > i { justify-self: end; padding: 7px 10px; border-radius: 999px; color: #315957; background: #e2efec; font-size: 9px; font-style: normal; font-weight: 800; }
 .patient-showcase-views { position: relative; height: 375px; overflow: hidden; }
-.patient-showcase-view { position: absolute; inset: 0; z-index: 0; padding: 28px 32px; visibility: hidden; opacity: 0; pointer-events: none; transform: translateY(10px) scale(.992); transition: opacity .58s ease,transform .68s cubic-bezier(.22,.8,.28,1),visibility 0s .68s; will-change: opacity,transform; }
+.patient-showcase-view { position: absolute; inset: 0; z-index: 0; padding: 28px 32px; visibility: hidden; opacity: 0; pointer-events: none; transform: translateY(8px) scale(.994); transition: opacity .48s ease,transform .56s cubic-bezier(.22,.8,.28,1),visibility 0s .56s; will-change: opacity,transform; }
 .patient-showcase-view.is-active { z-index: 1; visibility: visible; opacity: 1; pointer-events: auto; transform: none; transition-delay: 0s; }
 .patient-showcase-view > header { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-bottom: 22px; }
 .patient-showcase-view > header span { display: block; margin-bottom: 5px; color: #2f7773; font-size: 9px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
@@ -1274,7 +1274,8 @@
 .patient-platform-ready > header { padding-right: 205px; }
 .clinician-patient-management .patient-showcase-progress { height: 58px; padding-right: 26px; padding-left: 198px; }
 .patient-showcase-cursor { position: absolute; z-index: 9; width: 26px; height: 26px; pointer-events: none; filter: drop-shadow(0 2px 2px rgba(19,42,37,.28)); transition: left 1s cubic-bezier(.22,1,.36,1),top 1s cubic-bezier(.22,1,.36,1),transform .16s ease; }
-.patient-showcase-cursor svg { width: 100%; height: 100%; fill: #fff; stroke: #244b49; stroke-linejoin: round; stroke-width: 1.5; }
+.patient-showcase-cursor svg { width: 100%; height: 100%; fill: #fff; stroke: #244b49; stroke-linejoin: round; stroke-width: 1.5; animation: patient-showcase-cursor-breathe 2.1s ease-in-out infinite; }
+@keyframes patient-showcase-cursor-breathe { 0%,100% { translate: 0 0; } 50% { translate: 2px -3px; } }
 [data-patient-showcase][data-phase="0"] .patient-showcase-cursor { left: calc(50% + 397px); top: 259px; }
 [data-patient-showcase][data-phase="1"] .patient-showcase-cursor { left: calc(50% + 290px); top: 522px; }
 [data-patient-showcase][data-phase="2"] .patient-showcase-cursor { left: calc(50% + 235px); top: 462px; }
@@ -1818,7 +1819,7 @@
   .product-tour-mount.pth-scroll-reveal { opacity: 1; translate: none; transition: none; }
   .pth-view, .pth-progress i, .pth-gantt-bar { transition: none; }
   .pth-view.is-active .pth-card, .pth-view.is-active .pth-file, .pth-view.is-active .pth-type-card, .pth-meter i { animation: none; }
-  .micro-upload-view, .micro-data-view, .micro-report-view, .micro-share-view, .micro-focus { animation: none !important; }
+  .micro-upload-view, .micro-data-view, .micro-report-view, .micro-share-view, .micro-focus,.patient-showcase-cursor svg { animation: none !important; }
   .process-step { opacity: 1; transform: none; transition: none; }
   .process-step.is-active .micro-patient > em::before,
   .process-step.is-active .micro-upload > div > em::before,

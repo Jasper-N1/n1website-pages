@@ -753,12 +753,13 @@
     const progress = [...patientShowcase.querySelectorAll('[data-patient-showcase-step]')];
     const toggle = patientShowcase.querySelector('.patient-showcase-toggle');
     const demoCursor = patientShowcase.querySelector('.patient-showcase-cursor');
-    const dwellTimes = [5200,6500,5800,5200];
+    const dwellTimes = [1600,2400,2600,2200];
     let phase = 0;
     let timer = 0;
     let clickTimer = 0;
     let paused = false;
     let inView = false;
+    let entering = true;
     views.forEach((view) => { view.hidden = false; });
     const renderShowcase = (next) => {
       phase = (next + views.length) % views.length;
@@ -782,7 +783,7 @@
       patientShowcase.querySelectorAll('.is-demo-click').forEach((item) => item.classList.remove('is-demo-click'));
       demoCursor?.classList.remove('is-clicking');
     };
-    const startShowcase = () => {
+    const startShowcase = (initialDelay) => {
       stopShowcase();
       if (!inView || paused || reducedMotion || document.hidden) return;
       timer = window.setTimeout(() => {
@@ -797,7 +798,7 @@
           renderShowcase(phase + 1);
           startShowcase();
         }, 460);
-      }, dwellTimes[phase] || 5600);
+      }, initialDelay ?? dwellTimes[phase] ?? 3000);
     };
     const setShowcasePaused = (next) => {
       paused = next;
@@ -821,8 +822,13 @@
       const showcaseObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           inView = entry.isIntersecting && entry.intersectionRatio >= .22;
-          if (inView) startShowcase();
-          else stopShowcase();
+          if (inView) {
+            startShowcase(entering ? 1200 : undefined);
+            entering = false;
+          } else {
+            stopShowcase();
+            entering = true;
+          }
         });
       }, { threshold: [0,.22,.5], rootMargin: '-7% 0px -10% 0px' });
       showcaseObserver.observe(patientShowcase);
