@@ -1,0 +1,48 @@
+html:has(body.example-report-page),
+body.marketing-page.example-report-page { color: #202523; background: #e5ecea; }
+.example-report-main { min-height: 80svh; padding: 118px 20px 80px; background: linear-gradient(180deg, #dce8e5 0%, #e8efed 52%, #e5ecea 100%); }
+.example-report-shell { width: min(1240px, 100%); margin: auto; }
+.example-report-toolbar { display: flex; justify-content: space-between; gap: 20px; align-items: center; width: min(892px, calc(100% - 48px)); margin: 0 auto 18px; color: #5f6b67; font-size: 11px; }
+.example-report-toolbar a { color: #244b49; font-weight: 800; text-decoration: none; }
+.example-report-loading, .example-report-error { min-height: 50vh; display: grid; place-items: center; color: #5f6b67; }
+.example-report-document { overflow: clip; border: 1px solid #b9cbc6; border-radius: 18px; background: #f8fafc; box-shadow: 0 30px 70px -45px rgba(25, 53, 49, .6); }
+.example-report-loading[hidden] { display: none !important; }
+
+/* The platform TOC is calculated for a full application viewport. Inside this
+   narrower public report frame that leaves it at roughly 100px wide, forcing
+   ordinary section names onto four lines. Give it the available report gutter
+   while preserving a clear gap before the document column. */
+@media (min-width: 1300px) {
+  .example-report-document [data-a2ui-nav-list] {
+    right: auto;
+    left: max(12px, calc(50% - var(--a2-measure) / 2 - 164px));
+    width: 144px;
+    max-width: 144px;
+  }
+  .example-report-document [data-a2ui-nav-link] {
+    position: relative;
+    padding-left: 30px;
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+  .example-report-document [data-a2ui-nav-link]::before {
+    position: absolute;
+    top: 8px;
+    left: 10px;
+  }
+}
+
+@media (max-width: 720px) {
+  .example-report-main { padding: 92px 0 48px; }
+  .example-report-toolbar { width: auto; margin: 0 14px 14px; align-items: flex-start; flex-direction: column; }
+  .example-report-document { border-inline: 0; border-radius: 0; }
+  .example-report-document .a2ui-doc { --a2-gutter: 12px; }
+  .example-report-document [data-a2ui-component='ReportSection'] { padding-inline: 20px; }
+  .example-report-document [data-a2ui-section-body],
+  .example-report-document [data-a2ui-component='Row'],
+  .example-report-document [data-a2ui-component='Group'] { min-width: 0; max-width: 100%; }
+  .example-report-document [data-a2ui-component='ClinicalText'] { overflow-wrap: anywhere; }
+  .example-report-document [data-a2ui-triage-tile-head] { flex-wrap: wrap; }
+  .example-report-document [data-a2ui-triage-lead],
+  .example-report-document [data-a2ui-alert-name] { white-space: normal; overflow-wrap: anywhere; }
+}
