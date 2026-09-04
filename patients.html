@@ -426,15 +426,18 @@
 <div class="pricing-faq-list">
 <details>
 <summary><span>What health records can I upload?</span><i aria-hidden="true"></i></summary>
-<p>You can upload health records as PDFs and supported TXT, CSV, or TSV files. These may include laboratory reports, imaging reports, specialist letters, clinical notes, medication lists, supplement lists, procedure reports, and genetic reports provided as readable documents. n1 extracts relevant information such as dates, test results, units, reference ranges, diagnoses, medications, supplements, and procedures. Raw genetic-data files are not currently supported.</p>
+<p>You can upload clinical records as PDF, PNG, JPG, or JPEG files. These may include:</p>
+<ul><li>Laboratory and imaging reports</li><li>Clinical notes and specialist letters</li><li>Medication and supplement lists</li><li>Procedure reports</li><li>Readable genetic reports</li></ul>
+<p>n1 can extract relevant information such as dates, test results, units, reference ranges, diagnoses, medications, supplements, and procedures when these details are present and readable.</p>
+<p>Supported TXT, CSV, and TSV files can also be uploaded through the raw-DNA workflow; these formats are not intended for general clinical documents.</p>
 </details>
 <details>
 <summary><span>What happens after I upload a record?</span><i aria-hidden="true"></i></summary>
-<p>After upload, n1 checks whether the file can be processed, reads the document, and identifies key information such as document type, dates, and relevant health data. Extracted information is organized into your longitudinal health record, allowing results and clinical details from different sources to be viewed together over time. Each extracted item remains linked to the original document and page, so you can review the source before using the information in a report or sharing it.</p>
+<p>After upload, n1 checks whether the file can be processed, reads the document, and identifies key information such as document type, dates, and relevant health data. Extracted information is organized into your longitudinal health record, allowing results and clinical details from different sources to be viewed together over time. Supported extracted items retain links to the original document and page where source metadata is available, so you can review the evidence before using the information in a report or sharing it.</p>
 </details>
 <details>
 <summary><span>Can I check information against the original document?</span><i aria-hidden="true"></i></summary>
-<p>Yes. Extracted results and key health information are linked back to the original document and page. You can review the source alongside details such as the result date, unit, and reference range. If something does not match the original record, it should be corrected before you rely on it or include it in a shared report. Before discussing results with a clinician or sharing a report, review the linked source documents to confirm the information is accurate.</p>
+<p>Yes. When source metadata is available, extracted results and key health information include links back to the original document and page. You can review the available source alongside details such as the result date, unit, and reference range. If something does not match the original record, it should be corrected before you rely on it or include it in a shared report. Before discussing results with a clinician or sharing a report, review the available linked sources to confirm the information is accurate.</p>
 </details>
 <details>
 <summary><span>Does n1 diagnose conditions or replace my doctor?</span><i aria-hidden="true"></i></summary>
@@ -442,15 +445,15 @@
 </details>
 <details>
 <summary><span>Can my doctor automatically see everything I upload?</span><i aria-hidden="true"></i></summary>
-<p>No. Your patient workspace is private by default. A clinician can access information only when you share a report, accept an invitation, or create another connection using the available controls. You should review what access you are granting before confirming it and remove or disable access when it is no longer needed. Sharing information with one clinician does not automatically give other clinicians access to your records.</p>
+<p>No. Access depends on how the patient record was created and connected. Records you create in your own patient account are not automatically visible to clinicians. A record created for you by a clinician is accessible to that clinician, and you may be invited to access it. You can also choose to share a report or create another connection using the available controls. Review access before confirming it and remove or disable access when it is no longer needed. Sharing information with one clinician does not automatically give other clinicians access.</p>
 </details>
 <details>
 <summary><span>How do I share a report?</span><i aria-hidden="true"></i></summary>
-<p>Open or create the report, review the full contents, and check important statements against their linked source documents. When the report is ready, choose the sharing option and select the intended recipient or secure-link settings available to you. Share only the information needed for that specific conversation or care purpose. You can review active access and disable a shared link when it is no longer required.</p>
+<p>Open or create the report, review the full contents, and check important statements against any available source links. When the report is ready, choose the sharing option and select the intended recipient or secure-link settings available to you. Share only the information needed for that specific conversation or care purpose. You can review active access and disable a shared link when it is no longer required.</p>
 </details>
 <details>
 <summary><span>How is my health information protected?</span><i aria-hidden="true"></i></summary>
-<p>Your files are encrypted during transfer and while stored. Access is limited through authenticated accounts and sharing controls. You can hide identifying information, process a file without retaining the original source, choose a storage region, and control access to individual reports. No online service can remove every risk. Use a secure device, protect your account credentials, and review access regularly. Read the <a href="privacy.html">Privacy Notice</a> for more information about data collection, use, retention, and your choices.</p>
+<p>Your files are encrypted during transfer and while stored. Access is limited through authenticated accounts and sharing controls. Clinicians can create an anonymized patient record using an alias and birth year. The upload workflow can also process a file without retaining the original source, and access to shared reports can be managed or revoked. Regional storage options may be available for particular plans or deployments. No online service can remove every risk. Use a secure device, protect your account credentials, and review access regularly. Read the <a href="privacy.html">Privacy Notice</a> for more information about data collection, use, retention, and your choices.</p>
 </details>
 </div>
 </div>

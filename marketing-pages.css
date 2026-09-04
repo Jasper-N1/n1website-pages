@@ -330,6 +330,9 @@ body.marketing-page { color: var(--ink); background: var(--cream); }
 .pricing-faq-list details[open] summary { color: var(--wine); }
 .pricing-faq-list details[open] summary i { background: rgba(55, 99, 97, .12); transform: rotate(45deg); }
 .pricing-faq-list details > p { max-width: 720px; margin: -2px 0 0; padding: 0 54px 26px 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
+.pricing-faq-list details > p + p { margin-top: -14px; }
+.pricing-faq-list details > ul { max-width: 720px; margin: -14px 0 24px; padding: 0 54px 0 22px; color: var(--muted); font-size: 14px; line-height: 1.7; }
+.pricing-faq-list details > ul + p { margin-top: -10px; }
 .pricing-faq-list details > p a { color: var(--wine); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
 
 /* PLACEHOLDER PRICING. Every number on pricing.html is indicative and none of it
@@ -633,6 +636,7 @@ body.marketing-page { color: var(--ink); background: var(--cream); }
   .pricing-faq-head h2 { font-size: 42px; }
   .pricing-faq-list summary { min-height: 72px; gap: 18px; font-size: 17px; }
   .pricing-faq-list details > p { padding: 0 44px 24px 0; font-size: 13px; }
+  .pricing-faq-list details > ul { padding-right: 44px; font-size: 13px; }
   .workflow-step h3 { margin-top: 25px; }
   .product-page .workflow-step { min-height: 0; display: grid; grid-template-columns: minmax(0,1fr) 104px; grid-template-rows: auto auto 1fr; gap: 0 16px; padding: 24px; }
   .product-page .workflow-step > span, .product-page .workflow-step h3, .product-page .workflow-step p { grid-column: 1; }
