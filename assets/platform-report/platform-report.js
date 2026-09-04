@@ -1,2 +1,2 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./public-report-boot-CUjigI0O.js","./preload-helper-PPVm8Dsz.js","./platform-report.css"])))=>i.map(i=>d[i]);
-import{_ as e}from"./preload-helper-PPVm8Dsz.js";const i=new URL(import.meta.url).origin,n=window;n.env={API_URL:`${i}/unused-api`,AUTH_URL:`${i}/unused-auth`,BILLING_URL:`${i}/unused-billing`,...n.env??{}};await e(()=>import("./public-report-boot-CUjigI0O.js"),__vite__mapDeps([0,1,2]),import.meta.url);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./public-report-boot-ClMNRCGJ.js","./preload-helper-PPVm8Dsz.js","./platform-report.css"])))=>i.map(i=>d[i]);
+import{_ as e}from"./preload-helper-PPVm8Dsz.js";const i=new URL(import.meta.url).origin,n=window;n.env={API_URL:`${i}/unused-api`,AUTH_URL:`${i}/unused-auth`,BILLING_URL:`${i}/unused-billing`,...n.env??{}};await e(()=>import("./public-report-boot-ClMNRCGJ.js"),__vite__mapDeps([0,1,2]),import.meta.url);

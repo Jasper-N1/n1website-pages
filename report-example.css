@@ -15,14 +15,15 @@ body.marketing-page.example-report-page { color: #202523; background: #e5ecea; }
 @media (min-width: 1300px) {
   .example-report-document [data-a2ui-nav-list] {
     right: auto;
-    left: max(12px, calc(50% - var(--a2-measure) / 2 - 164px));
-    width: 144px;
-    max-width: 144px;
+    left: max(8px, calc(50% - var(--a2-measure) / 2 - 166px));
+    width: 156px;
+    max-width: 156px;
   }
   .example-report-document [data-a2ui-nav-link] {
+    box-sizing: border-box;
     position: relative;
     padding-left: 30px;
-    overflow-wrap: normal;
+    overflow-wrap: anywhere;
     word-break: normal;
   }
   .example-report-document [data-a2ui-nav-link]::before {
