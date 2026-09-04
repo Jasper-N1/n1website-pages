@@ -114,7 +114,7 @@
       success.focus();
     } catch (_error) {
       status.className = 'contact-status error';
-      status.innerHTML = 'We could not send the form. Your details are still here—try again, or email <a href="mailto:hello@n1.care">hello@n1.care</a> without patient information.';
+      status.innerHTML = 'We could not send the form. Your details are still here—try again, or email <a href="mailto:longevity@n1.care">longevity@n1.care</a> without patient information.';
       submitButton.disabled = false;
       submitButton.textContent = originalLabel;
     } finally {
