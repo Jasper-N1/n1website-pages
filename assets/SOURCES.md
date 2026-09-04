@@ -67,6 +67,8 @@ where they appear and must not be presented as photographs of the quoted people.
 | `patient-story-discuss.jpg` | [A doctor talking to a patient, Cedric Fauntleroy / Pexels](https://www.pexels.com/photo/a-doctor-talking-to-a-patient-4266940/) |
 | `patient-story-meditation.jpg` | [Woman meditating outdoors, Los Muertos Crew / Pexels](https://www.pexels.com/photo/woman-meditating-outdoors-8391701/) |
 | `patient-story-sport.jpg` | [Person jogging outdoors, Daniel Reche / Pexels](https://www.pexels.com/photo/person-jogging-3601094/) |
+| `clinician-story-notebook-care.webp` | [Person taking notes during a conversation, Polina Tankilevitch / Pexels](https://www.pexels.com/photo/3958372/) |
+| `clinician-doctor-warm-response-outpaint.webp` | AI-assisted landscape extension of [Doctor speaking with a patient, cottonbro studio / Pexels](https://www.pexels.com/photo/7578806/) |
 
 The specific Pexels URL and creator for this one were never recorded — **confirm the
 source before this goes public.** It is used decoratively (`alt=""`) and captioned as
