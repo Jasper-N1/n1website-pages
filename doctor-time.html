@@ -3250,7 +3250,7 @@
       <div class="footer-top">
         <div class="footer-brand">
           <span class="logo" aria-hidden="true"></span>
-          <p class="footer-tagline">One patient record. More time for care.</p>
+          <p class="footer-tagline">Put health files in order. See what changed. Check each fact at its source.</p>
         </div>
         <nav class="footer-cols" aria-label="Footer">
           <div class="footer-col">
@@ -3658,13 +3658,19 @@
 
       function cursorPoint(element, xRatio, yRatio) {
         var productRect = product.getBoundingClientRect();
+        // getBoundingClientRect() returns post-zoom pixels, while translate()
+        // consumes the walkthrough's local, pre-zoom coordinates. Convert the
+        // measured target back into that coordinate space so clicks stay aligned
+        // when the compact desktop layout applies zoom: .88.
+        var scaleX = product.offsetWidth ? productRect.width / product.offsetWidth : 1;
+        var scaleY = product.offsetHeight ? productRect.height / product.offsetHeight : 1;
         if (!element || typeof element.getBoundingClientRect !== 'function') {
-          return { x: productRect.width / 2, y: productRect.height / 2 };
+          return { x: product.offsetWidth / 2, y: product.offsetHeight / 2 };
         }
         var rect = element.getBoundingClientRect();
         return {
-          x: rect.left - productRect.left + rect.width * (xRatio == null ? .72 : xRatio),
-          y: rect.top - productRect.top + rect.height * (yRatio == null ? .55 : yRatio)
+          x: (rect.left - productRect.left + rect.width * (xRatio == null ? .72 : xRatio)) / scaleX,
+          y: (rect.top - productRect.top + rect.height * (yRatio == null ? .55 : yRatio)) / scaleY
         };
       }
 
