@@ -1229,10 +1229,13 @@
 .patient-platform-list > header h3 { color: #202725; font-size: 25px; letter-spacing: -.035em; }
 .patient-platform-list > header span { margin: 0; color: #71807b; font-size: 8px; letter-spacing: 0; text-transform: none; }
 .patient-platform-list > header > button,.patient-platform-action-menu > button { min-height: 34px; padding: 0 12px; border: 1px solid #a9c8c0; border-radius: 7px; color: #315f5b; background: #fff; font: 800 9px/1 var(--sans); }
+.patient-platform-action-menu > button { display: inline-flex; align-items: center; gap: 5px; }
+.patient-platform-action-menu > button svg { width: 10px; height: 10px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .patient-platform-action-menu { position: relative; z-index: 4; }
 .patient-platform-action-menu > aside { position: absolute; top: 39px; right: 0; width: 154px; overflow: hidden; padding: 5px; border: 1px solid #d5dfdc; border-radius: 9px; background: #fff; box-shadow: 0 12px 32px -16px rgba(29,49,47,.42); }
 .patient-platform-action-menu aside > * { width: 100%; min-height: 34px; display: flex; align-items: center; gap: 8px; padding: 0 9px; border: 0; border-radius: 6px; color: #40504b; background: transparent; font: 500 8.5px/1 var(--sans); text-align: left; }
 .patient-platform-action-menu aside > button { color: #2f625d; cursor: pointer; }
+.patient-platform-action-menu aside > button svg { width: 15px; height: 15px; flex: 0 0 15px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 .patient-platform-action-menu aside > button:hover { background: #eef6f4; }
 .patient-platform-action-menu aside b { font-size: inherit; }
 .patient-platform-toolbar { display: grid; grid-template-columns: minmax(190px,1fr) auto auto; gap: 9px; margin-bottom: 12px; }
@@ -1664,7 +1667,7 @@
   .product-hero-story p { max-width: 490px; margin-top: 15px; font-size: 13px; }
   .product-hero-story ul { grid-template-columns: 1fr; gap: 6px; margin-top: 15px; }
   .product-hero-story li { font-size: 10px; }
-  .product-hero-window { top: clamp(245px,27svh,270px); width: 100%; height: min(420px,52svh); margin: 0; border-radius: 15px; transform-origin: 50% 36%; }
+  .product-hero-window { top: clamp(190px,24svh,225px); width: 100%; height: min(520px,calc(100svh - 205px)); min-height: 420px; margin: 0; border-radius: 15px; transform-origin: 50% 36%; }
   .product-page .product-hero + .page-section.paper { margin-top: 0; padding-top: 56px; border-radius: 22px 22px 0 0; }
   .product-hero-bar { height: 55px; grid-template-columns: 1fr auto; padding: 0 14px; }
   .product-hero-brand { font-size: 22px; }
@@ -1673,9 +1676,10 @@
   .product-hero-person { padding: 5px 7px; }
   .product-hero-person > i { width: 26px; height: 26px; }
   .product-hero-app { height: calc(100% - 55px); grid-template-columns: 72px minmax(0,1fr); }
-  .product-hero-sidebar { padding: 15px 7px; }
-  .product-hero-sidebar span { margin: 10px 6px 5px; font-size: 5px; }
-  .product-hero-sidebar b { min-height: 30px; padding: 0 6px; font-size: 6px; }
+  .product-hero-sidebar { padding: 10px 7px; overflow: hidden; }
+  .product-hero-sidebar span { margin: 5px 6px 3px; font-size: 5px; line-height: 1.1; }
+  .product-hero-sidebar b { min-height: 26px; margin-bottom: 0; padding: 0 6px; font-size: 6px; }
+  .product-hero-sidebar b svg { width: 12px; height: 12px; flex-basis: 12px; }
   .product-hero-sidebar b::before { width: 12px; }
   .product-hero-dashboard { padding: 18px 12px; }
   .product-hero-records { padding: 18px 12px; }

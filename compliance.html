@@ -3,12 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex, nofollow">
-<meta http-equiv="refresh" content="0; url=index.html">
 <meta name="theme-color" content="#376361">
-<title>Compliance and control — n1.care</title>
-<meta name="description" content="See how n1 keeps clinical findings connected to sources and sharing under clinician control.">
-<script>location.replace('index.html');</script>
+<title>Security and compliance — n1.care</title>
+<meta name="description" content="How n1 protects health records: encryption, regional compliance (GDPR, HIPAA), access controls, audits, AI data-use commitments, and clinician-controlled sharing.">
 <link rel="icon" href="assets/n1-logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="art-directions.css">
 <link rel="stylesheet" href="marketing-pages.css">
@@ -17,90 +14,191 @@
 <link rel="stylesheet" href="smoked-birch-copper-patina.css">
 <script defer src="marketing-pages.js">
 </script>
+<style>
+.cert-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.cert-grid article { padding: 22px 22px 24px; border: 1px solid var(--line); border-radius: var(--n1-radius-4xl); background: var(--paper); }
+.cert-grid article > span { display: block; margin-bottom: 10px; color: #2f7773; font-size: 11px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+.cert-grid h3 { margin: 0 0 8px; font-size: 17px; }
+.cert-grid p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.55; }
+.cert-scope-note { margin-top: 18px; color: var(--muted); font-size: 12px; }
+@media (max-width: 1100px) { .cert-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 620px) { .cert-grid { grid-template-columns: 1fr; } }
+</style>
 </head>
 <body class="tonal marketing-page compliance-page">
 <a class="skip-link" href="#main">Skip to content</a>
 <script src="site-header.js"></script>
 <main id="main">
+
+<!-- 1. HERO — one-sentence commitment. Every reviewed trust page opens this way. -->
 <header class="page-hero">
 <div class="shell page-hero-grid">
 <div>
-<span class="page-kicker">Compliance and control</span>
-<h1>Check the source. Check the report. <em>Control access.</em>
+<span class="page-kicker">Security &amp; compliance</span>
+<h1>Built to protect <em>health information.</em>
 </h1>
 </div>
 <div class="page-hero-copy">
-<p>Choose how n1 treats source files. Keep each fact tied to its page. Pick which checked report can be shared.</p>
-<div class="page-actions">
-<a class="button" href="#evidence">See a finding and its source</a>
-<a class="button secondary" href="contact.html?intent=compliance">Ask a security question</a>
-</div>
+<p>Security and privacy are designed into every part of n1 — from how records are encrypted and who can access them, to how AI is allowed to use them.</p>
 </div>
 </div>
 </header>
-<section class="page-section paper" id="evidence">
-<div class="shell">
-<div class="section-head split">
-<div>
-<span class="page-kicker">Check the source</span>
-<h2>Open the source <em>behind each fact.</em>
-</h2>
-</div>
-<p>See the file, page, date, and lab range.</p>
-</div>
-<div class="compliance-demo">
-<div class="compliance-finding">
-<small>Finding</small>
-<h3>The latest HbA1c result rose to 6.1%.</h3>
-</div>
-<div class="compliance-source">
-<small>Source page · page 4</small>
-<div class="source-page">
-<div class="source-page-head">
-<span>Laboratory report · 2026-Jun-18</span>
-<span>Page 4 of 7</span>
-</div>
-<p>HbA1c <mark>6.1%</mark> · lab range under 5.7%.</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section class="page-section">
+
+<!-- 2. CERTIFICATIONS BAR — badges directly under the hero. HITRUST is the healthcare anchor cert; list only what is actually held. -->
+<section class="page-section paper" id="certifications">
 <div class="shell">
 <div class="section-head">
-<span class="page-kicker">Control points</span>
-<h2>Two control points. <em>Both yours.</em>
+<span class="page-kicker">Certifications &amp; frameworks</span>
+<h2>Audited against <em>recognized standards.</em>
 </h2>
 </div>
-<div class="compliance-controls">
-<article id="report-review"><span>Report state</span><h3>Draft → Checked → Ready to share</h3><p>Each report starts as a draft. A doctor can check it, edit it, and pick which copy to share.</p></article>
-<article id="sharing-controls"><span>Report link</span><h3>Password · End date · Link use · Turn off</h3><p>Lock a report link with a password. Set an end date, see who opened it, or turn it off. You can also save reports and export patient data.</p></article>
+<div class="cert-grid">
+<article><span>Encryption</span><h3>Encrypted everywhere</h3><p>TLS 1.3 in transit and AES-256 at rest for source records, uploads, and database connections. Documents are accessed only through short-lived signed links that expire automatically.</p></article>
+<article><span>SOC 2</span><h3>SOC 2 Type II hosting</h3><p>All infrastructure runs on hosting certified to SOC 2 Type II, inheriting its physical, environmental, and operational controls.</p></article>
+<article><span>Privacy law</span><h3>Privacy law worldwide</h3><p>Health and genetic data are handled as special-category data under GDPR (EEA, UK, Switzerland). n1 never sells patient data or uses it for targeted advertising, and honors regional rights to access, correction, deletion, and portability. A GDPR Data Processing Agreement (DPA) is available to customers. <a href="privacy.html#regional">Read more →</a></p></article>
+<article><span>HIPAA</span><h3>HIPAA-compliant workflows</h3><p>For deployments where HIPAA applies: BAAs with every service provider and partner that handles PHI on our behalf, and healthcare organizations can enter into a BAA directly with n1.</p></article>
 </div>
-<p class="clinical-boundary">n1 sorts the records you give it, and can draft notes on what they may mean and what to do next. A treating clinician must verify that draft. n1 never makes the clinical decision.</p>
+<p class="cert-scope-note">Certifications and attestations may vary by product, plan, and deployment, and describe the scope in which they were issued. Contact us to confirm what applies to your deployment.</p>
 </div>
 </section>
-<section class="page-section blush">
+
+<!-- 3. SECURITY PROGRAM — control domains with concrete specs. Encryption/access/monitoring specifics are the most-cited concrete claims across all 10 reviewed pages. -->
+<section class="page-section" id="security-program">
 <div class="shell">
 <div class="section-head split">
 <div>
-<span class="page-kicker">Your privacy choices</span>
-<h2>Choose how n1 <em>treats your files.</em>
+<span class="page-kicker">Security program</span>
+<h2>Controls at <em>every layer.</em>
 </h2>
 </div>
-<p>Pick the choice that fits the patient, the task, and the need to view source files again.</p>
+<p>The safeguards applied to every record, account, and report.</p>
 </div>
-<div class="privacy-modes"><article><span>Choice 01</span><h3>Hide personal details</h3><p>Hide names and ID data before AI reads the file.</p></article><article><span>Choice 02</span><h3>Do not store files</h3><p>Let n1 read source files without keeping them on its servers.</p></article><article><span>Choice 03</span><h3>Store files by region</h3><p>Keep files safe in the region you pick when you need them again.</p></article></div>
-<div class="security-table"><div><b>Encryption</b><span>TLS 1.3 in transit and AES-256 at rest</span></div><div><b>PHI access</b><span>Limited to authorized personnel, with access and modification logs</span></div><div><b>HIPAA and agreements</b><span>n1.care is HIPAA compliant. We maintain BAAs with every service provider and partner that handles PHI on our behalf, and healthcare organizations can put a BAA in place with n1.</span></div><div><b>Retention and deletion</b><span>Retention follows the selected mode. In no-record-storage mode, source records are not retained on n1 servers. Separate legal requirements may still apply to account and audit data.</span></div><div><b>Data location</b><span>Encrypted records remain in the storage region selected for the deployment.</span></div><div><b>Infrastructure</b><span>We use hosting certified to SOC 2 Type II.</span></div><div><b>Deployment documentation</b><span>Enterprise onboarding documents the selected region, AI providers, backup procedures, access controls, and incident-response process.</span></div></div>
-<div class="legal-links"><a href="privacy.html">Read the Privacy Notice →</a><a href="terms.html">Read the Terms of Use →</a></div>
+<div class="security-table">
+<div><b>Encryption</b><span>TLS 1.3 in transit — browser traffic and database connections. AES-256 at rest for source records and uploaded files. Document access uses short-lived signed URLs that expire automatically.</span></div>
+<div><b>Access control</b><span>Authenticated accounts with role-based permissions. Access to patient data is limited to authorized personnel, with access and modification logs. Sign-in with Google is supported. Passwords are checked against known breach databases and stored with modern memory-hard hashing.</span></div>
+<div><b>Infrastructure</b><span>Records are stored encrypted on AWS hosting certified to SOC 2 Type II, with the application delivered through Cloudflare. Production and staging are fully separated environments with distinct credentials.</span></div>
+<div><b>Monitoring &amp; logging</b><span>Structured logging with sensitive-value redaction. Security events — sign-ins, session revocations, report-share access — are recorded in dedicated audit trails, with metrics and traces collected through OpenTelemetry.</span></div>
+<div><b>Secure development</b><span>Automated static analysis, secret, dependency, and infrastructure scanning runs on every change, with container images scanned before deployment. Test suites gate releases, and CI uses short-lived, keyless cloud credentials with least-privilege permissions.</span></div>
+<div><b>Organizational security</b><span>Production access is limited to authorized personnel under least-privilege roles. Staff handling of patient data is governed by our privacy and security policies, applicable regional obligations, and the agreements described above.</span></div>
+</div>
 </div>
 </section>
+
+<!-- 5. AI & DATA USE — the differentiating section for health-AI companies (model cards, no-training commitments, human review). -->
+<section class="page-section blush" id="ai-data-use">
+<div class="shell">
+<div class="section-head split">
+<div>
+<span class="page-kicker">AI &amp; data use</span>
+<h2>Clear rules for <em>AI.</em>
+</h2>
+</div>
+<p>What AI is allowed to do with patient information — and what it is not.</p>
+</div>
+<div class="privacy-modes">
+<article><span>No training</span><h3>Your data does not train AI</h3><p>n1 does not use Customer Patient Data to train general-purpose AI models, and does not permit AI providers to do so, unless the customer gives separate, express authorization.</p></article>
+<article><span>Minimum data</span><h3>Only what the task needs</h3><p>The Service sends AI providers the minimum information needed for a task, under service-provider and subprocessor agreements.</p></article>
+<article><span>Human review</span><h3>A clinician decides</h3><p>Qualified human review is required before an output is used in care. n1 supports documentation and preparation — it never makes the clinical decision and is not a diagnostic device.</p></article>
+</div>
+<div class="legal-links"><a href="privacy.html#ai">AI and training in the Privacy Notice →</a></div>
+</div>
+</section>
+
+<!-- 6. DATA CONTROL — retention choices and clinician-controlled sharing (existing verified product behavior). -->
+<section class="page-section paper" id="data-control">
+<div class="shell">
+<div class="section-head split">
+<div>
+<span class="page-kicker">Data control</span>
+<h2>You choose how data <em>is handled.</em>
+</h2>
+</div>
+<p>Access, sharing, export, and deletion stay under user control.</p>
+</div>
+<div class="privacy-modes">
+<article><span>Patient access</span><h3>Clinicians control sharing</h3><p>Each report becomes visible to the patient only when the clinician turns on patient access for it.</p></article>
+<article><span>Export</span><h3>Take your data with you</h3><p>Export biomarkers, diagnoses, medications, and more as CSV or Excel, and download any report as PDF or Word.</p></article>
+<article><span>Deletion</span><h3>Delete your account</h3><p>Patients can delete their account directly from settings, with identity re-verification before anything is removed.</p></article>
+</div>
+<div class="compliance-controls">
+<article><span>Sharing controls</span><h3>Password · End date · View count · Turn off</h3><p>Patients can lock report links with a password, set an end date, see how often a link was viewed, and turn it off at any time.</p></article>
+<article><span>Data requests</span><h3>Access, correction, deletion</h3><p>Regional rights to access, correction, deletion, and portability are honored after verification, as described in the Privacy Notice.</p></article>
+</div>
+</div>
+</section>
+
+<!-- 7. DOCUMENTS & SUBPROCESSORS — evidence on request + vendor transparency. Portal-style trust centers gate SOC reports behind a request flow. -->
+<section class="page-section blush" id="documents">
+<div class="shell">
+<div class="section-head split">
+<div>
+<span class="page-kicker">Documents &amp; subprocessors</span>
+<h2>Evidence <em>on request.</em>
+</h2>
+</div>
+<p>For security reviews, procurement, and vendor assessments.</p>
+</div>
+<div class="security-table">
+<div><b>Available documents</b><span>Security and compliance documentation for vendor assessments — including the hosting SOC 2 Type II attestation, our GDPR Data Processing Agreement (DPA), and answers to security questionnaires — is available on request. Write to <a href="mailto:hello@n1.care">hello@n1.care</a> or use the <a href="contact.html?intent=security">security contact form</a>.</span></div>
+<div><b>Subprocessors</b><span>AWS — cloud hosting and encrypted document storage (handles patient data). Cloudflare — application delivery and TLS (patient data in transit). AI model providers — receive only the minimum data needed per task under service-provider agreements, never for training their models. <a href="privacy.html#ai">Read more →</a> Stripe — payments (no clinical data). Postmark — transactional email (no clinical documents). Google — optional sign-in only.</span></div>
+<div><b>Incident response</b><span>If we identify a reportable breach, we notify affected customers, individuals, or authorities as required by applicable law and contract.</span></div>
+</div>
+</div>
+</section>
+
+<!-- 8. RESPONSIBLE DISCLOSURE & CONTACT — security@ address, response commitment, no-bounty statement. Present on 8 of 10 reviewed pages. -->
+<section class="page-section" id="disclosure">
+<div class="shell">
+<div class="section-head split">
+<div>
+<span class="page-kicker">Report a concern</span>
+<h2>See something? <em>Tell us.</em>
+</h2>
+</div>
+<p>We investigate every report of a potential vulnerability.</p>
+</div>
+<div class="compliance-controls">
+<article><span>Security researchers</span><h3>hello@n1.care</h3><p>Report a suspected vulnerability to <a href="mailto:hello@n1.care">hello@n1.care</a> with steps to reproduce. Do not access, modify, or retain data that is not yours, and do not disrupt the service. We do not operate a bug bounty program.</p></article>
+<article><span>Customers &amp; patients</span><h3>Contact us directly</h3><p>Customers can raise security questions through their n1 contact or the <a href="contact.html?intent=security">security contact form</a>. Patients should contact their healthcare organization first.</p></article>
+</div>
+</div>
+</section>
+
+<!-- 9. FAQ — answers reuse claims already published on the site. -->
+<section class="pricing-faq" aria-labelledby="compliance-faq-title">
+<div class="shell pricing-faq-layout">
+<header class="pricing-faq-head">
+<span class="page-kicker">Security FAQ</span>
+<h2 id="compliance-faq-title">Questions about data protection.</h2>
+<p>Direct answers about compliance, encryption, access, retention, and sharing.</p>
+<a class="text-link" href="contact.html?intent=security">Ask a security question →</a>
+</header>
+<div class="pricing-faq-list">
+<details><summary><span>How is patient data encrypted?</span><i aria-hidden="true"></i></summary><p>Data is encrypted in transit with TLS 1.3 and at rest with AES-256. This covers traffic between the browser and n1, database connections, and stored source records and uploaded files.</p></details>
+<details><summary><span>Who can access patient records?</span><i aria-hidden="true"></i></summary><p>The clinician who uploads records and the patients they grant access to. Within n1, access to patient data is limited to authorized personnel under least-privilege roles, and access and modification are logged. AI providers receive only the minimum data needed for each processing task, under service-provider agreements, and never for training their models.</p></details>
+<details><summary><span>Is patient data used to train AI models?</span><i aria-hidden="true"></i></summary><p>No. n1 does not use Customer Patient Data to train general-purpose AI models, and does not permit an AI provider to use that data to train its general-purpose models, unless the customer gives separate, express authorization.<br><br><a href="privacy.html#ai">Read the AI and training section in our Privacy Notice →</a></p></details>
+<details><summary><span>Where is data stored — does it leave my country?</span><i aria-hidden="true"></i></summary><p>Records are stored encrypted on AWS infrastructure in the United States, certified to SOC 2 Type II. Where cross-border transfer rules apply, recognized safeguards such as standard contractual clauses are used, as described in the Privacy Notice. In-country hosting is not currently offered — contact us to discuss requirements for your jurisdiction.</p></details>
+<details><summary><span>Who owns the data, and how long is it kept?</span><i aria-hidden="true"></i></summary><p>Uploaded records remain your data — n1 processes them only to provide and secure the service, on your instructions. Information is retained only as long as needed to provide the service: patients can delete their account from settings, deletion requests are honored as described in the Privacy Notice, and data can be exported at any time as CSV, Excel, PDF, or Word. Separate legal requirements may still apply to account and audit data.</p></details>
+<details><summary><span>How is report sharing controlled?</span><i aria-hidden="true"></i></summary><p>A report becomes visible to the patient only when the clinician turns on patient access for it. Patients can also share a report by link — locked with a password, given an end date, tracked by view count, and revocable at any time.</p></details>
+<details><summary><span>Do I need patient consent before uploading records?</span><i aria-hidden="true"></i></summary><p>That depends on your jurisdiction and role: as the party providing the records, you are responsible for having the authority to do so — through consent, treatment relationship, or another lawful basis your rules recognize. n1 supports this with BAAs, a DPA, and processing strictly on your instructions.</p></details>
+<details><summary><span>Can I upload de-identified records?</span><i aria-hidden="true"></i></summary><p>Yes. What you upload is under your control — records can be de-identified before upload, and patient profiles can be created under a pseudonym without email or identity verification (a date of birth and sex are required for clinical context). Generated reports also anonymize identifiers in analysis sections: names, providers, and facilities are not referenced in clinical reasoning.</p></details>
+<details><summary><span>How do I verify AI-generated content and catch errors?</span><i aria-hidden="true"></i></summary><p>Supported extracted facts and report findings link back to the original source document and page where source metadata is available, so any statement can be checked against the record it came from. A report that misses the mark can be regenerated with revised instructions, and nothing reaches a patient until the clinician turns on access.</p></details>
+<details><summary><span>Does n1 integrate with our EMR?</span><i aria-hidden="true"></i></summary><p>Not yet for self-service accounts — current accounts use direct file upload (PDF for records; TXT/CSV for raw DNA data). Additional import and export options, including potential EHR/EMR integrations, are in development for enterprise deployments.<br><br><a href="contact.html?intent=enterprise">Discuss integration options →</a></p></details>
+<details><summary><span>Can n1 run on-premises or self-hosted?</span><i aria-hidden="true"></i></summary><p>No — n1 is delivered as a managed cloud service. Enterprise onboarding documents the deployment's access controls, subprocessors, and incident-response process for institutional review.</p></details>
+<details><summary><span>Which privacy laws does n1 comply with in my country?</span><i aria-hidden="true"></i></summary><p>In the EEA, UK, and Switzerland, health and genetic data are treated as special-category data under GDPR, processed with a lawful basis and an additional condition, with cross-border transfer safeguards in place; a Data Processing Agreement (DPA) is available to customers. In the US, n1 supports HIPAA workflows and honors state privacy rights to access, correction, deletion, and portability — and never sells patient data or uses it for targeted advertising. For other countries, we work with customers to determine whether additional approvals or agreements are needed.<br><br><a href="privacy.html#regional">Read more →</a></p></details>
+<details><summary><span>Is n1.care HIPAA compliant?</span><i aria-hidden="true"></i></summary><p>Yes, for deployments where HIPAA applies. n1.care supports HIPAA-compliant workflows and maintains Business Associate Agreements (BAAs) with service providers and partners that handle protected health information (PHI) on our behalf. Healthcare organizations can also enter into a BAA directly with n1.<br><br><a href="privacy.html#regional">Read the HIPAA information in our Privacy Notice →</a></p></details>
+<details><summary><span>Can we complete a security review or questionnaire with n1?</span><i aria-hidden="true"></i></summary><p>Yes. We answer security questionnaires and provide available documentation — including the hosting SOC 2 Type II attestation — for procurement and vendor assessments. Write to <a href="mailto:hello@n1.care">hello@n1.care</a> or use the <a href="contact.html?intent=security">security contact form</a>.</p></details>
+</div>
+</div>
+</section>
+
+<!-- 10. CLOSE -->
 <section class="page-close">
 <div class="shell">
 <h2>Check n1 against your rules.</h2>
 <p>Show us how files move through your team. We will answer your questions on data, access, care rules, and launch.</p>
 <div class="page-actions">
-<a class="button" href="contact.html?intent=compliance">Ask for security details</a>
+<a class="button" href="contact.html?intent=security">Ask for security details</a>
 <a class="button secondary" href="contact.html?intent=governance">Talk about care rules</a>
 </div>
 </div>

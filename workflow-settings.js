@@ -291,6 +291,7 @@
         });
         points.forEach(function (point, index) {
           point.classList.toggle('is-settings-active', index === active);
+          point.setAttribute('aria-pressed', index === active ? 'true' : 'false');
         });
         dots.forEach(function (dot, index) { dot.classList.toggle('is-active', index === active); });
         if (status) status.textContent = (active + 1) + ' of ' + panels.length;
@@ -335,6 +336,14 @@
         render();
         scheduleAdvance();
       }
+      points.forEach(function (point, index) {
+        point.addEventListener('click', function () {
+          stop();
+          active = index;
+          render();
+          if (!reduceMotion && inView && !document.hidden) scheduleAdvance();
+        });
+      });
       document.addEventListener('visibilitychange', function () {
         if (document.hidden) stop();
         else start();
