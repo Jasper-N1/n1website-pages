@@ -3,11 +3,7 @@
   if (!script || document.querySelector('[data-n1-site-header]')) return;
 
   const path = location.pathname.split('/').pop() || 'index.html';
-  const current = path.startsWith('clinician-interview-')
-    ? 'clinicians.html'
-    : path === 'report-library.html'
-      ? 'reports.html'
-      : path;
+  const current = path;
   const pricingIsCurrent = current === 'pricing.html' || current === 'pricing-patients.html';
   const links = [
     ['clinicians.html', 'For clinicians'],

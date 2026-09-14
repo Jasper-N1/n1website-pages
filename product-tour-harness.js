@@ -13,7 +13,7 @@
         {
           label: 'Choose files',
           caption: 'Choose supported records together. n1 shows each file before anything is sent.',
-          html: `${head('Medical records · 14 records','Add medical records','PDF clinical documents and supported TXT, CSV or TSV data files.',button('+ Upload records'))}
+          html: `${head('Medical records · 14 records','Add medical records','PDF or image clinical records, plus TXT, CSV or TSV raw genetic data.',button('+ Upload records'))}
             <div class="pth-dropzone"><div><b>Drop records here or choose files</b><small>PDF · TXT · CSV · TSV</small></div></div>
             <div class="pth-card pth-upload-list"><div class="pth-file"><i class="pth-filetype">PDF</i><div><b>example-laboratory-01-mar-2025.pdf</b><small>12 pages · 2.4 MB</small></div><span class="pth-file-state">Ready</span></div><div class="pth-file"><i class="pth-filetype">PDF</i><div><b>consult-note-2025.pdf</b><small>6 pages · 1.1 MB</small></div><span class="pth-file-state">Ready</span></div><div class="pth-file"><i class="pth-filetype">CSV</i><div><b>genetics-export.csv</b><small>Supported raw data</small></div><span class="pth-file-state">Ready</span></div></div>`
         },
