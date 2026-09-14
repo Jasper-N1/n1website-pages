@@ -29,6 +29,8 @@
 .product-page.clinician-product-chapter .product-hero-story .page-kicker { margin-bottom: 20px; color: var(--teal); font-size: 14px; font-weight: 800; letter-spacing: .14em; }
 .product-page.clinician-product-chapter .product-hero-story h2 { font-size: clamp(25px,2.15vw,34px); line-height: 1.08; text-wrap: balance; }
 .clinician-product-chapter .product-hero-story p:empty { display: none; }
+.product-page.clinician-product-chapter .product-hero-story .patent-pending-note { max-width: 260px; margin-top: 18px; padding: 0; border: 0; border-radius: 0; font-size: 9px; font-weight: 750; line-height: 1.45; letter-spacing: .075em; }
+.product-page.clinician-product-chapter .product-hero-story .patent-pending-note a { display: inline; border-bottom: 1px solid currentColor; }
 .clinician-patient-management .patient-showcase { margin-top: 0; }
 @media (min-width: 821px) {
   .clinician-patient-management .patient-showcase-stage { min-height: 720px; }
@@ -237,7 +239,7 @@
 .prepared-story-step.is-active:nth-child(2) .story-extract-start { animation: story-extract-start 7.4s .25s ease-in-out infinite; }
 .prepared-story-step.is-active:nth-child(2) .story-extract-pointer { animation: story-extract-click 7.4s .25s cubic-bezier(.22,1,.36,1) infinite; }
 .prepared-story-step.is-active:nth-child(2) .story-extract-typing { animation: story-extract-typing 7.4s .25s ease-in-out infinite; }
-.prepared-story-step.is-active:nth-child(2) .story-extract-typed { animation: story-extract-type 7.4s .25s steps(32,end) infinite; }
+.prepared-story-step.is-active:nth-child(2) .story-extract-typed { animation: story-extract-type 7.4s .25s steps(23,end) infinite; }
 .prepared-story-step.is-active:nth-child(2) .story-extract-scanbar i { animation: story-extract-progress 7.4s .25s cubic-bezier(.22,.75,.28,1) infinite; }
 .prepared-story-step.is-active:nth-child(2) .story-extract-results { animation: story-extract-results 7.4s .25s ease-in-out infinite; }
 .prepared-story-step.is-active:nth-child(3) .story-change-chart path { stroke-dasharray: 700; animation: story-line-draw 1.35s .2s cubic-bezier(.3,.1,.2,1) both; }
@@ -263,7 +265,7 @@
 @keyframes story-extract-start { 0%,24% { opacity: 1; transform: translateY(0); } 31%,96% { opacity: 0; transform: translateY(-5px); } 100% { opacity: 1; transform: translateY(0); } }
 @keyframes story-extract-click { 0%,7% { opacity: 0; transform: translate(18px,12px) rotate(-20deg); } 13%,19% { opacity: 1; transform: translate(0,0) rotate(-20deg); } 21% { opacity: 1; transform: translate(0,0) rotate(-20deg) scale(.78); } 24%,100% { opacity: 0; transform: translate(0,0) rotate(-20deg) scale(.78); } }
 @keyframes story-extract-typing { 0%,25% { opacity: 0; transform: translateY(6px); } 33%,59% { opacity: 1; transform: translateY(0); } 66%,100% { opacity: 0; transform: translateY(-5px); } }
-@keyframes story-extract-type { 0%,29% { width: 0; } 52%,100% { width: 31ch; } }
+@keyframes story-extract-type { 0%,29% { width: 0; } 52%,100% { width: 23ch; } }
 @keyframes story-extract-progress { 0%,29% { width: 0; } 60%,100% { width: 100%; } }
 @keyframes story-extract-results { 0%,60% { opacity: 0; transform: translateY(7px); } 69%,94% { opacity: 1; transform: translateY(0); } 100% { opacity: 0; transform: translateY(-4px); } }
 @keyframes story-control-in { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
@@ -575,12 +577,12 @@
     <div class="shell product-hero-inner">
       <div class="product-hero-copy">
         <span class="product-page-name">How it works</span>
-        <h2 class="product-hero-title-heading" id="clinician-product-animation-title">From records to clarity.</h2>
+        <h2 class="product-hero-title-heading" id="clinician-product-animation-title">From medical documents to clinical analysis.</h2>
       </div>
       <div class="product-hero-story">
         <span class="page-kicker">How it works</span>
-        <h2>From records to clarity.</h2>
-        <p></p>
+        <h2>From medical documents to clinical analysis.</h2>
+        <p>Upload supported records. n1 extracts clinical data, organizes the history, and prepares reports that bring findings, trends, and questions into view for professional review.</p>
         <p class="patent-pending-note"><a href="patents.html">Powered by patent-pending multi-agent analysis technology →</a></p>
       </div>
       <div class="product-hero-window" aria-hidden="true">
@@ -720,7 +722,7 @@
       <div class="shell tonal-patterns-grid">
         <div class="tonal-patterns-copy">
           <p class="eyebrow">Built around your workflow</p>
-          <h2 id="workflow-settings-title">Set it up exactly<br><em>how you work.</em></h2>
+          <h2 id="workflow-settings-title">Tailor the report to<br><em>your clinical approach.</em></h2>
           <ul class="tonal-check-list">
             <li><button type="button" data-settings-step="0" aria-pressed="false"><span class="tonal-check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="currentColor" opacity=".16"></circle><path d="M4 8.4l2.6 2.6L12 5.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Add instructions for all your patients in one go</button></li>
             <li><button type="button" data-settings-step="1" aria-pressed="false"><span class="tonal-check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="currentColor" opacity=".16"></circle><path d="M4 8.4l2.6 2.6L12 5.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Choose conventional or SI units</button></li>
@@ -847,8 +849,8 @@
     </div>
     <header class="whitelabel-copy">
       <p class="eyebrow">White-label reports</p>
-      <h2 id="whitelabel-title">Your brand.<br>Your reports.<br>Your patient experience.</h2>
-      <p>Present approved reports under your practice name, colors and patient-facing domain. Edit every report before sharing, and manage any patient billing through your existing practice workflow.</p>
+      <h2 id="whitelabel-title">Present reviewed reports under your practice’s brand.</h2>
+      <p>Explore the available branding options for the report and patient experience. Confirm the supported elements, plan requirements, and patient-facing workflow before activating practice branding.</p>
       <ul class="whitelabel-points">
         <li><b>Practice billing</b><span>Offer reports within your services while keeping pricing and patient charges in your existing billing workflow.</span></li>
         <li><b>Your reports</b><span>Edit the content and present every approved report under your practice brand.</span></li>
@@ -861,7 +863,7 @@
 <section class="clinician-voices" id="clinician-voices" aria-labelledby="clinician-voices-title">
 <div class="shell">
 <header class="voices-heading">
-<div><p class="eyebrow">Clinician testimonials</p><h2 id="clinician-voices-title">What clinicians say after using n1.care with their own patients.</h2></div>
+<div><p class="eyebrow">Clinician testimonials</p><h2 id="clinician-voices-title">Clinical experience, in their own words.</h2></div>
 </header>
 <div class="clinician-quote-trio">
 <article class="clinician-quote-card"><figure><img class="testimonial-dannette" src="assets/testimonial-dannette-kallay-wide.webp" alt="Dr Dannette Kallay" width="1537" height="1023" loading="lazy" decoding="async"></figure><blockquote><p>n1.care’s platform consolidates patient records into clean, organized reports that highlight patterns of dysfunction and potential health risks. It allows me to track biomarker trends and prioritize care efficiently, without spending excessive amounts of time manually synthesizing data.</p><footer><cite>Dannette Kallay, MD</cite></footer></blockquote></article>

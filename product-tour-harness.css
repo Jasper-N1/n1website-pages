@@ -1196,6 +1196,44 @@
   .product-hero-native-motion span,.product-hero-native-motion strong { font-size: 11px; }
 }
 
+/* Medication history mirrors the application's dated timeline rather than reducing
+   treatment history to a static inventory table. */
+.hero-medication-timeline { padding: 14px 16px 12px; color: #25322f; }
+.hero-medication-tools { display: flex; align-items: center; gap: 7px; margin-bottom: 12px; }
+.hero-medication-tools > span { min-width: 180px; flex: 1; padding: 8px 10px; border: 1px solid #d7e0dd; border-radius: 7px; color: #7a8581; background: #fff; font-size: 8px; }
+.hero-medication-tools > div { display: flex; overflow: hidden; border: 1px solid #d7e0dd; border-radius: 7px; background: #fff; }
+.hero-medication-tools > div :is(b,span),.hero-medication-tools > button { padding: 7px 9px; border: 0; color: #67736f; background: transparent; font: 700 7px var(--sans); }
+.hero-medication-tools .is-selected { color: #244b49; background: #e2efec; }
+.hero-medication-tools > button { border: 1px solid #d7e0dd; border-radius: 7px; background: #fff; }
+.hero-medication-axis,.hero-medication-rows article { display: grid; grid-template-columns: minmax(118px,.9fr) minmax(260px,2.35fr) minmax(150px,1.15fr); }
+.hero-medication-axis { min-height: 42px; align-items: end; border: 1px solid #dfe6e4; border-bottom: 0; border-radius: 9px 9px 0 0; color: #75817d; background: #f8faf9; }
+.hero-medication-axis > div:nth-child(2) { position: relative; height: 100%; border-inline: 1px solid #e1e7e5; }
+.hero-medication-axis > div:nth-child(2) i { position: absolute; bottom: 7px; font-size: 6px; font-style: normal; transform: translateX(-50%); }
+.hero-medication-axis > div:nth-child(2) em { position: absolute; top: 5px; padding: 2px 5px; border-radius: 999px; color: #244b49; background: #dfeeea; font-size: 5px; font-style: normal; font-weight: 800; transform: translateX(-100%); }
+.hero-medication-axis > div:last-child { display: grid; grid-template-columns: repeat(3,1fr); padding: 0 8px 8px; }
+.hero-medication-axis > div:last-child i { font-size: 5px; font-style: normal; font-weight: 800; letter-spacing: .04em; }
+.hero-medication-rows { overflow: hidden; border: 1px solid #dfe6e4; border-radius: 0 0 9px 9px; background: #fff; }
+.hero-medication-rows article { min-height: 67px; border-top: 1px solid #e8eceb; }
+.hero-medication-rows article:first-child { border-top: 0; }
+.hero-medication-rows article > header { display: flex; flex-direction: column; justify-content: center; padding: 9px 12px; }
+.hero-medication-rows article > header b { font-size: 8px; }
+.hero-medication-rows article > header small { margin-top: 2px; color: #6c7874; font-size: 6px; }
+.hero-medication-rows article > header u { margin-top: 5px; color: #2f7773; font-size: 5px; text-decoration: none; }
+.hero-medication-track { position: relative; overflow: hidden; border-inline: 1px solid #edf0ef; background: #fbfcfc; }
+.hero-medication-track > i { position: absolute; inset-block: 0; width: 1px; background: #e2e8e6; }
+.hero-medication-track .year-2023 { left: 4%; }.hero-medication-track .year-2024 { left: 31%; }.hero-medication-track .year-2025 { left: 58%; }.hero-medication-track .today { left: 91%; background: #8ebeb7; }
+.hero-medication-track .bar { position: absolute; top: 22px; left: var(--start); width: 0; height: 22px; display: flex; align-items: center; overflow: hidden; border-radius: 5px; color: #fff; background: #376361; box-shadow: 0 4px 10px rgba(36,75,73,.16); animation: hero-medication-bar-in .8s .2s cubic-bezier(.22,.78,.25,1) forwards; }
+.hero-medication-track .bar.is-stopped { background: #98a6a2; }
+.hero-medication-track .bar em { padding-left: 8px; font-size: 6px; font-style: normal; font-weight: 750; white-space: nowrap; }
+.hero-medication-rows article > footer { display: grid; grid-template-columns: repeat(3,1fr); align-items: center; padding: 8px; }
+.hero-medication-rows article > footer :is(time,b) { color: #5d6965; font-size: 5.5px; }
+.hero-medication-rows article > footer b { width: fit-content; padding: 3px 5px; border-radius: 999px; color: #22654e; background: #e4f4eb; }
+.hero-medication-rows article > footer b.is-stopped { color: #64706c; background: #edf0ef; }
+.hero-medication-legend { display: flex; align-items: center; gap: 12px; padding: 9px 2px 0; color: #65716d; font-size: 5.5px; }
+.hero-medication-legend span { display: flex; align-items: center; gap: 4px; }.hero-medication-legend span i { width: 7px; height: 7px; border-radius: 2px; background: #376361; }.hero-medication-legend span:nth-child(2) i { background: #98a6a2; }.hero-medication-legend small { margin-left: auto; font-size: 5.5px; }
+@keyframes hero-medication-bar-in { to { width: var(--length); } }
+@media (max-width:720px) { .hero-medication-axis,.hero-medication-rows article { grid-template-columns: 104px minmax(185px,1fr); }.hero-medication-axis > div:last-child,.hero-medication-rows article > footer { display:none; }.hero-medication-tools > div { display:none; }.hero-medication-tools > span { min-width:0; }.hero-medication-legend small { display:none; } }
+
 /* Patient management walkthrough — a reduced, platform-accurate rendering of
    the React application. Kept code-native so the demo remains crisp at every
    viewport and can show real click states instead of playing a screen capture. */

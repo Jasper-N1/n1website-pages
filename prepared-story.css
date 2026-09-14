@@ -160,7 +160,7 @@
 .prepared-story-step.is-active:nth-child(2) .story-extract-start { animation: story-extract-start 7.4s .25s ease-in-out infinite; }
 .prepared-story-step.is-active:nth-child(2) .story-extract-pointer { animation: story-extract-click 7.4s .25s cubic-bezier(.22,1,.36,1) infinite; }
 .prepared-story-step.is-active:nth-child(2) .story-extract-typing { animation: story-extract-typing 7.4s .25s ease-in-out infinite; }
-.prepared-story-step.is-active:nth-child(2) .story-extract-typed { animation: story-extract-type 7.4s .25s steps(32,end) infinite; }
+.prepared-story-step.is-active:nth-child(2) .story-extract-typed { animation: story-extract-type 7.4s .25s steps(23,end) infinite; }
 .prepared-story-step.is-active:nth-child(2) .story-extract-scanbar i { animation: story-extract-progress 7.4s .25s cubic-bezier(.22,.75,.28,1) infinite; }
 .prepared-story-step.is-active:nth-child(2) .story-extract-results { animation: story-extract-results 7.4s .25s ease-in-out infinite; }
 .prepared-story-step.is-active:nth-child(3) .story-change-chart path { stroke-dasharray: 700; animation: story-line-draw 1.35s .2s cubic-bezier(.3,.1,.2,1) both; }
@@ -186,7 +186,7 @@
 @keyframes story-extract-start { 0%,24% { opacity: 1; transform: translateY(0); } 31%,96% { opacity: 0; transform: translateY(-5px); } 100% { opacity: 1; transform: translateY(0); } }
 @keyframes story-extract-click { 0%,7% { opacity: 0; transform: translate(18px,12px) rotate(-20deg); } 13%,19% { opacity: 1; transform: translate(0,0) rotate(-20deg); } 21% { opacity: 1; transform: translate(0,0) rotate(-20deg) scale(.78); } 24%,100% { opacity: 0; transform: translate(0,0) rotate(-20deg) scale(.78); } }
 @keyframes story-extract-typing { 0%,25% { opacity: 0; transform: translateY(6px); } 33%,59% { opacity: 1; transform: translateY(0); } 66%,100% { opacity: 0; transform: translateY(-5px); } }
-@keyframes story-extract-type { 0%,29% { width: 0; } 52%,100% { width: 31ch; } }
+@keyframes story-extract-type { 0%,29% { width: 0; } 52%,100% { width: 23ch; } }
 @keyframes story-extract-progress { 0%,29% { width: 0; } 60%,100% { width: 100%; } }
 @keyframes story-extract-results { 0%,60% { opacity: 0; transform: translateY(7px); } 69%,94% { opacity: 1; transform: translateY(0); } 100% { opacity: 0; transform: translateY(-4px); } }
 @keyframes story-control-in { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
