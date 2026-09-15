@@ -12,8 +12,10 @@
 <link rel="stylesheet" href="buttons.css">
 <link rel="stylesheet" href="brand-tokens.css">
 <link rel="stylesheet" href="smoked-birch-copper-patina.css">
+<link rel="stylesheet" href="prepared-story.css?v=20260915-1">
 <script defer src="marketing-pages.js">
 </script>
+<script defer src="prepared-story.js?v=20260915-1"></script>
 <style>
 .compliance-page { --compliance-teal: #236f6b; --compliance-deep: #173936; --compliance-mint: #dcebe7; }
 .compliance-page .nav { position: fixed; height: 64px; padding-top: 12px; color: var(--cream); }
@@ -28,13 +30,62 @@
 .compliance-hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
 .compliance-hero-links { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 26px; font-size: 12px; font-weight: 700; }
 .compliance-hero-links a { color: var(--compliance-deep); border-bottom: 1px solid rgba(23,57,54,.35); }
-.privacy-feature { padding: clamp(78px,9vw,132px) 0; background: #f1efeb; }
-.privacy-feature + .privacy-feature { padding-top: 0; }
+.compliance-showcase { padding: clamp(82px,9vw,132px) 0 0; background: #f7f4ed; }
+.compliance-showcase-head { display: grid; grid-template-columns: 1fr .72fr; gap: clamp(40px,7vw,96px); align-items: end; margin-bottom: 52px; }
+.compliance-showcase-head h2 { max-width: 720px; margin: 0; font: 400 clamp(46px,5.2vw,72px)/.98 var(--serif); letter-spacing: -.04em; }
+.compliance-showcase-head h2 em { color: var(--compliance-teal); font-style: normal; }
+.compliance-showcase-head p { max-width: 520px; margin: 0 0 5px; color: var(--muted); font-size: 16px; line-height: 1.65; }
+.compliance-showcase .prepared-story { height: 540svh; margin-top: 0; }
+.compliance-showcase .prepared-story-step:nth-child(1) { z-index: 6; }
+.compliance-showcase .prepared-story-step:nth-child(2) { z-index: 5; }
+.compliance-showcase .prepared-story-step:nth-child(3) { z-index: 4; }
+.compliance-showcase .prepared-story-step:nth-child(4) { z-index: 3; }
+.compliance-showcase .prepared-story-step:nth-child(5) { z-index: 2; }
+.compliance-showcase .prepared-story-step:nth-child(6) { z-index: 1; }
+.compliance-showcase .prepared-story-state { padding: clamp(20px,2.4vw,30px); }
+.compliance-card-demo { min-height: 178px; display: grid; place-items: center; margin-top: 13px; }
+.compliance-mini-profile { width: 100%; display: grid; gap: 10px; }
+.compliance-mini-toggle { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 13px; border-bottom: 1px solid var(--line); font-size: 11px; font-weight: 800; }
+.compliance-mini-toggle i { width: 42px; height: 23px; position: relative; flex: none; border-radius: 99px; background: #cdd6d3; animation: privacy-toggle-on 6s ease-in-out infinite; }
+.compliance-mini-toggle i::after { width: 17px; height: 17px; position: absolute; top: 3px; left: 3px; border-radius: 50%; background: #fff; box-shadow: 0 2px 6px rgba(0,0,0,.14); content: ''; animation: compliance-mini-knob 6s ease-in-out infinite; }
+.compliance-mini-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.compliance-mini-fields span { min-width: 0; padding: 11px; border: 1px solid #dce3e0; border-radius: 9px; background: #fff; }
+.compliance-mini-fields small,.compliance-mini-fields b { display: block; }.compliance-mini-fields small { color: #818986; font-size: 7px; text-transform: uppercase; }.compliance-mini-fields b { margin-top: 4px; overflow: hidden; color: #26302d; font-size: 9px; text-overflow: ellipsis; white-space: nowrap; }
+.compliance-mini-fields b::after { color: var(--compliance-deep); content: attr(data-private); animation: compliance-private-label 6s steps(1,end) infinite; }
+.compliance-mini-fields b > i { font-style: normal; animation: compliance-public-label 6s steps(1,end) infinite; }
+.compliance-delete-demo { width: 100%; display: grid; gap: 16px; }
+.compliance-delete-file { display: grid; grid-template-columns: 36px 1fr auto; gap: 10px; align-items: center; padding: 13px; border: 1px solid #d8dfdc; border-radius: 11px; background: #fff; animation: source-file-remove 6s ease-in-out infinite; }
+.compliance-delete-file i { width: 36px; height: 40px; display: grid; place-items: center; border-radius: 7px; color: #fff; background: #b76c58; font: 800 7px var(--sans); }
+.compliance-delete-file b,.compliance-delete-file small { display: block; }.compliance-delete-file b { font-size: 10px; }.compliance-delete-file small { margin-top: 3px; color: var(--muted); font-size: 8px; }.compliance-delete-file > span:last-child { color: var(--compliance-teal); font-size: 8px; font-weight: 800; }
+.compliance-delete-track { height: 5px; overflow: hidden; border-radius: 99px; background: #d8e4e0; }.compliance-delete-track i { width: 100%; height: 100%; display: block; border-radius: inherit; background: #48a9a6; transform-origin: left; animation: source-progress 6s ease-in-out infinite; }
+.compliance-delete-result { padding: 14px; border: 1px solid #bcd5cf; border-radius: 10px; color: #22654e; background: #edf6f3; font-size: 9px; font-weight: 800; opacity: 0; transform: translateY(7px); animation: source-result-in 6s ease-in-out infinite; }
+.compliance-access-demo { width: 100%; display: grid; gap: 10px; }
+.compliance-access-report { padding: 16px; border: 1px solid #d9e2df; border-radius: 12px; background: #fff; }
+.compliance-access-report span { color: #61736e; font-size: 8px; text-transform: uppercase; }.compliance-access-report b { display: block; margin-top: 8px; font: 400 20px var(--serif); }
+.compliance-access-setting { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px; border-radius: 10px; color: #40504c; background: #e8f2ef; font-size: 9px; font-weight: 800; }
+.compliance-access-setting i { width: 18px; height: 18px; display: grid; place-items: center; border-radius: 50%; color: #fff; background: var(--compliance-teal); font-style: normal; opacity: 0; transform: scale(.7); animation: trust-check 6s ease-in-out infinite; }
+.compliance-access-setting:nth-child(3) i { animation-delay: 1s; }
+.compliance-protection-demo { width: 100%; display: grid; gap: 12px; }
+.compliance-protection-route { display: grid; grid-template-columns: 1fr 42px 1fr; gap: 10px; align-items: center; }
+.compliance-protection-node { min-height: 64px; display: grid; place-items: center; padding: 10px; border: 1px solid #d7e1de; border-radius: 11px; color: #334440; background: #fff; font-size: 9px; font-weight: 800; text-align: center; }
+.compliance-protection-path { height: 2px; position: relative; overflow: visible; background: #b7ceca; }
+.compliance-protection-path::after { width: 8px; height: 8px; position: absolute; top: -3px; left: 0; border-radius: 50%; background: #48a9a6; content: ''; animation: compliance-route 2.8s ease-in-out infinite; }
+.compliance-protection-status { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 14px; border-radius: 10px; color: #315e5a; background: #e8f2ef; font-size: 9px; font-weight: 800; }
+.compliance-protection-status i { font-style: normal; }
+.compliance-control-list { width: 100%; display: grid; gap: 9px; }
+.compliance-control-list span { display: flex; align-items: center; justify-content: space-between; gap: 14px; min-height: 42px; padding: 0 13px; border: 1px solid #d9e2df; border-radius: 10px; color: #40504c; background: #fff; font-size: 9px; font-weight: 800; }
+.compliance-control-list i { width: 19px; height: 19px; display: grid; place-items: center; flex: none; border-radius: 50%; color: #fff; background: var(--compliance-teal); font-style: normal; opacity: 0; animation: trust-check 6s ease-in-out infinite; }
+.compliance-control-list span:nth-child(2) i { animation-delay: .8s; }.compliance-control-list span:nth-child(3) i { animation-delay: 1.6s; }
+@keyframes compliance-route { 0% { left:0;opacity:0 } 18%,82% { opacity:1 } 100% { left:calc(100% - 8px);opacity:0 } }
+@keyframes compliance-mini-knob { 0%,18%,88%,100% { transform:none } 30%,76% { transform:translateX(19px) } }
+@keyframes compliance-public-label { 0%,22%,82%,100% { display:inline } 32%,74% { display:none } }
+@keyframes compliance-private-label { 0%,22%,82%,100% { content:'' } 32%,74% { content:attr(data-private) } }
+.privacy-feature { padding: clamp(88px,10vw,148px) 0; position: relative; overflow: hidden; }
 .privacy-feature-grid { display: grid; grid-template-columns: minmax(0,1.08fr) minmax(360px,.92fr); gap: clamp(56px,7vw,112px); align-items: center; }
 .privacy-feature.is-reversed .privacy-feature-visual { order: 2; }
-.privacy-feature-visual { min-height: 560px; display: grid; place-items: center; padding: clamp(28px,4vw,56px); overflow: hidden; border-radius: var(--n1-radius-4xl); background: #f8dfce; background-image: repeating-radial-gradient(circle at 50% 50%,transparent 0 52px,rgba(112,76,66,.09) 53px 54px); }
+.privacy-feature-visual { min-height: 560px; display: grid; place-items: center; padding: clamp(28px,4vw,56px); position: relative; overflow: hidden; }
 .privacy-feature-copy .page-kicker { margin-bottom: 24px; }
-.privacy-feature-copy h2 { max-width: 600px; margin: 0; font: 400 clamp(52px,5.2vw,76px)/.98 var(--serif); letter-spacing: -.045em; }
+.privacy-feature-copy h2 { max-width: 570px; margin: 0; font: 400 clamp(48px,4.8vw,70px)/.98 var(--serif); letter-spacing: -.045em; }
 .privacy-feature-copy h2 em { display: block; color: var(--compliance-teal); font-style: italic; }
 .privacy-feature-copy > p { max-width: 570px; margin: 28px 0 0; color: var(--muted); font-size: 17px; line-height: 1.65; }
 .privacy-feature-list { display: grid; gap: 18px; margin: 30px 0 0; padding: 0; list-style: none; }
@@ -50,9 +101,30 @@
 .privacy-fields { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; margin-top: 22px; }.privacy-field { min-height: 64px; padding: 12px 14px; border: 1px solid #dce3e0; border-radius: 10px; background: #fff; }.privacy-field b { position: relative; overflow: hidden; }.privacy-field b::after { position: absolute; inset: 0; color: var(--compliance-deep); background: #fff; content: attr(data-private); opacity: 0; animation: privacy-value-swap 6s ease-in-out infinite; }
 .source-flow { min-height: 330px; display: grid; align-content: center; gap: 16px; }.source-file { display: grid; grid-template-columns: 42px 1fr auto; gap: 12px; align-items: center; padding: 15px; border: 1px solid #d7dfdc; border-radius: 12px; background: #fff; animation: source-file-remove 6s ease-in-out infinite; }.source-file > i { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 9px; color: #fff; background: var(--compliance-teal); font-size: 10px; font-style: normal; font-weight: 800; }.source-file b,.source-file small { display: block; }.source-file b { color: #29322f; font-size: 12px; }.source-file small { margin-top: 4px; color: #78817e; font-size: 9px; }.source-file > span:last-child { color: var(--compliance-teal); font-size: 10px; font-weight: 800; }
 .source-progress { height: 7px; overflow: hidden; border-radius: 99px; background: #e5eae8; }.source-progress i { width: 100%; height: 100%; display: block; border-radius: inherit; background: #4aa9a4; transform-origin: left; animation: source-progress 6s ease-in-out infinite; }.source-result { padding: 18px; border: 1px solid #bcd5cf; border-radius: 12px; color: var(--compliance-deep); background: #edf6f3; opacity: 0; transform: translateY(8px); animation: source-result-in 6s ease-in-out infinite; }.source-result b { display: block; font-size: 13px; }.source-result span { display: block; margin-top: 6px; color: #63716d; font-size: 10px; line-height: 1.5; }
+#patient-anonymisation { background: #f2f0eb; }
+#patient-anonymisation::before { width: 42vw; height: 42vw; position: absolute; right: -24vw; bottom: -28vw; border: 1px solid rgba(133,87,68,.1); border-radius: 50%; content: ''; }
+#patient-anonymisation .privacy-feature-visual { border: 1px solid rgba(149,100,80,.12); border-radius: 72px 24px 72px 24px; background: #f8dfce; background-image: repeating-radial-gradient(circle at 50% 50%,transparent 0 52px,rgba(112,76,66,.09) 53px 54px); }
+#patient-anonymisation .privacy-demo { transform: translateY(-4px); }
+#patient-anonymisation .privacy-feature-copy { position: relative; }
+#patient-anonymisation .privacy-feature-copy::before { display: block; margin-bottom: 28px; color: rgba(35,111,107,.45); content: '01'; font: 700 11px var(--sans); letter-spacing: .16em; }
+#source-file-retention { color: var(--ink); background: #dfefeb; }
+#source-file-retention::after { width: 560px; height: 560px; position: absolute; top: -360px; left: 36%; border: 1px solid rgba(55,99,97,.12); border-radius: 50%; content: ''; }
+#source-file-retention .privacy-feature-grid { position: relative; z-index: 1; }
+#source-file-retention .privacy-feature-visual { border: 1px solid #aec9c3; border-radius: 24px 72px 24px 72px; background: linear-gradient(145deg,#f7f4ed 0%,#eef3f0 100%); background-image: linear-gradient(rgba(55,99,97,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(55,99,97,.05) 1px,transparent 1px),linear-gradient(145deg,#f7f4ed 0%,#eef3f0 100%); background-size: 42px 42px,42px 42px,100% 100%; box-shadow: 0 26px 70px -48px rgba(31,67,60,.55); }
+#source-file-retention .privacy-demo { border-color: #b7ccc7; box-shadow: 0 28px 60px rgba(35,56,50,.16); }
+#source-file-retention .privacy-feature-copy::before { display: block; margin-bottom: 28px; color: rgba(55,99,97,.45); content: '02'; font: 700 11px var(--sans); letter-spacing: .16em; }
+#source-file-retention .page-kicker { color: var(--compliance-teal); }
+#source-file-retention .privacy-feature-copy h2 { color: var(--ink); }
+#source-file-retention .privacy-feature-copy h2 em { color: var(--compliance-teal); }
+#source-file-retention .privacy-feature-copy > p { color: var(--muted); }
+#source-file-retention .privacy-feature-list li { color: #59625f; }
+#source-file-retention .privacy-feature-list li::before { color: var(--compliance-teal); background: rgba(35,111,107,.13); }
 @keyframes privacy-toggle-on { 0%,18%,88%,100% { background:#cdd6d3 } 30%,76% { background:var(--compliance-teal) } } @keyframes privacy-toggle-knob { 0%,18%,88%,100% { transform:none } 30%,76% { transform:translateX(22px) } } @keyframes privacy-value-swap { 0%,22%,82%,100% { opacity:0 } 32%,74% { opacity:1 } }
 @keyframes source-progress { 0%,12% { transform:scaleX(0) } 42%,78% { transform:scaleX(1) } 90%,100% { transform:scaleX(0) } } @keyframes source-file-remove { 0%,45% { opacity:1;transform:none } 58%,78% { opacity:.35;transform:scale(.98) } 90%,100% { opacity:1;transform:none } } @keyframes source-result-in { 0%,45%,90%,100% { opacity:0;transform:translateY(8px) } 58%,80% { opacity:1;transform:none } }
+@media (max-width: 1000px) { .compliance-showcase-head { grid-template-columns:1fr;gap:20px; } }
 @media (max-width: 900px) { .privacy-feature-grid { grid-template-columns:1fr; }.privacy-feature.is-reversed .privacy-feature-visual { order:0; }.privacy-feature-visual { min-height:440px; }.privacy-feature-copy h2 { font-size:clamp(44px,10vw,64px); } }
+@media (max-width: 820px) { .compliance-showcase .prepared-story { height: 510svh; } }
+@media (max-width: 680px) { .compliance-card-demo { min-height:210px; }.compliance-showcase .prepared-story-state { width:92%;padding:16px; }.compliance-mini-fields { grid-template-columns:1fr 1fr; } }
 @media (max-width: 560px) { .privacy-feature-visual { min-height:380px;padding:18px; }.privacy-demo-body { min-height:300px;padding:20px; }.privacy-fields { grid-template-columns:1fr; } }
 @media (prefers-reduced-motion: reduce) { .privacy-toggle,.privacy-toggle::after,.privacy-field b::after,.source-file,.source-progress i,.source-result { animation:none; }.privacy-toggle { background:var(--compliance-teal); }.privacy-toggle::after { transform:translateX(22px); }.privacy-field b::after,.source-result { opacity:1;transform:none; }.source-progress i { transform:scaleX(1); } }
 .trust-visual { min-height: 560px; position: relative; display: grid; place-items: center; isolation: isolate; }
@@ -126,6 +198,22 @@
 </div>
 </header>
 
+<section class="compliance-showcase" aria-labelledby="compliance-showcase-title">
+<div class="shell">
+<header class="compliance-showcase-head"><div><span class="page-kicker">Protection throughout the workflow</span><h2 id="compliance-showcase-title">See how records <em>are protected.</em></h2></div><p>Follow the key privacy, security, access, and sharing controls applied as health records move through n1.</p></header>
+<div class="prepared-story">
+<div class="prepared-story-steps">
+<article class="prepared-story-step"><div class="prepared-story-card" aria-label="Animation showing an identified patient profile changing to an anonymised profile"><div class="prepared-story-frame"><div class="prepared-story-media" aria-hidden="true"></div><div class="prepared-story-copy is-current"><h3>Keep direct identifiers out.</h3></div><div class="prepared-story-ui"><section class="prepared-story-state"><div class="story-ui-head"><div><span class="story-ui-avatar">PA</span><span><b>Patient privacy settings</b><small>Patient profile</small></span></div><span>Optional anonymisation</span></div><div class="compliance-card-demo"><div class="compliance-mini-profile"><div class="compliance-mini-toggle">Use an anonymised profile<i aria-hidden="true"></i></div><div class="compliance-mini-fields"><span><small>Name</small><b data-private="Patient A-104"><i>Alex Morgan</i></b></span><span><small>Email</small><b data-private="Not collected"><i>alex@example.com</i></b></span><span><small>Date of birth</small><b data-private="Birth year · 1978"><i>12 Mar 1978</i></b></span><span><small>Status</small><b data-private="Anonymised"><i>Identified</i></b></span></div></div></div></section></div></div></div></article>
+<article class="prepared-story-step"><div class="prepared-story-card" aria-label="Animation showing optional deletion of a source file after processing"><div class="prepared-story-frame"><div class="prepared-story-media" aria-hidden="true"></div><div class="prepared-story-copy"><h3>Choose whether the source file remains.</h3></div><div class="prepared-story-ui"><section class="prepared-story-state"><div class="story-ui-head"><div><span class="story-ui-avatar">ER</span><span><b>Source-file retention</b><small>Example clinical record</small></span></div><span>Optional deletion</span></div><div class="compliance-card-demo"><div class="compliance-delete-demo"><div class="compliance-delete-file"><i>PDF</i><span><b>health-record.pdf</b><small>Encrypted during processing</small></span><span>Processing</span></div><div class="compliance-delete-track"><i></i></div><div class="compliance-delete-result">✓ Health data organised · selected source-file setting applied</div></div></div></section></div></div></div></article>
+<article class="prepared-story-step"><div class="prepared-story-card" aria-label="Animation showing clinical information encrypted in transit and at rest"><div class="prepared-story-frame"><div class="prepared-story-media" aria-hidden="true"></div><div class="prepared-story-copy"><h3>Encrypted in transit and at rest.</h3></div><div class="prepared-story-ui"><section class="prepared-story-state"><div class="story-ui-head"><div><span class="story-ui-avatar">SEC</span><span><b>Encryption</b><small>Records and uploaded files</small></span></div><span>TLS · AES-256</span></div><div class="compliance-card-demo"><div class="compliance-protection-demo"><div class="compliance-protection-route"><div class="compliance-protection-node">In transit<br>TLS</div><div class="compliance-protection-path"></div><div class="compliance-protection-node">At rest<br>AES-256</div></div><div class="compliance-protection-status"><span>Records and uploads</span><i>✓ Protected</i></div></div></div></section></div></div></div></article>
+<article class="prepared-story-step"><div class="prepared-story-card" aria-label="Animation showing authenticated and role-based access controls"><div class="prepared-story-frame"><div class="prepared-story-media" aria-hidden="true"></div><div class="prepared-story-copy"><h3>Access follows the user’s role.</h3></div><div class="prepared-story-ui"><section class="prepared-story-state"><div class="story-ui-head"><div><span class="story-ui-avatar">ID</span><span><b>Workspace access</b><small>Identity and permissions</small></span></div><span>Authenticated</span></div><div class="compliance-card-demo"><div class="compliance-control-list"><span>Account verified<i>✓</i></span><span>Role checked<i>✓</i></span><span>Permission granted<i>✓</i></span></div></div></section></div></div></div></article>
+<article class="prepared-story-step"><div class="prepared-story-card" aria-label="Animation showing security activity recorded in an audit trail"><div class="prepared-story-frame"><div class="prepared-story-media" aria-hidden="true"></div><div class="prepared-story-copy"><h3>Important activity leaves a trail.</h3></div><div class="prepared-story-ui"><section class="prepared-story-state"><div class="story-ui-head"><div><span class="story-ui-avatar">AL</span><span><b>Audit trail</b><small>Security activity</small></span></div><span>Recorded</span></div><div class="compliance-card-demo"><div class="compliance-control-list"><span>Account sign-in<i>✓</i></span><span>Report access<i>✓</i></span><span>Session revoked<i>✓</i></span></div></div></section></div></div></div></article>
+<article class="prepared-story-step"><div class="prepared-story-card" aria-label="Animation showing clinician-controlled access to an approved report"><div class="prepared-story-frame"><div class="prepared-story-media" aria-hidden="true"></div><div class="prepared-story-copy"><h3>Share only when it is ready.</h3></div><div class="prepared-story-ui"><section class="prepared-story-state"><div class="story-ui-head"><div><span class="story-ui-avatar">HS</span><span><b>Report access</b><small>Health Summary</small></span></div><span>Clinician controlled</span></div><div class="compliance-card-demo"><div class="compliance-access-demo"><div class="compliance-access-report"><span>Approved report</span><b>Health Summary</b></div><div class="compliance-access-setting">Clinician approval complete<i>✓</i></div><div class="compliance-access-setting">Patient access enabled<i>✓</i></div></div></div></section></div></div></div></article>
+</div>
+</div>
+</div>
+</section>
+
 <section class="page-section paper" id="certifications" data-compliance-reveal>
 <div class="shell">
 <div class="section-head">
@@ -134,7 +222,7 @@
 </h2>
 </div>
 <div class="cert-grid">
-<article><span>Encryption</span><h3>Encrypted everywhere</h3><p>TLS 1.3 in transit and AES-256 at rest for source records, uploads, and database connections. Documents are accessed only through short-lived signed links that expire automatically.</p></article>
+<article><span>Encryption</span><h3>Encrypted in transit and at rest</h3><p>TLS protects data in transit. Source records and uploaded files stored in n1's production S3 storage are encrypted at rest using AES-256. Document links are signed and expire automatically.</p></article>
 <article><span>SOC 2</span><h3>SOC 2 Type II hosting</h3><p>All infrastructure runs on hosting certified to SOC 2 Type II, inheriting its physical, environmental, and operational controls.</p></article>
 <article><span>Privacy law</span><h3>Privacy law worldwide</h3><p>Health and genetic data are handled as special-category data under GDPR (EEA, UK, Switzerland). n1 never sells patient data or uses it for targeted advertising, and honors regional rights to access, correction, deletion, and portability. A GDPR Data Processing Agreement (DPA) is available to customers. <a href="privacy.html#regional">Read more →</a></p></article>
 <article><span>HIPAA</span><h3>HIPAA-compliant workflows</h3><p>For deployments where HIPAA applies: BAAs with every service provider and partner that handles PHI on our behalf, and healthcare organizations can enter into a BAA directly with n1.</p></article>
@@ -155,12 +243,10 @@
 <p>The safeguards applied to every record, account, and report.</p>
 </div>
 <div class="security-table">
-<div><b>Encryption</b><span>TLS 1.3 in transit — browser traffic and database connections. AES-256 at rest for source records and uploaded files. Document access uses short-lived signed URLs that expire automatically.</span></div>
-<div><b>Access control</b><span>Authenticated accounts with role-based permissions. Access to patient data is limited to authorized personnel, with access and modification logs. Sign-in with Google is supported. Passwords are checked against known breach databases and stored with modern memory-hard hashing.</span></div>
-<div><b>Infrastructure</b><span>Records are stored encrypted on AWS hosting certified to SOC 2 Type II, with the application delivered through Cloudflare. Production and staging are fully separated environments with distinct credentials.</span></div>
-<div><b>Monitoring &amp; logging</b><span>Structured logging with sensitive-value redaction. Security events — sign-ins, session revocations, report-share access — are recorded in dedicated audit trails, with metrics and traces collected through OpenTelemetry.</span></div>
-<div><b>Secure development</b><span>Automated static analysis, secret, dependency, and infrastructure scanning runs on every change, with container images scanned before deployment. Test suites gate releases, and CI uses short-lived, keyless cloud credentials with least-privilege permissions.</span></div>
-<div><b>Organizational security</b><span>Production access is limited to authorized personnel under least-privilege roles. Staff handling of patient data is governed by our privacy and security policies, applicable regional obligations, and the agreements described above.</span></div>
+<div><b>Encryption</b><span>TLS protects data in transit. Source records and uploaded files stored in n1's production S3 storage are encrypted at rest using AES-256. Document links are signed and expire automatically.</span></div>
+<div><b>Access control</b><span>Workspace access requires an authenticated account and permissions appropriate to the user's role. Patients may also create time-limited links for individual reports.</span></div>
+<div><b>Activity records</b><span>Security-sensitive activity, including sign-ins, report-sharing actions, and shared-link access, is recorded.</span></div>
+<div><b>Organizational controls</b><span>Access to production systems is limited to authorized personnel. Staff handling patient data are governed by our privacy and security policies, applicable regional obligations, and customer agreements.</span></div>
 </div>
 </div>
 </section>
@@ -185,66 +271,19 @@
 </div>
 </section>
 
-<!-- 6. PRIVACY CHOICES — product controls shown in the same alternating feature format as the clinician workflow section. -->
-<section class="privacy-feature" id="patient-anonymisation" data-compliance-reveal>
-<div class="shell privacy-feature-grid">
-<div class="privacy-feature-visual">
-<div class="privacy-demo" role="img" aria-label="Patient profile changing from identifying details to an alias and birth year when anonymisation is enabled">
-<div class="privacy-demo-head"><span>Patient privacy settings</span><b>Optional</b></div>
-<div class="privacy-demo-body">
-<div class="privacy-toggle-row"><span><b>Use an anonymised patient profile</b><small>Keep direct identifiers out of the n1 profile</small></span><i class="privacy-toggle" aria-hidden="true"></i></div>
-<div class="privacy-fields">
-<div class="privacy-field"><small>Patient name</small><b data-private="Patient A-104">Alex Morgan</b></div>
-<div class="privacy-field"><small>Email</small><b data-private="Not collected">alex@example.com</b></div>
-<div class="privacy-field"><small>Date of birth</small><b data-private="Birth year · 1978">12 March 1978</b></div>
-<div class="privacy-field"><small>Profile status</small><b data-private="Anonymised">Identified</b></div>
-</div>
-</div>
-</div>
-</div>
-<div class="privacy-feature-copy">
-<span class="page-kicker">Optional anonymisation</span>
-<h2>Use the clinical context.<em>Leave identifiers out.</em></h2>
-<p>Create a patient under an alias without adding their name, email address, or full date of birth. Birth year and sex can still provide the clinical context required for analysis.</p>
-<ul class="privacy-feature-list"><li>Anonymisation is optional for each patient</li><li>No email or identity verification is required</li><li>You control what appears in uploaded records</li></ul>
-</div>
-</div>
-</section>
-
-<section class="privacy-feature is-reversed" id="source-file-retention" data-compliance-reveal>
-<div class="shell privacy-feature-grid">
-<div class="privacy-feature-visual">
-<div class="privacy-demo" role="img" aria-label="A health record being processed and its original source file then being automatically deleted">
-<div class="privacy-demo-head"><span>Record processing</span><b>Source retention off</b></div>
-<div class="privacy-demo-body source-flow">
-<div class="source-file"><i>PDF</i><span><b>health-record.pdf</b><small>Encrypted during processing</small></span><span>Processing</span></div>
-<div class="source-progress"><i></i></div>
-<div class="source-result"><b>✓ Health data organised · source file deleted</b><span>The extracted health information remains available in n1. The original uploaded document is not retained after processing.</span></div>
-</div>
-</div>
-</div>
-<div class="privacy-feature-copy">
-<span class="page-kicker">Optional source deletion</span>
-<h2>Process the record.<em>Do not keep the file.</em></h2>
-<p>Choose automatic source-file deletion when uploading a record. n1 processes the document and keeps the organised health information, without retaining the original uploaded file afterward.</p>
-<ul class="privacy-feature-list"><li>Choose the setting as part of the upload workflow</li><li>The source file is encrypted while it is processed</li><li>Extracted information remains available for review</li></ul>
-</div>
-</div>
-</section>
-
 <!-- 7. DATA CONTROL — retention choices and clinician-controlled sharing (existing verified product behavior). -->
 <section class="page-section paper" id="data-control" data-compliance-reveal>
 <div class="shell">
 <div class="section-head split">
 <div>
-<span class="page-kicker">Data control</span>
-<h2>You choose how data <em>is handled.</em>
+<span class="page-kicker">The record lifecycle</span>
+<h2>Access, sharing <em>and deletion.</em>
 </h2>
 </div>
-<p>Access, sharing, export, and deletion stay under user control.</p>
+<p>Control who can use a record, what is shared, and what happens when information is no longer needed.</p>
 </div>
 <div class="privacy-modes">
-<article><span>Patient access</span><h3>Clinicians control sharing</h3><p>Each report becomes visible to the patient only when the clinician turns on patient access for it.</p></article>
+<article><span>Access</span><h3>Access follows your controls</h3><p>Reports and records are available only through authenticated accounts or the sharing controls selected for a specific report.</p></article>
 <article><span>Export</span><h3>Take your data with you</h3><p>Export biomarkers, diagnoses, medications, and more as CSV or Excel, and download any report as PDF or Word.</p></article>
 <article><span>Deletion</span><h3>Delete your account</h3><p>Patients can delete their account directly from settings, with identity re-verification before anything is removed.</p></article>
 </div>
@@ -260,8 +299,8 @@
 <div class="shell">
 <div class="section-head split">
 <div>
-<span class="page-kicker">Documents &amp; subprocessors</span>
-<h2>Evidence <em>on request.</em>
+<span class="page-kicker">Organizational review</span>
+<h2>Everything your organization needs to <em>review n1.</em>
 </h2>
 </div>
 <p>For security reviews, procurement, and vendor assessments.</p>
@@ -271,6 +310,7 @@
 <div><b>Subprocessors</b><span>AWS — cloud hosting and encrypted document storage (handles patient data). Cloudflare — application delivery and TLS (patient data in transit). AI model providers — receive only the minimum data needed per task under service-provider agreements, never for training their models. <a href="privacy.html#ai">Read more →</a> Stripe — payments (no clinical data). Postmark — transactional email (no clinical documents). Google — optional sign-in only.</span></div>
 <div><b>Incident response</b><span>If we identify a reportable breach, we notify affected customers, individuals, or authorities as required by applicable law and contract.</span></div>
 </div>
+<div class="legal-links"><a href="contact.html?intent=dpa">Request a DPA →</a><a href="contact.html?intent=security">Start a security review →</a><a href="contact.html?intent=governance">Ask a governance question →</a></div>
 </div>
 </section>
 
@@ -302,18 +342,11 @@
 <a class="text-link" href="contact.html?intent=security">Ask a security question →</a>
 </header>
 <div class="pricing-faq-list">
-<details><summary><span>How is patient data encrypted?</span><i aria-hidden="true"></i></summary><p>Data is encrypted in transit with TLS 1.3 and at rest with AES-256. This covers traffic between the browser and n1, database connections, and stored source records and uploaded files.</p></details>
 <details><summary><span>Who can access patient records?</span><i aria-hidden="true"></i></summary><p>The clinician who uploads records and the patients they grant access to. Within n1, access to patient data is limited to authorized personnel under least-privilege roles, and access and modification are logged. AI providers receive only the minimum data needed for each processing task, under service-provider agreements, and never for training their models.</p></details>
 <details><summary><span>Is patient data used to train AI models?</span><i aria-hidden="true"></i></summary><p>No. n1 does not use Customer Patient Data to train general-purpose AI models, and does not permit an AI provider to use that data to train its general-purpose models, unless the customer gives separate, express authorization.<br><br><a href="privacy.html#ai">Read the AI and training section in our Privacy Notice →</a></p></details>
 <details><summary><span>Where is data stored — does it leave my country?</span><i aria-hidden="true"></i></summary><p>Records are stored encrypted on AWS infrastructure in the United States, certified to SOC 2 Type II. Where cross-border transfer rules apply, recognized safeguards such as standard contractual clauses are used, as described in the Privacy Notice. In-country hosting is not currently offered — contact us to discuss requirements for your jurisdiction.</p></details>
-<details><summary><span>Who owns the data, and how long is it kept?</span><i aria-hidden="true"></i></summary><p>Uploaded records remain your data — n1 processes them only to provide and secure the service, on your instructions. Information is retained only as long as needed to provide the service: patients can delete their account from settings, deletion requests are honored as described in the Privacy Notice, and data can be exported at any time as CSV, Excel, PDF, or Word. Separate legal requirements may still apply to account and audit data.</p></details>
-<details><summary><span>How is report sharing controlled?</span><i aria-hidden="true"></i></summary><p>A report becomes visible to the patient only when the clinician turns on patient access for it. Patients can also share a report by link — locked with a password, given an end date, tracked by view count, and revocable at any time.</p></details>
 <details><summary><span>Do I need patient consent before uploading records?</span><i aria-hidden="true"></i></summary><p>That depends on your jurisdiction and role: as the party providing the records, you are responsible for having the authority to do so — through consent, treatment relationship, or another lawful basis your rules recognize. n1 supports this with BAAs, a DPA, and processing strictly on your instructions.</p></details>
-<details><summary><span>Can I upload de-identified records?</span><i aria-hidden="true"></i></summary><p>Yes. What you upload is under your control — records can be de-identified before upload, and patient profiles can be created under a pseudonym without email or identity verification (a date of birth and sex are required for clinical context). Generated reports also anonymize identifiers in analysis sections: names, providers, and facilities are not referenced in clinical reasoning.</p></details>
-<details><summary><span>How do I verify AI-generated content and catch errors?</span><i aria-hidden="true"></i></summary><p>Supported extracted facts and report findings link back to the original source document and page where source metadata is available, so any statement can be checked against the record it came from. A report that misses the mark can be regenerated with revised instructions, and nothing reaches a patient until the clinician turns on access.</p></details>
-<details><summary><span>Does n1 integrate with our EMR?</span><i aria-hidden="true"></i></summary><p>Not yet for self-service accounts — current accounts use direct file upload (PDF for records; TXT/CSV for raw DNA data). Additional import and export options, including potential EHR/EMR integrations, are in development for enterprise deployments.<br><br><a href="contact.html?intent=enterprise">Discuss integration options →</a></p></details>
 <details><summary><span>Can n1 run on-premises or self-hosted?</span><i aria-hidden="true"></i></summary><p>No — n1 is delivered as a managed cloud service. Enterprise onboarding documents the deployment's access controls, subprocessors, and incident-response process for institutional review.</p></details>
-<details><summary><span>Which privacy laws does n1 comply with in my country?</span><i aria-hidden="true"></i></summary><p>In the EEA, UK, and Switzerland, health and genetic data are treated as special-category data under GDPR, processed with a lawful basis and an additional condition, with cross-border transfer safeguards in place; a Data Processing Agreement (DPA) is available to customers. In the US, n1 supports HIPAA workflows and honors state privacy rights to access, correction, deletion, and portability — and never sells patient data or uses it for targeted advertising. For other countries, we work with customers to determine whether additional approvals or agreements are needed.<br><br><a href="privacy.html#regional">Read more →</a></p></details>
 <details><summary><span>Is n1.care HIPAA compliant?</span><i aria-hidden="true"></i></summary><p>Yes, for deployments where HIPAA applies. n1.care supports HIPAA-compliant workflows and maintains Business Associate Agreements (BAAs) with service providers and partners that handle protected health information (PHI) on our behalf. Healthcare organizations can also enter into a BAA directly with n1.<br><br><a href="privacy.html#regional">Read the HIPAA information in our Privacy Notice →</a></p></details>
 <details><summary><span>Can we complete a security review or questionnaire with n1?</span><i aria-hidden="true"></i></summary><p>Yes. We answer security questionnaires and provide available documentation — including the hosting SOC 2 Type II attestation — for procurement and vendor assessments. Write to <a href="mailto:hello@n1.care">hello@n1.care</a> or use the <a href="contact.html?intent=security">security contact form</a>.</p></details>
 </div>
