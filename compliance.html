@@ -15,14 +15,58 @@
 <script defer src="marketing-pages.js">
 </script>
 <style>
+.compliance-page { --compliance-teal: #236f6b; --compliance-deep: #173936; --compliance-mint: #dcebe7; }
+.compliance-hero { min-height: min(900px,92svh); display: flex; align-items: center; padding: clamp(118px,12vw,180px) 0 clamp(72px,8vw,118px); position: relative; overflow: hidden; background: radial-gradient(circle at 82% 20%,rgba(74,169,164,.18),transparent 31%),linear-gradient(145deg,#f8f5ee 0%,#edf4f1 100%); }
+.compliance-hero::before { width: 420px; height: 420px; position: absolute; top: -220px; left: -130px; border: 1px solid rgba(35,111,107,.16); border-radius: 50%; content: ''; }
+.compliance-hero-grid { display: grid; grid-template-columns: minmax(0,.92fr) minmax(500px,1.08fr); gap: clamp(54px,7vw,112px); align-items: center; }
+.compliance-hero-copy .page-kicker { margin-bottom: 22px; }
+.compliance-hero h1 { max-width: 720px; margin: 0; font: 400 clamp(58px,6.6vw,94px)/.92 var(--serif); letter-spacing: -.05em; text-wrap: balance; }
+.compliance-hero h1 em { color: var(--compliance-teal); font-style: normal; }
+.compliance-hero-copy > p { max-width: 630px; margin: 28px 0 0; color: var(--muted); font-size: clamp(17px,1.35vw,20px); line-height: 1.65; }
+.compliance-hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+.compliance-hero-links { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 26px; font-size: 12px; font-weight: 700; }
+.compliance-hero-links a { color: var(--compliance-deep); border-bottom: 1px solid rgba(23,57,54,.35); }
+.trust-visual { min-height: 560px; position: relative; display: grid; place-items: center; isolation: isolate; }
+.trust-orbit { width: min(520px,100%); aspect-ratio: 1; position: absolute; border: 1px solid rgba(35,111,107,.17); border-radius: 50%; animation: trust-spin 28s linear infinite; }
+.trust-orbit::before,.trust-orbit::after { width: 10px; height: 10px; position: absolute; top: 50%; border: 4px solid #edf4f1; border-radius: 50%; background: #4aa9a4; content: ''; }
+.trust-orbit::before { left: -5px; }.trust-orbit::after { right: -5px; }
+.trust-console { width: min(475px,92%); position: relative; z-index: 2; overflow: hidden; border: 1px solid rgba(35,111,107,.26); border-radius: 28px; background: rgba(255,253,249,.88); box-shadow: 0 30px 80px rgba(23,57,54,.13); backdrop-filter: blur(14px); }
+.trust-console-head { min-height: 68px; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; border-bottom: 1px solid var(--line); }
+.trust-console-head > span { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 800; }
+.trust-console-head > span::before { width: 10px; height: 10px; border-radius: 50%; background: #4aa9a4; box-shadow: 0 0 0 5px rgba(74,169,164,.12); content: ''; }
+.trust-console-head > b { color: var(--compliance-teal); font-size: 9px; letter-spacing: .13em; text-transform: uppercase; }
+.trust-flow { padding: 28px 26px 30px; }
+.trust-record { display: grid; grid-template-columns: 40px 1fr auto; gap: 13px; align-items: center; padding: 14px; border: 1px solid #d6e1dd; border-radius: 14px; background: #fffdfa; }
+.trust-record > i { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 11px; color: var(--compliance-teal); background: #e9f2ef; font: 800 10px var(--sans); }
+.trust-record b { display: block; font-size: 12px; }.trust-record small { display: block; margin-top: 3px; color: var(--muted); font-size: 10px; }
+.trust-record > span { color: var(--compliance-teal); font-size: 9px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.trust-route { height: 62px; position: relative; margin-left: 33px; border-left: 1px dashed #8fb9b3; }
+.trust-route::after { width: 7px; height: 7px; position: absolute; left: -4px; border-radius: 50%; background: #4aa9a4; content: ''; animation: trust-route 2.6s ease-in-out infinite; }
+.trust-gates { display: grid; gap: 9px; }
+.trust-gate { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; border-radius: 12px; background: #edf4f1; color: #40524f; font-size: 11px; }
+.trust-gate b { color: var(--compliance-deep); }.trust-gate i { width: 20px; height: 20px; display: grid; place-items: center; border-radius: 50%; color: #fff; background: var(--compliance-teal); font-style: normal; font-size: 10px; transform: scale(.65); opacity: 0; animation: trust-check 6s ease-in-out infinite; }
+.trust-gate:nth-child(2) i { animation-delay: 1s; }.trust-gate:nth-child(3) i { animation-delay: 2s; }
+.trust-status { margin-top: 18px; display: flex; align-items: center; gap: 9px; color: var(--muted); font-size: 10px; }
+.trust-status i { width: 7px; height: 7px; border-radius: 50%; background: #4aa9a4; box-shadow: 0 0 0 0 rgba(74,169,164,.25); animation: trust-pulse 2s infinite; }
 .cert-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-.cert-grid article { padding: 22px 22px 24px; border: 1px solid var(--line); border-radius: var(--n1-radius-4xl); background: var(--paper); }
+.cert-grid article { padding: 22px 22px 24px; border: 1px solid var(--line); border-radius: var(--n1-radius-4xl); background: var(--paper); transition: transform .3s ease,box-shadow .3s ease; }
+.cert-grid article:hover { transform: translateY(-4px); box-shadow: 0 16px 35px rgba(23,57,54,.08); }
 .cert-grid article > span { display: block; margin-bottom: 10px; color: #2f7773; font-size: 11px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
 .cert-grid h3 { margin: 0 0 8px; font-size: 17px; }
 .cert-grid p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.55; }
 .cert-scope-note { margin-top: 18px; color: var(--muted); font-size: 12px; }
+.compliance-page [data-compliance-reveal] { opacity: 0; transform: translateY(24px); transition: opacity .7s ease,transform .7s cubic-bezier(.2,.75,.25,1); }
+.compliance-page [data-compliance-reveal].is-visible { opacity: 1; transform: none; }
+.compliance-page .security-table > div { transition: background-color .25s ease; }
+.compliance-page .security-table > div:hover { background: rgba(255,255,255,.56); }
+@keyframes trust-spin { to { transform: rotate(360deg); } }
+@keyframes trust-route { 0% { top: 2px; opacity: 0; } 20%,75% { opacity: 1; } 100% { top: 54px; opacity: 0; } }
+@keyframes trust-check { 0%,12% { transform: scale(.65); opacity: 0; } 20%,72% { transform: scale(1); opacity: 1; } 82%,100% { transform: scale(.65); opacity: 0; } }
+@keyframes trust-pulse { 70% { box-shadow: 0 0 0 8px rgba(74,169,164,0); } }
 @media (max-width: 1100px) { .cert-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 620px) { .cert-grid { grid-template-columns: 1fr; } }
+@media (max-width: 960px) { .compliance-hero { min-height: auto; }.compliance-hero-grid { grid-template-columns: 1fr; }.trust-visual { min-height: 520px; }.trust-console { width: min(560px,94%); } }
+@media (max-width: 620px) { .cert-grid { grid-template-columns: 1fr; }.compliance-hero { padding-top: 104px; }.compliance-hero h1 { font-size: clamp(50px,15vw,68px); }.trust-visual { min-height: 440px; }.trust-orbit { width: 390px; }.trust-console { width: 100%; }.trust-console-head { padding: 0 18px; }.trust-flow { padding: 20px 18px 22px; } }
+@media (prefers-reduced-motion: reduce) { .trust-orbit,.trust-route::after,.trust-gate i,.trust-status i { animation: none; }.trust-gate i { opacity: 1; transform: none; }.compliance-page [data-compliance-reveal] { opacity: 1; transform: none; transition: none; } }
 </style>
 </head>
 <body class="tonal marketing-page compliance-page">
@@ -30,26 +74,35 @@
 <script src="site-header.js"></script>
 <main id="main">
 
-<!-- 1. HERO — one-sentence commitment. Every reviewed trust page opens this way. -->
-<header class="page-hero">
-<div class="shell page-hero-grid">
-<div>
+<header class="compliance-hero">
+<div class="shell compliance-hero-grid">
+<div class="compliance-hero-copy">
 <span class="page-kicker">Security &amp; compliance</span>
-<h1>Built to protect <em>health information.</em>
-</h1>
-</div>
-<div class="page-hero-copy">
+<h1>Health data deserves <em>clear safeguards.</em></h1>
 <p>Security and privacy are designed into every part of n1 — from how records are encrypted and who can access them, to how AI is allowed to use them.</p>
+<div class="compliance-hero-actions"><a class="button" href="contact.html?intent=security">Start a security review</a><a class="button secondary" href="#security-program">Explore the controls</a></div>
+<div class="compliance-hero-links"><a href="privacy.html">Privacy Notice</a><a href="terms.html">Terms</a><a href="#documents">Security documents</a></div>
+</div>
+<div class="trust-visual" aria-label="Illustration of an encrypted record passing through access and review controls">
+<div class="trust-orbit" aria-hidden="true"></div>
+<div class="trust-console">
+<header class="trust-console-head"><span>Protected record flow</span><b>Controls active</b></header>
+<div class="trust-flow">
+<div class="trust-record"><i>PDF</i><div><b>Example clinical record</b><small>Encrypted during transfer</small></div><span>Protected</span></div>
+<div class="trust-route" aria-hidden="true"></div>
+<div class="trust-gates"><div class="trust-gate"><b>Authenticated access</b><i>✓</i></div><div class="trust-gate"><b>Source-linked processing</b><i>✓</i></div><div class="trust-gate"><b>Clinician-controlled sharing</b><i>✓</i></div></div>
+<div class="trust-status"><i></i><span>Activity recorded in the audit trail</span></div>
+</div>
+</div>
 </div>
 </div>
 </header>
 
-<!-- 2. CERTIFICATIONS BAR — badges directly under the hero. HITRUST is the healthcare anchor cert; list only what is actually held. -->
-<section class="page-section paper" id="certifications">
+<section class="page-section paper" id="certifications" data-compliance-reveal>
 <div class="shell">
 <div class="section-head">
-<span class="page-kicker">Certifications &amp; frameworks</span>
-<h2>Audited against <em>recognized standards.</em>
+<span class="page-kicker">Security foundations</span>
+<h2>Built around <em>recognized safeguards.</em>
 </h2>
 </div>
 <div class="cert-grid">
@@ -63,7 +116,7 @@
 </section>
 
 <!-- 3. SECURITY PROGRAM — control domains with concrete specs. Encryption/access/monitoring specifics are the most-cited concrete claims across all 10 reviewed pages. -->
-<section class="page-section" id="security-program">
+<section class="page-section" id="security-program" data-compliance-reveal>
 <div class="shell">
 <div class="section-head split">
 <div>
@@ -85,7 +138,7 @@
 </section>
 
 <!-- 5. AI & DATA USE — the differentiating section for health-AI companies (model cards, no-training commitments, human review). -->
-<section class="page-section blush" id="ai-data-use">
+<section class="page-section blush" id="ai-data-use" data-compliance-reveal>
 <div class="shell">
 <div class="section-head split">
 <div>
@@ -105,7 +158,7 @@
 </section>
 
 <!-- 6. DATA CONTROL — retention choices and clinician-controlled sharing (existing verified product behavior). -->
-<section class="page-section paper" id="data-control">
+<section class="page-section paper" id="data-control" data-compliance-reveal>
 <div class="shell">
 <div class="section-head split">
 <div>
@@ -128,7 +181,7 @@
 </section>
 
 <!-- 7. DOCUMENTS & SUBPROCESSORS — evidence on request + vendor transparency. Portal-style trust centers gate SOC reports behind a request flow. -->
-<section class="page-section blush" id="documents">
+<section class="page-section blush" id="documents" data-compliance-reveal>
 <div class="shell">
 <div class="section-head split">
 <div>
@@ -147,7 +200,7 @@
 </section>
 
 <!-- 8. RESPONSIBLE DISCLOSURE & CONTACT — security@ address, response commitment, no-bounty statement. Present on 8 of 10 reviewed pages. -->
-<section class="page-section" id="disclosure">
+<section class="page-section" id="disclosure" data-compliance-reveal>
 <div class="shell">
 <div class="section-head split">
 <div>
@@ -165,7 +218,7 @@
 </section>
 
 <!-- 9. FAQ — answers reuse claims already published on the site. -->
-<section class="pricing-faq" aria-labelledby="compliance-faq-title">
+<section class="pricing-faq" aria-labelledby="compliance-faq-title" data-compliance-reveal>
 <div class="shell pricing-faq-layout">
 <header class="pricing-faq-head">
 <span class="page-kicker">Security FAQ</span>
@@ -193,7 +246,7 @@
 </section>
 
 <!-- 10. CLOSE -->
-<section class="page-close">
+<section class="page-close" data-compliance-reveal>
 <div class="shell">
 <h2>Check n1 against your rules.</h2>
 <p>Show us how files move through your team. We will answer your questions on data, access, care rules, and launch.</p>
@@ -214,8 +267,25 @@
 </a>
 <p>Put health files in order. See what changed. Check each fact at its source.</p>
 </div>
-<div class="marketing-footer-links"><div><strong>Product</strong><a href="clinicians.html#clinician-product-animation-title">How it works</a><a href="reports.html">Reports</a><a href="pricing.html">Pricing</a><a href="https://app.n1.care/demo">Live demo</a></div><div><strong>Solutions</strong><a href="clinicians.html">For clinicians</a><a href="patients.html">For patients</a><a href="contact.html?intent=enterprise">Enterprise</a></div><div><strong>Company</strong><a href="about.html">About</a><a href="case-studies.html">Clinical workflows</a><a href="contact.html">Contact</a></div><div><strong>Trust &amp; legal</strong><a href="compliance.html">Security &amp; compliance</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="patents.html">Patents</a></div></div></div></div><div class="marketing-footer-bottom">© 2026 N1 Research, LLC</div>
+<div class="marketing-footer-links"><div><strong>Product</strong><a href="clinicians.html#clinician-product-animation-title">How it works</a><a href="reports.html">Reports</a><a href="pricing.html">Pricing</a><a href="https://app.n1.care/demo">Live demo</a></div><div><strong>Solutions</strong><a href="clinicians.html">For clinicians</a><a href="patients.html">For patients</a><a href="contact.html?intent=enterprise">Enterprise</a></div><div><strong>Company</strong><a href="about.html">About</a><a href="case-studies.html">Clinical workflows</a><a href="contact.html">Contact</a></div><div><strong>Trust &amp; legal</strong><a href="compliance.html">Security &amp; compliance</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="patents.html">Patents</a></div></div></div><div class="marketing-footer-bottom">© 2026 N1 Research, LLC</div>
 </div>
 </footer>
+<script>
+(() => {
+  const items = [...document.querySelectorAll('[data-compliance-reveal]')];
+  if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    items.forEach((item) => item.classList.add('is-visible'));
+    return;
+  }
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-visible');
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: .08, rootMargin: '0px 0px -8% 0px' });
+  items.forEach((item) => observer.observe(item));
+})();
+</script>
 </body>
 </html>

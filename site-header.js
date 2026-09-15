@@ -9,6 +9,7 @@
     ['clinicians.html', 'For clinicians'],
     ['patients.html', 'For patients'],
     ['reports.html', 'Reports'],
+    ['compliance.html', 'Compliance'],
     ['about.html', 'About'],
   ];
   const linkMarkup = links.map(([href, label], index) => {
