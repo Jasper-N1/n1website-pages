@@ -289,17 +289,19 @@
     };
     const heroMenuDefinitions = [
       { view: 'dashboard', label: 'Dashboard', kicker: 'Patient dashboard', title: 'See the full record.', lead: 'Start with the key facts. See source files, open checks, new reports and test alerts.', bullets: ['Switch patients without losing your place','Add files or start a report','Open any item that needs a check'], badge: 'John Doe', stats: [['Records','14'],['Biomarkers','48'],['Diagnoses','6'],['Procedures','3']] },
+      { view: 'patient-notes', label: 'Patient Notes', kicker: 'Patient note', title: 'Keep important context with the patient.', lead: 'Add one patient-level note for context the report generator should take into account.', bullets: ['Keep one current note per patient','Edit the note when the context changes','Use it to guide report generation'], badge: '1 note' },
       { view: 'list', label: 'Medical Records', kicker: 'Source record library', title: 'Upload, parse and keep every source.', lead: 'Add the source files, follow each record while n1 parses it, then review the structured data beside the original page.', bullets: ['Upload PDFs together in one secure step','See Preparing, Parsing and Storing progress','Review extracted data beside each source PDF'], badge: '14 records', action: '+ Upload Records', filters: ['Search records…','Status: All','Uploaded ↓'], columns: ['Record Name','Uploaded','Test Date','Pages','Status','Insights'], rows: [['example-laboratory-01-mar-2025.pdf','14 Mar 2025','14 Mar 2025','12',heroRecordStatus(2.15),'View insights'],['consult-note-2025.pdf','11 Mar 2025','11 Mar 2025','6',heroRecordStatus(2.3),'View insights'],['cardiac-ct-2024.pdf','22 Nov 2024','22 Nov 2024','18',heroRecordStatus(2.45),'View insights']] },
       { view: 'reports', label: 'Reports', kicker: 'Report workspace', title: 'Build reports your way.', lead: 'Choose a report type, set its scope and add a short brief. Keep drafts and approved reports in one place.', bullets: ['Use a set report or save your own','Move between Reports and Archive','Check status, access and who it is for'], badge: '4 reports', action: '+ Generate Report', columns: ['Report name','Created','Type','Status'], rows: [['Health Summary','26 Aug 2026','Health Summary','Complete'],['Health Over Time','25 Aug 2026','Longitudinal','Generating'],['Supplement Review','20 Aug 2026','Supplements','Complete']] },
       { view: 'list', label: 'Biomarkers', kicker: 'Biomarker readings', title: 'Track each result over time.', lead: 'Filter tests by source or field. See the latest result, then open past values and ranges.', bullets: ['See the latest value and date','Check the source and trend','Open readings and patient ranges'], badge: '48 biomarkers', filters: ['Search by name…','All Sources','Specialty'], columns: ['Name','Source','Latest','Latest Date','Trend','Insights'], rows: [['LDL cholesterol','Blood','116 mg/dL','14 Mar 2025','↘','View all 4'],['Vitamin D','Blood','71 nmol/L','6 Jun 2025','→','View all 6'],['HbA1c','Blood','5.8%','14 Mar 2025','→','View all 3']] },
       { view: 'list', label: 'Diagnoses', editable: true, kicker: 'Diagnosis history', title: 'See each issue in context.', lead: 'See current and past diagnoses. Check each start date, end date, status, note and source page.', bullets: ['See when each issue began','Check if it is current or resolved','Edit the clinical note'], badge: '6 diagnoses', action: '+ Add Manually', filters: ['Search diagnoses…'], columns: ['Name','Date','Date Resolved','Status','Explanation'], rows: [['Insulin resistance','11 Mar 2025','—','Review','Clinical note requires confirmation'],['Hyperlipidaemia','14 Mar 2025','—','Current','Elevated LDL across two lab records'],['Vitamin D insufficiency','22 Nov 2024','6 Jun 2025','Resolved','Improved following supplementation']] },
       { view: 'list', label: 'Procedures', editable: true, kicker: 'Procedure history', title: 'See care in date order.', lead: 'View each test or procedure by date. Open its explanation, outcome and source file.', bullets: ['Search the full history','Read or edit the explanation and outcome','Open the linked source PDF'], badge: '3 procedures', action: '+ Add Manually', filters: ['Search procedures…'], columns: ['Name','Date','Explanation','Outcome'], rows: [['Cardiac CT','22 Nov 2024','Coronary risk investigation','No obstructive disease'],['DEXA scan','6 Aug 2024','Baseline bone-density assessment','Within expected range'],['Clinical examination','11 Mar 2025','Cardiometabolic review','Follow-up planned']] },
-      { view: 'genetics', label: 'Genetics', kicker: 'Genetic findings', title: 'Put genetic findings in clinical context.', lead: 'Review extracted genetic information alongside laboratory results, documented diagnoses, and the wider history. Its relevance belongs within the clinical assessment, not in isolation.', bullets: ['Separate raw DNA from lab data','Review findings by evidence tier','Expand each gene for variant context'], badge: '12 findings', action: 'Upload Records' },
+      { view: 'genetics', label: 'Genetics', kicker: 'Genetic findings', title: 'Put genetic findings in clinical context.', lead: '', bullets: ['Separate raw DNA from lab data','Review findings by evidence tier','Expand each gene for variant context'], badge: '12 findings', action: 'Upload Records' },
       { view: 'medication-timeline', label: 'Medications', editable: true, kicker: 'Medication history', title: 'Review the medication history, notes and timeline.', lead: 'See current and past medications across time. Review dates, status, dosage and notes, then open a medication to edit it.', bullets: ['See when each medication started and ended','Review current and stopped treatments','Open the medication notes and details'], badge: '7 medications', action: '+ Add' },
       { view: 'list', label: 'Supplements', editable: true, kicker: 'Supplement list', title: 'Keep the full plan in view.', lead: 'See the brand, dosage, type, frequency and dates for each supplement. Open a row to change it.', bullets: ['Use one view for supplements','Edit the real supplement fields','Upload a file or add one manually'], badge: '4 supplements', action: '+ Add', filters: ['Search supplements…'], columns: ['Name','Brand Name','Dosage','Type','Frequency','Started','Stopped On'], rows: [['Magnesium glycinate','Pure Encapsulations','200 mg','Capsule','Nightly','14 Mar 2025','—'],['Vitamin D3','Thorne','2,000 IU','Softgel','Daily','6 Jun 2025','—'],['Omega-3','Nordic Naturals','1 g','Softgel','With food','14 Mar 2025','—']] }
     ];
     const clinicianPageSummaries = {
       Dashboard: 'One patient record. One clear view.',
+      'Patient Notes': 'Keep important patient context in one place.',
       'Medical Records': 'Upload records. n1 builds the history.',
       Reports: 'Create, review and approve each report.',
       Biomarkers: 'See how the result developed over time.',
@@ -309,9 +311,7 @@
       Medications: 'Review the medication history, notes and timeline.',
       Supplements: 'Bring supplements into the clinical review.'
     };
-    const clinicianPageLeads = {
-      Genetics: 'Review extracted genetic information alongside laboratory results, documented diagnoses, and the wider history. Its relevance belongs within the clinical assessment, not in isolation.'
-    };
+    const clinicianPageLeads = {};
     const heroMotionPanels = {
       'Medical Records': `<div class="hero-record-upload-card"><header><b><i>↑</i>Upload records</b><span>×</span></header><div class="hero-record-upload-drop">＋ Drop or click to add more files</div><div class="hero-record-upload-file"><i>PDF</i><span><b>example-laboratory-01-mar-2025.pdf</b><small>12 pages · 2.4 MB</small></span><em>×</em></div><div class="hero-record-upload-file"><i>PDF</i><span><b>consult-note-2025.pdf</b><small>6 pages · 1.1 MB</small></span><em>×</em></div><div class="hero-record-upload-file"><i>PDF</i><span><b>cardiac-ct-2024.pdf</b><small>18 pages · 3.8 MB</small></span><em>×</em></div><footer><span>3 files · 36 pages · 7.3 MB</span><strong>↑ Upload 3 records</strong></footer></div><div class="hero-record-complete"><i>✓</i><div><header><b>All record data is ready</b><small>3 documents parsed and linked to their sources</small></header><section><span><b>83</b>Biomarkers</span><span><b>2</b>Diagnoses</span><span><b>1</b>Procedure</span><span><b>5</b>Medications</span><span><b>7</b>Supplements</span><span><b>1</b>Genetics</span></section></div></div>`,
       'Biomarkers': `<div class="product-hero-native-motion is-biomarkers"><div class="hero-native-dropdown"><b>Source: Blood</b><span>All sources</span><span>Blood</span><span>Urine</span></div><div class="hero-native-detail"><b>LDL cholesterol history</b><span>142 → 116 mg/dL · patient target ≤100</span><strong>Example Laboratory 01 · page 3</strong></div></div>`,
@@ -352,6 +352,14 @@
         <aside class="hero-record-ready"><i>✓</i><div><b>All record data is ready</b><span>3 documents processed and linked to their sources</span><small><b>83</b> Biomarkers　 <b>2</b> Diagnoses　 <b>1</b> Procedure　 <b>5</b> Medications</small></div></aside>
       </div>`;
     };
+    const renderHeroPatientNotes = () => `<div class="hero-patient-notes-demo">
+      <header><div><b>Patient Notes</b><span>Note about John Doe</span></div><em>Saved</em></header>
+      <article class="hero-patient-note-card">
+        <div><b>Patient note</b><span>Taken into account by the report generator when creating this patient's reports</span></div>
+        <p>Patient prefers conservative treatment approaches. Allergic to penicillin.</p>
+        <footer><small>One note is kept for this patient.</small><b>Edit note</b></footer>
+      </article>
+    </div>`;
     const renderHeroReportFlow = () => `<div class="hero-report-demo">
       <div class="hero-report-tabs"><b>Reports</b><span>Archive</span></div>
       <div class="hero-report-toolbar"><span>Search reports…</span><span>Status: All</span></div>
@@ -386,6 +394,7 @@
     </div>`;
     const renderHeroPageBody = (definition) => {
       if (definition.view === 'dashboard') return `<div class="product-hero-dashboard-stats">${definition.stats.map((stat) => `<article><i></i><div><b>${stat[1]}</b><span>${stat[0]}</span></div></article>`).join('')}</div><div class="product-hero-dashboard-body"><section><header><b>Quick Actions</b></header><div class="product-hero-quick-actions"><article><i>↑</i><div><b>Upload Records</b><span>Add PDFs and supported data files</span></div><strong>→</strong></article><article><i>▤</i><div><b>Generate Report</b><span>Choose a report and set its scope</span></div><strong>→</strong></article></div></section><section><header><b>Recent Reports</b><span>View all →</span></header><div class="product-hero-dashboard-list"><article><b>Health Summary</b><span>26 Aug 2026</span><strong>Complete</strong></article><article><b>Health Over Time</b><span>25 Aug 2026</span><strong>Generating</strong></article></div></section><section><header><b>Biomarker Alerts</b><span>2 need review</span></header><div class="product-hero-dashboard-list"><article><b>LDL cholesterol</b><span>116 mg/dL · target ≤100</span><strong>Review</strong></article><article><b>Vitamin D</b><span>71 nmol/L · range 50–125</span><strong>In range</strong></article></div></section></div>`;
+      if (definition.view === 'patient-notes') return renderHeroPatientNotes();
       if (definition.label === 'Medical Records') return renderHeroRecordUpload();
       if (definition.label === 'Biomarkers') return renderHeroBiomarkerFlow();
       if (definition.label === 'Diagnoses') return renderHeroDiagnosisFlow();
@@ -453,7 +462,11 @@
       if (scrollHero.classList.contains('clinician-product-hero')) {
         if (storyKicker) storyKicker.textContent = definition.label;
         if (storyTitle) storyTitle.textContent = clinicianPageSummaries[definition.label] || definition.title;
-        if (storyLead) storyLead.textContent = clinicianPageLeads[definition.label] || '';
+        if (storyLead) {
+          const lead = clinicianPageLeads[definition.label] || '';
+          storyLead.textContent = lead;
+          storyLead.hidden = !lead;
+        }
         if (storyList) storyList.innerHTML = '';
         if (storyPatentNote) storyPatentNote.hidden = true;
       }
@@ -465,7 +478,10 @@
       heroSidebarItems.forEach((item) => item.classList.toggle('is-active', item.textContent.trim() === 'Medical Records'));
       if (storyKicker) storyKicker.textContent = originalStory.kicker;
       if (storyTitle) storyTitle.innerHTML = originalStory.title;
-      if (storyLead) storyLead.textContent = originalStory.lead;
+      if (storyLead) {
+        storyLead.textContent = originalStory.lead;
+        storyLead.hidden = false;
+      }
       if (storyList) storyList.innerHTML = originalStory.list;
       if (storyPatentNote) storyPatentNote.hidden = false;
     };

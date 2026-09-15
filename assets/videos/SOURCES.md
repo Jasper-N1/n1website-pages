@@ -1,8 +1,7 @@
-# Concept video sources
+# Video sources
 
-These clips are used only in N1 Care website explorations. They are
-self-hosted, muted, trimmed, recompressed, and presented as concept footage; the
-people shown do not endorse N1 Care.
+These clips are self-hosted, muted, trimmed, and recompressed. The people shown
+do not endorse N1 Care.
 
 All clips are covered by the [Pexels licence](https://www.pexels.com/license/),
 which permits free use, website use, and modification without required attribution.

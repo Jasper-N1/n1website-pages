@@ -177,6 +177,9 @@
     .evidence-head .eyebrow { color: var(--wine); }
     .evidence-head h2 { max-width: 650px; margin: 0; color: var(--ink); font-family: var(--serif); font-size: clamp(40px,5vw,62px); font-weight: 400; line-height: 1; letter-spacing: -.03em; text-wrap: balance; }
     .evidence-head > p { max-width: 540px; margin: 0 0 4px; color: #554f49; font-size: 16px; line-height: 1.65; }
+    .home-patent-notes { display: flex; flex-wrap: wrap; gap: 8px; margin: -34px 0 32px; }
+    .home-patent-notes a { display: inline-flex; align-items: center; min-height: 30px; padding: 6px 10px; border: 1px solid #b8cbc6; border-radius: 999px; color: #376361; background: rgba(255,255,255,.44); font-size: 9px; font-weight: 750; line-height: 1.35; letter-spacing: .045em; text-decoration: none; text-transform: uppercase; }
+    .home-patent-notes a:hover { border-color: #376361; background: #fff; }
 
     /* Clinician perspectives with clinician portraits. */
     .workflow-rail-wrap { padding: 100px 0; background: var(--cream); border-bottom: 1px solid var(--line); }
@@ -1905,6 +1908,7 @@
       .process-step { grid-template-columns: 52px 1fr; gap: 16px; padding: 28px 0; }
       .process-no { width: 42px; height: 42px; font-size: 16px; }
       .evidence-head { gap: 22px; margin-bottom: 42px; }
+      .home-patent-notes { margin: -22px 0 28px; }
       .workflow-rail-wrap { padding: 64px 0; }
       .workflow-rail { gap: 16px; }
       .workflow-card, .workflow-card:first-child { min-height: 0; padding: 14px; border: 1px solid #c9d8d4; }
@@ -3032,10 +3036,10 @@
     <div class="prepared-story">
     <div class="prepared-story-steps">
     <article class="prepared-story-step">
-    <div class="prepared-story-card" aria-label="Two-step secure record upload"><div class="prepared-story-frame"><div class="prepared-story-media" aria-hidden="true"></div><div class="prepared-story-copy is-current"><h3>Upload records in two clicks.</h3></div><div class="prepared-story-ui"><section class="prepared-story-state"><div class="story-ui-head"><div><span class="story-ui-avatar">ER</span><span><b>Upload health records</b><small>Example record</small></span></div><span>Secure upload</span></div><div class="story-upload-zone"><div class="story-upload-stage story-upload-choose"><i>↑</i><b>Choose records</b><small>PDF, PNG or JPG · TXT, CSV or TSV for DNA</small></div><div class="story-upload-stage story-upload-selected"><div class="story-upload-selected-row"><i>PDF</i><span><b>lab-results-june.pdf</b><small>12 pages · 2.4 MB</small></span></div><div class="story-upload-meter"><span></span></div><small class="story-upload-status"><span>Uploading securely…</span><span>2.4 MB</span></small></div><div class="story-upload-stage story-upload-complete"><i>✓</i><b>Upload complete</b><small>1 record added securely</small></div></div><div class="story-upload-actions"><span><b>1</b> Choose files</span><span><b>2</b> Upload securely</span></div></section></div></div></div>
+    <div class="prepared-story-card" aria-label="Two-step secure record upload"><div class="prepared-story-frame"><div class="prepared-story-media" aria-hidden="true"></div><div class="prepared-story-copy is-current"><h3>Upload records in two clicks.</h3></div><div class="prepared-story-ui"><section class="prepared-story-state"><div class="story-ui-head"><div><span class="story-ui-avatar">ER</span><span><b>Upload health records</b></span></div><span>Secure upload</span></div><div class="story-upload-zone"><div class="story-upload-stage story-upload-choose"><i>↑</i><b>Choose records</b><small>PDF, PNG or JPG · TXT, CSV or TSV for DNA</small></div><div class="story-upload-stage story-upload-selected"><div class="story-upload-selected-row"><i>PDF</i><span><b>lab-results-june.pdf</b><small>12 pages · 2.4 MB</small></span></div><div class="story-upload-meter"><span></span></div><small class="story-upload-status"><span>Uploading securely…</span><span>2.4 MB</span></small></div><div class="story-upload-stage story-upload-complete"><i>✓</i><b>Upload complete</b><small>1 record added securely</small></div></div><div class="story-upload-actions"><span><b>1</b> Choose files</span><span><b>2</b> Upload securely</span></div></section></div></div></div>
     </article>
     <article class="prepared-story-step">
-    <div class="prepared-story-card" aria-label="Animation showing health data extracted from an example record"><div class="prepared-story-frame"><div class="prepared-story-media" aria-hidden="true"></div><div class="prepared-story-copy"><h3>All health data, auto-extracted.</h3></div><div class="prepared-story-ui"><section class="prepared-story-state"><div class="story-ui-head"><div><span class="story-ui-avatar">ER</span><span><b>Example record</b><small>Health history</small></span></div><span>Source-linked</span></div><div class="story-extract-body"><div class="story-extract-stage story-extract-start"><div class="story-extract-file"><i>PDF</i><span><b>complete-health-record.pdf</b><small>12 pages · health record</small></span></div><span class="story-extract-button">Extract health data<i class="story-extract-pointer">↖</i></span></div><div class="story-extract-stage story-extract-typing"><div class="story-extract-scan"><span>Reading source pages</span><b class="story-extract-typed">Extracting health data…</b><div class="story-extract-scanbar"><i></i></div></div></div><div class="story-extract-stage story-extract-results"><div class="story-extract-result-head"><span><i>✓</i>6 data types found</span><small>Source-linked data · sources attached</small></div><div class="story-data-table"><div class="story-data-row"><span>Biomarker</span><b>HbA1c · 6.4%</b><small>Page 2</small></div><div class="story-data-row"><span>Diagnosis</span><b>Hypertension</b><small>Page 4</small></div><div class="story-data-row"><span>Medication</span><b>Metformin · 500 mg</b><small>Page 4</small></div><div class="story-data-row"><span>Procedure</span><b>Echocardiogram · 2025</b><small>Page 6</small></div><div class="story-data-row"><span>Genetics</span><b>BRCA1/2 · negative</b><small>Page 8</small></div><div class="story-data-row"><span>Supplement</span><b>Vitamin D3 · 1,000 IU</b><small>Page 5</small></div></div></div></div></section></div></div></div>
+    <div class="prepared-story-card" aria-label="Animation showing health data extracted from a health record"><div class="prepared-story-frame"><div class="prepared-story-media" aria-hidden="true"></div><div class="prepared-story-copy"><h3>All health data, auto-extracted.</h3></div><div class="prepared-story-ui"><section class="prepared-story-state"><div class="story-ui-head"><div><span class="story-ui-avatar">ER</span><span><b>Health record</b><small>Health history</small></span></div><span>Source-linked</span></div><div class="story-extract-body"><div class="story-extract-stage story-extract-start"><div class="story-extract-file"><i>PDF</i><span><b>complete-health-record.pdf</b><small>12 pages · health record</small></span></div><span class="story-extract-button">Extract health data<i class="story-extract-pointer">↖</i></span></div><div class="story-extract-stage story-extract-typing"><div class="story-extract-scan"><span>Reading source pages</span><b class="story-extract-typed">Extracting health data…</b><div class="story-extract-scanbar"><i></i></div></div></div><div class="story-extract-stage story-extract-results"><div class="story-extract-result-head"><span><i>✓</i>6 data types found</span><small>Source-linked data · sources attached</small></div><div class="story-data-table"><div class="story-data-row"><span>Biomarker</span><b>HbA1c · 6.4%</b><small>Page 2</small></div><div class="story-data-row"><span>Diagnosis</span><b>Hypertension</b><small>Page 4</small></div><div class="story-data-row"><span>Medication</span><b>Metformin · 500 mg</b><small>Page 4</small></div><div class="story-data-row"><span>Procedure</span><b>Echocardiogram · 2025</b><small>Page 6</small></div><div class="story-data-row"><span>Genetics</span><b>BRCA1/2 · negative</b><small>Page 8</small></div><div class="story-data-row"><span>Supplement</span><b>Vitamin D3 · 1,000 IU</b><small>Page 5</small></div></div></div></div></section></div></div></div>
     </article>
     <article class="prepared-story-step">
     <div class="prepared-story-card" aria-label="Interactive longitudinal HbA1c view using anonymized data">
@@ -3574,7 +3578,10 @@
         <header class="evidence-head">
           <div><p class="eyebrow">Traceability in action</p><h2 id="security-title">Track a finding from the report to its source.</h2></div>
         </header>
-        <p class="patent-pending-note"><a href="patents.html">Patent-pending multi-agent record analysis and source-linking technology →</a></p>
+        <aside class="home-patent-notes" aria-label="Patent-pending technology">
+          <a href="patents.html">Patent pending · Multi-agent record analysis and source linking</a>
+          <a href="patents.html">Patent pending · Interdependent-system simulation and cascading-effect modelling</a>
+        </aside>
         <ol class="traceability-flow" aria-label="Five steps from a source record to a validated, source-linked report">
           <li class="traceability-step"><small>01 · Record</small><h3>Extract the record.</h3><div class="traceability-ui is-record"><b class="trace-record-name">Example Laboratory 01</b><span>Laboratory report <i>Page 3</i></span><div class="trace-extract-counts"><span><b>83</b> Biomarkers</span><span><b>2</b> Diagnoses</span><span><b>1</b> Procedure</span><span><b>5</b> Medications</span></div></div></li>
           <li class="traceability-step"><small>02 · Data</small><h3>Save the data.</h3><div class="traceability-ui"><div class="trace-data-grid"><span>Biomarker <b>HbA1c</b></span><span>Value <b>6.1%</b></span><span>Reference <b>&lt;5.7%</b></span><span>Date <b>2026-Aug-14</b></span><span>Source <b>Page 3</b></span></div></div></li>
@@ -3632,7 +3639,7 @@
         <nav class="footer-cols" aria-label="Footer">
           <div class="footer-col">
             <h3>For clinicians</h3>
-            <a href="clinicians.html#clinician-product-animation-title">How it works</a>
+            <a href="index.html#features">How it works</a>
             <a href="reports.html">Reports</a>
             <a href="pricing.html">Pricing</a>
           </div>
@@ -3643,7 +3650,7 @@
             </div>
           <div class="footer-col">
             <h3>Explore</h3>
-            <a href="case-studies.html">Clinical workflows</a>
+
             <a href="about.html">About</a>
 <a href="contact.html">Contact</a>
 <a href="compliance.html">Security &amp; compliance</a>
@@ -6092,25 +6099,6 @@
         start();
       }
       render();
-    })();
-
-    // Placeholder interviews — keep the action visible without sending people to a dead page.
-    (function () {
-      document.querySelectorAll('[data-interview-unavailable]').forEach(function (button) {
-        var original = button.textContent;
-        var resetTimer = null;
-        button.addEventListener('click', function () {
-          clearTimeout(resetTimer);
-          button.textContent = 'Interview not here yet';
-          button.classList.add('is-unavailable');
-          button.setAttribute('aria-live', 'polite');
-          resetTimer = setTimeout(function () {
-            button.textContent = original;
-            button.classList.remove('is-unavailable');
-            button.removeAttribute('aria-live');
-          }, 2400);
-        });
-      });
     })();
 
     // Report modal — open the full report in an in-page brand overlay

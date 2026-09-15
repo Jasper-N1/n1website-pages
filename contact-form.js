@@ -42,7 +42,7 @@
     compliance: {
       label: 'Security and data handling',
       title: 'Ask about security, <em>data handling, or governance.</em>',
-      intro: 'Share the requirement—not patient information—and we’ll respond directly or arrange a focused review.',
+      intro: 'Share the requirement and we’ll respond directly or arrange a focused review.',
     },
     dpa: {
       label: 'Data Processing Agreement request',
@@ -52,7 +52,7 @@
     governance: {
       label: 'Governance requirements',
       title: 'Ask about clinical <em>governance requirements.</em>',
-      intro: 'Share the requirement—not patient information—and we’ll respond directly or arrange a focused review.',
+      intro: 'Share the requirement and we’ll respond directly or arrange a focused review.',
     },
     workflow: {
       label: 'Clinical workflow',
@@ -133,7 +133,7 @@
       success.focus();
     } catch (_error) {
       status.className = 'contact-status error';
-      status.innerHTML = 'We could not send the form. Your details are still here—try again, or email <a href="mailto:longevity@n1.care">longevity@n1.care</a> without patient information.';
+      status.innerHTML = 'We could not send the form. Your details are still here—try again, or email <a href="mailto:longevity@n1.care">longevity@n1.care</a>.';
       submitButton.disabled = false;
       submitButton.textContent = originalLabel;
     } finally {

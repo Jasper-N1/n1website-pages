@@ -87,9 +87,7 @@ body.marketing-page { color: var(--ink); background: var(--cream); }
    same treatment .tonal-lab already gives the homepage — ink ground, footage
    warmed and held under full opacity, wine scrim over it — and the two surfaces
    read as one system rather than two. The copy sits *on* the scrim, so a band is
-   a section of the page and not an illustration parked beside one. Every band
-   carries a .media-credit (defined in art-directions.css): this is concept
-   footage, and the page says so rather than implying it is an n1 customer. */
+   a section of the page and not an illustration parked beside one. */
 .page-media { position: relative; overflow: hidden; border-radius: var(--n1-radius-5xl); color: var(--cream); background: var(--ink); }
 .page-media video, .page-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .82; filter: none; }
 /* Two ramps, and the split of labor matters. The vertical one carries the

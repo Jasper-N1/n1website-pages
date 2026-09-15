@@ -5,6 +5,12 @@
   const path = location.pathname.split('/').pop() || 'index.html';
   const current = path;
   const pricingIsCurrent = current === 'pricing.html' || current === 'pricing-patients.html';
+  const signupRole = current === 'patients.html' || current === 'pricing-patients.html'
+    ? 'patient'
+    : current === 'clinicians.html' || current === 'pricing.html'
+      ? 'doctor'
+      : null;
+  const signupHref = `https://app.n1.care/signup${signupRole ? `?role=${signupRole}` : ''}`;
   const links = [
     ['clinicians.html', 'For clinicians'],
     ['patients.html', 'For patients'],
@@ -34,7 +40,7 @@
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-menu" aria-label="Open navigation"><span></span></button>
       <div class="nav-menu" id="primary-menu">
         <div class="nav-links">${linkMarkup}</div>
-        <div class="nav-actions"><a class="login" href="https://app.n1.care/login">Log in</a><a class="button" href="https://app.n1.care/signup">Start free trial</a></div>
+        <div class="nav-actions"><a class="login" href="https://app.n1.care/login">Log in</a><a class="button" href="${signupHref}">Start free trial</a></div>
       </div>
     </div>`;
   script.insertAdjacentElement('afterend', nav);

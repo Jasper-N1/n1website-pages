@@ -600,6 +600,20 @@
 .product-hero-menu-head > div:last-child { display: flex; align-items: center; gap: 8px; }
 .product-hero-menu-head > div:last-child span { padding: 7px 10px; border-radius: 999px; color: #315957; background: #e0efec; font-size: 8px; font-weight: 800; }
 .product-hero-menu-head > div:last-child b { padding: 8px 10px; border-radius: 7px; color: #fff; background: #376361; font-size: 8px; }
+.hero-patient-notes-demo { margin-top: 24px; padding: 22px; border: 1px solid #d7e1de; border-radius: 12px; background: #f7faf9; }
+.hero-patient-notes-demo > header { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding-bottom: 15px; border-bottom: 1px solid #dce5e2; }
+.hero-patient-notes-demo > header b,.hero-patient-notes-demo > header span { display: block; }
+.hero-patient-notes-demo > header b { color: #24302c; font-size: 13px; }
+.hero-patient-notes-demo > header span { margin-top: 4px; color: #6b7773; font-size: 8px; }
+.hero-patient-notes-demo > header em { padding: 6px 9px; border-radius: 999px; color: #315957; background: #e0efec; font-size: 7px; font-style: normal; font-weight: 800; }
+.hero-patient-note-card { margin-top: 16px; padding: 18px; border: 1px solid #ccd9d5; border-radius: 10px; background: #fff; box-shadow: 0 12px 28px -24px rgba(28,56,50,.4); }
+.hero-patient-note-card > div b,.hero-patient-note-card > div span { display: block; }
+.hero-patient-note-card > div b { color: #26312e; font-size: 11px; }
+.hero-patient-note-card > div span { margin-top: 5px; color: #697570; font-size: 8px; }
+.hero-patient-note-card p { min-height: 94px; box-sizing: border-box; margin: 14px 0 0; padding: 13px; border: 1px solid #d7e1de; border-radius: 8px; color: #34423e; background: #fbfcfc; font-size: 9px; line-height: 1.55; }
+.hero-patient-note-card footer { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-top: 13px; }
+.hero-patient-note-card footer small { color: #71807b; font-size: 7px; }
+.hero-patient-note-card footer b { padding: 8px 11px; border-radius: 7px; color: #fff; background: #376361; font-size: 8px; }
 .hero-record-count { display: grid; }
 .hero-record-count i { grid-area: 1/1; font-style: normal; }
 .hero-record-count i:last-child { opacity: 0; }
