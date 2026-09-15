@@ -10,6 +10,8 @@
   const successCopy = document.querySelector('#contact-success-copy');
   const resetButton = document.querySelector('#contact-reset');
   const submitButton = form.querySelector('button[type="submit"]');
+  const messageInput = form.querySelector('#contact-message');
+  const messageHelp = document.querySelector('#message-help');
 
   const intents = {
     walkthrough: {
@@ -42,6 +44,11 @@
       title: 'Ask about security, <em>data handling, or governance.</em>',
       intro: 'Share the requirement—not patient information—and we’ll respond directly or arrange a focused review.',
     },
+    dpa: {
+      label: 'Data Processing Agreement request',
+      title: 'Request a <em>Data Processing Agreement.</em>',
+      intro: 'Send us your organization and contracting details. We’ll review the request and reply by email with the next step.',
+    },
     governance: {
       label: 'Governance requirements',
       title: 'Ask about clinical <em>governance requirements.</em>',
@@ -56,9 +63,21 @@
 
   const requestedIntent = new URLSearchParams(window.location.search).get('intent');
   const activeIntent = Object.hasOwn(intents, requestedIntent) ? requestedIntent : 'walkthrough';
-  intentSelect.value = activeIntent;
-  title.innerHTML = intents[activeIntent].title;
-  intro.textContent = intents[activeIntent].intro;
+  const setIntent = (intent) => {
+    const selectedIntent = Object.hasOwn(intents, intent) ? intent : 'walkthrough';
+    intentSelect.value = selectedIntent;
+    title.innerHTML = intents[selectedIntent].title;
+    intro.textContent = intents[selectedIntent].intro;
+    const isDpa = selectedIntent === 'dpa';
+    messageHelp.textContent = isDpa
+      ? 'Include your organization’s legal name, country or jurisdiction, and the name and email of the person who will review or sign the agreement.'
+      : 'Tell us which files you get, what task you need to do, who checks the work, and what you share.';
+    messageInput.placeholder = isDpa
+      ? 'Organization legal name:\nCountry or jurisdiction:\nReviewer or signer name and email:\nAnything else we should know:'
+      : '';
+  };
+  setIntent(activeIntent);
+  intentSelect.addEventListener('change', () => setIntent(intentSelect.value));
 
   form.addEventListener('invalid', (event) => {
     event.target.setAttribute('aria-invalid', 'true');
@@ -124,7 +143,7 @@
 
   resetButton?.addEventListener('click', () => {
     form.reset();
-    intentSelect.value = activeIntent;
+    setIntent(activeIntent);
     form.hidden = false;
     success.hidden = true;
     submitButton.disabled = false;
