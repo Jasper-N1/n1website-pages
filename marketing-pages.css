@@ -521,11 +521,11 @@ body.marketing-page { color: var(--ink); background: var(--cream); }
 .marketing-footer-links { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 28px; }
 .marketing-footer-links strong { display: block; margin-bottom: 20px; color: var(--peach); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
 .marketing-footer-links a { display: block; margin-top: 13px; color: #d7d2cb; font-size: 13px; }
-.marketing-footer-bottom { padding-top: 27px; border-top: 1px solid #47413a; color: #bcb6af; font-size: 11px; }
+.marketing-footer-bottom { padding-top: 27px; border-top: 1px solid #47413a; color: #efe8de; font-size: 11px; }
 .patent-pending-note { width: fit-content; margin: 20px 0 0; padding: 8px 11px; border: 1px solid currentColor; border-radius: 999px; color: #376361; font-size: 10px; font-weight: 750; letter-spacing: .06em; text-transform: uppercase; }
 .patent-pending-note a { color: inherit; text-decoration: none; }
 
-@media (max-width: 1280px) {
+@media (max-width: 900px) {
   .marketing-page .shell { width: var(--n1-page-width); }
   .marketing-page .marketing-nav-inner { width: var(--n1-nav-surface-width); }
   .marketing-nav-inner { position: relative; display: flex; grid-template-columns: none; justify-content: space-between; }
@@ -721,3 +721,5 @@ body.marketing-page { color: var(--ink); background: var(--cream); }
     transition-duration: .01ms !important;
   }
 }
+/* Keep unreleased feature copy in place for later activation without exposing it publicly. */
+[data-future-feature][hidden] { display: none !important; }

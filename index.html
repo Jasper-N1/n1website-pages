@@ -4,8 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
-  <title>n1.care — Patient histories for better-prepared consultations</title>
-  <meta name="description" content="Organize years of medical records into one timeline, check each finding against its source, and prepare reports for review.">
+  <title>n1.care — Health data you can trust</title>
+  <meta name="description" content="n1 brings scattered medical records into one history, with every finding linked to its original file and page.">
+  <meta property="og:title" content="n1.care — Health data you can trust">
+  <meta property="og:description" content="n1 brings scattered medical records into one history, with every finding linked to its original file and page.">
   <meta name="theme-color" content="#2a2b2a">
   <link rel="icon" type="image/svg+xml" href="assets/n1-logo.svg">
   <link rel="preload" as="image" href="assets/videos/runway-main-header-poster.jpg" fetchpriority="high">
@@ -45,7 +47,7 @@
     .tonal-orbit-wrap { display: none; }
     .tonal-hero { align-items: flex-end; padding: 130px 0 28px; }
     .tonal-hero-inner { width: var(--n1-page-width); max-width: none; padding-right: 0; padding-left: 0; align-items: flex-end; text-shadow: none !important; }
-    .tonal-copy-block { max-width: 1100px; gap: 0; }
+    .tonal-copy-block { width: 100%; min-width: 0; max-width: 1100px; gap: 0; }
     .tonal-hero .eyebrow { display: none; }
     .tonal-hero h1 { max-width: 1100px; color: #fff; font-family: var(--sans); font-size: clamp(54px,5.55vw,80px); font-weight: 400; line-height: 1.02; letter-spacing: -.045em; text-shadow: 0 3px 24px rgba(0,0,0,.24) !important; }
     .tonal-hero h1 .hero-trust-line { display: inline; color: inherit; }
@@ -98,7 +100,8 @@
     .doctor-features { position: relative; padding: clamp(80px,8vw,112px) 0 96px; overflow: clip; border-top: 1px solid var(--mist); background: var(--paper); }
     .doctor-features::before { display: none; }
     .doctor-features > .shell { position: relative; z-index: 1; }
-    #features, #product, #reports, #security, #roadmap, #contact { scroll-margin-top: 84px; }
+    #features, #product, #reports, #security, #roadmap, #contact, #clinician-prepared, #method { scroll-margin-top: 140px; }
+    .security-summary h2, .tonal-close h2, .evidence-head h2 { scroll-margin-top: 140px; }
     .section-head { max-width: 760px; margin: 0 auto 52px; text-align: center; }
     .section-head .eyebrow { color: var(--wine); }
     .section-head h2 { margin: 0; color: var(--ink); font-family: var(--serif); font-size: clamp(34px, 4.4vw, 54px); font-weight: 400; line-height: 1.05; letter-spacing: -.02em; }
@@ -1468,8 +1471,6 @@
     .traceability-step { position: relative; min-width: 0; min-height: 310px; display: flex; flex-direction: column; padding: 25px 20px 20px; border-right: 1px solid #dce4e1; background: #fbfaf7; transition: background-color .45s ease, box-shadow .45s ease; }
     .traceability-step:last-child { border-right: 0; }
     .traceability-step::before { position: absolute; top: 0; right: 0; left: 0; height: 3px; background: #3f8f88; content: ''; opacity: 0; transform: scaleX(.25); transform-origin: left; transition: opacity .35s ease, transform .45s ease; }
-    .traceability-step::after { position: absolute; z-index: 2; top: 47%; right: 8px; width: 22px; height: 22px; display: grid; place-items: center; border: 1px solid #c5d5d1; border-radius: 50%; color: #547a75; background: #fbfaf7; font: 700 12px/1 var(--sans); content: '→'; transform: translateY(-50%); transition: color .35s ease, border-color .35s ease, background-color .35s ease; }
-    .traceability-step:last-child::after { display: none; }
     .traceability-step > small { color: #55746f; font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; transition: color .35s ease; }
     .traceability-step > h3 { min-height: 51px; margin: 12px 0 7px; color: #202523; font: 400 24px/1.06 var(--serif); }
     .traceability-step > p { min-height: 38px; margin: 0; color: #65716d; font-size: 13px; line-height: 1.45; }
@@ -1495,7 +1496,6 @@
     .traceability-ui.is-table td { color: #244b49; font-weight: 800; text-align: right; }
     .traceability-step.is-active { z-index: 1; background: #eef6f4; box-shadow: inset 0 0 0 1px rgba(63,143,136,.08); }
     .traceability-step.is-active::before { opacity: 1; transform: scaleX(1); }
-    .traceability-step.is-active::after { color: #376361; background: #eef6f4; }
     .traceability-step.is-active > small { color: #24746e; }
     .traceability-step.is-active .traceability-ui { border-color: #9fc8c1; background: #fff; box-shadow: 0 15px 30px -24px rgba(35,90,82,.52); }
     .traceability-flow.is-paused .traceability-step { transition-duration: .2s; }
@@ -1777,10 +1777,11 @@
     .report-dot::before { position: absolute; inset: 10px; border-radius: 50%; background: #afc7c2; content: ""; transition: background .3s, transform .3s; }
     .report-dot.is-active { background: transparent; transform: none; }
     .report-dot.is-active::before { background: #2f7773; transform: scale(1.18); }
-    .site-footer, .site-footer .footer-tagline, .site-footer .footer-col a, .site-footer .footer-bottom, .site-footer .footer-contact .fc-label { color: #dcd3cb; }
+    .site-footer, .site-footer .footer-tagline, .site-footer .footer-col a, .site-footer .footer-contact .fc-label { color: #dcd3cb; }
+    .site-footer .footer-bottom, .site-footer .footer-bottom p { color: #f3eee6; }
     .site-footer .footer-cols { grid-template-columns: repeat(3, 1fr); }
     :focus-visible { outline: 3px solid var(--peach); outline-offset: 3px; }
-    @media (max-width: 1280px) {
+    @media (max-width: 1023px) {
       .tonal-motion .nav-inner { position: relative; display: flex; justify-content: space-between; }
       .nav-toggle { display: block; }
       .nav-menu { position: absolute; top: 54px; left: 0; right: 0; display: none; padding: 18px; border-radius: 18px; background: var(--berry); box-shadow: 0 18px 45px rgba(36,21,28,.35); }
@@ -1966,7 +1967,6 @@
       .traceability-flow { grid-template-columns: 1fr; }
       .traceability-step { min-height: 0; border-right: 0; border-bottom: 1px solid #d7e0dd; }
       .traceability-step:last-child { border-bottom: 0; }
-      .traceability-step::after { top: auto; right: 50%; bottom: -12px; content: '↓'; transform: translateX(50%); }
       .traceability-step > h3, .traceability-step > p { min-height: 0; }
       .traceability-ui { height: auto; min-height: 150px; margin-top: 18px; }
       .trust-showcase .privacy-choice-grid { grid-template-columns: 1fr; gap: 8px; padding: 8px; }
@@ -2394,6 +2394,13 @@
     .report-card.is-right { transform: translateX(48%) translateZ(-120px) rotateY(0deg) scale(.84); }
   }
 
+  /* Product demonstrations are evidence, not background texture. Keep their
+     explanatory text readable even inside the scaled application frame. */
+  .walkthrough-product :is(span,small,b,strong,em,p,button,label,td,th),
+  .traceability-flow :is(span,small,b,strong,em,p,button,label,td,th) {
+    font-size: 11px !important;
+  }
+
   /* ==========================================================================
      TESTIMONIALS & CLINICIAN SPOTLIGHT
      ========================================================================== */
@@ -2691,7 +2698,7 @@
       backdrop-filter: none;
     }
     .home-trust-header .tonal-hero h1 {
-      max-width: 1060px;
+      max-width: 820px;
       margin: 0;
       color: #376361 !important;
       font-family: var(--sans);
@@ -2702,23 +2709,48 @@
       text-wrap: balance;
       text-shadow: none !important;
     }
+    .home-hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+    .home-trust-header .tonal-copy-block {
+      opacity: 1;
+      transform: none;
+      animation: none !important;
+    }
+    .home-trust-header .home-hero-actions .button {
+      min-height: 46px;
+      padding: 0 18px;
+      border-color: #244b49;
+      color: #fff;
+      background: #244b49;
+    }
+    .home-trust-header .home-hero-actions .button.secondary {
+      border-color: #376361;
+      color: #244b49;
+      background: rgba(255,253,249,.7);
+    }
     .home-hero-note {
-      margin: clamp(28px,4.5vh,48px) 0 0;
+      display: inline-flex;
+      align-items: center;
+      margin: clamp(22px,3.5vh,36px) 0 0;
       color: #2f7773 !important;
       font-size: 13px;
       font-weight: 630;
       letter-spacing: .01em;
+      text-decoration: none;
       text-shadow: none !important;
     }
+    .home-hero-note:hover { color: #244b49 !important; }
     .home-hero-note::after {
-      width: 7px;
-      height: 7px;
       display: inline-block;
-      margin: 0 0 3px 11px;
-      border-right: 1.5px solid currentColor;
-      border-bottom: 1.5px solid currentColor;
-      content: "";
-      transform: rotate(45deg);
+      margin-left: 10px;
+      content: "↓";
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 1;
     }
     .home-trust-header .doctor-features {
       border-top: 0;
@@ -2960,20 +2992,28 @@
         line-height: .98;
       }
       .home-hero-note { margin-top: 22px; }
+      .home-trust-header .tonal-copy-block {
+        opacity: 1;
+        transform: none;
+        animation: none !important;
+      }
     }
     @media (max-width: 560px) {
       .home-trust-header .tonal-scroll-sequence,
-      .home-trust-header .tonal-hero { min-height: 620px !important; }
+      .home-trust-header .tonal-hero { min-height: 760px !important; }
       .home-trust-header .tonal-hero-video video {
-        top: 76px;
+        top: 68px;
         left: 0;
         width: 100%;
-        height: clamp(235px,38svh,300px);
+        height: 220px;
         object-position: center center;
-        transform: translateX(-18%) scale(1.48);
+        transform: translateX(-15%) scale(1.3);
       }
+      .home-trust-header .tonal-hero-inner,
+      .home-trust-header .tonal-scroll-sequence.is-engaged .tonal-hero-inner { top: 315px; }
       .home-trust-header .tonal-hero .eyebrow { margin-bottom: 12px; }
       .home-trust-header .tonal-hero h1 { max-width: 410px; font-size: clamp(42px,12vw,54px); line-height: 1; }
+      .home-trust-header .tonal-hero h1 { font-size: clamp(36px,11vw,44px); }
       .home-hero-note { margin-top: 20px; font-size: 12px; }
       .home-purpose-statement { min-height: 82svh; padding-inline: 22px; }
       .home-purpose-statement h2 { max-width: 480px; font-size: clamp(48px,14vw,68px); }
@@ -2996,7 +3036,7 @@
       .home-upload-progress i { width: 62%; animation: none !important; }
     }
   </style>
-  <script defer src="prepared-story.js?v=20260902-2"></script>
+  <script defer src="prepared-story.js?v=20260915-1"></script>
 </head>
 <body class="tonal tonal-motion home-trust-header">
   <div class="scroll-bg" aria-hidden="true"></div>
@@ -3016,7 +3056,11 @@
           <div class="shell tonal-hero-inner">
             <div class="tonal-copy-block">
               <h1 id="tonal-title">Health data<br>you can trust.</h1>
-              <p class="home-hero-note">A clearer view of the whole health record</p>
+              <div class="home-hero-actions">
+                <a class="button" href="https://app.n1.care/demo">Try the live demo</a>
+                <a class="button secondary" href="https://app.n1.care/signup">Start free trial</a>
+              </div>
+              <a class="home-hero-note" href="#clinician-prepared">Scroll to see how n1 works</a>
             </div>
           </div>
         </section>
@@ -3039,7 +3083,7 @@
     <div class="prepared-story-card" aria-label="Two-step secure record upload"><div class="prepared-story-frame"><div class="prepared-story-media" aria-hidden="true"></div><div class="prepared-story-copy is-current"><h3>Upload records in two clicks.</h3></div><div class="prepared-story-ui"><section class="prepared-story-state"><div class="story-ui-head"><div><span class="story-ui-avatar">ER</span><span><b>Upload health records</b></span></div><span>Secure upload</span></div><div class="story-upload-zone"><div class="story-upload-stage story-upload-choose"><i>↑</i><b>Choose records</b><small>PDF, PNG or JPG · TXT, CSV or TSV for DNA</small></div><div class="story-upload-stage story-upload-selected"><div class="story-upload-selected-row"><i>PDF</i><span><b>lab-results-june.pdf</b><small>12 pages · 2.4 MB</small></span></div><div class="story-upload-meter"><span></span></div><small class="story-upload-status"><span>Uploading securely…</span><span>2.4 MB</span></small></div><div class="story-upload-stage story-upload-complete"><i>✓</i><b>Upload complete</b><small>1 record added securely</small></div></div><div class="story-upload-actions"><span><b>1</b> Choose files</span><span><b>2</b> Upload securely</span></div></section></div></div></div>
     </article>
     <article class="prepared-story-step">
-    <div class="prepared-story-card" aria-label="Animation showing health data extracted from a health record"><div class="prepared-story-frame"><div class="prepared-story-media" aria-hidden="true"></div><div class="prepared-story-copy"><h3>All health data, auto-extracted.</h3></div><div class="prepared-story-ui"><section class="prepared-story-state"><div class="story-ui-head"><div><span class="story-ui-avatar">ER</span><span><b>Health record</b><small>Health history</small></span></div><span>Source-linked</span></div><div class="story-extract-body"><div class="story-extract-stage story-extract-start"><div class="story-extract-file"><i>PDF</i><span><b>complete-health-record.pdf</b><small>12 pages · health record</small></span></div><span class="story-extract-button">Extract health data<i class="story-extract-pointer">↖</i></span></div><div class="story-extract-stage story-extract-typing"><div class="story-extract-scan"><span>Reading source pages</span><b class="story-extract-typed">Extracting health data…</b><div class="story-extract-scanbar"><i></i></div></div></div><div class="story-extract-stage story-extract-results"><div class="story-extract-result-head"><span><i>✓</i>6 data types found</span><small>Source-linked data · sources attached</small></div><div class="story-data-table"><div class="story-data-row"><span>Biomarker</span><b>HbA1c · 6.4%</b><small>Page 2</small></div><div class="story-data-row"><span>Diagnosis</span><b>Hypertension</b><small>Page 4</small></div><div class="story-data-row"><span>Medication</span><b>Metformin · 500 mg</b><small>Page 4</small></div><div class="story-data-row"><span>Procedure</span><b>Echocardiogram · 2025</b><small>Page 6</small></div><div class="story-data-row"><span>Genetics</span><b>BRCA1/2 · negative</b><small>Page 8</small></div><div class="story-data-row"><span>Supplement</span><b>Vitamin D3 · 1,000 IU</b><small>Page 5</small></div></div></div></div></section></div></div></div>
+    <div class="prepared-story-card" aria-label="Animation showing health data extracted from a health record"><div class="prepared-story-frame"><div class="prepared-story-media" aria-hidden="true"></div><div class="prepared-story-copy"><h3>Health data, extracted with its source.</h3></div><div class="prepared-story-ui"><section class="prepared-story-state"><div class="story-ui-head"><div><span class="story-ui-avatar">ER</span><span><b>Health record</b><small>Health history</small></span></div><span>Source-linked</span></div><div class="story-extract-body"><div class="story-extract-stage story-extract-start"><div class="story-extract-file"><i>PDF</i><span><b>complete-health-record.pdf</b><small>12 pages · health record</small></span></div><span class="story-extract-button">Extract health data<i class="story-extract-pointer">↖</i></span></div><div class="story-extract-stage story-extract-typing"><div class="story-extract-scan"><span>Reading source pages</span><b class="story-extract-typed">Extracting health data…</b><div class="story-extract-scanbar"><i></i></div></div></div><div class="story-extract-stage story-extract-results"><div class="story-extract-result-head"><span><i>✓</i>6 data types found</span><small>Source-linked data · sources attached</small></div><div class="story-data-table"><div class="story-data-row"><span>Biomarker</span><b>HbA1c · 6.4%</b><small>Page 2</small></div><div class="story-data-row"><span>Diagnosis</span><b>Hypertension</b><small>Page 4</small></div><div class="story-data-row"><span>Medication</span><b>Metformin · 500 mg</b><small>Page 4</small></div><div class="story-data-row"><span>Procedure</span><b>Echocardiogram · 2025</b><small>Page 6</small></div><div class="story-data-row"><span>Genetics</span><b>BRCA1/2 · negative</b><small>Page 8</small></div><div class="story-data-row"><span>Supplement</span><b>Vitamin D3 · 1,000 IU</b><small>Page 5</small></div></div></div></div></section></div></div></div>
     </article>
     <article class="prepared-story-step">
     <div class="prepared-story-card" aria-label="Interactive longitudinal HbA1c view using anonymized data">
@@ -3049,21 +3093,21 @@
     <div class="story-change-chart" role="group" aria-label="Three HbA1c readings compared with a stated laboratory reference range of 4.0 to 5.6 percent">
     <svg viewBox="0 0 500 128" preserveAspectRatio="none">
     <g class="story-chart-grid"><line x1="38" y1="18" x2="488" y2="18"/><line x1="38" y1="50" x2="488" y2="50"/><line x1="38" y1="82" x2="488" y2="82"/><line x1="38" y1="98" x2="488" y2="98"/></g>
-    <rect class="story-chart-reference" x="38" y="82" width="450" height="16" rx="2"/><line class="story-chart-reference-edge" x1="38" y1="82" x2="488" y2="82"/><line class="story-chart-reference-edge" x1="38" y1="98" x2="488" y2="98"/><text class="story-chart-range-label" x="484" y="78" text-anchor="end">REFERENCE 4.0–5.6%</text>
-    <g class="story-chart-axis"><text x="2" y="21">7.5</text><text x="2" y="53">6.5</text><text x="2" y="85">5.6</text><text x="2" y="101">4.0</text><text x="48" y="121">Mar 2023</text><text x="264" y="121" text-anchor="middle">Jun 2024</text><text x="478" y="121" text-anchor="end">Jan 2025</text></g>
+    <rect class="story-chart-reference" x="38" y="82" width="450" height="16" rx="2"/><line class="story-chart-reference-edge" x1="38" y1="82" x2="488" y2="82"/><line class="story-chart-reference-edge" x1="38" y1="98" x2="488" y2="98"/>    <text class="story-chart-range-label" x="484" y="78" text-anchor="end">REFERENCE 4.0–5.6%</text>
+    <g class="story-chart-axis"><text x="2" y="21">7.5</text><text x="2" y="53">6.5</text><text x="2" y="85">5.6</text><text x="2" y="101">4.0</text><text x="48" y="121">Mar 2023</text><text x="264" y="121" text-anchor="middle">Jun 2024</text><text x="478" y="121" text-anchor="end">Mar 2025</text></g>
     <path class="story-chart-line" d="M48 29 C126 31 192 42 264 49 S406 59 478 65" vector-effect="non-scaling-stroke"/>
-    <g vector-effect="non-scaling-stroke"><circle class="story-chart-point is-outside" tabindex="0" role="button" aria-label="HbA1c 7.1 percent on 14 March 2023, above the stated range, source page 2" data-value="7.1%" data-date="14 Mar 2023" data-source="Above range · Source page 2" cx="48" cy="29" r="6"/><circle class="story-chart-point is-outside" tabindex="0" role="button" aria-label="HbA1c 6.8 percent on 20 June 2024, above the stated range, source page 5" data-value="6.8%" data-date="20 Jun 2024" data-source="Above range · Source page 5" cx="264" cy="49" r="6"/><circle class="story-chart-point is-outside" tabindex="0" role="button" aria-label="HbA1c 6.4 percent on 10 January 2025, above the stated range, source page 8" data-value="6.4%" data-date="10 Jan 2025" data-source="Above range · Source page 8" cx="478" cy="65" r="6"/></g>
+    <g vector-effect="non-scaling-stroke"><circle class="story-chart-point is-outside" tabindex="0" role="button" aria-label="HbA1c 7.1 percent on 14 March 2023, above the stated range, source page 2" data-value="7.1%" data-date="14 Mar 2023" data-source="Above range · Source page 2" cx="48" cy="29" r="6"/><circle class="story-chart-point is-outside" tabindex="0" role="button" aria-label="HbA1c 6.8 percent on 20 June 2024, above the stated range, source page 5" data-value="6.8%" data-date="20 Jun 2024" data-source="Above range · Source page 5" cx="264" cy="49" r="6"/><circle class="story-chart-point is-outside" tabindex="0" role="button" aria-label="HbA1c 6.4 percent on 14 March 2025, above the stated range, source page 8" data-value="6.4%" data-date="14 Mar 2025" data-source="Above range · Source page 8" cx="478" cy="65" r="6"/></g>
     </svg><div class="story-chart-tooltip" aria-hidden="true"><b></b><small></small></div>
     </div></section></div></div></div>
     </article>
     <article class="prepared-story-step">
     <div class="prepared-story-card" aria-label="Scrollable Health Summary preview using anonymized data">
-    <div class="prepared-story-frame"><div class="prepared-story-media" aria-hidden="true"></div><div class="prepared-story-copy"><h3>Key insights, ready for review.</h3></div><div class="prepared-story-ui"><section class="prepared-story-state">
+    <div class="prepared-story-frame"><div class="prepared-story-media" aria-hidden="true"></div><div class="prepared-story-copy"><h3>Findings ready for your review.</h3></div><div class="prepared-story-ui"><section class="prepared-story-state">
     <div class="story-report-window"><div class="story-report-scroll" role="document" tabindex="0" aria-label="Scrollable Health Summary report">
     <header class="story-report-cover"><span>Cross-panel findings &amp; clinical overview</span><h4>Health Summary</h4><p>Example patient · Report preview</p><div class="story-report-meta"><span>Records<b>14 reviewed</b></span><span>Findings<b>6 prioritized</b></span><span>Sources<b>Attached</b></span></div></header>
     <section class="story-report-section"><small>Section 1</small><h5>Executive summary</h5><p>The record shows an improving metabolic trend alongside findings that still need clinical review. Each statement remains connected to the source record and page from which it was prepared.</p><div class="story-report-markers"><span><small>HbA1c</small><b>6.4%</b><em>Down from 7.1%</em></span><span><small>LDL cholesterol</small><b>116 mg/dL</b><em>Review in context</em></span><span><small>hs-CRP</small><b>1.8 mg/L</b><em>Follow trend</em></span><span><small>Vitamin D</small><b>71 nmol/L</b><em>Improving</em></span></div></section>
     <section class="story-report-section"><small>Section 2</small><h5>Body systems</h5><div class="story-report-system"><span><b>Metabolic</b><br>HbA1c trend and treatment context</span><em>Review</em></div><div class="story-report-system"><span><b>Cardiovascular</b><br>Lipids, blood pressure and family history</span><em>Review</em></div><div class="story-report-system"><span><b>Hepatic</b><br>Available liver markers</span><em>Stable</em></div><div class="story-report-system"><span><b>Renal</b><br>Creatinine and eGFR</span><em>Stable</em></div></section>
-    <section class="story-report-section"><small>Section 3</small><h5>Recommendations for review</h5><div class="story-report-recommendations"><div><b>Confirm patient-specific ranges</b><p>Check the range and target appropriate to this patient before interpreting the trend.</p></div><div><b>Reconcile treatment</b><p>Confirm medicines, supplements and recent changes against the source record.</p></div><div><b>Verify before sharing</b><p>Edit the draft, resolve gaps and check every material finding at its source.</p></div></div></section>
+    <section class="story-report-section"><small>Section 3</small><h5>Recommendations for review</h5><div class="story-report-recommendations"><div><b>Confirm patient-specific ranges</b><p>Check the range and target appropriate to this patient before interpreting the trend.</p></div><div><b>Reconcile treatment</b><p>Confirm medicines, supplements and recent changes against the source record.</p></div><div><b>Verify before sharing</b><p><span data-future-feature="report-editing" hidden>Edit the draft, </span>Resolve gaps and check every material finding at its source.</p></div></div></section>
     <section class="story-report-section"><small>Section 4</small><h5>Data gaps</h5><p>Home blood-pressure readings, current anthropometrics and complete family history are not confirmed in the available patient record.</p></section>
     <span class="story-report-provenance">n1.care · Report preview only. This report is not medical advice, diagnosis or treatment.</span><a class="story-report-open" href="Health_summary_demo-1.html">Open full Health Summary →</a>
     </div><span class="story-report-cue" aria-hidden="true">Scroll report ↓</span></div>
@@ -3079,12 +3123,12 @@
     <section class="privacy-choice" aria-labelledby="privacy-choice-title">
       <div class="shell">
         <header class="privacy-choice-head">
-          <div><p class="eyebrow">Protected at every step</p><h2 id="privacy-choice-title">Secure &amp; compliant by design.</h2></div>
+          <div><p class="eyebrow">Protected at every step</p><h2 id="privacy-choice-title">Security at every step.</h2></div>
         </header>
         <div class="security-feature-grid">
           <article class="security-feature-card">
-            <div class="security-feature-visual" aria-hidden="true"><div class="security-handling-stack"><span>Patient anonymisation</span><span>Automatic record deletion</span><span>Controlled report sharing</span></div></div>
-            <div class="security-feature-copy"><h3>Control how records are<br>handled.</h3><p>Create anonymised patient records, automatically delete source files after processing, and control how reports are shared.</p></div>
+            <div class="security-feature-visual" aria-hidden="true"><div class="security-handling-stack"><span>Optional patient anonymisation</span><span>Optional source-file deletion</span><span>Controlled report sharing</span></div></div>
+            <div class="security-feature-copy"><h3>Control how records are<br>handled.</h3><p>Choose whether to use an anonymised patient profile, whether source files remain after processing, and how reports are shared.</p></div>
           </article>
           <article class="security-feature-card">
             <div class="security-feature-visual" aria-hidden="true"><div class="security-encryption-rings"><i></i><i></i><i></i><b>⌑</b></div></div>
@@ -3106,7 +3150,7 @@
             <span class="security-implementation"><i><svg viewBox="0 0 24 24"><rect x="3" y="4" width="7" height="7" rx="1"/><rect x="14" y="13" width="7" height="7" rx="1"/><path d="M10 7h4M17 11v2"/></svg></i><span><b>Production kept separate</b><small>Production and staging run in separate environments. AI processing uses dedicated production infrastructure.</small></span></span>
           </div>
         </div>
-        <a class="security-feature-link" href="contact.html?intent=security">Ask about security and data handling →</a>
+        <a class="security-feature-link" href="compliance.html">Ask about security and data handling →</a>
       </div>
     </section>
 
@@ -3145,7 +3189,7 @@
                   <article class="walkthrough-narration-step" data-narration-step="1"><b>Check the data, range, and source</b></article>
                   <article class="walkthrough-narration-step" data-narration-step="2"><b>Review diagnoses, medicines, procedures, and more</b></article>
                   <article class="walkthrough-narration-step" data-narration-step="3"><b>Build a useful clinical draft</b></article>
-                  <article class="walkthrough-narration-step" data-narration-step="4"><b>Edit and sign off on each report</b></article>
+                  <article class="walkthrough-narration-step" data-narration-step="4"><b><span data-future-feature="report-editing" hidden>Edit and </span>Sign off reports</b></article>
                 </div>
               </div>
               <div class="walkthrough-playbar" aria-label="Walkthrough chapters">
@@ -3159,7 +3203,7 @@
             </aside>
             <div class="product-walkthrough is-timeline-paused is-patient-empty" data-walkthrough>
               <div class="walkthrough-stage" aria-live="off">
-                <div class="walkthrough-product">
+                <div class="walkthrough-product" role="img" aria-label="Product walkthrough showing how uploaded records become a source-linked patient history">
                   <header class="walk-product-topbar">
                     <span class="walk-product-brand"><img src="assets/n1-care-dark-green.svg" alt="n1.care"></span>
                     <span class="walk-patient-switch"><b data-patient-initials>EP</b><span><i data-patient-name>Example patient</i><small>Health record</small></span></span>
@@ -3170,7 +3214,7 @@
                     </span>
                   </header>
                   <div class="walk-product-body">
-                    <nav class="walkthrough-tabs" aria-label="Patient record menu">
+                    <div class="walkthrough-tabs" role="presentation">
                       <div class="walk-menu-group"><b>Overview</b><button class="walk-menu-item walk-aux-tab" type="button" data-walk-aux="dashboard"><i class="walk-menu-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></i>Dashboard</button></div>
                       <div class="walk-menu-group"><b>Documents</b>
                         <button class="walkthrough-tab is-active" id="walkthrough-tab-records" type="button" aria-current="page" data-walkthrough-tab="0"><i class="walk-menu-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h8"/></svg></i>Medical Records</button>
@@ -3191,7 +3235,7 @@
                         <button class="walkthrough-tab" id="walkthrough-tab-patients" type="button" data-walkthrough-tab="5"><i class="walk-menu-icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><path d="M3 21v-2a6 6 0 0 1 12 0v2M19 8v6M16 11h6"/></svg></i>Patients</button>
                       </div>
                       <span class="walk-menu-cursor" aria-hidden="true"><i></i></span>
-                    </nav>
+                    </div>
                     <div class="walk-product-main">
                       <section class="walkthrough-panel is-active" id="walkthrough-panel-records" role="tabpanel" aria-labelledby="walkthrough-tab-records" aria-hidden="false" data-walkthrough-panel="0">
                         <div class="walk-page-head"><div><span data-record-count>Example patient · 14 records</span><h4>Medical Records</h4></div><button class="walk-primary-action" type="button">＋ Upload Records</button></div>
@@ -3321,7 +3365,7 @@
                                 </section>
                                 <section>
                                   <small>Section 4</small><h6>Recommendations</h6>
-                                  <div class="walk-recommendation-list"><article><b>Next visit</b><p>Review the confirmed metformin plan, custom HbA1c range, supplements, weight, and logged home blood pressure.</p></article><article><b>2–4 weeks</b><p>Review cardiovascular risk with the full lipid profile and decide whether ApoB would change care.</p></article><article><b>8–12 weeks</b><p>Repeat HbA1c and hs-CRP after the agreed plan, using the same units and reference settings.</p></article><article><b>Before sharing</b><p>Edit the draft, resolve flagged gaps, and complete the clinician approval flow.</p></article></div>
+                                  <div class="walk-recommendation-list"><article><b>Next visit</b><p>Review the confirmed metformin plan, custom HbA1c range, supplements, weight, and logged home blood pressure.</p></article><article><b>2–4 weeks</b><p>Review cardiovascular risk with the full lipid profile and decide whether ApoB would change care.</p></article><article><b>8–12 weeks</b><p>Repeat HbA1c and hs-CRP after the agreed plan, using the same units and reference settings.</p></article><article><b>Before sharing</b><p><span data-future-feature="report-editing" hidden>Edit the draft, </span>Resolve flagged gaps and complete the clinician approval flow.</p></article></div>
                                 </section>
                                 <section>
                                   <small>Section 5</small><h6>Data Gaps</h6>
@@ -3332,7 +3376,7 @@
                             </div>
                             </div>
                           </article>
-                          <aside class="walk-rewrite-prompt" aria-label="Rewrite selected report text">
+                          <aside class="walk-rewrite-prompt" aria-label="Rewrite selected report text" data-future-feature="report-editing" hidden>
                             <header><b>Rewrite selection</b><span>AI-assisted edit</span></header>
                             <textarea id="walk-rewrite-instruction" name="rewrite-instruction" data-walk-rewrite-prompt aria-label="Rewrite instruction" placeholder="Tell n1 how to rewrite this text…"></textarea>
                             <footer><span>Only the selected text will change</span><span class="walk-rewrite-done">Rewrite applied ✓</span><button type="button" data-walk-rewrite>Rewrite</button></footer>
@@ -3419,9 +3463,7 @@
     <section class="report-carousel" id="reports" aria-labelledby="reports-title">
       <div class="shell">
         <div class="report-carousel-head">
-          <p class="eyebrow">Pre-built or custom reports</p>
           <h2 id="reports-title">Build the right report<br><em>for every health question.</em></h2>
-          <p class="report-carousel-sub">Bring records, trends, and sources into one clear view. Choose a report template or create one around the question you want to answer.</p>
         </div>
         <div class="report-carousel-stage" role="region" aria-roledescription="carousel" aria-label="Sample reports">
           <button class="report-nav prev" type="button" aria-label="Previous report">‹</button>
@@ -3584,16 +3626,16 @@
         </aside>
         <ol class="traceability-flow" aria-label="Five steps from a source record to a validated, source-linked report">
           <li class="traceability-step"><small>01 · Record</small><h3>Extract the record.</h3><div class="traceability-ui is-record"><b class="trace-record-name">Example Laboratory 01</b><span>Laboratory report <i>Page 3</i></span><div class="trace-extract-counts"><span><b>83</b> Biomarkers</span><span><b>2</b> Diagnoses</span><span><b>1</b> Procedure</span><span><b>5</b> Medications</span></div></div></li>
-          <li class="traceability-step"><small>02 · Data</small><h3>Save the data.</h3><div class="traceability-ui"><div class="trace-data-grid"><span>Biomarker <b>HbA1c</b></span><span>Value <b>6.1%</b></span><span>Reference <b>&lt;5.7%</b></span><span>Date <b>2026-Aug-14</b></span><span>Source <b>Page 3</b></span></div></div></li>
-          <li class="traceability-step is-ai"><small>03 · AI</small><h3>Secure pass to AI.</h3><div class="traceability-ui"><p class="trace-finding-context">Six HbA1c results were reviewed against the stated laboratory range.</p><b class="trace-finding">HbA1c is above the stated range.</b><span>Drafted from the saved value, range, date, and source.</span></div></li>
+          <li class="traceability-step"><small>02 · Data</small><h3>Review the data.</h3><div class="traceability-ui"><div class="trace-data-grid"><span>Biomarker <b>HbA1c</b></span><span>Value <b>6.4%</b></span><span>Reference <b>4.0–5.6%</b></span><span>Date <b>2025-Mar-14</b></span><span>Source <b>Page 3</b></span></div></div></li>
+          <li class="traceability-step is-ai"><small>03 · AI</small><h3>Secure AI analysis.</h3><div class="traceability-ui"><p class="trace-finding-context">Five HbA1c results were reviewed against the stated laboratory range.</p><b class="trace-finding">HbA1c is above the stated range.</b><span>Drafted from the saved value, range, date, and source.</span></div></li>
           <li class="traceability-step is-verified"><small>04 · Check</small><h3>Check every fact.</h3><div class="traceability-ui"><div class="trace-check-list"><span><i>✓</i> Value and unit match</span><span><i>✓</i> Date and range match</span><span><i>✓</i> Finding matches the data</span><span><i>✓</i> Source page opens</span><span><i>✓</i> No unsupported claim</span></div></div></li>
-          <li class="traceability-step is-linked"><small>05 · Evidence</small><h3>Open the evidence.</h3><div class="traceability-ui trace-link-demo"><div class="trace-linked-text"><p>The patient’s <span class="trace-evidence-link">HbA1c ↗</span> has fallen across five readings but remains above the stated range.</p></div><div class="trace-evidence-panel"><header class="trace-evidence-head"><b>HbA1c trend</b><span>5 source-linked readings</span></header><svg class="thumb-spark trace-evidence-chart" viewBox="0 0 180 58" preserveAspectRatio="none" aria-label="HbA1c falling overall from 7.1% to 6.1%, with a brief intermediate rise, across five source-linked readings"><rect class="sp-band" x="8" y="45" width="164" height="8" rx="2"></rect><path class="sp-bound" d="M8 45H172M8 53H172"></path><g class="sp-grid"><path d="M8 14H172M8 29H172"></path></g><path class="sp-line" d="M8,17 C22,18 37,25 49,25 C63,25 76,20 90,21 C105,22 117,29 131,31 C146,33 160,36 172,37"></path><circle class="sp-point" cx="8" cy="17" r="1.7"></circle><circle class="sp-point" cx="49" cy="25" r="1.7"></circle><circle class="sp-point" cx="90" cy="21" r="1.7"></circle><circle class="sp-point" cx="131" cy="31" r="1.7"></circle><circle class="sp-point is-latest" cx="172" cy="37" r="2.1"></circle></svg><div class="trace-evidence-table" role="table" aria-label="Selected HbA1c source readings"><span class="trace-evidence-row" role="row"><time datetime="2024-01-12">2024-Jan-12</time><b>7.1%</b><i>Page 3</i></span><span class="trace-evidence-row" role="row"><time datetime="2025-03-14">2025-Mar-14</time><b>6.4%</b><i>Page 3</i></span><span class="trace-evidence-row" role="row"><time datetime="2026-08-14">2026-Aug-14</time><b>6.1%</b><i>Page 3</i></span></div></div><span class="trace-link-cursor" aria-hidden="true"><svg viewBox="0 0 18 22"><path d="M2 2v16l4.2-4.2 3.2 6.2 3-1.5-3.1-6.1H15L2 2Z"></path></svg></span></div></li>
+          <li class="traceability-step is-linked"><small>05 · Evidence</small><h3>Open the evidence.</h3><div class="traceability-ui trace-link-demo"><div class="trace-linked-text"><p>The patient’s <span class="trace-evidence-link">HbA1c ↗</span> has fallen across five readings but remains above the stated range.</p></div><div class="trace-evidence-panel"><header class="trace-evidence-head"><b>HbA1c trend</b><span>5 source-linked readings</span></header><svg class="thumb-spark trace-evidence-chart" viewBox="0 0 180 58" preserveAspectRatio="none" aria-label="HbA1c falling from 7.1% to 6.4% across five source-linked readings"><rect class="sp-band" x="8" y="45" width="164" height="8" rx="2"></rect><path class="sp-bound" d="M8 45H172M8 53H172"></path><g class="sp-grid"><path d="M8 14H172M8 29H172"></path></g><path class="sp-line" d="M8,17 C40,22 72,26 90,28 C118,32 146,36 172,38"></path><circle class="sp-point" cx="8" cy="17" r="1.7"></circle><circle class="sp-point" cx="49" cy="23" r="1.7"></circle><circle class="sp-point" cx="90" cy="28" r="1.7"></circle><circle class="sp-point" cx="131" cy="33" r="1.7"></circle><circle class="sp-point is-latest" cx="172" cy="38" r="2.1"></circle></svg><div class="trace-evidence-table" role="table" aria-label="Five HbA1c source readings"><span class="trace-evidence-row" role="row"><time datetime="2023-03-08">2023-Mar-08</time><b>7.1%</b><i>Page 3</i></span><span class="trace-evidence-row" role="row"><time datetime="2024-01-12">2024-Jan-12</time><b>6.8%</b><i>Page 3</i></span><span class="trace-evidence-row" role="row"><time datetime="2024-06-20">2024-Jun-20</time><b>6.6%</b><i>Page 5</i></span><span class="trace-evidence-row" role="row"><time datetime="2024-11-22">2024-Nov-22</time><b>6.5%</b><i>Page 3</i></span><span class="trace-evidence-row" role="row"><time datetime="2025-03-14">2025-Mar-14</time><b>6.4%</b><i>Page 3</i></span></div></div><span class="trace-link-cursor" aria-hidden="true"><svg viewBox="0 0 18 22"><path d="M2 2v16l4.2-4.2 3.2 6.2 3-1.5-3.1-6.1H15L2 2Z"></path></svg></span></div></li>
         </ol>
       </div>
     </section>
 
 
-    <section class="tonal-close" id="contact" aria-labelledby="home-proof-title"><div class="shell"><p class="eyebrow">Trust built into the workflow</p><h2 id="home-proof-title">Every fact stays connected to its source.</h2><p class="close-copy">Open the original file and page behind every finding. Each insight stays connected to its source, so you can review the full context.</p><div class="close-actions"><a class="button" href="https://app.n1.care/demo">Try the live demo <span aria-hidden="true">→</span></a><a class="button secondary" href="#security">See traceability in action</a></div></div></section>
+    <section class="tonal-close" id="contact" aria-labelledby="home-proof-title"><div class="shell"><p class="eyebrow">Trust built into the workflow</p><h2 id="home-proof-title">Every fact stays connected to its source.</h2><div class="close-actions"><a class="button" href="https://app.n1.care/demo">Try the live demo <span aria-hidden="true">→</span></a><a class="button secondary" href="#security">See traceability in action</a></div></div></section>
 
     <script>
       // Homepage narrative: promise → product → human outcome → reports → proof → control.
@@ -3634,7 +3676,7 @@
       <div class="footer-top">
         <div class="footer-brand">
           <span class="logo" aria-hidden="true"></span>
-          <p class="footer-tagline">Put health files in order. See what changed. Check each fact at its source.</p>
+          <p class="footer-tagline">Health data you can trust, with every finding linked to its source.</p>
         </div>
         <nav class="footer-cols" aria-label="Footer">
           <div class="footer-col">
@@ -5690,7 +5732,7 @@
       var patientMessage = 'Hi John, I’ve reviewed your latest results. Please read the summary before our next appointment, and send me any questions.';
       var scenarios = [
         { selected: 'LDL cholesterol remains above the patient-specific target despite improvement since the previous review.', prompt: 'Add the previous and latest LDL values and dates from the source.', ai: 'LDL cholesterol fell from 142 mg/dL (2024-Nov-22) to 116 mg/dL (2025-Mar-14), but remains above the patient-specific target.', final: 'LDL cholesterol fell from 142 mg/dL (2024-Nov-22) to 116 mg/dL (2025-Mar-14), but remains above the patient-specific target. Review alongside ApoB and overall cardiovascular risk.' },
-        { selected: 'HbA1c is moving in the right direction, with a steady fall across the latest three results.', prompt: 'Add the first and latest HbA1c values and dates from the source.', ai: 'HbA1c fell from 7.1% (2024-Jan-12) to 6.1% (2026-Aug-14) across the latest three results.', final: 'HbA1c fell from 7.1% (2024-Jan-12) to 6.1% (2026-Aug-14) across the latest three results. Continue the current plan and repeat in 12 weeks.' },
+        { selected: 'HbA1c is moving in the right direction, with a steady fall across the latest three results.', prompt: 'Add the first and latest HbA1c values and dates from the source.', ai: 'HbA1c fell from 7.1% (2023-Mar-08) to 6.4% (2025-Mar-14) across five source-linked results.', final: 'HbA1c fell from 7.1% (2023-Mar-08) to 6.4% (2025-Mar-14) across five source-linked results. Continue the current plan and repeat in 12 weeks.' },
         { selected: 'Vitamin D has improved with supplementation but remains below the patient-specific target.', prompt: 'Add the latest vitamin D value, unit, and result date.', ai: 'Vitamin D increased to 71 nmol/L but remains below the patient-specific target (2025-Mar-14).', final: 'Vitamin D increased to 71 nmol/L but remains below the patient-specific target (2025-Mar-14). Continue the current dose and recheck in 12 weeks.' },
         { selected: 'Homocysteine remains elevated and should be reviewed in its wider clinical context.', prompt: 'Add the latest homocysteine measurement and result date.', ai: 'Homocysteine is 14.2 µmol/L, above the patient-specific target (2025-Mar-14).', final: 'Homocysteine is 14.2 µmol/L, above the patient-specific target (2025-Mar-14). Review vitamin B12, folate, and renal function.' },
         { selected: 'hs-CRP remains mildly raised and is more useful as a trend than as a single result.', prompt: 'Add the latest hs-CRP result and date without overstating it.', ai: 'hs-CRP is mildly raised at 1.8 mg/L (2025-Mar-14) and should be followed as part of the wider trend.', final: 'hs-CRP is mildly raised at 1.8 mg/L (2025-Mar-14) and should be followed as part of the wider trend. Interpret alongside recent illness and cardiovascular risk.' },
@@ -5698,7 +5740,7 @@
         { selected: 'TSH remains stable across the latest results, with no source-linked sign of a marked shift.', prompt: 'Add the latest TSH result and date while keeping the wording neutral.', ai: 'TSH is 2.1 mIU/L (2025-Mar-14) and remains stable across the latest source-linked results.', final: 'TSH is 2.1 mIU/L (2025-Mar-14) and remains stable across the latest source-linked results. Review sooner if thyroid symptoms change.' },
         { selected: 'Fasting glucose remains within the stated range and should be read with the HbA1c trend.', prompt: 'Add the latest fasting glucose value and result date.', ai: 'Fasting glucose is 5.2 mmol/L (2025-Mar-14), within the stated range.', final: 'Fasting glucose is 5.2 mmol/L (2025-Mar-14), within the stated range. Interpret alongside the HbA1c trend.' },
         { selected: 'LDL cholesterol has improved, though it remains above the agreed target for this patient.', prompt: 'Make this patient-friendly and retain the current LDL value and date.', ai: 'Your LDL cholesterol has fallen, but the latest result of 116 mg/dL remains above your agreed target (2025-Mar-14).', final: 'Your LDL cholesterol has fallen, but the latest result of 116 mg/dL remains above your agreed target (2025-Mar-14). We will review this together at your next visit.' },
-        { selected: 'The latest HbA1c finding is supported by the linked laboratory report and can be checked at its source.', prompt: 'Name the HbA1c value, date, laboratory, and source page.', ai: 'HbA1c is 6.1% (2026-Aug-14), linked to Example Laboratory 01, Page 3, for source review.', final: 'HbA1c is 6.1% (2026-Aug-14), linked to Example Laboratory 01, Page 3, for source review. Source checked during clinician review.' }
+        { selected: 'The latest HbA1c finding is supported by the linked laboratory report and can be checked at its source.', prompt: 'Name the HbA1c value, date, laboratory, and source page.', ai: 'HbA1c is 6.4% (2025-Mar-14), linked to Example Laboratory 01, Page 3, for source review.', final: 'HbA1c is 6.4% (2025-Mar-14), linked to Example Laboratory 01, Page 3, for source review. Source checked during clinician review.' }
       ];
       var scenarioIndex = 0;
       var timers = [];

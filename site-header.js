@@ -53,11 +53,17 @@
     pricingDropdown.classList.toggle('is-open', open);
     pricingToggle.setAttribute('aria-expanded', String(open));
   };
+  const desktopNav = matchMedia('(min-width: 1024px)');
+  const syncMenuInert = () => {
+    if (desktopNav.matches || menu.classList.contains('is-open')) menu.removeAttribute('inert');
+    else menu.setAttribute('inert', '');
+  };
   const setMenu = (open) => {
     toggle.setAttribute('aria-expanded', String(open));
     toggle.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
     menu.classList.toggle('is-open', open);
     if (!open) setPricingMenu(false);
+    syncMenuInert();
   };
   toggle.addEventListener('click', () => setMenu(toggle.getAttribute('aria-expanded') !== 'true'));
   pricingToggle.addEventListener('click', () => setPricingMenu(pricingToggle.getAttribute('aria-expanded') !== 'true'));
@@ -75,8 +81,26 @@
       pricingToggle.focus();
     }
   });
-  matchMedia('(min-width: 1281px)').addEventListener('change', (event) => {
+  desktopNav.addEventListener('change', (event) => {
     if (event.matches) setMenu(false);
+    else syncMenuInert();
   });
+  syncMenuInert();
+
+  const mockupSelector = [
+    '.product-hero-window',
+    '.prepared-story-ui',
+    '.projected-screen',
+    '.pth-workspace',
+    '.patient-platform-app',
+    '.hero-custom-report-generator',
+    '.hero-bio-detail',
+    '.hero-bio-range-modal'
+  ].join(',');
+  const decorateMockup = (root) => {
+    root.setAttribute('inert', '');
+    root.setAttribute('aria-hidden', 'true');
+  };
+  document.querySelectorAll(mockupSelector).forEach(decorateMockup);
 
 })();

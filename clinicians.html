@@ -7,6 +7,8 @@
 <meta name="theme-color" content="#376361">
 <title>n1 for clinicians — n1.care</title>
 <meta name="description" content="See how clinicians use n1 to prepare a source-linked patient history for review, reporting, and controlled sharing.">
+<meta property="og:title" content="n1 for clinicians — n1.care">
+<meta property="og:description" content="See how clinicians use n1 to prepare a source-linked patient history for review, reporting, and controlled sharing.">
 <link rel="icon" href="assets/n1-logo.svg" type="image/svg+xml">
 <link rel="preload" as="image" href="assets/clinician-story-record-review-master-grade.webp" fetchpriority="high">
 <link rel="stylesheet" href="art-directions.css">
@@ -27,7 +29,7 @@
 .clinician-product-chapter .product-page-name { display: block; margin-bottom: 18px; color: var(--teal); font: 700 12px/1.2 var(--sans); letter-spacing: .16em; text-transform: uppercase; }
 .clinician-product-chapter .product-hero-title-heading { max-width: 820px; margin: 0 auto; color: var(--ink); font: 400 clamp(44px,4.6vw,68px)/1.04 var(--serif); letter-spacing: -.035em; text-wrap: balance; }
 .product-page.clinician-product-chapter .product-hero-story .page-kicker { margin-bottom: 20px; color: var(--teal); font-size: 14px; font-weight: 800; letter-spacing: .14em; }
-.product-page.clinician-product-chapter .product-hero-story h2 { font-size: clamp(25px,2.15vw,34px); line-height: 1.08; text-wrap: balance; }
+.product-page.clinician-product-chapter .product-hero-story h2 { min-block-size: 3.24em; font-size: clamp(25px,2.15vw,34px); line-height: 1.08; text-wrap: balance; }
 .clinician-product-chapter .product-hero-story p:empty { display: none; }
 .product-page.clinician-product-chapter .product-hero-story .patent-pending-note { max-width: 260px; margin-top: 18px; padding: 0; border: 0; border-radius: 0; font-size: 9px; font-weight: 750; line-height: 1.45; letter-spacing: .075em; }
 .product-page.clinician-product-chapter .product-hero-story .patent-pending-note a { display: inline; border-bottom: 1px solid currentColor; }
@@ -194,7 +196,7 @@
 .story-report-open { min-height: 34px; display: inline-flex; align-items: center; margin-top: 13px; padding: 0 12px; border-radius: 8px; color: #fff; background: #376361; font-size: 8px; font-weight: 800; text-decoration: none; pointer-events: auto; }
 .story-report-open:hover { background: #244b49; }
 .story-report-window { position: relative; margin-top: 12px; overflow: hidden; border: 1px solid #cfdbd7; border-radius: 12px; background: #fff; box-shadow: 0 10px 26px rgba(30,42,38,.06); }
-.story-report-scroll { height: 210px; box-sizing: border-box; overflow-x: hidden; overflow-y: auto; padding: 17px 18px 34px; color: #37413d; background: #fff; pointer-events: auto; overscroll-behavior: contain; scrollbar-color: #8db3ad #eef3f1; scrollbar-width: thin; }
+.story-report-scroll { height: 210px; box-sizing: border-box; overflow-x: hidden; overflow-y: auto; padding: 17px 18px 34px; color: #37413d; background: #fff; pointer-events: auto; overscroll-behavior-y: auto; scrollbar-color: #8db3ad #eef3f1; scrollbar-width: thin; }
 .story-report-scroll::-webkit-scrollbar { width: 7px; }
 .story-report-scroll::-webkit-scrollbar-track { background: #eef3f1; }
 .story-report-scroll::-webkit-scrollbar-thumb { border: 2px solid #eef3f1; border-radius: 999px; background: #8db3ad; }
@@ -399,9 +401,9 @@
 @keyframes whitelabel-portal { 0%,18%,100% { transform: translateY(0); } 27% { transform: translateY(-4px); } 38% { transform: translateY(0); } }
 @keyframes whitelabel-status { 0%,46%,100% { transform: scale(1); } 54% { transform: scale(1.08); } 62% { transform: scale(1); } }
 @keyframes whitelabel-revenue { 0%,48%,100% { opacity: 0; transform: translateY(18px) scale(.96); } 57%,82% { opacity: 1; transform: translateY(0) scale(1); } 90% { opacity: 0; transform: translateY(-8px) scale(.98); } }
-.whitelabel-grid { grid-template-columns: minmax(580px,1.32fr) minmax(300px,.68fr); }
-.whitelabel-preview { min-height: 620px; box-sizing: border-box; padding: 40px 38px 86px; }
-.whitelabel-copy { justify-self: end; }
+.whitelabel-grid { grid-template-columns: minmax(300px,.68fr) minmax(580px,1.32fr); }
+.whitelabel-preview { min-height: 620px; box-sizing: border-box; grid-column: 2; grid-row: 1; padding: 40px 38px 86px; }
+.whitelabel-copy { grid-column: 1; grid-row: 1; justify-self: start; }
 .whitelabel-pointer { display: none; }
 .whitelabel-settings,.whitelabel-portal,.whitelabel-report-status,.whitelabel-swatches i { animation: none; }
 .whitelabel-settings,.whitelabel-portal { transition: width .7s cubic-bezier(.22,1,.36,1),opacity .45s ease,transform .7s cubic-bezier(.22,1,.36,1); }
@@ -459,7 +461,7 @@
 .clinician-reveal-layer img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center; }
 .clinician-reveal-layer:nth-child(1) img { object-position: center 46%; }
 .clinician-reveal-layer:nth-child(2) img { object-position: center 44%; }
-.clinician-reveal-layer:nth-child(3) img { object-position: center 10%; }
+.clinician-reveal-layer:nth-child(3) img { object-position: center 48%; }
 .clinician-reveal-layer::after { position: absolute; inset: 0; background: linear-gradient(90deg,rgba(16,26,23,.86) 0,rgba(16,26,23,.57) 32%,rgba(16,26,23,.08) 68%); content: ''; }
 .clinician-reveal-copy { width: min(620px,calc(100% - 48px)); position: absolute; z-index: 2; top: 50%; left: max(19px,calc((100vw - 1356px)/2)); color: #fff; transform: translateY(-50%); }
 .clinician-reveal-copy > span { color: #79d0c9; font-size: 11px; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; }
@@ -530,7 +532,7 @@
 .portrait-clinician footer { margin-top: auto; padding-top: 15px; border-top: 1px solid #d5dfdc; text-align: right; }
 .portrait-clinician cite { color: #244b49; font-size: 13px; }
 .portrait-clinician small { display: block; margin-top: 4px; color: #74807c; font-size: 11px; }
-@media (max-width: 1050px) { .clinician-inline-grid,.whitelabel-grid { grid-template-columns: 1fr; } .clinician-inline-copy h2,.whitelabel-copy h2 { max-width: 720px; } .whitelabel-copy { max-width: 720px; justify-self: start; order: 1; } .whitelabel-preview { width: min(780px,100%); box-sizing: border-box; margin: 0 auto; order: 2; } .clinician-quote-trio { grid-template-columns: 1fr 1fr; } .clinician-quote-card:first-child { grid-column: 1 / -1; min-height: 330px; } .clinician-quote-card:nth-child(2) { transform: none; } .portrait-clinician { grid-template-columns: 1fr; } .portrait-clinician figure { height: 270px; } }
+@media (max-width: 1050px) { .clinician-inline-grid,.whitelabel-grid { grid-template-columns: 1fr; } .clinician-inline-copy h2,.whitelabel-copy h2 { max-width: 720px; } .whitelabel-copy { max-width: 720px; grid-column: 1; grid-row: auto; justify-self: start; order: 1; } .whitelabel-preview { width: min(780px,100%); box-sizing: border-box; grid-column: 1; grid-row: auto; margin: 0 auto; order: 2; } .clinician-quote-trio { grid-template-columns: 1fr 1fr; } .clinician-quote-card:first-child { grid-column: 1 / -1; min-height: 330px; } .clinician-quote-card:nth-child(2) { transform: none; } .portrait-clinician { grid-template-columns: 1fr; } .portrait-clinician figure { height: 270px; } }
 @media (max-width: 820px) { .voices-heading, .featured-clinician, .portrait-clinicians, .clinician-quote-trio { grid-template-columns: 1fr; } .clinician-quote-card:first-child { grid-column: auto; } .clinician-quote-card { min-height: 0; } .featured-clinician figure { min-height: 390px; } .portrait-clinician { grid-template-columns: minmax(160px,.64fr) minmax(0,1.36fr); } }
 @media (max-width: 980px) { .clinician-quote-trio { grid-template-columns: 1fr; gap: 16px; } .clinician-quote-card, .clinician-quote-card:first-child { min-height: 0; padding: 14px; } .clinician-quote-card:nth-child(2) { transform: none; } .clinician-quote-card figure, .clinician-quote-card:nth-child(2) figure { width: calc(100% + 28px); height: 220px; margin: -14px -14px 0; } }
 @media (max-width: 820px) { .doctor-hero { min-height: 100svh; align-items: flex-end; } .doctor-hero-media video { object-position: 60% center; } .doctor-hero-copy { width: 100%; max-width: 650px; margin-left: 0; } .prepared-story { height: 330svh; margin-top: 44px; } .prepared-story-step { gap: 24px; padding: 0 0 64px; } .prepared-story-card { grid-column: 1; grid-row: 2; width: calc(100% - 22px); aspect-ratio: 1.18; justify-self: center; } .prepared-story-copy, .prepared-story-step:nth-child(n) .prepared-story-copy { width: min(650px,calc(100% - 42px)); max-width: none; grid-column: 1; grid-row: 1; justify-self: center; margin: 0; padding: 0; border: 0; background: none; text-align: center; } .prepared-story-ui { padding: 28px; } .prepared-story-state { width: min(530px,84%); } }
@@ -544,7 +546,7 @@
 </style>
 <script defer src="marketing-pages.js">
 </script>
-<script defer src="product-tour-harness.js?v=20260828-10"></script>
+<script defer src="product-tour-harness.js?v=20260915-1"></script>
 </head>
 <body class="tonal tonal-motion marketing-page clinicians-page">
 <a class="skip-link" href="#main">Skip to content</a>
@@ -553,16 +555,16 @@
 <section class="clinician-reveal-section" data-clinician-reveal aria-label="From the complete record to a better clinical conversation">
 <div class="clinician-reveal-sticky">
 <article class="clinician-reveal-layer" data-clinician-reveal-layer>
-              <img src="assets/clinician-hero-doctor-patient-wide-v2.webp" alt="A doctor reviewing information with a patient during a consultation" loading="eager" fetchpriority="high" decoding="async">
-<div class="clinician-reveal-copy"><span>See the whole record</span><h1>One complete view of the patient’s history.</h1><p>Years of reports, results, notes, medicines, and genetics become one organized, source-linked record.</p></div>
+<img src="assets/clinician-story-record-review-master-grade.webp" alt="A clinician quietly reviewing a digital health record before a conversation" loading="eager" fetchpriority="high" decoding="async">
+<div class="clinician-reveal-copy"><span>See the whole record</span><h1>Understand the history before the consultation.</h1></div>
 </article>
 <article class="clinician-reveal-layer" data-clinician-reveal-layer>
-<img src="assets/clinician-hero-record-review-upscaled-v1.webp" alt="A doctor reviewing a clinical document with a patient" loading="lazy" decoding="async">
-<div class="clinician-reveal-copy"><span>Check the evidence</span><h2>Review every finding with confidence.</h2><p>Open the original file and page behind each claim, then edit anything that needs clinical judgment.</p></div>
+<img src="assets/clinician-doctor-warm-response-regraded.webp" alt="A doctor responding warmly to a patient during a consultation" loading="lazy" decoding="async">
+<div class="clinician-reveal-copy"><span>Check the evidence</span><h2>Review every finding with confidence.</h2></div>
 </article>
 <article class="clinician-reveal-layer" data-clinician-reveal-layer>
-<img src="assets/clinician-hero-supportive-care-upscaled-v2.webp" alt="A doctor supporting a patient during a consultation" loading="lazy" decoding="async">
-<div class="clinician-reveal-copy"><span>Stay present</span><h2>More time for the work only you can do.</h2><p>Spend less time reconstructing the record and more time discussing what matters with the patient.</p></div>
+<img src="assets/clinician-story-notebook-care.webp" alt="A clinician taking handwritten notes during a personal care conversation" loading="lazy" decoding="async">
+<div class="clinician-reveal-copy"><span>Stay present</span><h2>More time for the work only you can do.</h2></div>
 </article>
 <div class="clinician-reveal-counter" aria-hidden="true"><i class="is-active"></i><i></i><i></i></div>
 </div>
@@ -572,16 +574,16 @@
     <div class="product-hero-sticky">
     <div class="shell product-hero-inner">
       <div class="product-hero-copy">
-        <span class="product-page-name">How it works</span>
-        <h2 class="product-hero-title-heading" id="clinician-product-animation-title">From medical documents to clinical analysis.</h2>
+        <h2 class="product-hero-title-heading" id="clinician-product-animation-title">From medical documents to verified insights.</h2>
       </div>
       <div class="product-hero-story">
         <span class="page-kicker">How it works</span>
-        <h2>From medical documents to clinical analysis.</h2>
+        <h2>From medical documents to verified insights.</h2>
         <p>Upload supported records. n1 extracts clinical data, organizes the history, and prepares reports that bring findings, trends, and questions into view for professional review.</p>
+        <ol class="product-hero-chapters" aria-label="How it works steps"></ol>
         <p class="patent-pending-note"><a href="patents.html">Patent-pending cross-domain record analysis technology →</a></p>
       </div>
-      <div class="product-hero-window" aria-hidden="true">
+      <div class="product-hero-window" aria-hidden="true" inert>
         <div class="product-hero-bar">
           <span class="product-hero-brand"><b>n1.</b>care</span>
           <div class="product-hero-person"><i>JD</i><span><b>John Doe</b><small>Patient record</small></span></div>
@@ -633,7 +635,6 @@
         <header class="patient-showcase-head">
           <span class="page-kicker">Patient management</span>
           <h2 id="patient-showcase-title">Share and manage patients seamlessly.</h2>
-          <p>Keep each patient space private. Invite the patient when needed, and share only the reports you approve.</p>
         </header>
 
         <div class="patient-showcase-stage" data-patient-showcase aria-label="Patient management walkthrough">
@@ -655,7 +656,7 @@
               <div class="patient-showcase-views patient-platform-content">
                 <section class="patient-showcase-view patient-platform-list is-active" data-patient-showcase-view="0">
                   <header><div><h3>Patients</h3><span>3 patients</span></div><div class="patient-platform-action-menu"><button type="button">Actions <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button><aside aria-label="Patient actions"><button type="button"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3v9m0 0 3-3m-3 3L7 9M4 15h12"/></svg><b>Export all data</b></button><button type="button" data-patient-showcase-next><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 4v12M4 10h12"/></svg><b>Add patient</b></button></aside></div></header>
-                  <div class="patient-platform-toolbar"><span>⌕&nbsp;&nbsp; Search by name or email…</span><label>Patients Per Page&nbsp;&nbsp;<b>25⌄</b></label><label>1–3 of 3&nbsp;&nbsp; ‹ &nbsp;›</label></div>
+                  <div class="patient-platform-toolbar"><span>⌕&nbsp;&nbsp; Search by name or email…</span><label>Patients Per Page&nbsp;&nbsp;<b>25 ↓</b></label><label>1–3 of 3&nbsp;&nbsp; ‹ &nbsp;›</label></div>
                   <div class="patient-platform-table">
                     <header><span>□ &nbsp; Patient ↕</span><span>Last activity ↕</span><span>Age ↕</span><span>Sex ↕</span><span></span></header>
                     <article><span><i>JR</i><b>Jamie Rivera</b></span><em>Aug 28, 2026</em><em>40</em><em>Female</em><button type="button">•••</button></article>
@@ -670,7 +671,7 @@
                     <header><div><h3>Add New Patient</h3><p>Enter patient details to create a new record.</p></div><i>×</i></header>
                     <div class="patient-platform-form-grid">
                       <label>First Name<em>Jamie</em></label><label>Last Name<em>Rivera</em></label>
-                      <label>Date of Birth<em>12 Mar 1986 <span>▣</span></em></label><label>Gender<em>Female <span>⌄</span></em></label>
+                      <label>Date of Birth<em>12 Mar 1986 <span>▣</span></em></label><label>Gender<em>Female <span>↓</span></em></label>
                       <label>Weight (kg)<em>68</em></label><label>Height (cm)<em>168</em></label>
                     </div>
                     <footer><button type="button">Cancel</button><button type="button" data-patient-showcase-next>＋ Add Patient</button></footer>
@@ -688,8 +689,8 @@
 
                 <section class="patient-showcase-view patient-platform-list patient-platform-ready" data-patient-showcase-view="3" hidden>
                   <div class="patient-platform-toast"><i>✓</i><span><b>Invitation sent to Jamie!</b><small>The patient can now create their account.</small></span></div>
-                  <header><div><h3>Patients</h3><span>4 patients</span></div><button type="button">Actions⌄</button></header>
-                  <div class="patient-platform-toolbar"><span>⌕&nbsp;&nbsp; Search by name or email…</span><label>Patients Per Page&nbsp;&nbsp;<b>25⌄</b></label><label>1–4 of 4&nbsp;&nbsp; ‹ &nbsp;›</label></div>
+                  <header><div><h3>Patients</h3><span>4 patients</span></div><button type="button">Actions ↓</button></header>
+                  <div class="patient-platform-toolbar"><span>⌕&nbsp;&nbsp; Search by name or email…</span><label>Patients Per Page&nbsp;&nbsp;<b>25 ↓</b></label><label>1–4 of 4&nbsp;&nbsp; ‹ &nbsp;›</label></div>
                   <div class="patient-platform-table">
                     <header><span>□ &nbsp; Patient ↕</span><span>Last activity ↕</span><span>Age ↕</span><span>Sex ↕</span><span></span></header>
                     <article class="is-new" data-patient-showcase-next><span><i>JR</i><b>Jamie Rivera<u aria-label="Invite sent"></u></b></span><em>Just now</em><em>40</em><em>Female</em><button type="button">•••</button></article>
@@ -708,7 +709,7 @@
         <div class="patient-showcase-points">
           <article><h3>One space per patient</h3><p>Keep records, checks and reports in the right patient workspace.</p></article>
           <article><h3>Invite only when needed</h3><p>A patient account is optional. Send a secure invite when you want to share.</p></article>
-          <article><h3>Control every report</h3><p>Only approved reports can be shared. See access or turn it off at any time.</p></article>
+          <article><h3>Control every report</h3><p>Only approved reports can be shared. Manage access or turn it off at any time.</p></article>
         </div>
       </section>
 </div>
@@ -747,7 +748,7 @@
               </section>
               <section class="settings-panel settings-report-panel" data-settings-panel="3">
                 <header class="settings-panel-head"><span class="settings-panel-title"><i>+</i><span><b>Create a custom report</b><small>Save a reusable template for your workflow</small></span></span></header>
-                <div class="settings-panel-body"><div class="settings-report-builder"><div class="settings-form-grid"><div class="settings-field">Template &amp; Report Name<span>Cardiometabolic review</span></div><div class="settings-field">Audience<span>Doctor <i>⌄</i></span></div></div><div class="settings-field">Custom Prompt<span class="settings-report-brief settings-typing-box" data-settings-report-field><span data-settings-report-prompt></span><i class="settings-type-caret" aria-hidden="true"></i></span></div><span class="settings-panel-action" data-settings-report-action>Create report</span></div></div>
+                <div class="settings-panel-body"><div class="settings-report-builder"><div class="settings-form-grid"><div class="settings-field">Template &amp; Report Name<span>Cardiometabolic review</span></div><div class="settings-field">Audience<span>Doctor <i>↓</i></span></div></div><div class="settings-field">Custom Prompt<span class="settings-report-brief settings-typing-box" data-settings-report-field><span data-settings-report-prompt></span><i class="settings-type-caret" aria-hidden="true"></i></span></div><span class="settings-panel-action" data-settings-report-action>Create report</span></div></div>
               </section>
               <span class="settings-cursor" aria-hidden="true"><svg viewBox="0 0 18 23"><path d="M2 1.5v16.2l4.1-3.6 3 6.6 3.1-1.4-3-6.4 5.5-.2L2 1.5Z"/></svg><i></i></span>
             </div>
@@ -755,11 +756,11 @@
         </div>
       </div>
     </section>
-<section class="approval-summary" aria-labelledby="approval-title">
+<section class="approval-summary" aria-labelledby="approval-title" data-future-feature="report-editing" hidden>
   <div class="shell">
         <header class="approval-copy">
           <p class="eyebrow">Doctor sign-off</p>
-          <h2 id="approval-title">Edit and sign off on each report.</h2>
+          <h2 id="approval-title">Edit and sign off reports.</h2>
           <p class="approval-copy-intro">Check and edit each report before you share it.</p>
         </header>
     <div class="approval-demo" role="group" aria-label="A Health Summary moving through clinician review, approval, and sharing">
@@ -845,7 +846,7 @@
     </div>
     <header class="whitelabel-copy">
       <p class="eyebrow">White-label platform</p>
-      <h2 id="whitelabel-title">Make n1 your practice’s platform.</h2>
+      <h2 id="whitelabel-title">Customize n1 to your clinic.</h2>
       <p>Use your name, colours and domain across the patient experience.</p>
     </header>
   </div>
@@ -880,7 +881,7 @@
 <details><summary><span>Can I use custom reference ranges?</span><i aria-hidden="true"></i></summary><p>Yes. n1 allows clinicians to apply patient-specific custom biomarker ranges. The lab-reported reference range remains visible alongside the custom range, so both can be reviewed in context. Clinicians are responsible for ensuring that a custom range is appropriate for the assay, units, laboratory, patient, and clinical context.</p></details>
 <details><summary><span>Can patients access n1, and how do I share reports with them?</span><i aria-hidden="true"></i></summary><p>Patient access is optional. A clinician can share an approved report directly with the patient it belongs to and invite that patient to create or access their account when needed. Patients can create secure links when they want to share a report with someone else.</p></details>
 <details><summary><span>Can I brand reports with my practice and charge patients for them?</span><i aria-hidden="true"></i></summary><p>Yes. White-label branding is available as a paid add-on. With white-labeling, approved reports and the patient-facing experience can be presented under your practice name, colors, visual identity, and patient-facing domain. You may offer reports as a paid service within your practice and set your own pricing. However, patient billing is handled through your own billing workflow. n1 does not currently collect payments from patients or process patient charges on behalf of practices. Your practice remains responsible for billing practices, patient disclosures, taxes, professional obligations, and any applicable legal or organizational requirements.</p></details>
-<details><summary><span>Where does n1 fit in my clinical workflow?</span><i aria-hidden="true"></i></summary><p>n1 fits between receipt of patient records and clinician review, consultation, or follow-up.</p><p>A typical workflow is:</p><ul><li>Upload the relevant source records</li><li>Allow n1 to organize and extract the longitudinal information</li><li>Review extracted facts, trends, and source-linked findings</li><li>Generate a focused draft report or visit-preparation summary</li><li>Verify the supporting sources</li><li>Edit, interpret, and add clinical context</li><li>Approve the final version</li><li>Share with the patient if appropriate</li></ul><p>n1 is intended to support preparation, synthesis, documentation, and patient-facing communication. It is not a replacement for the EHR, the legal medical record, or clinician judgment.</p></details>
+<details><summary><span>Where does n1 fit in my clinical workflow?</span><i aria-hidden="true"></i></summary><p>n1 fits between receipt of patient records and clinician review, consultation, or follow-up.</p><p>A typical workflow is:</p><ul><li>Upload the relevant source records</li><li>Allow n1 to organize and extract the longitudinal information</li><li>Review extracted facts, trends, and source-linked findings</li><li>Generate a focused draft report or visit-preparation summary</li><li>Verify the supporting sources</li><li data-future-feature="report-editing" hidden>Edit, interpret, and add clinical context</li><li>Approve the final version</li><li>Share with the patient if appropriate</li></ul><p>n1 is intended to support preparation, synthesis, documentation, and patient-facing communication. It is not a replacement for the EHR, the legal medical record, or clinician judgment.</p></details>
 <details><summary><span>Can I see a sample report before signing up?</span><i aria-hidden="true"></i></summary><p>Yes. You can review <a href="reports.html">sample reports</a> without creating an account. The sample report library allows you to compare report formats, structures, and levels of clinical detail. The <a href="https://app.n1.care/demo">live demo</a> lets you explore a sample patient record and see how source-linked outputs work. Sample reports use illustrative information. They demonstrate the workflow and report experience but do not guarantee the content, quality, or outcome for any specific patient record set.</p></details>
 <details><summary><span>Can I create a report for my specialty, a condition, or a custom report type?</span><i aria-hidden="true"></i></summary><p>Yes. Start with a built-in report or create a reusable custom report template with instructions for its purpose, audience, structure, and clinical focus. Select the relevant records and give n1 the brief it should follow when creating the draft. After generation, review the available evidence, refine the content and wording, and approve only the version suited to your workflow and patient.</p></details>
 <details><summary><span>Is n1.care HIPAA compliant, and how is patient data protected?</span><i aria-hidden="true"></i></summary><p>Yes. n1.care supports HIPAA-compliant workflows and maintains Business Associate Agreements (BAAs) with service providers and partners that handle protected health information (PHI) on our behalf. Patient data is encrypted in transit using TLS 1.3 and at rest using AES-256. Access is controlled through authenticated accounts, role-based permissions, and activity logging. Healthcare organizations can also enter into a BAA directly with n1 for workflows involving PHI.<br><br><a href="privacy.html#regional">Read the HIPAA information in our Privacy Notice →</a></p></details>
@@ -897,7 +898,7 @@
 <span class="logo" aria-hidden="true">
 </span>
 </a>
-<p>Put health files in order. See what changed. Check each fact at its source.</p>
+<p>Health data you can trust, with every finding linked to its source.</p>
 </div>
 <div class="marketing-footer-links"><div><strong>Product</strong><a href="index.html#features">How it works</a><a href="reports.html">Reports</a><a href="pricing.html">Pricing</a><a href="https://app.n1.care/demo">Live demo</a></div><div><strong>Solutions</strong><a href="clinicians.html">For clinicians</a><a href="patients.html">For patients</a></div><div><strong>Company</strong><a href="about.html">About</a><a href="contact.html">Contact</a></div><div><strong>Trust &amp; legal</strong><a href="compliance.html">Security &amp; compliance</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="patents.html">Patents</a></div></div></div></div><div class="marketing-footer-bottom">© 2026 N1 Research, LLC</div>
 </div>

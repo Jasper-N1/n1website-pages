@@ -1,4 +1,31 @@
-.prepared-story { height: 360svh; position: relative; margin-top: clamp(50px,7vw,96px); }
+.prepared-story { height: 480svh; position: relative; margin-top: clamp(50px,7vw,96px); }
+.prepared-story-chapters {
+  position: sticky;
+  top: calc(100svh - 54px);
+  z-index: 4;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin: 0 0 18px;
+  padding: 0;
+  list-style: none;
+}
+.prepared-story-chapters button {
+  min-height: 36px;
+  padding: 0 14px;
+  border: 1px solid #c5d4d0;
+  border-radius: 999px;
+  color: #3f534f;
+  background: #fff;
+  font: 650 13px/1 inherit;
+  cursor: pointer;
+}
+.prepared-story-chapters button.is-active {
+  color: #fff;
+  border-color: #244b49;
+  background: #244b49;
+}
 .clinician-prepared-block .prepared-story { margin-top: 0; }
 .prepared-story-card { width: min(700px,100%,calc((100svh - 220px)*1.56)); aspect-ratio: 1.56; position: relative; z-index: 2; grid-column: 1; grid-row: 1; justify-self: center; overflow: visible; transform: translate3d(0,var(--story-y,0),0) scale(var(--story-scale,1)); transform-origin: center; will-change: transform; }
 .prepared-story-card::before { display: none; }
@@ -10,8 +37,8 @@
 .story-ui-head div { display: flex; align-items: center; gap: 10px; }
 .story-ui-avatar { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; color: #f7f4ed; background: #376361; font-size: 8px; font-weight: 800; }
 .story-ui-head b, .story-ui-head small { display: block; }
-.story-ui-head b { color: #282c29; font-size: 11px; }
-.story-ui-head small { margin-top: 3px; color: #7a7e7a; font-size: 8px; }
+.story-ui-head b { color: #282c29; font-size: 13px; }
+.story-ui-head small { margin-top: 3px; color: #4a5854; font-size: 12px; }
 .story-ui-head > span { color: #2f7773; font-size: 8px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
 .story-extract-body { min-height: 166px; position: relative; margin-top: 13px; overflow: hidden; }
 .story-extract-stage { position: absolute; inset: 0; opacity: 0; }
@@ -65,7 +92,7 @@
 .story-upload-status { display: flex; justify-content: space-between; color: #667772 !important; }
 .story-upload-complete > i { border-radius: 50%; background: #48a9a6; }
 .story-upload-zone b { font-size: 12px; }
-.story-upload-zone small { color: #77827e; font-size: 8px; }
+.story-upload-zone small { color: #3f534f; font-size: 12px; }
 .story-upload-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
 .story-upload-actions span { padding: 10px; border: 1px solid #d4dfdc; border-radius: 9px; color: #65716d; background: #fff; font-size: 8px; text-align: center; }
 .story-upload-actions b { margin-right: 4px; color: #2f7773; }
@@ -115,7 +142,7 @@
 .story-report-open:hover { background: #244b49; }
 .story-report-window { position: relative; margin-top: 12px; overflow: hidden; border: 0; border-radius: 0; background: #fff; box-shadow: none; pointer-events: auto; }
 .prepared-story-step:nth-child(4) .story-report-window { width: 100%; margin-top: 0; }
-.story-report-scroll { height: 210px; box-sizing: border-box; overflow-x: hidden; overflow-y: auto; padding: 17px 18px 34px; color: #37413d; background: #fff; pointer-events: auto; overscroll-behavior: contain; scrollbar-color: #8db3ad #eef3f1; scrollbar-width: thin; }
+.story-report-scroll { height: 210px; box-sizing: border-box; overflow-x: hidden; overflow-y: auto; padding: 17px 18px 34px; color: #37413d; background: #fff; pointer-events: auto; overscroll-behavior-y: auto; scrollbar-color: #8db3ad #eef3f1; scrollbar-width: thin; }
 .story-report-scroll::-webkit-scrollbar { width: 7px; }
 .story-report-scroll::-webkit-scrollbar-track { background: #eef3f1; }
 .story-report-scroll::-webkit-scrollbar-thumb { border: 2px solid #eef3f1; border-radius: 999px; background: #8db3ad; }
@@ -219,3 +246,8 @@
 @media (max-width: 620px) { .doctor-hero { min-height: max(680px,100svh); padding: 120px 0 48px; } .doctor-hero-media video { object-position: 64% center; } .doctor-hero h1 { max-width: 360px; font-size: 48px; line-height: 1.03; } .doctor-hero-scroll { margin-top: 30px; font-size: 13px; } .doctor-hero-credit { right: 12px; bottom: 10px; } .prepared-story-card { width: 100%; aspect-ratio: .94; } .prepared-story-frame { border-radius: 27px; } .prepared-story-copy, .prepared-story-step:nth-child(n) .prepared-story-copy { width: calc(100% - 28px); height: 54px; top: 0; left: 14px; padding: 0; } .prepared-story-copy h3 { font-size: 24px; } .prepared-story-copy p { font-size: 12px; } .prepared-story-ui { inset: 0; padding: 16px; } .prepared-story-state { width: 88%; padding: 18px; } .story-ui-head > span { display: none; } .story-records-grid { grid-template-columns: repeat(2,1fr); } .story-records-grid div:nth-child(3) { border-left: 0; } .story-records-grid div:nth-child(n+3) { border-top: 1px solid #dcdbd6; } .story-change-chart { height: 102px; } .story-source-card { align-items: flex-start; flex-direction: column; gap: 7px; } .story-source-card small { white-space: normal; } .clinician-voices { scroll-margin-top: 168px; } .featured-clinician figure { min-height: 310px; } .featured-clinician-copy { padding: 30px 24px 32px; } .featured-clinician blockquote p { font-size: 25px; } .supporting-voices-head { align-items: flex-start; flex-direction: column; } .portrait-clinician { grid-template-columns: 1fr; } .portrait-clinician figure { height: 260px; } .portrait-clinician blockquote { padding: 26px 22px; } }
 @media (max-width: 620px) { .prepared-story-step:nth-child(4) .prepared-story-state { width: 100%; box-sizing: border-box; padding: 14px; } .story-report-scroll { padding-right: 14px; padding-left: 14px; } .story-report-section p { font-size: 9.5px; } }
 @media (prefers-reduced-motion: reduce) { .prepared-story-media, .prepared-story-state, .prepared-story-copy { transition: none !important; } .prepared-story-copy.is-current { opacity: 1; transform: none; animation: none; } .prepared-story-step.is-active .prepared-story-state * { animation: none !important; } .story-extract-start,.story-extract-typing { display: none; } .story-extract-results { opacity: 1; transform: none; } .whitelabel-preview::before,.whitelabel-swatches i,.whitelabel-pointer,.whitelabel-portal,.whitelabel-report-status,.whitelabel-revenue-toast,.whitelabel-settings > header span::before { animation: none !important; } .whitelabel-revenue-toast { opacity: 1; transform: none; } .whitelabel-pointer { display: none; } }
+
+/* Product information remains readable; the surrounding shapes and icons can
+   stay compact without forcing explanatory text into 6–9px type. */
+.prepared-story-ui :is(span,small,b,strong,em,p) { font-size: 11px !important; }
+.prepared-story-ui :is(.story-extract-typed,.story-review-finding > b,.story-report-title b) { font-size: 13px !important; }

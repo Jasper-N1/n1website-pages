@@ -108,6 +108,7 @@
   if (!story) return;
 
   const steps = [...story.querySelectorAll('.prepared-story-step')];
+  const chapterButtons = [...story.querySelectorAll('[data-story-step]')];
   const titleCopies = steps.map((step) => step.querySelector('.prepared-story-copy'));
   let activeTitleIndex = 0;
   titleCopies.forEach((copy, index) => copy.setAttribute('aria-hidden', String(index !== activeTitleIndex)));
@@ -140,6 +141,10 @@
         copy.classList.toggle('is-current', isCurrent);
         copy.setAttribute('aria-hidden', String(!isCurrent));
         steps[index].classList.toggle('is-active', isCurrent);
+      });
+      chapterButtons.forEach((button, index) => {
+        button.classList.toggle('is-active', index === nextTitleIndex);
+        button.setAttribute('aria-current', index === nextTitleIndex ? 'step' : 'false');
       });
       activeTitleIndex = nextTitleIndex;
     }
@@ -177,6 +182,23 @@
     measure();
     requestRender();
   };
+
+  chapterButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const index = Number(button.dataset.storyStep);
+      if (Number.isNaN(index)) return;
+      measure();
+      const progress = steps.length > 1 ? index / (steps.length - 1) : 0;
+      window.scrollTo({
+        top: storyTop + progress * storyDistance,
+        behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
+      });
+    });
+  });
+  if (chapterButtons[0]) {
+    chapterButtons[0].classList.add('is-active');
+    chapterButtons[0].setAttribute('aria-current', 'step');
+  }
 
   window.addEventListener('scroll', requestRender, { passive: true });
   window.addEventListener('resize', remeasure);

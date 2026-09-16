@@ -5784,7 +5784,7 @@ body { display: flex; justify-content: center; }
  var bd=document.createElement('div');bd.className='rsn-backdrop';
  var dr=document.createElement('div');dr.className='rsn-drawer';
  dr.setAttribute('role','dialog');dr.setAttribute('aria-label','Reasoning');
- dr.innerHTML='<button class="rsn-close" aria-label="Close">\u00d7</button><h2 class="rsn-title"></h2><div class="rsn-content"></div>';
+ dr.innerHTML='<button class="rsn-close" aria-label="Close">\u00d7</button><h2 class="rsn-title">Report detail</h2><div class="rsn-content"></div>';
  document.body.appendChild(bd);document.body.appendChild(dr);
  var content=dr.querySelector('.rsn-content');var title=dr.querySelector('.rsn-title');
  function close(){dr.classList.remove('open');bd.classList.remove('open');}

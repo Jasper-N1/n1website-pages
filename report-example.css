@@ -7,6 +7,7 @@ body.marketing-page.example-report-page { color: #202523; background: #e5ecea; }
 .example-report-loading, .example-report-error { min-height: 50vh; display: grid; place-items: center; color: #5f6b67; }
 .example-report-document { overflow: clip; border: 1px solid #b9cbc6; border-radius: 18px; background: #f8fafc; box-shadow: 0 30px 70px -45px rgba(25, 53, 49, .6); }
 .example-report-loading[hidden] { display: none !important; }
+[data-a2ui-marker-empty] { display: none !important; }
 
 /* The platform TOC is calculated for a full application viewport. Inside this
    narrower public report frame that leaves it at roughly 100px wide, forcing

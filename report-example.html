@@ -13,8 +13,23 @@
 <link rel="stylesheet" href="brand-tokens.css">
 <link rel="stylesheet" href="assets/platform-report/platform-report.css">
 <link rel="stylesheet" href="report-example.css">
+<meta property="og:title" content="Example report — n1.care">
+<meta property="og:description" content="An anonymized example report generated from synthetic patient data.">
 <script defer src="marketing-pages.js"></script>
 <script type="module" src="assets/platform-report/platform-report.js?v=20260904-2"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const hideEmptyMarkerTables = () => {
+      document.querySelectorAll('[data-a2ui-marker-empty]').forEach((row) => row.remove());
+      document.querySelectorAll('[data-a2ui-marker-table]').forEach((table) => {
+        const values = [...table.querySelectorAll('[data-a2ui-marker-value]')];
+        table.hidden = !values.length || values.every((cell) => cell.textContent.replace(/\s/g, '') === '—');
+      });
+    };
+    hideEmptyMarkerTables();
+    new MutationObserver(hideEmptyMarkerTables).observe(document.documentElement, { childList: true, subtree: true });
+  });
+</script>
 </head>
 <body class="tonal marketing-page example-report-page">
 <a class="skip-link" href="#report">Skip to report</a>
@@ -26,6 +41,6 @@
 <article class="example-report-document" data-report hidden></article>
 </div>
 </main>
-<footer class="marketing-footer"><div class="shell"><div class="marketing-footer-top"><div class="marketing-footer-brand"><a href="index.html" aria-label="n1.care home"><span class="logo" aria-hidden="true"></span></a><p>Put health files in order. See what changed. Check each fact at its source.</p></div><div class="marketing-footer-links"><div><strong>Product</strong><a href="index.html#features">How it works</a><a href="reports.html">Reports</a><a href="pricing.html">Pricing</a><a href="https://app.n1.care/demo">Live demo</a></div><div><strong>Solutions</strong><a href="clinicians.html">For clinicians</a><a href="patients.html">For patients</a></div><div><strong>Company</strong><a href="about.html">About</a><a href="contact.html">Contact</a></div><div><strong>Trust &amp; legal</strong><a href="compliance.html">Security &amp; compliance</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="patents.html">Patents</a></div></div></div></div><div class="marketing-footer-bottom">© 2026 N1 Research, LLC</div></div></footer>
+<footer class="marketing-footer"><div class="shell"><div class="marketing-footer-top"><div class="marketing-footer-brand"><a href="index.html" aria-label="n1.care home"><span class="logo" aria-hidden="true"></span></a><p>Health data you can trust, with every finding linked to its source.</p></div><div class="marketing-footer-links"><div><strong>Product</strong><a href="index.html#features">How it works</a><a href="reports.html">Reports</a><a href="pricing.html">Pricing</a><a href="https://app.n1.care/demo">Live demo</a></div><div><strong>Solutions</strong><a href="clinicians.html">For clinicians</a><a href="patients.html">For patients</a></div><div><strong>Company</strong><a href="about.html">About</a><a href="contact.html">Contact</a></div><div><strong>Trust &amp; legal</strong><a href="compliance.html">Security &amp; compliance</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="patents.html">Patents</a></div></div></div></div><div class="marketing-footer-bottom">© 2026 N1 Research, LLC</div></div></footer>
 </body>
 </html>

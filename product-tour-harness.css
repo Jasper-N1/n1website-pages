@@ -8,6 +8,33 @@
 .product-hero-story .page-kicker { display: block; margin-bottom: 17px; }
 .product-hero-story h2 { margin: 0; font-family: var(--serif); font-size: clamp(34px,3vw,44px); font-weight: 400; line-height: 1.01; letter-spacing: -.035em; }
 .product-hero-story p { margin: 22px 0 0; color: #52615e; font-size: 15px; line-height: 1.62; }
+.product-hero-chapters {
+  display: grid;
+  gap: 4px;
+  margin: 22px 0 0;
+  padding: 0;
+  list-style: none;
+  pointer-events: auto;
+}
+.product-hero-chapters button {
+  width: 100%;
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 8px;
+  color: #52615e;
+  background: transparent;
+  font: 650 12px/1.2 inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.product-hero-chapters button:hover { background: rgba(55,99,97,.08); }
+.product-hero-chapters button.is-active {
+  color: #244b49;
+  background: #e5f1ee;
+}
 .product-hero-story ul { display: grid; gap: 10px; margin: 25px 0 0; padding: 0; list-style: none; }
 .product-hero-story li { position: relative; padding-left: 20px; color: #344642; font-size: 12px; line-height: 1.5; }
 .product-hero-story li::before { position: absolute; top: .5em; left: 0; width: 8px; height: 8px; border-radius: 50%; background: #48a9a6; content: ""; }

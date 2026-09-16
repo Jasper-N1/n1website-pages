@@ -1,5 +1,7 @@
 /* Site-wide alignment tokens.
    Change these values here to update every public page and navigation bar. */
+html { scroll-padding-top: 120px; }
+
 :root {
   --n1-page-content-max: 1320px;
   --n1-page-gutter-min: 19px;

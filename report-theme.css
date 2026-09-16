@@ -96,3 +96,5 @@ button, input, select, textarea { font-family: "Work Sans", ui-sans-serif, syste
   .sample-draft-banner { padding-inline: 12px !important; font-size: 9px !important; }
   .agui-doc .agui-header-inner { padding-top: 24px !important; }
 }
+
+[data-a2ui-marker-empty] { display: none !important; }
