@@ -108,6 +108,7 @@
   if (!story) return;
 
   const steps = [...story.querySelectorAll('.prepared-story-step')];
+  const intro = story.querySelector('.prepared-story-intro');
   const chapterButtons = [...story.querySelectorAll('[data-story-step]')];
   const titleCopies = steps.map((step) => step.querySelector('.prepared-story-copy'));
   let activeTitleIndex = 0;
@@ -126,13 +127,23 @@
 
   const render = () => {
     const progress = clamp((window.scrollY - storyTop) / storyDistance, 0, 1);
-    const position = progress * (steps.length - 1);
+    const introEnd = .22;
+    const introProgress = clamp(progress / introEnd, 0, 1);
+    const easedIntro = introProgress * introProgress * (3 - 2 * introProgress);
+    const contentProgress = clamp((progress - introEnd) / (1 - introEnd), 0, 1);
+    const position = contentProgress * (steps.length - 1);
     const lift = window.innerHeight * 1.18;
     const transitionProgress = position < steps.length - 1 ? position % 1 : 0;
     const fanProgress = clamp(transitionProgress / .45, 0, 1);
     const fan = Math.sin(fanProgress * Math.PI);
     const depthOffset = (window.innerWidth <= 820 ? 14 : 16) + fan * (window.innerWidth <= 820 ? 5 : 6);
     const depthScale = .018 + fan * .006;
+
+    if (intro) {
+      const introFade = clamp((introProgress - .08) / .78, 0, 1);
+      intro.style.opacity = (1 - introFade).toFixed(3);
+      intro.style.transform = `translate3d(0,${(-introFade * 54).toFixed(2)}px,0)`;
+    }
 
     const nextTitleIndex = clamp(Math.round(position), 0, steps.length - 1);
     if (nextTitleIndex !== activeTitleIndex) {
@@ -165,8 +176,11 @@
         scale = 1 - depth * depthScale;
       }
 
+      y += (1 - easedIntro) * window.innerHeight * .58;
+
       card.style.setProperty('--story-y', `${y.toFixed(2)}px`);
       card.style.setProperty('--story-scale', scale.toFixed(4));
+      card.style.setProperty('--story-opacity', introProgress.toFixed(3));
     });
 
     ticking = false;
