@@ -125,7 +125,6 @@
     }
 
     .search-hero__detail {
-      max-width:15ch;
       display:block;
       margin-top:clamp(18px,2.5vh,30px);
       font-size:clamp(21px,2vw,32px);
@@ -135,6 +134,16 @@
       opacity:clamp(0,calc((var(--hero-progress,0) - .72) * 4),1);
       transform:translateY(calc((1 - clamp(0,calc((var(--hero-progress,0) - .72) * 4),1)) * 14px));
     }
+
+    .search-hero__detail strong {
+      display:block;
+      font-size:clamp(27px,2.65vw,42px);
+      font-weight:600;
+      line-height:1;
+      white-space:nowrap;
+    }
+
+    .search-hero__detail span { display:block; margin-top:5px; }
 
     @media (min-width: 761px) and (max-width: 1500px) {
       .search-hero__copy {
@@ -176,7 +185,8 @@
         font-size:clamp(44px,12vw,64px);
       }
 
-      .search-hero__detail { max-width:18ch; font-size:clamp(20px,5.6vw,27px); }
+      .search-hero__detail { font-size:clamp(20px,5.6vw,27px); }
+      .search-hero__detail strong { font-size:clamp(27px,7.4vw,36px); }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -196,7 +206,7 @@
       <div class="search-hero__copy">
         <h1>
           <span class="search-hero__line search-hero__line--search">We're in there somewhere.</span>
-          <span class="search-hero__line search-hero__line--doctor">Found.<span class="search-hero__detail">The whole picture, seen in full.</span></span>
+          <span class="search-hero__line search-hero__line--doctor">Found.<span class="search-hero__detail"><strong>The whole picture,</strong><span>seen in full.</span></span></span>
         </h1>
       </div>
     </div>
