@@ -38,7 +38,7 @@
     body { background: #dfe8ed; }
 
     .search-hero {
-      height: 185svh;
+      height: 220svh;
       position: relative;
       background: #dfe8ed;
     }
@@ -124,12 +124,16 @@
       transform: translateY(calc((1 - clamp(0, calc((var(--hero-progress, 0) - .46) * 3.2), 1)) * 18px));
     }
 
-    .search-hero__emphasis {
-      color:#95514b;
-      text-decoration:underline;
-      text-decoration-color:#95514b;
-      text-decoration-thickness:.06em;
-      text-underline-offset:.11em;
+    .search-hero__detail {
+      max-width:15ch;
+      display:block;
+      margin-top:clamp(18px,2.5vh,30px);
+      font-size:clamp(21px,2vw,32px);
+      font-weight:400;
+      line-height:1.08;
+      letter-spacing:-.038em;
+      opacity:clamp(0,calc((var(--hero-progress,0) - .72) * 4),1);
+      transform:translateY(calc((1 - clamp(0,calc((var(--hero-progress,0) - .72) * 4),1)) * 14px));
     }
 
     @media (min-width: 761px) and (max-width: 1500px) {
@@ -147,7 +151,7 @@
 
     @media (max-width: 760px) {
       .search-hero {
-        height: 170svh;
+        height: 205svh;
       }
 
       .search-hero__stage { align-items: end; }
@@ -171,6 +175,8 @@
         max-width: 520px;
         font-size:clamp(44px,12vw,64px);
       }
+
+      .search-hero__detail { max-width:18ch; font-size:clamp(20px,5.6vw,27px); }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -178,7 +184,7 @@
       .search-hero__stage > img { transform: none; }
       .search-hero__image--doctor { opacity:1; }
       .search-hero__line--search { display: none; }
-      .search-hero__line--doctor { opacity: 1; transform: none; }
+      .search-hero__line--doctor,.search-hero__detail { opacity: 1; transform: none; }
     }
   </style>
 </head>
@@ -190,7 +196,7 @@
       <div class="search-hero__copy">
         <h1>
           <span class="search-hero__line search-hero__line--search">We're in there somewhere.</span>
-          <span class="search-hero__line search-hero__line--doctor">The doctor can see <span class="search-hero__emphasis">you</span> now.</span>
+          <span class="search-hero__line search-hero__line--doctor">Found.<span class="search-hero__detail">The whole picture, seen in full.</span></span>
         </h1>
       </div>
     </div>
