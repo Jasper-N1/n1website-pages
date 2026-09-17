@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>n1.care — Header concept 02</title>
+  <link rel="preload" as="image" href="assets/no-more-maybe.webp?v=5" fetchpriority="high">
+  <style>
+    @font-face { font-family:"Inter"; src:url("assets/fonts/inter-400.woff2") format("woff2"); font-weight:400; font-display:swap; }
+    * { box-sizing:border-box; }
+    html,body { min-height:100%; margin:0; background:#202220; font-family:"Inter",Arial,sans-serif; }
+    .maybe-hero { min-height:100svh; position:relative; display:grid; overflow:hidden; isolation:isolate; background:#202220; }
+    .maybe-hero > img { width:100%; height:100%; position:absolute; z-index:-2; inset:0; object-fit:cover; object-position:center 52%; filter:contrast(1.01); }
+    .maybe-hero::after { position:absolute; z-index:-1; inset:0; background:linear-gradient(90deg,rgba(18,20,19,.5) 0%,rgba(18,20,19,.15) 31%,transparent 52%); content:""; }
+    .maybe-hero__copy { width:min(500px,36vw); align-self:start; margin-top:clamp(118px,16vh,180px); margin-left:clamp(42px,6.5vw,112px); color:#f0ece3; }
+    .maybe-hero__copy h1 { margin:0; font:400 clamp(54px,5vw,82px)/.96 "Inter",Arial,sans-serif; letter-spacing:-.058em; text-wrap:balance; }
+    @media (max-width:760px) {
+      .maybe-hero { align-items:end; }
+      .maybe-hero > img { object-position:58% center; }
+      .maybe-hero::after { background:linear-gradient(0deg,rgba(18,20,19,.82) 0%,rgba(18,20,19,.18) 52%,transparent 72%); }
+      .maybe-hero__copy { width:auto; align-self:end; margin:0; padding:0 24px 56px; }
+      .maybe-hero__copy h1 { max-width:520px; font-size:clamp(46px,12vw,66px); }
+    }
+  </style>
+</head>
+<body>
+  <header class="maybe-hero">
+    <img src="assets/no-more-maybe.webp?v=5" alt="A monochrome prescription bottle labelled Likely, prescribed on a hunch" width="1447" height="1087" loading="eager" fetchpriority="high" decoding="async">
+    <div class="maybe-hero__copy">
+      <h1>No more maybe.</h1>
+    </div>
+  </header>
+</body>
+</html>
