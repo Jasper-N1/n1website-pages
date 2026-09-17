@@ -18,20 +18,24 @@
     .maybe-hero__image--certain { opacity:clamp(0,calc((var(--hero-progress,0) - .24) * 2.8),1); }
     .maybe-hero__stage::after { position:absolute; z-index:-1; inset:0; background:linear-gradient(90deg,rgba(18,20,19,.5) 0%,rgba(18,20,19,.15) 31%,transparent 52%); opacity:calc(1 - clamp(0,calc((var(--hero-progress,0) - .18) * 2.8),1)); content:""; }
     .maybe-hero__copy { width:min(500px,36vw); align-self:start; margin-top:clamp(118px,16vh,180px); margin-left:clamp(42px,6.5vw,112px); color:#f0ece3; }
-    .maybe-hero__copy h1 { margin:0; font:400 clamp(54px,5vw,82px)/.96 "Inter",Arial,sans-serif; letter-spacing:-.058em; text-wrap:balance; opacity:calc(1 - min(1,var(--hero-progress,0) * 2.55)); transform:translateY(calc(var(--hero-progress,0) * -18px)); }
+    .maybe-hero__copy h1 { display:grid; margin:0; font:inherit; }
+    .maybe-hero__line { max-width:520px; grid-column:1; grid-row:1; font:400 clamp(54px,5vw,82px)/.96 "Inter",Arial,sans-serif; letter-spacing:-.058em; text-wrap:balance; will-change:opacity,transform; }
+    .maybe-hero__line:first-child { opacity:calc(1 - min(1,var(--hero-progress,0) * 2.55)); transform:translateY(calc(var(--hero-progress,0) * -18px)); }
+    .maybe-hero__line:last-child { opacity:clamp(0,calc((var(--hero-progress,0) - .46) * 3.2),1); transform:translateY(calc((1 - clamp(0,calc((var(--hero-progress,0) - .46) * 3.2),1)) * 18px)); }
     @media (max-width:760px) {
       .maybe-hero { height:170svh; }
       .maybe-hero__stage { align-items:end; }
       .maybe-hero__stage > img { object-position:58% center; }
       .maybe-hero__stage::after { background:linear-gradient(0deg,rgba(18,20,19,.82) 0%,rgba(18,20,19,.18) 52%,transparent 72%); }
       .maybe-hero__copy { width:auto; align-self:end; margin:0; padding:0 24px 56px; }
-      .maybe-hero__copy h1 { max-width:520px; font-size:clamp(46px,12vw,66px); }
+      .maybe-hero__line { max-width:520px; font-size:clamp(46px,12vw,66px); }
     }
     @media (prefers-reduced-motion:reduce) {
       .maybe-hero { height:100svh; }
       .maybe-hero__stage > img { transform:none; }
-      .maybe-hero__image--likely,.maybe-hero__copy { display:none; }
+      .maybe-hero__image--likely,.maybe-hero__line:first-child { display:none; }
       .maybe-hero__image--certain { opacity:1; }
+      .maybe-hero__line:last-child { opacity:1; transform:none; }
     }
   </style>
 </head>
@@ -41,7 +45,10 @@
       <img class="maybe-hero__image--likely" src="assets/likely-bottle-first.webp" alt="A monochrome prescription bottle labelled Likely" width="1447" height="1087" loading="eager" fetchpriority="high" decoding="async">
       <img class="maybe-hero__image--certain" src="assets/certain-bottle-second.webp" alt="An amber prescription bottle labelled Certain" width="1448" height="1086" decoding="async">
       <div class="maybe-hero__copy">
-        <h1>No more maybe.</h1>
+        <h1>
+          <span class="maybe-hero__line">Maybe?</span>
+          <span class="maybe-hero__line">No more maybe.</span>
+        </h1>
       </div>
     </div>
   </header>
