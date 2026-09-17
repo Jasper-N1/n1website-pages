@@ -73,7 +73,7 @@
         const wash=Math.min(1,Math.max(0,(progress-.62)/.22));
         const lookupIn=Math.min(1,Math.max(0,(progress-.7)/.1));
         const lookupOut=1-Math.min(1,Math.max(0,(progress-.82)/.14));
-        const proof=Math.min(1,Math.max(0,(progress-.84)/.15));
+        const proof=Math.min(1,Math.max(0,(progress-.9)/.1));
         hero.style.setProperty('--exam-progress',progress.toFixed(4));
         hero.style.setProperty('--light-scale',(1+light*42).toFixed(3));
         hero.style.setProperty('--light-opacity',Math.min(1,light*2.4).toFixed(3));
