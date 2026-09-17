@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>n1.care — Header concept 05</title>
+  <link rel="preload" as="image" href="assets/whole-picture-header.webp" fetchpriority="high">
+  <style>
+    @font-face { font-family:"Inter"; src:url("assets/fonts/inter-400.woff2") format("woff2"); font-weight:400; font-display:swap; }
+    @font-face { font-family:"Inter"; src:url("assets/fonts/inter-600.woff2") format("woff2"); font-weight:600; font-display:swap; }
+    * { box-sizing:border-box; }
+    html,body { min-height:100%; margin:0; background:#17130f; font-family:"Inter",Arial,sans-serif; }
+    .picture-hero { min-height:100svh; position:relative; display:grid; overflow:hidden; isolation:isolate; background:#17130f; }
+    .picture-hero > img { width:100%; height:100%; position:absolute; z-index:-2; inset:0; object-fit:cover; object-position:center 52%; }
+    .picture-hero::after { position:absolute; z-index:-1; inset:0; background:linear-gradient(110deg,rgba(12,10,8,.5) 0%,rgba(12,10,8,.16) 34%,transparent 58%); content:""; }
+    .picture-hero__copy { width:min(650px,45vw); align-self:start; margin-top:clamp(58px,8vh,100px); margin-left:clamp(46px,6.5vw,112px); color:#f5efe4; }
+    .picture-hero__copy h1 { max-width:8ch; margin:0; font:600 clamp(60px,7vw,116px)/.88 "Inter",Arial,sans-serif; letter-spacing:-.072em; text-wrap:balance; }
+    .picture-hero__copy p { max-width:25ch; margin:clamp(22px,3vh,34px) 0 0; color:rgba(245,239,228,.78); font-size:clamp(18px,1.55vw,27px); line-height:1.28; letter-spacing:-.025em; }
+    @media (max-width:760px) {
+      .picture-hero { align-items:end; }
+      .picture-hero > img { object-position:55% center; }
+      .picture-hero::after { background:linear-gradient(0deg,rgba(12,10,8,.88) 0%,rgba(12,10,8,.3) 46%,transparent 70%); }
+      .picture-hero__copy { width:auto; align-self:end; margin:0; padding:0 24px 52px; }
+      .picture-hero__copy h1 { font-size:clamp(52px,14vw,76px); }
+      .picture-hero__copy p { max-width:24ch; font-size:clamp(17px,5vw,23px); }
+    }
+  </style>
+</head>
+<body>
+  <header class="picture-hero">
+    <img src="assets/whole-picture-header.webp" alt="A person walking through a long sunlit colonnade opening onto a broad landscape" width="1448" height="1086" loading="eager" fetchpriority="high" decoding="async">
+    <div class="picture-hero__copy">
+      <h1>The whole picture.</h1>
+      <p>Healthcare, from the first-person perspective.</p>
+    </div>
+  </header>
+</body>
+</html>
