@@ -2118,7 +2118,7 @@
     }
     /* Exam campaign header integrated into the full homepage. */
     html { scroll-snap-type: y proximity; }
-    .exam-home { height:650svh !important; position:relative; background:#fff; }
+    .exam-home { height:850svh !important; position:relative; background:#fff; }
     .exam-home__stage { height:100svh; position:sticky; top:0; display:grid; overflow:hidden; isolation:isolate; background:#121917; }
     .exam-home__stage > img { width:100%; height:100%; position:absolute; z-index:-4; inset:0; object-fit:cover; object-position:center 42%; image-rendering:auto; filter:brightness(calc(1 + var(--exposure,0) * 1.35)) contrast(calc(1 - var(--exposure,0) * .38)) saturate(calc(1 - var(--exposure,0) * .7)); transform:scale(calc(1 + var(--exam-progress,0) * .018)); transform-origin:31.8% 51%; }
     .exam-home__stage::before { position:absolute; z-index:-3; inset:0; background:linear-gradient(90deg,rgba(9,18,17,.72) 0%,rgba(9,18,17,.24) 31%,transparent 54%); opacity:calc(1 - var(--exam-progress,0)); content:""; }
@@ -2134,9 +2134,9 @@
     .exam-home__proof { z-index:3; place-content:center; padding:clamp(28px,6vw,96px); opacity:var(--proof-opacity,0); transform:translateY(calc((1 - var(--proof-opacity,0)) * 14px)); }
     .exam-home__proof span { margin:0 0 20px; font-size:clamp(11px,1vw,15px); letter-spacing:.2em; text-transform:uppercase; }
     .exam-home__proof p { max-width:11ch; margin:0 auto; font:400 clamp(56px,7.2vw,116px)/.92 var(--sans); letter-spacing:-.068em; text-wrap:balance; }
-    .exam-home__lookup-stop { width:1px; height:1px; position:absolute; top:300svh; left:0; pointer-events:none; scroll-snap-align:start; scroll-snap-stop:always; }
+    .exam-home__lookup-stop { width:1px; height:1px; position:absolute; top:480svh; left:0; pointer-events:none; scroll-snap-align:start; scroll-snap-stop:always; }
     @media (max-width:760px) {
-      .exam-home { height:560svh !important; }
+      .exam-home { height:700svh !important; }
       .exam-home__stage > img { object-position:58% center; transform:scale(calc(1 + var(--exam-progress,0) * .012)); }
       .exam-home__stage::before { background:linear-gradient(0deg,rgba(9,18,17,.82) 0%,rgba(9,18,17,.12) 56%,transparent 74%); }
       .exam-home__light { left:22%; }
@@ -2144,7 +2144,7 @@
       .exam-home__copy h1 { max-width:9ch; font-size:clamp(48px,13vw,68px); }
       .exam-home__payoff p { font-size:clamp(58px,17vw,88px); }
       .exam-home__proof p { max-width:10ch; font-size:clamp(50px,14.5vw,76px); }
-      .exam-home__lookup-stop { top:270svh; }
+      .exam-home__lookup-stop { top:385svh; }
     }
     @media (prefers-reduced-motion:reduce) {
       .exam-home { height:100svh !important; }
@@ -3146,13 +3146,13 @@
           const distance=Math.max(1,hero.offsetHeight-innerHeight);
           const progress=Math.min(1,Math.max(0,-rect.top/distance));
           const light=Math.min(1,Math.max(0,(progress-.12)/.62));
-          const exposure=Math.min(1,Math.max(0,(progress-.34)/.48));
+          const exposure=.18*Math.min(1,Math.max(0,(progress-.34)/.48));
           const wash=Math.min(1,Math.max(0,(progress-.56)/.18));
           const lookupIn=Math.min(1,Math.max(0,(progress-.64)/.08));
           const lookupOut=1-Math.min(1,Math.max(0,(progress-.75)/.08));
           const proof=Math.min(1,Math.max(0,(progress-.82)/.06));
           hero.style.setProperty('--exam-progress',progress.toFixed(4));
-          hero.style.setProperty('--light-scale',(1+light*42).toFixed(3));
+          hero.style.setProperty('--light-scale',(1+light*7.5).toFixed(3));
           hero.style.setProperty('--light-opacity',Math.min(1,light*2.4).toFixed(3));
           hero.style.setProperty('--exposure',exposure.toFixed(3));
           hero.style.setProperty('--wash-progress',wash.toFixed(3));
