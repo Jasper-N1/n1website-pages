@@ -22,16 +22,12 @@
 .compliance-page { --compliance-teal: #236f6b; --compliance-deep: #173936; --compliance-mint: #dcebe7; }
 .compliance-page .nav { position: fixed; height: 64px; padding-top: 12px; color: var(--cream); }
 .compliance-page .nav-inner { min-height: 56px; padding: 8px 20px; border-radius: var(--n1-radius-2xl); background: #376361; box-shadow: 0 12px 30px rgba(23,24,23,.18); }
-.compliance-hero { min-height: min(900px,92svh); display: flex; align-items: center; padding: clamp(118px,12vw,180px) 0 clamp(72px,8vw,118px); position: relative; overflow: hidden; background: radial-gradient(circle at 82% 20%,rgba(74,169,164,.18),transparent 31%),linear-gradient(145deg,#f8f5ee 0%,#edf4f1 100%); }
-.compliance-hero::before { width: 420px; height: 420px; position: absolute; top: -220px; left: -130px; border: 1px solid rgba(35,111,107,.16); border-radius: 50%; content: ''; }
-.compliance-hero-grid { display: grid; grid-template-columns: minmax(0,.92fr) minmax(500px,1.08fr); gap: clamp(54px,7vw,112px); align-items: center; }
-.compliance-hero-copy .page-kicker { margin-bottom: 22px; }
-.compliance-hero h1 { max-width: 720px; margin: 0; font: 400 clamp(58px,6.6vw,94px)/.92 var(--serif); letter-spacing: -.05em; text-wrap: balance; }
-.compliance-hero h1 em { color: var(--compliance-teal); font-style: normal; }
-.compliance-hero-copy > p { max-width: 630px; margin: 28px 0 0; color: var(--muted); font-size: clamp(17px,1.35vw,20px); line-height: 1.65; }
-.compliance-hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
-.compliance-hero-links { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 26px; font-size: 12px; font-weight: 700; }
-.compliance-hero-links a { color: var(--compliance-deep); border-bottom: 1px solid rgba(23,57,54,.35); }
+.compliance-hero { min-height:100svh; display:grid; place-items:center; padding:clamp(104px,12vh,148px) 28px clamp(72px,9vh,112px); color:#202523; background:#f9f8f2; text-align:center; }
+.compliance-hero-inner { width:min(1180px,100%); display:grid; justify-items:center; }
+.compliance-hero-animation { width:min(620px,78vw); aspect-ratio:5/2; margin:0 auto clamp(24px,4vh,42px); overflow:hidden; }
+.compliance-hero-animation video { width:100%; height:auto; display:block; transform:translateY(-30%); }
+.compliance-hero h1 { max-width:1120px; margin:0; color:#202523; font:400 clamp(58px,7.2vw,112px)/.98 var(--sans); letter-spacing:-.045em; text-wrap:balance; }
+.compliance-hero-stop { width:.16em; aspect-ratio:1; display:inline-block; margin-left:.07em; border-radius:.025em; background:#376361; vertical-align:0; }
 .compliance-showcase { padding: 24px 0 0; background: #f7f4ed; }
 .compliance-showcase .prepared-story { height: 540svh; margin-top: 0; }
 .compliance-showcase .prepared-story-step:nth-child(1) { z-index: 6; }
@@ -184,8 +180,8 @@
 @keyframes trust-pulse { 70% { box-shadow: 0 0 0 8px rgba(74,169,164,0); } }
 @media (max-width: 1100px) { .cert-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 920px) { .provider-baa-grid { grid-template-columns: 1fr; }.provider-baa-panel { width: min(680px,100%); } }
-@media (max-width: 960px) { .compliance-hero { min-height: auto; }.compliance-hero-grid { grid-template-columns: 1fr; }.trust-visual { min-height: 520px; }.trust-console { width: min(560px,94%); } }
-@media (max-width: 620px) { .cert-grid { grid-template-columns: 1fr; }.compliance-hero { padding-top: 104px; }.compliance-hero h1 { font-size: clamp(50px,15vw,68px); }.trust-visual { min-height: 440px; }.trust-orbit { width: 390px; }.trust-console { width: 100%; }.trust-console-head { padding: 0 18px; }.trust-flow { padding: 20px 18px 22px; }.provider-baa-list article { grid-template-columns: 38px minmax(0,1fr);padding:15px 17px; }.provider-baa-list article > i { width:38px;height:38px; }.provider-baa-list strong { grid-column:2; }.provider-baa-panel > footer { padding:16px 17px; } }
+@media (max-width: 960px) { .trust-visual { min-height: 520px; }.trust-console { width: min(560px,94%); } }
+@media (max-width: 620px) { .cert-grid { grid-template-columns: 1fr; }.compliance-hero { min-height:100svh; padding-inline:22px; }.compliance-hero h1 { max-width:480px; font-size:clamp(48px,14vw,68px); }.trust-visual { min-height: 440px; }.trust-orbit { width: 390px; }.trust-console { width: 100%; }.trust-console-head { padding: 0 18px; }.trust-flow { padding: 20px 18px 22px; }.provider-baa-list article { grid-template-columns: 38px minmax(0,1fr);padding:15px 17px; }.provider-baa-list article > i { width:38px;height:38px; }.provider-baa-list strong { grid-column:2; }.provider-baa-panel > footer { padding:16px 17px; } }
 @media (prefers-reduced-motion: reduce) { .trust-orbit,.trust-route::after,.trust-gate i,.trust-status i { animation: none; }.trust-gate i { opacity: 1; transform: none; }.compliance-page [data-compliance-reveal] { opacity: 1; transform: none; transition: none; } }
 </style>
 </head>
@@ -194,26 +190,10 @@
 <script src="site-header.js"></script>
 <main id="main">
 
-<header class="compliance-hero">
-<div class="shell compliance-hero-grid">
-<div class="compliance-hero-copy">
-<span class="page-kicker">Security &amp; compliance</span>
-<h1>The proof behind <em>health data you can trust.</em></h1>
-<div class="compliance-hero-actions"><a class="button" href="https://app.n1.care/signup">Start free trial <span aria-hidden="true">→</span></a><a class="button secondary" href="https://calendly.com/leah-n1/n1-care-discovery-call">Book a walkthrough</a></div>
-<div class="compliance-hero-links"><a href="privacy.html">Privacy Notice</a><a href="terms.html">Terms</a></div>
-</div>
-<div class="trust-visual" aria-label="Illustration of an encrypted record passing through access and review controls">
-<div class="trust-orbit" aria-hidden="true"></div>
-<div class="trust-console">
-<header class="trust-console-head"><span>Protected record flow</span><b>Controls active</b></header>
-<div class="trust-flow">
-<div class="trust-record"><i>PDF</i><div><b>Laboratory results · 14 Mar 2025</b><small>Encrypted during transfer</small></div><span>Protected</span></div>
-<div class="trust-route" aria-hidden="true"></div>
-<div class="trust-gates"><div class="trust-gate"><b>Authenticated access</b><i>✓</i></div><div class="trust-gate"><b>Source-linked processing</b><i>✓</i></div><div class="trust-gate"><b>Clinician-controlled sharing</b><i>✓</i></div></div>
-<div class="trust-status"><i></i><span>Activity recorded in the audit trail</span></div>
-</div>
-</div>
-</div>
+<header class="compliance-hero" aria-labelledby="compliance-hero-title">
+<div class="compliance-hero-inner">
+<div class="compliance-hero-animation" aria-hidden="true"><video autoplay loop muted playsinline preload="metadata" poster="assets/videos/human-care-ink-line-first-frame.webp"><source src="assets/videos/human-care-ink-line.mp4" type="video/mp4"></video></div>
+<h1 id="compliance-hero-title">Health data you can trust<span class="compliance-hero-stop" aria-hidden="true"></span><span class="sr-only">.</span></h1>
 </div>
 </header>
 

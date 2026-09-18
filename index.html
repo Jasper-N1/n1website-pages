@@ -10,7 +10,7 @@
   <meta property="og:description" content="n1 brings scattered medical records into one history, with every finding linked to its original file and page.">
   <meta name="theme-color" content="#2a2b2a">
   <link rel="icon" type="image/svg+xml" href="assets/n1-logo.svg">
-  <link rel="preload" as="image" href="assets/videos/runway-main-header-poster.jpg" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/where-did-this-come-from-v2.webp" fetchpriority="high">
   <link rel="stylesheet" href="art-directions.css">
   <link rel="stylesheet" href="buttons.css">
   <link rel="stylesheet" href="brand-tokens.css">
@@ -55,7 +55,7 @@
     .tonal-motion .nav, .tonal-motion .nav.is-past-hero { height: 72px; padding-top: 0; }
     .tonal-motion .nav .nav-inner, .tonal-motion .nav.is-past-hero .nav-inner { width: 100%; max-width: none; min-height: 72px; padding: 12px 32px; border-radius: 0; }
     .tonal-motion .nav:not(.is-past-hero) .nav-inner { color: var(--cream); background: transparent; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
-    .tonal-motion .nav:not(.is-past-hero) .nav-links, .tonal-motion .nav:not(.is-past-hero) .nav-actions { font-family: "Work Sans",var(--sans); text-shadow: 0 1px 10px rgba(0,0,0,.32); }
+    .tonal-motion .nav:not(.is-past-hero) .nav-links, .tonal-motion .nav:not(.is-past-hero) .nav-actions { font-family: var(--sans); text-shadow: 0 1px 10px rgba(0,0,0,.32); }
     .tonal-motion .nav:not(.is-past-hero) .button { color: var(--ink); background: var(--cream); border-color: var(--cream); }
     @media (max-width: 620px) { .tonal-hero-inner { width: var(--n1-page-width); } .tonal-hero h1 { max-width: 360px; font-size: 48px; line-height: 1.03; } }
     /* Wide enough for the subtitle's three authored lines to hold at 18px
@@ -2116,6 +2116,44 @@
         background: #fffdf5;
       }
     }
+    /* Exam campaign header integrated into the full homepage. */
+    html { scroll-snap-type: y proximity; }
+    .exam-home { height:650svh !important; position:relative; background:#fff; }
+    .exam-home__stage { height:100svh; position:sticky; top:0; display:grid; overflow:hidden; isolation:isolate; background:#121917; }
+    .exam-home__stage > img { width:100%; height:100%; position:absolute; z-index:-4; inset:0; object-fit:cover; object-position:center 42%; image-rendering:auto; filter:brightness(calc(1 + var(--exposure,0) * 1.35)) contrast(calc(1 - var(--exposure,0) * .38)) saturate(calc(1 - var(--exposure,0) * .7)); transform:scale(calc(1 + var(--exam-progress,0) * .018)); transform-origin:31.8% 51%; }
+    .exam-home__stage::before { position:absolute; z-index:-3; inset:0; background:linear-gradient(90deg,rgba(9,18,17,.72) 0%,rgba(9,18,17,.24) 31%,transparent 54%); opacity:calc(1 - var(--exam-progress,0)); content:""; }
+    .exam-home__stage::after { position:absolute; z-index:-2; inset:0; background:linear-gradient(0deg,rgba(7,13,12,.36),transparent 38%); opacity:calc(1 - var(--exam-progress,0)); content:""; }
+    .exam-home__light { width:96px; height:96px; position:absolute; z-index:1; top:51%; left:31.8%; border-radius:50%; background:radial-gradient(circle,rgba(255,255,255,1) 0 6%,rgba(255,253,239,.98) 12%,rgba(255,248,218,.74) 28%,rgba(255,255,255,.34) 48%,rgba(255,255,255,0) 74%); mix-blend-mode:screen; filter:blur(calc(1px + var(--exam-progress,0) * 5px)); opacity:var(--light-opacity,0); transform:translate(-50%,-50%) scale(var(--light-scale,1)); transform-origin:center; will-change:transform,filter,opacity; }
+    .exam-home__light::after { position:absolute; inset:36%; border-radius:50%; background:#fff; box-shadow:0 0 16px 5px rgba(255,252,225,.95),0 0 42px 16px rgba(255,246,198,.58); content:""; }
+    .exam-home__wash { position:absolute; z-index:1; inset:0; background:#fff; opacity:var(--wash-progress,0); }
+    .exam-home__copy { width:min(590px,42vw); align-self:end; margin:0 0 clamp(64px,9vh,112px) clamp(38px,6vw,104px); color:#f3eee5; }
+    .exam-home__copy h1 { max-width:8.6ch; margin:0; color:#f3eee5 !important; font:400 clamp(58px,6.1vw,102px)/.91 var(--sans); letter-spacing:-.065em; text-shadow:0 2px 24px rgba(5,12,11,.22); text-wrap:balance; opacity:calc(1 - clamp(0,calc(var(--exam-progress,0) * 2.4),1)); transform:translateY(calc(var(--exam-progress,0) * -18px)); }
+    .exam-home__payoff,.exam-home__proof { position:absolute; z-index:2; inset:0; display:grid; place-items:center; padding:24px; color:#172826; text-align:center; }
+    .exam-home__payoff { opacity:var(--lookup-opacity,0); transform:translateY(calc((1 - var(--lookup-opacity,0)) * 18px)); }
+    .exam-home__payoff p { margin:0; font:400 clamp(64px,8vw,132px)/.9 var(--sans); letter-spacing:-.07em; }
+    .exam-home__proof { z-index:3; place-content:center; padding:clamp(28px,6vw,96px); opacity:var(--proof-opacity,0); transform:translateY(calc((1 - var(--proof-opacity,0)) * 14px)); }
+    .exam-home__proof span { margin:0 0 20px; font-size:clamp(11px,1vw,15px); letter-spacing:.2em; text-transform:uppercase; }
+    .exam-home__proof p { max-width:11ch; margin:0 auto; font:400 clamp(56px,7.2vw,116px)/.92 var(--sans); letter-spacing:-.068em; text-wrap:balance; }
+    .exam-home__lookup-stop { width:1px; height:1px; position:absolute; top:300svh; left:0; pointer-events:none; scroll-snap-align:start; scroll-snap-stop:always; }
+    @media (max-width:760px) {
+      .exam-home { height:560svh !important; }
+      .exam-home__stage > img { object-position:58% center; transform:scale(calc(1 + var(--exam-progress,0) * .012)); }
+      .exam-home__stage::before { background:linear-gradient(0deg,rgba(9,18,17,.82) 0%,rgba(9,18,17,.12) 56%,transparent 74%); }
+      .exam-home__light { left:22%; }
+      .exam-home__copy { width:auto; margin:0; padding:0 24px 48px; }
+      .exam-home__copy h1 { max-width:9ch; font-size:clamp(48px,13vw,68px); }
+      .exam-home__payoff p { font-size:clamp(58px,17vw,88px); }
+      .exam-home__proof p { max-width:10ch; font-size:clamp(50px,14.5vw,76px); }
+      .exam-home__lookup-stop { top:270svh; }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      .exam-home { height:100svh !important; }
+      .exam-home__stage { background:#fff; }
+      .exam-home__stage > img,.exam-home__stage::before,.exam-home__stage::after,.exam-home__copy,.exam-home__light { display:none; }
+      .exam-home__wash { opacity:1; }
+      .exam-home__payoff { display:none; }
+      .exam-home__proof { opacity:1; transform:none; }
+    }
   </style>
 
   <style>
@@ -2615,7 +2653,7 @@
   <link rel="stylesheet" href="prepared-story.css?v=20260916-1">
   <style>
     /* N1 Hero 2 homepage header. */
-    .home-trust-header .tonal-scroll-sequence {
+    .home-trust-header .tonal-scroll-sequence:not(.exam-home) {
       height: 100svh !important;
       min-height: 640px;
     }
@@ -2877,57 +2915,18 @@
       margin-bottom: 18px;
       color: #2f7773;
     }
-    .home-purpose-statement {
-      min-height: 88svh;
-      display: grid;
-      place-items: center;
-      padding: clamp(96px,12vh,144px) 32px;
-      color: #202523;
-      background: #f9f8f2;
-      text-align: center;
-    }
     .home-purpose-flow { display: flex; flex-direction: column; }
     .home-purpose-flow .clinician-prepared-block { order: 1; }
-    .home-purpose-flow .home-purpose-statement { order: 2; }
-    .home-purpose-inner {
-      width: min(1180px,100%);
-      display: grid;
-      justify-items: center;
-    }
-    .home-purpose-statement h2 {
-      max-width: 1120px;
-      margin: 0;
-      color: #202523 !important;
-      font: 400 clamp(58px,7.2vw,112px)/.98 var(--serif);
-      letter-spacing: -.045em;
-      text-wrap: balance;
-    }
-    .home-purpose-animation { width: min(620px,78vw); aspect-ratio: 5 / 2; margin: 0 auto clamp(24px,4vh,42px); overflow: hidden; }
-    .home-purpose-animation video {
-      width: 100%;
-      height: auto;
-      display: block;
-      transform: translateY(-30%);
-    }
-    .home-purpose-stop {
-      width: .16em;
-      aspect-ratio: 1;
-      display: inline-block;
-      margin-left: .07em;
-      border-radius: .025em;
-      background: #376361;
-      vertical-align: 0;
-    }
     .home-trust-header .clinician-prepared-block {
       position: relative;
       z-index: 2;
-      background: #f9f8f2 !important;
+      background: #fff !important;
     }
     .home-trust-header .clinician-prepared-block::before {
       position: absolute;
       z-index: -1;
       inset: -2px 0;
-      background: #f9f8f2;
+      background: #fff;
       content: "";
     }
     .prepared-story-intro {
@@ -3008,91 +3007,21 @@
     @keyframes home-upload-progress { 0%,28% { width:0 } 68%,100% { width:100% } }
     @media (max-width: 900px) { .home-upload-moment-inner { width: min(720px,calc(100% - 40px)); grid-template-columns: 1fr; gap: 38px; } .home-upload-copy { text-align: center; } .home-upload-copy h3 { margin-right: auto; margin-left: auto; } }
     @media (max-width: 560px) { .home-upload-moment { padding: 76px 0 92px; } .home-upload-moment-inner { width: calc(100% - 28px); } .home-upload-copy h3 { font-size: 42px; } .home-upload-card { min-height: 350px; padding: 16px; border-radius: 25px; } .home-upload-panel { padding: 18px; } .home-upload-stage { padding: 20px 15px; } .home-upload-progress { right: 15px; left: 66px; } }
-    .home-trust-header .nav:not(.is-past-hero) {
-      color: #2f7773 !important;
+    .home-trust-header .site-nav-v2.nav.is-exam-light { color:#f5efe4 !important; }
+    .home-trust-header .site-nav-v2.nav.is-exam-light .nav-inner {
+      border-color:rgba(255,255,255,.14) !important;
+      color:#f5efe4 !important;
+      background:rgba(18,19,18,.78) !important;
+      box-shadow:0 12px 34px rgba(8,10,9,.18) !important;
+      -webkit-backdrop-filter:saturate(105%) blur(16px) !important;
+      backdrop-filter:saturate(105%) blur(16px) !important;
     }
-    .home-trust-header .site-nav-v2.nav:not(.is-past-hero) .nav-inner {
-      border-color: rgba(56,96,90,.2) !important;
-      background: rgba(239,245,241,.84) !important;
-      box-shadow: 0 14px 36px rgba(34,70,65,.12) !important;
-      -webkit-backdrop-filter: blur(18px) saturate(1.15) !important;
-      backdrop-filter: blur(18px) saturate(1.15) !important;
-    }
-    .home-trust-header .site-nav-v2.nav:not(.is-past-hero)::before {
-      opacity: 0;
-    }
-    .home-trust-header .nav:not(.is-past-hero) .logo {
-      background: #376361 !important;
-      filter: none !important;
-    }
-    .home-trust-header .nav:not(.is-past-hero) .nav-links,
-    .home-trust-header .nav:not(.is-past-hero) .nav-actions {
-      color: #2f7773 !important;
-      text-shadow: none !important;
-    }
-    .home-trust-header .site-nav-v2.nav:not(.is-past-hero) .nav-links a,
-    .home-trust-header .site-nav-v2.nav:not(.is-past-hero) .nav-actions .login {
-      color: #2f7773 !important;
-    }
-    .home-trust-header .site-nav-v2.nav:not(.is-past-hero) .nav-links a:hover,
-    .home-trust-header .site-nav-v2.nav:not(.is-past-hero) .nav-actions .login:hover,
-    .home-trust-header .site-nav-v2.nav:not(.is-past-hero) .nav-dropdown-toggle:hover {
-      background: rgba(36,75,73,.07);
-    }
-    .home-trust-header .site-nav-v2.nav:not(.is-past-hero) .nav-actions .button {
-      color: #fffdf5 !important;
-      border-color: #244b49 !important;
-      background: #244b49 !important;
-      box-shadow: 0 7px 20px rgba(24,61,57,.18);
-    }
-    .home-trust-header .site-nav-v2.nav:not(.is-past-hero) .nav-actions .button:hover {
-      color: #fff !important;
-      background: #173f3c !important;
-    }
-    .home-trust-header .site-nav-v2.nav,
-    .home-trust-header .site-nav-v2.nav.is-light-phase,
-    .home-trust-header .site-nav-v2.nav.is-past-hero,
-    .home-trust-header .site-nav-v2.nav.is-past-hero.is-light-phase {
-      color: #2f7773 !important;
-    }
-    .home-trust-header .site-nav-v2.nav .nav-inner,
-    .home-trust-header .site-nav-v2.nav.is-light-phase .nav-inner,
-    .home-trust-header .site-nav-v2.nav.is-past-hero .nav-inner,
-    .home-trust-header .site-nav-v2.nav.is-past-hero.is-light-phase .nav-inner {
-      border-color: rgba(56,96,90,.2) !important;
-      color: #2f7773 !important;
-      background: rgba(239,245,241,.92) !important;
-      box-shadow: 0 14px 36px rgba(34,70,65,.12) !important;
-      -webkit-backdrop-filter: blur(18px) saturate(1.15) !important;
-      backdrop-filter: blur(18px) saturate(1.15) !important;
-    }
-    .home-trust-header .site-nav-v2.nav .logo,
-    .home-trust-header .site-nav-v2.nav.is-light-phase .logo,
-    .home-trust-header .site-nav-v2.nav.is-past-hero .logo {
-      color: #376361 !important;
-      background: #376361 !important;
-      filter: none !important;
-    }
-    .home-trust-header .site-nav-v2.nav .nav-links,
-    .home-trust-header .site-nav-v2.nav .nav-actions,
-    .home-trust-header .site-nav-v2.nav .nav-links a,
-    .home-trust-header .site-nav-v2.nav .nav-actions .login {
-      color: #2f7773 !important;
-      text-shadow: none !important;
-    }
-    .home-trust-header .site-nav-v2.nav .nav-actions .button,
-    .home-trust-header .site-nav-v2.nav.is-light-phase .nav-actions .button,
-    .home-trust-header .site-nav-v2.nav.is-past-hero.is-light-phase .nav-actions .button {
-      color: #fffdf5 !important;
-      border-color: #244b49 !important;
-      background: #244b49 !important;
-    }
-    .home-trust-header .site-nav-v2.nav:not(.is-past-hero) .nav-toggle {
-      color: #416a64 !important;
-      border-color: rgba(56,96,90,.22) !important;
-      background: rgba(255,253,249,.58) !important;
-      box-shadow: 0 5px 16px rgba(34,70,65,.08);
-    }
+    .home-trust-header .site-nav-v2.nav.is-exam-light .logo { color:#f5efe4 !important; background:#f5efe4 !important; filter:none !important; }
+    .home-trust-header .site-nav-v2.nav.is-exam-light .nav-links,
+    .home-trust-header .site-nav-v2.nav.is-exam-light .nav-actions,
+    .home-trust-header .site-nav-v2.nav.is-exam-light .nav-links a,
+    .home-trust-header .site-nav-v2.nav.is-exam-light .nav-actions .login { color:#f5efe4 !important; text-shadow:none !important; }
+    .home-trust-header .site-nav-v2.nav.is-exam-light .nav-actions .button { color:#202523 !important; border-color:#f5efe4 !important; background:#f5efe4 !important; }
     @keyframes home-trust-settle {
       from { transform: scale(1.025); }
       to { transform: scale(1.01); }
@@ -3168,8 +3097,6 @@
       .home-trust-header .tonal-hero .eyebrow { margin-bottom: 12px; }
       .home-trust-header .tonal-hero h1 { max-width: 410px; font-size: clamp(42px,12vw,54px); line-height: 1; }
       .home-trust-header .tonal-hero h1 { font-size: clamp(35px,10.5vw,42px); }
-      .home-purpose-statement { min-height: 82svh; padding-inline: 22px; }
-      .home-purpose-statement h2 { max-width: 480px; font-size: clamp(48px,14vw,68px); }
       .home-trust-header .doctor-features .feature-study-head h2 { font-size: clamp(42px,11vw,52px); }
     }
     @media (prefers-reduced-motion: reduce) {
@@ -3197,27 +3124,49 @@
   <script src="site-header.js"></script>
 
   <main id="main">
-    <section class="tonal-scroll-sequence" data-step="idle" aria-label="n1.care introduction">
-      <div class="tonal-scroll-sticky">
-        <section class="tonal-hero" id="top" aria-labelledby="tonal-title">
-          <!-- n1 homepage film. -->
-          <div class="tonal-hero-video" aria-hidden="true">
-            <video id="home-trust-video" data-autoplay autoplay muted playsinline preload="auto" poster="assets/videos/runway-main-header-first-frame.webp">
-              <source src="assets/videos/runway-main-header.mp4?v=20260901-1" type="video/mp4">
-            </video>
-          </div>
-          <div class="shell tonal-hero-inner">
-            <div class="tonal-copy-block">
-              <h1 id="tonal-title">Every patient,<span class="human-line">remembered.</span></h1>
-              <div class="home-hero-actions">
-                <a class="button" href="https://app.n1.care/demo">Try the live demo</a>
-                <a class="button secondary" href="https://app.n1.care/signup">Start free trial</a>
-              </div>
-            </div>
-          </div>
-        </section>
+    <header class="exam-home tonal-scroll-sequence" id="top" data-exam-home aria-label="n1.care introduction">
+      <div class="exam-home__stage">
+        <img src="assets/where-did-this-come-from-v2.webp" alt="A calm doctor examining a patient with a penlight" width="1504" height="1046" loading="eager" fetchpriority="high" decoding="async">
+        <div class="exam-home__copy"><h1>Where did this come from?</h1></div>
+        <div class="exam-home__light" aria-hidden="true"></div>
+        <div class="exam-home__wash" aria-hidden="true"></div>
+        <div class="exam-home__payoff"><p>Look it up.</p></div>
+        <div class="exam-home__proof"><span>Healthcare AI</span><p>Every answer. Right back to the source.</p></div>
       </div>
-    </section>
+      <div class="exam-home__lookup-stop" aria-hidden="true"></div>
+    </header>
+    <script>
+      (() => {
+        const hero=document.querySelector('[data-exam-home]');
+        if(!hero || matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+        let frame=0;
+        const nav=document.querySelector('[data-n1-site-header]');
+        const render=()=>{
+          const rect=hero.getBoundingClientRect();
+          const distance=Math.max(1,hero.offsetHeight-innerHeight);
+          const progress=Math.min(1,Math.max(0,-rect.top/distance));
+          const light=Math.min(1,Math.max(0,(progress-.12)/.62));
+          const exposure=Math.min(1,Math.max(0,(progress-.34)/.48));
+          const wash=Math.min(1,Math.max(0,(progress-.56)/.18));
+          const lookupIn=Math.min(1,Math.max(0,(progress-.64)/.08));
+          const lookupOut=1-Math.min(1,Math.max(0,(progress-.75)/.08));
+          const proof=Math.min(1,Math.max(0,(progress-.82)/.06));
+          hero.style.setProperty('--exam-progress',progress.toFixed(4));
+          hero.style.setProperty('--light-scale',(1+light*42).toFixed(3));
+          hero.style.setProperty('--light-opacity',Math.min(1,light*2.4).toFixed(3));
+          hero.style.setProperty('--exposure',exposure.toFixed(3));
+          hero.style.setProperty('--wash-progress',wash.toFixed(3));
+          hero.style.setProperty('--lookup-opacity',Math.min(lookupIn,lookupOut).toFixed(3));
+          hero.style.setProperty('--proof-opacity',proof.toFixed(3));
+          if(nav) nav.classList.toggle('is-exam-light',progress>=.56);
+          frame=0;
+        };
+        const requestRender=()=>{ if(!frame) frame=requestAnimationFrame(render); };
+        addEventListener('scroll',requestRender,{passive:true});
+        addEventListener('resize',requestRender);
+        render();
+      })();
+    </script>
 
     <div class="home-purpose-flow">
     <section class="page-section clinician-prepared-block" id="clinician-prepared">
@@ -3225,14 +3174,14 @@
     <div class="prepared-story">
     <div class="prepared-story-steps">
     <article class="prepared-story-step">
-    <div class="prepared-story-card" aria-label="Two-step secure record upload"><div class="prepared-story-frame"><div class="prepared-story-media" aria-hidden="true"></div><div class="prepared-story-copy is-current"><h3>Every number, traced to its page.</h3></div><div class="prepared-story-ui"><section class="prepared-story-state"><div class="story-ui-head"><div><span class="story-ui-avatar">ER</span><span><b>Upload health records</b></span></div><span>Secure upload</span></div><div class="story-upload-zone"><div class="story-upload-stage story-upload-choose"><i>↑</i><b>Choose records</b><small>PDF, PNG or JPG · TXT, CSV or TSV for DNA</small></div><div class="story-upload-stage story-upload-selected"><div class="story-upload-selected-row"><i>PDF</i><span><b>lab-results-june.pdf</b><small>12 pages · 2.4 MB</small></span></div><div class="story-upload-meter"><span></span></div><small class="story-upload-status"><span>Uploading securely…</span><span>2.4 MB</span></small></div><div class="story-upload-stage story-upload-complete"><i>✓</i><b>Upload complete</b><small>1 record added securely</small></div></div><div class="story-upload-actions"><span><b>1</b> Choose files</span><span><b>2</b> Upload securely</span></div></section></div></div></div>
+    <div class="prepared-story-card" aria-label="Two-step secure record upload"><div class="prepared-story-frame"><div class="prepared-story-media" aria-hidden="true"></div><div class="prepared-story-copy is-current"><h3>Upload files</h3></div><div class="prepared-story-ui"><section class="prepared-story-state"><div class="story-ui-head"><div><span class="story-ui-avatar">ER</span><span><b>Upload health records</b></span></div><span>Secure upload</span></div><div class="story-upload-zone"><div class="story-upload-stage story-upload-choose"><i>↑</i><b>Choose records</b><small>PDF, PNG or JPG · TXT, CSV or TSV for DNA</small></div><div class="story-upload-stage story-upload-selected"><div class="story-upload-selected-row"><i>PDF</i><span><b>lab-results-june.pdf</b><small>12 pages · 2.4 MB</small></span></div><div class="story-upload-meter"><span></span></div><small class="story-upload-status"><span>Uploading securely…</span><span>2.4 MB</span></small></div><div class="story-upload-stage story-upload-complete"><i>✓</i><b>Upload complete</b><small>1 record added securely</small></div></div><div class="story-upload-actions"><span><b>1</b> Choose files</span><span><b>2</b> Upload securely</span></div></section></div></div></div>
     </article>
     <article class="prepared-story-step">
-    <div class="prepared-story-card" aria-label="Animation showing health data extracted from a health record"><div class="prepared-story-frame"><div class="prepared-story-media" aria-hidden="true"></div><div class="prepared-story-copy"><h3>Nothing left in the pile.</h3></div><div class="prepared-story-ui"><section class="prepared-story-state"><div class="story-ui-head"><div><span class="story-ui-avatar">ER</span><span><b>Health record</b><small>Health history</small></span></div><span>Source-linked</span></div><div class="story-extract-body"><div class="story-extract-stage story-extract-start"><div class="story-extract-file"><i>PDF</i><span><b>complete-health-record.pdf</b><small>12 pages · health record</small></span></div><span class="story-extract-button">Extract health data<i class="story-extract-pointer">↖</i></span></div><div class="story-extract-stage story-extract-typing"><div class="story-extract-scan"><span>Reading source pages</span><b class="story-extract-typed">Extracting health data…</b><div class="story-extract-scanbar"><i></i></div></div></div><div class="story-extract-stage story-extract-results"><div class="story-extract-result-head"><span><i>✓</i>6 data types found</span><small>Source-linked data · sources attached</small></div><div class="story-data-table"><div class="story-data-row"><span>Biomarker</span><b>HbA1c · 6.4%</b><small>Page 2</small></div><div class="story-data-row"><span>Diagnosis</span><b>Hypertension</b><small>Page 4</small></div><div class="story-data-row"><span>Medication</span><b>Metformin · 500 mg</b><small>Page 4</small></div><div class="story-data-row"><span>Procedure</span><b>Echocardiogram · 2025</b><small>Page 6</small></div><div class="story-data-row"><span>Genetics</span><b>BRCA1/2 · negative</b><small>Page 8</small></div><div class="story-data-row"><span>Supplement</span><b>Vitamin D3 · 1,000 IU</b><small>Page 5</small></div></div></div></div></section></div></div></div>
+    <div class="prepared-story-card" aria-label="Animation showing health data extracted from a health record"><div class="prepared-story-frame"><div class="prepared-story-media" aria-hidden="true"></div><div class="prepared-story-copy"><h3>We extract all medical data.</h3></div><div class="prepared-story-ui"><section class="prepared-story-state"><div class="story-ui-head"><div><span class="story-ui-avatar">ER</span><span><b>Health record</b><small>Health history</small></span></div><span>Source-linked</span></div><div class="story-extract-body"><div class="story-extract-stage story-extract-start"><div class="story-extract-file"><i>PDF</i><span><b>complete-health-record.pdf</b><small>12 pages · health record</small></span></div><span class="story-extract-button">Extract health data<i class="story-extract-pointer">↖</i></span></div><div class="story-extract-stage story-extract-typing"><div class="story-extract-scan"><span>Reading source pages</span><b class="story-extract-typed">Extracting health data…</b><div class="story-extract-scanbar"><i></i></div></div></div><div class="story-extract-stage story-extract-results"><div class="story-extract-result-head"><span><i>✓</i>6 data types found</span><small>Source-linked data · sources attached</small></div><div class="story-data-table"><div class="story-data-row"><span>Biomarker</span><b>HbA1c · 6.4%</b><small>Page 2</small></div><div class="story-data-row"><span>Diagnosis</span><b>Hypertension</b><small>Page 4</small></div><div class="story-data-row"><span>Medication</span><b>Metformin · 500 mg</b><small>Page 4</small></div><div class="story-data-row"><span>Procedure</span><b>Echocardiogram · 2025</b><small>Page 6</small></div><div class="story-data-row"><span>Genetics</span><b>BRCA1/2 · negative</b><small>Page 8</small></div><div class="story-data-row"><span>Supplement</span><b>Vitamin D3 · 1,000 IU</b><small>Page 5</small></div></div></div></div></section></div></div></div>
     </article>
     <article class="prepared-story-step">
     <div class="prepared-story-card" aria-label="Interactive longitudinal HbA1c view using anonymized data">
-    <div class="prepared-story-frame"><div class="prepared-story-media" aria-hidden="true"></div><div class="prepared-story-copy"><h3>Forty years, read before you sit down.</h3></div><div class="prepared-story-ui"><section class="prepared-story-state">
+    <div class="prepared-story-frame"><div class="prepared-story-media" aria-hidden="true"></div><div class="prepared-story-copy"><h3>Review everything in one visualisation.</h3></div><div class="prepared-story-ui"><section class="prepared-story-state">
     <div class="story-ui-head"><div><span class="story-ui-avatar">JR</span><span><b>Changes across the record</b><small>Hover over each source-linked reading</small></span></div><span>Longitudinal view</span></div>
     <div class="story-change-title"><span>Biomarker trend <em>Stated lab range 4.0–5.6%</em></span><b>HbA1c</b></div>
     <div class="story-change-chart" role="group" aria-label="Three HbA1c readings compared with a stated laboratory reference range of 4.0 to 5.6 percent">
@@ -3247,7 +3196,7 @@
     </article>
     <article class="prepared-story-step">
     <div class="prepared-story-card" aria-label="Scrollable Health Summary preview using anonymized data">
-    <div class="prepared-story-frame"><div class="prepared-story-media" aria-hidden="true"></div><div class="prepared-story-copy"><h3>Check any claim in one click.</h3></div><div class="prepared-story-ui"><section class="prepared-story-state">
+    <div class="prepared-story-frame"><div class="prepared-story-media" aria-hidden="true"></div><div class="prepared-story-copy"><h3>In-depth reports are generated.</h3></div><div class="prepared-story-ui"><section class="prepared-story-state">
     <div class="story-report-window"><div class="story-report-scroll" role="document" tabindex="0" aria-label="Scrollable Health Summary report">
     <header class="story-report-cover"><span>Cross-panel findings &amp; clinical overview</span><h4>Health Summary</h4><p>Example patient · Report preview</p><div class="story-report-meta"><span>Records<b>14 reviewed</b></span><span>Findings<b>6 prioritized</b></span><span>Sources<b>Attached</b></span></div></header>
     <section class="story-report-section"><small>Section 1</small><h5>Executive summary</h5><p>The record shows an improving metabolic trend alongside findings that still need clinical review. Each statement remains connected to the source record and page from which it was prepared.</p><div class="story-report-markers"><span><small>HbA1c</small><b>6.4%</b><em>Down from 7.1%</em></span><span><small>LDL cholesterol</small><b>116 mg/dL</b><em>Review in context</em></span><span><small>hs-CRP</small><b>1.8 mg/L</b><em>Follow trend</em></span><span><small>Vitamin D</small><b>71 nmol/L</b><em>Improving</em></span></div></section>
@@ -3258,7 +3207,17 @@
     </div><span class="story-report-cue" aria-hidden="true">Scroll report ↓</span></div>
     </section></div></div></div>
     </article>
-    <h2 class="prepared-story-intro"><span>Better care, sooner.</span></h2>
+    <article class="prepared-story-step">
+    <div class="prepared-story-card" aria-label="Animation showing a report claim opening its source-linked biomarker information">
+    <div class="prepared-story-frame"><div class="prepared-story-media" aria-hidden="true"></div><div class="prepared-story-copy"><h3>Every claim is verifiable. No hallucination.</h3></div><div class="prepared-story-ui"><section class="prepared-story-state story-verify-state">
+    <div class="story-ui-head"><div><span class="story-ui-avatar">ER</span><span><b>Health Summary</b><small>Clinical overview</small></span></div><span>Source-linked</span></div>
+    <div class="story-verify-layout">
+      <article class="story-verify-report"><small>Metabolic health</small><h4>Improving glucose control</h4><p>HbA1c has fallen across three readings and is now <button class="story-verify-claim" type="button">6.4%</button>, while remaining above the stated laboratory range.</p><span>Click any finding to inspect its source.</span></article>
+      <aside class="story-verify-panel"><small>Biomarker</small><strong>HbA1c</strong><dl><div><dt>Value</dt><dd>6.4%</dd></div><div><dt>Reference</dt><dd>4.0–5.6%</dd></div><div><dt>Date</dt><dd>14 Mar 2025</dd></div><div><dt>Source</dt><dd>Page 8 ↗</dd></div></dl><em>Verified against source</em></aside>
+      <svg class="story-verify-cursor" viewBox="0 0 18 22" aria-hidden="true"><path d="M2 2v16l4.2-4.2 3.2 6.2 3-1.5-3.1-6.1H15L2 2Z"/></svg>
+    </div>
+    </section></div></div></div>
+    </article>
     </div>
     </div>
     </div>
@@ -3761,13 +3720,6 @@
       </div>
     </section>
 
-    <section class="home-purpose-statement" aria-labelledby="home-purpose-title">
-      <div class="home-purpose-inner">
-        <div class="home-purpose-animation" aria-hidden="true"><video id="human-care-animation" data-autoplay muted playsinline preload="metadata" poster="assets/videos/human-care-ink-line-first-frame.webp"><source src="assets/videos/human-care-ink-line.mp4" type="video/mp4"></video></div>
-        <h2 id="home-purpose-title">Health data you can trust<span class="home-purpose-stop" aria-hidden="true"></span><span class="sr-only">.</span></h2>
-      </div>
-    </section>
-
     <section class="security-summary" id="security" aria-labelledby="security-title">
       <div class="shell">
         <header class="evidence-head">
@@ -3801,7 +3753,6 @@
           '#method',
           '#features',
           '#reports',
-          '.home-purpose-statement',
           '#security',
           '.privacy-choice',
           '.approval-summary',
@@ -4011,70 +3962,6 @@
         }, { threshold: .2 }).observe(section);
       } else {
         video.play().catch(function () {});
-      }
-    })();
-
-    // Begin in view, hold the completed hand, then hold the completed AI before looping.
-    (function () {
-      var video = document.querySelector('#human-care-animation');
-      if (!video || reduceMotion) return;
-      var handFrameTime = 6;
-      var aiFrameTime = 7.8;
-      var holding = false;
-      var handHeldThisLoop = false;
-      var aiHeldThisLoop = false;
-      var inView = false;
-      var holdTimer = null;
-      function holdFrame(time, onComplete) {
-        if (holding) return;
-        holding = true;
-        video.pause();
-        video.currentTime = time;
-        holdTimer = setTimeout(function () {
-          onComplete();
-          holding = false;
-          holdTimer = null;
-          if (inView && !document.hidden) video.play().catch(function () {});
-        }, 2000);
-      }
-      video.addEventListener('timeupdate', function () {
-        if (!handHeldThisLoop && video.currentTime >= handFrameTime) {
-          holdFrame(handFrameTime, function () { handHeldThisLoop = true; });
-        } else if (handHeldThisLoop && !aiHeldThisLoop && video.currentTime >= aiFrameTime) {
-          holdFrame(aiFrameTime, function () {
-            aiHeldThisLoop = true;
-            video.currentTime = 0;
-            handHeldThisLoop = false;
-            aiHeldThisLoop = false;
-          });
-        }
-      });
-      function reset() {
-        if (holdTimer !== null) clearTimeout(holdTimer);
-        holdTimer = null;
-        holding = false;
-        video.currentTime = 0;
-        handHeldThisLoop = false;
-        aiHeldThisLoop = false;
-      }
-      function syncPlayback() {
-        if (inView && !document.hidden) video.play().catch(function () {});
-        else {
-          video.pause();
-          reset();
-        }
-      }
-      video.pause();
-      reset();
-      document.addEventListener('visibilitychange', syncPlayback);
-      if ('IntersectionObserver' in window) {
-        new IntersectionObserver(function (entries) {
-          inView = entries[0].isIntersecting;
-          syncPlayback();
-        }, { threshold: .25 }).observe(video.closest('.home-purpose-statement'));
-      } else {
-        inView = true;
-        syncPlayback();
       }
     })();
 

@@ -10,7 +10,7 @@
 <meta property="og:title" content="n1 for clinicians — n1.care">
 <meta property="og:description" content="See how clinicians use n1 to prepare a source-linked patient history for review, reporting, and controlled sharing.">
 <link rel="icon" href="assets/n1-logo.svg" type="image/svg+xml">
-<link rel="preload" as="image" href="assets/clinician-story-record-review-master-grade.webp" fetchpriority="high">
+<link rel="preload" as="image" href="assets/whole-picture-red-clean.webp" fetchpriority="high">
 <link rel="stylesheet" href="art-directions.css">
 <link rel="stylesheet" href="marketing-pages.css">
 <link rel="stylesheet" href="buttons.css">
@@ -455,21 +455,13 @@
 [data-whitelabel-demo][data-phase="2"] .whitelabel-share-dialog,[data-whitelabel-demo][data-phase="3"] .whitelabel-share-dialog { transform: none; }
 [data-whitelabel-demo][data-phase="3"] .whitelabel-share-dialog > header,[data-whitelabel-demo][data-phase="3"] .whitelabel-share-form,[data-whitelabel-demo][data-phase="3"] .whitelabel-share-dialog > footer { display: none; }
 [data-whitelabel-demo][data-phase="3"] .whitelabel-share-success { display: block; }
-.clinician-reveal-section { height: 320svh; position: relative; background: #172722; }
-.clinician-reveal-sticky { height: 100svh; min-height: 680px; position: sticky; top: 0; overflow: hidden; }
-.clinician-reveal-layer { position: absolute; inset: 0; overflow: hidden; clip-path: inset(var(--reveal-top,0%) 0 0); will-change: clip-path; }
-.clinician-reveal-layer img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center; }
-.clinician-reveal-layer:nth-child(1) img { object-position: center 46%; }
-.clinician-reveal-layer:nth-child(2) img { object-position: center 44%; }
-.clinician-reveal-layer:nth-child(3) img { object-position: center 48%; }
-.clinician-reveal-layer::after { position: absolute; inset: 0; background: linear-gradient(90deg,rgba(16,26,23,.86) 0,rgba(16,26,23,.57) 32%,rgba(16,26,23,.08) 68%); content: ''; }
-.clinician-reveal-copy { width: min(620px,calc(100% - 48px)); position: absolute; z-index: 2; top: 50%; left: max(19px,calc((100vw - 1356px)/2)); color: #fff; transform: translateY(-50%); }
-.clinician-reveal-copy > span { color: #79d0c9; font-size: 11px; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; }
-.clinician-reveal-copy h1,.clinician-reveal-copy h2 { max-width: 610px; margin: 18px 0 0; color: #fff; font: 400 clamp(46px,5vw,78px)/.96 var(--serif); letter-spacing: -.04em; text-wrap: balance; }
-.clinician-reveal-copy p { max-width: 525px; margin: 24px 0 0; color: rgba(255,255,255,.88); font-size: clamp(15px,1.35vw,19px); line-height: 1.55; }
-.clinician-reveal-counter { position: absolute; z-index: 3; right: clamp(24px,5vw,74px); bottom: clamp(26px,5vh,58px); display: flex; gap: 8px; }
-.clinician-reveal-counter i { width: 34px; height: 3px; border-radius: 4px; background: rgba(255,255,255,.38); }
-.clinician-reveal-counter i.is-active { background: #fff; }
+.clinician-lifetime-hero { min-height:100svh; position:relative; display:grid; overflow:hidden; isolation:isolate; background:#17130f; }
+.clinician-lifetime-hero figure { position:absolute; z-index:0; inset:0; margin:0; }
+.clinician-lifetime-hero img { width:100%; height:100%; display:block; object-fit:cover; object-position:center 52%; }
+.clinician-lifetime-hero::after { position:absolute; z-index:1; inset:0; background:linear-gradient(110deg,rgba(12,10,8,.5) 0%,rgba(12,10,8,.16) 34%,transparent 58%); content:''; }
+.clinician-lifetime-copy { width:min(650px,45vw); position:relative; z-index:2; align-self:start; margin-top:clamp(118px,14vh,168px); margin-left:clamp(46px,6.5vw,112px); color:#f5efe4; }
+.clinician-lifetime-hero h1 { max-width:8ch; margin:0; color:inherit; font:600 clamp(60px,7vw,116px)/.88 var(--sans); letter-spacing:-.072em; text-wrap:balance; }
+.clinician-lifetime-copy p { max-width:25ch; margin:clamp(22px,3vh,34px) 0 0; color:rgba(245,239,228,.78); font-size:clamp(18px,1.55vw,27px); line-height:1.28; letter-spacing:-.025em; }
 .clinician-voices { padding: clamp(72px,8vw,116px) 0; scroll-margin-top: 120px; background: #e8f1ef; }
 .voices-heading { display: block; margin-bottom: 60px; }
 .voices-heading .eyebrow { margin: 0 0 22px; color: #2a2b2a; font-size: 11px; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; }
@@ -541,7 +533,7 @@
 @media (max-width: 620px) { .clinician-review-canvas { min-height: 610px; padding: 12px; border-radius: 20px; } .clinician-review-report { min-height: 520px; padding: 22px 18px; } .clinician-review-report > div { grid-template-columns: 1fr; } .clinician-inline-editor { right: 8px; bottom: 8px; width: calc(100% - 16px); padding: 16px; } .clinician-inline-source { grid-template-columns: 1fr 1fr; } .clinician-inline-source span:last-child { grid-column: 1 / -1; } .clinician-inline-editor footer { align-items: stretch; flex-direction: column; } .clinician-inline-editor .signoff-approve { width: 100%; box-sizing: border-box; justify-content: center; } }
 @media (max-width: 620px) { .whitelabel-copy h2 { font-size: 40px; } .whitelabel-preview { min-height: 550px; display: flex; padding: 18px 14px 72px; border-radius: 20px; } .whitelabel-settings { width: 188px; top: 47%; left: 8px; transform: translateY(-54%); } .whitelabel-setting { margin-top: 11px; } .whitelabel-portal { width: calc(100% - 58px); min-height: 414px; margin: 0 0 0 auto; border-radius: 16px; } .whitelabel-portal > header { padding: 0 14px; } .whitelabel-report { padding: 20px 14px 16px; } .whitelabel-report > header { align-items: flex-start; } .whitelabel-report > header h3 { font-size: 22px; } .whitelabel-report-grid { grid-template-columns: repeat(3,1fr); } .whitelabel-report-grid span { padding: 8px 5px; } .whitelabel-report-footer { align-items: flex-end; flex-direction: column; padding: 10px 14px; } .whitelabel-report-footer > span { display: none; } .whitelabel-share-layer { inset: 14px 10px 65px; } .whitelabel-share-dialog { width: calc(100% - 18px); padding: 18px; } .whitelabel-demo-progress { right: 12px; bottom: 17px; left: 52px; gap: 5px; } .whitelabel-demo-progress button { font-size: 6px; } .whitelabel-demo-toggle { bottom: 10px; left: 8px; width: 34px; height: 34px; } [data-whitelabel-demo][data-phase="0"] .whitelabel-demo-cursor { top: 215px; left: 67px; } [data-whitelabel-demo][data-phase="1"] .whitelabel-demo-cursor { top: 434px; left: calc(100% - 76px); } [data-whitelabel-demo][data-phase="2"] .whitelabel-demo-cursor { top: 411px; left: calc(100% - 84px); } [data-whitelabel-demo][data-phase="1"] .whitelabel-portal,[data-whitelabel-demo][data-phase="2"] .whitelabel-portal,[data-whitelabel-demo][data-phase="3"] .whitelabel-portal { width: 100%; transform: none; } }
 @media (max-width: 720px) { .clinician-product-chapter .product-hero-title-heading { font-size: 42px; } }
-@media (max-width: 850px) { .clinician-reveal-copy { top: auto; bottom: 82px; left: 24px; transform: none; } .clinician-reveal-copy h1,.clinician-reveal-copy h2 { font-size: clamp(42px,12vw,62px); } .clinician-reveal-layer:nth-child(1) img { object-position: 82% center; } .clinician-reveal-layer:nth-child(2) img { object-position: 62% center; } .clinician-reveal-layer:nth-child(3) img { object-position: 66% center; } .clinician-reveal-layer::after { background: linear-gradient(0deg,rgba(14,26,22,.91) 0,rgba(14,26,22,.55) 46%,rgba(14,26,22,.08) 78%); } }
+@media (max-width:850px) { .clinician-lifetime-hero { min-height:100svh; align-items:end; } .clinician-lifetime-hero img { object-position:55% center; } .clinician-lifetime-hero::after { background:linear-gradient(0deg,rgba(12,10,8,.88) 0%,rgba(12,10,8,.3) 46%,transparent 70%); } .clinician-lifetime-copy { width:auto; align-self:end; margin:0; padding:0 24px 52px; } .clinician-lifetime-hero h1 { font-size:clamp(52px,14vw,76px); } .clinician-lifetime-copy p { max-width:24ch; font-size:clamp(17px,5vw,23px); } }
 @media (prefers-reduced-motion: reduce) { .prepared-story-media, .prepared-story-state, .prepared-story-copy { transition: none !important; } .prepared-story-copy.is-current { opacity: 1; transform: none; animation: none; } .prepared-story-step.is-active .prepared-story-state * { animation: none !important; } .story-extract-start,.story-extract-typing { display: none; } .story-extract-results { opacity: 1; transform: none; } .whitelabel-preview::before,.whitelabel-swatches i,.whitelabel-pointer,.whitelabel-portal,.whitelabel-report-status,.whitelabel-revenue-toast,.whitelabel-settings > header span::before,.whitelabel-demo-cursor svg { animation: none !important; } .whitelabel-revenue-toast { opacity: 1; transform: none; } .whitelabel-pointer { display: none; } }
 </style>
 <script defer src="marketing-pages.js">
@@ -552,22 +544,14 @@
 <a class="skip-link" href="#main">Skip to content</a>
 <script src="site-header.js"></script>
 <main id="main">
-<section class="clinician-reveal-section" data-clinician-reveal aria-label="From the complete record to a better clinical conversation">
-<div class="clinician-reveal-sticky">
-<article class="clinician-reveal-layer" data-clinician-reveal-layer>
-<img src="assets/clinician-story-record-review-master-grade.webp" alt="A clinician quietly reviewing a digital health record before a conversation" loading="eager" fetchpriority="high" decoding="async">
-<div class="clinician-reveal-copy"><span>See the whole record</span><h1>Understand the history before the consultation.</h1></div>
-</article>
-<article class="clinician-reveal-layer" data-clinician-reveal-layer>
-<img src="assets/clinician-doctor-warm-response-regraded.webp" alt="A doctor responding warmly to a patient during a consultation" loading="lazy" decoding="async">
-<div class="clinician-reveal-copy"><span>Check the evidence</span><h2>Review every finding with confidence.</h2></div>
-</article>
-<article class="clinician-reveal-layer" data-clinician-reveal-layer>
-<img src="assets/clinician-story-notebook-care.webp" alt="A clinician taking handwritten notes during a personal care conversation" loading="lazy" decoding="async">
-<div class="clinician-reveal-copy"><span>Stay present</span><h2>More time for the work only you can do.</h2></div>
-</article>
-<div class="clinician-reveal-counter" aria-hidden="true"><i class="is-active"></i><i></i><i></i></div>
-</div>
+<section class="clinician-lifetime-hero" aria-labelledby="clinician-lifetime-title">
+  <figure>
+    <img src="assets/whole-picture-red-clean.webp" alt="A person walking through a long sunlit colonnade framed by red flowering vines" width="1448" height="1086" loading="eager" fetchpriority="high" decoding="async">
+  </figure>
+  <div class="clinician-lifetime-copy">
+    <h1 id="clinician-lifetime-title">The whole picture.</h1>
+    <p>Healthcare, from the first-person perspective.</p>
+  </div>
 </section>
 <div class="product-page clinician-product-chapter">
   <header class="page-hero product-hero clinician-product-hero" data-product-hero-scroll aria-labelledby="clinician-product-animation-title">

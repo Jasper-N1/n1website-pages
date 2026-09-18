@@ -1,5 +1,7 @@
 @import url("site-layout.css");
-@import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap");
+@font-face { font-family:"Inter"; src:url("assets/fonts/inter-400.woff2") format("woff2"); font-weight:400; font-display:swap; }
+@font-face { font-family:"Inter"; src:url("assets/fonts/inter-600.woff2") format("woff2"); font-weight:600; font-display:swap; }
+@font-face { font-family:"Inter"; src:url("assets/fonts/inter-700.woff2") format("woff2"); font-weight:700; font-display:swap; }
 
 /* Radius comes from brand-tokens.css (--n1-radius-*), which every page here
    loads. Nothing in this file states a corner in pixels any more: there used
@@ -17,10 +19,11 @@
 
    Pick the step that matches the surface's footprint. 50% stays literal
    because it means "circle", not a radius on a scale. */
-:root { --sans: "Work Sans", ui-sans-serif, system-ui, sans-serif; --serif: Iowan Old Style, Baskerville, "Times New Roman", serif; --ease: cubic-bezier(.2,.75,.25,1); }
+:root { --sans: "Inter", ui-sans-serif, system-ui, sans-serif; --serif: "Inter", ui-sans-serif, system-ui, sans-serif; --ease: cubic-bezier(.2,.75,.25,1); }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; background: var(--wine); }
 body { margin: 0; overflow-x: hidden; font-family: var(--sans); background: transparent; }
+button, input, select, textarea { font-family: inherit; }
 /* Full-viewport fixed color layer (tennr-style): the whole page is one solid
    brand color at every instant. It holds solid wine through the hero pin, then
    tweens to cream in one smooth temporal transition as the next section enters —

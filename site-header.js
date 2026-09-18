@@ -22,7 +22,7 @@
     const link = `<a href="${href}"${current === href ? ' aria-current="page"' : ''}>${label}</a>`;
     if (index !== 2) return link;
     return `${link}<div class="nav-dropdown${pricingIsCurrent ? ' is-current' : ''}">
-      <button class="nav-dropdown-toggle" type="button" aria-expanded="false" aria-controls="pricing-menu">Pricing<span aria-hidden="true"></span></button>
+      <button class="nav-dropdown-toggle" type="button" aria-expanded="false" aria-controls="pricing-menu">Pricing<svg class="nav-dropdown-chevron" viewBox="0 0 12 8" aria-hidden="true"><path d="m1 1 5 5 5-5"/></svg></button>
       <div class="nav-dropdown-menu" id="pricing-menu">
         <a href="pricing.html"${current === 'pricing.html' ? ' aria-current="page"' : ''}>Clinician</a>
         <a href="pricing-patients.html"${current === 'pricing-patients.html' ? ' aria-current="page"' : ''}>Patient</a>
