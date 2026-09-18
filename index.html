@@ -2120,10 +2120,10 @@
     html { scroll-snap-type: y proximity; }
     .exam-home { height:850svh !important; position:relative; background:#fff; }
     .exam-home__stage { height:100svh; position:sticky; top:0; display:grid; overflow:hidden; isolation:isolate; background:#121917; }
-    .exam-home__stage > img { width:100%; height:100%; position:absolute; z-index:-4; inset:0; object-fit:cover; object-position:center 42%; image-rendering:auto; filter:brightness(calc(1 + var(--exposure,0) * 1.35)) contrast(calc(1 - var(--exposure,0) * .38)) saturate(calc(1 - var(--exposure,0) * .7)); transform:scale(calc(1 + var(--exam-progress,0) * .018)); transform-origin:31.8% 51%; }
+    .exam-home__stage > img { width:100%; height:100%; position:absolute; z-index:-4; inset:0; object-fit:cover; object-position:center 42%; image-rendering:auto; filter:brightness(calc(1 + var(--exposure,0) * 1.35)) contrast(calc(1 - var(--exposure,0) * .38)) saturate(calc(1 - var(--exposure,0) * .7)); transform:scale(calc(1 + var(--exam-progress,0) * .018)); transform-origin:var(--light-x,34%) var(--light-y,53.5%); }
     .exam-home__stage::before { position:absolute; z-index:-3; inset:0; background:linear-gradient(90deg,rgba(9,18,17,.72) 0%,rgba(9,18,17,.24) 31%,transparent 54%); opacity:calc(1 - var(--exam-progress,0)); content:""; }
     .exam-home__stage::after { position:absolute; z-index:-2; inset:0; background:linear-gradient(0deg,rgba(7,13,12,.36),transparent 38%); opacity:calc(1 - var(--exam-progress,0)); content:""; }
-    .exam-home__light { width:96px; height:96px; position:absolute; z-index:1; top:51%; left:31.8%; border-radius:50%; background:radial-gradient(circle,rgba(255,255,255,1) 0 6%,rgba(255,253,239,.98) 12%,rgba(255,248,218,.74) 28%,rgba(255,255,255,.34) 48%,rgba(255,255,255,0) 74%); mix-blend-mode:screen; filter:blur(calc(1px + var(--exam-progress,0) * 5px)); opacity:var(--light-opacity,0); transform:translate(-50%,-50%) scale(var(--light-scale,1)); transform-origin:center; will-change:transform,filter,opacity; }
+    .exam-home__light { width:96px; height:96px; position:absolute; z-index:1; top:var(--light-y,53.5%); left:var(--light-x,34%); border-radius:50%; background:radial-gradient(circle,rgba(255,255,255,1) 0 6%,rgba(255,253,239,.98) 12%,rgba(255,248,218,.74) 28%,rgba(255,255,255,.34) 48%,rgba(255,255,255,0) 74%); mix-blend-mode:screen; filter:blur(calc(1px + var(--exam-progress,0) * 5px)); opacity:var(--light-opacity,0); transform:translate(-50%,-50%) scale(var(--light-scale,1)); transform-origin:center; will-change:transform,filter,opacity; }
     .exam-home__light::after { position:absolute; inset:36%; border-radius:50%; background:#fff; box-shadow:0 0 16px 5px rgba(255,252,225,.95),0 0 42px 16px rgba(255,246,198,.58); content:""; }
     .exam-home__wash { position:absolute; z-index:1; inset:0; background:#fff; opacity:var(--wash-progress,0); }
     .exam-home__copy { width:min(590px,42vw); align-self:end; margin:0 0 clamp(64px,9vh,112px) clamp(38px,6vw,104px); color:#f3eee5; }
@@ -2137,9 +2137,8 @@
     .exam-home__lookup-stop { width:1px; height:1px; position:absolute; top:480svh; left:0; pointer-events:none; scroll-snap-align:start; scroll-snap-stop:always; }
     @media (max-width:760px) {
       .exam-home { height:700svh !important; }
-      .exam-home__stage > img { object-position:58% center; transform:scale(calc(1 + var(--exam-progress,0) * .012)); }
+      .exam-home__stage > img { object-position:34% center; transform:scale(calc(1 + var(--exam-progress,0) * .012)); }
       .exam-home__stage::before { background:linear-gradient(0deg,rgba(9,18,17,.82) 0%,rgba(9,18,17,.12) 56%,transparent 74%); }
-      .exam-home__light { left:22%; }
       .exam-home__copy { width:auto; margin:0; padding:0 24px 48px; }
       .exam-home__copy h1 { max-width:9ch; font-size:clamp(48px,13vw,68px); }
       .exam-home__payoff p { font-size:clamp(58px,17vw,88px); }
@@ -3141,6 +3140,29 @@
         if(!hero || matchMedia('(prefers-reduced-motion:reduce)').matches) return;
         let frame=0;
         const nav=document.querySelector('[data-n1-site-header]');
+        const stage=hero.querySelector('.exam-home__stage');
+        const image=stage && stage.querySelector('img');
+        const sourceLight={x:510,y:555};
+        const positionPercent=(value,axis)=>{
+          const keywords=axis==='x' ? {left:0,center:50,right:100} : {top:0,center:50,bottom:100};
+          if(value in keywords) return keywords[value];
+          const parsed=parseFloat(value);
+          return Number.isFinite(parsed) ? parsed : 50;
+        };
+        const alignLight=()=>{
+          if(!stage || !image || !image.naturalWidth || !image.naturalHeight) return;
+          const style=getComputedStyle(image);
+          const position=style.objectPosition.trim().split(/\s+/);
+          const positionX=positionPercent(position[0] || '50%','x')/100;
+          const positionY=positionPercent(position[1] || '50%','y')/100;
+          const scale=Math.max(stage.clientWidth/image.naturalWidth,stage.clientHeight/image.naturalHeight);
+          const renderedWidth=image.naturalWidth*scale;
+          const renderedHeight=image.naturalHeight*scale;
+          const x=(stage.clientWidth-renderedWidth)*positionX+sourceLight.x*scale;
+          const y=(stage.clientHeight-renderedHeight)*positionY+sourceLight.y*scale;
+          hero.style.setProperty('--light-x',`${x.toFixed(2)}px`);
+          hero.style.setProperty('--light-y',`${y.toFixed(2)}px`);
+        };
         const render=()=>{
           const rect=hero.getBoundingClientRect();
           const distance=Math.max(1,hero.offsetHeight-innerHeight);
@@ -3163,7 +3185,9 @@
         };
         const requestRender=()=>{ if(!frame) frame=requestAnimationFrame(render); };
         addEventListener('scroll',requestRender,{passive:true});
-        addEventListener('resize',requestRender);
+        addEventListener('resize',()=>{ alignLight(); requestRender(); });
+        if(image && !image.complete) image.addEventListener('load',alignLight,{once:true});
+        alignLight();
         render();
       })();
     </script>
@@ -3269,7 +3293,7 @@
          place on this page that wants air rather than another panel. -->
     <section class="tonal-lab" id="method" aria-labelledby="lab-title">
       <div class="tonal-lab-frame">
-        <video id="prepared-conversation-video" muted loop playsinline preload="metadata" poster="assets/videos/prepared-conversation-workspace-first-frame.webp" aria-hidden="true"><source src="assets/videos/prepared-conversation-workspace.mp4" type="video/mp4"></video>
+        <video id="prepared-conversation-video" muted loop playsinline preload="metadata" poster="assets/videos/pexels-clinic-consultation-4487124-first-frame.jpg" aria-hidden="true"><source src="assets/videos/pexels-clinic-consultation-4487124.mp4" type="video/mp4"></video>
         <div class="tonal-lab-copy">
           <div><p class="eyebrow">More time for what matters</p><h2 id="lab-title">Walk into every conversation<br><em>prepared.</em></h2></div>
         </div>
