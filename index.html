@@ -3,7 +3,6 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex, nofollow">
   <title>n1.care — Every patient, remembered</title>
   <meta name="description" content="n1 brings scattered medical records into one history, with every finding linked to its original file and page.">
   <meta property="og:title" content="n1.care — Every patient, remembered">
@@ -11,6 +10,8 @@
   <meta name="theme-color" content="#2a2b2a">
   <link rel="icon" type="image/svg+xml" href="assets/n1-logo.svg">
   <link rel="preload" as="image" href="assets/where-did-this-come-from-v2.webp" fetchpriority="high">
+  <link rel="preload" as="font" href="assets/fonts/inter-400.woff2" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="site-layout.css">
   <link rel="stylesheet" href="art-directions.css">
   <link rel="stylesheet" href="buttons.css">
   <link rel="stylesheet" href="brand-tokens.css">
@@ -328,7 +329,7 @@
     .security-feature-card.is-in-view .security-access-toggles span:nth-child(3)::after { left: calc(100% - 41px); background: #76cbc3; box-shadow: 0 0 24px rgba(118,203,195,.28); transition-delay: .58s; }
     @media (max-width: 1100px) { .security-technical-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
     @media (max-width: 820px) { .security-feature-grid { grid-template-columns: 1fr; gap: 34px; } .security-feature-visual { height: 330px; } .security-feature-copy > p { min-height: 0; } .security-technical-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
-    .scroll-reveal { --reveal-y: 12px; opacity: .12; translate: 0 var(--reveal-y); transition: opacity .68s cubic-bezier(.22,.7,.2,1), translate .68s cubic-bezier(.22,.7,.2,1); transition-delay: 0s; will-change: opacity, translate; }
+    .scroll-reveal { --reveal-y: 12px; translate: 0 var(--reveal-y); transition: translate .68s cubic-bezier(.22,.7,.2,1); transition-delay: 0s; will-change: translate; }
     .scroll-reveal.is-reveal-above { --reveal-y: -10px; }
     .scroll-reveal.is-in-view { opacity: 1; translate: 0 0; transition-delay: var(--reveal-delay,0ms); }
     @media (prefers-reduced-motion: reduce) { .scroll-reveal { opacity: 1; translate: none; transition: none; } }
@@ -2352,7 +2353,7 @@
      ========================================================================== */
   .tonal-lab { width: 100%; margin-inline: 0; padding-right: 0 !important; padding-left: 0 !important; background: #f9f8f2 !important; }
   .tonal-lab-frame { width: var(--n1-nav-surface-width); margin-inline: auto; background: #171817 !important; color: #ffffff !important; }
-  .tonal-lab video { opacity: 1 !important; }
+  .tonal-lab video, .tonal-lab-frame > img { opacity: 1 !important; }
   .tonal-lab-frame::after {
     background:
       linear-gradient(90deg, rgba(23,24,23,.38) 0%, rgba(23,24,23,.14) 34%, transparent 58%),
@@ -2662,7 +2663,8 @@
   .footer p { color: #6a6864 !important; }
   </style>
   <link rel="stylesheet" href="site-nav.css">
-  <link rel="stylesheet" href="prepared-story.css?v=20260916-1">
+  <link rel="stylesheet" href="prepared-story.css?v=20260916-1" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="prepared-story.css?v=20260916-1"></noscript>
   <style>
     /* N1 Hero 2 homepage header. */
     .home-trust-header .tonal-scroll-sequence:not(.exam-home) {
@@ -3114,6 +3116,9 @@
     }
   </style>
   <script defer src="prepared-story.js?v=20260916-3"></script>
+  <style>
+    .walk-page-head span, .walk-empty-state p, .trace-evidence-head span { color: #55635e !important; }
+  </style>
 </head>
 <body class="tonal tonal-motion home-trust-header media-hero-page">
   <div class="scroll-bg" aria-hidden="true"></div>
@@ -3193,6 +3198,7 @@
     <div class="home-purpose-flow">
     <section class="page-section clinician-prepared-block" id="clinician-prepared">
     <div class="shell">
+    <h2 class="sr-only">From uploaded records to source-linked reports</h2>
     <div class="prepared-story">
     <div class="prepared-story-steps">
     <article class="prepared-story-step">
@@ -3291,7 +3297,7 @@
          place on this page that wants air rather than another panel. -->
     <section class="tonal-lab" id="method" aria-labelledby="lab-title">
       <div class="tonal-lab-frame">
-        <video id="prepared-conversation-video" muted loop playsinline preload="metadata" poster="assets/videos/pexels-clinic-consultation-4487124-first-frame.jpg" aria-hidden="true"><source src="assets/videos/pexels-clinic-consultation-4487124.mp4" type="video/mp4"></video>
+        <img src="assets/clinician-hero-doctor-patient-wide-v4.webp" alt="A doctor talking with a patient during a consultation" width="1680" height="945" loading="lazy" decoding="async">
         <div class="tonal-lab-copy">
           <div><p class="eyebrow">More time for what matters</p><h2 id="lab-title">Walk into every conversation<br><em>prepared.</em></h2></div>
         </div>
@@ -3308,6 +3314,7 @@
         </header>
         <div class="feature-concepts">
           <section class="feature-concept concept-mercury" id="concept-mercury">
+            <h3 class="sr-only">Product walkthrough</h3>
             <aside class="walkthrough-narration" aria-live="polite" aria-label="Walkthrough playback and explanation">
               <span class="walkthrough-play" aria-hidden="true" data-walkthrough-play>Ⅱ</span>
               <div class="walkthrough-narration-copy">
@@ -3323,8 +3330,8 @@
                 <button class="walkthrough-stage-control is-active" type="button" data-walkthrough-control="0" aria-label="Jump to records">Records</button>
                 <button class="walkthrough-stage-control" type="button" data-walkthrough-control="1" aria-label="Jump to data review">Data</button>
                 <button class="walkthrough-stage-control" type="button" data-walkthrough-control="2" aria-label="Jump to all patient data">All patient data</button>
-                <button class="walkthrough-stage-control" type="button" data-walkthrough-control="3" aria-label="Jump to report generation">Generate</button>
-                <button class="walkthrough-stage-control" type="button" data-walkthrough-control="4" aria-label="Jump to report review and sharing">Review &amp; send</button>
+                <button class="walkthrough-stage-control" type="button" data-walkthrough-control="3" aria-label="Generate: jump to report generation">Generate</button>
+                <button class="walkthrough-stage-control" type="button" data-walkthrough-control="4" aria-label="Review &amp; send: jump to report review and sharing">Review &amp; send</button>
               </div>
               <span class="walkthrough-time" data-walkthrough-time>0:00 / 1:30</span>
             </aside>
@@ -3337,7 +3344,7 @@
                     <span class="walk-product-actions">
                       <button class="walk-add-patient" type="button" data-walk-add-patient hidden>＋ Add patient</button>
                       <span class="walk-secure-state"><i></i>Encrypted record</span>
-                      <span class="walk-notification-bell" aria-label="One new notification"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/></svg><b aria-hidden="true"></b></span>
+                      <span class="walk-notification-bell" role="img" aria-label="One new notification"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/></svg><b aria-hidden="true"></b></span>
                     </span>
                   </header>
                   <div class="walk-product-body">
@@ -3954,35 +3961,6 @@
         records.slice(0,seedCount).forEach(appendStatic);
         recordIndex = seedCount;
         addRecord();
-      }
-    })();
-
-    // Keep the closing clinician film on its poster until the user reaches it.
-    (function () {
-      var video = document.querySelector('#prepared-conversation-video');
-      var section = document.querySelector('.tonal-lab');
-      if (!video || !section || reduceMotion) return;
-
-      function resetVideo() {
-        video.pause();
-        try { video.currentTime = 0; } catch (error) {}
-      }
-
-      resetVideo();
-      document.addEventListener('visibilitychange', function () {
-        if (document.hidden) video.pause();
-      });
-
-      if ('IntersectionObserver' in window) {
-        new IntersectionObserver(function (entries) {
-          if (entries[0].isIntersecting && !document.hidden) {
-            video.play().catch(function () {});
-          } else {
-            resetVideo();
-          }
-        }, { threshold: .2 }).observe(section);
-      } else {
-        video.play().catch(function () {});
       }
     })();
 
@@ -6368,6 +6346,18 @@
         else if (!event.shiftKey && document.activeElement === last) { first.focus(); event.preventDefault(); }
       });
     })();
+
+    // This compact visual is presented as a labelled group, not a data table.
+    // Removing table-only roles avoids announcing incomplete row semantics.
+    document.querySelectorAll('.trace-evidence-table').forEach(function (table) {
+      table.setAttribute('role', 'group');
+      table.querySelectorAll('[role="row"]').forEach(function (row) {
+        row.removeAttribute('role');
+      });
+    });
+    document.querySelectorAll('.prepared-story-card[aria-label]').forEach(function (card) {
+      card.setAttribute('role', 'group');
+    });
 
   </script>
 
