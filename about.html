@@ -21,13 +21,13 @@
 :root { --about-ink:#202523; --about-muted:#62706b; --about-line:#c8d2ce; --about-paper:#f7f4ed; --about-mint:#e7efec; --about-green:#376361; }
 .about-page { color:var(--about-ink); background:var(--about-paper); }
 .about-display { margin:0; font:400 clamp(44px,5.2vw,76px)/.97 var(--serif); letter-spacing:-.048em; text-wrap:balance; }
-.about-opening { min-height:100svh; position:relative; display:flex; align-items:flex-end; overflow:hidden; padding:clamp(152px,17vw,218px) 0 clamp(64px,7vw,96px); color:#fff; background:#172421 url("assets/videos/log-crossing-wide-first-frame.webp") center/cover no-repeat; }
+.about-opening { min-height:100svh; position:relative; display:flex; align-items:flex-start; overflow:hidden; padding:clamp(126px,13.5vh,154px) 0 clamp(64px,7vw,96px); color:#fff; background:#172421 url("assets/videos/log-crossing-wide-first-frame.webp") center/cover no-repeat; }
 .about-opening-media { position:absolute; inset:0; background:#172421 url("assets/videos/log-crossing-wide-first-frame.webp") center/cover no-repeat; }
 .about-opening-media video { width:100%; height:100%; display:block; object-fit:cover; object-position:center 58%; }
-.about-opening::before { position:absolute; z-index:1; inset:0; background:linear-gradient(180deg,rgba(12,24,21,.08) 26%,rgba(12,24,21,.25) 58%,rgba(12,24,21,.82) 100%); content:""; }
+.about-opening::before { position:absolute; z-index:1; inset:0; background:linear-gradient(90deg,rgba(12,24,21,.5) 0%,rgba(12,24,21,.15) 42%,transparent 68%),linear-gradient(180deg,rgba(12,24,21,.18) 0%,rgba(12,24,21,.08) 44%,rgba(12,24,21,.6) 100%); content:""; }
 .about-opening .shell { position:relative; z-index:2; }
-.about-opening h1 { max-width:1120px; margin:0; color:#fff; font:400 clamp(66px,8.4vw,124px)/.9 var(--serif); letter-spacing:-.06em; text-shadow:0 2px 28px rgba(8,18,16,.22); }
-.about-opening p { max-width:620px; margin:18px 0 0; color:rgba(255,255,255,.9); font-size:clamp(19px,1.7vw,25px); line-height:1.4; }
+.about-opening h1 { max-width:820px; margin:0; color:#fff; font:400 clamp(58px,6vw,88px)/.94 var(--serif); letter-spacing:-.055em; text-shadow:0 2px 28px rgba(8,18,16,.22); text-wrap:balance; }
+.about-opening p { max-width:620px; margin:22px 0 0; color:rgba(255,255,255,.9); font-size:clamp(18px,1.45vw,22px); line-height:1.4; }
 .about-mission { padding:clamp(92px,12vw,170px) 0; border-top:1px solid var(--about-line); background:#fffdf9; }
 .about-mission > .shell { width:var(--n1-page-width); }
 .about-editorial-grid { display:grid; grid-template-columns:minmax(0,1fr); align-items:start; }
@@ -137,7 +137,7 @@
   .about-location { min-height:480px; }
 }
 @media(max-width:700px) {
-  .about-opening { min-height:100svh; padding:130px 0 54px; background-image:url("assets/videos/log-crossing-portrait-first-frame.webp"); }
+  .about-opening { min-height:100svh; align-items:flex-end; padding:130px 0 54px; background-image:url("assets/videos/log-crossing-portrait-first-frame.webp"); }
   .about-opening-media { background-image:url("assets/videos/log-crossing-portrait-first-frame.webp"); }
   .about-opening-media video { object-position:center 58%; }
   .about-opening h1 { font-size:clamp(56px,17vw,74px); }
@@ -150,8 +150,7 @@
   .about-timeline li:nth-child(odd) { padding-left:0; border-left:0; }
   .about-story-media { height:600px; }
   .about-story-points { grid-template-columns:1fr; }
-  .about-story-points article,.about-story-points article:first-child { min-height:0; padding:28px 0; border-top:1px solid #404744; border-left:0; }
-  .about-story-points article:first-child { border-top:0; }
+  .about-story-points article,.about-story-points article:first-child { min-height:0; padding:28px 0; border:0; }
   .about-story-points h3 { margin-top:22px; }
   .about-leads { gap:8px; }
   .about-lead-card figcaption { min-height:92px; padding:14px; }
@@ -171,7 +170,7 @@
 </style>
 <script defer src="marketing-pages.js"></script>
 </head>
-<body class="tonal marketing-page about-page">
+<body class="tonal marketing-page about-page media-hero-page">
 <a class="skip-link" href="#main">Skip to content</a>
 <script src="site-header.js"></script>
 <main id="main">
@@ -209,6 +208,6 @@
 </div></div></section>
 <section class="about-close"><div class="shell"><div class="about-close-card"><h2>Build AI that makes care more human.</h2><a class="button" href="contact.html">Talk with us <span aria-hidden="true">→</span></a></div></div></section>
 </main>
-<footer class="marketing-footer"><div class="shell"><div class="marketing-footer-top"><div class="marketing-footer-brand"><a href="index.html" aria-label="n1.care home"><span class="logo" aria-hidden="true"></span></a><p>Health data you can trust, with every finding linked to its source.</p></div><div class="marketing-footer-links"><div><strong>Product</strong><a href="index.html#features">How it works</a><a href="reports.html">Reports</a><a href="pricing.html">Pricing</a><a href="https://app.n1.care/demo">Live demo</a></div><div><strong>Solutions</strong><a href="clinicians.html">For clinicians</a><a href="patients.html">For patients</a></div><div><strong>Company</strong><a href="about.html">About</a><a href="contact.html">Contact</a></div><div><strong>Trust &amp; legal</strong><a href="compliance.html">Security &amp; compliance</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="patents.html">Patents</a></div></div></div></div><div class="marketing-footer-bottom">© 2026 N1 Research, LLC</div></div></footer>
+<footer class="marketing-footer"><div class="shell"><div class="marketing-footer-top"><div class="marketing-footer-brand"><a href="index.html" aria-label="n1.care home"><span class="logo" aria-hidden="true"></span></a><p>The whole health story. Every answer traced to its source.</p></div><div class="marketing-footer-links"><div><strong>Product</strong><a href="index.html#features">How it works</a><a href="reports.html">Reports</a><a href="pricing.html">Pricing</a></div><div><strong>Solutions</strong><a href="clinicians.html">For clinicians</a><a href="patients.html">For patients</a></div><div><strong>Company</strong><a href="about.html">About</a><a href="contact.html">Contact</a></div><div><strong>Trust &amp; legal</strong><a href="compliance.html">Security &amp; compliance</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="patents.html">Patents</a></div></div></div></div><div class="marketing-footer-bottom">© 2026 N1 Research, LLC</div></div></footer>
 </body>
 </html>

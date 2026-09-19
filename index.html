@@ -1930,8 +1930,18 @@
       .team-band-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 620px) {
+      .site-footer .footer-top { gap: 38px; padding-bottom: 38px; }
+      .site-footer .footer-cols { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 32px 24px; }
+      .site-footer .footer-col:last-child { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); column-gap: 24px; }
+      .site-footer .footer-col:last-child h3 { grid-column: 1 / -1; }
+      .site-footer .footer-col h3 { font-size: 11px; }
+      .site-footer .footer-col a { min-height: 38px; display: flex; align-items: center; padding: 0; font-size: 14px; }
       .security-technical-grid { grid-template-columns: 1fr; }
-      .security-implementation { min-height: 0; }
+      .security-implementation { min-height: 0; gap: 13px; padding: 16px; line-height: 1.4; }
+      .security-implementation i { width: 30px; height: 30px; }
+      .security-implementation i svg { width: 16px; height: 16px; }
+      .security-implementation b { font-size: 13px; line-height: 1.35; }
+      .security-implementation small { margin-top: 6px; font-size: 12px; line-height: 1.55; }
       .doctor-features { padding: 58px 0; }
       .approval-summary { padding: 64px 0; }
       .approval-report-meta { grid-template-columns: 1fr; }
@@ -2123,9 +2133,9 @@
     .exam-home__stage > img { width:100%; height:100%; position:absolute; z-index:-4; inset:0; object-fit:cover; object-position:center 42%; image-rendering:auto; filter:brightness(calc(1 + var(--exposure,0) * 1.35)) contrast(calc(1 - var(--exposure,0) * .38)) saturate(calc(1 - var(--exposure,0) * .7)); transform:scale(calc(1 + var(--exam-progress,0) * .018)); transform-origin:var(--light-x,34%) var(--light-y,53.5%); }
     .exam-home__stage::before { position:absolute; z-index:-3; inset:0; background:linear-gradient(90deg,rgba(9,18,17,.72) 0%,rgba(9,18,17,.24) 31%,transparent 54%); opacity:calc(1 - var(--exam-progress,0)); content:""; }
     .exam-home__stage::after { position:absolute; z-index:-2; inset:0; background:linear-gradient(0deg,rgba(7,13,12,.36),transparent 38%); opacity:calc(1 - var(--exam-progress,0)); content:""; }
-    .exam-home__light { width:96px; height:96px; position:absolute; z-index:1; top:var(--light-y,53.5%); left:var(--light-x,34%); border-radius:50%; background:radial-gradient(circle,rgba(255,255,255,1) 0 6%,rgba(255,253,239,.98) 12%,rgba(255,248,218,.74) 28%,rgba(255,255,255,.34) 48%,rgba(255,255,255,0) 74%); mix-blend-mode:screen; filter:blur(calc(1px + var(--exam-progress,0) * 5px)); opacity:var(--light-opacity,0); transform:translate(-50%,-50%) scale(var(--light-scale,1)); transform-origin:center; will-change:transform,filter,opacity; }
-    .exam-home__light::after { position:absolute; inset:36%; border-radius:50%; background:#fff; box-shadow:0 0 16px 5px rgba(255,252,225,.95),0 0 42px 16px rgba(255,246,198,.58); content:""; }
-    .exam-home__wash { position:absolute; z-index:1; inset:0; background:#fff; opacity:var(--wash-progress,0); }
+    .exam-home__light { width:96px; height:96px; position:absolute; z-index:1; top:var(--light-y,53.5%); left:var(--light-x,34%); border-radius:50%; background:radial-gradient(circle,rgba(250,232,220,1) 0 7%,rgba(248,226,216,.96) 15%,rgba(247,241,231,.72) 32%,rgba(222,238,234,.3) 52%,rgba(250,232,220,0) 76%); mix-blend-mode:screen; filter:blur(calc(1px + var(--exam-progress,0) * 5px)); opacity:var(--light-opacity,0); transform:translate(-50%,-50%) scale(var(--light-scale,1)); transform-origin:center; will-change:transform,filter,opacity; }
+    .exam-home__light::after { position:absolute; inset:36%; border-radius:50%; background:#fae8dc; box-shadow:0 0 16px 5px rgba(248,226,216,.84),0 0 42px 16px rgba(247,241,231,.5); content:""; }
+    .exam-home__wash { position:absolute; z-index:1; inset:0; background:#fae8dc; opacity:var(--wash-progress,0); }
     .exam-home__copy { width:min(590px,42vw); align-self:end; margin:0 0 clamp(64px,9vh,112px) clamp(38px,6vw,104px); color:#f3eee5; }
     .exam-home__copy h1 { max-width:8.6ch; margin:0; color:#f3eee5 !important; font:400 clamp(58px,6.1vw,102px)/.91 var(--sans); letter-spacing:-.065em; text-shadow:0 2px 24px rgba(5,12,11,.22); text-wrap:balance; opacity:calc(1 - clamp(0,calc(var(--exam-progress,0) * 2.4),1)); transform:translateY(calc(var(--exam-progress,0) * -18px)); }
     .exam-home__payoff,.exam-home__proof { position:absolute; z-index:2; inset:0; display:grid; place-items:center; padding:24px; color:#172826; text-align:center; }
@@ -2340,17 +2350,19 @@
   /* ==========================================================================
      LAB VIDEO SECTION WITH HIGH-CONTRAST SCRIM (NO TEXT-SHADOW)
      ========================================================================== */
-  .tonal-lab { background: #f9f8f2 !important; }
-  .tonal-lab-frame { background: #171817 !important; color: #ffffff !important; }
+  .tonal-lab { width: 100%; margin-inline: 0; padding-right: 0 !important; padding-left: 0 !important; background: #f9f8f2 !important; }
+  .tonal-lab-frame { width: var(--n1-nav-surface-width); margin-inline: auto; background: #171817 !important; color: #ffffff !important; }
+  .tonal-lab video { opacity: 1 !important; }
   .tonal-lab-frame::after {
-    background: linear-gradient(90deg, rgba(23,24,23,.9), rgba(23,24,23,.68) 44%, rgba(23,24,23,.18) 76%, transparent 100%),
-                linear-gradient(0deg, rgba(23,24,23,.42), transparent 48%) !important;
+    background:
+      linear-gradient(90deg, rgba(23,24,23,.38) 0%, rgba(23,24,23,.14) 34%, transparent 58%),
+      linear-gradient(0deg, rgba(23,24,23,.64) 0%, rgba(23,24,23,.28) 28%, transparent 58%) !important;
   }
   .tonal-lab-copy { justify-content: flex-end !important; padding-bottom: clamp(72px,8vw,116px) !important; color: #ffffff !important; text-shadow: none !important; }
   .tonal-lab-copy > div { max-width: 760px; }
-  .tonal-lab-copy .eyebrow { color: #48a9a6 !important; }
+  .tonal-lab-copy .eyebrow { color: #8fe0d8 !important; }
   .tonal-lab h2 { color: #ffffff !important; text-shadow: none !important; }
-  .tonal-lab h2 em { color: #48a9a6; font-style: normal; }
+  .tonal-lab h2 em { color: #8fe0d8; font-style: normal; }
   .tonal-lab-copy > p { color: #f3ede2 !important; text-shadow: none !important; }
 
   /* ==========================================================================
@@ -2426,8 +2438,9 @@
     .report-nav.prev { left: max(14px,calc(50% - 400px)); }
     .report-nav.next { right: max(14px,calc(50% - 400px)); }
   }
-  @media (max-width: 800px) {
-    .report-card.is-left { transform: translateX(-48%) translateZ(-120px) rotateY(0deg) scale(.84); }
+    @media (max-width: 800px) {
+      .report-nav { display: none !important; }
+      .report-card.is-left { transform: translateX(-48%) translateZ(-120px) rotateY(0deg) scale(.84); }
     .report-card.is-right { transform: translateX(48%) translateZ(-120px) rotateY(0deg) scale(.84); }
   }
 
@@ -3006,21 +3019,6 @@
     @keyframes home-upload-progress { 0%,28% { width:0 } 68%,100% { width:100% } }
     @media (max-width: 900px) { .home-upload-moment-inner { width: min(720px,calc(100% - 40px)); grid-template-columns: 1fr; gap: 38px; } .home-upload-copy { text-align: center; } .home-upload-copy h3 { margin-right: auto; margin-left: auto; } }
     @media (max-width: 560px) { .home-upload-moment { padding: 76px 0 92px; } .home-upload-moment-inner { width: calc(100% - 28px); } .home-upload-copy h3 { font-size: 42px; } .home-upload-card { min-height: 350px; padding: 16px; border-radius: 25px; } .home-upload-panel { padding: 18px; } .home-upload-stage { padding: 20px 15px; } .home-upload-progress { right: 15px; left: 66px; } }
-    .home-trust-header .site-nav-v2.nav.is-exam-light { color:#f5efe4 !important; }
-    .home-trust-header .site-nav-v2.nav.is-exam-light .nav-inner {
-      border-color:rgba(255,255,255,.14) !important;
-      color:#f5efe4 !important;
-      background:rgba(18,19,18,.78) !important;
-      box-shadow:0 12px 34px rgba(8,10,9,.18) !important;
-      -webkit-backdrop-filter:saturate(105%) blur(16px) !important;
-      backdrop-filter:saturate(105%) blur(16px) !important;
-    }
-    .home-trust-header .site-nav-v2.nav.is-exam-light .logo { color:#f5efe4 !important; background:#f5efe4 !important; filter:none !important; }
-    .home-trust-header .site-nav-v2.nav.is-exam-light .nav-links,
-    .home-trust-header .site-nav-v2.nav.is-exam-light .nav-actions,
-    .home-trust-header .site-nav-v2.nav.is-exam-light .nav-links a,
-    .home-trust-header .site-nav-v2.nav.is-exam-light .nav-actions .login { color:#f5efe4 !important; text-shadow:none !important; }
-    .home-trust-header .site-nav-v2.nav.is-exam-light .nav-actions .button { color:#202523 !important; border-color:#f5efe4 !important; background:#f5efe4 !important; }
     @keyframes home-trust-settle {
       from { transform: scale(1.025); }
       to { transform: scale(1.01); }
@@ -3117,7 +3115,7 @@
   </style>
   <script defer src="prepared-story.js?v=20260916-3"></script>
 </head>
-<body class="tonal tonal-motion home-trust-header">
+<body class="tonal tonal-motion home-trust-header media-hero-page">
   <div class="scroll-bg" aria-hidden="true"></div>
   <a class="skip-link" href="#main">Skip to content</a>
   <script src="site-header.js"></script>
@@ -3180,7 +3178,7 @@
           hero.style.setProperty('--wash-progress',wash.toFixed(3));
           hero.style.setProperty('--lookup-opacity',Math.min(lookupIn,lookupOut).toFixed(3));
           hero.style.setProperty('--proof-opacity',proof.toFixed(3));
-          if(nav) nav.classList.toggle('is-exam-light',progress>=.56);
+          if(nav) nav.classList.remove('is-exam-light');
           frame=0;
         };
         const requestRender=()=>{ if(!frame) frame=requestAnimationFrame(render); };
@@ -3201,11 +3199,11 @@
     <div class="prepared-story-card" aria-label="Two-step secure record upload"><div class="prepared-story-frame"><div class="prepared-story-media" aria-hidden="true"></div><div class="prepared-story-copy is-current"><h3>Upload files</h3></div><div class="prepared-story-ui"><section class="prepared-story-state"><div class="story-ui-head"><div><span class="story-ui-avatar">ER</span><span><b>Upload health records</b></span></div><span>Secure upload</span></div><div class="story-upload-zone"><div class="story-upload-stage story-upload-choose"><i>↑</i><b>Choose records</b><small>PDF, PNG or JPG · TXT, CSV or TSV for DNA</small></div><div class="story-upload-stage story-upload-selected"><div class="story-upload-selected-row"><i>PDF</i><span><b>lab-results-june.pdf</b><small>12 pages · 2.4 MB</small></span></div><div class="story-upload-meter"><span></span></div><small class="story-upload-status"><span>Uploading securely…</span><span>2.4 MB</span></small></div><div class="story-upload-stage story-upload-complete"><i>✓</i><b>Upload complete</b><small>1 record added securely</small></div></div><div class="story-upload-actions"><span><b>1</b> Choose files</span><span><b>2</b> Upload securely</span></div></section></div></div></div>
     </article>
     <article class="prepared-story-step">
-    <div class="prepared-story-card" aria-label="Animation showing health data extracted from a health record"><div class="prepared-story-frame"><div class="prepared-story-media" aria-hidden="true"></div><div class="prepared-story-copy"><h3>We extract all medical data.</h3></div><div class="prepared-story-ui"><section class="prepared-story-state"><div class="story-ui-head"><div><span class="story-ui-avatar">ER</span><span><b>Health record</b><small>Health history</small></span></div><span>Source-linked</span></div><div class="story-extract-body"><div class="story-extract-stage story-extract-start"><div class="story-extract-file"><i>PDF</i><span><b>complete-health-record.pdf</b><small>12 pages · health record</small></span></div><span class="story-extract-button">Extract health data<i class="story-extract-pointer">↖</i></span></div><div class="story-extract-stage story-extract-typing"><div class="story-extract-scan"><span>Reading source pages</span><b class="story-extract-typed">Extracting health data…</b><div class="story-extract-scanbar"><i></i></div></div></div><div class="story-extract-stage story-extract-results"><div class="story-extract-result-head"><span><i>✓</i>6 data types found</span><small>Source-linked data · sources attached</small></div><div class="story-data-table"><div class="story-data-row"><span>Biomarker</span><b>HbA1c · 6.4%</b><small>Page 2</small></div><div class="story-data-row"><span>Diagnosis</span><b>Hypertension</b><small>Page 4</small></div><div class="story-data-row"><span>Medication</span><b>Metformin · 500 mg</b><small>Page 4</small></div><div class="story-data-row"><span>Procedure</span><b>Echocardiogram · 2025</b><small>Page 6</small></div><div class="story-data-row"><span>Genetics</span><b>BRCA1/2 · negative</b><small>Page 8</small></div><div class="story-data-row"><span>Supplement</span><b>Vitamin D3 · 1,000 IU</b><small>Page 5</small></div></div></div></div></section></div></div></div>
+    <div class="prepared-story-card" aria-label="Animation showing health data extracted from a health record"><div class="prepared-story-frame"><div class="prepared-story-media" aria-hidden="true"></div><div class="prepared-story-copy"><h3>We extract all information.</h3></div><div class="prepared-story-ui"><section class="prepared-story-state"><div class="story-ui-head"><div><span class="story-ui-avatar">ER</span><span><b>Health record</b><small>Health history</small></span></div><span>Source-linked</span></div><div class="story-extract-body"><div class="story-extract-stage story-extract-start"><div class="story-extract-file"><i>PDF</i><span><b>complete-health-record.pdf</b><small>12 pages · health record</small></span></div><span class="story-extract-button">Extract health data<i class="story-extract-pointer">↖</i></span></div><div class="story-extract-stage story-extract-typing"><div class="story-extract-scan"><span>Reading source pages</span><b class="story-extract-typed">Extracting health data…</b><div class="story-extract-scanbar"><i></i></div></div></div><div class="story-extract-stage story-extract-results"><div class="story-extract-result-head"><span><i>✓</i>6 data types found</span><small>Source-linked data · sources attached</small></div><div class="story-data-table"><div class="story-data-row"><span>Biomarker</span><b>HbA1c · 6.4%</b><small>Page 2</small></div><div class="story-data-row"><span>Diagnosis</span><b>Hypertension</b><small>Page 4</small></div><div class="story-data-row"><span>Medication</span><b>Metformin · 500 mg</b><small>Page 4</small></div><div class="story-data-row"><span>Procedure</span><b>Echocardiogram · 2025</b><small>Page 6</small></div><div class="story-data-row"><span>Genetics</span><b>BRCA1/2 · negative</b><small>Page 8</small></div><div class="story-data-row"><span>Supplement</span><b>Vitamin D3 · 1,000 IU</b><small>Page 5</small></div></div></div></div></section></div></div></div>
     </article>
     <article class="prepared-story-step">
     <div class="prepared-story-card" aria-label="Interactive longitudinal HbA1c view using anonymized data">
-    <div class="prepared-story-frame"><div class="prepared-story-media" aria-hidden="true"></div><div class="prepared-story-copy"><h3>Review everything in one visualisation.</h3></div><div class="prepared-story-ui"><section class="prepared-story-state">
+    <div class="prepared-story-frame"><div class="prepared-story-media" aria-hidden="true"></div><div class="prepared-story-copy"><h3>And show you for review.</h3></div><div class="prepared-story-ui"><section class="prepared-story-state">
     <div class="story-ui-head"><div><span class="story-ui-avatar">JR</span><span><b>Changes across the record</b><small>Hover over each source-linked reading</small></span></div><span>Longitudinal view</span></div>
     <div class="story-change-title"><span>Biomarker trend <em>Stated lab range 4.0–5.6%</em></span><b>HbA1c</b></div>
     <div class="story-change-chart" role="group" aria-label="Three HbA1c readings compared with a stated laboratory reference range of 4.0 to 5.6 percent">
@@ -3220,12 +3218,12 @@
     </article>
     <article class="prepared-story-step">
     <div class="prepared-story-card" aria-label="Scrollable Health Summary preview using anonymized data">
-    <div class="prepared-story-frame"><div class="prepared-story-media" aria-hidden="true"></div><div class="prepared-story-copy"><h3>In-depth reports are generated.</h3></div><div class="prepared-story-ui"><section class="prepared-story-state">
+    <div class="prepared-story-frame"><div class="prepared-story-media" aria-hidden="true"></div><div class="prepared-story-copy"><h3>One-click reports.</h3></div><div class="prepared-story-ui"><section class="prepared-story-state">
     <div class="story-report-window"><div class="story-report-scroll" role="document" tabindex="0" aria-label="Scrollable Health Summary report">
     <header class="story-report-cover"><span>Cross-panel findings &amp; clinical overview</span><h4>Health Summary</h4><p>Example patient · Report preview</p><div class="story-report-meta"><span>Records<b>14 reviewed</b></span><span>Findings<b>6 prioritized</b></span><span>Sources<b>Attached</b></span></div></header>
-    <section class="story-report-section"><small>Section 1</small><h5>Executive summary</h5><p>The record shows an improving metabolic trend alongside findings that still need clinical review. Each statement remains connected to the source record and page from which it was prepared.</p><div class="story-report-markers"><span><small>HbA1c</small><b>6.4%</b><em>Down from 7.1%</em></span><span><small>LDL cholesterol</small><b>116 mg/dL</b><em>Review in context</em></span><span><small>hs-CRP</small><b>1.8 mg/L</b><em>Follow trend</em></span><span><small>Vitamin D</small><b>71 nmol/L</b><em>Improving</em></span></div></section>
+    <section class="story-report-section"><small>Section 1</small><h5>Executive summary</h5><p>The record shows that key health trends have improved. Some findings still need review. Each statement links to its source and page.</p><div class="story-report-markers"><span><small>HbA1c</small><b>6.4%</b><em>Down from 7.1%</em></span><span><small>LDL cholesterol</small><b>116 mg/dL</b><em>Review in context</em></span><span><small>hs-CRP</small><b>1.8 mg/L</b><em>Follow trend</em></span><span><small>Vitamin D</small><b>71 nmol/L</b><em>Improving</em></span></div></section>
     <section class="story-report-section"><small>Section 2</small><h5>Body systems</h5><div class="story-report-system"><span><b>Metabolic</b><br>HbA1c trend and treatment context</span><em>Review</em></div><div class="story-report-system"><span><b>Cardiovascular</b><br>Lipids, blood pressure and family history</span><em>Review</em></div><div class="story-report-system"><span><b>Hepatic</b><br>Available liver markers</span><em>Stable</em></div><div class="story-report-system"><span><b>Renal</b><br>Creatinine and eGFR</span><em>Stable</em></div></section>
-    <section class="story-report-section"><small>Section 3</small><h5>Recommendations for review</h5><div class="story-report-recommendations"><div><b>Confirm patient-specific ranges</b><p>Check the range and target appropriate to this patient before interpreting the trend.</p></div><div><b>Reconcile treatment</b><p>Confirm medicines, supplements and recent changes against the source record.</p></div><div><b>Verify before sharing</b><p><span data-future-feature="report-editing" hidden>Edit the draft, </span>Resolve gaps and check every material finding at its source.</p></div></div></section>
+    <section class="story-report-section"><small>Section 3</small><h5>Recommendations for review</h5><div class="story-report-recommendations"><div><b>Confirm patient-specific ranges</b><p>Check the range and target appropriate to this patient before interpreting the trend.</p></div><div><b>Reconcile treatment</b><p>Confirm medicines, supplements and recent changes against the source record.</p></div><div><b>Verify before sharing</b><p><span data-future-feature="report-editing" hidden>Edit the draft, </span>Fill any gaps, then check key facts against the source files.</p></div></div></section>
     <section class="story-report-section"><small>Section 4</small><h5>Data gaps</h5><p>Home blood-pressure readings, current anthropometrics and complete family history are not confirmed in the available patient record.</p></section>
     <span class="story-report-provenance">n1.care · Report preview only. This report is not medical advice, diagnosis or treatment.</span><a class="story-report-open" href="Health_summary_demo-1.html">Open full Health Summary →</a>
     </div><span class="story-report-cue" aria-hidden="true">Scroll report ↓</span></div>
@@ -3233,7 +3231,7 @@
     </article>
     <article class="prepared-story-step">
     <div class="prepared-story-card" aria-label="Animation showing a report claim opening its source-linked biomarker information">
-    <div class="prepared-story-frame"><div class="prepared-story-media" aria-hidden="true"></div><div class="prepared-story-copy"><h3>Every claim is verifiable. No hallucination.</h3></div><div class="prepared-story-ui"><section class="prepared-story-state story-verify-state">
+    <div class="prepared-story-frame"><div class="prepared-story-media" aria-hidden="true"></div><div class="prepared-story-copy"><h3>And all of the sources.</h3></div><div class="prepared-story-ui"><section class="prepared-story-state story-verify-state">
     <div class="story-ui-head"><div><span class="story-ui-avatar">ER</span><span><b>Health Summary</b><small>Clinical overview</small></span></div><span>Source-linked</span></div>
     <div class="story-verify-layout">
       <article class="story-verify-report"><small>Metabolic health</small><h4>Improving glucose control</h4><p>HbA1c has fallen across three readings and is now <button class="story-verify-claim" type="button">6.4%</button>, while remaining above the stated laboratory range.</p><span>Click any finding to inspect its source.</span></article>
@@ -3584,15 +3582,14 @@
           </section>
         </div>
 
-        <div class="walk-demo-access"><a class="button" href="https://app.n1.care/demo">Try the live demo <span aria-hidden="true">→</span></a><span>Demo account · no sign-up required</span></div>
-
       </div>
     </section>
 
     <section class="report-carousel" id="reports" aria-labelledby="reports-title">
       <div class="shell">
         <div class="report-carousel-head">
-          <h2 id="reports-title">Build the right report<br><em>for every health question.</em></h2>
+          <h2 id="reports-title">Choose the report your question calls for.</h2>
+          <p class="report-carousel-sub">Choose from report templates or build your own custom report.</p>
         </div>
         <div class="report-carousel-stage" role="region" aria-roledescription="carousel" aria-label="Sample reports">
           <button class="report-nav prev" type="button" aria-label="Previous report">‹</button>
@@ -3704,7 +3701,7 @@
             <button class="report-dot" id="report-tab-3" type="button" role="tab" data-index="2" aria-selected="false" aria-controls="report-panel-3" aria-label="Supplement Report" tabindex="-1"></button>
             <button class="report-dot" id="report-tab-4" type="button" role="tab" data-index="3" aria-selected="false" aria-controls="report-panel-4" aria-label="Genetic Predisposition Report" tabindex="-1"></button>
           </div>
-          <a class="report-library-cta" href="reports.html">Explore all reports from anonymized patients <span aria-hidden="true">→</span></a>
+          <a class="report-library-cta" href="reports.html">Explore sample reports <span aria-hidden="true">→</span></a>
         </div>
       </div>
     </section>
@@ -3764,7 +3761,7 @@
     </section>
 
 
-    <section class="tonal-close" id="contact" aria-labelledby="home-proof-title"><div class="shell"><p class="eyebrow">Trust built into the workflow</p><h2 id="home-proof-title">Every fact stays connected to its source.</h2><div class="close-actions"><a class="button" href="https://app.n1.care/demo">Try the live demo <span aria-hidden="true">→</span></a><a class="button secondary" href="#security">See traceability in action</a></div></div></section>
+    <section class="tonal-close" id="contact" aria-labelledby="home-proof-title"><div class="shell"><p class="eyebrow">Trust built into the workflow</p><h2 id="home-proof-title">Every fact stays connected to its source.</h2><div class="close-actions"><a class="button secondary" href="#security">See traceability in action</a></div></div></section>
 
     <script>
       // Homepage narrative: promise → product → human outcome → reports → proof → control.
@@ -3805,7 +3802,7 @@
       <div class="footer-top">
         <div class="footer-brand">
           <span class="logo" aria-hidden="true"></span>
-          <p class="footer-tagline">Health data you can trust, with every finding linked to its source.</p>
+          <p class="footer-tagline">The whole health story. Every answer traced to its source.</p>
         </div>
         <nav class="footer-cols" aria-label="Footer">
           <div class="footer-col">
@@ -6252,6 +6249,21 @@
       stage.addEventListener('focusout', function (event) {
         if (!stage.contains(event.relatedTarget)) startAutoRotate();
       });
+      var touchStartX = 0;
+      var touchStartY = 0;
+      stage.addEventListener('touchstart', function (event) {
+        var touch = event.changedTouches[0];
+        touchStartX = touch.clientX;
+        touchStartY = touch.clientY;
+        stopAutoRotate();
+      }, { passive: true });
+      stage.addEventListener('touchend', function (event) {
+        var touch = event.changedTouches[0];
+        var deltaX = touch.clientX - touchStartX;
+        var deltaY = touch.clientY - touchStartY;
+        if (Math.abs(deltaX) > 44 && Math.abs(deltaX) > Math.abs(deltaY) * 1.15) go(active + (deltaX < 0 ? 1 : -1));
+        startAutoRotate();
+      }, { passive: true });
       document.addEventListener('visibilitychange', function () {
         if (document.hidden) stopAutoRotate();
         else startAutoRotate();

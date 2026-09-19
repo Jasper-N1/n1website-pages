@@ -45,6 +45,21 @@
     </div>`;
   script.insertAdjacentElement('afterend', nav);
 
+  const hasMediaHero = document.body.classList.contains('media-hero-page');
+  const homeHero = document.body.classList.contains('home-trust-header')
+    ? document.querySelector('[data-exam-home]')
+    : null;
+  const syncScrollState = () => {
+    const isPastHero = !hasMediaHero
+      || (homeHero ? homeHero.getBoundingClientRect().bottom <= innerHeight + 1 : scrollY > 24);
+    nav.classList.toggle('is-past-hero', isPastHero);
+  };
+  if (hasMediaHero) {
+    addEventListener('scroll', syncScrollState, { passive: true });
+    addEventListener('resize', syncScrollState);
+  }
+  syncScrollState();
+
   const toggle = nav.querySelector('.nav-toggle');
   const menu = nav.querySelector('.nav-menu');
   const pricingDropdown = nav.querySelector('.nav-dropdown');

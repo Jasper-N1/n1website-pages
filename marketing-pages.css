@@ -482,8 +482,25 @@ body.marketing-page { color: var(--ink); background: var(--cream); }
 /* --control-line, not --line: an input's border is a component boundary and
    owes 3:1 (WCAG 1.4.11). The decorative hairline measured 1.58:1 here. */
 .contact-field input, .contact-field select, .contact-field textarea { width: 100%; min-height: 48px; box-sizing: border-box; padding: 12px 13px; border: 1px solid var(--control-line); border-radius: var(--n1-radius-xl); color: var(--ink); background: #fffdf8; font: inherit; font-size: 14px; }
+.contact-field select {
+  min-height: 52px;
+  padding: 12px 48px 12px 15px;
+  border-color: rgba(55,99,97,.32);
+  border-radius: 12px;
+  color: #27302d;
+  background-color: #f7f4ed;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9' fill='none'%3E%3Cpath d='m2 2 5 5 5-5' stroke='%23376361' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-position: right 16px center;
+  background-repeat: no-repeat;
+  box-shadow: 0 1px 0 rgba(255,255,255,.8) inset, 0 4px 14px rgba(28,55,51,.05);
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
+.contact-field select:hover { border-color: rgba(55,99,97,.58); background-color: #f2f3ec; }
 .contact-field textarea { min-height: 150px; resize: vertical; line-height: 1.55; }
-.contact-field input:focus, .contact-field select:focus, .contact-field textarea:focus { outline: 2px solid var(--wine); outline-offset: 2px; }
+.contact-field input:focus, .contact-field textarea:focus { outline: 2px solid var(--wine); outline-offset: 2px; }
+.contact-field select:focus { border-color: #376361; outline: 3px solid rgba(72,169,166,.22); outline-offset: 2px; }
 .contact-field [aria-invalid="true"] { border-color: #a52929; }
 .field-help { margin: 0; color: var(--muted); font-size: 11px; }
 .patient-warning { padding: 11px 13px; border-left: 3px solid var(--peach); color: var(--ink); background: var(--cream); font-size: 11px; line-height: 1.5; }
@@ -687,7 +704,7 @@ body.marketing-page { color: var(--ink); background: var(--cream); }
   .lab-report-page, .lab-timeline { min-height: 0; }
   .source-page-head { flex-direction: column; gap: 5px; }
   .marketing-footer-top { gap: 50px; }
-  .marketing-footer-links { grid-template-columns: 1fr; gap: 28px; }
+  .marketing-footer-links { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 32px 24px; }
   .marketing-footer-links strong { margin-bottom: 8px; }
   .marketing-footer-links a {
     min-height: 40px;

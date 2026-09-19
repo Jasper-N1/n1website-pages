@@ -11,13 +11,12 @@
   const resetButton = document.querySelector('#contact-reset');
   const submitButton = form.querySelector('button[type="submit"]');
   const messageInput = form.querySelector('#contact-message');
-  const messageHelp = document.querySelector('#message-help');
 
   const intents = {
     walkthrough: {
       label: 'Product walkthrough',
-      title: 'Tell us what <em>you’re evaluating.</em>',
-      intro: 'We’ll reply by email with the most useful next step: an answer, a relevant example, or a product walkthrough.',
+      title: 'How can <em>we help?</em>',
+      intro: 'Tell us what you need. We’ll reply with a clear answer, a useful example, or a guided tour of n1.',
     },
     pricing: {
       label: 'Plans and expected use',
@@ -59,6 +58,11 @@
       title: 'Map a clinical workflow <em>with us.</em>',
       intro: 'Tell us what records arrive, what the clinician needs to review, and what output is required.',
     },
+    other: {
+      label: 'Other',
+      title: 'How can <em>we help?</em>',
+      intro: 'Share a little context and we’ll make sure your message reaches the right person.',
+    },
   };
 
   const requestedIntent = new URLSearchParams(window.location.search).get('intent');
@@ -69,9 +73,6 @@
     title.innerHTML = intents[selectedIntent].title;
     intro.textContent = intents[selectedIntent].intro;
     const isDpa = selectedIntent === 'dpa';
-    messageHelp.textContent = isDpa
-      ? 'Include your organization’s legal name, country or jurisdiction, and the name and email of the person who will review or sign the agreement.'
-      : 'Tell us which files you get, what task you need to do, who checks the work, and what you share.';
     messageInput.placeholder = isDpa
       ? 'Organization legal name:\nCountry or jurisdiction:\nReviewer or signer name and email:\nAnything else we should know:'
       : '';
