@@ -165,6 +165,11 @@
       </ol>
     </aside>
   </section>
+  <div class="organizing-signals" aria-hidden="true">
+    <span>Dates aligned</span>
+    <span>Sources linked</span>
+    <span>Findings grouped</span>
+  </div>
   <div class="zoom-copy" aria-hidden="true">
     <h2><span>Years of history.</span><span>Brought into focus.</span></h2>
     <span>N1 organizes patient records into a clear history and draft reports, with source links for clinical review.</span>
@@ -178,6 +183,8 @@
     const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
     const zoomCard = document.querySelector('.card-care');
     const cardField = document.querySelector('.card-field');
+    const organizingSignals = document.querySelector('.organizing-signals');
+    const signalItems = [...organizingSignals.children];
     const zoomCopy = document.querySelector('.zoom-copy');
     const zoomLayer = document.querySelector('.patient-zoom');
     let zoomStart = null;
@@ -225,7 +232,7 @@
     randomiseCardField();
     const prepareZoomTarget = () => {
       zoomStart = zoomCard.getBoundingClientRect();
-      gatherAnimations.forEach(animation => animation.cancel());
+      gatherAnimations.forEach(({ animation }) => animation.cancel());
       gatherAnimations = [];
       if (reducedMotion.matches) return;
       const targetX = zoomStart.left + zoomStart.width / 2;
@@ -246,7 +253,10 @@
         ], { duration: 1000, fill: 'both', easing: 'linear' });
         animation.pause();
         animation.currentTime = 0;
-        gatherAnimations.push(animation);
+        const distanceDelay = Math.min(.12, distance / Math.hypot(innerWidth, innerHeight) * .12);
+        const start = .035 + (index % 7) * .014 + distanceDelay;
+        const duration = .38 + (index % 5) * .022;
+        gatherAnimations.push({ animation, start, end: start + duration });
       });
     };
     const clamp = value => Math.max(0, Math.min(1, value));
@@ -254,9 +264,16 @@
     const smooth = progress => progress * progress * (3 - 2 * progress);
     const renderImageZoom = progress => {
       if (!zoomStart) return;
-      const gatherProgress = smooth(clamp(progress / .72));
-      gatherAnimations.forEach(animation => { animation.currentTime = gatherProgress * 1000; });
-      const rawZoom = clamp((progress - .32) / .38);
+      gatherAnimations.forEach(({ animation, start, end }) => {
+        animation.currentTime = smooth(clamp((progress - start) / (end - start))) * 1000;
+      });
+      signalItems.forEach((item, index) => {
+        const appear = smooth(clamp((progress - (.18 + index * .055)) / .08));
+        const leave = 1 - smooth(clamp((progress - .5) / .1));
+        item.style.opacity = String(appear * leave);
+        item.style.transform = `translateY(${mix(9, 0, appear)}px) scale(${mix(.94, 1, appear)})`;
+      });
+      const rawZoom = clamp((progress - .52) / .32);
       const zoom = smooth(rawZoom);
       zoomLayer.style.left = `${mix(zoomStart.left, 0, zoom)}px`;
       zoomLayer.style.top = `${mix(zoomStart.top, 0, zoom)}px`;
@@ -266,12 +283,18 @@
       zoomLayer.style.setProperty('--overlay-opacity', zoom);
       zoomLayer.style.opacity = zoom > .001 ? '1' : '0';
       zoomCard.style.opacity = String(1 - clamp(zoom / .08));
-      cardField.style.setProperty('--field-fade', clamp((progress - .64) / .13));
-      const copyProgress = smooth(clamp((progress - .72) / .18));
+      cardField.style.setProperty('--field-fade', clamp((progress - .57) / .14));
+      const copyProgress = smooth(clamp((progress - .82) / .15));
       zoomCopy.style.opacity = String(copyProgress);
       zoomCopy.style.transform = `translateY(${mix(24, 0, copyProgress)}px)`;
     };
     prepareZoomTarget();
+    const positionSignals = () => {
+      if (!zoomStart) return;
+      organizingSignals.style.left = `${zoomStart.left + zoomStart.width / 2}px`;
+      organizingSignals.style.top = `${zoomStart.top + zoomStart.height / 2}px`;
+    };
+    positionSignals();
     renderImageZoom(0);
     const autoplayStart = performance.now() + 180;
     const autoplayDuration = 5200;
@@ -297,6 +320,7 @@
     addEventListener('resize', () => {
       randomiseCardField();
       prepareZoomTarget();
+      positionSignals();
       renderImageZoom(autoplayProgress);
     });
   </script>
