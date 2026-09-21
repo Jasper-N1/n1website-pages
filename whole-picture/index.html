@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>n1.care — The whole picture</title>
-  <meta name="description" content="The whole picture. Healthcare, from the first-person perspective.">
+  <title>n1.care — Years of history. Brought into focus.</title>
+  <meta name="description" content="Years of health history, brought into focus.">
   <meta name="theme-color" content="#fafaf8">
   <link rel="canonical" href="https://jasper-n1.github.io/n1website-pages/whole-picture/">
   <link rel="icon" href="../assets/n1-logo.svg" type="image/svg+xml">
@@ -166,9 +166,8 @@
     </aside>
   </section>
   <div class="zoom-copy" aria-hidden="true">
-    <p>n1.care</p>
-    <h2>The whole picture.</h2>
-    <span>Healthcare, from the first-person perspective.</span>
+    <h2><span>Years of history.</span><span>Brought into focus.</span></h2>
+    <span>N1 organizes patient records into a clear history and draft reports, with source links for clinical review.</span>
   </div>
   <div class="patient-zoom" aria-hidden="true"><img src="../assets/patient-story-records-home.jpg" alt="" width="1200" height="1800"></div>
   </main>
@@ -182,9 +181,8 @@
     const zoomCopy = document.querySelector('.zoom-copy');
     const zoomLayer = document.querySelector('.patient-zoom');
     let zoomStart = null;
-    let targetProgress = 0;
-    let currentProgress = 0;
-    let scrollFrame = 0;
+    let autoplayProgress = 0;
+    let autoplayFrame = 0;
     let gatherAnimations = [];
     const randomiseCardField = () => {
       if (innerWidth <= 1100) return;
@@ -232,13 +230,19 @@
       if (reducedMotion.matches) return;
       const targetX = zoomStart.left + zoomStart.width / 2;
       const targetY = zoomStart.top + zoomStart.height / 2;
-      cards.filter(card => card !== zoomCard).forEach(card => {
+      cards.filter(card => card !== zoomCard).forEach((card, index) => {
         const rect = card.getBoundingClientRect();
         const x = targetX - (rect.left + rect.width / 2);
         const y = targetY - (rect.top + rect.height / 2);
+        const distance = Math.max(1, Math.hypot(x, y));
+        const direction = index % 2 ? 1 : -1;
+        const curve = Math.min(90, distance * .14) * direction;
+        const curveX = (-y / distance) * curve;
+        const curveY = (x / distance) * curve;
         const animation = card.animate([
-          { translate: '0 0', scale: '1' },
-          { translate: `${x}px ${y}px`, scale: '.16' }
+          { translate: '0 0', scale: '1', rotate: '0deg' },
+          { translate: `${x * .58 + curveX}px ${y * .58 + curveY}px`, scale: '.62', rotate: `${direction * 10}deg`, offset: .62 },
+          { translate: `${x}px ${y}px`, scale: '.12', rotate: `${direction * 24}deg` }
         ], { duration: 1000, fill: 'both', easing: 'linear' });
         animation.pause();
         animation.currentTime = 0;
@@ -247,43 +251,36 @@
     };
     const clamp = value => Math.max(0, Math.min(1, value));
     const mix = (from, to, progress) => from + (to - from) * progress;
+    const smooth = progress => progress * progress * (3 - 2 * progress);
     const renderImageZoom = progress => {
       if (!zoomStart) return;
-      const rawZoom = clamp(progress / .76);
-      const zoom = 1 - Math.pow(1 - rawZoom, 3);
-      const right = innerWidth - zoomStart.right;
-      const bottom = innerHeight - zoomStart.bottom;
-      zoomLayer.style.clipPath = `inset(${mix(zoomStart.top, 0, zoom)}px ${mix(right, 0, zoom)}px ${mix(bottom, 0, zoom)}px ${mix(zoomStart.left, 0, zoom)}px round ${mix(20, 0, zoom)}px)`;
-      zoomLayer.style.opacity = zoom > .001 ? '1' : '0';
-      zoomLayer.style.transform = `scale(${mix(1.025, 1, zoom)})`;
-      zoomCard.style.opacity = String(1 - clamp(zoom / .08));
-      const gatherProgress = clamp(progress / .58);
+      const gatherProgress = smooth(clamp(progress / .72));
       gatherAnimations.forEach(animation => { animation.currentTime = gatherProgress * 1000; });
-      cardField.style.setProperty('--field-fade', clamp((progress - .2) / .5));
-      const copyProgress = clamp((progress - .68) / .24);
+      const rawZoom = clamp((progress - .32) / .38);
+      const zoom = smooth(rawZoom);
+      zoomLayer.style.left = `${mix(zoomStart.left, 0, zoom)}px`;
+      zoomLayer.style.top = `${mix(zoomStart.top, 0, zoom)}px`;
+      zoomLayer.style.width = `${mix(zoomStart.width, innerWidth, zoom)}px`;
+      zoomLayer.style.height = `${mix(zoomStart.height, innerHeight, zoom)}px`;
+      zoomLayer.style.borderRadius = `${mix(20, 0, zoom)}px`;
+      zoomLayer.style.setProperty('--overlay-opacity', zoom);
+      zoomLayer.style.opacity = zoom > .001 ? '1' : '0';
+      zoomCard.style.opacity = String(1 - clamp(zoom / .08));
+      cardField.style.setProperty('--field-fade', clamp((progress - .64) / .13));
+      const copyProgress = smooth(clamp((progress - .72) / .18));
       zoomCopy.style.opacity = String(copyProgress);
       zoomCopy.style.transform = `translateY(${mix(24, 0, copyProgress)}px)`;
     };
-    const readZoomProgress = () => {
-      const journey = document.querySelector('.zoom-journey');
-      const distance = journey.offsetHeight - innerHeight;
-      targetProgress = clamp((scrollY - journey.offsetTop) / distance);
-    };
-    const animateZoom = () => {
-      currentProgress += (targetProgress - currentProgress) * .14;
-      if (Math.abs(targetProgress - currentProgress) < .0005) currentProgress = targetProgress;
-      renderImageZoom(currentProgress);
-      if (currentProgress !== targetProgress) scrollFrame = requestAnimationFrame(animateZoom);
-      else scrollFrame = 0;
-    };
-    const requestZoom = () => {
-      readZoomProgress();
-      if (!scrollFrame) scrollFrame = requestAnimationFrame(animateZoom);
-    };
     prepareZoomTarget();
-    readZoomProgress();
-    currentProgress = targetProgress;
-    renderImageZoom(currentProgress);
+    renderImageZoom(0);
+    const autoplayStart = performance.now() + 180;
+    const autoplayDuration = 5200;
+    const playZoom = timestamp => {
+      autoplayProgress = reducedMotion.matches ? 1 : clamp((timestamp - autoplayStart) / autoplayDuration);
+      renderImageZoom(autoplayProgress);
+      if (autoplayProgress < 1) autoplayFrame = requestAnimationFrame(playZoom);
+    };
+    autoplayFrame = requestAnimationFrame(playZoom);
     let frame = 0;
     const moveCards = event => {
       if (reducedMotion.matches) return;
@@ -297,11 +294,10 @@
       }));
     };
     addEventListener('pointermove', moveCards, { passive: true });
-    addEventListener('scroll', requestZoom, { passive: true });
     addEventListener('resize', () => {
       randomiseCardField();
       prepareZoomTarget();
-      requestZoom();
+      renderImageZoom(autoplayProgress);
     });
   </script>
 </body>
