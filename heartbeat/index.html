@@ -342,7 +342,7 @@
         <span class="sum-status">Draft &middot; awaiting clinician review</span>
       </header>
 
-      <section class="sum-block">
+      <section class="sum-block" style="--i:0;--fx:70px;--fr:2.4deg">
         <p class="sum-label">Section 1</p>
         <h3>Executive summary &amp; alerts</h3>
         <p>This record is best read as a single metabolic story in an otherwise well 48-year-old. The dominant thread is <mark>insulin resistance that was caught early and has been treated steadily</mark>: HbA1c peaked at 7.6% around diagnosis and has fallen across every subsequent session to 6.4%, the lowest of three source-linked readings.</p>
@@ -353,7 +353,7 @@
         </ul>
       </section>
 
-      <section class="sum-block">
+      <section class="sum-block" style="--i:1;--fx:-70px;--fr:-2.4deg">
         <p class="sum-label">Section 2</p>
         <h3>Body systems</h3>
         <dl class="sum-systems">
@@ -364,13 +364,13 @@
         </dl>
       </section>
 
-      <section class="sum-block">
+      <section class="sum-block" style="--i:2;--fx:70px;--fr:2deg">
         <p class="sum-label">Section 3</p>
         <h3>Cross-system patterns</h3>
         <p>The glycaemic improvement and the stable renal picture move together, which is what you would expect if the 2022 treatment decision is doing the work. The lipid panel is the outlier: it has not moved since 2023 and is the only measure in the record trending against the others.</p>
       </section>
 
-      <section class="sum-block">
+      <section class="sum-block" style="--i:3;--fx:-70px;--fr:-2deg">
         <p class="sum-label">Section 4</p>
         <h3>Recommendations</h3>
         <ol class="sum-recs">
@@ -380,7 +380,7 @@
         </ol>
       </section>
 
-      <section class="sum-block sum-gaps">
+      <section class="sum-block sum-gaps" style="--i:4;--fx:64px;--fr:1.6deg">
         <p class="sum-label">Section 5</p>
         <h3>Data gaps</h3>
         <p>No lipid result after September 2023, and no recorded foot screening despite it being added to the recall list in March 2023. Both are named rather than inferred around.</p>
@@ -820,16 +820,19 @@
     }
 
     /* The report arrives a section at a time, on each block's own position. */
+    const sumReport = document.querySelector('.sum-report');
     const sumBlocks = [...document.querySelectorAll('.sum-block')];
-    if (sumBlocks.length && !reducedMotion.matches) {
-      const sumObserver = new IntersectionObserver((entries, observer) => {
+    if (sumReport && sumBlocks.length && !reducedMotion.matches) {
+      /* One trigger on the report, not one per block: the sections should
+         arrive as a set being assembled, not as five separate reveals. The
+         card clips them, so they fly in from outside its edges. */
+      new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
           if (!entry.isIntersecting) return;
-          entry.target.classList.add('is-in');
-          observer.unobserve(entry.target);
+          observer.disconnect();
+          sumBlocks.forEach(block => block.classList.add('is-in'));
         });
-      }, { rootMargin: '0px 0px -14% 0px' });
-      sumBlocks.forEach(block => sumObserver.observe(block));
+      }, { rootMargin: '0px 0px -18% 0px' }).observe(sumReport);
     } else {
       sumBlocks.forEach(block => block.classList.add('is-in'));
     }
