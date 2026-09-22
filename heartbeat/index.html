@@ -593,7 +593,7 @@
       const onScreen = cards.filter(card => card.offsetWidth);
       if (!onScreen.length || reducedMotion.matches) return;
       const reach = Math.hypot(innerWidth, innerHeight) / 2;
-      for (let i = 0; i < onScreen.length * 3; i += 1) {
+      for (let i = 0; i < onScreen.length * 4; i += 1) {
         const clone = onScreen[i % onScreen.length].cloneNode(true);
         const angle = Math.random() * Math.PI * 2;
         const radius = reach * (1.15 + Math.random() * 1.15);
@@ -640,10 +640,10 @@
         const tangentY = (x / distance) * swirl;
         const entry = outer
           /* Outer cards take no part in the arrival - they hold station, unseen,
-             until the vortex reaches out for them. */
+             until the vortex starts, and are lit the instant it does. */
           ? [{ translate: '0 0', scale: '1', rotate: '0deg', opacity: 0, offset: 0 },
-             { translate: '0 0', scale: '1', rotate: '0deg', opacity: 0, offset: .5 },
-             { translate: '0 0', scale: '1', rotate: '0deg', opacity: .95, offset: .56 }]
+             { translate: '0 0', scale: '1', rotate: '0deg', opacity: 0, offset: .49 },
+             { translate: '0 0', scale: '1', rotate: '0deg', opacity: .95, offset: .5 }]
           : [{ translate: `${cornerX * innerWidth * .8}px ${cornerY * innerHeight * .8}px`, scale: '.5', rotate: `${cornerX * 14}deg`, opacity: 0, offset: 0 },
              { translate: '0 0', scale: '1', rotate: '0deg', opacity: 1, offset: .5 }];
         const animation = card.animate([
@@ -657,9 +657,16 @@
         animation.currentTime = 0;
         /* Latest possible finish: .03 + .072 + .08 + .335 = .517, which is
            what the image start below is keyed to. Change one, change both. */
+        /* Outer cards have several screens to cross, so they get the whole
+           collapse to do it in. Given the on-screen window they covered that
+           distance in a third of the time and simply blurred past. */
         const distanceDelay = Math.min(.08, distance / Math.hypot(innerWidth, innerHeight) * .1);
-        const start = .03 + (index % 7) * .012 + distanceDelay;
-        const duration = .26 + (index % 5) * .015;
+        const start = outer
+          ? .015 + (index % 9) * .008
+          : .03 + (index % 7) * .012 + distanceDelay;
+        const duration = outer
+          ? .42 + (index % 5) * .018
+          : .26 + (index % 5) * .015;
         gatherAnimations.push({ animation, start, end: start + duration });
       });
     };
