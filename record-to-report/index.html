@@ -134,7 +134,7 @@
   .ml-line dt{ font-size: .95cqw; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--slate-400); }
   .ml-line dd{ margin: 0; font-size: 1.3cqw; color: var(--slate-800); }
   .ml-line dd b{ font-weight: 700; }
-  .ml-body{ padding: 1.4cqw 1.6cqw; min-height: 30cqw; align-content: start; display: grid; gap: .9cqw; }
+  .ml-body{ padding: 1.4cqw 1.6cqw; min-height: 46cqw; align-content: start; display: grid; gap: .9cqw; }
   .ml-body p{ margin: 0; font-size: 1.4cqw; line-height: 1.5; color: var(--slate-700); max-width: 74ch; }
   .ml-body p:first-child, .ml-body p:nth-last-child(2){ color: var(--slate-900); }
   .caret{ display: inline-block; width: .9cqw; height: 1.5cqw; margin-left: .15cqw; vertical-align: -.2cqw;
@@ -159,6 +159,53 @@
            padding: .9cqw 1.6cqw; font-size: 1.3cqw; font-weight: 700; letter-spacing: -.01em; white-space: nowrap; }
   .ml-cta .url{ font-size: 1.25cqw; font-weight: 600; color: var(--care-700); }
   .ml-cta .note{ font-size: 1.05cqw; color: var(--slate-600); }
+
+  /* the call to action lives inside the message */
+  .ml-inline{ display: grid; gap: .5cqw; justify-items: start; padding: .5cqw 0 .2cqw;
+              opacity: 0; transform: translateY(.6cqw); transition: opacity .3s ease, transform .3s ease; }
+  .ml-inline.on{ opacity: 1; transform: none; }
+  .ml-inline .btn{ background: var(--care-500); color: #fff; border-radius: var(--rad-sm);
+                   padding: 1cqw 1.8cqw; font-size: 1.35cqw; font-weight: 700; letter-spacing: -.01em; }
+  .ml-inline .u{ font-size: 1.1cqw; color: var(--slate-500); }
+  .ml-inline .u b{ color: var(--care-700); font-weight: 600; }
+
+  /* closing sheet */
+  .sheet-f{ z-index: -2; background: var(--slate-50);
+            box-shadow: 0 2px 5px rgb(15 23 42 / .06), 0 3cqw 7cqw -2.6cqw rgb(15 23 42 / .4); }
+  .sheet-e{ clip-path: inset(var(--cut5, 0%) 0 0 0); }
+
+  .cf-mark{ display: grid; justify-items: center; gap: 1.2cqw; padding: 3.4cqw 0 3cqw;
+            border: 1px solid var(--green-200); background: var(--green-50); border-radius: var(--rad-lg); }
+  .cf-mark svg{ width: 11cqw; height: 11cqw; display: block; }
+  .cf-mark b{ font-size: 2.2cqw; font-weight: 700; letter-spacing: -.03em; }
+  .cf-mark span{ font-size: 1.3cqw; color: var(--slate-600); }
+  .cf-steps{ display: grid; grid-template-columns: repeat(5, 1fr);
+             border: 1px solid var(--slate-200); border-radius: var(--rad-lg); overflow: hidden; }
+  .cf-steps > div{ padding: 1.1cqw 1.2cqw; display: grid; gap: .3cqw; align-content: start; }
+  .cf-steps > div + div{ border-left: 1px solid var(--slate-200); }
+  .cf-steps i{ display: grid; place-items: center; width: 2.4cqw; height: 2.4cqw; border-radius: 50%;
+               background: var(--care-500); color: #fff; font-style: normal; font-size: 1cqw; font-weight: 700; }
+  .cf-steps b{ font-size: 1.3cqw; font-weight: 600; letter-spacing: -.01em; }
+  .cf-steps span{ font-size: 1.05cqw; color: var(--slate-500); line-height: 1.35; }
+  .cf-out{ display: grid; grid-template-columns: repeat(3, 1fr);
+           border: 1px solid var(--slate-200); border-radius: var(--rad-lg); overflow: hidden; }
+  .cf-out > div{ padding: 1.1cqw 1.3cqw; display: grid; gap: .25cqw; }
+  .cf-out > div + div{ border-left: 1px solid var(--slate-200); }
+  .cf-out dt{ font-size: .95cqw; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--slate-400); }
+  .cf-out dd{ margin: 0; font-size: 1.5cqw; font-weight: 700; letter-spacing: -.02em; }
+  .cf-out dd em{ font-style: normal; font-size: 1.1cqw; font-weight: 500; color: var(--slate-500); margin-left: .4cqw; }
+
+  .cf-next{ display: grid; grid-template-columns: repeat(3, 1fr);
+            border: 1px solid var(--slate-200); border-radius: var(--rad-lg); overflow: hidden; }
+  .cf-next > div{ padding: 1.2cqw 1.3cqw; display: grid; gap: .4cqw; align-content: start; }
+  .cf-next > div + div{ border-left: 1px solid var(--slate-200); }
+  .cf-next b{ font-size: 1.35cqw; font-weight: 600; letter-spacing: -.01em; }
+  .cf-next span{ font-size: 1.15cqw; color: var(--slate-600); line-height: 1.4; }
+
+  .cf-end{ display: grid; grid-template-columns: auto 1fr; gap: 1.6cqw; align-items: center;
+           border-top: 1px solid var(--slate-200); padding-top: 1.6cqw; }
+  .cf-end svg{ width: 5.4cqw; height: 5.4cqw; display: block; }
+  .cf-end p{ margin: 0; font-size: 2.1cqw; font-weight: 700; letter-spacing: -.035em; line-height: 1.15; max-width: 34ch; }
 
   .cutline{
     z-index: 3; align-self: start; justify-self: stretch;
@@ -387,9 +434,93 @@
       <h2>Easily generate a Report</h2>
       <h2>Every number traced to its source</h2>
       <h2>Share it with your client</h2>
+      <h2>Delivered</h2>
     </div>
 
     <div class="sheets" id="sheets">
+
+      <!-- ============ SHEET F — the close ============ -->
+      <div class="frame sheet-f hs">
+        <div class="hs-doc">
+          <div class="hs-rule"></div>
+
+          <div class="hs-head">
+            <div class="eyebrow">Delivered</div>
+            <h1>Sent</h1>
+            <p class="sub">19 Sep 2026 · 17:42 · to j.vreede@example.com</p>
+            <dl class="hs-meta">
+              <div><dt>Status</dt><dd>Delivered</dd></div>
+              <div><dt>Attachments</dt><dd>2</dd></div>
+              <div><dt>Live link</dt><dd>Active</dd></div>
+              <div><dt>Specimen</dt><dd>422697</dd></div>
+              <div><dt>Fields</dt><dd>15</dd></div>
+              <div><dt>Elapsed</dt><dd>2 min</dd></div>
+            </dl>
+          </div>
+
+          <div class="hs-body">
+
+            <div class="cf-mark">
+              <svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
+                <circle cx="32" cy="32" r="29" stroke="#0d7377" stroke-width="3"></circle>
+                <path d="M20 33.5 L28.5 42 L45 24" stroke="#0d7377" stroke-width="5"
+                      stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+              <b>The Health Summary is with the patient</b>
+              <span>Two attachments and a live link, from one printed page.</span>
+            </div>
+
+            <section class="hs-sec">
+              <h2><i>1</i> What travelled with it <u></u></h2>
+              <dl class="cf-out">
+                <div><dt>Health Summary</dt><dd>7 sections<em>PDF · 1.2 MB</em></dd></div>
+                <div><dt>Evidence appendix</dt><dd>5 sections<em>PDF · 480 KB</em></dd></div>
+                <div><dt>Live report</dt><dd>n1.care/r/422697<em>always current</em></dd></div>
+              </dl>
+            </section>
+
+            <section class="hs-sec">
+              <h2><i>2</i> What happens next <u></u></h2>
+              <div class="cf-next">
+                <div><b>The patient opens the link</b><span>The same summary, on any device, without a PDF to hunt for.</span></div>
+                <div><b>The next panel merges in place</b><span>A second draw joins the same record, and the trends begin.</span></div>
+                <div><b>The trail stays attached</b><span>Every value keeps pointing back to the page it was read from.</span></div>
+              </div>
+            </section>
+
+            <section class="hs-sec">
+              <h2><i>3</i> The whole path <u></u></h2>
+              <div class="cf-steps">
+                <div><i>1</i><b>Upload a record</b><span>A printed panel, nine pages, as the lab issued it.</span></div>
+                <div><i>2</i><b>Extract every result</b><span>15 analytes read, coded and unit-normalised.</span></div>
+                <div><i>3</i><b>Generate a report</b><span>A Health Summary written from the mapped fields.</span></div>
+                <div><i>4</i><b>Trace the sources</b><span>Provenance, literature and open gaps for each number.</span></div>
+                <div><i>5</i><b>Share it</b><span>Emailed with both documents and a live link.</span></div>
+              </div>
+            </section>
+
+            <div class="cf-end">
+              <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
+                <rect x="1" y="1" width="38" height="38" rx="9" fill="#0d7377"></rect>
+                <rect x="10" y="11" width="20" height="3.4" rx="1.7" fill="#fff"></rect>
+                <rect x="10" y="18.3" width="14" height="3.4" rx="1.7" fill="#fff" opacity=".7"></rect>
+                <rect x="10" y="25.6" width="8" height="3.4" rx="1.7" fill="#fff" opacity=".45"></rect>
+              </svg>
+              <p>One printed page in. A summary, its evidence and a shared link out.</p>
+            </div>
+
+          </div>
+
+          <div class="hs-foot">
+            <div class="notice">Patient-facing interpretation should be reviewed with a qualified clinician; reference intervals and targets are individualized.</div>
+            <div class="row">
+              <span>Sent by <b>Dr. A. Osei, MD</b></span>
+              <span>Specimen <b>422697</b> · synthetic patient data</span>
+              <span>N1 · <b>record to report</b></span>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <!-- ============ SHEET E — the email ============ -->
       <div class="frame sheet-e hs">
@@ -435,17 +566,6 @@
                   <span class="ic"><i></i><i></i><i></i><i></i></span>
                   <span><b>Evidence appendix · 422697.pdf</b><span>Sources, provenance and references · 480 KB</span></span>
                 </div>
-              </div>
-            </section>
-
-            <section class="hs-sec">
-              <h2><i>3</i> Or open it in N1 <u></u></h2>
-              <div class="ml-cta">
-                <span class="ml-btn">Open the live report</span>
-                <span>
-                  <span class="url">n1.care/r/422697</span>
-                  <span class="note">The link always shows the current version — when a new panel arrives, the summary updates in place.</span>
-                </span>
               </div>
             </section>
 
@@ -790,6 +910,7 @@
       <div class="cutline" id="cutline2" aria-hidden="true"></div>
       <div class="cutline" id="cutline3" aria-hidden="true"></div>
       <div class="cutline" id="cutline4" aria-hidden="true"></div>
+      <div class="cutline" id="cutline5" aria-hidden="true"></div>
     </div>
   </div>
 </section>
@@ -877,6 +998,8 @@
       thead = document.getElementById("thead"),
       sheetC = document.querySelector(".sheet-c"),
       sheetD = document.querySelector(".sheet-d"),
+      sheetE = document.querySelector(".sheet-e"),
+      cutline5 = document.getElementById("cutline5"),
       cutline3 = document.getElementById("cutline3"),
       cutline4 = document.getElementById("cutline4"),
       titles = document.getElementById("titles").querySelectorAll("h2"),
@@ -884,11 +1007,13 @@
       scroller = document.getElementById("scroller"),
       at = -1, wasDone = null;
 
-  var WIPE  = .18,  // the printed sheet is gone
-      READ  = .46,  // every marker is structured
-      RPT   = .60,  // the record gives way to the summary
-      EVID  = .74,  // the summary gives way to its evidence
-      MAILW = .80;  // the evidence gives way to the email
+  var WIPE  = .16,  // the printed sheet is gone
+      READ  = .40,  // every marker is structured
+      RPT   = .52,  // the record gives way to the summary
+      EVID  = .64,  // the summary gives way to its evidence
+      MAILW = .70,  // the evidence gives way to the email
+      TYPED = .86,  // the message has written itself
+      SENDW = .94;  // the email gives way to the delivery receipt
 
   var MAIL = [
     "Dear Jonas,",
@@ -898,6 +1023,9 @@
     "Dr. A. Osei"
   ];
   var MAIL_LEN = MAIL.reduce(function(a, t){ return a + t.length; }, 0);
+  var CTA_AFTER = MAIL[0].length + MAIL[1].length + MAIL[2].length;  // the button lands before the sign-off
+  var CTA_HTML = '<div class="ml-inline on"><span class="btn">Open the live report</span>' +
+                 '<span class="u"><b>n1.care/r/422697</b> — always the current version</span></div>';
   var mlBody = document.getElementById("mlBody"), typedAt = -1;
 
   function typeMail(frac){
@@ -911,6 +1039,7 @@
       if (take === 0) break;
       var done = take === MAIL[i].length;
       out += "<p>" + MAIL[i].slice(0, take) + (!done || (done && n <= used && frac < 1) ? '<span class="caret"></span>' : "") + "</p>";
+      if (i === 2 && done && n >= CTA_AFTER) out += CTA_HTML;
       if (!done) break;
     }
     mlBody.innerHTML = out;
@@ -950,7 +1079,7 @@
     // act three — the record gives way to the report written from it
     document.body.style.background = p > READ ? "#F8FAFC" : "#FFFFFF";
 
-    var step = p < WIPE * .3 ? 0 : (p < READ ? 1 : (p < RPT ? 2 : (p < EVID ? 3 : 4)));
+    var step = p < WIPE * .3 ? 0 : (p < READ ? 1 : (p < RPT ? 2 : (p < EVID ? 3 : (p < SENDW ? 4 : 5))));
     if (step !== shownTitle){
       titles[shownTitle].classList.remove("on");
       titles[step].classList.add("on");
@@ -972,10 +1101,16 @@
     sheetD.style.setProperty("--cut4", (w4 * 100).toFixed(2) + "%");
     cutline4.style.setProperty("--cutpx", (w4 * sheetD.offsetHeight).toFixed(1) + "px");
     cutline4.style.setProperty("--cutop", (w4 > 0 && w4 < 1) ? 1 : 0);
-    typeMail(Math.min(1, Math.max(0, (p - MAILW) / (.96 - MAILW))));
+    typeMail(Math.min(1, Math.max(0, (p - MAILW) / (TYPED - MAILW))));
+
+    // act six — the email gives way to the delivery receipt
+    var w5 = Math.min(1, Math.max(0, (p - SENDW) / (1 - SENDW)));
+    sheetE.style.setProperty("--cut5", (w5 * 100).toFixed(2) + "%");
+    cutline5.style.setProperty("--cutpx", (w5 * sheetE.offsetHeight).toFixed(1) + "px");
+    cutline5.style.setProperty("--cutop", (w5 > 0 && w5 < 1) ? 1 : 0);
   }
 
-  scroller.style.height = "calc(100svh + " + (N * 34 + 420) + "svh)";
+  scroller.style.height = "calc(100svh + " + (N * 34 + 520) + "svh)";
   var ticking = false;
   window.addEventListener("scroll", function(){
     if (ticking) return;
