@@ -327,6 +327,17 @@
           <p class="tl-foot"><a class="tl-source" href="#patient-record">Lab report &middot; Page 8 <span aria-hidden="true">&rarr;</span></a><span class="tl-by">Meridian Diagnostics</span></p>
         </div>
       </li>
+      <li class="tl-entry" style="--i:8">
+        <span class="tl-dot" aria-hidden="true"></span>
+        <time datetime="2026-09">Now</time>
+        <div class="tl-body">
+          <a class="tl-tag" href="#patient-record">Appointment</a>
+          <b>Tuesday 09:30 &middot; Dr Shah</b>
+          <p>Seven years of record, and twelve minutes to talk about it. This is the moment the summary is for.</p>
+          <dl class="tl-vals"><div><dt>Last result</dt><dd>14 Mar 2025</dd></div><div><dt>Waiting</dt><dd>186 results</dd></div></dl>
+          <p class="tl-foot"><span class="tl-by">Wellcare Family Practice</span></p>
+        </div>
+      </li>
     </ol>
       <div class="tl-deep" data-for="2" aria-hidden="true">
         <div class="tl-deep-face tl-deep-front">
@@ -418,7 +429,7 @@
         </div>
       </div>
     <div class="tl-rail" aria-hidden="true"><span class="tl-focus"></span></div>
-    <p class="tl-count" aria-hidden="true"><b>01</b> / 08</p>
+    <p class="tl-count" aria-hidden="true"><b>01</b> / 09</p>
     </div>
   </section>
 
@@ -444,6 +455,32 @@
       </div>
 
       <p class="send-done" aria-hidden="true"><span class="send-tick">&#10003;</span> Delivered to Maya R. &middot; with 186 linked results</p>
+    </div>
+  </section>
+
+  <section class="trust-scene" aria-labelledby="trust-title">
+    <div class="trust-inner">
+      <div class="trust-animation" aria-hidden="true">
+        <video autoplay loop muted playsinline preload="metadata" poster="../assets/videos/human-care-ink-line-first-frame.webp">
+          <source src="../assets/videos/human-care-ink-line.mp4" type="video/mp4">
+        </video>
+      </div>
+      <h2 id="trust-title">Health data you can trust<span class="trust-stop" aria-hidden="true"></span><span class="sr-only">.</span></h2>
+    </div>
+  </section>
+
+  <section class="cta-scene" aria-labelledby="cta-title">
+    <img class="cta-photo" src="../assets/clinician-hero-supportive-care-upscaled-v2.webp" alt="A clinician supporting a patient" width="1600" height="1067" loading="lazy" decoding="async">
+    <div class="cta-shade" aria-hidden="true"></div>
+    <div class="cta-inner">
+      <p class="cta-eyebrow">n1.care</p>
+      <h2 id="cta-title">Arrive prepared.<br>Be present.</h2>
+      <p class="cta-sub">The record is read, the history is drawn, the summary is drafted and sourced. What is left is the part that was always the point: the conversation.</p>
+      <div class="cta-actions">
+        <a class="cta-primary" href="https://app.n1.care/signup">Start free trial</a>
+        <a class="cta-secondary" href="https://app.n1.care/login">Log in <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <p class="cta-note">Nothing is shared until a clinician has reviewed it.</p>
     </div>
   </section>
 
@@ -762,6 +799,14 @@
        is discrete, so there is always exactly one entry being read. */
     /* The two moments where N1 is working: scrubbed like everything else, so
        the lines land as you arrive at them rather than on a timer you missed. */
+    /* An autoplaying loop is motion the visitor did not ask for. */
+    if (reducedMotion.matches) {
+      document.querySelectorAll('.trust-animation video').forEach(video => {
+        video.autoplay = false;
+        video.pause();
+      });
+    }
+
     const sendScene = document.querySelector('.send-scene');
     if (sendScene) {
       let sendFrame = 0;
@@ -809,7 +854,7 @@
         if (deepFor.has(index)) segments.push({ kind: 'deep', index, len: 5.2 });
         if (index < tlItems.length - 1) segments.push({ kind: 'move', index, len: 1.2 });
       });
-      segments.push({ kind: 'report', index: tlItems.length - 1, len: 7 });
+      segments.push({ kind: 'report', index: tlItems.length - 1, len: 10 });
       const totalLen = segments.reduce((sum, seg) => sum + seg.len, 0);
 
       const drawTimeline = () => {
