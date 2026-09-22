@@ -377,14 +377,21 @@ body{display:block;overflow:visible;overflow-x:clip}
 .sum-top em{color:var(--muted);font-size:13px;font-style:normal}
 .sum-status{padding:6px 11px;border-radius:999px;background:#ece0cc;color:#6a5b42;font-size:11px;font-weight:600;letter-spacing:.06em}
 
-/* Each section flies in from beyond the card's edge and settles into place;
-   .sum-report clips, so they read as arriving into the report rather than
-   fading up inside it. Staggered by --i so it assembles top to bottom. */
+/* Each section arrives from alternating sides - right, left, right - from well
+   beyond the card's edge, which clips them, so they read as flying into the
+   report rather than fading up inside it.
+
+   No rotation: pure lateral travel on a long decelerate is what reads as
+   considered; a tilt reads as playful. The soft-focus entry is the detail that
+   sells it - things resolve as they arrive rather than simply appearing. */
 .sum-block{padding:clamp(22px,3vw,32px);border-bottom:1px solid #f0e6d6;
-  opacity:0;translate:var(--fx,60px) 26px;rotate:var(--fr,2deg);scale:.96;
-  transition:opacity .45s ease,translate .7s cubic-bezier(.16,.84,.3,1),rotate .7s cubic-bezier(.16,.84,.3,1),scale .7s cubic-bezier(.16,.84,.3,1);
-  transition-delay:calc(var(--i, 0) * .13s)}
-.sum-block.is-in{opacity:1;translate:0;rotate:0deg;scale:1}
+  opacity:0;translate:var(--fx,150px) 0;scale:.98;filter:blur(9px);
+  transition:opacity .55s cubic-bezier(.32,.72,0,1),
+             translate .95s cubic-bezier(.32,.72,0,1),
+             scale .95s cubic-bezier(.32,.72,0,1),
+             filter .7s cubic-bezier(.32,.72,0,1);
+  transition-delay:calc(var(--i, 0) * .16s)}
+.sum-block.is-in{opacity:1;translate:0;scale:1;filter:blur(0)}
 .sum-label{margin:0 0 7px;color:#a8977c;font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
 .sum-block h3{margin:0 0 12px;font-size:clamp(18px,2vw,23px);font-weight:600;letter-spacing:-.02em}
 .sum-block p{max-width:62ch;margin:0 0 12px;font-size:16px;line-height:1.62}
@@ -523,3 +530,37 @@ body{display:block;overflow:visible;overflow-x:clip}
   .flip-deck>*{grid-area:auto}
   .sum-block{opacity:1;translate:none;transition:none}
 }
+
+/* ==========================================================================
+   The close.
+
+   Back onto the dark canvas, so the page ends where it opened - the two blobs
+   return, slower and dimmer, as a bookend rather than a reprise.
+   ========================================================================== */
+
+/* Fills the viewport so the page ends on the canvas, not on a sliver of the
+   body background below it. */
+.cta-scene{position:relative;z-index:1;display:grid;place-items:center;min-height:100svh;overflow:hidden;padding:clamp(80px,14vh,160px) 24px;background:var(--canvas);color:#fdfaf6;text-align:center}
+.cta-glow{position:absolute;inset:0;pointer-events:none}
+.cta-glow i{position:absolute;display:block;border-radius:50%;opacity:.42}
+.cta-glow i:first-child{width:min(70vmin,760px);aspect-ratio:1;top:-18%;left:-8%;background:radial-gradient(closest-side,#17999b,rgba(23,153,155,0) 72%);animation:cta-drift-a 26s ease-in-out infinite}
+.cta-glow i:last-child{width:min(58vmin,620px);aspect-ratio:1;right:-10%;bottom:-22%;background:radial-gradient(closest-side,#266ea4,rgba(38,110,164,0) 72%);animation:cta-drift-b 32s ease-in-out infinite}
+@keyframes cta-drift-a{0%,100%{transform:translate(0,0)}50%{transform:translate(7vw,5vh)}}
+@keyframes cta-drift-b{0%,100%{transform:translate(0,0)}50%{transform:translate(-6vw,-4vh)}}
+
+.cta-inner{position:relative;max-width:780px}
+.cta-eyebrow{margin:0 0 18px;color:rgba(255,255,255,.62);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.cta-scene h2{margin:0;font-size:clamp(32px,5vw,74px);font-weight:400;line-height:1.02;letter-spacing:-.045em}
+.cta-sub{max-width:56ch;margin:clamp(20px,3vh,30px) auto 0;color:rgba(253,250,246,.76);font-size:clamp(16px,1.5vw,19px);line-height:1.6}
+
+.cta-actions{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:clamp(30px,5vh,46px)}
+.cta-primary,.cta-secondary{display:inline-flex;align-items:center;gap:8px;padding:15px 30px;border-radius:999px;font-size:16px;font-weight:600;text-decoration:none;transition:background .2s ease,color .2s ease,translate .2s ease}
+.cta-primary{color:#0b3d3f;background:#fdfaf6}
+.cta-primary:hover{background:#fff;translate:0 -1px}
+.cta-secondary{border:1px solid rgba(255,255,255,.34);color:#fdfaf6}
+.cta-secondary:hover{background:rgba(255,255,255,.12);translate:0 -1px}
+.cta-primary:focus-visible,.cta-secondary:focus-visible{outline:3px solid #7fc0ba;outline-offset:3px}
+
+.cta-note{margin:clamp(24px,4vh,38px) 0 0;color:rgba(253,250,246,.5);font-size:13px}
+
+@media(prefers-reduced-motion:reduce){.cta-glow i{animation:none}}
