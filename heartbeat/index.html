@@ -206,20 +206,18 @@
   </section>
 
 
-  <section class="ai-scene ai-read" aria-label="N1 is reading">
-    <div class="ai-stage">
-      <div class="ai-mark" aria-hidden="true">
+  
+  <section class="timeline-scene" aria-labelledby="timeline-title">
+    <div class="tl-stage">
+      <div class="ai-load" aria-hidden="true">
+<div class="ai-mark" aria-hidden="true">
         <span class="ai-ring"></span><span class="ai-ring ai-ring-2"></span>
         <span class="ai-ring ai-ring-3"></span><span class="ai-core"></span>
       </div>
-      <p class="ai-eyebrow">N1 is reading</p>
-      <h2 class="ai-title">Seven years, read in one pass.</h2>
-      <ul class="ai-lines"><li style="--s:0.12"><i></i><span>Reading 186 results across 12 sources</span></li><li style="--s:0.25"><i></i><span>Aligning dates, units and reference ranges</span></li><li style="--s:0.38"><i></i><span>Grouping findings that belong together</span></li><li style="--s:0.51"><i></i><span>Linking every value back to its page</span></li></ul>
-    </div>
-  </section>
-
-  <section class="timeline-scene" aria-labelledby="timeline-title">
-    <div class="tl-stage">
+        <p class="ai-eyebrow">N1 is reading</p>
+        <p class="ai-load-note">Seven years, read in one pass.</p>
+        <ul class="ai-lines"><li ><i></i><span>Reading 186 results across 12 sources</span></li><li ><i></i><span>Aligning dates, units and reference ranges</span></li><li ><i></i><span>Grouping findings that belong together</span></li><li ><i></i><span>Linking every value back to its page</span></li></ul>
+      </div>
     <div class="tl-head">
       <h2 id="timeline-title">Your appointment starts today.<br>Your health story doesn&rsquo;t.</h2>
       <div class="tl-patient">
@@ -370,29 +368,17 @@
     </div>
   </section>
 
-  <section class="ai-scene ai-draft" aria-label="N1 is drafting">
-    <div class="ai-stage">
-      <div class="ai-mark" aria-hidden="true">
+  
+  <section class="summary-scene" aria-label="The health summary">
+      <div class="ai-load" aria-hidden="true">
+<div class="ai-mark" aria-hidden="true">
         <span class="ai-ring"></span><span class="ai-ring ai-ring-2"></span>
         <span class="ai-ring ai-ring-3"></span><span class="ai-core"></span>
       </div>
-      <p class="ai-eyebrow">N1 is drafting</p>
-      <h2 class="ai-title">Now it writes it down.</h2>
-      <ul class="ai-lines"><li style="--s:0.12"><i></i><span>Drafting the executive summary</span></li><li style="--s:0.25"><i></i><span>Grouping findings by body system</span></li><li style="--s:0.38"><i></i><span>Checking every claim against its source</span></li><li style="--s:0.51"><i></i><span>Naming what is missing rather than filling it in</span></li></ul>
-      <div class="ai-draft-card" aria-hidden="true">
-        <span class="ai-draft-head">Health Summary &middot; draft</span>
-        <b>One metabolic story, caught early</b>
-        <span class="ai-draft-rows"><i></i><i></i><i></i><i></i></span>
+        <p class="ai-eyebrow">N1 is drafting</p>
+        <p class="ai-load-note">Now it writes it down.</p>
+        <ul class="ai-lines"><li ><i></i><span>Drafting the executive summary</span></li><li ><i></i><span>Grouping findings by body system</span></li><li ><i></i><span>Checking every claim against its source</span></li><li ><i></i><span>Naming what is missing rather than filling it in</span></li></ul>
       </div>
-    </div>
-  </section>
-
-  <section class="summary-scene" aria-labelledby="summary-title">
-    <div class="sum-head">
-      <h2 id="summary-title">Prepared by N1.<br>Approved by you.</h2>
-      <p class="sum-sub">A health summary drafted from 186 results across 12 sources &mdash; and held as a draft until a clinician signs it off.</p>
-    </div>
-
     <article class="sum-report">
       <header class="sum-top">
         <div><span class="sum-mark"></span><b>Health Summary</b><em>Maya R. &middot; 2021&ndash;2025 &middot; 12 sources</em></div>
@@ -516,6 +502,29 @@
     </div>
   </dialog>
 
+  <section class="send-scene" aria-labelledby="send-title">
+    <div class="send-stage">
+      <p class="send-eyebrow">n1.care</p>
+      <h2 id="send-title">Prepared by N1.<br>Approved by you.</h2>
+      <p class="send-sub">Once a clinician signs it off, it goes to the person it is about &mdash; in language they can read, with every source still attached.</p>
+
+      <div class="send-rig" aria-hidden="true">
+        <span class="send-trail"></span>
+        <div class="send-doc">
+          <span class="send-doc-head">Health Summary &middot; approved</span>
+          <b>One metabolic story, caught early</b>
+          <span class="send-doc-rows"><i></i><i></i><i></i></span>
+        </div>
+        <div class="send-target">
+          <span class="send-pulse"></span>
+          <img src="../assets/avatar-patient.jpg" alt="" width="256" height="256" loading="lazy" decoding="async">
+        </div>
+      </div>
+
+      <p class="send-done" aria-hidden="true"><span class="send-tick">&#10003;</span> Delivered to Maya R. &middot; with 186 linked results</p>
+    </div>
+  </section>
+
   <section class="flip-scene" aria-labelledby="flip-title">
     <div class="flip-stage">
       <div class="flip-copy">
@@ -568,11 +577,12 @@
   </div>
 
   <section class="cta-scene" aria-labelledby="cta-title">
-    <div class="cta-glow" aria-hidden="true"><i></i><i></i></div>
+    <img class="cta-photo" src="../assets/clinician-hero-supportive-care-upscaled-v2.webp" alt="A clinician supporting a patient" width="1600" height="1067" loading="lazy" decoding="async">
+    <div class="cta-shade" aria-hidden="true"></div>
     <div class="cta-inner">
       <p class="cta-eyebrow">n1.care</p>
-      <h2 id="cta-title">Start with the record<br>you already have.</h2>
-      <p class="cta-sub">Connect your sources and N1 drafts the history, the summary and the report &mdash; every claim linked to the page it came from, and held as a draft until a clinician signs it off.</p>
+      <h2 id="cta-title">Arrive prepared.<br>Be present.</h2>
+      <p class="cta-sub">The record is read, the history is drawn, the summary is drafted and sourced. What is left is the part that was always the point: the conversation.</p>
       <div class="cta-actions">
         <a class="cta-primary" href="https://app.n1.care/signup">Start free trial</a>
         <a class="cta-secondary" href="https://app.n1.care/login">Log in <span aria-hidden="true">&rarr;</span></a>
@@ -748,7 +758,9 @@
       gatherCharge = collapsing;
       gatherRelease = handover;
 
-      const rawZoom = clamp((progress - .52) / .2);
+      /* Opens while the last cards are still on their way in, so the image
+         is already coming out of the point rather than waiting for silence. */
+      const rawZoom = clamp((progress - .42) / .28);
       const zoom = smooth(rawZoom);
       const frameW = mix(zoomStart.width, innerWidth, zoom);
       const frameH = mix(zoomStart.height, innerHeight, zoom);
@@ -894,18 +906,33 @@
        is discrete, so there is always exactly one entry being read. */
     /* The two moments where N1 is working: scrubbed like everything else, so
        the lines land as you arrive at them rather than on a timer you missed. */
-    const aiScenes = [...document.querySelectorAll('.ai-scene')];
-    if (aiScenes.length) {
-      let aiFrame = 0;
-      const drawAi = () => aiScenes.forEach(scene =>
-        scene.style.setProperty('--ai', trackProgress(scene).toFixed(4)));
+    const sendScene = document.querySelector('.send-scene');
+    if (sendScene) {
+      let sendFrame = 0;
+      const drawSend = () => sendScene.style.setProperty('--send', trackProgress(sendScene).toFixed(4));
       addEventListener('scroll', () => {
-        cancelAnimationFrame(aiFrame);
-        aiFrame = requestAnimationFrame(drawAi);
+        cancelAnimationFrame(sendFrame);
+        sendFrame = requestAnimationFrame(drawSend);
       }, { passive: true });
-      addEventListener('resize', drawAi);
-      drawAi();
+      addEventListener('resize', drawSend);
+      drawSend();
     }
+
+    /* The loader stands in for the content rather than sitting in a section of
+       its own: you arrive, N1 is working, and about a second later the thing it
+       was working on is there instead. */
+    document.querySelectorAll('.ai-load').forEach(load => {
+      const host = load.closest('.tl-stage, .summary-scene');
+      if (!host) return;
+      host.style.setProperty('--ready', '0');
+      new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          observer.disconnect();
+          setTimeout(() => host.style.setProperty('--ready', '1'), reducedMotion.matches ? 0 : 1100);
+        });
+      }, { threshold: .25 }).observe(host);
+    });
 
     const tlScene = document.querySelector('.timeline-scene');
     const tlTrack = document.querySelector('.tl-list');

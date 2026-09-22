@@ -294,9 +294,6 @@ body{display:block;overflow:visible;overflow-x:clip}
 /* The report stands as its own section, headed like one, rather than reading
    as the tail of the timeline above it. */
 .summary-scene{position:relative;padding:clamp(72px,12vh,140px) max(24px,calc((100vw - 920px)/2)) clamp(80px,12vh,140px);background:#f3ede2;color:var(--ink)}
-.sum-head{max-width:720px;margin:0 0 clamp(34px,5vh,56px);padding-left:clamp(26px,4vw,44px)}
-.sum-head h2{margin:0;font-size:clamp(30px,4vw,58px);font-weight:400;line-height:1.04;letter-spacing:-.04em}
-.sum-sub{margin:20px 0 0;max-width:56ch;color:var(--muted);font-size:16px;line-height:1.6}
 
 .sum-report{margin-left:clamp(26px,4vw,44px);border:1px solid #e3d7c2;border-radius:18px;background:#fffdf9;box-shadow:0 18px 44px rgba(60,52,38,.1);overflow:hidden}
 .sum-top{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:20px clamp(20px,3vw,32px);border-bottom:1px solid #eee3d2;background:#fbf6ec}
@@ -563,8 +560,6 @@ body{display:block;overflow:visible;overflow-x:clip}
    rather than "working".
    ========================================================================== */
 
-.ai-scene{--ai:0;height:190svh;position:relative;z-index:1;background:#f3ede2;color:var(--ink)}
-.ai-stage{height:100svh;position:sticky;top:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(14px,2vh,22px);padding:clamp(40px,8vh,90px) 24px;overflow:hidden;text-align:center}
 
 .ai-mark{width:clamp(78px,10vmin,112px);aspect-ratio:1;display:grid;place-items:center;margin-bottom:clamp(8px,2vh,20px)}
 .ai-mark>*{grid-area:1/1;border-radius:50%}
@@ -576,30 +571,104 @@ body{display:block;overflow:visible;overflow-x:clip}
 @keyframes ai-breathe{0%,100%{scale:1;opacity:.85}50%{scale:1.35;opacity:1}}
 
 .ai-eyebrow{margin:0;color:var(--teal);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
-.ai-title{max-width:16ch;margin:0;font-size:clamp(28px,4vw,54px);font-weight:400;line-height:1.04;letter-spacing:-.04em}
 
 .ai-lines{display:flex;flex-direction:column;gap:11px;margin:clamp(12px,2vh,24px) 0 0;padding:0;list-style:none;text-align:left}
-.ai-lines li{--in:clamp(0,calc((var(--ai) - var(--s)) / .08),1);
-  display:flex;gap:11px;align-items:center;opacity:calc(var(--in) * .55 + var(--in) * .45);
-  translate:0 calc((1 - var(--in)) * 8px);color:var(--muted);font-size:clamp(14px,1.4vw,17px)}
-.ai-lines i{width:7px;height:7px;flex:none;border-radius:50%;background:var(--teal);scale:var(--in)}
-.ai-lines span{opacity:calc(.45 + var(--in) * .55)}
+.ai-lines li{display:flex;gap:11px;align-items:center;color:var(--muted);font-size:clamp(14px,1.4vw,17px);
+  opacity:0;animation:ai-line .5s ease forwards}
+.ai-lines li:nth-child(1){animation-delay:.05s}
+.ai-lines li:nth-child(2){animation-delay:.28s}
+.ai-lines li:nth-child(3){animation-delay:.51s}
+.ai-lines li:nth-child(4){animation-delay:.74s}
+@keyframes ai-line{from{opacity:0;translate:0 8px}to{opacity:1;translate:0}}
+.ai-lines i{width:7px;height:7px;flex:none;border-radius:50%;background:var(--teal)}
 
-/* The draft, growing toward you at the end of the beat - it hands off to the
-   report section immediately below. */
-.ai-draft-card{--grow:clamp(0,calc((var(--ai) - .62) / .3),1);
-  width:min(420px,84vw);margin-top:clamp(14px,3vh,30px);padding:18px 20px;border:1px solid #e3d7c2;border-radius:16px;
-  background:#fffdf9;box-shadow:0 22px 52px rgba(60,52,38,.18);text-align:left;
-  opacity:var(--grow);scale:calc(.82 + var(--grow) * .5)}
-.ai-draft-head{display:block;margin-bottom:8px;color:var(--teal);font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
-.ai-draft-card b{display:block;font-size:17px;font-weight:600;letter-spacing:-.01em}
-.ai-draft-rows{display:flex;flex-direction:column;gap:6px;margin-top:12px}
-.ai-draft-rows i{height:6px;border-radius:99px;background:#ece0cc}
-.ai-draft-rows i:nth-child(1){width:92%}
-.ai-draft-rows i:nth-child(2){width:78%}
-.ai-draft-rows i:nth-child(3){width:86%}
-.ai-draft-rows i:nth-child(4){width:54%;background:#d8e9e2}
 
 @media(prefers-reduced-motion:reduce){
   .ai-ring,.ai-core{animation:none}
 }
+
+/* ==========================================================================
+   Prepared by N1. Approved by you.
+
+   The report leaving for the person it is about. It travels an arc rather than
+   a straight line - a straight slide reads as a UI transition, an arc reads as
+   something being handed over - and it is received rather than merely arriving:
+   the ring answers it.
+   ========================================================================== */
+
+.send-scene{--send:0;height:260svh;position:relative;z-index:1;background:#edf6f4;color:var(--ink)}
+.send-stage{height:100svh;position:sticky;top:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(10px,1.6vh,18px);padding:clamp(40px,8vh,90px) 24px;overflow:hidden;text-align:center}
+
+.send-eyebrow{margin:0;color:var(--teal);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.send-scene h2{max-width:16ch;margin:0;font-size:clamp(30px,4.4vw,60px);font-weight:400;line-height:1.03;letter-spacing:-.04em}
+.send-sub{max-width:52ch;margin:clamp(8px,1.4vh,16px) 0 0;color:var(--muted);font-size:clamp(15px,1.5vw,18px);line-height:1.6}
+
+.send-rig{width:min(620px,92vw);height:clamp(150px,22vh,210px);position:relative;margin-top:clamp(14px,3vh,34px)}
+
+/* The path it takes, drawn faintly behind it. */
+.send-trail{position:absolute;top:50%;right:14%;left:16%;height:96px;translate:0 -58%;
+  border-bottom:1.5px dashed rgba(46,125,120,.28);border-radius:0 0 999px 999px;
+  opacity:calc(clamp(0,calc((var(--send) - .18) / .16),1) * (1 - clamp(0,calc((var(--send) - .74) / .16),1)))}
+
+.send-doc{--go:clamp(0,calc((var(--send) - .2) / .48),1);
+  width:min(250px,56vw);position:absolute;top:50%;left:0;padding:14px 16px;border:1px solid #cfe5df;border-radius:14px;
+  background:#fff;box-shadow:0 16px 38px rgba(31,52,48,.16);text-align:left;
+  /* the arc: across on --go, and a dip that peaks at the middle of the trip */
+  translate:calc(var(--go) * (min(620px,92vw) - min(250px,56vw) - 34px))
+            calc(-50% - sin(var(--go) * 180deg) * 46px);
+  scale:calc(1 - var(--go) * .62);opacity:calc(1 - clamp(0,calc((var(--go) - .82) / .18),1))}
+.send-doc-head{display:block;margin-bottom:7px;color:var(--teal);font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+.send-doc b{display:block;font-size:14px;font-weight:600;letter-spacing:-.01em}
+.send-doc-rows{display:flex;flex-direction:column;gap:5px;margin-top:10px}
+.send-doc-rows i{height:5px;border-radius:99px;background:#e3efec}
+.send-doc-rows i:nth-child(2){width:74%}
+.send-doc-rows i:nth-child(3){width:88%}
+
+.send-target{width:76px;height:76px;position:absolute;top:50%;right:0;translate:0 -50%;display:grid;place-items:center}
+.send-target img{width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:center 28%;box-shadow:0 0 0 2px #edf6f4,0 4px 14px rgba(31,52,48,.18)}
+.send-pulse{--hit:clamp(0,calc((var(--send) - .6) / .14),1);
+  width:100%;height:100%;position:absolute;border:2px solid var(--teal);border-radius:50%;
+  opacity:calc(var(--hit) * (1 - var(--hit)) * 4);scale:calc(1 + var(--hit) * 1.5)}
+
+.send-done{--in:clamp(0,calc((var(--send) - .72) / .12),1);
+  display:flex;gap:9px;align-items:center;margin:clamp(12px,2vh,24px) 0 0;color:var(--green);font-size:14px;font-weight:600;
+  opacity:var(--in);translate:0 calc((1 - var(--in)) * 8px)}
+.send-tick{display:grid;width:22px;height:22px;place-items:center;border-radius:50%;background:var(--teal);color:#fff;font-size:12px}
+
+/* ==========================================================================
+   Arrive prepared. Be present. - the close, on a photograph.
+   ========================================================================== */
+
+.cta-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 32%}
+.cta-shade{position:absolute;inset:0;background:linear-gradient(0deg,rgba(6,38,38,.9) 0%,rgba(6,38,38,.62) 46%,rgba(6,38,38,.42) 100%)}
+.cta-scene{background:#062626}
+.cta-note{color:rgba(253,250,246,.62)}
+
+/* The closing copy on the header image, sized for a phone. */
+@media(max-width:620px){
+  .zoom-copy{width:calc(100vw - 40px);right:20px;bottom:34px;left:20px}
+  .zoom-copy h2{font-size:clamp(30px,9vw,46px);letter-spacing:-.045em}
+  .zoom-copy h2 span{white-space:normal}
+  .zoom-copy>span{margin-top:14px;font-size:15px;line-height:1.45}
+  .send-rig{height:150px}
+  .send-doc{width:56vw}
+  .send-target{width:60px;height:60px}
+}
+
+/* ==========================================================================
+   Working, then done.
+
+   The loader takes the content's place - it is not a section you scroll past,
+   it is what is there until the thing it is making is. --ready flips a second
+   after you arrive and the two cross-fade.
+   ========================================================================== */
+
+.ai-load{position:absolute;z-index:8;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;
+  padding:24px;text-align:center;opacity:calc(1 - var(--ready,1));pointer-events:none;transition:opacity .55s ease}
+.ai-load-note{max-width:20ch;margin:2px 0 6px;font-size:clamp(20px,2.4vw,30px);font-weight:400;letter-spacing:-.03em;line-height:1.1}
+
+/* The timeline and the report wait behind it. */
+.tl-list,.tl-rail,.tl-count{opacity:calc((1 - var(--deep) * .88) * var(--ready,1));transition:opacity .6s ease}
+.tl-head{opacity:calc((1 - var(--deep) * .75) * var(--ready,1));transition:opacity .6s ease}
+.summary-scene{position:relative}
+.sum-report{opacity:var(--ready,1);transition:opacity .6s ease}
