@@ -25,7 +25,6 @@
     <div class="heart-act">
       <div class="heart-copy">
         <p class="heart-kicker">n1.care</p>
-        <h1>Years of history.<br>Brought into focus.</h1>
         <p class="heart-cue"><span aria-hidden="true">↓</span> Scroll</p>
       </div>
     </div>
@@ -178,16 +177,12 @@
     <span>N1 organizes patient records into a clear history and draft reports, with source links for clinical review.</span>
   </div>
   <div class="singularity" aria-hidden="true"></div>
-  <div class="patient-zoom" aria-hidden="true"><img src="../assets/clinician-hero-doctor-patient-wide-v4.webp" alt="" width="1680" height="945"></div>
+  <div class="patient-zoom" aria-hidden="true"><img src="../assets/clinician-hero-doctor-patient-wide-v2.webp" alt="" width="1672" height="941"></div>
   </main>
   </div>
 
   <section class="chat-scene" aria-labelledby="chat-title">
     <div class="chat-stage">
-    <div class="chat-intro">
-      <h2 id="chat-title">Your appointment starts today.<br>Your health story doesn&rsquo;t.</h2>
-    </div>
-
     <div class="chat-thread">
       <p class="chat-day"><span>Today 09:41</span></p>
 
@@ -225,6 +220,95 @@
     </div>
   </section>
 
+
+  <section class="timeline-scene" aria-labelledby="timeline-title">
+    <div class="tl-head">
+      <h2 id="timeline-title">Years of history.<br>Brought into focus.</h2>
+      <p class="tl-sub">Maya R. &middot; 12 sources &middot; 186 results &middot; 2021&ndash;2025</p>
+    </div>
+    <ol class="tl-list">
+      <li class="tl-entry" style="--i:0">
+        <span class="tl-dot" aria-hidden="true"></span>
+        <time datetime="2021-05">May 2021</time>
+        <div class="tl-body">
+          <span class="tl-tag">Note</span>
+          <b>Symptoms first recorded</b>
+          <p>Fatigue and increased thirst documented at a primary-care visit.</p>
+          <a class="tl-source" href="#patient-record">Clinical note · Page 2 <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </li>
+      <li class="tl-entry" style="--i:1">
+        <span class="tl-dot" aria-hidden="true"></span>
+        <time datetime="2022-01">Jan 2022</time>
+        <div class="tl-body">
+          <span class="tl-tag">Diagnosis</span>
+          <b>Type 2 diabetes diagnosed</b>
+          <p>HbA1c measured at 7.4%. Treatment options discussed and agreed.</p>
+          <a class="tl-source" href="#patient-record">Lab report · Page 4 <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </li>
+      <li class="tl-entry" style="--i:2">
+        <span class="tl-dot" aria-hidden="true"></span>
+        <time datetime="2022-03">Mar 2022</time>
+        <div class="tl-body">
+          <span class="tl-tag">Medication</span>
+          <b>Metformin started</b>
+          <p>500 mg twice daily added to the active medicines list.</p>
+          <a class="tl-source" href="#patient-record">Prescription <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </li>
+      <li class="tl-entry" style="--i:3">
+        <span class="tl-dot" aria-hidden="true"></span>
+        <time datetime="2022-11">Nov 2022</time>
+        <div class="tl-body">
+          <span class="tl-tag">Imaging</span>
+          <b>Retinal screening</b>
+          <p>No diabetic retinopathy. Repeat advised in 24 months.</p>
+          <a class="tl-source" href="#patient-record">Imaging · 4 images <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </li>
+      <li class="tl-entry" style="--i:4">
+        <span class="tl-dot" aria-hidden="true"></span>
+        <time datetime="2023-03">Mar 2023</time>
+        <div class="tl-body">
+          <span class="tl-tag">Letter</span>
+          <b>Endocrinology review</b>
+          <p>Specialist confirms the plan and adds annual foot screening.</p>
+          <a class="tl-source" href="#patient-record">Specialist letter · Page 3 <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </li>
+      <li class="tl-entry" style="--i:5">
+        <span class="tl-dot" aria-hidden="true"></span>
+        <time datetime="2023-09">Sep 2023</time>
+        <div class="tl-body">
+          <span class="tl-tag">Result</span>
+          <b>Control improving</b>
+          <p>HbA1c down to 6.9% across two readings.</p>
+          <a class="tl-source" href="#patient-record">Lab report · Page 6 <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </li>
+      <li class="tl-entry" style="--i:6">
+        <span class="tl-dot" aria-hidden="true"></span>
+        <time datetime="2024-06">Jun 2024</time>
+        <div class="tl-body">
+          <span class="tl-tag">Vitals</span>
+          <b>Blood pressure review</b>
+          <p>128/79 mmHg. No change to medication.</p>
+          <a class="tl-source" href="#patient-record">Vitals · Practice nurse <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </li>
+      <li class="tl-entry" style="--i:7">
+        <span class="tl-dot" aria-hidden="true"></span>
+        <time datetime="2025-03">Mar 2025</time>
+        <div class="tl-body">
+          <span class="tl-tag">Result</span>
+          <b>Lowest reading to date</b>
+          <p>HbA1c 6.4%, the lowest of three source-linked readings.</p>
+          <a class="tl-source" href="#patient-record">Lab report · Page 8 <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </li>
+    </ol>
+  </section>
 
   <script>
     const cards = [...document.querySelectorAll('.float-card')];
@@ -294,12 +378,14 @@
         const curve = Math.min(90, distance * .14) * direction;
         const curveX = (-y / distance) * curve;
         const curveY = (x / distance) * curve;
+        const [cornerX, cornerY] = CORNERS[index % CORNERS.length];
         const animation = card.animate([
-          { translate: '0 0', scale: '1', rotate: '0deg', opacity: 1 },
-          { translate: `${x * .58 + curveX}px ${y * .58 + curveY}px`, scale: '.62', rotate: `${direction * 10}deg`, opacity: 1, offset: .62 },
-          { translate: `${x * .94}px ${y * .94}px`, scale: '.16', rotate: `${direction * 22}deg`, opacity: .9, offset: .88 },
-          { translate: `${x}px ${y}px`, scale: '.02', rotate: `${direction * 26}deg`, opacity: 0 }
-        ], { duration: 1000, fill: 'both', easing: 'linear' });
+          { translate: `${cornerX * innerWidth * .8}px ${cornerY * innerHeight * .8}px`, scale: '.5', rotate: `${cornerX * 14}deg`, opacity: 0, offset: 0 },
+          { translate: '0 0', scale: '1', rotate: '0deg', opacity: 1, offset: .5 },
+          { translate: `${x * .58 + curveX}px ${y * .58 + curveY}px`, scale: '.62', rotate: `${direction * 10}deg`, opacity: 1, offset: .81 },
+          { translate: `${x * .94}px ${y * .94}px`, scale: '.16', rotate: `${direction * 22}deg`, opacity: .9, offset: .94 },
+          { translate: `${x}px ${y}px`, scale: '.02', rotate: `${direction * 26}deg`, opacity: 0, offset: 1 }
+        ], { duration: 2000, fill: 'both', easing: 'linear' });
         animation.pause();
         animation.currentTime = 0;
         /* Latest possible finish: .03 + .072 + .08 + .335 = .517, which is
@@ -312,13 +398,15 @@
     };
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     scrollTo(0, 0);
+    /* Which corner each card flies in from, cycled by index. */
+    const CORNERS = [[-1, -1], [1, -1], [-1, 1], [1, 1]];
     const clamp = value => Math.max(0, Math.min(1, value));
     const mix = (from, to, progress) => from + (to - from) * progress;
     const smooth = progress => progress * progress * (3 - 2 * progress);
     const renderImageZoom = progress => {
       if (!zoomStart) return;
       gatherAnimations.forEach(({ animation, start, end }) => {
-        animation.currentTime = smooth(clamp((progress - start) / (end - start))) * 1000;
+        animation.currentTime = 1000 + smooth(clamp((progress - start) / (end - start))) * 1000;
       });
       signalItems.forEach((item, index) => {
         const appear = smooth(clamp((progress - (.18 + index * .055)) / .08));
@@ -367,6 +455,9 @@
     const heartAct = document.querySelector('.heart-act');
     const chatScene = document.querySelector('.chat-scene');
     const chatStage = document.querySelector('.chat-stage');
+    const timelineScene = document.querySelector('.timeline-scene');
+    let timelineTarget = 0;
+    let timelineEased = 0;
     let chatTarget = 0;
     let chatEased = 0;
     /* The journey is scrubbed by the scrollbar rather than played on a timer.
@@ -398,7 +489,7 @@
         const last = Math.max(1, gatherAnimations.length - 1);
         gatherAnimations.forEach(({ animation }, index) => {
           const local = smooth(clamp((emerge - (index / last) * .34) / .58));
-          animation.currentTime = (1 - local) * 1000;
+          animation.currentTime = local * 1000;
         });
       }
 
@@ -415,6 +506,7 @@
       /* The thread is scrubbed the same way; each message carries the scroll
          position it arrives at as --s, and CSS does the rest. */
       if (chatStage) chatStage.style.setProperty('--chat', chatProgress.toFixed(4));
+      if (timelineScene) timelineScene.style.setProperty('--tl', timelineEased.toFixed(4));
     };
     const trackProgress = element => {
       const travel = element.offsetHeight - innerHeight;
@@ -423,6 +515,7 @@
     const readTarget = () => {
       targetProgress = trackProgress(journey);
       if (chatScene) chatTarget = trackProgress(chatScene);
+      if (timelineScene) timelineTarget = trackProgress(timelineScene);
     };
     /* The sequence eases toward the scroll position on its own frame loop.
        Scheduling a frame per scroll event instead lets a fast gesture cancel
@@ -435,8 +528,9 @@
     const tick = () => {
       easedProgress = ease(easedProgress, targetProgress);
       chatEased = ease(chatEased, chatTarget);
+      timelineEased = ease(timelineEased, timelineTarget);
       paint(easedProgress, chatEased);
-      running = easedProgress !== targetProgress || chatEased !== chatTarget;
+      running = easedProgress !== targetProgress || chatEased !== chatTarget || timelineEased !== timelineTarget;
       if (running) requestAnimationFrame(tick);
     };
     addEventListener('scroll', () => {
@@ -449,6 +543,7 @@
     readTarget();
     easedProgress = targetProgress;
     chatEased = chatTarget;
+    timelineEased = timelineTarget;
     paint(easedProgress, chatEased);
     let frame = 0;
     const moveCards = event => {
