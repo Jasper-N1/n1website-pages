@@ -138,7 +138,6 @@ body{display:block;overflow:visible;overflow-x:clip}
 
 
 .chat-thread{width:min(720px,100%);margin:0 auto;display:flex;flex-direction:column;gap:11px;padding:0 clamp(0px,6vw,52px)}
-.chat-day{margin:0 0 14px;color:#7f8f8a;font-size:13px;text-align:center}
 
 .msg,.msg-read{--in:clamp(0,calc((var(--chat) - var(--s)) / .07),1)}
 .msg{max-width:74%;position:relative;padding:15px 21px;border-radius:25px;opacity:var(--in);translate:0 calc((1 - var(--in)) * 16px);scale:calc(.93 + var(--in) * .07);font-size:19px;line-height:1.42}
