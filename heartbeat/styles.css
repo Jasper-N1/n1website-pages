@@ -671,7 +671,8 @@ body{display:block;overflow:visible;overflow-x:clip}
    the page has been making needs the thing it rests on.
    ========================================================================== */
 
-.trust-scene{position:relative;z-index:1;display:grid;place-items:center;min-height:86svh;
+/* A full screen of its own, like the close below it. */
+.trust-scene{position:relative;z-index:1;display:grid;place-items:center;min-height:100svh;
   padding:clamp(80px,12vh,140px) 24px;background:#f9f8f2;color:#202523;text-align:center}
 .trust-inner{width:min(1120px,100%);display:grid;justify-items:center}
 .trust-animation{width:min(620px,78vw);aspect-ratio:5/2;margin:0 auto clamp(20px,4vh,40px);overflow:hidden}
@@ -695,8 +696,35 @@ body{display:block;overflow:visible;overflow-x:clip}
    which works on a wide screen and guillotines it on a narrow one. On a phone
    the box goes square and the offset comes off, so the whole animation plays. */
 @media(max-width:620px){
-  .trust-scene{min-height:auto;padding:clamp(60px,10vh,96px) 20px}
+  .trust-scene{min-height:100svh;padding:clamp(60px,10vh,96px) 20px}
   .trust-animation{width:min(84vw,400px);aspect-ratio:1;margin-bottom:clamp(6px,1.5vh,16px)}
   .trust-animation video{transform:none}
   .trust-scene h2{font-size:clamp(27px,8.4vw,44px);line-height:1.02}
 }
+
+/* The vortex canvas sits exactly where the field does, and is only ever opaque
+   while the collapse is running. One element, one layer. */
+.vortex-canvas{position:absolute;z-index:5;inset:0;width:100%;height:100%;opacity:0;pointer-events:none}
+
+/* ==========================================================================
+   Chrome was doing far more work than Safari for the same frame.
+
+   backdrop-filter is the reason. Safari's implementation is cheap; Chrome's
+   samples and blurs the backdrop per element, per frame, and a scaling element
+   can never reuse the result. Seventy-two of them during the entry phase is
+   the clunk - and it was buying nothing, because what sits behind these cards
+   is a flat colour with two soft blobs on it. A slightly more opaque card is
+   indistinguishable and free.
+
+   will-change: transform on every card forced seventy-two permanent
+   compositor layers as well. The animation promotes what it needs while it is
+   running; declaring it up front just holds the memory the whole time. And
+   will-change on left/top/width/height is meaningless - those are layout, and
+   no hint makes layout compositable.
+   ========================================================================== */
+
+.card-inner{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(255,255,255,.94);
+  box-shadow:0 18px 34px rgba(31,52,48,.16)}
+.scan-card span{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(9,16,17,.82)}
+.float-card{will-change:auto}
+.patient-zoom{will-change:opacity}

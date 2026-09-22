@@ -30,6 +30,7 @@
       </div>
     </div>
 
+    <canvas class="vortex-canvas" aria-hidden="true"></canvas>
     <div class="card-field" aria-hidden="true">
       <div class="float-card card-profile" data-depth=".7"><div class="card-inner ui-card profile-card"><span class="avatar">ER</span><div><small>Patient record</small><b>Complete history</b><em>14 records connected</em></div></div></div>
       <div class="float-card card-report" data-depth="1.35"><div class="card-inner ui-card report-card"><small>Health Summary</small><b>The whole record,<br>in one clear view.</b><span><i></i><i></i><i></i></span></div></div>
@@ -471,7 +472,7 @@
   </section>
 
   <section class="cta-scene" aria-labelledby="cta-title">
-    <img class="cta-photo" src="../assets/clinician-hero-supportive-care-upscaled-v2.webp" alt="A clinician supporting a patient" width="1600" height="1067" loading="lazy" decoding="async">
+    <img class="cta-photo" src="../assets/clinician-story-human-care-master-grade.webp" alt="A clinician sitting with a patient at home" width="1600" height="1067" loading="lazy" decoding="async">
     <div class="cta-shade" aria-hidden="true"></div>
     <div class="cta-inner">
       <p class="cta-eyebrow">n1.care</p>
@@ -500,7 +501,6 @@
     let easedProgress = 0;
     let running = false;
     let gatherAnimations = [];
-    let outerCards = [];
     const randomiseCardField = () => {
       /* This used to bail out below 1100px, which left every card sitting on
          positions tuned for a desktop hero - the field on a phone was a handful
@@ -550,30 +550,188 @@
         card.style.zIndex = String(2 + Math.floor(Math.random() * 7));
       });
 
-      /* Three more fields' worth of cards parked in a ring beyond the edges of
-         the screen. They are never seen at rest - the vortex is what drags them
-         in - so the collapse pulls in four times what was ever on display. */
-      outerCards.forEach(clone => clone.remove());
-      outerCards = [];
-      const onScreen = cards.filter(card => card.offsetWidth);
-      if (!onScreen.length || reducedMotion.matches) return;
-      const reach = Math.hypot(innerWidth, innerHeight) / 2;
-      for (let i = 0; i < onScreen.length * 4; i += 1) {
-        const clone = onScreen[i % onScreen.length].cloneNode(true);
-        const angle = Math.random() * Math.PI * 2;
-        const radius = reach * (1.15 + Math.random() * 1.15);
-        const scale = (narrow ? .3 : .6) + Math.random() * .22;
-        clone.classList.add('is-outer');
-        clone.style.left = `${innerWidth / 2 + Math.cos(angle) * radius}px`;
-        clone.style.top = `${innerHeight / 2 + Math.sin(angle) * radius}px`;
-        clone.style.setProperty('--layout-scale', scale.toFixed(3));
-        clone.style.setProperty('--layout-rotate', `${(-14 + Math.random() * 28).toFixed(2)}deg`);
-        clone.style.zIndex = '1';
-        cardField.appendChild(clone);
-        outerCards.push(clone);
-      }
     };
     randomiseCardField();
+
+    /* ---------------------------------------------------------------------
+       The vortex is drawn, not laid out.
+
+       The collapse used to be 360 DOM cards. Each one carries two box-shadows
+       and a backdrop-filter, and each was changing scale every frame - so the
+       compositor re-sampled and re-blurred the backdrop behind every card, and
+       re-rasterised every shadow, 360 times a frame. That is the clunk; it was
+       never the JavaScript.
+
+       So the field stays in the DOM only while it is still and readable. The
+       moment it starts moving, one canvas takes over and blits the same cards
+       as pre-rasterised sprites: no layout, no filters, no compositing of 360
+       layers - a few hundred drawImage calls, which canvas does not notice.
+       --------------------------------------------------------------------- */
+    const vortexCanvas = document.querySelector('.vortex-canvas');
+    const vtx = vortexCanvas && vortexCanvas.getContext ? vortexCanvas.getContext('2d') : null;
+    let sprites = [];
+    let motes = [];
+    let vortexAlpha = 0;
+
+    const roundRect = (g, x, y, w, h, r) => {
+      g.beginPath();
+      g.moveTo(x + r, y);
+      g.arcTo(x + w, y, x + w, y + h, r);
+      g.arcTo(x + w, y + h, x, y + h, r);
+      g.arcTo(x, y + h, x, y, r);
+      g.arcTo(x, y, x + w, y, r);
+      g.closePath();
+    };
+
+    /* Each archetype is rasterised once, at the largest size it will ever be
+       drawn, and then only ever scaled down. */
+    const buildSprites = dpr => {
+      const kinds = [
+        { fill: '#eef5f2', label: '#2e7d78', value: '#1b2725', tint: null },
+        { fill: '#f6efe6', label: '#a8977c', value: '#2b2320', tint: null },
+        { fill: '#e7f1ee', label: '#2e7d78', value: '#1b2725', tint: '#cfe5df' },
+        { fill: '#0d1214', label: '#7f9a96', value: '#dfe9e7', tint: 'scan' },
+        { fill: '#fdfaf6', label: '#2e7d78', value: '#1b2725', tint: 'chart' },
+      ];
+      return kinds.map(kind => {
+        const w = 240;
+        const h = kind.tint === 'scan' ? 190 : 150;
+        const canvas = document.createElement('canvas');
+        canvas.width = w * dpr;
+        canvas.height = h * dpr;
+        const g = canvas.getContext('2d');
+        g.scale(dpr, dpr);
+        const pad = 14;
+        g.shadowColor = 'rgba(12,32,30,.34)';
+        g.shadowBlur = 22;
+        g.shadowOffsetY = 10;
+        g.fillStyle = kind.fill;
+        roundRect(g, pad, pad, w - pad * 2, h - pad * 2, 18);
+        g.fill();
+        g.shadowColor = 'transparent';
+        const x = pad + 16;
+        const iw = w - pad * 2 - 32;
+        if (kind.tint === 'scan') {
+          g.fillStyle = '#243033';
+          roundRect(g, x, pad + 18, iw, h - pad * 2 - 52, 10);
+          g.fill();
+          g.fillStyle = '#48585c';
+          g.beginPath();
+          g.ellipse(x + iw / 2, pad + 18 + (h - pad * 2 - 52) / 2, iw * .3, (h - pad * 2 - 52) * .32, 0, 0, 6.3);
+          g.fill();
+        } else {
+          g.fillStyle = kind.label;
+          g.globalAlpha = .75;
+          g.fillRect(x, pad + 18, iw * .46, 7);
+          g.globalAlpha = 1;
+          g.fillStyle = kind.value;
+          g.fillRect(x, pad + 38, iw * .62, 17);
+          g.globalAlpha = .3;
+          g.fillRect(x, pad + 66, iw, 6);
+          g.fillRect(x, pad + 80, iw * .74, 6);
+          g.globalAlpha = 1;
+          if (kind.tint === 'chart') {
+            g.strokeStyle = '#2e7d78';
+            g.lineWidth = 2.4;
+            g.beginPath();
+            g.moveTo(x, h - pad - 26);
+            g.lineTo(x + iw * .32, h - pad - 38);
+            g.lineTo(x + iw * .64, h - pad - 30);
+            g.lineTo(x + iw, h - pad - 46);
+            g.stroke();
+          } else if (kind.tint) {
+            g.fillStyle = kind.tint;
+            roundRect(g, x, h - pad - 34, iw * .5, 14, 7);
+            g.fill();
+          }
+        }
+        return { canvas, w, h };
+      });
+    };
+
+    /* One mote per card that will converge: the real field, plus four more
+       fields' worth waiting in a ring beyond the edges of the screen. */
+    const buildMotes = () => {
+      if (!vtx) return;
+      /* Capped at 1.5 rather than 2: the sprites are small and in motion, and
+         a full-viewport canvas at DPR 2 is four times the fill rate for detail
+         nobody can see at this speed. */
+      const dpr = Math.min(1.5, devicePixelRatio || 1);
+      vortexCanvas.width = innerWidth * dpr;
+      vortexCanvas.height = innerHeight * dpr;
+      vortexCanvas.style.width = `${innerWidth}px`;
+      vortexCanvas.style.height = `${innerHeight}px`;
+      vtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      sprites = buildSprites(dpr);
+
+      const onScreen = cards.filter(card => card.offsetWidth);
+      const reach = Math.hypot(innerWidth, innerHeight) / 2;
+      const total = onScreen.length * 5;
+      motes = [];
+      for (let i = 0; i < total; i += 1) {
+        let cx;
+        let cy;
+        let scale;
+        if (i < onScreen.length) {
+          const rect = onScreen[i].getBoundingClientRect();
+          cx = rect.left + rect.width / 2;
+          cy = rect.top + rect.height / 2;
+          scale = rect.width / 240;
+        } else {
+          const angle = Math.random() * Math.PI * 2;
+          const radius = reach * (1.12 + Math.random() * 1.2);
+          cx = innerWidth / 2 + Math.cos(angle) * radius;
+          cy = innerHeight / 2 + Math.sin(angle) * radius;
+          scale = (innerWidth < 900 ? .34 : .62) + Math.random() * .24;
+        }
+        const dx = innerWidth / 2 - cx;
+        const dy = innerHeight / 2 - cy;
+        const distance = Math.max(1, Math.hypot(dx, dy));
+        const swirlAmount = Math.min(300, distance * .82);
+        const start = i < onScreen.length
+          ? .03 + (i % 7) * .012 + Math.min(.08, distance / (reach * 2) * .1)
+          : .015 + (i % 9) * .008;
+        motes.push({
+          cx, cy, dx, dy, scale,
+          sprite: i % 5,
+          tangentX: (-dy / distance) * swirlAmount,
+          tangentY: (dx / distance) * swirlAmount,
+          spin: 146 + (i % 5) * 12,
+          start,
+          span: (i < onScreen.length ? .26 + (i % 5) * .015 : .42 + (i % 5) * .018),
+          outer: i >= onScreen.length,
+        });
+      }
+    };
+
+    const drawVortex = (t, alpha) => {
+      if (!vtx) return;
+      vortexCanvas.style.opacity = alpha.toFixed(3);
+      vtx.clearRect(0, 0, innerWidth, innerHeight);
+      if (alpha <= .002) return;
+      for (let i = 0; i < motes.length; i += 1) {
+        const mote = motes[i];
+        const local = smooth(clamp((t - mote.start) / mote.span));
+        if (local >= 1) continue;
+        if (mote.outer && local <= 0) continue;
+        /* The tangential offset decays with the radius, which is what makes
+           the path a spiral rather than an arc. */
+        const decay = 1 - local;
+        const x = mote.cx + mote.dx * local + mote.tangentX * local * decay * 1.9;
+        const y = mote.cy + mote.dy * local + mote.tangentY * local * decay * 1.9;
+        const scale = mote.scale * (1 - local * .985);
+        if (scale <= .004) continue;
+        const sprite = sprites[mote.sprite];
+        vtx.save();
+        vtx.globalAlpha = alpha * (local > .88 ? (1 - local) / .12 : 1) * (mote.outer ? Math.min(1, local * 14) : 1);
+        vtx.translate(x, y);
+        vtx.rotate(local * mote.spin * Math.PI / 180);
+        vtx.scale(scale, scale);
+        vtx.drawImage(sprite.canvas, -sprite.w / 2, -sprite.h / 2, sprite.w, sprite.h);
+        vtx.restore();
+      }
+    };
+
     const prepareZoomTarget = () => {
       /* Everything converges on one point in the middle of the screen, and the
          image is born out of that same point rather than being one of the
@@ -584,9 +742,9 @@
       gatherAnimations.forEach(({ animation }) => animation.cancel());
       gatherAnimations = [];
       if (reducedMotion.matches) return;
-      [...cards, ...outerCards].forEach((card, index) => {
+      cards.forEach((card, index) => {
         if (!card.offsetWidth) return;
-        const outer = card.classList.contains('is-outer');
+        const outer = false;
         const rect = card.getBoundingClientRect();
         const x = targetX - (rect.left + rect.width / 2);
         const y = targetY - (rect.top + rect.height / 2);
@@ -642,9 +800,14 @@
     const smooth = progress => progress * progress * (3 - 2 * progress);
     const renderImageZoom = progress => {
       if (!zoomStart) return;
-      gatherAnimations.forEach(({ animation, start, end }) => {
-        animation.currentTime = 1000 + smooth(clamp((progress - start) / (end - start))) * 1000;
-      });
+      /* The DOM field holds its resting pose and fades; the canvas carries the
+         collapse. The cross-fade happens just after the motion starts, when the
+         cards are already shrinking and turning, so a sprite standing in for a
+         card reads as motion rather than as a swap. */
+      const crossFade = clamp((progress - .03) / .06);
+      gatherAnimations.forEach(({ animation }) => { animation.currentTime = 1000; });
+      cardField.style.opacity = String(1 - crossFade);
+      drawVortex(progress, crossFade);
       /* The dot brightens as the cards arrive, then hands over: it is gone by
          the time the image has opened out of it. */
       const collapsing = smooth(clamp((progress - .12) / .4));
@@ -677,6 +840,7 @@
       zoomCopy.style.opacity = String(copyProgress);
       zoomCopy.style.transform = `translateY(${mix(24, 0, copyProgress)}px)`;
     };
+    buildMotes();
     prepareZoomTarget();
     const journey = document.querySelector('.zoom-journey');
     const heartAct = document.querySelector('.heart-act');
@@ -702,6 +866,10 @@
       /* Before the sequence proper, the field comes OUT of the point: the same
          gather animations, scrubbed backwards. Runs after renderImageZoom
          because both write currentTime and this one has to win. */
+      if (progress < SEQUENCE_START) {
+        if (vortexCanvas) vortexCanvas.style.opacity = '0';
+        cardField.style.opacity = '1';
+      }
       if (progress < SEQUENCE_START && gatherAnimations.length) {
         /* Half again as much scroll as the collapse, so the field arrives
            at an unhurried pace. */
@@ -723,6 +891,22 @@
       /* The thread is scrubbed the same way; each message carries the scroll
          position it arrives at as --s, and CSS does the rest. */
     };
+    /* One scroll listener and one frame loop for the whole page.
+
+       Every scene used to listen to scroll itself and measure inside the
+       handler, so a single trackpad flick - which fires scroll far more often
+       than once a frame - forced a layout per scene per event, and four rAF
+       loops then competed for the same frame. Scrolling fast, scrolling slow
+       and stopping all behaved differently because the work was tied to event
+       frequency rather than to frames.
+
+       Now: scroll only marks the page dirty, and once a frame every scene is
+       measured and written in a fixed order. */
+    const scenes = [];
+    let scrollDirty = true;
+    let loopOn = false;
+    let lastStamp = 0;
+
     const trackProgress = element => {
       const travel = element.offsetHeight - innerHeight;
       return travel > 0 ? clamp(-element.getBoundingClientRect().top / travel) : 0;
@@ -734,23 +918,39 @@
        Scheduling a frame per scroll event instead lets a fast gesture cancel
        its own pending frame over and over, so the whole change lands in one
        jump when the gesture stops; this moves on every frame either way. */
-    const ease = (current, target) => {
-      const gap = target - current;
-      return Math.abs(gap) < .0004 ? target : current + gap * .14;
-    };
-    const tick = () => {
-      easedProgress = ease(easedProgress, targetProgress);
-      paint(easedProgress);
-      running = easedProgress !== targetProgress;
-      if (running) requestAnimationFrame(tick);
-    };
-    addEventListener('scroll', () => {
-      readTarget();
-      if (!running) {
-        running = true;
-        requestAnimationFrame(tick);
+    /* Frame-rate independent easing. The old `gap * .14 per frame` ran twice as
+       fast on a 120Hz screen and slowed down under load, which is why the
+       header felt different depending on the machine and on how busy the frame
+       was. A time constant gives the same curve at any refresh rate. */
+    const EASE_MS = 110;
+    const runFrame = stamp => {
+      const dt = lastStamp ? Math.min(64, stamp - lastStamp) : 16;
+      lastStamp = stamp;
+
+      if (scrollDirty) {
+        scrollDirty = false;
+        readTarget();
+        scenes.forEach(scene => scene());
       }
-    }, { passive: true });
+
+      const gap = targetProgress - easedProgress;
+      easedProgress = Math.abs(gap) < .0002
+        ? targetProgress
+        : easedProgress + gap * (1 - Math.exp(-dt / EASE_MS));
+      paint(easedProgress);
+
+      loopOn = scrollDirty || easedProgress !== targetProgress;
+      if (loopOn) requestAnimationFrame(runFrame);
+      else lastStamp = 0;
+    };
+    const wake = () => {
+      scrollDirty = true;
+      if (loopOn) return;
+      loopOn = true;
+      requestAnimationFrame(runFrame);
+    };
+    addEventListener('scroll', wake, { passive: true });
+    addEventListener('resize', wake);
     readTarget();
     easedProgress = targetProgress;
     paint(easedProgress);
@@ -786,11 +986,7 @@
           if (stage) stage.style.setProperty('--chat', trackProgress(scene).toFixed(4));
         });
       };
-      addEventListener('scroll', () => {
-        cancelAnimationFrame(chatFrame);
-        chatFrame = requestAnimationFrame(drawChats);
-      }, { passive: true });
-      addEventListener('resize', drawChats);
+      scenes.push(drawChats);
       drawChats();
     }
 
@@ -812,11 +1008,7 @@
     if (sendScene) {
       let sendFrame = 0;
       const drawSend = () => sendScene.style.setProperty('--send', trackProgress(sendScene).toFixed(4));
-      addEventListener('scroll', () => {
-        cancelAnimationFrame(sendFrame);
-        sendFrame = requestAnimationFrame(drawSend);
-      }, { passive: true });
-      addEventListener('resize', drawSend);
+      scenes.push(drawSend);
       drawSend();
     }
 
@@ -918,17 +1110,14 @@
         tlItems.forEach((item, index) => item.classList.toggle('is-active', index === active));
         if (tlCount) tlCount.textContent = String(active + 1).padStart(2, '0');
       };
-      addEventListener('scroll', () => {
-        cancelAnimationFrame(tlFrame);
-        tlFrame = requestAnimationFrame(drawTimeline);
-      }, { passive: true });
-      addEventListener('resize', drawTimeline);
+      scenes.push(drawTimeline);
       drawTimeline();
     }
 
     addEventListener('pointermove', moveCards, { passive: true });
     addEventListener('resize', () => {
       randomiseCardField();
+      buildMotes();
       prepareZoomTarget();
       readTarget();
       paint(easedProgress);
