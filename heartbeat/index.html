@@ -204,14 +204,6 @@
         <p>Let me have a look.</p>
       </div>
 
-      <div class="msg msg-in msg-record" style="--s:.58">
-        <span class="record-peek">
-          <span class="record-peek-head">n1.care &middot; Patient record</span>
-          <b>Maya R.</b>
-          <em>7 years &middot; 12 sources &middot; 186 results</em>
-        </span>
-      </div>
-
       <div class="msg msg-in" style="--s:.72">
         <p>The same pattern is in here from 2021, and there are labs from March I haven&rsquo;t read yet. I&rsquo;ll get back to you asap.</p>
         <a class="msg-source" href="#patient-record">Clinical note &middot; Page 2 <span aria-hidden="true">&rarr;</span></a>
@@ -232,30 +224,36 @@
         <span class="tl-dot" aria-hidden="true"></span>
         <time datetime="2021-05">May 2021</time>
         <div class="tl-body">
-          <span class="tl-tag">Note</span>
-          <b>Symptoms first recorded</b>
-          <p>Fatigue and increased thirst documented at a primary-care visit.</p>
-          <a class="tl-source" href="#patient-record">Clinical note · Page 2 <span aria-hidden="true">&rarr;</span></a>
+          <span class="tl-tag">Clinical note</span>
+          <b>Fatigue and increased thirst recorded</b>
+          <p>Six-week history of tiredness and nocturia. Random glucose taken at the same visit.</p>
+          <dl class="tl-vals"><div><dt>Weight</dt><dd>78.2 kg</dd></div><div><dt>Blood pressure</dt><dd>132/84</dd></div></dl>
+          
+          <p class="tl-foot"><a class="tl-source" href="#patient-record">Clinical note &middot; Page 2 <span aria-hidden="true">&rarr;</span></a><span class="tl-by">Dr A. Osei &middot; Wellcare Family Practice</span></p>
         </div>
       </li>
       <li class="tl-entry" style="--i:1">
         <span class="tl-dot" aria-hidden="true"></span>
         <time datetime="2022-01">Jan 2022</time>
         <div class="tl-body">
-          <span class="tl-tag">Diagnosis</span>
-          <b>Type 2 diabetes diagnosed</b>
-          <p>HbA1c measured at 7.4%. Treatment options discussed and agreed.</p>
-          <a class="tl-source" href="#patient-record">Lab report · Page 4 <span aria-hidden="true">&rarr;</span></a>
+          <span class="tl-tag">Laboratory</span>
+          <b>HbA1c 7.4% &mdash; type 2 diabetes confirmed</b>
+          <p>Second sample confirms the first. Diagnosis recorded and treatment options discussed.</p>
+          <dl class="tl-vals"><div><dt>HbA1c</dt><dd>7.4 %</dd></div><div><dt>Fasting glucose</dt><dd>8.1 mmol/L</dd></div></dl>
+          <figure class="tl-chart"><svg viewBox="0 0 190 54" role="img" aria-label="HbA1c &middot; 2021&ndash;2022"><path class="tlc-grid" d="M2 46H188"/><path class="tlc-line" d="M4 12 L66 16 L128 21 L186 27"/><circle cx="4" cy="12" r="2.6"/><circle cx="66" cy="16" r="2.6"/><circle cx="128" cy="21" r="2.6"/><circle cx="186" cy="27" r="2.6"/></svg><figcaption>HbA1c &middot; 2021&ndash;2022</figcaption></figure>
+          <p class="tl-foot"><a class="tl-source" href="#patient-record">Lab report &middot; Page 4 <span aria-hidden="true">&rarr;</span></a><span class="tl-by">Meridian Diagnostics &middot; XN-1000</span></p>
         </div>
       </li>
       <li class="tl-entry" style="--i:2">
         <span class="tl-dot" aria-hidden="true"></span>
         <time datetime="2022-03">Mar 2022</time>
         <div class="tl-body">
-          <span class="tl-tag">Medication</span>
-          <b>Metformin started</b>
-          <p>500 mg twice daily added to the active medicines list.</p>
-          <a class="tl-source" href="#patient-record">Prescription <span aria-hidden="true">&rarr;</span></a>
+          <span class="tl-tag">Prescription</span>
+          <b>Metformin 500 mg twice daily started</b>
+          <p>Added to the active medicines list with a twelve-week review booked.</p>
+          <dl class="tl-vals"><div><dt>Started</dt><dd>14 Mar 2022</dd></div><div><dt>Review</dt><dd>12 weeks</dd></div></dl>
+          
+          <p class="tl-foot"><a class="tl-source" href="#patient-record">Prescription &middot; 1 page <span aria-hidden="true">&rarr;</span></a><span class="tl-by">Dr A. Osei &middot; Wellcare Family Practice</span></p>
         </div>
       </li>
       <li class="tl-entry" style="--i:3">
@@ -263,29 +261,35 @@
         <time datetime="2022-11">Nov 2022</time>
         <div class="tl-body">
           <span class="tl-tag">Imaging</span>
-          <b>Retinal screening</b>
-          <p>No diabetic retinopathy. Repeat advised in 24 months.</p>
-          <a class="tl-source" href="#patient-record">Imaging · 4 images <span aria-hidden="true">&rarr;</span></a>
+          <b>Retinal screening &mdash; no retinopathy</b>
+          <p>Both eyes graded R0M0. Repeat advised in 24 months.</p>
+          <dl class="tl-vals"><div><dt>Right eye</dt><dd>R0M0</dd></div><div><dt>Left eye</dt><dd>R0M0</dd></div></dl>
+          
+          <p class="tl-foot"><a class="tl-source" href="#patient-record">Imaging &middot; 4 images <span aria-hidden="true">&rarr;</span></a><span class="tl-by">Regional Screening Service</span></p>
         </div>
       </li>
       <li class="tl-entry" style="--i:4">
         <span class="tl-dot" aria-hidden="true"></span>
         <time datetime="2023-03">Mar 2023</time>
         <div class="tl-body">
-          <span class="tl-tag">Letter</span>
+          <span class="tl-tag">Specialist letter</span>
           <b>Endocrinology review</b>
-          <p>Specialist confirms the plan and adds annual foot screening.</p>
-          <a class="tl-source" href="#patient-record">Specialist letter · Page 3 <span aria-hidden="true">&rarr;</span></a>
+          <p>Plan confirmed. Annual foot screening added to the recall list.</p>
+          <dl class="tl-vals"><div><dt>HbA1c</dt><dd>7.0 %</dd></div><div><dt>eGFR</dt><dd>94 mL/min</dd></div></dl>
+          
+          <p class="tl-foot"><a class="tl-source" href="#patient-record">Specialist letter &middot; Page 3 <span aria-hidden="true">&rarr;</span></a><span class="tl-by">Dr P. Lindqvist &middot; Endocrinology</span></p>
         </div>
       </li>
       <li class="tl-entry" style="--i:5">
         <span class="tl-dot" aria-hidden="true"></span>
         <time datetime="2023-09">Sep 2023</time>
         <div class="tl-body">
-          <span class="tl-tag">Result</span>
-          <b>Control improving</b>
-          <p>HbA1c down to 6.9% across two readings.</p>
-          <a class="tl-source" href="#patient-record">Lab report · Page 6 <span aria-hidden="true">&rarr;</span></a>
+          <span class="tl-tag">Laboratory</span>
+          <b>Lipids and renal function stable</b>
+          <p>No change to therapy. Renal function unchanged across four samples.</p>
+          <dl class="tl-vals"><div><dt>LDL</dt><dd>2.9 mmol/L</dd></div><div><dt>eGFR</dt><dd>92 mL/min</dd></div></dl>
+          <figure class="tl-chart"><svg viewBox="0 0 190 54" role="img" aria-label="eGFR &middot; 2021&ndash;2023"><path class="tlc-grid" d="M2 46H188"/><path class="tlc-line" d="M4 20 L66 24 L128 22 L186 25"/><circle cx="4" cy="20" r="2.6"/><circle cx="66" cy="24" r="2.6"/><circle cx="128" cy="22" r="2.6"/><circle cx="186" cy="25" r="2.6"/></svg><figcaption>eGFR &middot; 2021&ndash;2023</figcaption></figure>
+          <p class="tl-foot"><a class="tl-source" href="#patient-record">Lab report &middot; Page 6 <span aria-hidden="true">&rarr;</span></a><span class="tl-by">Meridian Diagnostics</span></p>
         </div>
       </li>
       <li class="tl-entry" style="--i:6">
@@ -294,18 +298,22 @@
         <div class="tl-body">
           <span class="tl-tag">Vitals</span>
           <b>Blood pressure review</b>
-          <p>128/79 mmHg. No change to medication.</p>
-          <a class="tl-source" href="#patient-record">Vitals · Practice nurse <span aria-hidden="true">&rarr;</span></a>
+          <p>Readings settled after the 2021 peak. No change to medication.</p>
+          <dl class="tl-vals"><div><dt>Blood pressure</dt><dd>128/79</dd></div><div><dt>Resting HR</dt><dd>72 bpm</dd></div></dl>
+          <figure class="tl-chart"><svg viewBox="0 0 190 54" role="img" aria-label="Systolic &middot; 2021&ndash;2024"><path class="tlc-grid" d="M2 46H188"/><path class="tlc-line" d="M4 14 L52 18 L100 26 L144 30 L186 32"/><circle cx="4" cy="14" r="2.6"/><circle cx="52" cy="18" r="2.6"/><circle cx="100" cy="26" r="2.6"/><circle cx="144" cy="30" r="2.6"/><circle cx="186" cy="32" r="2.6"/></svg><figcaption>Systolic &middot; 2021&ndash;2024</figcaption></figure>
+          <p class="tl-foot"><a class="tl-source" href="#patient-record">Vitals &middot; Practice nurse <span aria-hidden="true">&rarr;</span></a><span class="tl-by">Wellcare Family Practice</span></p>
         </div>
       </li>
       <li class="tl-entry" style="--i:7">
         <span class="tl-dot" aria-hidden="true"></span>
         <time datetime="2025-03">Mar 2025</time>
         <div class="tl-body">
-          <span class="tl-tag">Result</span>
-          <b>Lowest reading to date</b>
-          <p>HbA1c 6.4%, the lowest of three source-linked readings.</p>
-          <a class="tl-source" href="#patient-record">Lab report · Page 8 <span aria-hidden="true">&rarr;</span></a>
+          <span class="tl-tag">Laboratory</span>
+          <b>HbA1c 6.4% &mdash; lowest of three readings</b>
+          <p>Down a full point from diagnosis. Albumin:creatinine ratio remains normal.</p>
+          <dl class="tl-vals"><div><dt>HbA1c</dt><dd>6.4 %</dd></div><div><dt>ACR</dt><dd>1.8 mg/mmol</dd></div></dl>
+          <figure class="tl-chart"><svg viewBox="0 0 190 54" role="img" aria-label="HbA1c &middot; 2022&ndash;2025"><path class="tlc-grid" d="M2 46H188"/><path class="tlc-line" d="M4 10 L50 15 L96 23 L142 31 L186 38"/><circle cx="4" cy="10" r="2.6"/><circle cx="50" cy="15" r="2.6"/><circle cx="96" cy="23" r="2.6"/><circle cx="142" cy="31" r="2.6"/><circle cx="186" cy="38" r="2.6"/></svg><figcaption>HbA1c &middot; 2022&ndash;2025</figcaption></figure>
+          <p class="tl-foot"><a class="tl-source" href="#patient-record">Lab report &middot; Page 8 <span aria-hidden="true">&rarr;</span></a><span class="tl-by">Meridian Diagnostics</span></p>
         </div>
       </li>
     </ol>
@@ -456,9 +464,6 @@
     const heartAct = document.querySelector('.heart-act');
     const chatScene = document.querySelector('.chat-scene');
     const chatStage = document.querySelector('.chat-stage');
-    const timelineScene = document.querySelector('.timeline-scene');
-    let timelineTarget = 0;
-    let timelineEased = 0;
     let chatTarget = 0;
     let chatEased = 0;
     /* The journey is scrubbed by the scrollbar rather than played on a timer.
@@ -507,7 +512,6 @@
       /* The thread is scrubbed the same way; each message carries the scroll
          position it arrives at as --s, and CSS does the rest. */
       if (chatStage) chatStage.style.setProperty('--chat', chatProgress.toFixed(4));
-      if (timelineScene) timelineScene.style.setProperty('--tl', timelineEased.toFixed(4));
     };
     const trackProgress = element => {
       const travel = element.offsetHeight - innerHeight;
@@ -516,7 +520,6 @@
     const readTarget = () => {
       targetProgress = trackProgress(journey);
       if (chatScene) chatTarget = trackProgress(chatScene);
-      if (timelineScene) timelineTarget = trackProgress(timelineScene);
     };
     /* The sequence eases toward the scroll position on its own frame loop.
        Scheduling a frame per scroll event instead lets a fast gesture cancel
@@ -529,9 +532,8 @@
     const tick = () => {
       easedProgress = ease(easedProgress, targetProgress);
       chatEased = ease(chatEased, chatTarget);
-      timelineEased = ease(timelineEased, timelineTarget);
       paint(easedProgress, chatEased);
-      running = easedProgress !== targetProgress || chatEased !== chatTarget || timelineEased !== timelineTarget;
+      running = easedProgress !== targetProgress || chatEased !== chatTarget;
       if (running) requestAnimationFrame(tick);
     };
     addEventListener('scroll', () => {
@@ -544,7 +546,6 @@
     readTarget();
     easedProgress = targetProgress;
     chatEased = chatTarget;
-    timelineEased = timelineTarget;
     paint(easedProgress, chatEased);
     let frame = 0;
     const moveCards = event => {
@@ -558,6 +559,30 @@
         card.style.setProperty('--mouse-y', `${y * depth * 14}px`);
       }));
     };
+
+    /* The timeline reveals on each entry's own position rather than on a scroll
+       ratio, once each and for good: arriving on a ratio rather than on where
+       the entry actually is - and un-writing itself when you scroll back up -
+       is what made it feel unsteady. The spine lights to the last revealed dot,
+       so line and dots always agree. */
+    const tlList = document.querySelector('.tl-list');
+    const tlEntries = [...document.querySelectorAll('.tl-entry')];
+    if (tlList && tlEntries.length && !reducedMotion.matches) {
+      let lit = 0;
+      const tlObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-in');
+          observer.unobserve(entry.target);
+          lit = Math.max(lit, tlEntries.indexOf(entry.target) + 1);
+          tlList.style.setProperty('--lit', (lit / tlEntries.length).toFixed(3));
+        });
+      }, { rootMargin: '0px 0px -18% 0px' });
+      tlEntries.forEach(entry => tlObserver.observe(entry));
+    } else if (tlList) {
+      tlEntries.forEach(entry => entry.classList.add('is-in'));
+      tlList.style.setProperty('--lit', '1');
+    }
 
     addEventListener('pointermove', moveCards, { passive: true });
     addEventListener('resize', () => {
