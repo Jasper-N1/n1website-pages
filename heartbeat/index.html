@@ -217,7 +217,18 @@
   <section class="timeline-scene" aria-labelledby="timeline-title">
     <div class="tl-head">
       <h2 id="timeline-title">Years of history.<br>Brought into focus.</h2>
-      <p class="tl-sub"><img class="tl-face" src="../assets/avatar-patient.jpg" alt="" width="256" height="256" loading="lazy" decoding="async">Maya R. &middot; 12 sources &middot; 186 results &middot; 2021&ndash;2025</p>
+      <div class="tl-patient">
+        <img class="tl-face" src="../assets/avatar-patient.jpg" alt="" width="256" height="256" loading="lazy" decoding="async">
+        <div class="tl-patient-meta">
+          <b>Maya R.</b>
+          <dl>
+            <div><dt>Age</dt><dd>48</dd></div>
+            <div><dt>Sex</dt><dd>Female</dd></div>
+            <div><dt>Since</dt><dd>2021</dd></div>
+            <div><dt>Record</dt><dd>186 results &middot; 12 sources</dd></div>
+          </dl>
+        </div>
+      </div>
     </div>
     <ol class="tl-list">
       <li class="tl-entry" style="--i:0">
@@ -387,7 +398,11 @@
     <div class="chat-thread chat-thread-two">
       <p class="chat-day"><span>Thursday 16:20</span></p>
 
-      <div class="msg msg-in" style="--s:.06">
+      <div class="msg msg-in msg-typing" style="--s:.02;--o:.1" aria-hidden="true">
+        <p><i></i><i></i><i></i></p>
+      </div>
+
+      <div class="msg msg-in" style="--s:.12">
         <p>I&rsquo;ve been through the record. Two things stand out.</p>
       </div>
 
@@ -407,7 +422,11 @@
         <p>Two likely causes, and both are quick to settle: a short-term drift in glucose control, or your lipids &mdash; the one measure we haven&rsquo;t moved since 2023.</p>
       </div>
 
-      <div class="msg msg-in" style="--s:.6">
+      <div class="msg msg-in msg-typing" style="--s:.52;--o:.6" aria-hidden="true">
+        <p><i></i><i></i><i></i></p>
+      </div>
+
+      <div class="msg msg-in" style="--s:.62">
         <p>So: bloods this week, and I&rsquo;d like to bring your review forward. Can we have a chat soon &mdash; Monday or Tuesday?</p>
       </div>
 
@@ -635,15 +654,11 @@
     positionSignals();
     const journey = document.querySelector('.zoom-journey');
     const heartAct = document.querySelector('.heart-act');
-    const chatScene = document.querySelector('.chat-scene');
-    const chatStage = document.querySelector('.chat-stage');
-    let chatTarget = 0;
-    let chatEased = 0;
     /* The journey is scrubbed by the scrollbar rather than played on a timer.
        The opening copy holds the start, the card field fades up behind it,
        and the original gather-and-zoom sequence owns the rest. */
     const SEQUENCE_START = .49;
-    const paint = (progress, chatProgress) => {
+    const paint = progress => {
       /* Title out, then the three blobs run together into the point, then the
          record field comes up out of it. */
       const titleOut = smooth(clamp((progress - .04) / .11));
@@ -684,7 +699,6 @@
       }
       /* The thread is scrubbed the same way; each message carries the scroll
          position it arrives at as --s, and CSS does the rest. */
-      if (chatStage) chatStage.style.setProperty('--chat', chatProgress.toFixed(4));
     };
     const trackProgress = element => {
       const travel = element.offsetHeight - innerHeight;
@@ -692,7 +706,6 @@
     };
     const readTarget = () => {
       targetProgress = trackProgress(journey);
-      if (chatScene) chatTarget = trackProgress(chatScene);
     };
     /* The sequence eases toward the scroll position on its own frame loop.
        Scheduling a frame per scroll event instead lets a fast gesture cancel
@@ -704,9 +717,8 @@
     };
     const tick = () => {
       easedProgress = ease(easedProgress, targetProgress);
-      chatEased = ease(chatEased, chatTarget);
-      paint(easedProgress, chatEased);
-      running = easedProgress !== targetProgress || chatEased !== chatTarget;
+      paint(easedProgress);
+      running = easedProgress !== targetProgress;
       if (running) requestAnimationFrame(tick);
     };
     addEventListener('scroll', () => {
@@ -718,8 +730,7 @@
     }, { passive: true });
     readTarget();
     easedProgress = targetProgress;
-    chatEased = chatTarget;
-    paint(easedProgress, chatEased);
+    paint(easedProgress);
     let frame = 0;
     const moveCards = event => {
       if (reducedMotion.matches) return;
@@ -738,6 +749,31 @@
        the entry actually is - and un-writing itself when you scroll back up -
        is what made it feel unsteady. The spine lights to the last revealed dot,
        so line and dots always agree. */
+    /* A conversation is not a scrubbable object - you cannot un-say a message.
+       Each thread waits until it is reached, then plays itself through once, at
+       its own pace, the way a real one arrives. */
+    document.querySelectorAll('.chat-stage').forEach(stage => {
+      const PLAY_MS = 11000;
+      let started = 0;
+      const run = now => {
+        const played = clamp((now - started) / PLAY_MS);
+        stage.style.setProperty('--chat', played.toFixed(4));
+        if (played < 1) requestAnimationFrame(run);
+      };
+      if (reducedMotion.matches) {
+        stage.style.setProperty('--chat', '1');
+        return;
+      }
+      new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          observer.disconnect();
+          started = performance.now();
+          requestAnimationFrame(run);
+        });
+      }, { threshold: .3 }).observe(stage);
+    });
+
     const threadRun = document.querySelector('.thread-run');
     if (threadRun) {
       let threadFrame = 0;
@@ -808,7 +844,7 @@
       prepareZoomTarget();
       positionSignals();
       readTarget();
-      paint(easedProgress, chatEased);
+      paint(easedProgress);
     });
   </script>
 </body>

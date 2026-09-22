@@ -133,8 +133,10 @@ body{display:block;overflow:visible;overflow-x:clip}
    a number in the markup rather than a change here.
    ========================================================================== */
 
-.chat-scene{height:340svh;position:relative;z-index:1;background:#edf6f4;color:var(--ink)}
-.chat-stage{--chat:0;min-height:100svh;position:sticky;top:0;display:flex;flex-direction:column;justify-content:center;padding:clamp(52px,8vh,92px) max(24px,calc((100vw - 980px)/2))}
+/* No longer a scroll track: the conversation plays itself, so holding the page
+   still for three screens of scroll would just be dead space. */
+.chat-scene{position:relative;z-index:1;background:#edf6f4;color:var(--ink)}
+.chat-stage{--chat:0;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:clamp(60px,10vh,110px) max(24px,calc((100vw - 980px)/2))}
 
 
 .chat-thread{width:min(720px,100%);margin:0 auto;display:flex;flex-direction:column;gap:11px;padding:0 clamp(0px,6vw,52px)}
@@ -169,7 +171,6 @@ body{display:block;overflow:visible;overflow-x:clip}
 .patient-zoom{overflow:hidden}
 
 @media(max-width:620px){
-  .chat-scene{height:300svh}
   .msg{max-width:84%;padding:12px 16px;font-size:16px}
   .chat-thread{padding:0 40px}
   .msg::before{width:28px;height:28px}
@@ -200,9 +201,14 @@ body{display:block;overflow:visible;overflow-x:clip}
 .timeline-scene{--tl:0;position:relative;z-index:1;padding:clamp(72px,12vh,140px) max(24px,calc((100vw - 920px)/2)) clamp(96px,16vh,180px);background:#f3ede2;color:var(--ink)}
 .tl-head{max-width:720px;margin:0 0 clamp(44px,7vh,80px)}
 .tl-head h2{margin:0;font-size:clamp(30px,4vw,58px);font-weight:400;line-height:1.04;letter-spacing:-.04em}
-.tl-sub{display:flex;align-items:center;gap:13px;margin:20px 0 0;color:var(--muted);font-size:16px;letter-spacing:.01em}
-/* Just enough of the patient to put a face to the record, not a portrait. */
-.tl-face{width:38px;height:38px;flex:none;border-radius:50%;object-fit:cover;object-position:center 28%;box-shadow:0 0 0 1px #e0d3bd,0 1px 3px rgba(60,52,38,.12)}
+/* The patient, with the facts you would want before reading their record. */
+.tl-patient{display:flex;gap:16px;align-items:center;margin:24px 0 0}
+.tl-face{width:56px;height:56px;flex:none;border-radius:50%;object-fit:cover;object-position:center 28%;box-shadow:0 0 0 1px #e0d3bd,0 2px 6px rgba(60,52,38,.14)}
+.tl-patient-meta b{display:block;font-size:19px;font-weight:600;letter-spacing:-.01em}
+.tl-patient-meta dl{display:flex;flex-wrap:wrap;gap:4px 22px;margin:7px 0 0}
+.tl-patient-meta div{margin:0}
+.tl-patient-meta dt{display:inline;color:#a8977c;font-size:10px;font-weight:600;letter-spacing:.11em;text-transform:uppercase}
+.tl-patient-meta dd{display:inline;margin:0 0 0 7px;color:var(--muted);font-size:14px;font-weight:600}
 
 .tl-list{margin:0;padding:0 0 0 clamp(26px,4vw,44px);position:relative;list-style:none}
 /* The spine draws itself down the section as you travel. */
@@ -347,7 +353,7 @@ body{display:block;overflow:visible;overflow-x:clip}
    The clinician comes back - a second thread, the same shape as the first.
    ========================================================================== */
 
-.chat-two{height:300svh}
+
 .chat-two .msg-in::before{background-image:url("../assets/avatar-doctor.jpg")}
 
 /* The attachment reads as a file, not a bubble. */
@@ -430,7 +436,6 @@ body{display:block;overflow:visible;overflow-x:clip}
 
 @media(max-width:620px){
   .flip-scene{height:300svh}
-  .chat-two{height:280svh}
 }
 @media(prefers-reduced-motion:reduce){
   .flip-face{transform:none}
