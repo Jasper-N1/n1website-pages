@@ -208,7 +208,7 @@ body{display:block;overflow:visible;overflow-x:clip}
 
 /* The rail sits just under the header rather than at the vertical middle -
    centring it left a dead band of half a screen above the cards. */
-.timeline-scene{--tl:0;--deep:0;--rail-y:clamp(228px,30vh,320px);height:880svh;position:relative;z-index:1;background:#f3ede2;color:var(--ink)}
+.timeline-scene{--tl:0;--deep:0;--rail-y:clamp(228px,30vh,320px);height:1020svh;position:relative;z-index:1;background:#f3ede2;color:var(--ink)}
 .tl-stage{height:100svh;position:sticky;top:0;overflow:hidden}
 
 .tl-head{position:absolute;z-index:3;top:clamp(28px,5vh,56px);left:max(24px,calc((100vw - 1180px)/2));right:24px}
@@ -283,77 +283,6 @@ body{display:block;overflow:visible;overflow-x:clip}
 @media(prefers-reduced-motion:reduce){
   .tl-entry,.tl-entry .tl-body>*{opacity:1;translate:none;transition:none}
   .tl-dot{scale:1;background:var(--teal);transition:none}
-}
-
-/* ==========================================================================
-   Health summary - the report the record adds up to, in the voice the real
-   one uses: one metabolic story, named alerts, and the gaps stated rather
-   than smoothed over.
-   ========================================================================== */
-
-/* The report stands as its own section, headed like one, rather than reading
-   as the tail of the timeline above it. */
-.summary-scene{position:relative;padding:clamp(72px,12vh,140px) max(24px,calc((100vw - 920px)/2)) clamp(80px,12vh,140px);background:#f3ede2;color:var(--ink)}
-
-.sum-report{margin-left:clamp(26px,4vw,44px);border:1px solid #e3d7c2;border-radius:18px;background:#fffdf9;box-shadow:0 18px 44px rgba(60,52,38,.1);overflow:hidden}
-.sum-top{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:20px clamp(20px,3vw,32px);border-bottom:1px solid #eee3d2;background:#fbf6ec}
-.sum-top>div{display:flex;align-items:center;gap:11px;flex-wrap:wrap}
-.sum-mark{width:26px;height:26px;border-radius:7px;background:var(--teal)}
-.sum-top b{font-size:17px;font-weight:600}
-.sum-top em{color:var(--muted);font-size:13px;font-style:normal}
-.sum-status{padding:6px 11px;border-radius:999px;background:#ece0cc;color:#6a5b42;font-size:11px;font-weight:600;letter-spacing:.06em}
-
-/* Each section arrives from alternating sides - right, left, right - from well
-   beyond the card's edge, which clips them, so they read as flying into the
-   report rather than fading up inside it.
-
-   No rotation: pure lateral travel on a long decelerate is what reads as
-   considered; a tilt reads as playful. The soft-focus entry is the detail that
-   sells it - things resolve as they arrive rather than simply appearing. */
-.sum-block{padding:clamp(22px,3vw,32px);border-bottom:1px solid #f0e6d6;
-  opacity:0;translate:var(--fx,150px) 0;scale:.98;filter:blur(9px);
-  transition:opacity .55s cubic-bezier(.32,.72,0,1),
-             translate .95s cubic-bezier(.32,.72,0,1),
-             scale .95s cubic-bezier(.32,.72,0,1),
-             filter .7s cubic-bezier(.32,.72,0,1);
-  transition-delay:calc(var(--i, 0) * .16s)}
-.sum-block.is-in{opacity:1;translate:0;scale:1;filter:blur(0)}
-.sum-label{margin:0 0 7px;color:#a8977c;font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
-.sum-block h3{margin:0 0 12px;font-size:clamp(18px,2vw,23px);font-weight:600;letter-spacing:-.02em}
-.sum-block p{max-width:62ch;margin:0 0 12px;font-size:16px;line-height:1.62}
-.sum-block p:last-child{margin-bottom:0}
-.sum-block mark{padding:1px 4px;border-radius:4px;background:#d8e9e2;color:inherit}
-
-.sum-alerts{display:flex;flex-direction:column;gap:8px;margin:16px 0 0;padding:0;list-style:none}
-.sum-alerts li{display:flex;gap:10px;align-items:baseline;padding:10px 13px;border-radius:10px;font-size:14px}
-.sum-alerts b{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
-.sum-alerts .is-watch{background:#fbeede;color:#7a5a20}
-.sum-alerts .is-ok{background:#e6f2ec;color:#2b6b52}
-
-.sum-systems{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px 28px;margin:0}
-.sum-systems div{margin:0}
-.sum-systems dt{color:var(--muted);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
-.sum-systems dd{margin:6px 0 0;font-size:15px}
-.sys-bar{display:block;height:5px;margin-top:9px;border-radius:99px;background:#ece0cc}
-.sys-bar i{display:block;width:var(--v);height:100%;border-radius:99px;background:#c9a24a}
-.sys-bar.is-good i{background:var(--teal)}
-.sys-bar.is-watch i{background:#c0714f}
-
-.sum-recs{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:12px}
-.sum-recs li{font-size:16px}
-.sum-recs b{display:block;font-weight:600}
-.sum-recs span{display:block;margin-top:3px;color:var(--muted);font-size:14px}
-.sum-gaps{background:#fbf6ec}
-
-.sum-foot{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:18px clamp(20px,3vw,32px);color:var(--muted);font-size:13px}
-.sum-open{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:999px;background:var(--teal);color:#fff;font-size:13px;font-weight:600;text-decoration:none;transition:background .18s ease}
-.sum-open:hover{background:#25655f}
-.sum-open:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
-
-@media(max-width:620px){
-  .sum-report{margin-left:0}
-  .sum-head{padding-left:0}
-  .thread-run{--thread-x:10px}
 }
 
 /* ==========================================================================
@@ -454,8 +383,7 @@ body{display:block;overflow:visible;overflow-x:clip}
   .flip-face{animation:none;opacity:1;transform:none}
   .flip-deck{display:flex;flex-direction:column;gap:18px}
   .flip-deck>*{grid-area:auto}
-  .sum-block{opacity:1;translate:none;transition:none}
-}
+  }
 
 /* ==========================================================================
    The close.
@@ -521,7 +449,9 @@ body{display:block;overflow:visible;overflow-x:clip}
 .tl-head{opacity:calc(1 - var(--deep) * .75)}
 
 .tl-deep{--zoom:0;--flip:0;width:min(780px,90vw);position:absolute;z-index:6;top:50%;left:50%;
-  translate:-50% -50%;scale:calc(.62 + var(--zoom) * .38);opacity:var(--zoom);
+  /* Starts near the size the card is on the rail, so it reads as travelling
+     into that card rather than a panel fading up over it. */
+  translate:-50% -50%;scale:calc(.3 + var(--zoom) * .7);opacity:calc(clamp(0,calc(var(--zoom) * 2.4),1));
   perspective:1800px;pointer-events:none;visibility:hidden}
 .tl-deep-face{width:100%;position:absolute;top:50%;left:0;padding:clamp(26px,3.4vw,44px);
   translate:0 -50%;border:1px solid #e3d7c2;border-radius:22px;background:#fffdf9;
@@ -561,31 +491,12 @@ body{display:block;overflow:visible;overflow-x:clip}
    ========================================================================== */
 
 
-.ai-mark{width:clamp(78px,10vmin,112px);aspect-ratio:1;display:grid;place-items:center;margin-bottom:clamp(8px,2vh,20px)}
-.ai-mark>*{grid-area:1/1;border-radius:50%}
-.ai-ring{width:100%;aspect-ratio:1;border:1.5px solid rgba(46,125,120,.34);border-top-color:var(--teal);animation:ai-spin 3.4s linear infinite}
-.ai-ring-2{width:72%;border-color:rgba(46,125,120,.22);border-right-color:var(--teal);animation-duration:2.3s;animation-direction:reverse}
-.ai-ring-3{width:46%;border-color:rgba(46,125,120,.16);border-bottom-color:var(--teal);animation-duration:1.6s}
-.ai-core{width:15%;aspect-ratio:1;background:var(--teal);box-shadow:0 0 0 6px rgba(46,125,120,.12);animation:ai-breathe 2.2s ease-in-out infinite}
-@keyframes ai-spin{to{rotate:360deg}}
-@keyframes ai-breathe{0%,100%{scale:1;opacity:.85}50%{scale:1.35;opacity:1}}
 
-.ai-eyebrow{margin:0;color:var(--teal);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
-
-.ai-lines{display:flex;flex-direction:column;gap:11px;margin:clamp(12px,2vh,24px) 0 0;padding:0;list-style:none;text-align:left}
-.ai-lines li{display:flex;gap:11px;align-items:center;color:var(--muted);font-size:clamp(14px,1.4vw,17px);
-  opacity:0;animation:ai-line .5s ease forwards}
-.ai-lines li:nth-child(1){animation-delay:.05s}
-.ai-lines li:nth-child(2){animation-delay:.28s}
-.ai-lines li:nth-child(3){animation-delay:.51s}
-.ai-lines li:nth-child(4){animation-delay:.74s}
 @keyframes ai-line{from{opacity:0;translate:0 8px}to{opacity:1;translate:0}}
-.ai-lines i{width:7px;height:7px;flex:none;border-radius:50%;background:var(--teal)}
 
 
 @media(prefers-reduced-motion:reduce){
-  .ai-ring,.ai-core{animation:none}
-}
+  }
 
 /* ==========================================================================
    Prepared by N1. Approved by you.
@@ -665,10 +576,154 @@ body{display:block;overflow:visible;overflow-x:clip}
 
 .ai-load{position:absolute;z-index:8;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;
   padding:24px;text-align:center;opacity:calc(1 - var(--ready,1));pointer-events:none;transition:opacity .55s ease}
-.ai-load-note{max-width:20ch;margin:2px 0 6px;font-size:clamp(20px,2.4vw,30px);font-weight:400;letter-spacing:-.03em;line-height:1.1}
 
 /* The timeline and the report wait behind it. */
 .tl-list,.tl-rail,.tl-count{opacity:calc((1 - var(--deep) * .88) * var(--ready,1));transition:opacity .6s ease}
-.tl-head{opacity:calc((1 - var(--deep) * .75) * var(--ready,1));transition:opacity .6s ease}
-.summary-scene{position:relative}
-.sum-report{opacity:var(--ready,1);transition:opacity .6s ease}
+/* The heading steps aside for the report too - it was colliding with it. */
+.tl-head{opacity:calc((1 - var(--deep) * .75) * (1 - clamp(0,calc(var(--build,0) * 5),1)) * var(--ready,1));transition:opacity .6s ease}
+
+/* A vignette on the header image, layered over the existing wash: the corners
+   fall away so the frame holds the eye at the centre, and the lower-left has
+   its own ground for the copy to sit on rather than competing with the room
+   behind it. Rides the same --overlay-opacity, so it arrives with the zoom. */
+.patient-zoom::after{
+  background:
+    radial-gradient(128% 96% at 50% 44%, rgba(4,20,19,0) 40%, rgba(4,20,19,.3) 76%, rgba(4,20,19,.66) 100%),
+    linear-gradient(0deg, rgba(4,20,19,.74) 0%, rgba(4,20,19,.2) 44%, rgba(4,20,19,0) 70%),
+    linear-gradient(90deg, rgba(4,20,19,.52) 0%, rgba(4,20,19,.14) 46%, rgba(4,20,19,0) 100%)}
+
+/* ==========================================================================
+   What the machine is doing.
+
+   Two different jobs, so two different pictures. Reading the record is
+   reasoning - a thought, then steps that resolve one at a time, each spinning
+   while it works and ticking when it is done. Writing the report is not
+   reasoning, it is emission: a2ui streams components into a surface, so the
+   report loader shows exactly that - named components arriving one by one,
+   each as the shape it will become.
+   ========================================================================== */
+
+.ai-load{align-items:flex-start;gap:0;padding:clamp(24px,5vw,60px);text-align:left;
+  max-width:min(620px,92vw);margin:0 auto;inset:0}
+.ai-kicker{margin:0 0 10px;color:var(--teal);font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;font-family:var(--n1-font-mono,ui-monospace,SFMono-Regular,Menlo,monospace)}
+.ai-thought{display:flex;align-items:baseline;margin:0 0 clamp(18px,3vh,30px);font-size:clamp(20px,2.4vw,30px);font-weight:400;letter-spacing:-.025em}
+.ai-dots{display:inline-flex;gap:4px;margin-left:8px}
+.ai-dots i{width:5px;height:5px;border-radius:50%;background:currentColor;opacity:.25;animation:ai-dot 1.25s ease-in-out infinite}
+.ai-dots i:nth-child(2){animation-delay:.16s}
+.ai-dots i:nth-child(3){animation-delay:.32s}
+@keyframes ai-dot{0%,100%{opacity:.22;translate:0 0}45%{opacity:1;translate:0 -3px}}
+
+/* ---- reasoning: each step works, then resolves ---- */
+.ai-steps{display:flex;flex-direction:column;gap:13px;margin:0;padding:0;list-style:none}
+.ai-steps li{display:flex;gap:11px;align-items:center;color:var(--muted);font-size:clamp(14px,1.4vw,16px);
+  opacity:0;animation:ai-step-in .4s ease forwards var(--t)}
+@keyframes ai-step-in{from{opacity:0;translate:0 6px}to{opacity:1;translate:0}}
+.ai-state{width:16px;height:16px;flex:none;position:relative;display:grid;place-items:center}
+.ai-state>*{grid-area:1/1}
+.ai-spin{width:13px;height:13px;border:1.6px solid rgba(46,125,120,.28);border-top-color:var(--teal);border-radius:50%;
+  animation:ai-turn .7s linear infinite,ai-spin-out .01s linear forwards calc(var(--t) + .4s)}
+@keyframes ai-turn{to{rotate:360deg}}
+@keyframes ai-spin-out{to{opacity:0}}
+.ai-tick{color:var(--teal);font-size:12px;font-weight:700;opacity:0;animation:ai-tick-in .25s ease forwards calc(var(--t) + .4s)}
+@keyframes ai-tick-in{from{opacity:0;scale:.6}to{opacity:1;scale:1}}
+
+/* ---- emission: components arriving on the surface ---- */
+.ai-stream{display:flex;flex-direction:column;gap:11px;margin:0;padding:0;list-style:none}
+.ai-stream li{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;align-items:center;
+  padding:11px 13px;border:1px solid #e3d7c2;border-radius:11px;background:#fffdf9;
+  opacity:0;animation:ai-emit .42s cubic-bezier(.2,.8,.3,1) forwards var(--t)}
+@keyframes ai-emit{from{opacity:0;translate:14px 0;scale:.97}to{opacity:1;translate:0;scale:1}}
+.ai-comp{padding:3px 7px;border-radius:5px;background:#e7efe9;color:var(--green);font-size:9px;font-weight:700;letter-spacing:.08em;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.ai-label{grid-column:2;color:var(--muted);font-size:12px}
+.ai-shape{display:flex;gap:4px;align-items:center}
+.ai-shape i{height:6px;border-radius:99px;background:#ece0cc}
+.ai-shape-bar i:first-child{width:120px}.ai-shape-bar i:not(:first-child){display:none}
+.ai-shape-lines i{width:64px}.ai-shape-lines i:nth-child(2){width:38px}.ai-shape-lines i:nth-child(3){display:none}
+.ai-shape-row i{width:40px}.ai-shape-row i:nth-child(2){width:26px;background:#d8e9e2}.ai-shape-row i:nth-child(3){width:34px}
+.ai-shape-chip i:first-child{width:74px;height:14px;border-radius:99px;background:#e7efe9}.ai-shape-chip i:not(:first-child){display:none}
+.ai-shape-card i:first-child{width:96px;height:12px;border-radius:4px}.ai-shape-card i:nth-child(2){width:52px}.ai-shape-card i:nth-child(3){display:none}
+
+.ai-foot{display:flex;gap:8px;align-items:center;margin:clamp(16px,2.5vh,24px) 0 0;color:#a8977c;font-size:11px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;opacity:0;animation:ai-step-in .4s ease forwards 1.9s}
+.ai-cursor{width:7px;height:13px;background:var(--teal);animation:ai-blink .9s steps(1) infinite}
+@keyframes ai-blink{50%{opacity:0}}
+
+@media(prefers-reduced-motion:reduce){
+  .ai-dots i,.ai-spin,.ai-cursor{animation:none}
+  .ai-steps li,.ai-stream li,.ai-foot{opacity:1;animation:none}
+  .ai-tick{opacity:1;animation:none}
+}
+
+/* The report section is several screens tall, so a loader on inset:0 centres
+   itself somewhere below the fold. It belongs in the first screen of it. */
+
+/* ==========================================================================
+   The report, written where you are standing.
+
+   It is the timeline's last step rather than a section below it: the line
+   clears, and the summary is composed in the same frame - each component
+   arriving as a skeleton with its a2ui name, then resolving into the thing it
+   was always going to be. Nothing appears finished.
+   ========================================================================== */
+
+.timeline-scene{--build:0}
+.tl-report{--on:clamp(0,calc(var(--build) / .08),1);
+  width:min(760px,92vw);position:absolute;z-index:7;top:50%;left:50%;
+  translate:-50% -50%;opacity:var(--on);scale:calc(.94 + var(--on) * .06);pointer-events:none}
+
+.rp-stream{display:flex;align-items:center;margin:0 0 12px;color:var(--teal);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  opacity:calc(1 - clamp(0,calc((var(--build) - .82) / .1),1))}
+
+.rp-head{display:flex;flex-wrap:wrap;gap:9px;align-items:center;padding:13px 16px;border:1px solid #e3d7c2;border-bottom:0;border-radius:14px 14px 0 0;background:#fbf6ec}
+.rp-mark{width:20px;height:20px;border-radius:6px;background:var(--teal)}
+.rp-head b{font-size:15px;font-weight:600}
+.rp-head em{color:var(--muted);font-size:12px;font-style:normal}
+.rp-status{margin-left:auto;padding:5px 9px;border-radius:999px;background:#ece0cc;color:#6a5b42;font-size:10px;font-weight:600}
+
+.rp-body{display:flex;flex-direction:column;border:1px solid #e3d7c2;border-radius:0 0 14px 14px;background:#fffdf9;overflow:hidden}
+.rb{--in:clamp(0,calc((var(--build) - var(--s)) / .05),1);
+  --done:clamp(0,calc((var(--build) - var(--s) - .055) / .05),1);
+  position:relative;display:grid;padding:13px 16px;border-bottom:1px solid #f0e6d6;
+  opacity:var(--in);translate:0 calc((1 - var(--in)) * 10px)}
+.rb:last-child{border-bottom:0}
+.rb>*{grid-area:1/1}
+
+.rb-tag{justify-self:start;padding:3px 7px;border-radius:5px;background:#e7efe9;color:var(--green);
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:9px;font-weight:700;letter-spacing:.08em;
+  translate:0 -2px;opacity:calc(1 - var(--done))}
+.rb-skel{display:flex;flex-direction:column;gap:6px;margin-top:22px;opacity:calc(1 - var(--done))}
+.rb-skel i{height:7px;border-radius:99px;background:#ece0cc}
+.rb-skel i:nth-child(2){width:72%}
+.rb-skel i:nth-child(3){width:86%}
+.rb-real{opacity:var(--done)}
+.rb-real h4{margin:0 0 7px;font-size:14px;font-weight:600;letter-spacing:-.01em}
+.rb-real p{margin:0;color:var(--muted);font-size:13px;line-height:1.5}
+.rb-real mark{padding:1px 4px;border-radius:4px;background:#d8e9e2;color:inherit}
+
+.rb-alerts{display:flex;flex-wrap:wrap;gap:7px;margin:9px 0 0;padding:0;list-style:none}
+.rb-alerts li{padding:5px 9px;border-radius:8px;font-size:11px}
+.rb-alerts b{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.rb-alerts .is-watch{background:#fbeede;color:#7a5a20}
+.rb-alerts .is-ok{background:#e6f2ec;color:#2b6b52}
+
+.rb-systems{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:9px 20px;margin:0}
+.rb-systems div{margin:0}
+.rb-systems dt{color:#a8977c;font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+.rb-systems dd{margin:3px 0 0;font-size:12px}
+.rb-bar{display:block;height:4px;margin-top:5px;border-radius:99px;background:#ece0cc}
+.rb-bar i{display:block;width:var(--v);height:100%;border-radius:99px;background:#c9a24a}
+.rb-bar.is-good i{background:var(--teal)}
+.rb-bar.is-watch i{background:#c0714f}
+
+.rb-recs{margin:0;padding-left:16px;display:flex;flex-direction:column;gap:6px}
+.rb-recs li{font-size:12px}
+.rb-recs b{display:block;font-weight:600}
+.rb-recs span{display:block;color:var(--muted);font-size:11px}
+
+.rp-foot{margin:11px 0 0;color:#a8977c;font-size:11px;text-align:center;
+  opacity:clamp(0,calc((var(--build) - .84) / .1),1)}
+
+/* The line steps aside while it is written. */
+.tl-list,.tl-rail,.tl-count{opacity:calc((1 - var(--deep) * .88) * (1 - var(--build, 0) * 4) * var(--ready,1))}

@@ -209,14 +209,10 @@
   
   <section class="timeline-scene" aria-labelledby="timeline-title">
     <div class="tl-stage">
-      <div class="ai-load" aria-hidden="true">
-<div class="ai-mark" aria-hidden="true">
-        <span class="ai-ring"></span><span class="ai-ring ai-ring-2"></span>
-        <span class="ai-ring ai-ring-3"></span><span class="ai-core"></span>
-      </div>
-        <p class="ai-eyebrow">N1 is reading</p>
-        <p class="ai-load-note">Seven years, read in one pass.</p>
-        <ul class="ai-lines"><li ><i></i><span>Reading 186 results across 12 sources</span></li><li ><i></i><span>Aligning dates, units and reference ranges</span></li><li ><i></i><span>Grouping findings that belong together</span></li><li ><i></i><span>Linking every value back to its page</span></li></ul>
+      <div class="ai-load ai-think" aria-hidden="true">
+        <p class="ai-kicker">N1 &middot; reasoning</p>
+        <p class="ai-thought">Thinking<span class="ai-dots"><i></i><i></i><i></i></span></p>
+        <ol class="ai-steps"><li style="--t:0.35s"><span class="ai-state"><i class="ai-spin"></i><i class="ai-tick">&#10003;</i></span><span>Reading 186 results across 12 sources</span></li><li style="--t:0.75s"><span class="ai-state"><i class="ai-spin"></i><i class="ai-tick">&#10003;</i></span><span>Aligning dates, units and reference ranges</span></li><li style="--t:1.15s"><span class="ai-state"><i class="ai-spin"></i><i class="ai-tick">&#10003;</i></span><span>Grouping findings that belong together</span></li><li style="--t:1.55s"><span class="ai-state"><i class="ai-spin"></i><i class="ai-tick">&#10003;</i></span><span>Linking every value back to its page</span></li></ol>
       </div>
     <div class="tl-head">
       <h2 id="timeline-title">Your appointment starts today.<br>Your health story doesn&rsquo;t.</h2>
@@ -363,79 +359,58 @@
           </div>
         </div>
       </div>
+      <div class="tl-report" aria-hidden="true">
+        <p class="rp-stream">a2ui_stream.v1 &middot; composing<span class="ai-dots"><i></i><i></i><i></i></span></p>
+        <div class="rp-head">
+          <span class="rp-mark"></span><b>Health Summary</b>
+          <em>Maya R. &middot; 2021&ndash;2025 &middot; 12 sources</em>
+          <span class="rp-status">Draft &middot; awaiting clinician review</span>
+        </div>
+        <div class="rp-body">
+        <section class="rb" style="--s:.10">
+          <span class="rb-tag">Section</span>
+          <div class="rb-skel" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="rb-real"><h4>Executive summary &amp; alerts</h4><p>One metabolic story in an otherwise well 48-year-old. HbA1c peaked at 7.6% around diagnosis and has fallen at every session since, to <mark>6.4%</mark>.</p>
+        <ul class="rb-alerts"><li class="is-watch"><b>Watch</b> LDL above target</li><li class="is-ok"><b>Stable</b> Renal function unchanged</li></ul></div>
+        </section>
+        <section class="rb" style="--s:.26">
+          <span class="rb-tag">SystemGrid</span>
+          <div class="rb-skel" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="rb-real"><h4>Body systems</h4><dl class="rb-systems">
+          <div><dt>Metabolic</dt><dd>HbA1c 6.4 %<span class="rb-bar"><i style="--v:62%"></i></span></dd></div>
+          <div><dt>Renal</dt><dd>eGFR 92 mL/min<span class="rb-bar is-good"><i style="--v:88%"></i></span></dd></div>
+          <div><dt>Cardiovascular</dt><dd>LDL 2.9 mmol/L<span class="rb-bar is-watch"><i style="--v:44%"></i></span></dd></div>
+          <div><dt>Ophthalmic</dt><dd>R0M0 both eyes<span class="rb-bar is-good"><i style="--v:94%"></i></span></dd></div>
+        </dl></div>
+        </section>
+        <section class="rb" style="--s:.42">
+          <span class="rb-tag">Finding</span>
+          <div class="rb-skel" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="rb-real"><h4>Cross-system patterns</h4><p>Glycaemic improvement and stable renal function move together, which is what you would expect if the 2022 decision is doing the work. The lipid panel is the outlier.</p></div>
+        </section>
+        <section class="rb" style="--s:.58">
+          <span class="rb-tag">ActionCard</span>
+          <div class="rb-skel" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="rb-real"><h4>Recommendations</h4><ol class="rb-recs">
+          <li><b>Review lipid therapy</b><span>LDL 2.9 against a target under 2.6</span></li>
+          <li><b>Repeat retinal screening</b><span>Last graded Nov 2022 &middot; now due</span></li>
+          <li><b>Continue metformin</b><span>Three consecutive falling readings</span></li>
+        </ol></div>
+        </section>
+        <section class="rb" style="--s:.74">
+          <span class="rb-tag">DataGaps</span>
+          <div class="rb-skel" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="rb-real"><h4>Data gaps</h4><p>No lipid result after September 2023, and no foot screening recorded despite the March 2023 recall. Both named rather than inferred around.</p></div>
+        </section>
+        </div>
+        <p class="rp-foot">Every claim links to the page it came from &middot; 5 components streamed</p>
+      </div>
     <div class="tl-rail" aria-hidden="true"><span class="tl-focus"></span></div>
     <p class="tl-count" aria-hidden="true"><b>01</b> / 08</p>
     </div>
   </section>
 
   
-  <section class="summary-scene" aria-label="The health summary">
-      <div class="ai-load" aria-hidden="true">
-<div class="ai-mark" aria-hidden="true">
-        <span class="ai-ring"></span><span class="ai-ring ai-ring-2"></span>
-        <span class="ai-ring ai-ring-3"></span><span class="ai-core"></span>
-      </div>
-        <p class="ai-eyebrow">N1 is drafting</p>
-        <p class="ai-load-note">Now it writes it down.</p>
-        <ul class="ai-lines"><li ><i></i><span>Drafting the executive summary</span></li><li ><i></i><span>Grouping findings by body system</span></li><li ><i></i><span>Checking every claim against its source</span></li><li ><i></i><span>Naming what is missing rather than filling it in</span></li></ul>
-      </div>
-    <article class="sum-report">
-      <header class="sum-top">
-        <div><span class="sum-mark"></span><b>Health Summary</b><em>Maya R. &middot; 2021&ndash;2025 &middot; 12 sources</em></div>
-        <span class="sum-status">Draft &middot; awaiting clinician review</span>
-      </header>
-
-      <section class="sum-block" style="--i:0;--fx:150px">
-        <p class="sum-label">Section 1</p>
-        <h3>Executive summary &amp; alerts</h3>
-        <p>This record is best read as a single metabolic story in an otherwise well 48-year-old. The dominant thread is <mark>insulin resistance that was caught early and has been treated steadily</mark>: HbA1c peaked at 7.6% around diagnosis and has fallen across every subsequent session to 6.4%, the lowest of three source-linked readings.</p>
-        <p>Downstream measures have not followed it down. LDL sits at 2.9 mmol/L against a target under 2.6 for this risk profile, and remains the one unaddressed lever in the record.</p>
-        <ul class="sum-alerts">
-          <li class="is-watch"><b>Watch</b> LDL above target for cardiovascular risk band</li>
-          <li class="is-ok"><b>Stable</b> Renal function unchanged across four samples</li>
-        </ul>
-      </section>
-
-      <section class="sum-block" style="--i:1;--fx:-150px">
-        <p class="sum-label">Section 2</p>
-        <h3>Body systems</h3>
-        <dl class="sum-systems">
-          <div><dt>Metabolic</dt><dd>HbA1c 6.4% &middot; improving across 3 readings<span class="sys-bar"><i style="--v:62%"></i></span></dd></div>
-          <div><dt>Renal</dt><dd>eGFR 92 mL/min &middot; ACR 1.8 mg/mmol<span class="sys-bar is-good"><i style="--v:88%"></i></span></dd></div>
-          <div><dt>Cardiovascular</dt><dd>BP 128/79 &middot; LDL 2.9 mmol/L<span class="sys-bar is-watch"><i style="--v:44%"></i></span></dd></div>
-          <div><dt>Ophthalmic</dt><dd>R0M0 both eyes &middot; screened Nov 2022<span class="sys-bar is-good"><i style="--v:94%"></i></span></dd></div>
-        </dl>
-      </section>
-
-      <section class="sum-block" style="--i:2;--fx:150px">
-        <p class="sum-label">Section 3</p>
-        <h3>Cross-system patterns</h3>
-        <p>The glycaemic improvement and the stable renal picture move together, which is what you would expect if the 2022 treatment decision is doing the work. The lipid panel is the outlier: it has not moved since 2023 and is the only measure in the record trending against the others.</p>
-      </section>
-
-      <section class="sum-block" style="--i:3;--fx:-150px">
-        <p class="sum-label">Section 4</p>
-        <h3>Recommendations</h3>
-        <ol class="sum-recs">
-          <li><b>Review lipid therapy</b><span>LDL 2.9 against a target under 2.6 &middot; unchanged since Sep 2023</span></li>
-          <li><b>Repeat retinal screening</b><span>Last graded Nov 2022 &middot; 24-month interval now due</span></li>
-          <li><b>Continue metformin at current dose</b><span>Three consecutive falling HbA1c readings</span></li>
-        </ol>
-      </section>
-
-      <section class="sum-block sum-gaps" style="--i:4;--fx:150px">
-        <p class="sum-label">Section 5</p>
-        <h3>Data gaps</h3>
-        <p>No lipid result after September 2023, and no recorded foot screening despite it being added to the recall list in March 2023. Both are named rather than inferred around.</p>
-      </section>
-
-      <footer class="sum-foot">
-        <span>Every claim above links to the page it came from.</span>
-        <a class="sum-open" href="#patient-record">Open with sources <span aria-hidden="true">&rarr;</span></a>
-      </footer>
-    </article>
-  </section>
-
 
   <section class="chat-scene chat-two" aria-label="The clinician comes back">
     <div class="chat-stage">
@@ -922,14 +897,14 @@
        its own: you arrive, N1 is working, and about a second later the thing it
        was working on is there instead. */
     document.querySelectorAll('.ai-load').forEach(load => {
-      const host = load.closest('.tl-stage, .summary-scene');
+      const host = load.closest('.tl-stage');
       if (!host) return;
       host.style.setProperty('--ready', '0');
       new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
           if (!entry.isIntersecting) return;
           observer.disconnect();
-          setTimeout(() => host.style.setProperty('--ready', '1'), reducedMotion.matches ? 0 : 1100);
+          setTimeout(() => host.style.setProperty('--ready', '1'), reducedMotion.matches ? 0 : 2300);
         });
       }, { threshold: .25 }).observe(host);
     });
@@ -950,9 +925,10 @@
       const segments = [];
       tlItems.forEach((item, index) => {
         segments.push({ kind: 'hold', index, len: .8 });
-        if (deepFor.has(index)) segments.push({ kind: 'deep', index, len: 3.4 });
+        if (deepFor.has(index)) segments.push({ kind: 'deep', index, len: 5.2 });
         if (index < tlItems.length - 1) segments.push({ kind: 'move', index, len: 1.2 });
       });
+      segments.push({ kind: 'report', index: tlItems.length - 1, len: 7 });
       const totalLen = segments.reduce((sum, seg) => sum + seg.len, 0);
 
       const drawTimeline = () => {
@@ -964,14 +940,18 @@
         let deepIndex = -1;
         let zoom = 0;
         let flip = 0;
+        let build = 0;
         for (const seg of segments) {
           if (at <= acc + seg.len || seg === segments[segments.length - 1]) {
             const t = clamp((at - acc) / seg.len);
             pos = seg.kind === 'move' ? seg.index + t : seg.index;
+            if (seg.kind === 'report') build = t;
             if (seg.kind === 'deep') {
               deepIndex = seg.index;
-              zoom = t < .24 ? smooth(t / .24) : t > .78 ? 1 - smooth((t - .78) / .22) : 1;
-              flip = smooth(clamp((t - .34) / .32));
+              /* A third of the detour is spent coming in, so the card grows into
+                 the screen rather than snapping to it. */
+              zoom = t < .34 ? smooth(t / .34) : t > .76 ? 1 - smooth((t - .76) / .24) : 1;
+              flip = smooth(clamp((t - .44) / .26));
             }
             break;
           }
@@ -980,6 +960,7 @@
         }
         tlTrack.style.setProperty('--pos', pos.toFixed(4));
         tlScene.style.setProperty('--deep', zoom.toFixed(4));
+        tlScene.style.setProperty('--build', build.toFixed(4));
         tlDeeps.forEach(panel => {
           const on = Number(panel.dataset.for) === deepIndex;
           panel.style.setProperty('--zoom', on ? zoom.toFixed(4) : '0');
@@ -998,24 +979,6 @@
       }, { passive: true });
       addEventListener('resize', drawTimeline);
       drawTimeline();
-    }
-
-    /* The report arrives a section at a time, on each block's own position. */
-    const sumReport = document.querySelector('.sum-report');
-    const sumBlocks = [...document.querySelectorAll('.sum-block')];
-    if (sumReport && sumBlocks.length && !reducedMotion.matches) {
-      /* One trigger on the report, not one per block: the sections should
-         arrive as a set being assembled, not as five separate reveals. The
-         card clips them, so they fly in from outside its edges. */
-      new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) return;
-          observer.disconnect();
-          sumBlocks.forEach(block => block.classList.add('is-in'));
-        });
-      }, { rootMargin: '0px 0px -18% 0px' }).observe(sumReport);
-    } else {
-      sumBlocks.forEach(block => block.classList.add('is-in'));
     }
 
     addEventListener('pointermove', moveCards, { passive: true });
