@@ -478,9 +478,8 @@ body{display:block;overflow:visible;overflow-x:clip}
   padding:24px;text-align:center;opacity:calc(1 - var(--ready,1));pointer-events:none;transition:opacity .55s ease}
 
 /* The timeline and the report wait behind it. */
-.tl-list,.tl-rail,.tl-count{opacity:calc((1 - var(--deep) * .88) * var(--ready,1));transition:opacity .6s ease}
 /* The heading steps aside for the report too - it was colliding with it. */
-.tl-head{opacity:calc((1 - var(--deep) * .75) * (1 - clamp(0,calc(var(--build,0) * 16),1)) * var(--ready,1));transition:opacity .6s ease}
+.tl-head{opacity:calc((1 - var(--deep) * .75) * (1 - clamp(0,calc(var(--build,0) * 16),1)))}
 
 /* A vignette on the header image, layered over the existing wash: the corners
    fall away so the frame holds the eye at the centre, and the lower-left has
@@ -647,8 +646,10 @@ body{display:block;overflow:visible;overflow-x:clip}
   opacity:clamp(0,calc((var(--build) - .93) / .06),1)}
 
 /* The line steps aside while it is written. */
-/* The line has to be gone before the mark appears, not merely dim. */
-.tl-list,.tl-rail,.tl-count{opacity:calc((1 - var(--deep) * .88) * (1 - clamp(0,calc(var(--build,0) * 16),1)) * var(--ready,1))}
+/* The line has to be gone before the mark appears, not merely dim. No
+   transition here - these track scroll, and easing them makes the whole
+   timeline lag behind the finger. */
+.tl-list,.tl-rail,.tl-count{opacity:calc((1 - var(--deep) * .88) * (1 - clamp(0,calc(var(--build,0) * 16),1)))}
 
 /* The generating mark: three arcs at different rates round a core. The same
    one appears wherever N1 is working, so the two moments read as one thing. */
@@ -678,3 +679,14 @@ body{display:block;overflow:visible;overflow-x:clip}
 .trust-scene h2{max-width:1120px;margin:0;font-size:clamp(40px,6.4vw,96px);font-weight:400;line-height:.98;letter-spacing:-.045em;text-wrap:balance}
 .trust-stop{width:.16em;aspect-ratio:1;display:inline-block;margin-left:.07em;border-radius:.025em;background:#376361;vertical-align:0}
 .sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* Handing over, not cross-fading.
+
+   The timeline used to fade up while the loader was still fading out, so for
+   half a second you saw both. A veil in the section's own colour holds the
+   content out of sight instead: the loader goes first, and only once it is
+   gone does the veil lift. The content's own opacity is left alone, so it can
+   keep tracking scroll without a transition fighting it. */
+.tl-veil{position:absolute;z-index:9;inset:0;background:#f3ede2;pointer-events:none;
+  opacity:calc(1 - var(--ready,1));transition:opacity .5s ease .44s}
+.tl-stage .ai-load{z-index:10;transition:opacity .4s ease}
