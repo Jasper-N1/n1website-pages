@@ -510,3 +510,15 @@ body{display:block;overflow:visible;overflow-x:clip}
 .cta-note{margin:clamp(24px,4vh,38px) 0 0;color:rgba(253,250,246,.5);font-size:13px}
 
 @media(prefers-reduced-motion:reduce){.cta-glow i{animation:none}}
+
+/* The field is positioned by script at every width now, so the absolute
+   placement has to apply at every width too - it was inside a min-width:1101px
+   block, which is why a phone got desktop coordinates. */
+.card-field{display:block;padding:0}
+.card-field>.float-card{position:absolute;right:auto;bottom:auto;
+  transform:translate3d(var(--mouse-x),var(--mouse-y),0) rotate(var(--layout-rotate,var(--r,0deg))) scale(var(--layout-scale,.8))}
+
+@media(max-width:1100px){
+  /* Overrides the old breakpoint rules that hid most of the field. */
+  .card-field>.float-card{display:block}
+}

@@ -534,11 +534,25 @@
     let running = false;
     let gatherAnimations = [];
     const randomiseCardField = () => {
-      if (innerWidth <= 1100) return;
-      const padding = 14;
+      /* This used to bail out below 1100px, which left every card sitting on
+         positions tuned for a desktop hero - the field on a phone was a handful
+         of oversized cards hanging off the edges. It lays out at any width now;
+         only the scale changes. */
+      const narrow = innerWidth <= 1100;
+      const padding = narrow ? 8 : 14;
+      /* Below 1100 the stylesheet used to hide all but a handful of cards,
+         because they were sitting on desktop coordinates. They are placed by
+         script now, so the field comes back - budgeted by width so a phone gets
+         a field rather than a crowd. */
+      const budget = innerWidth < 560 ? 22 : innerWidth <= 1100 ? 34 : cards.length;
+      cards.forEach((card, index) => { card.style.display = index < budget ? '' : 'none'; });
       const occupied = [];
       cards.forEach(card => {
-        const scale = .68 + Math.random() * .24;
+        /* Hidden at this breakpoint - no size, so nothing to place. */
+        if (!card.offsetWidth) return;
+        const scale = narrow
+          ? .4 + Math.random() * .20
+          : .68 + Math.random() * .24;
         const width = card.offsetWidth * scale;
         const height = card.offsetHeight * scale;
         let best = null;
@@ -557,8 +571,12 @@
           if (clearance >= 7) break;
         }
         occupied.push(best);
-        card.style.left = `${best.left}px`;
-        card.style.top = `${best.top}px`;
+        /* The box we packed is the SCALED size, but left/top position the
+           unscaled element, which then scales about its own centre - so it
+           spills half the difference past the box on each side and clips at the
+           viewport edge. Offset by that half. */
+        card.style.left = `${best.left - (card.offsetWidth - width) / 2}px`;
+        card.style.top = `${best.top - (card.offsetHeight - height) / 2}px`;
         card.style.setProperty('--layout-scale', scale.toFixed(3));
         card.style.setProperty('--layout-rotate', `${(-6 + Math.random() * 12).toFixed(2)}deg`);
         card.style.zIndex = String(2 + Math.floor(Math.random() * 7));
@@ -576,6 +594,7 @@
       gatherAnimations = [];
       if (reducedMotion.matches) return;
       cards.forEach((card, index) => {
+        if (!card.offsetWidth) return;
         const rect = card.getBoundingClientRect();
         const x = targetX - (rect.left + rect.width / 2);
         const y = targetY - (rect.top + rect.height / 2);
@@ -589,16 +608,16 @@
            tangential offset has to agree across the whole field or it reads as
            cards wandering rather than as one vortex. It decays as the radius
            does, which is what makes the path a spiral instead of an arc. */
-        const swirl = Math.min(190, distance * .5);
+        const swirl = Math.min(300, distance * .82);
         const tangentX = (-y / distance) * swirl;
         const tangentY = (x / distance) * swirl;
         const animation = card.animate([
           { translate: `${cornerX * innerWidth * .8}px ${cornerY * innerHeight * .8}px`, scale: '.5', rotate: `${cornerX * 14}deg`, opacity: 0, offset: 0 },
           { translate: '0 0', scale: '1', rotate: '0deg', opacity: 1, offset: .5 },
-          { translate: `${x * .34 + tangentX}px ${y * .34 + tangentY}px`, scale: '.8', rotate: '12deg', opacity: 1, offset: .68 },
-          { translate: `${x * .68 + tangentX * .55}px ${y * .68 + tangentY * .55}px`, scale: '.5', rotate: '34deg', opacity: 1, offset: .84 },
-          { translate: `${x * .92 + tangentX * .2}px ${y * .92 + tangentY * .2}px`, scale: '.18', rotate: '58deg', opacity: .85, offset: .95 },
-          { translate: `${x}px ${y}px`, scale: '.02', rotate: '78deg', opacity: 0, offset: 1 }
+          { translate: `${x * .34 + tangentX}px ${y * .34 + tangentY}px`, scale: '.8', rotate: '20deg', opacity: 1, offset: .68 },
+          { translate: `${x * .68 + tangentX * .55}px ${y * .68 + tangentY * .55}px`, scale: '.5', rotate: '58deg', opacity: 1, offset: .84 },
+          { translate: `${x * .92 + tangentX * .2}px ${y * .92 + tangentY * .2}px`, scale: '.18', rotate: '104deg', opacity: .85, offset: .95 },
+          { translate: `${x}px ${y}px`, scale: '.02', rotate: '146deg', opacity: 0, offset: 1 }
         ], { duration: 2000, fill: 'both', easing: 'linear' });
         animation.pause();
         animation.currentTime = 0;
