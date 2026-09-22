@@ -210,6 +210,7 @@
   <section class="timeline-scene" aria-labelledby="timeline-title">
     <div class="tl-stage">
       <div class="ai-load ai-think" aria-hidden="true">
+        <span class="ai-orb" aria-hidden="true"><i></i><i></i><i></i><b></b></span>
         <p class="ai-kicker">N1 &middot; reasoning</p>
         <p class="ai-thought">Thinking<span class="ai-dots"><i></i><i></i><i></i></span></p>
         <ol class="ai-steps"><li style="--t:0.35s"><span class="ai-state"><i class="ai-spin"></i><i class="ai-tick">&#10003;</i></span><span>Reading 186 results across 12 sources</span></li><li style="--t:0.75s"><span class="ai-state"><i class="ai-spin"></i><i class="ai-tick">&#10003;</i></span><span>Aligning dates, units and reference ranges</span></li><li style="--t:1.15s"><span class="ai-state"><i class="ai-spin"></i><i class="ai-tick">&#10003;</i></span><span>Grouping findings that belong together</span></li><li style="--t:1.55s"><span class="ai-state"><i class="ai-spin"></i><i class="ai-tick">&#10003;</i></span><span>Linking every value back to its page</span></li></ol>
@@ -360,6 +361,16 @@
         </div>
       </div>
       <div class="tl-report" aria-hidden="true">
+        <div class="rp-spark">
+          <span class="ai-orb" aria-hidden="true"><i></i><i></i><i></i><b></b></span>
+          <p class="ai-kicker">N1 &middot; composing</p>
+        </div>
+        <div class="rp-seed">
+          <span class="rp-seed-tag">Generating</span>
+          <b>Health summary</b>
+          <span class="rp-seed-rows"><i></i><i></i><i></i></span>
+        </div>
+        <div class="rp-full">
         <p class="rp-stream">a2ui_stream.v1 &middot; composing<span class="ai-dots"><i></i><i></i><i></i></span></p>
         <div class="rp-head">
           <span class="rp-mark"></span><b>Health Summary</b>
@@ -367,13 +378,13 @@
           <span class="rp-status">Draft &middot; awaiting clinician review</span>
         </div>
         <div class="rp-body">
-        <section class="rb" style="--s:.10">
+        <section class="rb" style="--s:.46">
           <span class="rb-tag">Section</span>
           <div class="rb-skel" aria-hidden="true"><i></i><i></i><i></i></div>
           <div class="rb-real"><h4>Executive summary &amp; alerts</h4><p>One metabolic story in an otherwise well 48-year-old. HbA1c peaked at 7.6% around diagnosis and has fallen at every session since, to <mark>6.4%</mark>.</p>
         <ul class="rb-alerts"><li class="is-watch"><b>Watch</b> LDL above target</li><li class="is-ok"><b>Stable</b> Renal function unchanged</li></ul></div>
         </section>
-        <section class="rb" style="--s:.26">
+        <section class="rb" style="--s:.56">
           <span class="rb-tag">SystemGrid</span>
           <div class="rb-skel" aria-hidden="true"><i></i><i></i><i></i></div>
           <div class="rb-real"><h4>Body systems</h4><dl class="rb-systems">
@@ -383,12 +394,12 @@
           <div><dt>Ophthalmic</dt><dd>R0M0 both eyes<span class="rb-bar is-good"><i style="--v:94%"></i></span></dd></div>
         </dl></div>
         </section>
-        <section class="rb" style="--s:.42">
+        <section class="rb" style="--s:.66">
           <span class="rb-tag">Finding</span>
           <div class="rb-skel" aria-hidden="true"><i></i><i></i><i></i></div>
           <div class="rb-real"><h4>Cross-system patterns</h4><p>Glycaemic improvement and stable renal function move together, which is what you would expect if the 2022 decision is doing the work. The lipid panel is the outlier.</p></div>
         </section>
-        <section class="rb" style="--s:.58">
+        <section class="rb" style="--s:.76">
           <span class="rb-tag">ActionCard</span>
           <div class="rb-skel" aria-hidden="true"><i></i><i></i><i></i></div>
           <div class="rb-real"><h4>Recommendations</h4><ol class="rb-recs">
@@ -397,13 +408,14 @@
           <li><b>Continue metformin</b><span>Three consecutive falling readings</span></li>
         </ol></div>
         </section>
-        <section class="rb" style="--s:.74">
+        <section class="rb" style="--s:.86">
           <span class="rb-tag">DataGaps</span>
           <div class="rb-skel" aria-hidden="true"><i></i><i></i><i></i></div>
           <div class="rb-real"><h4>Data gaps</h4><p>No lipid result after September 2023, and no foot screening recorded despite the March 2023 recall. Both named rather than inferred around.</p></div>
         </section>
         </div>
         <p class="rp-foot">Every claim links to the page it came from &middot; 5 components streamed</p>
+        </div>
       </div>
     <div class="tl-rail" aria-hidden="true"><span class="tl-focus"></span></div>
     <p class="tl-count" aria-hidden="true"><b>01</b> / 08</p>
@@ -411,71 +423,6 @@
   </section>
 
   
-
-  <section class="chat-scene chat-two" aria-label="The clinician comes back">
-    <div class="chat-stage">
-    <div class="chat-thread chat-thread-two">
-      <div class="msg msg-in msg-typing" style="--s:.02;--o:.1" aria-hidden="true">
-        <p><i></i><i></i><i></i></p>
-      </div>
-
-      <div class="msg msg-in" style="--s:.12">
-        <p>I&rsquo;ve been through the record. Two things stand out.</p>
-      </div>
-
-      <div class="msg msg-in" style="--s:.18">
-        <p>Your HbA1c has fallen at every check since 2022, so the treatment is doing its job. What you&rsquo;re describing now doesn&rsquo;t fit that long trend &mdash; it fits something recent.</p>
-      </div>
-
-      <div class="msg msg-in msg-file" style="--s:.32">
-        <button class="pdf-pill" type="button" data-open-pdf>
-          <span class="pdf-icon" aria-hidden="true">PDF</span>
-          <span class="pdf-meta"><b>Health summary &middot; Maya R.</b><em>5 pages &middot; drafted from 186 results</em></span>
-          <span class="pdf-go" aria-hidden="true">&rarr;</span>
-        </button>
-      </div>
-
-      <div class="msg msg-in" style="--s:.46">
-        <p>Two likely causes, and both are quick to settle: a short-term drift in glucose control, or your lipids &mdash; the one measure we haven&rsquo;t moved since 2023.</p>
-      </div>
-
-      <div class="msg msg-in msg-typing" style="--s:.52;--o:.6" aria-hidden="true">
-        <p><i></i><i></i><i></i></p>
-      </div>
-
-      <div class="msg msg-in" style="--s:.62">
-        <p>So: bloods this week, and I&rsquo;d like to bring your review forward. Can we have a chat soon &mdash; Monday or Tuesday?</p>
-      </div>
-
-      <div class="msg msg-out" style="--s:.74">
-        <p>Monday works. Thank you for looking properly.</p>
-      </div>
-      <span class="msg-read" style="--s:.78">Delivered</span>
-    </div>
-    </div>
-  </section>
-
-  <dialog class="pdf-modal" aria-label="Health summary preview">
-    <div class="pdf-sheet">
-      <header>
-        <div><span class="pdf-sheet-mark"></span><b>Health Summary</b><em>Maya R. &middot; 2021&ndash;2025 &middot; 12 sources</em></div>
-        <button class="pdf-close" type="button" data-close-pdf aria-label="Close preview">&times;</button>
-      </header>
-      <div class="pdf-page">
-        <p class="pdf-kicker">Section 1 &middot; Executive summary &amp; alerts</p>
-        <h4>One metabolic story, caught early</h4>
-        <p>HbA1c peaked at 7.6% around diagnosis and has fallen across every subsequent session to 6.4%, the lowest of three source-linked readings. Renal function is unchanged across four samples.</p>
-        <p>LDL sits at 2.9 mmol/L against a target under 2.6 for this risk profile, and remains the one unaddressed lever in the record.</p>
-        <div class="pdf-rows">
-          <p><b>HbA1c</b><span>6.4 %</span><em>4.0&ndash;5.6</em><i class="is-out">Above range</i></p>
-          <p><b>eGFR</b><span>92 mL/min</span><em>&gt; 90</em><i>In range</i></p>
-          <p><b>LDL</b><span>2.9 mmol/L</span><em>&lt; 2.6</em><i class="is-out">Above target</i></p>
-          <p><b>Blood pressure</b><span>128/79</span><em>&lt; 130</em><i>In range</i></p>
-        </div>
-        <p class="pdf-foot">Page 1 of 5 &middot; every claim links to its source</p>
-      </div>
-    </div>
-  </dialog>
 
   <section class="send-scene" aria-labelledby="send-title">
     <div class="send-stage">
@@ -497,72 +444,6 @@
       </div>
 
       <p class="send-done" aria-hidden="true"><span class="send-tick">&#10003;</span> Delivered to Maya R. &middot; with 186 linked results</p>
-    </div>
-  </section>
-
-  <section class="flip-scene" aria-labelledby="flip-title">
-    <div class="flip-stage">
-      <div class="flip-copy">
-        <h2 id="flip-title">Keep the proof.<br>Elevate the promise.</h2>
-      </div>
-      <div class="flip-deck">
-      <article class="flip-face" style="--c:0.0">
-        <p class="fc-step">1 / 3</p>
-        <h3>The report</h3>
-        <p class="fc-sub">What the record adds up to</p>
-        <div class="fc-body"><div class="fc-report">
-        <p class="fc-kicker">Health summary &middot; draft</p>
-        <h4>One metabolic story, caught early</h4>
-        <p>HbA1c peaked at 7.6% around diagnosis and has fallen across every subsequent session to <mark>6.4%</mark>, the lowest of three readings. LDL remains <mark>above target</mark> and is the one unaddressed lever.</p>
-        <div class="fc-rows"><p><b>HbA1c</b><span>6.4 %</span></p><p><b>eGFR</b><span>92 mL/min</span></p><p><b>LDL</b><span>2.9 mmol/L</span></p></div>
-      </div></div>
-      </article>
-      <article class="flip-face" style="--c:0.5">
-        <p class="fc-step">2 / 3</p>
-        <h3>Every claim, sourced</h3>
-        <p class="fc-sub">Turn it over and each sentence carries its page</p>
-        <div class="fc-body"><div class="fc-sources">
-        <p class="fc-kicker">Claim &rarr; source</p>
-        <ul>
-          <li><b>&ldquo;HbA1c peaked at 7.6%&rdquo;</b><span>Lab report &middot; Page 4 &middot; 12 Jan 2022</span></li>
-          <li><b>&ldquo;fallen across every subsequent session&rdquo;</b><span>Lab reports &middot; Pages 6, 7, 8 &middot; 2023&ndash;2025</span></li>
-          <li><b>&ldquo;6.4%, the lowest of three readings&rdquo;</b><span>Lab report &middot; Page 8 &middot; 14 Mar 2025</span></li>
-          <li><b>&ldquo;LDL remains above target&rdquo;</b><span>Lab report &middot; Page 6 &middot; 09 Sep 2023</span></li>
-        </ul>
-      </div></div>
-      </article>
-      <article class="flip-face" style="--c:1.0">
-        <p class="fc-step">3 / 3</p>
-        <h3>And the evidence under it</h3>
-        <p class="fc-sub">The thresholds are not ours</p>
-        <div class="fc-body"><div class="fc-research">
-        <p class="fc-kicker">Reference standards</p>
-        <ul>
-          <li><b>HbA1c diagnostic threshold &ge; 6.5%</b><span>WHO &middot; Use of glycated haemoglobin in diagnosis</span></li>
-          <li><b>LDL target &lt; 2.6 mmol/L at this risk band</b><span>ESC/EAS &middot; Dyslipidaemia guidelines</span></li>
-          <li><b>eGFR &gt; 90 mL/min &middot; CKD-EPI</b><span>KDIGO &middot; CKD evaluation and management</span></li>
-          <li><b>Retinal screening at 24 months when R0M0</b><span>National screening programme standard</span></li>
-        </ul>
-      </div></div>
-      </article>
-      </div>
-      <p class="flip-cue" aria-hidden="true">Keep scrolling</p>
-    </div>
-  </section>
-  </div>
-
-  <section class="cta-scene" aria-labelledby="cta-title">
-    <img class="cta-photo" src="../assets/clinician-hero-supportive-care-upscaled-v2.webp" alt="A clinician supporting a patient" width="1600" height="1067" loading="lazy" decoding="async">
-    <div class="cta-shade" aria-hidden="true"></div>
-    <div class="cta-inner">
-      <p class="cta-eyebrow">n1.care</p>
-      <h2 id="cta-title">Arrive prepared.<br>Be present.</h2>
-      <p class="cta-sub">The record is read, the history is drawn, the summary is drafted and sourced. What is left is the part that was always the point: the conversation.</p>
-      <div class="cta-actions">
-        <a class="cta-primary" href="https://app.n1.care/signup">Start free trial</a>
-        <a class="cta-secondary" href="https://app.n1.care/login">Log in <span aria-hidden="true">&rarr;</span></a>
-      </div>
-      <p class="cta-note">Nothing is shared until a clinician has reviewed it.</p>
     </div>
   </section>
 
