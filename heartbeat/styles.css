@@ -165,7 +165,43 @@ body{display:block;overflow:visible;overflow-x:clip}
 
 /* The singularity the field collapses into, and that the image opens out of.
    JS drives opacity and scale; it sits above the cards and below the image. */
-.singularity{width:min(52vmin,380px);aspect-ratio:1;position:absolute;z-index:80;top:50%;left:50%;translate:-50% -50%;border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,.96),rgba(206,238,231,.55) 20%,rgba(40,99,95,0) 68%);opacity:0;pointer-events:none;will-change:opacity,scale}
+/* The singularity.
+
+   A soft blob that swells as things fall into it is backwards - and it is the
+   one piece of this page that still looks like a 2015 hero. Light concentrating
+   gets tighter and brighter, then releases: so the core CONTRACTS as the field
+   arrives, a faint halo holds the volume behind it, an anamorphic streak widens
+   with the charge, and at the hand-off two thin rings fire outward and the
+   whole thing is gone. Nothing here fades - it discharges. */
+.singularity{--charge:0;--release:0;width:min(52vmin,380px);aspect-ratio:1;position:absolute;z-index:80;top:50%;left:50%;display:grid;place-items:center;translate:-50% -50%;pointer-events:none}
+.singularity>*{grid-area:1/1;border-radius:50%;will-change:transform,opacity}
+
+/* Tightens from half-size to a point as the charge builds, then blooms once. */
+.sg-core{width:26%;aspect-ratio:1;
+  background:radial-gradient(closest-side,#fff 0%,rgba(255,255,255,.92) 38%,rgba(214,244,238,.5) 64%,rgba(214,244,238,0) 100%);
+  opacity:calc(var(--charge) * (1 - var(--release)));
+  scale:calc((2 - var(--charge) * 1.35) * (1 + var(--release) * 5))}
+
+/* The volume behind it - wide, weak, and it never gets sharp. */
+.sg-halo{width:100%;aspect-ratio:1;
+  background:radial-gradient(closest-side,rgba(180,232,222,.34),rgba(140,214,206,.12) 46%,rgba(11,97,100,0) 72%);
+  opacity:calc(var(--charge) * .85 * (1 - var(--release)));
+  scale:calc(.5 + var(--charge) * .5)}
+
+/* Anamorphic: real lenses smear a point light horizontally, and it is the
+   cheapest way to make a bright spot read as an optical event. */
+.sg-streak{width:100%;height:2px;border-radius:2px;
+  background:linear-gradient(90deg,rgba(214,244,238,0),rgba(255,255,255,.92) 50%,rgba(214,244,238,0));
+  opacity:calc(var(--charge) * .6 + var(--release) * (1 - var(--release)) * 2.4);
+  scale:calc(.25 + var(--charge) * .95 + var(--release) * 1.8) calc(1 + var(--release) * 3)}
+
+/* Two thin shockwaves on release, the second a beat behind. */
+.sg-ring{width:100%;aspect-ratio:1;border:1.5px solid rgba(233,252,248,.9);
+  opacity:calc(var(--release) * (1 - var(--release)) * 3.4);
+  scale:calc(.06 + var(--release) * 1.5)}
+.sg-ring-2{border-color:rgba(160,224,216,.55);
+  opacity:calc(clamp(0,calc((var(--release) - .22) / .5),1) * (1 - var(--release)) * 2.6);
+  scale:calc(.04 + var(--release) * 2.4)}
 .patient-zoom{overflow:hidden}
 
 @media(max-width:620px){

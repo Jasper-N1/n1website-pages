@@ -177,7 +177,13 @@
     <h2><span>Years of history.</span><span>Brought into focus.</span></h2>
     <span>N1 organizes patient records into a clear history and draft reports, with source links for clinical review.</span>
   </div>
-  <div class="singularity" aria-hidden="true"></div>
+  <div class="singularity" aria-hidden="true">
+    <span class="sg-halo"></span>
+    <span class="sg-streak"></span>
+    <span class="sg-core"></span>
+    <span class="sg-ring"></span>
+    <span class="sg-ring sg-ring-2"></span>
+  </div>
   <div class="patient-zoom" aria-hidden="true"><img src="../assets/clinician-hero-doctor-patient-wide-v2.webp" alt="" width="1672" height="941"></div>
   </main>
   </div>
@@ -518,8 +524,8 @@
     const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
     const singularity = document.querySelector('.singularity');
     const focal = document.querySelector('.focal');
-    let gatherGlow = 0;
-    let gatherScale = 1;
+    let gatherCharge = 0;
+    let gatherRelease = 0;
     const cardField = document.querySelector('.card-field');
     const organizingSignals = document.querySelector('.organizing-signals');
     const signalItems = [...organizingSignals.children];
@@ -621,8 +627,8 @@
          the time the image has opened out of it. */
       const collapsing = smooth(clamp((progress - .12) / .4));
       const handover = smooth(clamp((progress - .52) / .09));
-      gatherGlow = collapsing * (1 - handover);
-      gatherScale = mix(.22, 1, collapsing) * mix(1, 2.4, handover);
+      gatherCharge = collapsing;
+      gatherRelease = handover;
 
       const rawZoom = clamp((progress - .52) / .2);
       const zoom = smooth(rawZoom);
@@ -691,14 +697,11 @@
 
       /* The dot is lit twice - once by the blobs arriving, once by the cards -
          so whichever phase is brighter owns it. */
-      const pullGlow = pull * (1 - cardsIn);
-      if (pullGlow >= gatherGlow) {
-        singularity.style.opacity = pullGlow.toFixed(3);
-        singularity.style.scale = String(mix(.1, .4, pull));
-      } else {
-        singularity.style.opacity = gatherGlow.toFixed(3);
-        singularity.style.scale = String(gatherScale);
-      }
+      /* Two quantities, not one: how much has fallen in, and the moment it lets
+         go. Charge tightens and brightens the core - energy concentrating, not
+         a blob swelling - and release fires the ring and the streak. */
+      singularity.style.setProperty('--charge', Math.max(pull * (1 - cardsIn), gatherCharge).toFixed(4));
+      singularity.style.setProperty('--release', gatherRelease.toFixed(4));
       /* The thread is scrubbed the same way; each message carries the scroll
          position it arrives at as --s, and CSS does the rest. */
     };
