@@ -82,11 +82,16 @@
 
   /* ================= 1 · focal — the focus setup, aurora colour ================= */
   .s-focal{ background: var(--care-900); }
-  .s-focal i{ position: absolute; border-radius: 46% 54% 52% 48% / 50% 46% 54% 50%; display: block;
+  /* The cluster is anchored to the centre and measured entirely in vmin, so it
+     holds its shape at any aspect ratio. Sizing in vmin while positioning in
+     vw/vh was what pulled the blobs apart on wide screens: the blobs shrank
+     with the short side while left/right kept pushing them to the long edges.
+     translate composes with the scale in `sharpen`, so the two don't fight. */
+  .s-focal i{ position: absolute; left: 50%; top: 50%; border-radius: 46% 54% 52% 48% / 50% 46% 54% 50%; display: block;
               animation: sharpen 9s ease-in-out infinite; }
-  .s-focal i:nth-child(1){ width: 46vmin; height: 46vmin; left: 9vw; top: 16vh; background: var(--care-500); }
-  .s-focal i:nth-child(2){ width: 34vmin; height: 34vmin; right: 12vw; top: 22vh; background: var(--azure-600); animation-delay: -3s; }
-  .s-focal i:nth-child(3){ width: 40vmin; height: 40vmin; left: 38vw; bottom: 6vh; background: var(--moss-600); animation-delay: -6s; }
+  .s-focal i:nth-child(1){ width: 46vmin; height: 46vmin; translate: calc(-50% - 16vmin) calc(-50% - 7vmin); background: var(--care-500); }
+  .s-focal i:nth-child(2){ width: 34vmin; height: 34vmin; translate: calc(-50% + 18vmin) calc(-50% - 8vmin); background: var(--azure-600); animation-delay: -3s; }
+  .s-focal i:nth-child(3){ width: 40vmin; height: 40vmin; translate: calc(-50% + 3vmin) calc(-50% + 17vmin); background: var(--moss-600); animation-delay: -6s; }
 
   /* ================= 2 · aurora ================= */
   .s-aurora{ background: var(--care-900); }
