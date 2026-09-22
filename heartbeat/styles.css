@@ -198,71 +198,75 @@ body{display:block;overflow:visible;overflow-x:clip}
 .msg-typing + .msg-in::before{display:block}
 
 /* ==========================================================================
-   Years of history. Brought into focus.
+   The record, sideways.
 
-   The record as a timeline. The section scrolls normally; --tl is its scroll
-   progress and each entry opens across its own slice of it, so the records
-   arrive as you travel down the spine.
+   A pinned stage where vertical scroll drives the track horizontally past a
+   fixed focal marker at the centre. Position is continuous so it glides;
+   the highlight is discrete, so there is always exactly one entry being read
+   and the rest are held back rather than competing with it.
    ========================================================================== */
 
-.timeline-scene{--tl:0;position:relative;z-index:1;padding:clamp(72px,12vh,140px) max(24px,calc((100vw - 920px)/2)) clamp(96px,16vh,180px);background:#f3ede2;color:var(--ink)}
-.tl-head{max-width:720px;margin:0 0 clamp(44px,7vh,80px)}
-.tl-head h2{margin:0;font-size:clamp(30px,4vw,58px);font-weight:400;line-height:1.04;letter-spacing:-.04em}
-/* The patient, with the facts you would want before reading their record. */
-.tl-patient{display:flex;gap:16px;align-items:center;margin:24px 0 0}
-.tl-face{width:56px;height:56px;flex:none;border-radius:50%;object-fit:cover;object-position:center 28%;box-shadow:0 0 0 1px #e0d3bd,0 2px 6px rgba(60,52,38,.14)}
-.tl-patient-meta b{display:block;font-size:19px;font-weight:600;letter-spacing:-.01em}
-.tl-patient-meta dl{display:flex;flex-wrap:wrap;gap:4px 22px;margin:7px 0 0}
+.timeline-scene{--tl:0;height:540svh;position:relative;z-index:1;background:#f3ede2;color:var(--ink)}
+.tl-stage{height:100svh;position:sticky;top:0;overflow:hidden}
+
+.tl-head{position:absolute;z-index:3;top:clamp(34px,7vh,78px);left:max(24px,calc((100vw - 1180px)/2));right:24px}
+.tl-head h2{margin:0;font-size:clamp(24px,3vw,44px);font-weight:400;line-height:1.05;letter-spacing:-.04em}
+
+/* The rail the entries travel along, and the mark they are read at. */
+.tl-rail{position:absolute;z-index:1;top:50%;right:0;left:0;height:1px;
+  background:linear-gradient(90deg,rgba(205,191,168,.3),rgba(205,191,168,.75) 50%,rgba(205,191,168,.3))}
+.tl-focus{width:13px;height:13px;position:absolute;top:50%;left:50%;translate:-50% -50%;border:1.5px solid var(--teal);border-radius:50%}
+.tl-focus::after{width:3px;height:3px;position:absolute;top:50%;left:50%;translate:-50% -50%;border-radius:50%;background:var(--teal);content:""}
+
+.tl-count{position:absolute;z-index:3;right:max(24px,calc((100vw - 1180px)/2));bottom:clamp(30px,6vh,64px);margin:0;color:#a8977c;font-size:12px;font-weight:600;letter-spacing:.14em}
+.tl-count b{color:var(--ink)}
+
+.tl-list{--card:min(400px,76vw);--gap:clamp(30px,5vw,80px);--pos:0;
+  position:absolute;z-index:2;top:50%;left:0;display:flex;gap:var(--gap);margin:0;padding:0;list-style:none;
+  translate:calc(50vw - var(--card) / 2 - var(--pos) * (var(--card) + var(--gap))) -6px;
+  transition:translate .12s linear}
+
+.tl-entry{width:var(--card);flex:none;position:relative;padding-top:34px;
+  opacity:.3;scale:.95;filter:blur(1.5px);
+  transition:opacity .45s ease,scale .5s cubic-bezier(.2,.8,.3,1),filter .45s ease}
+.tl-entry.is-active{opacity:1;scale:1;filter:blur(0)}
+
+.tl-dot{width:11px;height:11px;position:absolute;top:0;left:calc(var(--card) / 2 - 5.5px);
+  border:2px solid #f3ede2;border-radius:50%;background:#cdbfa8;scale:.8;
+  transition:background .35s ease,scale .35s cubic-bezier(.2,.9,.3,1.3)}
+.tl-entry.is-active .tl-dot{background:var(--teal);scale:1.25}
+
+.tl-entry time{display:block;margin-bottom:9px;color:var(--muted);font-size:13px;font-weight:600;letter-spacing:.06em;text-align:center}
+.tl-entry.is-active time{color:var(--teal)}
+.tl-body{padding:clamp(18px,2vw,26px);border:1px solid #e3d7c2;border-radius:16px;background:#fffdf9;box-shadow:0 10px 28px rgba(60,52,38,.08)}
+.tl-entry.is-active .tl-body{box-shadow:0 18px 44px rgba(60,52,38,.15)}
+
+/* The patient, sized for the stage header. */
+.tl-patient{display:flex;gap:13px;align-items:center;margin:16px 0 0}
+.tl-face{width:46px;height:46px;flex:none;border-radius:50%;object-fit:cover;object-position:center 28%;box-shadow:0 0 0 1px #e0d3bd,0 2px 6px rgba(60,52,38,.14)}
+.tl-patient-meta b{display:block;font-size:16px;font-weight:600;letter-spacing:-.01em}
+.tl-patient-meta dl{display:flex;flex-wrap:wrap;gap:2px 18px;margin:5px 0 0}
 .tl-patient-meta div{margin:0}
 .tl-patient-meta dt{display:inline;color:#a8977c;font-size:10px;font-weight:600;letter-spacing:.11em;text-transform:uppercase}
-.tl-patient-meta dd{display:inline;margin:0 0 0 7px;color:var(--muted);font-size:14px;font-weight:600}
+.tl-patient-meta dd{display:inline;margin:0 0 0 6px;color:var(--muted);font-size:13px;font-weight:600}
 
-.tl-list{margin:0;padding:0 0 0 clamp(26px,4vw,44px);position:relative;list-style:none}
-/* The spine draws itself down the section as you travel. */
-.tl-list{--lit:0}
-
-/* One short move, once. Scrubbing this against scroll is what made it feel
-   unsteady - the entry arrived on a ratio rather than on where it actually
-   was, and reversed when you scrolled back. */
-.tl-entry{position:relative;display:grid;grid-template-columns:clamp(88px,11vw,128px) 1fr;gap:clamp(14px,3vw,34px);
-          padding:0 0 clamp(38px,6vh,62px);opacity:0;translate:0 18px;
-          transition:opacity .5s ease,translate .55s cubic-bezier(.2,.75,.25,1)}
-.tl-entry.is-in{opacity:1;translate:0}
-/* The one stagger that helps is inside an entry, not between them. */
-.tl-entry .tl-body>*{opacity:0;translate:0 8px;transition:opacity .45s ease .06s,translate .45s ease .06s}
-.tl-entry.is-in .tl-body>*{opacity:1;translate:0}
-.tl-entry.is-in .tl-body>*:nth-child(2){transition-delay:.1s}
-.tl-entry.is-in .tl-body>*:nth-child(3){transition-delay:.14s}
-.tl-entry.is-in .tl-body>*:nth-child(n+4){transition-delay:.18s}
-.tl-dot{width:11px;height:11px;position:absolute;top:7px;left:calc(clamp(26px,4vw,44px) * -1 - 4.5px);border:2px solid #f3ede2;border-radius:50%;background:#cdbfa8;scale:.6;transition:background .35s ease .12s,scale .4s cubic-bezier(.2,.9,.3,1.3) .12s}
-.tl-entry.is-in .tl-dot{background:var(--teal);scale:1}
-.tl-entry time{color:var(--muted);font-size:14px;font-weight:600;letter-spacing:.04em}
-.tl-body{padding-top:1px}
-/* A label, not a pill. One pill per entry - the source - is enough; a row of
-   them made every entry look equally loud. */
-.tl-tag{display:inline-block;margin-bottom:8px;color:#a8977c;font-size:10px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;text-decoration:none;transition:color .18s ease}
+/* A label, not a pill. One pill per entry - the source - is enough. */
+.tl-tag{display:block;margin-bottom:8px;color:#a8977c;font-size:10px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;text-decoration:none;transition:color .18s ease}
 .tl-tag:hover{color:#6a5b42}
 .tl-tag:focus-visible{outline:3px solid var(--teal);outline-offset:2px;border-radius:3px}
-.tl-body b{display:block;font-size:clamp(19px,2vw,25px);font-weight:600;letter-spacing:-.02em}
-.tl-body p{margin:7px 0 0;max-width:46ch;color:var(--muted);font-size:16px;line-height:1.55}
-.tl-source{display:inline-flex;align-items:center;gap:6px;margin-top:13px;transition:background .18s ease,box-shadow .18s ease;padding:7px 12px;border-radius:999px;color:var(--green);background:#fffdf9;font-size:12px;font-weight:600;text-decoration:none}
-.tl-source:hover{background:#fff;box-shadow:0 1px 4px rgba(60,52,38,.14)}
+.tl-source{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;color:var(--green);background:#f6f1e7;font-size:12px;font-weight:600;text-decoration:none;transition:background .18s ease}
+.tl-source:hover{background:#efe7d8}
 .tl-source:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
-
-@media(max-width:620px){
-  .tl-entry{grid-template-columns:1fr;gap:6px}
-  .tl-body p{font-size:15px}
-}
 
 /* Values and sparklines - the detail that makes an entry read as a record
    rather than as a caption. */
-.tl-vals{display:flex;flex-wrap:wrap;gap:10px 28px;margin:14px 0 0}
+.tl-vals{display:flex;flex-wrap:wrap;gap:10px 24px;margin:14px 0 0}
 .tl-vals div{margin:0}
 .tl-vals dt{color:var(--muted);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
 .tl-vals dd{margin:3px 0 0;font-size:17px;font-weight:600;letter-spacing:-.01em}
 /* A sparkline, not a chart: the viewBox would otherwise scale to the full
    column width and tower over the entry. */
-.tl-chart{max-width:320px;margin:16px 0 0;padding:11px 13px 9px;border:1px solid #e3d7c2;border-radius:12px;background:#fffdf9}
+.tl-chart{max-width:100%;margin:16px 0 0;padding:11px 13px 9px;border:1px solid #e3d7c2;border-radius:12px;background:#fffdf9}
 .tl-chart svg{width:100%;height:auto;display:block}
 /* The platform's sparkline language, stylized: a soft reference band behind a
    smoothed line at 60% opacity, and a dot only where a reading falls outside
@@ -278,29 +282,6 @@ body{display:block;overflow:visible;overflow-x:clip}
   .tl-entry,.tl-entry .tl-body>*{opacity:1;translate:none;transition:none}
   .tl-dot{scale:1;background:var(--teal);transition:none}
 }
-
-/* ==========================================================================
-   The thread.
-
-   One line drawn down the whole record - timeline, summary and everything
-   after it - in a light teal. It follows the scroll position directly rather
-   than through the eased loop: a progress line that lags your scroll is the
-   thing that reads as wrong, and it is a different problem from content
-   easing. --thread-x matches the timeline's gutter, so the dots sit on it.
-   ========================================================================== */
-
-.thread-run{--draw:0;--thread-x:max(24px,calc((100vw - 920px) / 2));--thread-top:0px;--thread-bottom:0px;position:relative}
-/* Above the section backgrounds, or each one paints over it - the whole point
-   is that it runs through them. Decorative, so it never takes a click. */
-/* Starts at the first dot rather than the top of the section, and stops where
-   the report does - it is the record's line, not the page's. */
-.thread-run::before{width:2px;position:absolute;z-index:3;top:var(--thread-top,0px);bottom:var(--thread-bottom,0px);left:var(--thread-x);
-  background:linear-gradient(#7fc0ba 0%,#7fc0ba calc(var(--draw) * 100%),rgba(127,192,186,.18) calc(var(--draw) * 100%));
-  pointer-events:none;content:""}
-.thread-run>*{position:relative;z-index:1}
-.tl-dot{z-index:4}
-.tl-dot{background:#7fc0ba}
-.tl-entry.is-in .tl-dot{background:var(--teal)}
 
 /* ==========================================================================
    Health summary - the report the record adds up to, in the voice the real
@@ -522,3 +503,6 @@ body{display:block;overflow:visible;overflow-x:clip}
   /* Overrides the old breakpoint rules that hid most of the field. */
   .card-field>.float-card{display:block}
 }
+
+/* Parked outside the viewport until the collapse reaches them. */
+.card-field>.float-card.is-outer{opacity:0}

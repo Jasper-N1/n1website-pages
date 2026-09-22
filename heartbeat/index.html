@@ -206,8 +206,8 @@
   </section>
 
 
-  <div class="thread-run">
   <section class="timeline-scene" aria-labelledby="timeline-title">
+    <div class="tl-stage">
     <div class="tl-head">
       <h2 id="timeline-title">Your appointment starts today.<br>Your health story doesn&rsquo;t.</h2>
       <div class="tl-patient">
@@ -321,6 +321,9 @@
         </div>
       </li>
     </ol>
+    <div class="tl-rail" aria-hidden="true"><span class="tl-focus"></span></div>
+    <p class="tl-count" aria-hidden="true"><b>01</b> / 08</p>
+    </div>
   </section>
 
   <section class="summary-scene" aria-labelledby="summary-title">
@@ -386,7 +389,6 @@
     </article>
   </section>
 
-  </div>
 
   <section class="chat-scene chat-two" aria-label="The clinician comes back">
     <div class="chat-stage">
@@ -533,6 +535,7 @@
     let easedProgress = 0;
     let running = false;
     let gatherAnimations = [];
+    let outerCards = [];
     const randomiseCardField = () => {
       /* This used to bail out below 1100px, which left every card sitting on
          positions tuned for a desktop hero - the field on a phone was a handful
@@ -544,14 +547,14 @@
          because they were sitting on desktop coordinates. They are placed by
          script now, so the field comes back - budgeted by width so a phone gets
          a field rather than a crowd. */
-      const budget = innerWidth < 560 ? 22 : innerWidth <= 1100 ? 34 : cards.length;
+      const budget = innerWidth < 560 ? 34 : innerWidth <= 1100 ? 48 : cards.length;
       cards.forEach((card, index) => { card.style.display = index < budget ? '' : 'none'; });
       const occupied = [];
       cards.forEach(card => {
         /* Hidden at this breakpoint - no size, so nothing to place. */
         if (!card.offsetWidth) return;
         const scale = narrow
-          ? .4 + Math.random() * .20
+          ? .34 + Math.random() * .16
           : .68 + Math.random() * .24;
         const width = card.offsetWidth * scale;
         const height = card.offsetHeight * scale;
@@ -581,6 +584,29 @@
         card.style.setProperty('--layout-rotate', `${(-6 + Math.random() * 12).toFixed(2)}deg`);
         card.style.zIndex = String(2 + Math.floor(Math.random() * 7));
       });
+
+      /* Three more fields' worth of cards parked in a ring beyond the edges of
+         the screen. They are never seen at rest - the vortex is what drags them
+         in - so the collapse pulls in four times what was ever on display. */
+      outerCards.forEach(clone => clone.remove());
+      outerCards = [];
+      const onScreen = cards.filter(card => card.offsetWidth);
+      if (!onScreen.length || reducedMotion.matches) return;
+      const reach = Math.hypot(innerWidth, innerHeight) / 2;
+      for (let i = 0; i < onScreen.length * 3; i += 1) {
+        const clone = onScreen[i % onScreen.length].cloneNode(true);
+        const angle = Math.random() * Math.PI * 2;
+        const radius = reach * (1.15 + Math.random() * 1.15);
+        const scale = (narrow ? .3 : .6) + Math.random() * .22;
+        clone.classList.add('is-outer');
+        clone.style.left = `${innerWidth / 2 + Math.cos(angle) * radius}px`;
+        clone.style.top = `${innerHeight / 2 + Math.sin(angle) * radius}px`;
+        clone.style.setProperty('--layout-scale', scale.toFixed(3));
+        clone.style.setProperty('--layout-rotate', `${(-14 + Math.random() * 28).toFixed(2)}deg`);
+        clone.style.zIndex = '1';
+        cardField.appendChild(clone);
+        outerCards.push(clone);
+      }
     };
     randomiseCardField();
     const prepareZoomTarget = () => {
@@ -593,8 +619,9 @@
       gatherAnimations.forEach(({ animation }) => animation.cancel());
       gatherAnimations = [];
       if (reducedMotion.matches) return;
-      cards.forEach((card, index) => {
+      [...cards, ...outerCards].forEach((card, index) => {
         if (!card.offsetWidth) return;
+        const outer = card.classList.contains('is-outer');
         const rect = card.getBoundingClientRect();
         const x = targetX - (rect.left + rect.width / 2);
         const y = targetY - (rect.top + rect.height / 2);
@@ -611,9 +638,16 @@
         const swirl = Math.min(300, distance * .82);
         const tangentX = (-y / distance) * swirl;
         const tangentY = (x / distance) * swirl;
+        const entry = outer
+          /* Outer cards take no part in the arrival - they hold station, unseen,
+             until the vortex reaches out for them. */
+          ? [{ translate: '0 0', scale: '1', rotate: '0deg', opacity: 0, offset: 0 },
+             { translate: '0 0', scale: '1', rotate: '0deg', opacity: 0, offset: .5 },
+             { translate: '0 0', scale: '1', rotate: '0deg', opacity: .95, offset: .56 }]
+          : [{ translate: `${cornerX * innerWidth * .8}px ${cornerY * innerHeight * .8}px`, scale: '.5', rotate: `${cornerX * 14}deg`, opacity: 0, offset: 0 },
+             { translate: '0 0', scale: '1', rotate: '0deg', opacity: 1, offset: .5 }];
         const animation = card.animate([
-          { translate: `${cornerX * innerWidth * .8}px ${cornerY * innerHeight * .8}px`, scale: '.5', rotate: `${cornerX * 14}deg`, opacity: 0, offset: 0 },
-          { translate: '0 0', scale: '1', rotate: '0deg', opacity: 1, offset: .5 },
+          ...entry,
           { translate: `${x * .34 + tangentX}px ${y * .34 + tangentY}px`, scale: '.8', rotate: '20deg', opacity: 1, offset: .68 },
           { translate: `${x * .68 + tangentX * .55}px ${y * .68 + tangentY * .55}px`, scale: '.5', rotate: '58deg', opacity: 1, offset: .84 },
           { translate: `${x * .92 + tangentX * .2}px ${y * .92 + tangentY * .2}px`, scale: '.18', rotate: '104deg', opacity: .85, offset: .95 },
@@ -786,50 +820,35 @@
       drawChats();
     }
 
-    const threadRun = document.querySelector('.thread-run');
-    if (threadRun) {
-      let threadFrame = 0;
-      /* The line belongs to the record: it starts on the first dot and stops
-         where the report ends, rather than running the height of the wrapper. */
-      const measureThread = () => {
-        const runRect = threadRun.getBoundingClientRect();
-        const firstDot = threadRun.querySelector('.tl-dot');
-        const report = threadRun.querySelector('.sum-report');
-        if (firstDot) {
-          const dot = firstDot.getBoundingClientRect();
-          threadRun.style.setProperty('--thread-top', `${dot.top - runRect.top + dot.height / 2}px`);
-        }
-        if (report) {
-          threadRun.style.setProperty('--thread-bottom', `${Math.max(0, runRect.bottom - report.getBoundingClientRect().bottom)}px`);
-        }
+    /* The timeline runs sideways now: vertical scroll drives the track past a
+       fixed focal marker, and whichever entry is nearest it is the live one.
+       Position is continuous rather than snapped, so it glides; the highlight
+       is discrete, so there is always exactly one entry being read. */
+    const tlScene = document.querySelector('.timeline-scene');
+    const tlTrack = document.querySelector('.tl-list');
+    const tlItems = [...document.querySelectorAll('.tl-entry')];
+    const tlCount = document.querySelector('.tl-count b');
+    if (tlScene && tlTrack && tlItems.length) {
+      let tlFrame = 0;
+      let lastActive = -1;
+      const drawTimeline = () => {
+        const travel = tlScene.offsetHeight - innerHeight;
+        const progress = travel > 0 ? clamp(-tlScene.getBoundingClientRect().top / travel) : 0;
+        const pos = progress * (tlItems.length - 1);
+        tlTrack.style.setProperty('--pos', pos.toFixed(4));
+        tlScene.style.setProperty('--tl', progress.toFixed(4));
+        const active = Math.round(pos);
+        if (active === lastActive) return;
+        lastActive = active;
+        tlItems.forEach((item, index) => item.classList.toggle('is-active', index === active));
+        if (tlCount) tlCount.textContent = String(active + 1).padStart(2, '0');
       };
-      const drawThread = () => {
-        const rect = threadRun.getBoundingClientRect();
-        const travel = rect.height - innerHeight * .5;
-        const past = innerHeight * .5 - rect.top;
-        threadRun.style.setProperty('--draw', clamp(travel > 0 ? past / travel : 0).toFixed(4));
-      };
-      measureThread();
-      addEventListener('resize', measureThread);
-      addEventListener('load', measureThread);
       addEventListener('scroll', () => {
-        cancelAnimationFrame(threadFrame);
-        threadFrame = requestAnimationFrame(drawThread);
+        cancelAnimationFrame(tlFrame);
+        tlFrame = requestAnimationFrame(drawTimeline);
       }, { passive: true });
-      addEventListener('resize', drawThread);
-      drawThread();
-    }
-
-    const pdfModal = document.querySelector('.pdf-modal');
-    if (pdfModal) {
-      document.querySelectorAll('[data-open-pdf]').forEach(button =>
-        button.addEventListener('click', () => pdfModal.showModal()));
-      pdfModal.querySelector('[data-close-pdf]').addEventListener('click', () => pdfModal.close());
-      /* Clicking the backdrop closes it: the dialog itself fills only part of
-         the box, so a click landing on the element is a click outside the sheet. */
-      pdfModal.addEventListener('click', event => {
-        if (event.target === pdfModal) pdfModal.close();
-      });
+      addEventListener('resize', drawTimeline);
+      drawTimeline();
     }
 
     /* The report arrives a section at a time, on each block's own position. */
@@ -848,25 +867,6 @@
       }, { rootMargin: '0px 0px -18% 0px' }).observe(sumReport);
     } else {
       sumBlocks.forEach(block => block.classList.add('is-in'));
-    }
-
-    const tlList = document.querySelector('.tl-list');
-    const tlEntries = [...document.querySelectorAll('.tl-entry')];
-    if (tlList && tlEntries.length && !reducedMotion.matches) {
-      let lit = 0;
-      const tlObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add('is-in');
-          observer.unobserve(entry.target);
-          lit = Math.max(lit, tlEntries.indexOf(entry.target) + 1);
-          tlList.style.setProperty('--lit', (lit / tlEntries.length).toFixed(3));
-        });
-      }, { rootMargin: '0px 0px -18% 0px' });
-      tlEntries.forEach(entry => tlObserver.observe(entry));
-    } else if (tlList) {
-      tlEntries.forEach(entry => entry.classList.add('is-in'));
-      tlList.style.setProperty('--lit', '1');
     }
 
     addEventListener('pointermove', moveCards, { passive: true });
