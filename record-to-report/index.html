@@ -86,23 +86,42 @@
 
   /* evidence sheet */
   .ev-src{ display: grid; grid-template-columns: 1fr 13cqw 20cqw 11cqw; align-items: baseline; gap: 1.2cqw;
-           padding: .8cqw 1.4cqw; }
+           padding: .65cqw 1.4cqw; }
   .ev-src + .ev-src{ border-top: 1px solid var(--slate-200); }
   .ev-src.head{ background: var(--slate-50); border-bottom: 1px solid var(--slate-200); }
   .ev-src.head span{ font-size: .95cqw; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--slate-500); }
   .ev-src .nm{ font-size: 1.35cqw; font-weight: 600; color: var(--care-700); }
   .ev-src .mt{ font-size: 1.2cqw; color: var(--slate-600); }
-  .ev-ref{ display: grid; grid-template-columns: 2.6cqw 1fr; gap: 1cqw; padding: .95cqw 0; }
+  .ev-ref{ display: grid; grid-template-columns: 2.6cqw 1fr; gap: 1cqw; padding: .7cqw 0; }
   .ev-ref + .ev-ref{ border-top: 1px solid var(--slate-200); }
   .ev-ref .no{ font-size: 1.3cqw; font-weight: 700; color: var(--care-600); }
   .ev-ref b{ font-size: 1.35cqw; font-weight: 600; }
   .ev-ref p{ margin: .2cqw 0 0; font-size: 1.2cqw; color: var(--slate-600); max-width: 78ch; }
   .ev-ref .used{ margin-top: .25cqw; font-size: 1.05cqw; color: var(--slate-400); }
-  .ev-gap{ display: grid; grid-template-columns: 2.6cqw 1fr; gap: 1cqw; padding: .9cqw 1.4cqw; }
+  .ev-gap{ display: grid; grid-template-columns: 2.6cqw 1fr; gap: 1cqw; padding: .75cqw 1.4cqw; }
   .ev-gap + .ev-gap{ border-top: 1px solid var(--slate-200); }
   .ev-gap i{ font-style: normal; font-size: 1.3cqw; font-weight: 700; color: var(--orange-700); }
   .ev-gap b{ font-size: 1.3cqw; font-weight: 600; }
   .ev-gap span{ font-size: 1.2cqw; color: var(--slate-600); }
+
+  .ev-prov{ display: grid; grid-template-columns: repeat(5, 1fr);
+            border: 1px solid var(--slate-200); border-radius: var(--rad-lg); overflow: hidden; }
+  .ev-prov .cell{ padding: .65cqw 1.2cqw; display: grid; gap: .1cqw; border-bottom: 1px solid var(--slate-200); }
+  .ev-prov .cell:not(:nth-child(5n+1)){ border-left: 1px solid var(--slate-200); }
+  .ev-prov .cell:nth-last-child(-n+5){ border-bottom: 0; }
+  .ev-prov .top{ display: flex; align-items: baseline; gap: .7cqw; }
+  .ev-prov .cd{ font-size: 1cqw; font-weight: 700; letter-spacing: .1em; color: var(--care-700); }
+  .ev-prov .vv{ font-size: 1.3cqw; font-weight: 700; letter-spacing: -.02em; }
+  .ev-prov .uu{ font-size: 1cqw; color: var(--slate-500); }
+  .ev-prov .lo{ font-size: 1cqw; color: var(--slate-400); }
+
+  .ev-trail{ display: grid; grid-template-columns: repeat(5, 1fr);
+             border: 1px solid var(--slate-200); border-radius: var(--rad-lg); overflow: hidden; }
+  .ev-trail > div{ padding: .9cqw 1.2cqw; display: grid; gap: .2cqw; align-content: start; }
+  .ev-trail > div + div{ border-left: 1px solid var(--slate-200); }
+  .ev-trail .t{ font-size: .9cqw; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--care-600); }
+  .ev-trail b{ font-size: 1.25cqw; font-weight: 600; }
+  .ev-trail span{ font-size: 1cqw; color: var(--slate-500); line-height: 1.35; }
 
   .cutline{
     z-index: 3; align-self: start; justify-self: stretch;
@@ -175,7 +194,7 @@
   .hs-meta dt{ font-size: .95cqw; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--slate-400); }
   .hs-meta dd{ margin: 0; font-size: 1.35cqw; font-weight: 600; color: var(--slate-800); }
 
-  .hs-body{ padding: 1.8cqw 2.6cqw; display: grid; gap: 1.8cqw; align-content: space-between; min-height: 0; }
+  .hs-body{ padding: 1.5cqw 2.6cqw; display: grid; gap: 1.3cqw; align-content: space-between; min-height: 0; }
   .hs-sec{ display: grid; gap: 1.1cqw; }
   .hs-sec > h2{ display: flex; align-items: center; gap: .9cqw; margin: 0;
                 font-size: 1.7cqw; font-weight: 700; letter-spacing: -.02em; }
@@ -347,7 +366,7 @@
               <div><dt>Specimen</dt><dd>422697</dd></div>
               <div><dt>Source records</dt><dd>4</dd></div>
               <div><dt>Fields used</dt><dd>15</dd></div>
-              <div><dt>References</dt><dd>4</dd></div>
+              <div><dt>References</dt><dd>3</dd></div>
               <div><dt>Open gaps</dt><dd>2</dd></div>
               <div><dt>Report</dt><dd>19 Sep 2026</dd></div>
             </dl>
@@ -367,7 +386,12 @@
             </section>
 
             <section class="hs-sec">
-              <h2><i>2</i> Literature behind the interpretation <u></u></h2>
+              <h2><i>2</i> Field provenance <u></u></h2>
+              <div class="ev-prov"><div class="cell"><span class="top"><span class="cd">HGB</span><span class="vv">14.2</span><span class="uu">g/dL</span></span><span class="lo">row 01</span></div><div class="cell"><span class="top"><span class="cd">RBC</span><span class="vv">4.63</span><span class="uu">×10¹²/L</span></span><span class="lo">row 02</span></div><div class="cell"><span class="top"><span class="cd">HCT</span><span class="vv">41.6</span><span class="uu">%</span></span><span class="lo">row 03</span></div><div class="cell"><span class="top"><span class="cd">MCV</span><span class="vv">89.9</span><span class="uu">fL</span></span><span class="lo">row 04</span></div><div class="cell"><span class="top"><span class="cd">MCH</span><span class="vv">30.7</span><span class="uu">pg</span></span><span class="lo">row 05</span></div><div class="cell"><span class="top"><span class="cd">MCHC</span><span class="vv">34.1</span><span class="uu">g/dL</span></span><span class="lo">row 06</span></div><div class="cell"><span class="top"><span class="cd">RDW</span><span class="vv">14.1</span><span class="uu">%</span></span><span class="lo">row 07</span></div><div class="cell"><span class="top"><span class="cd">WBC</span><span class="vv">6.3</span><span class="uu">×10⁹/L</span></span><span class="lo">row 08</span></div><div class="cell"><span class="top"><span class="cd">NEUT</span><span class="vv">52.6</span><span class="uu">%</span></span><span class="lo">row 09</span></div><div class="cell"><span class="top"><span class="cd">LYMPH</span><span class="vv">36.2</span><span class="uu">%</span></span><span class="lo">row 10</span></div><div class="cell"><span class="top"><span class="cd">MONO</span><span class="vv">6.3</span><span class="uu">%</span></span><span class="lo">row 11</span></div><div class="cell"><span class="top"><span class="cd">EOS</span><span class="vv">3.8</span><span class="uu">%</span></span><span class="lo">row 12</span></div><div class="cell"><span class="top"><span class="cd">BASO</span><span class="vv">1.1</span><span class="uu">%</span></span><span class="lo">row 13</span></div><div class="cell"><span class="top"><span class="cd">PLT</span><span class="vv">224</span><span class="uu">×10⁹/L</span></span><span class="lo">row 14</span></div><div class="cell"><span class="top"><span class="cd">ESR</span><span class="vv">3</span><span class="uu">mm/hr</span></span><span class="lo">row 15</span></div></div>
+            </section>
+
+            <section class="hs-sec">
+              <h2><i>3</i> Literature behind the interpretation <u></u></h2>
               <div>
                 <div class="ev-ref"><span class="no">1.</span><div>
                   <b>World Health Organization — Haemoglobin concentrations for the diagnosis of anaemia and assessment of severity</b>
@@ -384,16 +408,22 @@
                   <p>Method and interval basis for the Westergren ESR reported here.</p>
                   <div class="used">Used in: ESR · Body Systems</div>
                 </div></div>
-                <div class="ev-ref"><span class="no">4.</span><div>
-                  <b>Synthetic patient fixture</b>
-                  <p>Demonstration record. No real person, specimen or laboratory is represented anywhere in this report.</p>
-                  <div class="used">Used in: every value shown</div>
-                </div></div>
               </div>
             </section>
 
             <section class="hs-sec">
-              <h2><i>3</i> Gaps to resolve <u></u></h2>
+              <h2><i>4</i> Processing trail <u></u></h2>
+              <div class="ev-trail">
+                <div><span class="t">Received</span><b>19 Sep · 17:40</b><span>Printed report, 9 pages</span></div>
+                <div><span class="t">Parsed</span><b>15 analytes</b><span>Plus film comment and sample type</span></div>
+                <div><span class="t">Mapped</span><b>15 fields</b><span>Codes assigned, units normalised</span></div>
+                <div><span class="t">Checked</span><b>15 of 15</b><span>Each value against its printed interval</span></div>
+                <div><span class="t">Generated</span><b>Health Summary</b><span>7 sections from the mapped fields</span></div>
+              </div>
+            </section>
+
+            <section class="hs-sec">
+              <h2><i>5</i> Gaps to resolve <u></u></h2>
               <div class="hs-table">
                 <div class="ev-gap"><i>!</i><div><b>No prior panel on file.</b>
                   <span>A single draw cannot establish a trend, so this summary reports position within interval rather than direction of travel.</span></div></div>
