@@ -208,7 +208,7 @@ body{display:block;overflow:visible;overflow-x:clip}
 
 /* The rail sits just under the header rather than at the vertical middle -
    centring it left a dead band of half a screen above the cards. */
-.timeline-scene{--tl:0;--rail-y:clamp(228px,30vh,320px);height:540svh;position:relative;z-index:1;background:#f3ede2;color:var(--ink)}
+.timeline-scene{--tl:0;--deep:0;--rail-y:clamp(228px,30vh,320px);height:880svh;position:relative;z-index:1;background:#f3ede2;color:var(--ink)}
 .tl-stage{height:100svh;position:sticky;top:0;overflow:hidden}
 
 .tl-head{position:absolute;z-index:3;top:clamp(28px,5vh,56px);left:max(24px,calc((100vw - 1180px)/2));right:24px}
@@ -508,3 +508,98 @@ body{display:block;overflow:visible;overflow-x:clip}
 
 /* Parked outside the viewport until the collapse reaches them. */
 .card-field>.float-card.is-outer{opacity:0}
+
+/* ==========================================================================
+   Opening an entry.
+
+   Two entries are not just read in passing - the travel stops, the record
+   behind them opens to full size, and another beat of scroll turns it over to
+   the sources and the literature underneath. Then it closes and the timeline
+   carries on, so the detour costs scroll rather than skipping the line forward.
+   ========================================================================== */
+
+/* The line itself recedes while an entry is open. */
+.tl-list,.tl-rail,.tl-count{opacity:calc(1 - var(--deep) * .88);
+  filter:blur(calc(var(--deep) * 4px));transition:none}
+.tl-head{opacity:calc(1 - var(--deep) * .75)}
+
+.tl-deep{--zoom:0;--flip:0;width:min(780px,90vw);position:absolute;z-index:6;top:50%;left:50%;
+  translate:-50% -50%;scale:calc(.62 + var(--zoom) * .38);opacity:var(--zoom);
+  perspective:1800px;pointer-events:none;visibility:hidden}
+.tl-deep-face{width:100%;position:absolute;top:50%;left:0;padding:clamp(26px,3.4vw,44px);
+  translate:0 -50%;border:1px solid #e3d7c2;border-radius:22px;background:#fffdf9;
+  box-shadow:0 34px 80px rgba(60,52,38,.22);backface-visibility:hidden}
+.tl-deep-front{transform:rotateY(calc(var(--flip) * -180deg))}
+.tl-deep-back{transform:rotateY(calc(180deg - var(--flip) * 180deg))}
+
+.tl-deep-eyebrow{margin:0 0 12px;color:var(--teal);font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase}
+.tl-deep h3{margin:0;font-size:clamp(24px,3vw,38px);font-weight:600;letter-spacing:-.03em;line-height:1.06}
+.tl-deep-body{max-width:56ch;margin:14px 0 0;color:var(--muted);font-size:16px;line-height:1.6}
+.tl-deep-vals{display:flex;flex-wrap:wrap;gap:16px 40px;margin:22px 0 0;padding-top:18px;border-top:1px solid #f0e6d6}
+.tl-deep-vals div{margin:0}
+.tl-deep-vals dt{color:#a8977c;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+.tl-deep-vals dd{margin:5px 0 0;font-size:19px;font-weight:600;letter-spacing:-.01em}
+.tl-deep-cue{margin:24px 0 0;color:#a8977c;font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+
+.tl-deep-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:26px 38px}
+.tl-deep-cols h4{margin:0 0 12px;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#a8977c}
+.tl-deep-cols ul{display:flex;flex-direction:column;gap:13px;margin:0;padding:0;list-style:none}
+.tl-deep-cols li{padding-bottom:13px;border-bottom:1px solid #f0e6d6}
+.tl-deep-cols li:last-child{border-bottom:0;padding-bottom:0}
+.tl-deep-cols b{display:block;font-size:15px;font-weight:600}
+.tl-deep-cols span{display:block;margin-top:3px;color:var(--muted);font-size:13px;line-height:1.45}
+
+@media(prefers-reduced-motion:reduce){.tl-deep-face{transform:none}}
+
+/* ==========================================================================
+   N1 at work.
+
+   Two short beats where the product is doing something: reading the record
+   before the timeline, drafting the report after it. Both are scrubbed, so the
+   lines land as you arrive at them rather than on a timer you might miss.
+
+   The mark is three rings at different rates around a core that breathes -
+   machine-like without resorting to a spinner, which would say "waiting"
+   rather than "working".
+   ========================================================================== */
+
+.ai-scene{--ai:0;height:190svh;position:relative;z-index:1;background:#f3ede2;color:var(--ink)}
+.ai-stage{height:100svh;position:sticky;top:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(14px,2vh,22px);padding:clamp(40px,8vh,90px) 24px;overflow:hidden;text-align:center}
+
+.ai-mark{width:clamp(78px,10vmin,112px);aspect-ratio:1;display:grid;place-items:center;margin-bottom:clamp(8px,2vh,20px)}
+.ai-mark>*{grid-area:1/1;border-radius:50%}
+.ai-ring{width:100%;aspect-ratio:1;border:1.5px solid rgba(46,125,120,.34);border-top-color:var(--teal);animation:ai-spin 3.4s linear infinite}
+.ai-ring-2{width:72%;border-color:rgba(46,125,120,.22);border-right-color:var(--teal);animation-duration:2.3s;animation-direction:reverse}
+.ai-ring-3{width:46%;border-color:rgba(46,125,120,.16);border-bottom-color:var(--teal);animation-duration:1.6s}
+.ai-core{width:15%;aspect-ratio:1;background:var(--teal);box-shadow:0 0 0 6px rgba(46,125,120,.12);animation:ai-breathe 2.2s ease-in-out infinite}
+@keyframes ai-spin{to{rotate:360deg}}
+@keyframes ai-breathe{0%,100%{scale:1;opacity:.85}50%{scale:1.35;opacity:1}}
+
+.ai-eyebrow{margin:0;color:var(--teal);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.ai-title{max-width:16ch;margin:0;font-size:clamp(28px,4vw,54px);font-weight:400;line-height:1.04;letter-spacing:-.04em}
+
+.ai-lines{display:flex;flex-direction:column;gap:11px;margin:clamp(12px,2vh,24px) 0 0;padding:0;list-style:none;text-align:left}
+.ai-lines li{--in:clamp(0,calc((var(--ai) - var(--s)) / .08),1);
+  display:flex;gap:11px;align-items:center;opacity:calc(var(--in) * .55 + var(--in) * .45);
+  translate:0 calc((1 - var(--in)) * 8px);color:var(--muted);font-size:clamp(14px,1.4vw,17px)}
+.ai-lines i{width:7px;height:7px;flex:none;border-radius:50%;background:var(--teal);scale:var(--in)}
+.ai-lines span{opacity:calc(.45 + var(--in) * .55)}
+
+/* The draft, growing toward you at the end of the beat - it hands off to the
+   report section immediately below. */
+.ai-draft-card{--grow:clamp(0,calc((var(--ai) - .62) / .3),1);
+  width:min(420px,84vw);margin-top:clamp(14px,3vh,30px);padding:18px 20px;border:1px solid #e3d7c2;border-radius:16px;
+  background:#fffdf9;box-shadow:0 22px 52px rgba(60,52,38,.18);text-align:left;
+  opacity:var(--grow);scale:calc(.82 + var(--grow) * .5)}
+.ai-draft-head{display:block;margin-bottom:8px;color:var(--teal);font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+.ai-draft-card b{display:block;font-size:17px;font-weight:600;letter-spacing:-.01em}
+.ai-draft-rows{display:flex;flex-direction:column;gap:6px;margin-top:12px}
+.ai-draft-rows i{height:6px;border-radius:99px;background:#ece0cc}
+.ai-draft-rows i:nth-child(1){width:92%}
+.ai-draft-rows i:nth-child(2){width:78%}
+.ai-draft-rows i:nth-child(3){width:86%}
+.ai-draft-rows i:nth-child(4){width:54%;background:#d8e9e2}
+
+@media(prefers-reduced-motion:reduce){
+  .ai-ring,.ai-core{animation:none}
+}
