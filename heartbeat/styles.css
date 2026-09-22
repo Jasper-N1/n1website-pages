@@ -206,10 +206,7 @@ body{display:block;overflow:visible;overflow-x:clip}
 
 .tl-list{margin:0;padding:0 0 0 clamp(26px,4vw,44px);position:relative;list-style:none}
 /* The spine draws itself down the section as you travel. */
-/* Lit as far as the last revealed dot, so the line never runs ahead of the
-   entry it belongs to. */
 .tl-list{--lit:0}
-.tl-list::before{width:2px;position:absolute;top:6px;bottom:6px;left:0;background:linear-gradient(#cdbfa8 0%,#cdbfa8 calc(var(--lit) * 100%),rgba(205,191,168,.2) calc(var(--lit) * 100%));transition:background .6s ease;content:""}
 
 /* One short move, once. Scrubbing this against scroll is what made it feel
    unsteady - the entry arrived on a ratio rather than on where it actually
@@ -265,4 +262,176 @@ body{display:block;overflow:visible;overflow-x:clip}
 @media(prefers-reduced-motion:reduce){
   .tl-entry,.tl-entry .tl-body>*{opacity:1;translate:none;transition:none}
   .tl-dot{scale:1;background:var(--teal);transition:none}
+}
+
+/* ==========================================================================
+   The thread.
+
+   One line drawn down the whole record - timeline, summary and everything
+   after it - in a light teal. It follows the scroll position directly rather
+   than through the eased loop: a progress line that lags your scroll is the
+   thing that reads as wrong, and it is a different problem from content
+   easing. --thread-x matches the timeline's gutter, so the dots sit on it.
+   ========================================================================== */
+
+.thread-run{--draw:0;--thread-x:max(24px,calc((100vw - 920px) / 2));position:relative}
+/* Above the section backgrounds, or each one paints over it - the whole point
+   is that it runs through them. Decorative, so it never takes a click. */
+.thread-run::before{width:2px;position:absolute;z-index:3;top:0;bottom:0;left:var(--thread-x);
+  background:linear-gradient(#7fc0ba 0%,#7fc0ba calc(var(--draw) * 100%),rgba(127,192,186,.18) calc(var(--draw) * 100%));
+  pointer-events:none;content:""}
+.thread-run>*{position:relative;z-index:1}
+.tl-dot{z-index:4}
+.tl-dot{background:#7fc0ba}
+.tl-entry.is-in .tl-dot{background:var(--teal)}
+
+/* ==========================================================================
+   Health summary - the report the record adds up to, in the voice the real
+   one uses: one metabolic story, named alerts, and the gaps stated rather
+   than smoothed over.
+   ========================================================================== */
+
+.summary-scene{position:relative;padding:clamp(20px,4vh,48px) max(24px,calc((100vw - 920px)/2)) clamp(80px,12vh,140px);background:#f3ede2;color:var(--ink)}
+.sum-head{max-width:640px;margin:0 0 clamp(26px,4vh,42px);padding-left:clamp(26px,4vw,44px)}
+.sum-eyebrow{margin:0 0 12px;color:var(--teal);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+.sum-head h2{margin:0;font-size:clamp(26px,3.2vw,44px);font-weight:400;line-height:1.06;letter-spacing:-.035em}
+
+.sum-report{margin-left:clamp(26px,4vw,44px);border:1px solid #e3d7c2;border-radius:18px;background:#fffdf9;box-shadow:0 18px 44px rgba(60,52,38,.1);overflow:hidden}
+.sum-top{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:20px clamp(20px,3vw,32px);border-bottom:1px solid #eee3d2;background:#fbf6ec}
+.sum-top>div{display:flex;align-items:center;gap:11px;flex-wrap:wrap}
+.sum-mark{width:26px;height:26px;border-radius:7px;background:var(--teal)}
+.sum-top b{font-size:17px;font-weight:600}
+.sum-top em{color:var(--muted);font-size:13px;font-style:normal}
+.sum-status{padding:6px 11px;border-radius:999px;background:#ece0cc;color:#6a5b42;font-size:11px;font-weight:600;letter-spacing:.06em}
+
+.sum-block{padding:clamp(22px,3vw,32px);border-bottom:1px solid #f0e6d6}
+.sum-label{margin:0 0 7px;color:#a8977c;font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.sum-block h3{margin:0 0 12px;font-size:clamp(18px,2vw,23px);font-weight:600;letter-spacing:-.02em}
+.sum-block p{max-width:62ch;margin:0 0 12px;font-size:16px;line-height:1.62}
+.sum-block p:last-child{margin-bottom:0}
+.sum-block mark{padding:1px 4px;border-radius:4px;background:#d8e9e2;color:inherit}
+
+.sum-alerts{display:flex;flex-direction:column;gap:8px;margin:16px 0 0;padding:0;list-style:none}
+.sum-alerts li{display:flex;gap:10px;align-items:baseline;padding:10px 13px;border-radius:10px;font-size:14px}
+.sum-alerts b{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+.sum-alerts .is-watch{background:#fbeede;color:#7a5a20}
+.sum-alerts .is-ok{background:#e6f2ec;color:#2b6b52}
+
+.sum-systems{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px 28px;margin:0}
+.sum-systems div{margin:0}
+.sum-systems dt{color:var(--muted);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+.sum-systems dd{margin:6px 0 0;font-size:15px}
+.sys-bar{display:block;height:5px;margin-top:9px;border-radius:99px;background:#ece0cc}
+.sys-bar i{display:block;width:var(--v);height:100%;border-radius:99px;background:#c9a24a}
+.sys-bar.is-good i{background:var(--teal)}
+.sys-bar.is-watch i{background:#c0714f}
+
+.sum-recs{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:12px}
+.sum-recs li{font-size:16px}
+.sum-recs b{display:block;font-weight:600}
+.sum-recs span{display:block;margin-top:3px;color:var(--muted);font-size:14px}
+.sum-gaps{background:#fbf6ec}
+
+.sum-foot{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:18px clamp(20px,3vw,32px);color:var(--muted);font-size:13px}
+.sum-open{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:999px;background:var(--teal);color:#fff;font-size:13px;font-weight:600;text-decoration:none;transition:background .18s ease}
+.sum-open:hover{background:#25655f}
+.sum-open:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+
+@media(max-width:620px){
+  .sum-report{margin-left:0}
+  .sum-head{padding-left:0}
+  .thread-run{--thread-x:10px}
+}
+
+/* ==========================================================================
+   The clinician comes back - a second thread, the same shape as the first.
+   ========================================================================== */
+
+.chat-two{height:300svh}
+.chat-two .msg-in::before{background-image:url("../assets/avatar-doctor.jpg")}
+
+/* The attachment reads as a file, not a bubble. */
+.msg-file{padding:6px;background:#1f6a66}
+.pdf-pill{display:flex;gap:12px;align-items:center;width:100%;padding:13px 15px;border:0;border-radius:19px;background:#fff;color:var(--ink);font:inherit;text-align:left;cursor:pointer;transition:box-shadow .18s ease,translate .18s ease}
+.pdf-pill:hover{box-shadow:0 6px 18px rgba(31,52,48,.18);translate:0 -1px}
+.pdf-pill:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+.pdf-icon{flex:none;padding:6px 8px;border-radius:7px;background:#b3452f;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em}
+.pdf-meta b{display:block;font-size:15px;font-weight:600}
+.pdf-meta em{display:block;margin-top:2px;color:var(--muted);font-size:12px;font-style:normal}
+.pdf-go{margin-left:auto;color:var(--teal);font-size:18px}
+
+.pdf-modal{max-width:min(620px,92vw);width:100%;padding:0;border:0;border-radius:18px;background:transparent;overflow:visible}
+.pdf-modal::backdrop{background:rgba(9,40,38,.62);backdrop-filter:blur(3px)}
+.pdf-sheet{border-radius:18px;background:#fff;box-shadow:0 34px 80px rgba(0,0,0,.4);overflow:hidden}
+.pdf-sheet header{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:17px 20px;border-bottom:1px solid #eef2f0;background:#f7faf9}
+.pdf-sheet header>div{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.pdf-sheet-mark{width:22px;height:22px;border-radius:6px;background:var(--teal)}
+.pdf-sheet b{font-size:15px;font-weight:600}
+.pdf-sheet em{color:var(--muted);font-size:12px;font-style:normal}
+.pdf-close{width:32px;height:32px;border:0;border-radius:50%;background:#eef2f0;color:var(--ink);font-size:20px;line-height:1;cursor:pointer}
+.pdf-close:hover{background:#e0e7e4}
+.pdf-page{padding:26px 28px 22px}
+.pdf-kicker{margin:0 0 9px;color:var(--teal);font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+.pdf-page h4{margin:0 0 12px;font-size:21px;font-weight:600;letter-spacing:-.02em}
+.pdf-page>p{max-width:60ch;margin:0 0 11px;color:var(--ink);font-size:14px;line-height:1.6}
+.pdf-rows{margin:16px 0 0;border-top:1px solid #eef2f0}
+.pdf-rows p{display:grid;grid-template-columns:1fr 92px 74px 96px;gap:8px;align-items:center;margin:0;padding:9px 0;border-bottom:1px solid #f2f5f4;font-size:13px}
+.pdf-rows b{font-weight:500}
+.pdf-rows span{font-weight:600}
+.pdf-rows em{color:var(--muted);font-size:11px;font-style:normal}
+.pdf-rows i{font-size:10px;font-style:normal;font-weight:600;letter-spacing:.05em;text-align:right;color:#2b6b52}
+.pdf-rows i.is-out{color:#b3452f}
+.pdf-foot{margin:16px 0 0;color:var(--muted);font-size:11px}
+
+/* ==========================================================================
+   Keep the proof. Elevate the promise.
+
+   One card turned over twice: the report, then the source under each claim,
+   then the standard under the source. Each face owns a slice of --flip and
+   rotates through it, so the turn is yours to drive.
+   ========================================================================== */
+
+.flip-scene{--flip:0;height:340svh;position:relative;background:#f3ede2;color:var(--ink)}
+.flip-stage{height:100svh;position:sticky;top:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(20px,4vh,40px);padding:clamp(40px,7vh,80px) 24px;overflow:hidden;perspective:1600px}
+.flip-copy h2{max-width:760px;margin:0;font-size:clamp(26px,3.2vw,46px);font-weight:400;line-height:1.06;letter-spacing:-.04em;text-align:center}
+
+.flip-deck{width:min(560px,92vw);position:relative;display:grid;place-items:stretch;transform-style:preserve-3d}
+.flip-deck>*{grid-area:1/1}
+
+.flip-face{
+  /* in from +90deg, flat at its centre, out to -90deg */
+  --a:calc((var(--flip) - var(--c)) * -240);
+  --near:clamp(0,calc((var(--flip) - (var(--c) - .26)) / .12),1);
+  --far:clamp(0,calc(((var(--c) + .26) - var(--flip)) / .12),1);
+  padding:clamp(22px,3vw,34px);border:1px solid #e3d7c2;border-radius:20px;background:#fffdf9;
+  box-shadow:0 26px 60px rgba(60,52,38,.18);
+  transform:rotateY(calc(var(--a) * 1deg));opacity:calc(var(--near) * var(--far));
+  backface-visibility:hidden;will-change:transform,opacity}
+
+.fc-step{margin:0 0 10px;color:#a8977c;font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.flip-face h3{margin:0;font-size:clamp(20px,2.3vw,27px);font-weight:600;letter-spacing:-.02em}
+.fc-sub{margin:6px 0 18px;color:var(--muted);font-size:15px}
+.fc-kicker{margin:0 0 10px;color:var(--teal);font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+.fc-report h4{margin:0 0 10px;font-size:18px;font-weight:600}
+.fc-report p{margin:0;font-size:14px;line-height:1.6}
+.fc-report mark{padding:1px 4px;border-radius:4px;background:#d8e9e2;color:inherit}
+.fc-rows{display:flex;flex-wrap:wrap;gap:10px 24px;margin-top:16px;padding-top:14px;border-top:1px solid #f0e6d6}
+.fc-rows p{margin:0}
+.fc-rows b{display:block;color:var(--muted);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+.fc-rows span{display:block;margin-top:3px;font-size:17px;font-weight:600}
+.fc-sources ul,.fc-research ul{display:flex;flex-direction:column;gap:11px;margin:0;padding:0;list-style:none}
+.fc-sources li,.fc-research li{padding-bottom:11px;border-bottom:1px solid #f0e6d6}
+.fc-sources li:last-child,.fc-research li:last-child{border-bottom:0;padding-bottom:0}
+.fc-sources b,.fc-research b{display:block;font-size:14px;font-weight:600}
+.fc-sources span,.fc-research span{display:block;margin-top:3px;color:var(--teal);font-size:12px;font-weight:600}
+.fc-research span{color:var(--muted);font-weight:500}
+
+.flip-cue{margin:0;color:#a8977c;font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+
+@media(max-width:620px){
+  .flip-scene{height:300svh}
+  .chat-two{height:280svh}
+}
+@media(prefers-reduced-motion:reduce){
+  .flip-face{transform:none}
 }
