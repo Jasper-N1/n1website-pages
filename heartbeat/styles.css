@@ -228,11 +228,13 @@ body{display:block;overflow:visible;overflow-x:clip}
 .tl-entry.is-in .tl-dot{background:var(--teal);scale:1}
 .tl-entry time{color:var(--muted);font-size:14px;font-weight:600;letter-spacing:.04em}
 .tl-body{padding-top:1px}
-.tl-tag{display:inline-block;margin-bottom:9px;padding:4px 9px;border-radius:999px;background:#e5dac6;color:#6a5b42;font-size:10px;font-weight:600;letter-spacing:.11em;text-transform:uppercase}
+.tl-tag{display:inline-block;margin-bottom:9px;padding:4px 9px;border-radius:999px;background:#e5dac6;color:#6a5b42;font-size:10px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;text-decoration:none;transition:background .18s ease,color .18s ease}
+.tl-tag:hover{background:#d8c9ab;color:#4e4230}
+.tl-tag:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
 .tl-body b{display:block;font-size:clamp(19px,2vw,25px);font-weight:600;letter-spacing:-.02em}
 .tl-body p{margin:7px 0 0;max-width:46ch;color:var(--muted);font-size:16px;line-height:1.55}
-.tl-source{display:inline-flex;align-items:center;gap:6px;margin-top:13px;padding:7px 12px;border-radius:999px;color:var(--green);background:#fffdf9;font-size:12px;font-weight:600;text-decoration:none}
-.tl-source:hover{background:#fff}
+.tl-source{display:inline-flex;align-items:center;gap:6px;margin-top:13px;transition:background .18s ease,box-shadow .18s ease;padding:7px 12px;border-radius:999px;color:var(--green);background:#fffdf9;font-size:12px;font-weight:600;text-decoration:none}
+.tl-source:hover{background:#fff;box-shadow:0 1px 4px rgba(60,52,38,.14)}
 .tl-source:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
 
 @media(max-width:620px){
@@ -250,9 +252,12 @@ body{display:block;overflow:visible;overflow-x:clip}
    column width and tower over the entry. */
 .tl-chart{max-width:320px;margin:16px 0 0;padding:11px 13px 9px;border:1px solid #e3d7c2;border-radius:12px;background:#fffdf9}
 .tl-chart svg{width:100%;height:auto;display:block}
-.tlc-grid{stroke:#e6dcca;stroke-width:1}
-.tlc-line{fill:none;stroke:var(--teal);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
-.tl-chart circle{fill:var(--teal)}
+/* The platform's sparkline language, stylized: a soft reference band behind a
+   smoothed line at 60% opacity, and a dot only where a reading falls outside
+   the band. Nothing in range is marked, so the eye goes straight to what is. */
+.tlc-band{fill:#d8e9e2}
+.tlc-line{fill:none;stroke:var(--teal);stroke-opacity:.6;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.tl-chart circle{fill:#b3452f}
 .tl-chart figcaption{margin-top:7px;color:var(--muted);font-size:11px;letter-spacing:.04em}
 .tl-foot{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;margin:15px 0 0}
 .tl-by{color:#8c8375;font-size:12px}
