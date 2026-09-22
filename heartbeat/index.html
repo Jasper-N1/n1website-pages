@@ -821,19 +821,35 @@
     }
 
     /* The loader stands in for the content rather than sitting in a section of
-       its own: you arrive, N1 is working, and about a second later the thing it
-       was working on is there instead. */
+       its own: you arrive, N1 is working, and a couple of seconds later the
+       thing it was working on is there instead.
+
+       Two ways out, because the timer alone was not enough. A fast scroll can
+       carry you past a threshold without the observer ever reporting it, and a
+       0.25 threshold made that easy - so it fires on any intersection at all,
+       and the scroll driver below hands over the moment you are actually into
+       the section. Whichever comes first wins; the loader can never outlast the
+       content it is standing in for. */
+    let timelineReady = () => {};
     document.querySelectorAll('.ai-load').forEach(load => {
       const host = load.closest('.tl-stage');
       if (!host) return;
       host.style.setProperty('--ready', '0');
+      let handoverTimer = 0;
+      let handedOver = false;
+      timelineReady = () => {
+        if (handedOver) return;
+        handedOver = true;
+        clearTimeout(handoverTimer);
+        host.style.setProperty('--ready', '1');
+      };
       new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
           if (!entry.isIntersecting) return;
           observer.disconnect();
-          setTimeout(() => host.style.setProperty('--ready', '1'), reducedMotion.matches ? 0 : 2300);
+          handoverTimer = setTimeout(timelineReady, reducedMotion.matches ? 0 : 2300);
         });
-      }, { threshold: .25 }).observe(host);
+      }, { threshold: 0 }).observe(host);
     });
 
     const tlScene = document.querySelector('.timeline-scene');
@@ -861,6 +877,8 @@
       const drawTimeline = () => {
         const travel = tlScene.offsetHeight - innerHeight;
         const progress = travel > 0 ? clamp(-tlScene.getBoundingClientRect().top / travel) : 0;
+        /* Past the first sliver of the section the line is what you came for. */
+        if (progress > .035) timelineReady();
         const at = progress * totalLen;
         let acc = 0;
         let pos = 0;
