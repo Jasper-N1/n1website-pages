@@ -393,6 +393,8 @@
     </article>
   </section>
 
+  </div>
+
   <section class="chat-scene chat-two" aria-label="The clinician comes back">
     <div class="chat-stage">
     <div class="chat-thread chat-thread-two">
@@ -749,62 +751,60 @@
        the entry actually is - and un-writing itself when you scroll back up -
        is what made it feel unsteady. The spine lights to the last revealed dot,
        so line and dots always agree. */
-    /* A conversation is not a scrubbable object - you cannot un-say a message.
-       Each thread waits until it is reached, then plays itself through once, at
-       its own pace, the way a real one arrives. */
-    document.querySelectorAll('.chat-stage').forEach(stage => {
-      const PLAY_MS = 11000;
-      let started = 0;
-      const run = now => {
-        const played = clamp((now - started) / PLAY_MS);
-        stage.style.setProperty('--chat', played.toFixed(4));
-        if (played < 1) requestAnimationFrame(run);
-      };
-      if (reducedMotion.matches) {
-        stage.style.setProperty('--chat', '1');
-        return;
-      }
-      new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) return;
-          observer.disconnect();
-          started = performance.now();
-          requestAnimationFrame(run);
+    /* Scroll-scrubbed, with the typing pauses kept. Every thread, not just the
+       first: querySelector returns one node, which is why the second thread sat
+       empty once it existed. */
+    const chatStages = [...document.querySelectorAll('.chat-scene')].map(scene => ({
+      scene,
+      stage: scene.querySelector('.chat-stage'),
+    }));
+    if (chatStages.length) {
+      let chatFrame = 0;
+      const drawChats = () => {
+        chatStages.forEach(({ scene, stage }) => {
+          if (stage) stage.style.setProperty('--chat', trackProgress(scene).toFixed(4));
         });
-      }, { threshold: .3 }).observe(stage);
-    });
+      };
+      addEventListener('scroll', () => {
+        cancelAnimationFrame(chatFrame);
+        chatFrame = requestAnimationFrame(drawChats);
+      }, { passive: true });
+      addEventListener('resize', drawChats);
+      drawChats();
+    }
 
     const threadRun = document.querySelector('.thread-run');
     if (threadRun) {
       let threadFrame = 0;
+      /* The line belongs to the record: it starts on the first dot and stops
+         where the report ends, rather than running the height of the wrapper. */
+      const measureThread = () => {
+        const runRect = threadRun.getBoundingClientRect();
+        const firstDot = threadRun.querySelector('.tl-dot');
+        const report = threadRun.querySelector('.sum-report');
+        if (firstDot) {
+          const dot = firstDot.getBoundingClientRect();
+          threadRun.style.setProperty('--thread-top', `${dot.top - runRect.top + dot.height / 2}px`);
+        }
+        if (report) {
+          threadRun.style.setProperty('--thread-bottom', `${Math.max(0, runRect.bottom - report.getBoundingClientRect().bottom)}px`);
+        }
+      };
       const drawThread = () => {
         const rect = threadRun.getBoundingClientRect();
         const travel = rect.height - innerHeight * .5;
         const past = innerHeight * .5 - rect.top;
         threadRun.style.setProperty('--draw', clamp(travel > 0 ? past / travel : 0).toFixed(4));
       };
+      measureThread();
+      addEventListener('resize', measureThread);
+      addEventListener('load', measureThread);
       addEventListener('scroll', () => {
         cancelAnimationFrame(threadFrame);
         threadFrame = requestAnimationFrame(drawThread);
       }, { passive: true });
       addEventListener('resize', drawThread);
       drawThread();
-    }
-
-    const flipScene = document.querySelector('.flip-scene');
-    if (flipScene) {
-      let flipFrame = 0;
-      const drawFlip = () => {
-        const travel = flipScene.offsetHeight - innerHeight;
-        const p = travel > 0 ? clamp(-flipScene.getBoundingClientRect().top / travel) : 0;
-        flipScene.style.setProperty('--flip', p.toFixed(4));
-      };
-      addEventListener('scroll', () => {
-        cancelAnimationFrame(flipFrame);
-        flipFrame = requestAnimationFrame(drawFlip);
-      }, { passive: true });
-      addEventListener('resize', drawFlip);
-      drawFlip();
     }
 
     const pdfModal = document.querySelector('.pdf-modal');
@@ -817,6 +817,21 @@
       pdfModal.addEventListener('click', event => {
         if (event.target === pdfModal) pdfModal.close();
       });
+    }
+
+    /* The report arrives a section at a time, on each block's own position. */
+    const sumBlocks = [...document.querySelectorAll('.sum-block')];
+    if (sumBlocks.length && !reducedMotion.matches) {
+      const sumObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-in');
+          observer.unobserve(entry.target);
+        });
+      }, { rootMargin: '0px 0px -14% 0px' });
+      sumBlocks.forEach(block => sumObserver.observe(block));
+    } else {
+      sumBlocks.forEach(block => block.classList.add('is-in'));
     }
 
     const tlList = document.querySelector('.tl-list');
