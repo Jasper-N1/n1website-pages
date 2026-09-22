@@ -80,27 +80,13 @@
   .light .copy{ color: var(--sand-950); }
   .light .copy h1{ text-shadow: none; }
 
-  /* ================= 1 · focal — aurora colour, focus behaviour ================= */
+  /* ================= 1 · focal — the focus setup, aurora colour ================= */
   .s-focal{ background: var(--care-900); }
-  .s-focal i{ position: absolute; display: block; animation: float 1s ease-in-out infinite; }
-  .s-focal i b{
-    display: block; width: 100%; height: 100%;
-    border-radius: 46% 54% 52% 48% / 50% 46% 54% 50%;
-    animation: resolve 10s ease-in-out infinite;
-  }
-  .s-focal i:nth-child(1){ width: 52vmin; height: 52vmin; left: 6vw;  top: 12vh; animation-duration: 27s; }
-  .s-focal i:nth-child(2){ width: 44vmin; height: 44vmin; right: 9vw; top: 8vh;  animation-duration: 33s; animation-direction: reverse; }
-  .s-focal i:nth-child(3){ width: 48vmin; height: 48vmin; left: 30vw; bottom: -6vh; animation-duration: 24s; }
-  .s-focal i:nth-child(4){ width: 34vmin; height: 34vmin; right: 24vw; bottom: 6vh; animation-duration: 30s; animation-direction: reverse; }
-  .s-focal i:nth-child(1) b{ background: var(--care-500); }
-  .s-focal i:nth-child(2) b{ background: var(--moss-600); animation-delay: -3.3s; }
-  .s-focal i:nth-child(3) b{ background: var(--azure-600); animation-delay: -6.6s; }
-  .s-focal i:nth-child(4) b{ background: var(--moss-400); opacity: .75; animation-delay: -1.7s; }
-  @keyframes float{ 50%{ transform: translate3d(7vw, 6vh, 0) } }
-  @keyframes resolve{
-    0%, 100%{ filter: blur(60px); transform: scale(1.16); opacity: .8 }
-    50%{ filter: blur(3px); transform: scale(.97); opacity: 1 }
-  }
+  .s-focal i{ position: absolute; border-radius: 46% 54% 52% 48% / 50% 46% 54% 50%; display: block;
+              animation: sharpen 9s ease-in-out infinite; }
+  .s-focal i:nth-child(1){ width: 46vmin; height: 46vmin; left: 9vw; top: 16vh; background: var(--care-500); }
+  .s-focal i:nth-child(2){ width: 34vmin; height: 34vmin; right: 12vw; top: 22vh; background: var(--azure-600); animation-delay: -3s; }
+  .s-focal i:nth-child(3){ width: 40vmin; height: 40vmin; left: 38vw; bottom: 6vh; background: var(--moss-600); animation-delay: -6s; }
 
   /* ================= 2 · aurora ================= */
   .s-aurora{ background: var(--care-900); }
@@ -167,9 +153,9 @@
   @keyframes rise{ from{ transform: scaleY(.18) } to{ transform: scaleY(1) } }
 
   @media (prefers-reduced-motion: reduce){
-    .s-focal i, .s-focal i b, .s-aurora i, .s-rings .r, .s-streams .l,
+    .s-focal i, .s-aurora i, .s-rings .r, .s-streams .l,
     .s-grid .g b, .s-focus i, .s-orbit .o, .s-bars .b{ animation: none !important; }
-    .s-focus i, .s-focal i b{ filter: blur(8px); }
+    .s-focus i, .s-focal i{ filter: blur(8px); }
   }
 </style>
 
@@ -188,7 +174,7 @@
 </div>
 
 <main class="stage" id="stage">
-  <div class="scene s-focal" data-i="0"><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i></div>
+  <div class="scene s-focal" data-i="0"><i></i><i></i><i></i></div>
 
   <div class="scene s-aurora" data-i="1"><i></i><i></i><i></i><i></i></div>
   <div class="scene s-rings" data-i="2"></div>
