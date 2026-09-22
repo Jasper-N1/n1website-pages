@@ -35,7 +35,8 @@
 
   /* ---------- switcher ---------- */
   .bar{
-    position: fixed; z-index: 30; inset: 0 0 auto; display: flex; align-items: center; gap: 16px;
+    position: fixed; z-index: 30; inset: 0 0 auto; display: flex; align-items: center;
+    flex-wrap: wrap; gap: 8px 14px;
     padding: 10px 16px calc(10px + env(safe-area-inset-top, 0px));
     background: rgb(0 0 0 / .32); backdrop-filter: blur(14px);
     border-bottom: 1px solid rgb(255 255 255 / .12);
@@ -43,8 +44,7 @@
   .bar .mark{ display: flex; align-items: center; gap: 8px; flex: none; }
   .bar .mark svg{ display: block; width: 22px; height: 22px; }
   .bar .mark b{ font-size: 13px; font-weight: 700; letter-spacing: -.02em; }
-  .tabs{ display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; }
-  .tabs::-webkit-scrollbar{ display: none; }
+  .tabs{ display: flex; flex-wrap: wrap; gap: 6px; min-width: 0; }
   .tabs button{
     flex: none; font: inherit; font-size: 11.5px; font-weight: 600; letter-spacing: .01em;
     color: rgb(255 255 255 / .62); background: transparent; cursor: pointer;
@@ -56,7 +56,7 @@
   .tabs button[aria-selected="true"]{ background: #fff; border-color: #fff; color: #10181b; }
   .tabs button:focus-visible{ outline: 2px solid #fff; outline-offset: 2px; }
   .hint{ margin-left: auto; flex: none; font-size: 11px; color: rgb(255 255 255 / .45); }
-  @media (max-width: 760px){ .hint{ display: none; } }
+  @media (max-width: 1100px){ .hint{ display: none; } }
 
   /* ---------- stage ---------- */
   .stage{ position: relative; height: 100%; overflow: hidden; isolation: isolate; }
@@ -67,7 +67,7 @@
   .copy{
     position: relative; z-index: 10; height: 100%;
     display: grid; align-content: center; justify-items: center; gap: 22px;
-    text-align: center; padding: 96px 20px 64px;
+    text-align: center; padding: calc(var(--barh, 64px) + 28px) 20px 64px;
     pointer-events: none;
   }
   .copy h1{
@@ -444,6 +444,13 @@
     if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
     show((running + (e.key === "ArrowRight" ? 1 : NAMES.length - 1)) % NAMES.length);
   });
+
+  var bar = document.querySelector(".bar");
+  function measureBar(){
+    document.documentElement.style.setProperty("--barh", Math.round(bar.getBoundingClientRect().height) + "px");
+  }
+  measureBar();
+  window.addEventListener("resize", measureBar);
 
   var resizeTimer;
   window.addEventListener("resize", function(){
