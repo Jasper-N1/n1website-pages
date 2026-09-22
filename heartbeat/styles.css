@@ -690,3 +690,13 @@ body{display:block;overflow:visible;overflow-x:clip}
 .tl-veil{position:absolute;z-index:9;inset:0;background:#f3ede2;pointer-events:none;
   opacity:calc(1 - var(--ready,1));transition:opacity .5s ease .44s}
 .tl-stage .ai-load{z-index:10;transition:opacity .4s ease}
+
+/* The source is a 960x960 square; the 5:2 box crops a band out of its middle,
+   which works on a wide screen and guillotines it on a narrow one. On a phone
+   the box goes square and the offset comes off, so the whole animation plays. */
+@media(max-width:620px){
+  .trust-scene{min-height:auto;padding:clamp(60px,10vh,96px) 20px}
+  .trust-animation{width:min(84vw,400px);aspect-ratio:1;margin-bottom:clamp(6px,1.5vh,16px)}
+  .trust-animation video{transform:none}
+  .trust-scene h2{font-size:clamp(27px,8.4vw,44px);line-height:1.02}
+}
