@@ -183,6 +183,24 @@ body{display:block;overflow:visible;overflow-x:clip}
   scale:calc((2 - var(--charge) * 1.35) * (1 + var(--release) * 5))}
 
 /* The volume behind it - wide, weak, and it never gets sharp. */
+/* A real light source has a small hard centre; pure gradient reads as fog. */
+.sg-hot{width:3.4%;aspect-ratio:1;background:#fff;
+  box-shadow:0 0 12px 4px rgba(255,255,255,.75),0 0 34px 12px rgba(190,238,230,.4);
+  opacity:calc(var(--charge) * var(--charge) * (1 - var(--release)));
+  scale:calc(.6 + var(--charge) * .9 + var(--release) * 7)}
+
+/* Accretion: a sweep of light orbiting the point, tightening as the charge
+   builds. It is what makes the wait feel like something gathering rather than
+   something waiting. */
+.sg-orbit{width:64%;aspect-ratio:1;
+  background:conic-gradient(from 0deg,rgba(214,244,238,0) 0deg,rgba(214,244,238,.5) 70deg,rgba(255,255,255,.75) 110deg,rgba(214,244,238,0) 190deg,rgba(214,244,238,0) 360deg);
+  mask:radial-gradient(closest-side,transparent 63%,#000 67%,#000 78%,transparent 82%);
+  -webkit-mask:radial-gradient(closest-side,transparent 63%,#000 67%,#000 78%,transparent 82%);
+  opacity:calc(var(--charge) * .85 * (1 - var(--release)));
+  scale:calc(1.5 - var(--charge) * .75);
+  animation:sg-spin 7s linear infinite}
+@keyframes sg-spin{to{rotate:360deg}}
+
 .sg-halo{width:100%;aspect-ratio:1;
   background:radial-gradient(closest-side,rgba(180,232,222,.34),rgba(140,214,206,.12) 46%,rgba(11,97,100,0) 72%);
   opacity:calc(var(--charge) * .85 * (1 - var(--release)));
@@ -196,10 +214,20 @@ body{display:block;overflow:visible;overflow-x:clip}
   scale:calc(.25 + var(--charge) * .95 + var(--release) * 1.8) calc(1 + var(--release) * 3)}
 
 /* Two thin shockwaves on release, the second a beat behind. */
+/* The vertical arm is deliberately a quarter of the horizontal - a lens streak
+   is anamorphic, not a symmetrical star. */
+.sg-streak-v{width:2px;height:100%;
+  background:linear-gradient(180deg,rgba(214,244,238,0),rgba(255,255,255,.7) 50%,rgba(214,244,238,0));
+  opacity:calc((var(--charge) * .3 + var(--release) * (1 - var(--release)) * 1.2));
+  scale:calc(1 + var(--release) * 2.4) calc(.18 + var(--charge) * .5 + var(--release) * .9)}
+
 .sg-ring{width:100%;aspect-ratio:1;border:1.5px solid rgba(233,252,248,.9);
   opacity:calc(var(--release) * (1 - var(--release)) * 3.4);
   scale:calc(.06 + var(--release) * 1.5)}
-.sg-ring-2{border-color:rgba(160,224,216,.55);
+/* Opposite chromatic edges: warm leading, cool trailing, the way a fast
+   optical event separates. */
+.sg-ring{box-shadow:0 0 0 1px rgba(255,214,190,.28) inset}
+.sg-ring-2{border-color:rgba(168,226,255,.5);box-shadow:0 0 18px 2px rgba(150,214,255,.14);
   opacity:calc(clamp(0,calc((var(--release) - .22) / .5),1) * (1 - var(--release)) * 2.6);
   scale:calc(.04 + var(--release) * 2.4)}
 .patient-zoom{overflow:hidden}
