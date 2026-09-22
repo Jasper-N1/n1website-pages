@@ -54,15 +54,12 @@ body{overflow-x:hidden;overflow-y:auto}.patient-story{min-height:100svh;position
 }
 
 html,body{overflow:hidden}.zoom-journey{height:100svh}.zoom-journey .floating-hero{position:relative}.patient-story{display:none}.patient-zoom{display:block;z-index:90;inset:auto;overflow:hidden;clip-path:none;will-change:left,top,width,height,border-radius}.patient-zoom::after{position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,15,13,.62) 0%,rgba(7,15,13,.34) 42%,rgba(7,15,13,.2) 100%),rgba(7,15,13,.12);content:"";opacity:var(--overlay-opacity,0)}.patient-zoom img{object-position:center 38%}.card-field{--field-fade:0}.card-field>.float-card:not(.card-care){opacity:calc(1 - var(--field-fade))}.zoom-copy{width:min(1100px,80vw);position:absolute;z-index:95;right:auto;bottom:clamp(44px,8vh,96px);left:max(28px,calc((100vw - 1320px)/2));color:#fff;text-align:left;opacity:0;pointer-events:none;text-shadow:0 2px 24px rgba(0,0,0,.35);will-change:opacity,transform}.zoom-copy::before{display:none}.zoom-copy h2{margin:0;font-size:clamp(64px,7vw,108px);font-weight:400;line-height:.88;letter-spacing:-.065em}.zoom-copy h2 span{display:block;max-width:none;margin:0;font:inherit;line-height:inherit;white-space:nowrap}.zoom-copy>span{display:block;max-width:760px;margin-top:24px;font-size:clamp(20px,2vw,30px);line-height:1.3}
-html,body{overflow:hidden}.zoom-journey{height:100svh}.zoom-journey .floating-hero{position:relative}.patient-story{display:none}.patient-zoom{display:block;z-index:90;inset:auto;overflow:hidden;clip-path:none;will-change:left,top,width,height,border-radius}.patient-zoom::after{position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,15,13,.62) 0%,rgba(7,15,13,.34) 42%,rgba(7,15,13,.2) 100%),rgba(7,15,13,.12);content:"";opacity:var(--overlay-opacity,0)}.patient-zoom img{object-position:center 38%}.card-field{--field-fade:0}.card-field>.float-card:not(.card-care){opacity:calc(1 - var(--field-fade))}.organizing-signals{position:absolute;z-index:70;width:0;height:0;pointer-events:none}.organizing-signals span{width:max-content;position:absolute;padding:9px 13px;border:1px solid rgba(43,113,105,.18);border-radius:999px;color:#276b64;background:rgba(241,249,247,.94);box-shadow:0 12px 28px rgba(24,55,50,.14);font-size:11px;font-weight:600;letter-spacing:.02em;opacity:0}.organizing-signals span:nth-child(1){right:105px;bottom:38px}.organizing-signals span:nth-child(2){left:105px;bottom:5px}.organizing-signals span:nth-child(3){left:72px;top:58px}.zoom-copy{width:min(1100px,80vw);position:absolute;z-index:95;right:auto;bottom:clamp(44px,8vh,96px);left:max(28px,calc((100vw - 1320px)/2));color:#fff;text-align:left;opacity:0;pointer-events:none;text-shadow:0 2px 24px rgba(0,0,0,.35);will-change:opacity,transform}.zoom-copy::before{display:none}.zoom-copy h2{margin:0;font-size:clamp(64px,7vw,108px);font-weight:400;line-height:.88;letter-spacing:-.065em}.zoom-copy h2 span{display:block;max-width:none;margin:0;font:inherit;line-height:inherit;white-space:nowrap}.zoom-copy>span{display:block;max-width:760px;margin-top:24px;font-size:clamp(20px,2vw,30px);line-height:1.3}
-@media(max-width:620px){.zoom-copy{width:calc(100vw - 44px);right:22px;bottom:42px;left:22px}.zoom-copy h2{font-size:clamp(36px,10.5vw,56px)}.zoom-copy>span{font-size:17px;line-height:1.4}}
+html,body{overflow:hidden}.zoom-journey{height:100svh}.zoom-journey .floating-hero{position:relative}.patient-story{display:none}.patient-zoom{display:block;z-index:90;inset:auto;overflow:hidden;clip-path:none;will-change:left,top,width,height,border-radius}.patient-zoom::after{position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,15,13,.62) 0%,rgba(7,15,13,.34) 42%,rgba(7,15,13,.2) 100%),rgba(7,15,13,.12);content:"";opacity:var(--overlay-opacity,0)}.patient-zoom img{object-position:center 38%}.card-field{--field-fade:0}.card-field>.float-card:not(.card-care){opacity:calc(1 - var(--field-fade))}@media(max-width:620px){.zoom-copy{width:calc(100vw - 44px);right:22px;bottom:42px;left:22px}.zoom-copy h2{font-size:clamp(36px,10.5vw,56px)}.zoom-copy>span{font-size:17px;line-height:1.4}}
 
 .card-care{width:210px;height:154px}
 .float-card:nth-child(5n) .ui-card{background:rgba(238,247,245,.94)}
 .float-card:nth-child(7n) .ui-card{background:rgba(250,242,237,.95)}
 .float-card:nth-child(11n) .card-inner{box-shadow:0 30px 56px rgba(31,52,48,.2),0 6px 16px rgba(31,52,48,.08)}
-@media(max-width:620px){.organizing-signals{display:none}.card-care{width:150px;height:110px}}
-
 /* ==========================================================================
    Scroll staging + the beating background.
 
@@ -166,69 +163,18 @@ body{display:block;overflow:visible;overflow-x:clip}
    JS drives opacity and scale; it sits above the cards and below the image. */
 /* The singularity.
 
-   A soft blob that swells as things fall into it is backwards - and it is the
-   one piece of this page that still looks like a 2015 hero. Light concentrating
-   gets tighter and brighter, then releases: so the core CONTRACTS as the field
-   arrives, a faint halo holds the volume behind it, an anamorphic streak widens
-   with the charge, and at the hand-off two thin rings fire outward and the
-   whole thing is gone. Nothing here fades - it discharges. */
-.singularity{--charge:0;--release:0;width:min(52vmin,380px);aspect-ratio:1;position:absolute;z-index:80;top:50%;left:50%;display:grid;place-items:center;translate:-50% -50%;pointer-events:none}
-.singularity>*{grid-area:1/1;border-radius:50%;will-change:transform,opacity}
-
-/* Tightens from half-size to a point as the charge builds, then blooms once. */
-.sg-core{width:26%;aspect-ratio:1;
-  background:radial-gradient(closest-side,#fff 0%,rgba(255,255,255,.92) 38%,rgba(214,244,238,.5) 64%,rgba(214,244,238,0) 100%);
+   One point. Everything that was gathering around it - the halo, the orbiting
+   sweep, the anamorphic arms, the shockwave rings - has gone: the collapse is
+   already the drama, and a point of light is more convincing when nothing is
+   decorating it. It contracts as the field arrives and blooms once as the
+   image takes over. */
+.singularity{--charge:0;--release:0;width:min(40vmin,300px);aspect-ratio:1;position:absolute;z-index:80;top:50%;left:50%;display:grid;place-items:center;translate:-50% -50%;pointer-events:none}
+.sg-core{width:6%;aspect-ratio:1;border-radius:50%;background:#fff;
+  box-shadow:0 0 14px 5px rgba(255,255,255,.7),0 0 46px 16px rgba(190,238,230,.38),0 0 120px 44px rgba(127,192,186,.18);
   opacity:calc(var(--charge) * (1 - var(--release)));
-  scale:calc((2 - var(--charge) * 1.35) * (1 + var(--release) * 5))}
+  scale:calc((1.5 - var(--charge) * .75) * (1 + var(--release) * 9));
+  will-change:transform,opacity}
 
-/* The volume behind it - wide, weak, and it never gets sharp. */
-/* A real light source has a small hard centre; pure gradient reads as fog. */
-.sg-hot{width:3.4%;aspect-ratio:1;background:#fff;
-  box-shadow:0 0 12px 4px rgba(255,255,255,.75),0 0 34px 12px rgba(190,238,230,.4);
-  opacity:calc(var(--charge) * var(--charge) * (1 - var(--release)));
-  scale:calc(.6 + var(--charge) * .9 + var(--release) * 7)}
-
-/* Accretion: a sweep of light orbiting the point, tightening as the charge
-   builds. It is what makes the wait feel like something gathering rather than
-   something waiting. */
-.sg-orbit{width:64%;aspect-ratio:1;
-  background:conic-gradient(from 0deg,rgba(214,244,238,0) 0deg,rgba(214,244,238,.5) 70deg,rgba(255,255,255,.75) 110deg,rgba(214,244,238,0) 190deg,rgba(214,244,238,0) 360deg);
-  mask:radial-gradient(closest-side,transparent 63%,#000 67%,#000 78%,transparent 82%);
-  -webkit-mask:radial-gradient(closest-side,transparent 63%,#000 67%,#000 78%,transparent 82%);
-  opacity:calc(var(--charge) * .85 * (1 - var(--release)));
-  scale:calc(1.5 - var(--charge) * .75);
-  animation:sg-spin 7s linear infinite}
-@keyframes sg-spin{to{rotate:360deg}}
-
-.sg-halo{width:100%;aspect-ratio:1;
-  background:radial-gradient(closest-side,rgba(180,232,222,.34),rgba(140,214,206,.12) 46%,rgba(11,97,100,0) 72%);
-  opacity:calc(var(--charge) * .85 * (1 - var(--release)));
-  scale:calc(.5 + var(--charge) * .5)}
-
-/* Anamorphic: real lenses smear a point light horizontally, and it is the
-   cheapest way to make a bright spot read as an optical event. */
-.sg-streak{width:100%;height:2px;border-radius:2px;
-  background:linear-gradient(90deg,rgba(214,244,238,0),rgba(255,255,255,.92) 50%,rgba(214,244,238,0));
-  opacity:calc(var(--charge) * .6 + var(--release) * (1 - var(--release)) * 2.4);
-  scale:calc(.25 + var(--charge) * .95 + var(--release) * 1.8) calc(1 + var(--release) * 3)}
-
-/* Two thin shockwaves on release, the second a beat behind. */
-/* The vertical arm is deliberately a quarter of the horizontal - a lens streak
-   is anamorphic, not a symmetrical star. */
-.sg-streak-v{width:2px;height:100%;
-  background:linear-gradient(180deg,rgba(214,244,238,0),rgba(255,255,255,.7) 50%,rgba(214,244,238,0));
-  opacity:calc((var(--charge) * .3 + var(--release) * (1 - var(--release)) * 1.2));
-  scale:calc(1 + var(--release) * 2.4) calc(.18 + var(--charge) * .5 + var(--release) * .9)}
-
-.sg-ring{width:100%;aspect-ratio:1;border:1.5px solid rgba(233,252,248,.9);
-  opacity:calc(var(--release) * (1 - var(--release)) * 3.4);
-  scale:calc(.06 + var(--release) * 1.5)}
-/* Opposite chromatic edges: warm leading, cool trailing, the way a fast
-   optical event separates. */
-.sg-ring{box-shadow:0 0 0 1px rgba(255,214,190,.28) inset}
-.sg-ring-2{border-color:rgba(168,226,255,.5);box-shadow:0 0 18px 2px rgba(150,214,255,.14);
-  opacity:calc(clamp(0,calc((var(--release) - .22) / .5),1) * (1 - var(--release)) * 2.6);
-  scale:calc(.04 + var(--release) * 2.4)}
 .patient-zoom{overflow:hidden}
 
 @media(max-width:620px){

@@ -168,25 +168,11 @@
       </ol>
     </aside>
   </section>
-  <div class="organizing-signals" aria-hidden="true">
-    <span>Dates aligned</span>
-    <span>Sources linked</span>
-    <span>Findings grouped</span>
-  </div>
   <div class="zoom-copy" aria-hidden="true">
     <h2><span>Years of history.</span><span>Brought into focus.</span></h2>
     <span>N1 organizes patient records into a clear history and draft reports, with source links for clinical review.</span>
   </div>
-  <div class="singularity" aria-hidden="true">
-    <span class="sg-halo"></span>
-    <span class="sg-orbit"></span>
-    <span class="sg-streak sg-streak-v"></span>
-    <span class="sg-streak"></span>
-    <span class="sg-core"></span>
-    <span class="sg-hot"></span>
-    <span class="sg-ring"></span>
-    <span class="sg-ring sg-ring-2"></span>
-  </div>
+  <div class="singularity" aria-hidden="true"><span class="sg-core"></span></div>
   <div class="patient-zoom" aria-hidden="true"><img src="../assets/clinician-hero-doctor-patient-wide-v2.webp" alt="" width="1672" height="941"></div>
   </main>
   </div>
@@ -540,8 +526,6 @@
     let gatherCharge = 0;
     let gatherRelease = 0;
     const cardField = document.querySelector('.card-field');
-    const organizingSignals = document.querySelector('.organizing-signals');
-    const signalItems = [...organizingSignals.children];
     const zoomCopy = document.querySelector('.zoom-copy');
     const zoomLayer = document.querySelector('.patient-zoom');
     let zoomStart = null;
@@ -596,17 +580,25 @@
         const x = targetX - (rect.left + rect.width / 2);
         const y = targetY - (rect.top + rect.height / 2);
         const distance = Math.max(1, Math.hypot(x, y));
-        const direction = index % 2 ? 1 : -1;
-        const curve = Math.min(90, distance * .14) * direction;
-        const curveX = (-y / distance) * curve;
-        const curveY = (x / distance) * curve;
-        const [cornerX, cornerY] = CORNERS[index % CORNERS.length];
+        /* A card enters from the corner of the quadrant it belongs to, so a
+           card that lives top-right comes in from top-right. Nothing crosses
+           the screen to reach its place. */
+        const cornerX = rect.left + rect.width / 2 > targetX ? 1 : -1;
+        const cornerY = rect.top + rect.height / 2 > targetY ? 1 : -1;
+        /* One direction of swirl for every card, not alternating: the
+           tangential offset has to agree across the whole field or it reads as
+           cards wandering rather than as one vortex. It decays as the radius
+           does, which is what makes the path a spiral instead of an arc. */
+        const swirl = Math.min(190, distance * .5);
+        const tangentX = (-y / distance) * swirl;
+        const tangentY = (x / distance) * swirl;
         const animation = card.animate([
           { translate: `${cornerX * innerWidth * .8}px ${cornerY * innerHeight * .8}px`, scale: '.5', rotate: `${cornerX * 14}deg`, opacity: 0, offset: 0 },
           { translate: '0 0', scale: '1', rotate: '0deg', opacity: 1, offset: .5 },
-          { translate: `${x * .58 + curveX}px ${y * .58 + curveY}px`, scale: '.62', rotate: `${direction * 10}deg`, opacity: 1, offset: .81 },
-          { translate: `${x * .94}px ${y * .94}px`, scale: '.16', rotate: `${direction * 22}deg`, opacity: .9, offset: .94 },
-          { translate: `${x}px ${y}px`, scale: '.02', rotate: `${direction * 26}deg`, opacity: 0, offset: 1 }
+          { translate: `${x * .34 + tangentX}px ${y * .34 + tangentY}px`, scale: '.8', rotate: '12deg', opacity: 1, offset: .68 },
+          { translate: `${x * .68 + tangentX * .55}px ${y * .68 + tangentY * .55}px`, scale: '.5', rotate: '34deg', opacity: 1, offset: .84 },
+          { translate: `${x * .92 + tangentX * .2}px ${y * .92 + tangentY * .2}px`, scale: '.18', rotate: '58deg', opacity: .85, offset: .95 },
+          { translate: `${x}px ${y}px`, scale: '.02', rotate: '78deg', opacity: 0, offset: 1 }
         ], { duration: 2000, fill: 'both', easing: 'linear' });
         animation.pause();
         animation.currentTime = 0;
@@ -620,8 +612,6 @@
     };
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     scrollTo(0, 0);
-    /* Which corner each card flies in from, cycled by index. */
-    const CORNERS = [[-1, -1], [1, -1], [-1, 1], [1, 1]];
     const clamp = value => Math.max(0, Math.min(1, value));
     const mix = (from, to, progress) => from + (to - from) * progress;
     const smooth = progress => progress * progress * (3 - 2 * progress);
@@ -629,12 +619,6 @@
       if (!zoomStart) return;
       gatherAnimations.forEach(({ animation, start, end }) => {
         animation.currentTime = 1000 + smooth(clamp((progress - start) / (end - start))) * 1000;
-      });
-      signalItems.forEach((item, index) => {
-        const appear = smooth(clamp((progress - (.18 + index * .055)) / .08));
-        const leave = 1 - smooth(clamp((progress - .5) / .1));
-        item.style.opacity = String(appear * leave);
-        item.style.transform = `translateY(${mix(9, 0, appear)}px) scale(${mix(.94, 1, appear)})`;
       });
       /* The dot brightens as the cards arrive, then hands over: it is gone by
          the time the image has opened out of it. */
@@ -667,12 +651,6 @@
       zoomCopy.style.transform = `translateY(${mix(24, 0, copyProgress)}px)`;
     };
     prepareZoomTarget();
-    const positionSignals = () => {
-      if (!zoomStart) return;
-      organizingSignals.style.left = `${innerWidth / 2}px`;
-      organizingSignals.style.top = `${innerHeight / 2}px`;
-    };
-    positionSignals();
     const journey = document.querySelector('.zoom-journey');
     const heartAct = document.querySelector('.heart-act');
     /* The journey is scrubbed by the scrollbar rather than played on a timer.
@@ -876,7 +854,6 @@
     addEventListener('resize', () => {
       randomiseCardField();
       prepareZoomTarget();
-      positionSignals();
       readTarget();
       paint(easedProgress);
     });
