@@ -1013,3 +1013,134 @@ body{display:block;overflow:visible;overflow-x:clip}
   border:1px solid var(--ae-border,#ddd0ba);background:#ece2d1;color:var(--ae-fg,var(--ink));
   font-size:11px;font-weight:400;line-height:1.6}
 .task-mark{width:13px;height:13px;color:var(--teal);opacity:.75}
+
+/* ==========================================================================
+   Written, not revealed.
+
+   Everything the page presents as generated now arrives a piece at a time.
+   Faster than a model would really manage, but the order is the same: the
+   label, then the claim, then the evidence under it. A card that faded in
+   whole read as retrieved; this reads as composed.
+   ========================================================================== */
+.tl-body>*{--d:0;
+  opacity:clamp(0,calc((var(--gen) - var(--d)) * 7),1);
+  translate:0 calc((1 - clamp(0,calc((var(--gen) - var(--d)) * 7),1)) * 5px)}
+.tl-body>.tl-kind{--d:0}
+.tl-body>b{--d:.16}
+.tl-body>p{--d:.34}
+.tl-body>.tl-vals,.tl-body>.tl-trend,.tl-body>.tl-chips{--d:.54}
+.tl-body>.tl-skel{--d:0;opacity:calc(1 - var(--gen));translate:none}
+
+/* The record chips under each reasoning step land one after another too. */
+.task-file{opacity:0;animation:cot-in .3s ease forwards}
+.task-items .task-file:nth-child(1){animation-delay:calc(var(--t,0s) + .10s)}
+.task-items .task-file:nth-child(2){animation-delay:calc(var(--t,0s) + .20s)}
+.task-items .task-file:nth-child(3){animation-delay:calc(var(--t,0s) + .30s)}
+.task-items .task-file:nth-child(4){animation-delay:calc(var(--t,0s) + .40s)}
+
+/* The records we are not opening. They were specks; at this density they are
+   the point - most of a life is the stuff no card is being made of. */
+.tl-ticks{height:14px}
+.tl-ticks i{top:3px;width:6px;height:6px;background:#c0ae90;opacity:.85}
+.tl-ticks i.is-high{top:1px;width:10px;height:10px;background:var(--teal);opacity:.9;
+  box-shadow:0 0 0 3px rgba(46,125,120,.12)}
+
+/* --- readings, trends and chips on the cards ----------------------------- */
+.tl-vals{display:flex;flex-wrap:wrap;gap:6px 26px;margin:14px 0 0}
+.tl-vals div{margin:0}
+.tl-vals dt{color:#a8977c;font-size:10px;font-weight:700;letter-spacing:.11em;text-transform:uppercase}
+.tl-vals dd{margin:3px 0 0;font-size:17px;font-weight:600;letter-spacing:-.01em}
+
+.tl-trend{display:flex;align-items:center;gap:12px;margin-top:14px;color:#b9895b}
+.tl-trend.is-good{color:var(--teal)}
+.tl-trend-k{color:#a8977c;font-size:10px;font-weight:700;letter-spacing:.11em;text-transform:uppercase}
+.tl-spark{width:132px;height:34px;flex:none}
+.tl-trend-v{margin-left:auto;color:var(--ink);font-size:17px;font-weight:600;letter-spacing:-.01em}
+
+.tl-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+.tl-chips span{padding:3px 9px;border-radius:7px;border:1px solid #e3d7c2;background:#f7f0e3;
+  font-size:12px;font-weight:500}
+
+/* --- the identity card --------------------------------------------------- */
+.tl-face{width:clamp(132px,15vw,210px);height:clamp(158px,18vw,250px);border-radius:24px;
+  object-fit:cover;object-position:50% 22%}
+.tl-id-sub{margin:2px 0 0;color:var(--muted);font-size:13px}
+.tl-id-meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 26px;margin:6px 0 0}
+
+@media(max-width:760px){
+  .tl-face{width:clamp(104px,30vw,140px);height:clamp(124px,36vw,168px);border-radius:20px}
+  .tl-id-meta{gap:9px 18px}
+  .tl-spark{width:104px}
+}
+
+/* The identity block is much taller than the old avatar row, so the line drops
+   to clear it rather than running through the portrait. */
+.timeline-scene{--rail-y:clamp(300px,36svh,404px)}
+
+/* ==========================================================================
+   The reply.
+
+   The report used to be generated at the end of the timeline and then sat
+   there, addressed to nobody. It arrives in the thread instead - the doctor
+   comes back, the artefact is written into the conversation, and the words
+   around it are his, not the product's.
+   ========================================================================== */
+.reply-scene{--chat:0;--build:0;height:520svh;position:relative;z-index:1;
+  background:#edf6f4;color:var(--ink)}
+.reply-stage{height:var(--stage-h);position:sticky;top:0;display:flex;flex-direction:column;
+  justify-content:center;overflow:hidden;
+  padding:var(--stage-top) max(var(--stage-x),calc((100vw - 980px)/2)) var(--stage-bottom)}
+
+/* The report, now a message: it keeps the artefact's own shell but sits in
+   the thread's column rather than centred on a stage of its own. */
+.msg-report{max-width:100%}
+.rp-in-chat{width:min(560px,100%);position:relative;top:auto;left:auto;translate:none;
+  scale:1;pointer-events:none}
+.rp-in-chat>*{position:relative;top:auto;translate:none}
+.rp-in-chat .rp-spark,.rp-in-chat .rp-seed{position:absolute;inset:0}
+
+/* The report is an artefact in the thread, not a speech bubble: no teal, no
+   padding, no tail. The doctor's words are his; the report is the product's. */
+.msg-report{max-width:min(560px,100%);padding:0;border-radius:0;background:none;color:inherit;
+  align-self:flex-start}
+.reply-stage .chat-thread{position:relative;align-items:flex-start;
+  transition:none;will-change:translate}
+.reply-stage{justify-content:flex-start}
+.rp-in-chat .rp-full{border-radius:16px;overflow:hidden}
+
+/* A streaming report grows; it does not sit at full height waiting for its
+   own content. Blocks that have not arrived take no room. */
+.rb{overflow:hidden;max-height:calc(var(--in) * 520px)}
+
+/* ==========================================================================
+   One line through the whole middle of the page.
+
+   The timeline already had a line and a dot riding it. The conversation before
+   it and the reply after it now sit on the same line: it leaves the first
+   thread, runs horizontally as the rail, and picks up again on the way into
+   the reply. Three sections, one continuous move.
+   ========================================================================== */
+.spine{position:absolute;left:50%;z-index:2;width:1px;translate:-50% 0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(205,191,168,0),rgba(205,191,168,.8))}
+.spine-out{top:auto;bottom:0;height:clamp(70px,14svh,150px)}
+.spine-in{top:0;bottom:auto;height:clamp(70px,14svh,150px);
+  background:linear-gradient(180deg,rgba(205,191,168,.8),rgba(205,191,168,0))}
+
+/* The dot we follow, at the head of the line it is drawing. */
+.spine i{position:absolute;left:50%;width:9px;height:9px;border-radius:50%;
+  background:var(--teal);translate:-50% -50%;
+  box-shadow:0 0 0 4px rgba(46,125,120,.14)}
+.chat-stage .spine-out i{top:calc(clamp(0,calc((var(--chat) - .72) / .28),1) * 100%)}
+.reply-stage .spine-in i{top:calc((1 - clamp(0,calc(var(--chat) / .10),1)) * 100%)}
+.timeline-scene .spine-in i,.timeline-scene .spine-out i{display:none}
+
+/* On the cream section the line takes that section's own hairline colour. */
+.timeline-scene .spine{background:linear-gradient(180deg,rgba(205,191,168,0),rgba(205,191,168,.75))}
+.timeline-scene .spine-in{background:linear-gradient(180deg,rgba(205,191,168,.75),rgba(205,191,168,0))}
+.chat-stage .spine,.reply-stage .spine{
+  background:linear-gradient(180deg,rgba(120,170,162,0),rgba(120,170,162,.7))}
+.reply-stage .spine-in{background:linear-gradient(180deg,rgba(120,170,162,.7),rgba(120,170,162,0))}
+
+/* Inside the timeline the incoming line runs all the way down to the rail it
+   becomes, rather than stopping short of it. */
+.timeline-scene .spine-in{height:var(--rail-y)}
