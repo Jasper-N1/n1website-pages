@@ -817,3 +817,127 @@ body{display:block;overflow:visible;overflow-x:clip}
 @media(max-width:720px){
   .floating-hero{min-height:min(650px,var(--stage-h))}
 }
+
+/* ==========================================================================
+   AI Elements.
+
+   The thinking loader, the stream indicator and the source panels were each
+   drawn from scratch. They now follow the AI Elements library
+   (elements.ai-sdk.dev): Chain of Thought, Task and Sources. The library
+   ships as React and shadcn and this page has no build step, so the
+   components are ported to plain CSS - but the measurements are theirs,
+   read off the source rather than eyeballed: 16px icons, an 8px gap, 14px
+   body against 12px secondary, a 1px connector hung from the marker at
+   28px, chips at 2px/8px, and the three step states (active reads at full
+   strength, complete goes muted, pending sits at half).
+
+   The palette is this page's, not shadcn's defaults - the components are
+   guests on a cream section, not on a white app surface.
+   ========================================================================== */
+.ai-i{width:16px;height:16px;flex:none}                       /* size-4 */
+
+.cot,.src,.rp-stream{
+  --ae-fg:var(--ink);
+  --ae-muted:#7b6c58;
+  --ae-border:#ddd0ba;
+  --ae-chip:#ece2d1;
+}
+
+/* --- Chain of Thought ---------------------------------------------------- */
+.cot{display:grid;gap:16px;width:min(460px,100%);text-align:left}
+.cot-head{display:flex;align-items:center;gap:8px;margin:0;font-size:14px;color:var(--ae-muted)}
+.cot-title{flex:1}
+.cot-chev{opacity:.55}
+.cot-steps{display:grid;gap:12px;margin:0;padding:0;list-style:none}
+
+/* Each step fades and slides down into place, the library's animate-in. */
+.cot-step{display:flex;gap:8px;font-size:14px;opacity:0;translate:0 -8px;
+  animation:cot-in .45s cubic-bezier(.2,.75,.25,1) var(--t,0s) forwards}
+@keyframes cot-in{to{opacity:1;translate:0 0}}
+
+/* The marker column stretches to the height of its step - that is what gives
+   the connector something to run down. Pinned to the icon's 16px it collapsed
+   into a stub between steps. */
+.cot-marker{position:relative;width:16px;align-self:stretch;margin-top:2px;color:var(--ae-muted)}
+.cot-marker .ai-i{position:absolute;top:0;left:0}
+/* The hairline that ties one step to the next, carried across the 12px gap. */
+.cot-marker::after{position:absolute;top:22px;bottom:-14px;left:50%;width:1px;margin-left:-.5px;
+  background:var(--ae-border);content:""}
+.cot-step:last-child .cot-marker::after{display:none}
+
+/* A step arrives active and settles to complete: the dot becomes a check and
+   the label drops back to muted, so the list reads as work being finished. */
+.cot-check{opacity:0;color:var(--teal);
+  animation:cot-on .3s linear calc(var(--t,0s) + .95s) forwards}
+.cot-dot{animation:cot-off .3s linear calc(var(--t,0s) + .95s) forwards}
+@keyframes cot-on{to{opacity:1}}
+@keyframes cot-off{to{opacity:0}}
+.cot-body{flex:1;display:grid;gap:8px;min-width:0}
+.cot-label{margin:0;color:var(--ae-fg);
+  animation:cot-settle .4s linear calc(var(--t,0s) + .95s) forwards}
+@keyframes cot-settle{to{color:var(--ae-muted)}}
+.cot-desc{margin:0;font-size:12px;color:var(--ae-muted);opacity:.78}
+
+/* Badge, secondary variant. */
+.cot-chips{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.cot-chip{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:6px;
+  background:var(--ae-chip);color:var(--ae-fg);font-size:12px;font-weight:400;line-height:1.5}
+
+/* --- Shimmer ------------------------------------------------------------- */
+/* Their Shimmer is a motion component sweeping a gradient across clipped
+   text. The same thing falls out of a background-position keyframe. */
+.ai-shimmer{--spread:64px;
+  background-image:
+    linear-gradient(90deg,transparent calc(50% - var(--spread)),var(--ae-fg),transparent calc(50% + var(--spread))),
+    linear-gradient(var(--ae-muted),var(--ae-muted));
+  background-size:250% 100%,auto;background-repeat:no-repeat,padding-box;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:ai-shimmer 2s linear infinite}
+@keyframes ai-shimmer{from{background-position:100% center}to{background-position:0% center}}
+
+/* --- Task ---------------------------------------------------------------- */
+.rp-stream{display:flex;align-items:center;gap:8px;margin:0 0 10px;padding:0;
+  font-family:inherit;font-size:14px;font-weight:400;letter-spacing:0;text-transform:none;
+  color:var(--ae-muted)}
+.rp-spin{animation:rp-spin 1s linear infinite}
+@keyframes rp-spin{to{rotate:360deg}}
+.rp-chev{opacity:.55;rotate:180deg}
+
+/* TaskItemFile: a bordered chip naming the component being streamed. */
+.rb-tag{display:inline-flex;align-items:center;gap:4px;padding:2px 6px;border-radius:6px;
+  border:1px solid var(--n1-sand-200,#d7cabc);background:#ece2d1;color:var(--ink);
+  font-size:12px;font-weight:400;letter-spacing:0;text-transform:none}
+
+/* The skeleton rows shimmer rather than sitting flat, so a block that has not
+   arrived yet reads as pending instead of broken. */
+.rb-skel i{background-image:linear-gradient(90deg,#ece0cc,#f7f0e3,#ece0cc);
+  background-size:200% 100%;animation:ai-shimmer 1.6s linear infinite}
+
+/* --- Sources ------------------------------------------------------------- */
+.src{display:grid;gap:12px;font-size:12px}
+.src-trigger{display:flex;align-items:center;gap:8px;margin:0;color:var(--teal);font-weight:500}
+.src-chev{opacity:.55}
+.src-list{display:grid;gap:8px}
+.src-item{display:flex;align-items:flex-start;gap:8px;color:inherit;text-decoration:none}
+.src-mark{margin-top:1px;color:var(--teal);opacity:.75}
+.src-text{display:grid;gap:2px;min-width:0}
+.src-title{color:var(--ae-fg);font-weight:500}
+.src-sub{color:var(--ae-muted)}
+
+@media(prefers-reduced-motion:reduce){
+  .cot-step,.cot-check,.cot-dot,.cot-label{animation-delay:0s;animation-duration:1ms}
+  .ai-shimmer,.rp-spin,.rb-skel i{animation:none}
+  .ai-shimmer{-webkit-background-clip:border-box;background-clip:border-box;
+    background-image:none;color:var(--ae-muted)}
+}
+
+/* Both source columns start on the same line. */
+.tl-deep-cols{align-items:start}
+.tl-deep-cols>.src{align-self:start;margin:0}
+
+/* The report's own first beat speaks the same language as the Task trigger
+   above it, rather than its own orb. */
+.rp-spark-line{display:flex;align-items:center;justify-content:center;gap:8px;margin:0;
+  font-size:14px;color:var(--ae-muted,#7b6c58)}
+.rp-seed-tag.rb-tag{margin-bottom:9px;color:var(--ink)}
+.rp-seed-tag.rb-tag::before{display:none}
