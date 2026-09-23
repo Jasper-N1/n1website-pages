@@ -486,6 +486,25 @@
   </section>
 
   <script>
+    /* Every pinned stage is one --stage-h tall, and that is the box the whole
+       animation has to fill and be measured against - not innerHeight.
+
+       On a phone the two are different things. innerHeight is the area you can
+       actually see, which grows by the height of the address bar the moment
+       that bar slides away. A sticky element pins against the layout viewport,
+       which does not move. Sizing the stage from innerHeight left a strip of
+       the next section showing under it - a pale band on the way into the chat
+       - and made a stage that fills nothing look like it had scrolled rather
+       than animated. A desktop window has no address bar to lose, which is why
+       none of this shows up there. */
+    const stageProbe = document.createElement('div');
+    stageProbe.setAttribute('aria-hidden', 'true');
+    stageProbe.style.cssText =
+      'position:absolute;top:0;left:0;width:0;height:var(--stage-h);visibility:hidden;pointer-events:none';
+    document.documentElement.appendChild(stageProbe);
+    let stageHeight = stageProbe.offsetHeight || innerHeight;
+    const measureStage = () => { stageHeight = stageProbe.offsetHeight || innerHeight; };
+
     const cards = [...document.querySelectorAll('.float-card')];
     const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
     const singularity = document.querySelector('.singularity');
@@ -582,7 +601,7 @@
          image is born out of that same point rather than being one of the
          cards - so nothing in the field gives the ending away. */
       const targetX = innerWidth / 2;
-      const targetY = innerHeight / 2;
+      const targetY = stageHeight / 2;
       zoomStart = { left: targetX - 6, top: targetY - 6, width: 12, height: 12 };
       gatherAnimations.forEach(({ animation }) => animation.cancel());
       gatherAnimations = [];
@@ -660,7 +679,7 @@
       const rawZoom = clamp((progress - .42) / .28);
       const zoom = smooth(rawZoom);
       const frameW = mix(zoomStart.width, innerWidth, zoom);
-      const frameH = mix(zoomStart.height, innerHeight, zoom);
+      const frameH = mix(zoomStart.height, stageHeight, zoom);
       zoomLayer.style.left = `${mix(zoomStart.left, 0, zoom)}px`;
       zoomLayer.style.top = `${mix(zoomStart.top, 0, zoom)}px`;
       zoomLayer.style.width = `${frameW}px`;
@@ -749,20 +768,6 @@
        scroll frame is writes only. -rect.top is the same number as
        scrollY - absoluteTop for an untransformed block in flow, which is what
        every one of these sections is. */
-    /* The sections are sized in svh, which never moves. innerHeight does: on a
-       phone it grows by the height of the address bar the moment that bar
-       slides away mid-scroll. Measuring the travel against innerHeight meant
-       the whole mapping shifted under the reader during the gesture - the
-       animation sped up and reached its end before the section did. Measure
-       the svh the layout is actually using instead. */
-    const svhProbe = document.createElement('div');
-    svhProbe.setAttribute('aria-hidden', 'true');
-    svhProbe.style.cssText =
-      'position:absolute;top:0;left:0;width:0;height:100svh;visibility:hidden;pointer-events:none';
-    document.body.appendChild(svhProbe);
-    let stageHeight = svhProbe.offsetHeight || innerHeight;
-    const measureStage = () => { stageHeight = svhProbe.offsetHeight || innerHeight; };
-
     const geometry = new Map();
     const geometryOf = element => {
       let box = geometry.get(element);

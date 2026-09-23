@@ -751,10 +751,19 @@ body{display:block;overflow:visible;overflow-x:clip}
    when the bar retracts is simply more of the same colour.
    ========================================================================== */
 :root{
-  --stage-h:100svh;
+  /* lvh, not svh. A sticky stage pins against the layout viewport, which on a
+     phone is the tall one - the address bar sliding away does not change it.
+     Sized in svh the stage came up about a hundred pixels short of the area it
+     had to cover, so the section underneath showed through along the bottom
+     edge. The overshoot when the bar IS showing costs nothing: every stage
+     centres its content and clips. */
+  --stage-h:100lvh;
+  /* Exactly the browser chrome's height, and zero on a desktop. Content keeps
+     this much clear of the bottom so nothing hides behind the address bar. */
+  --chrome-bottom:calc(100lvh - 100svh);
   /* Clear the fixed nav at the top and the home indicator at the bottom. */
   --stage-top:calc(clamp(58px,8svh,86px) + env(safe-area-inset-top,0px));
-  --stage-bottom:calc(clamp(24px,4svh,44px) + env(safe-area-inset-bottom,0px));
+  --stage-bottom:calc(clamp(24px,4svh,44px) + var(--chrome-bottom) + env(safe-area-inset-bottom,0px));
   --stage-x:max(24px,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px));
 }
 
@@ -804,7 +813,7 @@ body{display:block;overflow:visible;overflow-x:clip}
    one - an iPhone SE is 568px - so on exactly those devices the whole opening
    sequence scrolled away instead of pinning. The floor still applies wherever
    there is room for it. */
-.floating-hero{min-height:min(680px,100svh)}
+.floating-hero{height:var(--stage-h);min-height:min(680px,var(--stage-h))}
 @media(max-width:720px){
-  .floating-hero{min-height:min(650px,100svh)}
+  .floating-hero{min-height:min(650px,var(--stage-h))}
 }
