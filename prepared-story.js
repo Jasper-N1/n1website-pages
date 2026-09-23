@@ -219,3 +219,29 @@
   measure();
   render();
 })();
+
+/* The panel inside each card is centred in its frame, so the room above it is
+   (frame - panel) / 2 - a different number for every card and every width. A
+   fixed band can only ever be right for one of them: at 768 the title sat forty
+   pixels high, and a band tall enough to fix that pushed it into the panel on a
+   phone. Measure the room and let the title centre in it. */
+(function () {
+  var steps = document.querySelectorAll('.prepared-story-step');
+  if (!steps.length) return;
+
+  function fitTitles() {
+    steps.forEach(function (step) {
+      var frame = step.querySelector('.prepared-story-frame');
+      var panel = step.querySelector('.prepared-story-state');
+      var copy  = step.querySelector('.prepared-story-copy');
+      if (!frame || !panel || !copy) return;
+      var room = (frame.offsetHeight - panel.offsetHeight) / 2;
+      if (room > 24) copy.style.setProperty('--title-band', Math.round(room) + 'px');
+      else copy.style.removeProperty('--title-band');
+    });
+  }
+
+  fitTitles();
+  addEventListener('resize', fitTitles);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitTitles);
+})();
