@@ -24,6 +24,8 @@
     <g id="i-loader"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></g>
   </defs>
 </svg>
+  <div class="thread-line" aria-hidden="true"></div>
+  <i class="thread-dot" aria-hidden="true"></i>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="floating-nav">
     <a class="floating-signin" href="https://app.n1.care/login">Log in</a>
@@ -212,7 +214,6 @@
         <p>I&rsquo;ll get back to you asap.</p>
       </div>
     </div>
-    <span class="spine spine-out" aria-hidden="true"><i></i></span>
 
     </div>
   </section>
@@ -459,17 +460,13 @@
           </div>
         </div>
       </div>
-      
-    <span class="spine spine-in" aria-hidden="true"><i></i></span>
     <div class="tl-rail" aria-hidden="true"><span class="tl-focus"></span></div>
-    <span class="spine spine-out" aria-hidden="true"><i></i></span>
     
     </div>
   </section>
   <section class="reply-scene" aria-labelledby="reply-title">
     <div class="reply-stage">
       <h2 id="reply-title" class="sr-only">The reply</h2>
-      <span class="spine spine-in" aria-hidden="true"><i></i></span>
       <div class="chat-thread">
         <div class="msg msg-in" style="--s:.04">
           <p>I&rsquo;ve looked into it &mdash; went back through the whole record, not just this year.</p>
@@ -1199,6 +1196,92 @@
       };
       scenes.push(drawTheme);
       drawTheme();
+    }
+
+    /* One line, from the last thing the doctor says in the first conversation
+       to the end of the reply. It is fixed to the centre of the viewport
+       rather than living inside any section, because the four segments it
+       replaces each sat in a sticky stage and so could never meet across a
+       boundary - one had already scrolled away before the next arrived.
+
+       The dot starts inside that last message bubble. The bubble is the same
+       teal, so at first there is only a line; as you scroll it comes out of
+       the message and rides down to the centre, where it stays while the
+       record runs past it. */
+    /* One line, from the doctor's last message in the first conversation to the
+       end of the reply. It is fixed to the viewport rather than living inside
+       any section, because the four segments it replaces each sat in a sticky
+       stage and so could never meet across a boundary - one had already
+       scrolled away before the next arrived.
+
+       The ball waits inside that last bubble. The bubble is the same teal, so
+       at first there is only a line; as you scroll it comes out of the message,
+       across and down, and settles on the line at the height the record runs
+       past. */
+    const threadLine = document.querySelector('.thread-line');
+    const threadDot = document.querySelector('.thread-dot');
+    const lineStart = document.querySelector('.chat-scene .chat-thread > .msg:last-of-type');
+    const lineEnd = document.querySelector('.reply-scene');
+    if (threadLine && threadDot && lineStart && lineEnd) {
+      const chatScene = document.querySelector('.chat-scene');
+      const chatStage = document.querySelector('.chat-stage');
+      const railEl = document.querySelector('.tl-rail');
+      let unpin = 0, endY = 0, restY = 0, bubbleY = 0, bubbleX = 0;
+      const measureLine = () => {
+        const chatBox = geometryOf(chatScene);
+        /* The scroll position at which the chat stage stops being pinned. */
+        unpin = chatBox.top + chatBox.height - stageHeight;
+        /* While it is pinned the bubble does not move, so its offset inside
+           the stage is its position on screen. */
+        let top = 0;
+        for (let node = lineStart; node && node !== chatStage; node = node.offsetParent) {
+          top += node.offsetTop;
+        }
+        bubbleY = top + lineStart.offsetHeight;
+        bubbleX = lineStart.offsetLeft + lineStart.offsetWidth / 2
+                + (chatStage.offsetWidth - chatStage.clientWidth) / 2
+                + chatStage.getBoundingClientRect().left;
+        endY = geometryOf(lineEnd).top + geometryOf(lineEnd).height;
+        restY = railEl ? railEl.offsetTop : stageHeight * .5;
+      };
+      const drawLine = () => {
+        /* Where the bubble is on screen: still while the stage is pinned, then
+           carried up with it. */
+        const past = Math.max(0, scrollY - unpin);
+        /* Only while the ball is actually leaving the message is its exact
+           position worth a measurement; the offset chain through a centred,
+           padded, sticky stage is not worth guessing at. Past that window the
+           line is far from the bubble and the cached number is fine, so the
+           rest of the page keeps its zero-layout scroll. */
+        const head = past < stageHeight
+          ? lineStart.getBoundingClientRect().bottom
+          : bubbleY - past;
+        const tail = endY - scrollY;
+        const appears = unpin - stageHeight * .55;
+        if (scrollY < appears || tail < 0) {
+          threadLine.style.opacity = '0';
+          threadDot.style.opacity = '0';
+          return;
+        }
+        const topPx = Math.max(0, Math.min(head, stageHeight));
+        const bottomPx = Math.max(0, Math.min(tail, stageHeight));
+        threadLine.style.opacity = '1';
+        threadLine.style.top = topPx.toFixed(1) + 'px';
+        threadLine.style.height = Math.max(0, bottomPx - topPx).toFixed(1) + 'px';
+
+        const out = smooth(clamp(past / (stageHeight * .7)));
+        threadDot.style.opacity = '1';
+        const startX = past < stageHeight
+          ? lineStart.getBoundingClientRect().left + lineStart.offsetWidth / 2
+          : bubbleX;
+        threadDot.style.left = mix(startX, innerWidth / 2, out).toFixed(1) + 'px';
+        threadDot.style.top = mix(head - 16, restY, out).toFixed(1) + 'px';
+      };
+      measureLine();
+      addEventListener('resize', measureLine);
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(measureLine);
+      scenes.push(drawLine);
+      drawLine();
     }
 
     addEventListener('pointermove', moveCards, { passive: true });

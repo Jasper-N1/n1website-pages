@@ -1184,3 +1184,26 @@ body{display:block;overflow:visible;overflow-x:clip}
 .ai-think.is-running .cot-desc i,.ai-think.is-running .task-file,
 .ai-think.is-running .cot-dot,.ai-think.is-running .cot-spin,
 .ai-think.is-running .cot-check{animation-play-state:running}
+
+/* ==========================================================================
+   One line, all the way through.
+
+   It is fixed to the centre of the viewport and spans from the doctor's last
+   message in the first conversation to the end of the reply. Nothing about it
+   is per-section, so there is no boundary for it to break across - which is
+   exactly what went wrong with the four segments it replaces.
+   ========================================================================== */
+.thread-line{position:fixed;z-index:4;left:50%;width:1px;translate:-50% 0;
+  background:rgba(150,178,171,.55);pointer-events:none;opacity:0}
+.thread-dot{position:fixed;z-index:5;width:10px;height:10px;border-radius:50%;
+  background:var(--teal);translate:-50% -50%;pointer-events:none;opacity:0}
+
+/* Over the cream sections the line takes their hairline instead. */
+.timeline-scene ~ *,.timeline-scene{--line-tint:rgba(205,191,168,.8)}
+
+/* The line passes behind the reading, not through it: a hairline this faint
+   reads as the cards being threaded onto it rather than as a rule drawn over
+   their text. The dot stays solid, because that is the thing you follow. */
+.thread-line{background:rgba(150,178,171,.34)}
+.timeline-scene{--x:0}
+.thread-dot{box-shadow:0 0 0 3px rgba(243,237,226,.9)}
