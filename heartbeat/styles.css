@@ -1193,8 +1193,10 @@ body{display:block;overflow:visible;overflow-x:clip}
    is per-section, so there is no boundary for it to break across - which is
    exactly what went wrong with the four segments it replaces.
    ========================================================================== */
-.thread-line{position:fixed;z-index:4;left:50%;width:1px;translate:-50% 0;
-  background:rgba(150,178,171,.55);pointer-events:none;opacity:0}
+.thread-line{position:fixed;z-index:4;inset:0;width:100%;height:100%;
+  pointer-events:none;opacity:0}
+/* The timeline's own hairline colour, and drawn to be seen. */
+.thread-path{stroke:#cdbfa8;stroke-width:1.5;stroke-linecap:round}
 .thread-dot{position:fixed;z-index:5;width:10px;height:10px;border-radius:50%;
   background:var(--teal);translate:-50% -50%;pointer-events:none;opacity:0}
 
@@ -1204,6 +1206,25 @@ body{display:block;overflow:visible;overflow-x:clip}
 /* The line passes behind the reading, not through it: a hairline this faint
    reads as the cards being threaded onto it rather than as a rule drawn over
    their text. The dot stays solid, because that is the thing you follow. */
-.thread-line{background:rgba(150,178,171,.34)}
+
 .timeline-scene{--x:0}
-.thread-dot{box-shadow:0 0 0 3px rgba(243,237,226,.9)}
+/* No halo: the ball has to disappear against the bubble it starts in, and a
+   ring in another colour is exactly what stops it doing that. */
+.thread-dot{box-shadow:none}
+
+/* ==========================================================================
+   The markers belong to the line, not to the card.
+
+   An inactive entry was scaled, blurred and faded as a whole - and its dot and
+   its scatter of other records went with it. Scaling about the card's centre
+   pushed the dot about five pixels off the rail, and the blur made half the
+   dots fuzzy while the rest stayed sharp, which is what read as them being out
+   of whack. The card recedes; the marks on the line do not.
+   ========================================================================== */
+.tl-entry{opacity:1;scale:1;filter:none;transition:none}
+.tl-entry>time,.tl-entry>.tl-body{opacity:.3;scale:.95;filter:blur(1.5px);
+  transition:opacity .45s ease,scale .5s cubic-bezier(.2,.8,.3,1),filter .45s ease}
+.tl-entry.is-active>time,.tl-entry.is-active>.tl-body{opacity:1;scale:1;filter:blur(0)}
+
+/* The list already carries a -6px nudge that puts these marks on the line, so
+   they need no centring of their own - adding it moved them up twice. */

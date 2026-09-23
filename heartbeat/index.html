@@ -24,7 +24,7 @@
     <g id="i-loader"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></g>
   </defs>
 </svg>
-  <div class="thread-line" aria-hidden="true"></div>
+  <svg class="thread-line" aria-hidden="true" preserveAspectRatio="none"><path class="thread-path" fill="none"/></svg>
   <i class="thread-dot" aria-hidden="true"></i>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="floating-nav">
@@ -1208,75 +1208,97 @@
        teal, so at first there is only a line; as you scroll it comes out of
        the message and rides down to the centre, where it stays while the
        record runs past it. */
-    /* One line, from the doctor's last message in the first conversation to the
-       end of the reply. It is fixed to the viewport rather than living inside
-       any section, because the four segments it replaces each sat in a sticky
-       stage and so could never meet across a boundary - one had already
-       scrolled away before the next arrived.
+    /* One line, from the corner of the doctor's last message to the end of the
+       reply. It is a real path rather than a stack of divs, for two reasons:
+       it has to leave the bubble at a point and arrive at the centre of the
+       rail, which is a bend, not a stack of rectangles; and the ball has to be
+       ON it at every moment, which is only checkable if the line is something
+       you can ask for a coordinate.
 
-       The ball waits inside that last bubble. The bubble is the same teal, so
-       at first there is only a line; as you scroll it comes out of the message,
-       across and down, and settles on the line at the height the record runs
-       past. */
+       The whole shape is one function of y, so the path drawn and the point
+       the ball sits at come from the same place and cannot disagree. */
     const threadLine = document.querySelector('.thread-line');
+    const threadPath = document.querySelector('.thread-path');
     const threadDot = document.querySelector('.thread-dot');
     const lineStart = document.querySelector('.chat-scene .chat-thread > .msg:last-of-type');
     const lineEnd = document.querySelector('.reply-scene');
-    if (threadLine && threadDot && lineStart && lineEnd) {
+    if (threadLine && threadPath && threadDot && lineStart && lineEnd) {
       const chatScene = document.querySelector('.chat-scene');
-      const chatStage = document.querySelector('.chat-stage');
       const railEl = document.querySelector('.tl-rail');
-      let unpin = 0, endY = 0, restY = 0, bubbleY = 0, bubbleX = 0;
+      const BEND = 150;          /* how long the line takes to reach the centre */
+      const CORNER_IN = 22;      /* tucked inside the bubble's rounded corner */
+      const CORNER_UP = 11;      /* and just inside its bottom edge, so the ball
+                                    can rest there and be both hidden and on the
+                                    line - the two are the same point */
+      let unpin = 0, endY = 0, restY = 0, parkX = 0, parkY = 0;
+
       const measureLine = () => {
         const chatBox = geometryOf(chatScene);
-        /* The scroll position at which the chat stage stops being pinned. */
         unpin = chatBox.top + chatBox.height - stageHeight;
-        /* While it is pinned the bubble does not move, so its offset inside
-           the stage is its position on screen. */
-        let top = 0;
-        for (let node = lineStart; node && node !== chatStage; node = node.offsetParent) {
-          top += node.offsetTop;
-        }
-        bubbleY = top + lineStart.offsetHeight;
-        bubbleX = lineStart.offsetLeft + lineStart.offsetWidth / 2
-                + (chatStage.offsetWidth - chatStage.clientWidth) / 2
-                + chatStage.getBoundingClientRect().left;
         endY = geometryOf(lineEnd).top + geometryOf(lineEnd).height;
         restY = railEl ? railEl.offsetTop : stageHeight * .5;
+        const box = lineStart.getBoundingClientRect();
+        parkX = box.right - CORNER_IN;
+        parkY = box.bottom - CORNER_UP;
       };
+
+      /* Where the message corner is on screen: still while its stage is
+         pinned, then carried up with it. */
+      const cornerNow = () => {
+        if (scrollY <= unpin + stageHeight) {
+          const box = lineStart.getBoundingClientRect();
+          return { x: box.right - CORNER_IN, y: box.bottom - CORNER_UP };
+        }
+        return { x: parkX, y: parkY - (scrollY - unpin) };
+      };
+
+      /* The one description of the line. Everything else reads from it. */
+      const xAt = (y, corner, centre) => {
+        if (y <= corner.y) return corner.x;
+        return mix(corner.x, centre, smooth(clamp((y - corner.y) / BEND)));
+      };
+
       const drawLine = () => {
-        /* Where the bubble is on screen: still while the stage is pinned, then
-           carried up with it. */
-        const past = Math.max(0, scrollY - unpin);
-        /* Only while the ball is actually leaving the message is its exact
-           position worth a measurement; the offset chain through a centred,
-           padded, sticky stage is not worth guessing at. Past that window the
-           line is far from the bubble and the cached number is fine, so the
-           rest of the page keeps its zero-layout scroll. */
-        const head = past < stageHeight
-          ? lineStart.getBoundingClientRect().bottom
-          : bubbleY - past;
-        const tail = endY - scrollY;
+        const corner = cornerNow();
+        const centre = innerWidth / 2;
+        const tail = Math.min(endY - scrollY, stageHeight);
         const appears = unpin - stageHeight * .55;
         if (scrollY < appears || tail < 0) {
           threadLine.style.opacity = '0';
           threadDot.style.opacity = '0';
           return;
         }
-        const topPx = Math.max(0, Math.min(head, stageHeight));
-        const bottomPx = Math.max(0, Math.min(tail, stageHeight));
         threadLine.style.opacity = '1';
-        threadLine.style.top = topPx.toFixed(1) + 'px';
-        threadLine.style.height = Math.max(0, bottomPx - topPx).toFixed(1) + 'px';
 
+        /* Draw only what is on screen, sampled through the bend and straight
+           after it. */
+        const from = Math.max(corner.y, -2);
+        let d = 'M' + xAt(from, corner, centre).toFixed(1) + ',' + from.toFixed(1);
+        const bendEnd = corner.y + BEND;
+        if (bendEnd > from) {
+          const steps = 18;
+          for (let i = 1; i <= steps; i++) {
+            const y = from + (Math.min(bendEnd, tail) - from) * (i / steps);
+            d += 'L' + xAt(y, corner, centre).toFixed(1) + ',' + y.toFixed(1);
+          }
+        }
+        if (tail > bendEnd) d += 'L' + centre.toFixed(1) + ',' + tail.toFixed(1);
+        threadPath.setAttribute('d', d);
+
+        /* The ball travels down the line, and its x is read off the same
+           function, so it cannot be beside it. */
+        const past = Math.max(0, scrollY - unpin);
         const out = smooth(clamp(past / (stageHeight * .7)));
-        threadDot.style.opacity = '1';
-        const startX = past < stageHeight
-          ? lineStart.getBoundingClientRect().left + lineStart.offsetWidth / 2
-          : bubbleX;
-        threadDot.style.left = mix(startX, innerWidth / 2, out).toFixed(1) + 'px';
-        threadDot.style.top = mix(head - 16, restY, out).toFixed(1) + 'px';
+        /* The ball cannot be anywhere the line is not: never above where the
+           line leaves the bubble, never below where the line ends. It sits in
+           the corner until the line has carried that corner above its resting
+           height, and only then rides down. */
+        const dotY = Math.min(Math.max(corner.y, mix(corner.y, restY, out)), tail);
+        threadDot.style.opacity = dotY < -8 || dotY > stageHeight + 8 ? '0' : '1';
+        threadDot.style.left = xAt(dotY, corner, centre).toFixed(1) + 'px';
+        threadDot.style.top = dotY.toFixed(1) + 'px';
       };
+
       measureLine();
       addEventListener('resize', measureLine);
       if (document.fonts && document.fonts.ready) document.fonts.ready.then(measureLine);
