@@ -988,3 +988,69 @@
   }
   document.addEventListener('visibilitychange', () => instances.forEach((instance) => document.hidden ? instance.stop() : instance.start()));
 })();
+
+
+/* The product window sits at a fixed distance down the stage, and that constant
+   assumed the copy above it ran to two lines. It does at 540px and wider. On a
+   phone the same sentence wraps to three lines, or four at 320px, and the copy
+   runs 32 to 76 pixels into the top of the window - which is what it looks
+   like: the paragraph printed over the app.
+
+   The copy's height is not knowable in CSS, so it is measured. The window is
+   placed below whatever the copy actually occupies, and its height follows from
+   where it now starts, so the bottom of the app does not fall out of the stage
+   on a short screen. */
+(function () {
+  var sticky = document.querySelector('.product-hero-sticky');
+  var copy   = document.querySelector('.product-hero-copy');
+  var win    = document.querySelector('.product-hero-window');
+  if (!sticky || !copy || !win) return;
+
+  function placeWindow() {
+    if (!matchMedia('(max-width: 720px)').matches) {
+      sticky.style.removeProperty('--hero-window-top');
+      return;
+    }
+    var stage = sticky.getBoundingClientRect();
+    var below = copy.getBoundingClientRect().bottom - stage.top;
+    sticky.style.setProperty('--hero-window-top', Math.round(below + 20) + 'px');
+  }
+
+  /* The app inside the window is a desktop interface. Squeezed into 350px its
+     dashboard grid collapses onto itself - the record counts print over their
+     own labels. It is drawn at a width it was designed for and scaled down to
+     fit instead, so it reads as a small screenshot rather than a broken page. */
+  var DESIGN = 980;
+  function scaleApp() {
+    var app = document.querySelector('.product-hero-app');
+    if (!app) return;
+    if (!matchMedia('(max-width: 720px)').matches) {
+      app.style.removeProperty('width');
+      app.style.removeProperty('height');
+      app.style.removeProperty('transform');
+      return;
+    }
+    var box = win.getBoundingClientRect();
+    if (!box.width) return;
+    var scale = box.width / DESIGN;
+    /* Draw it at its design width with whatever height its content needs, then
+       scale. Forcing the height from the window instead left the app padded out
+       with empty space its content never reached. */
+    app.style.width = DESIGN + 'px';
+    app.style.height = 'auto';
+    app.style.transform = 'none';
+    var natural = app.scrollHeight;
+    app.style.transform = 'scale(' + scale.toFixed(4) + ')';
+    /* The window closes around the scaled app, plus its own title bar. */
+    var bar = win.querySelector('.product-hero-bar');
+    var barH = bar ? bar.getBoundingClientRect().height : 0;
+    win.style.height = Math.round(barH + natural * scale) + 'px';
+    win.style.minHeight = '0';
+  }
+
+  function fit() { placeWindow(); scaleApp(); }
+
+  fit();
+  addEventListener('resize', fit);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+})();

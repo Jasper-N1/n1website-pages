@@ -1746,7 +1746,7 @@
   .product-hero-story p { max-width: 490px; margin-top: 15px; font-size: 13px; }
   .product-hero-story ul { grid-template-columns: 1fr; gap: 6px; margin-top: 15px; }
   .product-hero-story li { font-size: 10px; }
-  .product-hero-window { top: clamp(190px,24svh,225px); width: 100%; height: min(520px,calc(100svh - 205px)); min-height: 420px; margin: 0; border-radius: 15px; transform-origin: 50% 36%; }
+  .product-hero-window { top: var(--hero-window-top, clamp(190px,24svh,225px)); width: 100%; height: min(520px,calc(100svh - var(--hero-window-top, 205px) - 18px)); min-height: 300px; margin: 0; border-radius: 15px; transform-origin: 50% 36%; }
   .product-page .product-hero + .page-section.paper { margin-top: 0; padding-top: 56px; border-radius: 22px 22px 0 0; }
   .product-hero-bar { height: 55px; grid-template-columns: 1fr auto; padding: 0 14px; }
   .product-hero-brand { font-size: 22px; }
@@ -2086,4 +2086,10 @@
   .clinician-product-chapter :is(.hero-record-empty,.hero-record-ready,.hero-record-complete,.hero-record-upload-card) :is(span,small) {
     font-size: 9.5px !important;
   }
+}
+
+/* The mock is scaled from its top-left on a phone, so it needs an origin and
+   somewhere to scale into. Width and height come from the harness. */
+@media (max-width: 720px) {
+  .product-hero-app { transform-origin: 0 0; }
 }
