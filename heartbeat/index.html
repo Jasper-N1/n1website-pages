@@ -749,6 +749,20 @@
        scroll frame is writes only. -rect.top is the same number as
        scrollY - absoluteTop for an untransformed block in flow, which is what
        every one of these sections is. */
+    /* The sections are sized in svh, which never moves. innerHeight does: on a
+       phone it grows by the height of the address bar the moment that bar
+       slides away mid-scroll. Measuring the travel against innerHeight meant
+       the whole mapping shifted under the reader during the gesture - the
+       animation sped up and reached its end before the section did. Measure
+       the svh the layout is actually using instead. */
+    const svhProbe = document.createElement('div');
+    svhProbe.setAttribute('aria-hidden', 'true');
+    svhProbe.style.cssText =
+      'position:absolute;top:0;left:0;width:0;height:100svh;visibility:hidden;pointer-events:none';
+    document.body.appendChild(svhProbe);
+    let stageHeight = svhProbe.offsetHeight || innerHeight;
+    const measureStage = () => { stageHeight = svhProbe.offsetHeight || innerHeight; };
+
     const geometry = new Map();
     const geometryOf = element => {
       let box = geometry.get(element);
@@ -762,7 +776,7 @@
     };
     const trackProgress = element => {
       const box = geometryOf(element);
-      const travel = box.height - innerHeight;
+      const travel = box.height - stageHeight;
       return travel > 0 ? clamp((scrollY - box.top) / travel) : 0;
     };
     const readTarget = () => {
@@ -1015,6 +1029,7 @@
     addEventListener('pointermove', moveCards, { passive: true });
     addEventListener('resize', () => {
       geometry.clear();
+      measureStage();
       randomiseCardField();
       prepareZoomTarget();
       readTarget();

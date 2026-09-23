@@ -798,3 +798,13 @@ body{display:block;overflow:visible;overflow-x:clip}
      right where the first line starts. */
   .tl-head{top:var(--stage-top);right:var(--stage-x);left:var(--stage-x)}
 }
+
+/* A sticky header taller than the screen does not stick. The hero carried a
+   680px floor (650px on a phone), which is taller than the viewport on a short
+   one - an iPhone SE is 568px - so on exactly those devices the whole opening
+   sequence scrolled away instead of pinning. The floor still applies wherever
+   there is room for it. */
+.floating-hero{min-height:min(680px,100svh)}
+@media(max-width:720px){
+  .floating-hero{min-height:min(650px,100svh)}
+}
