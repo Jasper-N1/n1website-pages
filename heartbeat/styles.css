@@ -12,9 +12,9 @@
 @media(max-width:720px){.floating-copy{width:calc(100% - 38px)}.floating-copy h1 span{font-size:clamp(50px,13vw,64px)}.floating-perspective{max-width:340px;font-size:16px!important}}
 body{overflow-x:hidden;overflow-y:auto}.patient-story{min-height:100svh;position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(380px,520px);gap:clamp(50px,8vw,130px);align-items:end;padding:clamp(110px,10vw,160px) max(28px,calc((100vw - 1320px)/2));overflow:hidden;color:#fff;background:#17211f}.patient-story-image{width:100%;height:100%;position:absolute;inset:0;object-fit:cover;object-position:center 48%;transform:scale(1.06);transition:transform 1.5s cubic-bezier(.2,.75,.25,1)}.patient-story.is-visible .patient-story-image{transform:scale(1)}.patient-story-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,18,16,.9) 0%,rgba(10,18,16,.64) 38%,rgba(10,18,16,.14) 67%,rgba(10,18,16,.5) 100%),linear-gradient(0deg,rgba(10,18,16,.72),transparent 52%)}.patient-story-copy,.patient-timeline{position:relative;z-index:1;opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .9s cubic-bezier(.2,.75,.25,1)}.patient-story.is-visible .patient-story-copy,.patient-story.is-visible .patient-timeline{opacity:1;transform:none}.patient-timeline{transition-delay:.16s}.patient-story-copy{max-width:690px;padding-bottom:28px}.patient-story-copy>p:first-child{margin:0 0 22px;color:#9dd9d2;font-size:12px;font-weight:600;letter-spacing:.15em;text-transform:uppercase}.patient-story-copy h2{max-width:680px;margin:0;font-size:clamp(52px,6vw,88px);font-weight:400;line-height:.95;letter-spacing:-.06em}.patient-story-copy>p:last-child{max-width:610px;margin:30px 0 0;color:#d6e1de;font-size:18px;line-height:1.65}.patient-timeline{align-self:center;max-height:calc(100svh - 100px);padding:26px;border:1px solid rgba(255,255,255,.28);border-radius:24px;color:#17211f;background:rgba(255,253,249,.9);box-shadow:0 28px 70px rgba(0,0,0,.22);backdrop-filter:blur(18px);overflow:auto}.patient-timeline header{display:flex;align-items:start;justify-content:space-between;gap:20px;padding-bottom:19px;border-bottom:1px solid #d9e0dd}.patient-timeline header small{color:#64716d;font-size:10px;letter-spacing:.13em;text-transform:uppercase}.patient-timeline h3{margin:7px 0 0;font-size:26px}.patient-timeline header>span{padding:7px 9px;border-radius:8px;color:#256b62;background:#dceeea;font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}.patient-timeline ol{margin:0;padding:0;list-style:none}.patient-timeline li{position:relative;display:grid;grid-template-columns:76px 1fr;gap:16px;padding:22px 0 22px 24px;border-bottom:1px solid #dce2df}.patient-timeline li:last-child{border-bottom:0}.patient-timeline li::before{width:9px;height:9px;position:absolute;top:27px;left:0;border:3px solid #d5eae6;border-radius:50%;background:#2f7d78;content:""}.patient-timeline li:not(:last-child)::after{width:1px;position:absolute;top:38px;bottom:-28px;left:4px;background:#b8cfca;content:""}.patient-timeline time{color:#596763;font-size:11px}.patient-timeline b{font-size:14px}.patient-timeline li p{margin:7px 0 9px;color:#596763;font-size:12px;line-height:1.45}.patient-timeline a{color:#286c67;font-size:10px;font-weight:600}.patient-timeline a:focus-visible{outline:3px solid #55aaa2;outline-offset:3px}
 @media(max-width:900px){.patient-story{grid-template-columns:1fr;align-items:end;padding:100px 22px 28px}.patient-story-image{object-position:42% center}.patient-story-shade{background:linear-gradient(0deg,rgba(10,18,16,.94) 0%,rgba(10,18,16,.62) 53%,rgba(10,18,16,.18) 100%)}.patient-story-copy{padding:0}.patient-story-copy h2{font-size:clamp(44px,11vw,68px)}.patient-story-copy>p:last-child{font-size:16px}.patient-timeline{width:100%;max-height:none;align-self:end;padding:20px;border-radius:20px}.patient-timeline ol{display:grid;grid-template-columns:1fr 1fr}.patient-timeline li:nth-child(odd){border-right:1px solid #dce2df}.patient-timeline li:nth-last-child(-n+2){border-bottom:0}}
-@media(max-width:620px){.patient-story{min-height:auto;padding-top:76vh}.patient-story-image{height:100%;object-position:43% top}.patient-story-copy h2{font-size:44px}.patient-timeline ol{grid-template-columns:1fr}.patient-timeline li{grid-template-columns:68px 1fr}.patient-timeline li:nth-child(odd){border-right:0}.patient-timeline li:nth-last-child(2){border-bottom:1px solid #dce2df}}
+@media(max-width:620px){.patient-story{min-height:auto;padding-top:76svh}.patient-story-image{height:100%;object-position:43% top}.patient-story-copy h2{font-size:44px}.patient-timeline ol{grid-template-columns:1fr}.patient-timeline li{grid-template-columns:68px 1fr}.patient-timeline li:nth-child(odd){border-right:0}.patient-timeline li:nth-last-child(2){border-bottom:1px solid #dce2df}}
 .zoom-journey{height:300svh;position:relative;background:#fafaf8}.zoom-journey .floating-hero{position:sticky;top:0}.card-care{z-index:30}.card-care img{object-position:center 38%}.patient-zoom{position:absolute;z-index:35;inset:0;opacity:0;clip-path:inset(61% 6% 27% calc(100% - 170px) round 20px);pointer-events:none;will-change:clip-path,transform}.patient-zoom img{width:100%;height:100%;object-fit:cover;object-position:center 42%}.patient-story{min-height:100%;position:absolute;z-index:40;inset:0;opacity:0;pointer-events:none}.patient-story-image{object-position:center 42%}.floating-copy,.float-card{transition:opacity .22s linear}.floating-nav{transition:opacity .25s linear}
-@media(max-width:620px){.zoom-journey{height:280svh}.patient-story{min-height:100%;padding-top:32vh}.patient-story-copy h2{font-size:40px}.patient-story-copy>p:last-child{display:none}.patient-timeline{max-height:52vh;overflow:auto}}
+@media(max-width:620px){.zoom-journey{height:280svh}.patient-story{min-height:100%;padding-top:32svh}.patient-story-copy h2{font-size:40px}.patient-story-copy>p:last-child{display:none}.patient-timeline{max-height:52svh;overflow:auto}}
 @media(max-width:1100px){.card-care{display:block}}
 @media(max-width:720px){.card-care{width:108px;height:80px;top:auto;right:-24px;bottom:9%}.card-claim{display:none}}
 
@@ -53,7 +53,7 @@ body{overflow-x:hidden;overflow-y:auto}.patient-story{min-height:100svh;position
   .card-field>.card-care{z-index:30;transform:translate3d(var(--mouse-x),var(--mouse-y),0)}
 }
 
-html,body{overflow:hidden}.zoom-journey{height:100svh}.zoom-journey .floating-hero{position:relative}.patient-story{display:none}.patient-zoom{display:block;z-index:90;inset:auto;overflow:hidden;clip-path:none;will-change:left,top,width,height,border-radius}.patient-zoom::after{position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,15,13,.62) 0%,rgba(7,15,13,.34) 42%,rgba(7,15,13,.2) 100%),rgba(7,15,13,.12);content:"";opacity:var(--overlay-opacity,0)}.patient-zoom img{object-position:center 38%}.card-field{--field-fade:0}.card-field>.float-card:not(.card-care){opacity:calc(1 - var(--field-fade))}.zoom-copy{width:min(1100px,80vw);position:absolute;z-index:95;right:auto;bottom:clamp(44px,8vh,96px);left:max(28px,calc((100vw - 1320px)/2));color:#fff;text-align:left;opacity:0;pointer-events:none;text-shadow:0 2px 24px rgba(0,0,0,.35);will-change:opacity,transform}.zoom-copy::before{display:none}.zoom-copy h2{margin:0;font-size:clamp(64px,7vw,108px);font-weight:400;line-height:.88;letter-spacing:-.065em}.zoom-copy h2 span{display:block;max-width:none;margin:0;font:inherit;line-height:inherit;white-space:nowrap}.zoom-copy>span{display:block;max-width:760px;margin-top:24px;font-size:clamp(20px,2vw,30px);line-height:1.3}
+html,body{overflow:hidden}.zoom-journey{height:100svh}.zoom-journey .floating-hero{position:relative}.patient-story{display:none}.patient-zoom{display:block;z-index:90;inset:auto;overflow:hidden;clip-path:none;will-change:left,top,width,height,border-radius}.patient-zoom::after{position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,15,13,.62) 0%,rgba(7,15,13,.34) 42%,rgba(7,15,13,.2) 100%),rgba(7,15,13,.12);content:"";opacity:var(--overlay-opacity,0)}.patient-zoom img{object-position:center 38%}.card-field{--field-fade:0}.card-field>.float-card:not(.card-care){opacity:calc(1 - var(--field-fade))}.zoom-copy{width:min(1100px,80vw);position:absolute;z-index:95;right:auto;bottom:clamp(44px,8svh,96px);left:max(28px,calc((100vw - 1320px)/2));color:#fff;text-align:left;opacity:0;pointer-events:none;text-shadow:0 2px 24px rgba(0,0,0,.35);will-change:opacity,transform}.zoom-copy::before{display:none}.zoom-copy h2{margin:0;font-size:clamp(64px,7vw,108px);font-weight:400;line-height:.88;letter-spacing:-.065em}.zoom-copy h2 span{display:block;max-width:none;margin:0;font:inherit;line-height:inherit;white-space:nowrap}.zoom-copy>span{display:block;max-width:760px;margin-top:24px;font-size:clamp(20px,2vw,30px);line-height:1.3}
 html,body{overflow:hidden}.zoom-journey{height:100svh}.zoom-journey .floating-hero{position:relative}.patient-story{display:none}.patient-zoom{display:block;z-index:90;inset:auto;overflow:hidden;clip-path:none;will-change:left,top,width,height,border-radius}.patient-zoom::after{position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,15,13,.62) 0%,rgba(7,15,13,.34) 42%,rgba(7,15,13,.2) 100%),rgba(7,15,13,.12);content:"";opacity:var(--overlay-opacity,0)}.patient-zoom img{object-position:center 38%}.card-field{--field-fade:0}.card-field>.float-card:not(.card-care){opacity:calc(1 - var(--field-fade))}@media(max-width:620px){.zoom-copy{width:calc(100vw - 44px);right:22px;bottom:42px;left:22px}.zoom-copy h2{font-size:clamp(36px,10.5vw,56px)}.zoom-copy>span{font-size:17px;line-height:1.4}}
 
 .card-care{width:210px;height:154px}
@@ -110,7 +110,7 @@ body{display:block;overflow:visible;overflow-x:clip}
 .heart-copy{max-width:min(900px,90vw)}
 .heart-kicker{margin:0 0 16px;color:rgba(255,255,255,.66);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
 .heart-copy h1{margin:0;color:#fdfaf6;font-size:clamp(34px,6.4vw,104px);font-weight:400;line-height:.95;letter-spacing:-.055em}
-.heart-cue{margin:clamp(26px,4vh,44px) 0 0;color:rgba(255,255,255,.5);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+.heart-cue{margin:clamp(26px,4svh,44px) 0 0;color:rgba(255,255,255,.5);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
 .heart-cue span{display:block;margin-bottom:6px;animation:nudge 2.4s ease-in-out infinite}
 @keyframes nudge{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(5px);opacity:1}}
 
@@ -131,7 +131,7 @@ body{display:block;overflow:visible;overflow-x:clip}
    ========================================================================== */
 
 .chat-scene{height:330svh;position:relative;z-index:1;background:#edf6f4;color:var(--ink)}
-.chat-stage{--chat:0;min-height:100svh;position:sticky;top:0;display:flex;flex-direction:column;justify-content:center;padding:clamp(52px,8vh,92px) max(24px,calc((100vw - 980px)/2))}
+.chat-stage{--chat:0;min-height:100svh;position:sticky;top:0;display:flex;flex-direction:column;justify-content:center;padding:clamp(52px,8svh,92px) max(24px,calc((100vw - 980px)/2))}
 
 
 .chat-thread{width:min(720px,100%);margin:0 auto;display:flex;flex-direction:column;gap:11px;padding:0 clamp(0px,6vw,52px)}
@@ -208,10 +208,10 @@ body{display:block;overflow:visible;overflow-x:clip}
 
 /* The rail sits just under the header rather than at the vertical middle -
    centring it left a dead band of half a screen above the cards. */
-.timeline-scene{--tl:0;--deep:0;--rail-y:clamp(228px,30vh,320px);height:1180svh;position:relative;z-index:1;background:#f3ede2;color:var(--ink)}
+.timeline-scene{--tl:0;--deep:0;--rail-y:clamp(228px,30svh,320px);height:1245svh;position:relative;z-index:1;background:#f3ede2;color:var(--ink)}
 .tl-stage{height:100svh;position:sticky;top:0;overflow:hidden}
 
-.tl-head{position:absolute;z-index:3;top:clamp(28px,5vh,56px);left:max(24px,calc((100vw - 1180px)/2));right:24px}
+.tl-head{position:absolute;z-index:3;top:clamp(28px,5svh,56px);left:max(24px,calc((100vw - 1180px)/2));right:24px}
 .tl-head h2{margin:0;font-size:clamp(24px,3vw,44px);font-weight:400;line-height:1.05;letter-spacing:-.04em}
 
 /* The rail the entries travel along, and the mark they are read at. */
@@ -220,7 +220,7 @@ body{display:block;overflow:visible;overflow-x:clip}
 .tl-focus{width:13px;height:13px;position:absolute;top:50%;left:50%;translate:-50% -50%;border:1.5px solid var(--teal);border-radius:50%}
 .tl-focus::after{width:3px;height:3px;position:absolute;top:50%;left:50%;translate:-50% -50%;border-radius:50%;background:var(--teal);content:""}
 
-.tl-count{position:absolute;z-index:3;right:max(24px,calc((100vw - 1180px)/2));bottom:clamp(30px,6vh,64px);margin:0;color:#a8977c;font-size:12px;font-weight:600;letter-spacing:.14em}
+.tl-count{position:absolute;z-index:3;right:max(24px,calc((100vw - 1180px)/2));bottom:clamp(30px,6svh,64px);margin:0;color:#a8977c;font-size:12px;font-weight:600;letter-spacing:.14em}
 .tl-count b{color:var(--ink)}
 
 .tl-list{--card:min(400px,76vw);--gap:clamp(30px,5vw,80px);--pos:0;
@@ -294,20 +294,20 @@ body{display:block;overflow:visible;overflow-x:clip}
 
 /* Fills the viewport so the page ends on the canvas, not on a sliver of the
    body background below it. */
-.cta-scene{position:relative;z-index:1;display:grid;place-items:center;min-height:100svh;overflow:hidden;padding:clamp(80px,14vh,160px) 24px;background:var(--canvas);color:#fdfaf6;text-align:center}
+.cta-scene{position:relative;z-index:1;display:grid;place-items:center;min-height:100svh;overflow:hidden;padding:clamp(80px,14svh,160px) 24px;background:var(--canvas);color:#fdfaf6;text-align:center}
 .cta-glow{position:absolute;inset:0;pointer-events:none}
 .cta-glow i{position:absolute;display:block;border-radius:50%;opacity:.42}
 .cta-glow i:first-child{width:min(70vmin,760px);aspect-ratio:1;top:-18%;left:-8%;background:radial-gradient(closest-side,#17999b,rgba(23,153,155,0) 72%);animation:cta-drift-a 26s ease-in-out infinite}
 .cta-glow i:last-child{width:min(58vmin,620px);aspect-ratio:1;right:-10%;bottom:-22%;background:radial-gradient(closest-side,#266ea4,rgba(38,110,164,0) 72%);animation:cta-drift-b 32s ease-in-out infinite}
-@keyframes cta-drift-a{0%,100%{transform:translate(0,0)}50%{transform:translate(7vw,5vh)}}
+@keyframes cta-drift-a{0%,100%{transform:translate(0,0)}50%{transform:translate(7vw,5svh)}}
 @keyframes cta-drift-b{0%,100%{transform:translate(0,0)}50%{transform:translate(-6vw,-4vh)}}
 
 .cta-inner{position:relative;max-width:780px}
 .cta-eyebrow{margin:0 0 18px;color:rgba(255,255,255,.62);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
 .cta-scene h2{margin:0;font-size:clamp(32px,5vw,74px);font-weight:400;line-height:1.02;letter-spacing:-.045em}
-.cta-sub{max-width:56ch;margin:clamp(20px,3vh,30px) auto 0;color:rgba(253,250,246,.76);font-size:clamp(16px,1.5vw,19px);line-height:1.6}
+.cta-sub{max-width:56ch;margin:clamp(20px,3svh,30px) auto 0;color:rgba(253,250,246,.76);font-size:clamp(16px,1.5vw,19px);line-height:1.6}
 
-.cta-actions{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:clamp(30px,5vh,46px)}
+.cta-actions{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:clamp(30px,5svh,46px)}
 .cta-primary,.cta-secondary{display:inline-flex;align-items:center;gap:8px;padding:15px 30px;border-radius:999px;font-size:16px;font-weight:600;text-decoration:none;transition:background .2s ease,color .2s ease,translate .2s ease}
 .cta-primary{color:#0b3d3f;background:#fdfaf6}
 .cta-primary:hover{background:#fff;translate:0 -1px}
@@ -315,7 +315,7 @@ body{display:block;overflow:visible;overflow-x:clip}
 .cta-secondary:hover{background:rgba(255,255,255,.12);translate:0 -1px}
 .cta-primary:focus-visible,.cta-secondary:focus-visible{outline:3px solid #7fc0ba;outline-offset:3px}
 
-.cta-note{margin:clamp(24px,4vh,38px) 0 0;color:rgba(253,250,246,.5);font-size:13px}
+.cta-note{margin:clamp(24px,4svh,38px) 0 0;color:rgba(253,250,246,.5);font-size:13px}
 
 @media(prefers-reduced-motion:reduce){.cta-glow i{animation:none}}
 
@@ -408,13 +408,13 @@ body{display:block;overflow:visible;overflow-x:clip}
    ========================================================================== */
 
 .send-scene{--send:0;height:260svh;position:relative;z-index:1;background:#edf6f4;color:var(--ink)}
-.send-stage{height:100svh;position:sticky;top:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(10px,1.6vh,18px);padding:clamp(40px,8vh,90px) 24px;overflow:hidden;text-align:center}
+.send-stage{height:100svh;position:sticky;top:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(10px,1.6svh,18px);padding:clamp(40px,8svh,90px) 24px;overflow:hidden;text-align:center}
 
 .send-eyebrow{margin:0;color:var(--teal);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
 .send-scene h2{max-width:16ch;margin:0;font-size:clamp(30px,4.4vw,60px);font-weight:400;line-height:1.03;letter-spacing:-.04em}
-.send-sub{max-width:52ch;margin:clamp(8px,1.4vh,16px) 0 0;color:var(--muted);font-size:clamp(15px,1.5vw,18px);line-height:1.6}
+.send-sub{max-width:52ch;margin:clamp(8px,1.4svh,16px) 0 0;color:var(--muted);font-size:clamp(15px,1.5vw,18px);line-height:1.6}
 
-.send-rig{width:min(620px,92vw);height:clamp(150px,22vh,210px);position:relative;margin-top:clamp(14px,3vh,34px)}
+.send-rig{width:min(620px,92vw);height:clamp(150px,22svh,210px);position:relative;margin-top:clamp(14px,3svh,34px)}
 
 /* The path it takes, drawn faintly behind it. */
 .send-trail{position:absolute;top:50%;right:14%;left:16%;height:96px;translate:0 -58%;
@@ -442,7 +442,7 @@ body{display:block;overflow:visible;overflow-x:clip}
   opacity:calc(var(--hit) * (1 - var(--hit)) * 4);scale:calc(1 + var(--hit) * 1.5)}
 
 .send-done{--in:clamp(0,calc((var(--send) - .72) / .12),1);
-  display:flex;gap:9px;align-items:center;margin:clamp(12px,2vh,24px) 0 0;color:var(--green);font-size:14px;font-weight:600;
+  display:flex;gap:9px;align-items:center;margin:clamp(12px,2svh,24px) 0 0;color:var(--green);font-size:14px;font-weight:600;
   opacity:var(--in);translate:0 calc((1 - var(--in)) * 8px)}
 .send-tick{display:grid;width:22px;height:22px;place-items:center;border-radius:50%;background:var(--teal);color:#fff;font-size:12px}
 
@@ -505,7 +505,7 @@ body{display:block;overflow:visible;overflow-x:clip}
 .ai-load{align-items:flex-start;gap:0;padding:clamp(24px,5vw,60px);text-align:left;
   max-width:min(620px,92vw);margin:0 auto;inset:0}
 .ai-kicker{margin:0 0 10px;color:var(--teal);font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;font-family:var(--n1-font-mono,ui-monospace,SFMono-Regular,Menlo,monospace)}
-.ai-thought{display:flex;align-items:baseline;margin:0 0 clamp(18px,3vh,30px);font-size:clamp(20px,2.4vw,30px);font-weight:400;letter-spacing:-.025em}
+.ai-thought{display:flex;align-items:baseline;margin:0 0 clamp(18px,3svh,30px);font-size:clamp(20px,2.4vw,30px);font-weight:400;letter-spacing:-.025em}
 .ai-dots{display:inline-flex;gap:4px;margin-left:8px}
 .ai-dots i{width:5px;height:5px;border-radius:50%;background:currentColor;opacity:.25;animation:ai-dot 1.25s ease-in-out infinite}
 .ai-dots i:nth-child(2){animation-delay:.16s}
@@ -543,7 +543,7 @@ body{display:block;overflow:visible;overflow-x:clip}
 .ai-shape-chip i:first-child{width:74px;height:14px;border-radius:99px;background:#e7efe9}.ai-shape-chip i:not(:first-child){display:none}
 .ai-shape-card i:first-child{width:96px;height:12px;border-radius:4px}.ai-shape-card i:nth-child(2){width:52px}.ai-shape-card i:nth-child(3){display:none}
 
-.ai-foot{display:flex;gap:8px;align-items:center;margin:clamp(16px,2.5vh,24px) 0 0;color:#a8977c;font-size:11px;
+.ai-foot{display:flex;gap:8px;align-items:center;margin:clamp(16px,2.5svh,24px) 0 0;color:#a8977c;font-size:11px;
   font-family:ui-monospace,SFMono-Regular,Menlo,monospace;opacity:0;animation:ai-step-in .4s ease forwards 1.9s}
 .ai-cursor{width:7px;height:13px;background:var(--teal);animation:ai-blink .9s steps(1) infinite}
 @keyframes ai-blink{50%{opacity:0}}
@@ -673,9 +673,9 @@ body{display:block;overflow:visible;overflow-x:clip}
 
 /* A full screen of its own, like the close below it. */
 .trust-scene{position:relative;z-index:1;display:grid;place-items:center;min-height:100svh;
-  padding:clamp(80px,12vh,140px) 24px;background:#f9f8f2;color:#202523;text-align:center}
+  padding:clamp(80px,12svh,140px) 24px;background:#f9f8f2;color:#202523;text-align:center}
 .trust-inner{width:min(1120px,100%);display:grid;justify-items:center}
-.trust-animation{width:min(620px,78vw);aspect-ratio:5/2;margin:0 auto clamp(20px,4vh,40px);overflow:hidden}
+.trust-animation{width:min(620px,78vw);aspect-ratio:5/2;margin:0 auto clamp(20px,4svh,40px);overflow:hidden}
 .trust-animation video{width:100%;height:auto;display:block;transform:translateY(-30%)}
 .trust-scene h2{max-width:1120px;margin:0;font-size:clamp(40px,6.4vw,96px);font-weight:400;line-height:.98;letter-spacing:-.045em;text-wrap:balance}
 .trust-stop{width:.16em;aspect-ratio:1;display:inline-block;margin-left:.07em;border-radius:.025em;background:#376361;vertical-align:0}
@@ -696,8 +696,8 @@ body{display:block;overflow:visible;overflow-x:clip}
    which works on a wide screen and guillotines it on a narrow one. On a phone
    the box goes square and the offset comes off, so the whole animation plays. */
 @media(max-width:620px){
-  .trust-scene{min-height:100svh;padding:clamp(60px,10vh,96px) 20px}
-  .trust-animation{width:min(84vw,400px);aspect-ratio:1;margin-bottom:clamp(6px,1.5vh,16px)}
+  .trust-scene{min-height:100svh;padding:clamp(60px,10svh,96px) 20px}
+  .trust-animation{width:min(84vw,400px);aspect-ratio:1;margin-bottom:clamp(6px,1.5svh,16px)}
   .trust-animation video{transform:none}
   .trust-scene h2{font-size:clamp(27px,8.4vw,44px);line-height:1.02}
 }
@@ -732,4 +732,69 @@ body{display:block;overflow:visible;overflow-x:clip}
    back in; the desktop crop is wide enough not to need it. */
 @media(max-width:760px){
   .patient-zoom img{object-position:86% 36%}
+}
+
+
+/* ==========================================================================
+   One full-screen stage, everywhere.
+
+   Every full-height section used to measure the viewport its own way: some in
+   svh, some in vh, the patient story in a 76vh top padding. On a desktop those
+   are the same number. On a phone they are not - vh is the viewport with the
+   URL bar hidden, svh with it showing, and the gap between them is about a
+   tenth of the screen. That is why the page held together in a narrow browser
+   window and came apart on a device.
+
+   svh is the one to standardise on: it is the smallest the viewport ever gets,
+   so browser chrome can never cut a stage off. Each pinned stage is
+   transparent over its own section's background, so the strip that appears
+   when the bar retracts is simply more of the same colour.
+   ========================================================================== */
+:root{
+  --stage-h:100svh;
+  /* Clear the fixed nav at the top and the home indicator at the bottom. */
+  --stage-top:calc(clamp(58px,8svh,86px) + env(safe-area-inset-top,0px));
+  --stage-bottom:calc(clamp(24px,4svh,44px) + env(safe-area-inset-bottom,0px));
+  --stage-x:max(24px,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px));
+}
+
+/* A pinned stage is exactly one viewport. min-height let it outgrow the screen
+   - and a sticky element taller than the viewport stops sticking, which is how
+   the chat thread came unpinned once the bubbles wrapped on a narrow screen. */
+.chat-stage,.tl-stage,.send-stage{height:var(--stage-h);min-height:0}
+
+/* Sections that fill a screen rather than pin to one. */
+.trust-scene,.cta-scene{min-height:var(--stage-h)}
+
+/* Nothing sits under the notch or the home indicator. The nav keeps the insets
+   it already had; the safe area only ever pushes them further in. */
+.floating-nav{padding-top:calc(22px + env(safe-area-inset-top,0px));
+  padding-right:max(28px,env(safe-area-inset-right,0px));
+  padding-left:max(28px,env(safe-area-inset-left,0px))}
+@media(max-width:720px){
+  .floating-nav{padding-top:calc(18px + env(safe-area-inset-top,0px));
+    padding-right:max(18px,env(safe-area-inset-right,0px));
+    padding-left:max(18px,env(safe-area-inset-left,0px))}
+}
+.cta-scene{padding-bottom:calc(clamp(80px,14svh,160px) + env(safe-area-inset-bottom,0px))}
+.patient-story{padding-bottom:calc(28px + env(safe-area-inset-bottom,0px))}
+
+/* The report is one composition, meant to be taken in whole rather than
+   scrolled. Its finished state is 849px tall - taller than a phone - so the
+   stage was cropping the head off the top and the last block off the bottom.
+   It scales to the room the stage has instead, which keeps every internal
+   proportion and the centring intact. --fit is set in JS because only the
+   browser knows how tall the block ended up. */
+.tl-report{scale:var(--fit,1)}
+
+/* The video is drawn on #f9f7f1 and the section was #f9f8f2 - one unit apart,
+   which is invisible in a swatch and a clearly drawn rectangle across 400px of
+   flat colour. The section takes the video's exact colour so the frame has no
+   edge to see. */
+.trust-scene{background:#f9f7f1}
+
+@media(max-width:760px){
+  /* The heading ran under the floating Log in button, which on a phone sits
+     right where the first line starts. */
+  .tl-head{top:var(--stage-top);right:var(--stage-x);left:var(--stage-x)}
 }
