@@ -3445,7 +3445,7 @@
          place on this page that wants air rather than another panel. -->
     <section class="tonal-lab" id="method" aria-labelledby="lab-title">
       <div class="tonal-lab-frame">
-        <img src="assets/clinician-hero-doctor-patient-wide-v4.webp" alt="A doctor talking with a patient during a consultation" width="1680" height="945" loading="lazy" decoding="async">
+        <video id="prepared-conversation-video" muted loop playsinline preload="metadata" poster="assets/videos/pexels-clinic-consultation-4487124-first-frame.jpg" aria-hidden="true"><source src="assets/videos/pexels-clinic-consultation-4487124.mp4" type="video/mp4"></video>
         <div class="tonal-lab-copy">
           <div><p class="eyebrow">More time for what matters</p><h2 id="lab-title">Walk into every conversation<br><em>prepared.</em></h2></div>
         </div>
@@ -4016,6 +4016,37 @@
       if (event.matches) homeTrustVideo.pause();
       else homeTrustVideo.play().catch(() => {});
     });
+
+    /* The consultation film holds on its poster until the reader reaches it,
+       rewinds when they leave, and stops with the tab - restored as the page
+       had it before the section was flattened to a still. */
+    (function () {
+      var video = document.querySelector('#prepared-conversation-video');
+      var section = document.querySelector('.tonal-lab');
+      if (!video || !section || reduceMotion) return;
+
+      function resetVideo() {
+        video.pause();
+        try { video.currentTime = 0; } catch (error) {}
+      }
+
+      resetVideo();
+      document.addEventListener('visibilitychange', function () {
+        if (document.hidden) video.pause();
+      });
+
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (entries) {
+          if (entries[0].isIntersecting && !document.hidden) {
+            video.play().catch(function () {});
+          } else {
+            resetVideo();
+          }
+        }, { threshold: .2 }).observe(section);
+      } else {
+        video.play().catch(function () {});
+      }
+    })();
 
     (function () {
       const stream = document.querySelector('#hero-record-lines');
