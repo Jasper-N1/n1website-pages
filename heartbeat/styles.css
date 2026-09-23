@@ -850,9 +850,7 @@ body{display:block;overflow:visible;overflow-x:clip}
 .cot-chev{opacity:.55}
 .cot-steps{display:grid;gap:12px;margin:0;padding:0;list-style:none}
 
-/* Each step fades and slides down into place, the library's animate-in. */
-.cot-step{display:flex;gap:8px;font-size:14px;opacity:0;translate:0 -8px;
-  animation:cot-in .45s cubic-bezier(.2,.75,.25,1) var(--t,0s) forwards}
+
 @keyframes cot-in{to{opacity:1;translate:0 0}}
 
 /* The marker column stretches to the height of its step - that is what gives
@@ -865,16 +863,11 @@ body{display:block;overflow:visible;overflow-x:clip}
   background:var(--ae-border);content:""}
 .cot-step:last-child .cot-marker::after{display:none}
 
-/* A step arrives active and settles to complete: the dot becomes a check and
-   the label drops back to muted, so the list reads as work being finished. */
-.cot-check{opacity:0;color:var(--teal);
-  animation:cot-on .3s linear calc(var(--t,0s) + .95s) forwards}
-.cot-dot{animation:cot-off .3s linear calc(var(--t,0s) + .95s) forwards}
+
 @keyframes cot-on{to{opacity:1}}
 @keyframes cot-off{to{opacity:0}}
 .cot-body{flex:1;display:grid;gap:8px;min-width:0}
-.cot-label{margin:0;color:var(--ae-fg);
-  animation:cot-settle .4s linear calc(var(--t,0s) + .95s) forwards}
+
 @keyframes cot-settle{to{color:var(--ae-muted)}}
 .cot-desc{margin:0;font-size:12px;color:var(--ae-muted);opacity:.78}
 
@@ -1031,12 +1024,7 @@ body{display:block;overflow:visible;overflow-x:clip}
 .tl-body>.tl-vals,.tl-body>.tl-trend,.tl-body>.tl-chips{--d:.54}
 .tl-body>.tl-skel{--d:0;opacity:calc(1 - var(--gen));translate:none}
 
-/* The record chips under each reasoning step land one after another too. */
-.task-file{opacity:0;animation:cot-in .3s ease forwards}
-.task-items .task-file:nth-child(1){animation-delay:calc(var(--t,0s) + .10s)}
-.task-items .task-file:nth-child(2){animation-delay:calc(var(--t,0s) + .20s)}
-.task-items .task-file:nth-child(3){animation-delay:calc(var(--t,0s) + .30s)}
-.task-items .task-file:nth-child(4){animation-delay:calc(var(--t,0s) + .40s)}
+
 
 /* The records we are not opening. They were specks; at this density they are
    the point - most of a life is the stuff no card is being made of. */
@@ -1144,3 +1132,55 @@ body{display:block;overflow:visible;overflow-x:clip}
 /* Inside the timeline the incoming line runs all the way down to the rail it
    becomes, rather than stopping short of it. */
 .timeline-scene .spine-in{height:var(--rail-y)}
+
+/* ==========================================================================
+   What a reasoning stream actually looks like.
+
+   Not four finished ticks arriving together. At any moment one step is
+   working - it spins, and its text is still arriving - while the steps above
+   it have settled into muted checks and the ones below have not started. The
+   words come a few at a time, and the sources appear as they are found. Each
+   step carries its own --t (when it starts) and --done (when it finishes), so
+   the whole thing is one stream rather than four animations.
+   ========================================================================== */
+.cot-step{display:flex;gap:8px;font-size:14px;
+  opacity:0;translate:0 -6px;
+  animation:cot-in .35s cubic-bezier(.2,.75,.25,1) var(--t) forwards}
+
+/* pending dot -> working spinner -> settled check */
+.cot-dot{opacity:1;animation:cot-off .2s linear var(--t) forwards}
+.cot-spin{opacity:0;color:var(--muted);
+  animation:cot-on .2s linear var(--t) forwards,
+            spin-run 1s linear var(--t) infinite,
+            cot-off .25s linear var(--done) forwards}
+.cot-check{opacity:0;color:var(--teal);animation:cot-on .25s linear var(--done) forwards}
+@keyframes spin-run{to{rotate:360deg}}
+
+/* The step being worked on reads at full strength and settles back after. */
+.cot-label{margin:0;color:var(--ae-fg);
+  animation:cot-settle .4s linear var(--done) forwards}
+
+/* Words arrive a few at a time, which is the whole tell. */
+.cot-label i,.cot-desc i{display:inline-block;font-style:normal;
+  opacity:0;translate:0 3px;
+  animation:word-in .18s ease var(--w) forwards}
+@keyframes word-in{to{opacity:1;translate:0 0}}
+
+/* Sources appear as they are found, not as a set. */
+.task-file{opacity:0;scale:.96;animation:chip-in .24s cubic-bezier(.2,.8,.3,1) var(--c) forwards}
+@keyframes chip-in{to{opacity:1;scale:1}}
+
+@media(prefers-reduced-motion:reduce){
+  .cot-step,.cot-label i,.cot-desc i,.task-file,.cot-dot,.cot-spin,.cot-check{
+    animation-delay:0s;animation-duration:1ms}
+  .cot-spin{display:none}
+}
+
+/* Held at the first frame until the reader gets here. */
+.ai-think .cot-step,.ai-think .cot-label i,.ai-think .cot-desc i,
+.ai-think .task-file,.ai-think .cot-dot,.ai-think .cot-spin,.ai-think .cot-check{
+  animation-play-state:paused}
+.ai-think.is-running .cot-step,.ai-think.is-running .cot-label i,
+.ai-think.is-running .cot-desc i,.ai-think.is-running .task-file,
+.ai-think.is-running .cot-dot,.ai-think.is-running .cot-spin,
+.ai-think.is-running .cot-check{animation-play-state:running}
