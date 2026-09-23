@@ -992,10 +992,9 @@ body{display:block;overflow:visible;overflow-x:clip}
   .tl-head{left:var(--stage-x)}
 }
 
-/* The closing film carries burned-in annotations from the scan it came from.
-   They are somebody's, so they are not readable here: the plate is held soft
-   and behind the scrim, as atmosphere rather than as a document. */
-.cta-photo{filter:blur(3px) saturate(0);scale:1.06}
+/* A patient going into the scanner, not a sheet of film - and nothing on it
+   belongs to anybody, so it needs no hiding. It runs sharp. */
+.cta-photo{filter:none;scale:1.02}
 
 /* Task, nested inside each Chain of Thought step: the reasoning says what is
    being done, the indented rule underneath shows the records it is being done
@@ -1079,22 +1078,13 @@ body{display:block;overflow:visible;overflow-x:clip}
   justify-content:center;overflow:hidden;
   padding:var(--stage-top) max(var(--stage-x),calc((100vw - 980px)/2)) var(--stage-bottom)}
 
-/* The report, now a message: it keeps the artefact's own shell but sits in
-   the thread's column rather than centred on a stage of its own. */
-.msg-report{max-width:100%}
-.rp-in-chat{width:min(560px,100%);position:relative;top:auto;left:auto;translate:none;
-  scale:1;pointer-events:none}
-.rp-in-chat>*{position:relative;top:auto;translate:none}
-.rp-in-chat .rp-spark,.rp-in-chat .rp-seed{position:absolute;inset:0}
 
-/* The report is an artefact in the thread, not a speech bubble: no teal, no
-   padding, no tail. The doctor's words are his; the report is the product's. */
-.msg-report{max-width:min(560px,100%);padding:0;border-radius:0;background:none;color:inherit;
-  align-self:flex-start}
+
+
 .reply-stage .chat-thread{position:relative;align-items:flex-start;
   transition:none;will-change:translate}
 .reply-stage{justify-content:flex-start}
-.rp-in-chat .rp-full{border-radius:16px;overflow:hidden}
+
 
 /* A streaming report grows; it does not sit at full height waiting for its
    own content. Blocks that have not arrived take no room. */
@@ -1228,3 +1218,48 @@ body{display:block;overflow:visible;overflow-x:clip}
 
 /* The list already carries a -6px nudge that puts these marks on the line, so
    they need no centring of their own - adding it moved them up twice. */
+
+/* ==========================================================================
+   The report is written in the timeline. What arrives in the conversation is
+   the file - which is what actually gets sent, and what a thread can carry
+   without becoming a document viewer.
+   ========================================================================== */
+/* It keeps the doctor's bubble - it is a thing he sent, not a thing beside the
+   conversation - and reads as an attachment inside it. */
+.msg-file{max-width:min(420px,88%)}
+.file-card{display:flex;align-items:center;gap:13px;text-align:left}
+.file-icon{display:grid;place-items:center;width:38px;height:38px;flex:none;border-radius:11px;
+  background:rgba(255,255,255,.16)}
+.file-icon .ai-i{width:20px;height:20px}
+.file-text{display:grid;gap:2px;min-width:0}
+.file-name{font-size:15px;font-weight:600;letter-spacing:-.005em}
+.file-meta{color:rgba(255,255,255,.72);font-size:12.5px}
+
+/* The line runs down the middle of the reply, so the conversation keeps out of
+   its way: his messages to the left of it, hers to the right. Left alone, a
+   bubble at 74% reached across the centre and the line drew through the words. */
+.reply-stage .chat-thread{align-items:stretch}
+.reply-stage .msg{max-width:min(46%,430px)}
+.reply-stage .msg-out{align-self:flex-end}
+.reply-stage .msg-in{align-self:flex-start}
+
+
+/* The identity card belongs to the line, so it clears with it when the report
+   takes the stage - it was left sitting on top of the thing being written. */
+.tl-id{opacity:calc((1 - var(--deep,0) * .88) * (1 - clamp(0,calc(var(--build,0) * 16),1)))}
+
+/* Nothing behind the report is drawn while the report is the thing on screen. */
+.timeline-scene.is-report .tl-list,
+.timeline-scene.is-report .tl-rail,
+.timeline-scene.is-report .tl-id,
+.timeline-scene.is-report .tl-head{visibility:hidden}
+
+/* The report writes itself rather than appearing. Each word carries the point
+   in its block's reveal at which it lands, so the text arrives left to right
+   as the reader scrolls - the same behaviour as the reasoning above it, driven
+   by the same thing. */
+.rb-real i{display:inline-block;font-style:normal;
+  opacity:clamp(0,calc((var(--done,0) - var(--w,0)) * 14),1);
+  translate:0 calc((1 - clamp(0,calc((var(--done,0) - var(--w,0)) * 14),1)) * 2px)}
+.rb-real{opacity:1}
+@media(prefers-reduced-motion:reduce){ .rb-real i{opacity:1;translate:none} }
