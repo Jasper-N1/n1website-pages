@@ -2025,6 +2025,13 @@
       .walk-product-nav { display: none; }
       .walk-product-main { min-height: 538px; }
       .walkthrough-panel { padding: 16px; }
+      /* The head is a desktop toolbar: title left, action right. On a phone
+         the action's 114px left the title 72px at 320, so "Medical Records"
+         and the record count both broke a word per line. Let it wrap instead
+         and the action drops to its own row below ~470px. */
+      .walk-page-head { flex-wrap: wrap; gap: 8px 12px; }
+      .walk-page-head > div { flex: 1 1 200px; min-width: 0; }
+      .walk-page-head > div > span { font-size: 8px; letter-spacing: .05em; }
       .walk-page-head h4 { font-size: 18px; }
       .walk-table-row { grid-template-columns: 1fr auto; }
       .walk-table-row > span:nth-child(2), .walk-table-row > span:nth-child(3) { display: none; }
@@ -2041,6 +2048,21 @@
       .walk-upload-extract > span { min-height: 27px; margin: 0; padding: 3px 5px; font-size: 7px; }
       .walk-upload-extract > span i { width: 18px; height: 18px; }
       .walk-upload-extract > small { display: none; }
+      /* The file picker had no phone rules at all: a 132px sidebar inside a
+         ~230px dialog left under 100px for the file list, so every filename
+         ellipsised away to "PDF" and the path crumb wrapped mid-phrase. */
+      .walk-file-picker { top: 26px; width: calc(100% - 16px); min-height: 0; }
+      .walk-picker-titlebar { height: 34px; padding: 0 10px; }
+      .walk-picker-titlebar b { white-space: nowrap; }
+      .walk-picker-titlebar span:last-child { display: none; }
+      .walk-picker-body { min-height: 0; grid-template-columns: 84px minmax(0,1fr); }
+      .walk-picker-sidebar { padding: 9px 6px; }
+      .walk-picker-sidebar span { padding: 6px; }
+      .walk-picker-main { padding: 10px; }
+      .walk-picker-path { margin-bottom: 8px; }
+      .walk-picker-file { min-height: 44px; gap: 7px; padding: 6px 8px; }
+      .walk-picker-footer { min-height: 48px; gap: 6px; padding: 8px 10px; }
+      .walk-picker-footer button { padding: 6px 10px; }
       .walk-process-heading { align-items: flex-start; flex-direction: column; gap: 2px; }
       .walk-extract-grid { grid-template-columns: repeat(3, minmax(0,1fr)); row-gap: 5px; }
       .walk-extract-grid span:nth-child(3) { border-right: 0; }
@@ -2447,10 +2469,22 @@
   }
 
   /* Product demonstrations are evidence, not background texture. Keep their
-     explanatory text readable even inside the scaled application frame. */
-  .walkthrough-product :is(span,small,b,strong,em,p,button,label,td,th),
+     explanatory text readable even inside the scaled application frame.
+
+     Held above 620px on purpose. .walkthrough-product is a desktop interface,
+     and the phone layout further down reflows it to a 42px icon rail and 7-9px
+     type. This rule is !important and, as `.walkthrough-product :is(button)`,
+     also outranks every .walk-* class, so on a phone it overrode all of that:
+     the icon rail's `font-size: 0` came back as 11px and printed "Dashboard",
+     "Medical Records" and the rest across their own icons, and the upload
+     dialog, extract chips and narration all inflated past their boxes. */
   .traceability-flow :is(span,small,b,strong,em,p,button,label,td,th) {
     font-size: 11px !important;
+  }
+  @media (min-width: 621px) {
+    .walkthrough-product :is(span,small,b,strong,em,p,button,label,td,th) {
+      font-size: 11px !important;
+    }
   }
 
   /* ==========================================================================

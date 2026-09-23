@@ -505,8 +505,8 @@ button { font: inherit; }
 
 @media (max-width: 800px) {
   .report-card { width: 300px; margin-left: -150px; }
-  .report-track { height: 570px; }
-  .report-cover { height: 570px; }
+  .report-track { height: 600px; }
+  .report-cover { height: 600px; }
   .report-cover-body { flex-direction: column; gap: 14px; padding: 18px 18px 0; }
   .report-thumb { flex-basis: auto; }
   .cover-art { flex: none; width: 100%; }
@@ -516,6 +516,16 @@ button { font: inherit; }
   .is-genetic .thumb-body { gap: 4px; padding: 10px; }
   .is-genetic .thumb-genetic-summary > span { padding: 5px; }
   .is-genetic .thumb-genetic-row { padding-block: 4px; }
+  /* The supplement thumb carries two more blocks than any other card — two
+     regimen rows, a biomarker head and a monitoring plan — and at this width
+     it needed 499px in a 441px body, so its description ran under the footer
+     rule and the button spilled past the card. The four other cards sit ~2px
+     inside the same box, so the height goes up a little for all of them and
+     this one tightens the rest of the way. */
+  .is-supplement .thumb-body { gap: 5px; padding: 12px 10px 10px; }
+  .is-supplement .thumb-safety-row { padding-block: 5px; }
+  .is-supplement .thumb-monitor-plan { padding-block: 5px; }
+  .is-supplement .thumb-spark { height: 34px; }
   .report-nav.prev { left: 8px; }
   .report-nav.next { right: 8px; }
   .report-carousel-head h2 { font-size: 1.9rem; }
@@ -722,6 +732,13 @@ button { font: inherit; }
 .tonal-product iframe { width: 145%; height: 1050px; border: 0; transform: scale(.69); transform-origin: 0 0; pointer-events: none; }
 .tonal-close { padding: 150px 0; background: var(--berry); color: var(--cream); text-align: center; }
 .tonal-close h2 { max-width: 820px; margin: 0 auto 32px; font-family: var(--serif); font-size: clamp(36px,4.5vw,60px); font-weight: 400; letter-spacing: -.03em; line-height: 1.05; }
+
+/* Closing CTA pair. index.html and clinicians.html each carried their own copy
+   of this rule inline; pricing, pricing-patients and about did not, so their
+   buttons fell back to inline-block and sat edge to edge with no gap — visible
+   on a phone, where the pair wraps and the two rows touch as well. One rule
+   here covers every page that has a .close-actions, whatever its wrapper. */
+.close-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px; }
 
 /* Site footer (tonal) — grounds the page in ink, cream type, peach accents. */
 .site-footer { background: var(--ink); color: rgba(244,237,223,.72); padding: 76px 0 34px; }

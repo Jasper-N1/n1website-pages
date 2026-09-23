@@ -24,6 +24,15 @@
 .reports-page .maybe-hero__image--likely { opacity:calc(1 - clamp(0,calc((var(--hero-progress,0) - .18) * 2.8),1)); }
 .reports-page .maybe-hero__image--certain { opacity:clamp(0,calc((var(--hero-progress,0) - .24) * 2.8),1); }
 .reports-page .maybe-hero__stage::after { position:absolute; z-index:-1; inset:0; background:linear-gradient(90deg,rgba(18,20,19,.5) 0%,rgba(18,20,19,.15) 31%,transparent 52%); opacity:calc(1 - clamp(0,calc((var(--hero-progress,0) - .18) * 2.8),1)); content:""; }
+/* Permanent vignette. ::after above is tied to --hero-progress and fades to
+   zero exactly as the Certain bottle arrives, so the headline ended up white
+   on a bright amber label with no scrim at all. This one never fades, and is
+   weighted to wherever the copy sits: left on desktop, bottom on a phone.
+   Stops are in px, not %, because the copy column is capped (112px margin +
+   500px) and so never runs past ~604px however wide the screen gets; a %
+   gradient that covered it at 1600 left the last two lines sitting on the
+   bright bottle cap at 768. */
+.reports-page .maybe-hero__stage::before { position:absolute; z-index:-1; inset:0; background:linear-gradient(100deg,rgba(14,16,15,.82) 0px,rgba(14,16,15,.7) 260px,rgba(14,16,15,.46) 470px,rgba(14,16,15,.2) 640px,rgba(14,16,15,0) 830px); content:""; pointer-events:none; }
 .reports-page .maybe-hero__copy { width:min(500px,36vw); align-self:start; margin-top:clamp(118px,16vh,180px); margin-left:clamp(42px,6.5vw,112px); color:#f0ece3; }
 .reports-page .maybe-hero__copy h1 { margin:0; font:inherit; }
 .reports-page .maybe-hero__line { max-width:620px; display:block; font:400 clamp(48px,4.6vw,76px)/.98 "Inter",Arial,sans-serif; letter-spacing:-.058em; text-wrap:balance; opacity:clamp(0,calc((var(--hero-progress,0) - .64) * 4),1); transform:translateY(calc((1 - clamp(0,calc((var(--hero-progress,0) - .64) * 4),1)) * 20px)); will-change:opacity,transform; }
@@ -32,6 +41,7 @@
   .reports-page .maybe-hero { height:205svh; }
   .reports-page .maybe-hero__stage { align-items:end; }
   .reports-page .maybe-hero__stage::after { background:linear-gradient(0deg,rgba(18,20,19,.82) 0%,rgba(18,20,19,.18) 52%,transparent 72%); }
+  .reports-page .maybe-hero__stage::before { background:linear-gradient(0deg,rgba(14,16,15,.92) 0%,rgba(14,16,15,.84) 24%,rgba(14,16,15,.66) 42%,rgba(14,16,15,.34) 60%,rgba(14,16,15,.1) 76%,rgba(14,16,15,0) 90%); }
   .reports-page .maybe-hero__copy { width:auto; align-self:end; margin:0; padding:0 24px 56px; }
   .reports-page .maybe-hero__line { max-width:520px; font-size:clamp(46px,12vw,66px); }
 }
@@ -155,7 +165,9 @@
   .reports-library .toolbar { grid-template-columns:1fr; }
   .reports-library .people-grid { grid-template-columns:1fr; column-gap:0; }
   .reports-library .person-select { min-height:0; padding:18px 14px; }
-  .reports-library .person-head { grid-template-columns:32px minmax(0,1fr); gap:8px; }
+  /* No 32px avatar track here: report-library.js stopped rendering
+     .person-avatar, so that column left the name in a 32px cell and broke
+     "Patient A" and "85-year-old male" one word per line on a phone. */
   .reports-library .person-avatar { width:32px; height:32px; font-size:9px; }
   .reports-library .person-name b { font-size:23px; }
   .reports-library .person-name .person-demographics { font-size:12px; }
