@@ -881,3 +881,7 @@ button { font: inherit; }
   .tonal-motion .tonal-scroll-sticky { position: relative; height: auto; overflow: visible; display: block; }
   .tonal-motion .tonal-scroll-sticky .tonal-hero { min-height: 960px; }
 }
+
+/* The reports section carries two explores now: its own sample library, and the
+   demo. They sit on one line and wrap together on a narrow screen. */
+.report-library-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }

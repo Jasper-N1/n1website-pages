@@ -24,8 +24,8 @@
     return `${link}<div class="nav-dropdown${pricingIsCurrent ? ' is-current' : ''}">
       <button class="nav-dropdown-toggle" type="button" aria-expanded="false" aria-controls="pricing-menu">Pricing<svg class="nav-dropdown-chevron" viewBox="0 0 12 8" aria-hidden="true"><path d="m1 1 5 5 5-5"/></svg></button>
       <div class="nav-dropdown-menu" id="pricing-menu">
-        <a href="pricing.html"${current === 'pricing.html' ? ' aria-current="page"' : ''}>Clinician</a>
-        <a href="pricing-patients.html"${current === 'pricing-patients.html' ? ' aria-current="page"' : ''}>Patient</a>
+        <a href="pricing-patients.html"${current === 'pricing-patients.html' ? ' aria-current="page"' : ''}>Pricing for patients</a>
+        <a href="pricing.html"${current === 'pricing.html' ? ' aria-current="page"' : ''}>Pricing for doctors</a>
       </div>
     </div>`;
   }).join('');
