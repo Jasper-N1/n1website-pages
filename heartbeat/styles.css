@@ -941,3 +941,75 @@ body{display:block;overflow:visible;overflow-x:clip}
   font-size:14px;color:var(--ae-muted,#7b6c58)}
 .rp-seed-tag.rb-tag{margin-bottom:9px;color:var(--ink)}
 .rp-seed-tag.rb-tag::before{display:none}
+
+/* ==========================================================================
+   The timeline, rebuilt around a whole life.
+   ========================================================================== */
+
+/* The kind label used to be a link out. The cards carry no calls to action
+   now - the line is for reading, not for clicking away from. */
+.tl-kind{display:inline-block;margin-bottom:9px;color:#a8977c;font-size:10px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase}
+
+/* Ambient density. Most entries sit in a scatter of other records; two carry
+   none at all, because a real record has stretches where nothing happened. */
+.tl-ticks{position:absolute;top:0;left:0;width:100%;height:11px;pointer-events:none}
+.tl-ticks i{position:absolute;top:4px;left:var(--x);width:3px;height:3px;border-radius:50%;
+  background:#c3b49a;translate:-50% 0}
+.tl-ticks i.is-high{width:5px;height:5px;top:3px;background:var(--teal);opacity:.55}
+
+/* Each card is written as you reach it, rather than sitting there finished.
+   --gen runs 0 to 1 just before the card lands on the focus point. */
+.tl-entry{--gen:1}
+.tl-body>.tl-kind,.tl-body>b,.tl-body>p{opacity:var(--gen)}
+.tl-skel{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-start;
+  gap:11px;padding:inherit;opacity:calc(1 - var(--gen));pointer-events:none}
+.tl-body{position:relative}
+.tl-skel i{height:9px;border-radius:99px;
+  background-image:linear-gradient(90deg,#ece0cc,#f7f0e3,#ece0cc);background-size:200% 100%;
+  animation:ai-shimmer 1.6s linear infinite}
+.tl-skel i:nth-child(1){width:38%;height:7px}
+.tl-skel i:nth-child(2){width:92%}
+.tl-skel i:nth-child(3){width:74%}
+
+/* Identity above the line, the statement below it: you are told whose record
+   this is, you travel it, and only then does the page make its claim. */
+.tl-id{position:absolute;z-index:3;top:var(--stage-top);
+  left:max(24px,calc((100vw - 1180px)/2));display:flex;align-items:center;gap:clamp(16px,2vw,26px)}
+.tl-face{width:clamp(96px,11vw,148px);height:clamp(96px,11vw,148px);border-radius:22px;
+  object-fit:cover;object-position:50% 28%;background:#e6dccb;
+  box-shadow:0 12px 30px rgba(60,52,38,.14)}
+.tl-id-card{display:grid;gap:10px;padding:clamp(14px,1.6vw,20px) clamp(16px,2vw,24px);
+  border:1px solid #e3d7c2;border-radius:18px;background:rgba(255,253,249,.82)}
+.tl-id-name{margin:0;font-size:clamp(17px,1.6vw,21px);font-weight:600;letter-spacing:-.01em}
+.tl-id-meta{display:flex;flex-wrap:wrap;gap:4px 22px;margin:0}
+.tl-id-meta div{margin:0}
+.tl-id-meta dt{color:#a8977c;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.tl-id-meta dd{margin:2px 0 0;font-size:14px;font-weight:500}
+
+/* The statement sits under the line. */
+.tl-head{top:auto;right:var(--stage-x);bottom:var(--stage-bottom);
+  left:max(24px,calc((100vw - 1180px)/2))}
+.tl-kind{display:block}
+
+@media(max-width:760px){
+  .tl-id{left:var(--stage-x);right:var(--stage-x);gap:14px}
+  .tl-id-card{padding:12px 14px}
+  .tl-id-meta{gap:4px 16px}
+  .tl-head{left:var(--stage-x)}
+}
+
+/* The closing film carries burned-in annotations from the scan it came from.
+   They are somebody's, so they are not readable here: the plate is held soft
+   and behind the scrim, as atmosphere rather than as a document. */
+.cta-photo{filter:blur(3px) saturate(0);scale:1.06}
+
+/* Task, nested inside each Chain of Thought step: the reasoning says what is
+   being done, the indented rule underneath shows the records it is being done
+   to. Their TaskContent is a left rule with the items set in from it. */
+.task-items{display:flex;flex-wrap:wrap;gap:7px;margin-top:2px;padding-left:14px;
+  border-left:2px solid var(--ae-border,#ddd0ba)}
+.task-file{display:inline-flex;align-items:center;gap:5px;padding:2px 7px;border-radius:6px;
+  border:1px solid var(--ae-border,#ddd0ba);background:#ece2d1;color:var(--ae-fg,var(--ink));
+  font-size:11px;font-weight:400;line-height:1.6}
+.task-mark{width:13px;height:13px;color:var(--teal);opacity:.75}
