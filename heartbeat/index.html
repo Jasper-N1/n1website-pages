@@ -964,6 +964,54 @@
     </div>
   </section>
 
+  <section class="trace-scene" aria-labelledby="trace-title">
+    <div class="trace-inner">
+      <div class="trace-head">
+        <p class="report-eyebrow">Traceability in action</p>
+        <h2 id="trace-title" aria-live="polite">Extract the record.</h2>
+        <p class="report-sub">Track a finding from the report back to the page it came from.</p>
+      </div>
+      <ol class="trace-flow">
+        <li><button class="trace-step" type="button" aria-current="step" data-title="Extract the record.">
+          <small>01 &middot; Record</small>
+          <span class="trace-ui">
+            <b class="trace-doc">Example Laboratory 01</b>
+            <span class="trace-doc-meta">Laboratory report <i>Page 1</i></span>
+            <span class="trace-counts"><span><b>45</b> Biomarkers</span><span><b>3</b> Observations</span><span><b>1</b> Procedure</span><span><b>2</b> Medications</span></span>
+          </span>
+        </button></li>
+        <li><button class="trace-step" type="button" data-title="Review the data.">
+          <small>02 &middot; Data</small>
+          <span class="trace-ui">
+            <span class="trace-grid"><span>Biomarker <b>ApoB</b></span><span>Value <b>1.15 g/L</b></span><span>Reference <b>0.6&ndash;1.2 g/L</b></span><span>Date <b>2025-Mar-14</b></span><span>Source <b>Page 1</b></span></span>
+          </span>
+        </button></li>
+        <li><button class="trace-step" type="button" data-title="Secure AI analysis.">
+          <small>03 &middot; AI</small>
+          <span class="trace-ui">
+            <span class="trace-context">Five ApoB results from 2004 onward were reviewed against the stated laboratory range.</span>
+            <b class="trace-finding">ApoB has risen steadily and sits near the top of the range.</b>
+            <span class="trace-note">Drafted from the saved values, ranges, dates, and sources.</span>
+          </span>
+        </button></li>
+        <li><button class="trace-step" type="button" data-title="Check every fact.">
+          <small>04 &middot; Check</small>
+          <span class="trace-ui">
+            <span class="trace-checks"><span><i>&#10003;</i> Value and unit match</span><span><i>&#10003;</i> Date and range match</span><span><i>&#10003;</i> Finding matches the data</span><span><i>&#10003;</i> Source page opens</span><span><i>&#10003;</i> No unsupported claim</span></span>
+          </span>
+        </button></li>
+        <li><button class="trace-step" type="button" data-title="Open the evidence.">
+          <small>05 &middot; Evidence</small>
+          <span class="trace-ui">
+            <span class="trace-ev-head"><b>ApoB trend</b><span>5 source-linked readings</span></span>
+            <svg class="thumb-spark" viewBox="0 0 320 92" preserveAspectRatio="none" aria-hidden="true"><rect class="sp-band" x="20" y="17" width="292" height="63" rx="2"></rect><path class="sp-bound" d="M20 17H312M20 80H312"></path><path class="sp-line" d="M20,68 L93,60 L166,51 L239,36 L312,22"></path><circle class="sp-point" cx="20" cy="68" r="4"></circle><circle class="sp-point" cx="93" cy="60" r="4"></circle><circle class="sp-point" cx="166" cy="51" r="4"></circle><circle class="sp-point" cx="239" cy="36" r="4"></circle><circle class="sp-point is-latest" cx="312" cy="22" r="4"></circle></svg>
+            <span class="trace-note">Every reading opens the page it was read from.</span>
+          </span>
+        </button></li>
+      </ol>
+    </div>
+  </section>
+
   <section class="reply-scene" aria-labelledby="reply-title">
     <div class="reply-stage">
       <h2 id="reply-title" class="sr-only">The reply</h2>
@@ -1649,6 +1697,36 @@
        finished running. It is scrubbed rather than timed: this one is worth
        watching assemble, and at a fixed speed you would either be waiting for
        it or have missed it. */
+    /* Traceability: clicking a step promotes its title into the headline.
+       The five titles used to be repeated once per card; as one line that
+       changes they carry the section instead of decorating it. */
+    const traceFlow = document.querySelector('.trace-flow');
+    if (traceFlow) {
+      const traceTitle = document.getElementById('trace-title');
+      const steps = [...traceFlow.querySelectorAll('.trace-step')];
+      const select = (step) => {
+        steps.forEach(other => other.removeAttribute('aria-current'));
+        step.setAttribute('aria-current', 'step');
+        if (traceTitle) traceTitle.textContent = step.dataset.title;
+      };
+      traceFlow.addEventListener('click', event => {
+        const step = event.target.closest('.trace-step');
+        if (step) select(step);
+      });
+      /* Left and right move between steps once one has been picked, which is
+         what a row of related controls is expected to do. */
+      traceFlow.addEventListener('keydown', event => {
+        const dir = event.key === 'ArrowRight' ? 1 : event.key === 'ArrowLeft' ? -1 : 0;
+        if (!dir) return;
+        const here = steps.indexOf(event.target.closest('.trace-step'));
+        if (here < 0) return;
+        event.preventDefault();
+        const next = steps[(here + dir + steps.length) % steps.length];
+        select(next);
+        next.focus();
+      });
+    }
+
     const reportScene = document.querySelector('.report-scene');
     if (reportScene) {
       const drawReport = () => {

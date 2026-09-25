@@ -1359,3 +1359,72 @@ body{display:block;overflow:visible;overflow-x:clip}
   translate:0 calc((1 - clamp(0,calc((var(--done,0) - var(--w,0)) * 14),1)) * 2px)}
 .rb-real{opacity:1}
 @media(prefers-reduced-motion:reduce){ .rb-real i{opacity:1;translate:none} }
+
+/* ==========================================================================
+   Traceability, by hand.
+
+   Every other section on this page is driven by scroll. This one is not: the
+   claim is that any finding can be opened back to its source, and a claim
+   about what you can do is better answered by letting you do it. Clicking a
+   step promotes its title into the headline, so the five titles that were
+   repeated once per card become one line that changes.
+   ========================================================================== */
+.trace-scene{position:relative;z-index:1;padding:clamp(64px,11svh,124px) var(--stage-x);
+  background:#f3ede2;color:var(--ink)}
+.trace-inner{width:min(1180px,100%);margin:0 auto}
+.trace-head{text-align:center}
+/* The titles differ in length, and without a floor the cards jump up the page
+   as you click between them. */
+.trace-head h2{min-height:1.2em;margin:0;font-size:clamp(26px,3.4vw,44px);font-weight:400;
+  line-height:1.06;letter-spacing:-.038em}
+.trace-flow{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;
+  margin:clamp(30px,5svh,52px) 0 0;padding:0;list-style:none}
+.trace-flow li{display:flex}
+
+.trace-step{display:flex;flex-direction:column;gap:12px;width:100%;
+  padding:16px 16px 18px;border:1px solid #e7dcc8;border-top:3px solid transparent;
+  border-radius:14px;color:inherit;background:#fffdf9;font:inherit;text-align:left;
+  cursor:pointer;transition:border-color .2s ease,background .2s ease,translate .2s ease}
+.trace-step:hover{border-color:#c7dbd6;translate:0 -2px}
+.trace-step[aria-current="step"]{border-color:#c7dbd6;border-top-color:#244b49;background:#eef6f4}
+.trace-step:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+.trace-step small{color:#5c6b66;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.trace-step[aria-current="step"] small{color:#244b49}
+.trace-ui{display:flex;flex-direction:column;gap:8px;font-size:11.5px;line-height:1.45}
+
+.trace-doc{font-size:12px;font-weight:600}
+.trace-doc-meta{display:flex;justify-content:space-between;gap:8px;
+  padding-bottom:8px;border-bottom:1px solid #ece2d2;color:#5c6b66}
+.trace-doc-meta i{color:#244b49;font-style:normal;font-weight:600}
+.trace-counts{display:flex;flex-direction:column;gap:4px;color:#5c6b66}
+.trace-counts b{color:var(--ink);font-weight:600}
+.trace-grid{display:flex;flex-direction:column;gap:6px}
+.trace-grid span{display:flex;justify-content:space-between;gap:10px;color:#5c6b66}
+.trace-grid b{color:var(--ink);font-weight:600}
+.trace-context{color:#5c6b66}
+.trace-finding{padding:9px 11px;border-left:3px solid #244b49;border-radius:0 6px 6px 0;
+  background:#eef6f4;font-size:11.5px;font-weight:600}
+.trace-note{color:#5c6b66;font-size:10.5px}
+.trace-checks{display:flex;flex-direction:column;gap:6px}
+.trace-checks span{display:flex;align-items:center;gap:7px}
+.trace-checks i{width:14px;height:14px;flex:none;display:grid;place-items:center;border-radius:50%;
+  color:#fff;background:#48a987;font-size:8px;font-style:normal}
+.trace-ev-head{display:flex;flex-direction:column;gap:2px}
+.trace-ev-head b{font-size:12px}
+.trace-ev-head span{color:#5c6b66;font-size:10.5px}
+.trace-step .thumb-spark{height:44px}
+
+@media (max-width:900px){
+  /* Five columns leave nothing readable, so the row becomes something you
+     swipe, one card at a time, rather than five slivers. */
+  .trace-flow{display:flex;gap:12px;margin-inline:calc(var(--stage-x) * -1);
+    padding-inline:var(--stage-x);overflow-x:auto;scroll-snap-type:x mandatory;
+    scrollbar-width:none}
+  .trace-flow::-webkit-scrollbar{display:none}
+  .trace-flow li{flex:0 0 min(272px,78vw);scroll-snap-align:center}
+  .trace-head h2{min-height:1.25em}
+}
+@media (prefers-reduced-motion:reduce){
+  .trace-step{transition:none}
+  .trace-step:hover{translate:none}
+}
