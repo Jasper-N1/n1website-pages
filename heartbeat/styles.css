@@ -130,7 +130,7 @@ body{display:block;overflow:visible;overflow-x:clip}
    a number in the markup rather than a change here.
    ========================================================================== */
 
-.chat-scene{height:330svh;position:relative;z-index:1;background:#edf6f4;color:var(--ink)}
+.chat-scene{height:360svh;position:relative;z-index:1;background:#edf6f4;color:var(--ink)}
 .chat-stage{--chat:0;min-height:100svh;position:sticky;top:0;display:flex;flex-direction:column;justify-content:center;padding:clamp(52px,8svh,92px) max(24px,calc((100vw - 980px)/2))}
 
 
@@ -208,7 +208,7 @@ body{display:block;overflow:visible;overflow-x:clip}
 
 /* The rail sits just under the header rather than at the vertical middle -
    centring it left a dead band of half a screen above the cards. */
-.timeline-scene{--tl:0;--deep:0;--rail-y:clamp(228px,30svh,320px);height:1245svh;position:relative;z-index:1;background:#f3ede2;color:var(--ink)}
+.timeline-scene{--tl:0;--stop-card:clamp(280px,38svh,400px);--rail-y:clamp(228px,30svh,320px);height:454svh;position:relative;z-index:1;background:#f3ede2;color:var(--ink)}
 .tl-stage{height:100svh;position:sticky;top:0;overflow:hidden}
 
 .tl-head{position:absolute;z-index:3;top:clamp(28px,5svh,56px);left:max(24px,calc((100vw - 1180px)/2));right:24px}
@@ -228,7 +228,7 @@ body{display:block;overflow:visible;overflow-x:clip}
   translate:calc(50vw - var(--card) / 2 - var(--pos) * (var(--card) + var(--gap))) -6px;
   transition:translate .12s linear}
 
-.tl-entry{width:var(--card);flex:none;position:relative;padding-top:34px;
+.tl-entry{width:var(--card);flex:none;position:relative;padding-top:34px;content-visibility:auto;contain-intrinsic-size:auto var(--card) auto 320px;
   opacity:.3;scale:.95;filter:blur(1.5px);
   transition:opacity .45s ease,scale .5s cubic-bezier(.2,.8,.3,1),filter .45s ease}
 .tl-entry.is-active{opacity:1;scale:1;filter:blur(0)}
@@ -240,7 +240,7 @@ body{display:block;overflow:visible;overflow-x:clip}
 
 .tl-entry time{display:block;margin-bottom:9px;color:var(--muted);font-size:13px;font-weight:600;letter-spacing:.06em;text-align:center}
 .tl-entry.is-active time{color:var(--teal)}
-.tl-body{padding:clamp(18px,2vw,26px);border:1px solid #e3d7c2;border-radius:16px;background:#fffdf9;box-shadow:0 10px 28px rgba(60,52,38,.08)}
+.tl-body{display:flex;flex-direction:column;padding:clamp(22px,2.4vw,30px);border:1px solid #e3d7c2;border-radius:18px;background:#fffdf9;box-shadow:0 10px 28px rgba(60,52,38,.08)}
 .tl-entry.is-active .tl-body{box-shadow:0 18px 44px rgba(60,52,38,.15)}
 
 /* The patient, sized for the stage header. */
@@ -266,9 +266,7 @@ body{display:block;overflow:visible;overflow-x:clip}
 .tl-vals div{margin:0}
 .tl-vals dt{color:var(--muted);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
 .tl-vals dd{margin:3px 0 0;font-size:17px;font-weight:600;letter-spacing:-.01em}
-/* A sparkline, not a chart: the viewBox would otherwise scale to the full
-   column width and tower over the entry. */
-.tl-chart{max-width:100%;margin:16px 0 0;padding:11px 13px 9px;border:1px solid #e3d7c2;border-radius:12px;background:#fffdf9}
+/* The chart sits on the card, not in a panel of its own. */
 .tl-chart svg{width:100%;height:auto;display:block}
 /* The platform's sparkline language, stylized: a soft reference band behind a
    smoothed line at 60% opacity, and a dot only where a reading falls outside
@@ -344,39 +342,11 @@ body{display:block;overflow:visible;overflow-x:clip}
    ========================================================================== */
 
 /* The line itself recedes while an entry is open. */
-.tl-list,.tl-rail,.tl-count{opacity:calc(1 - var(--deep) * .88);
-  filter:blur(calc(var(--deep) * 4px));transition:none}
-.tl-head{opacity:calc(1 - var(--deep) * .75)}
 
-.tl-deep{--zoom:0;--flip:0;width:min(780px,90vw);position:absolute;z-index:6;top:50%;left:50%;
-  /* Starts near the size the card is on the rail, so it reads as travelling
-     into that card rather than a panel fading up over it. */
-  translate:-50% -50%;scale:calc(.3 + var(--zoom) * .7);opacity:calc(clamp(0,calc(var(--zoom) * 2.4),1));
-  perspective:1800px;pointer-events:none;visibility:hidden}
-.tl-deep-face{width:100%;position:absolute;top:50%;left:0;padding:clamp(26px,3.4vw,44px);
-  translate:0 -50%;border:1px solid #e3d7c2;border-radius:22px;background:#fffdf9;
-  box-shadow:0 34px 80px rgba(60,52,38,.22);backface-visibility:hidden}
-.tl-deep-front{transform:rotateY(calc(var(--flip) * -180deg))}
-.tl-deep-back{transform:rotateY(calc(180deg - var(--flip) * 180deg))}
 
-.tl-deep-eyebrow{margin:0 0 12px;color:var(--teal);font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase}
-.tl-deep h3{margin:0;font-size:clamp(24px,3vw,38px);font-weight:600;letter-spacing:-.03em;line-height:1.06}
-.tl-deep-body{max-width:56ch;margin:14px 0 0;color:var(--muted);font-size:16px;line-height:1.6}
-.tl-deep-vals{display:flex;flex-wrap:wrap;gap:16px 40px;margin:22px 0 0;padding-top:18px;border-top:1px solid #f0e6d6}
-.tl-deep-vals div{margin:0}
-.tl-deep-vals dt{color:#a8977c;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
-.tl-deep-vals dd{margin:5px 0 0;font-size:19px;font-weight:600;letter-spacing:-.01em}
-.tl-deep-cue{margin:24px 0 0;color:#a8977c;font-size:11px;letter-spacing:.12em;text-transform:uppercase}
 
-.tl-deep-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:26px 38px}
-.tl-deep-cols h4{margin:0 0 12px;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#a8977c}
-.tl-deep-cols ul{display:flex;flex-direction:column;gap:13px;margin:0;padding:0;list-style:none}
-.tl-deep-cols li{padding-bottom:13px;border-bottom:1px solid #f0e6d6}
-.tl-deep-cols li:last-child{border-bottom:0;padding-bottom:0}
-.tl-deep-cols b{display:block;font-size:15px;font-weight:600}
-.tl-deep-cols span{display:block;margin-top:3px;color:var(--muted);font-size:13px;line-height:1.45}
 
-@media(prefers-reduced-motion:reduce){.tl-deep-face{transform:none}}
+@media(prefers-reduced-motion:reduce){}
 
 /* ==========================================================================
    N1 at work.
@@ -479,7 +449,7 @@ body{display:block;overflow:visible;overflow-x:clip}
 
 /* The timeline and the report wait behind it. */
 /* The heading steps aside for the report too - it was colliding with it. */
-.tl-head{opacity:calc((1 - var(--deep) * .75) * (1 - clamp(0,calc(var(--build,0) * 16),1)))}
+.tl-head{opacity:1}
 
 /* A vignette on the header image, layered over the existing wash: the corners
    fall away so the frame holds the eye at the centre, and the lower-left has
@@ -566,7 +536,6 @@ body{display:block;overflow:visible;overflow-x:clip}
    was always going to be. Nothing appears finished.
    ========================================================================== */
 
-.timeline-scene{--build:0}
 .tl-report{width:min(760px,92vw);position:absolute;z-index:7;top:50%;left:50%;translate:-50% -50%;pointer-events:none}
 .tl-report>*{position:absolute;top:50%;right:0;left:0;translate:0 -50%}
 
@@ -596,11 +565,11 @@ body{display:block;overflow:visible;overflow-x:clip}
   font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
   opacity:calc(clamp(0,calc((var(--build) - .34) / .06),1) * (1 - clamp(0,calc((var(--build) - .92) / .06),1)))}
 
-.rp-head{display:flex;flex-wrap:wrap;gap:9px;align-items:center;padding:13px 16px;border:1px solid #e3d7c2;border-bottom:0;border-radius:14px 14px 0 0;background:#fbf6ec}
-.rp-mark{width:20px;height:20px;border-radius:6px;background:var(--teal)}
-.rp-head b{font-size:15px;font-weight:600}
-.rp-head em{color:var(--muted);font-size:12px;font-style:normal}
-.rp-status{margin-left:auto;padding:5px 9px;border-radius:999px;background:#ece0cc;color:#6a5b42;font-size:10px;font-weight:600}
+.rp-head{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:15px 20px;border:1px solid #244b49;border-bottom:0;border-radius:14px 14px 0 0;background:#244b49;color:#fffdf9}
+.rp-mark{width:20px;height:20px;border-radius:6px;background:#5fb3a8}
+.rp-head b{font-size:15px;font-weight:600;letter-spacing:-.01em}
+.rp-head em{color:rgba(255,253,249,.72);font-size:12px;font-style:normal}
+.rp-status{margin-left:auto;padding:5px 10px;border-radius:999px;background:rgba(255,253,249,.14);color:#dff0ec;font-size:10px;font-weight:600}
 
 .rp-body{display:flex;flex-direction:column;border:1px solid #e3d7c2;border-radius:0 0 14px 14px;background:#fffdf9;overflow:hidden}
 .rb{--in:clamp(0,calc((var(--build) - var(--s)) / .04),1);
@@ -649,7 +618,7 @@ body{display:block;overflow:visible;overflow-x:clip}
 /* The line has to be gone before the mark appears, not merely dim. No
    transition here - these track scroll, and easing them makes the whole
    timeline lag behind the finger. */
-.tl-list,.tl-rail,.tl-count{opacity:calc((1 - var(--deep) * .88) * (1 - clamp(0,calc(var(--build,0) * 16),1)))}
+.tl-list,.tl-rail,.tl-count{opacity:1}
 
 /* The generating mark: three arcs at different rates round a core. The same
    one appears wherever N1 is working, so the two moments read as one thing. */
@@ -925,8 +894,6 @@ body{display:block;overflow:visible;overflow-x:clip}
 }
 
 /* Both source columns start on the same line. */
-.tl-deep-cols{align-items:start}
-.tl-deep-cols>.src{align-self:start;margin:0}
 
 /* The report's own first beat speaks the same language as the Task trigger
    above it, rather than its own orb. */
@@ -946,14 +913,15 @@ body{display:block;overflow:visible;overflow-x:clip}
 
 /* Ambient density. Most entries sit in a scatter of other records; two carry
    none at all, because a real record has stretches where nothing happened. */
-.tl-ticks{position:absolute;top:0;left:0;width:100%;height:11px;pointer-events:none}
-.tl-ticks i{position:absolute;top:4px;left:var(--x);width:3px;height:3px;border-radius:50%;
-  background:#c3b49a;translate:-50% 0}
-.tl-ticks i.is-high{width:5px;height:5px;top:3px;background:var(--teal);opacity:.55}
 
 /* Each card is written as you reach it, rather than sitting there finished.
    --gen runs 0 to 1 just before the card lands on the focus point. */
 .tl-entry{--gen:1}
+/* Every stop the same size: a chart, a scan and a range bar are
+   naturally different heights, and the card jumping as the line
+   settled onto the next one was the most obvious thing about it. */
+.tl-entry[data-stop] .tl-body{min-height:var(--stop-card)}
+
 .tl-body>.tl-kind,.tl-body>b,.tl-body>p{opacity:var(--gen)}
 .tl-skel{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-start;
   gap:11px;padding:inherit;opacity:calc(1 - var(--gen));pointer-events:none}
@@ -1020,17 +988,13 @@ body{display:block;overflow:visible;overflow-x:clip}
 .tl-body>.tl-kind{--d:0}
 .tl-body>b{--d:.16}
 .tl-body>p{--d:.34}
-.tl-body>.tl-vals,.tl-body>.tl-trend,.tl-body>.tl-chips{--d:.54}
+.tl-body>.tl-metric,.tl-body>.tl-chart,.tl-body>.tl-scan,.tl-body>.tl-range-bar{--d:.54}
 .tl-body>.tl-skel{--d:0;opacity:calc(1 - var(--gen));translate:none}
 
 
 
 /* The records we are not opening. They were specks; at this density they are
    the point - most of a life is the stuff no card is being made of. */
-.tl-ticks{height:14px}
-.tl-ticks i{top:3px;width:6px;height:6px;background:#c0ae90;opacity:.85}
-.tl-ticks i.is-high{top:1px;width:10px;height:10px;background:var(--teal);opacity:.9;
-  box-shadow:0 0 0 3px rgba(46,125,120,.12)}
 
 /* --- readings, trends and chips on the cards ----------------------------- */
 .tl-vals{display:flex;flex-wrap:wrap;gap:6px 26px;margin:14px 0 0}
@@ -1038,15 +1002,44 @@ body{display:block;overflow:visible;overflow-x:clip}
 .tl-vals dt{color:#a8977c;font-size:10px;font-weight:700;letter-spacing:.11em;text-transform:uppercase}
 .tl-vals dd{margin:3px 0 0;font-size:17px;font-weight:600;letter-spacing:-.01em}
 
-.tl-trend{display:flex;align-items:center;gap:12px;margin-top:14px;color:#b9895b}
-.tl-trend.is-good{color:var(--teal)}
-.tl-trend-k{color:#a8977c;font-size:10px;font-weight:700;letter-spacing:.11em;text-transform:uppercase}
-.tl-spark{width:132px;height:34px;flex:none}
-.tl-trend-v{margin-left:auto;color:var(--ink);font-size:17px;font-weight:600;letter-spacing:-.01em}
+/* ==========================================================================
+   The card.
 
-.tl-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
-.tl-chips span{padding:3px 9px;border-radius:7px;border:1px solid #e3d7c2;background:#f7f0e3;
-  font-size:12px;font-weight:500}
+   kind + status / finding / value / evidence / source. The value leads because
+   it is what gets read first, and the source line is on every card because
+   linking a fact to the page it came from is what the product does.
+   ========================================================================== */
+.tl-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.tl-flag{padding:4px 10px;border-radius:99px;font-size:11px;font-weight:600;white-space:nowrap}
+.tl-flag.is-ok{color:#1f5f52;background:#dcefeb}
+.tl-flag.is-watch{color:#8a6a24;background:#f6ead1}
+.tl-flag.is-none{color:var(--muted);background:rgba(60,52,38,.06)}
+
+.tl-metric{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;margin-top:14px}
+.tl-metric-v{color:var(--ink);font-size:clamp(28px,3.2vw,38px);font-weight:600;letter-spacing:-.03em;line-height:1}
+.tl-metric-v em{margin-left:5px;color:var(--muted);font-size:15px;font-style:normal;font-weight:500;letter-spacing:0}
+.tl-metric-ref{color:var(--muted);font-size:12px}
+
+.tl-range-bar{height:8px;position:relative;display:block;margin:16px 0 0;border-radius:99px;background:#dcefeb}
+.tl-range-bar i{width:11px;height:11px;position:absolute;top:50%;left:var(--at,50%);
+  border:2px solid #fffdf9;border-radius:50%;background:#2f7d78;translate:-50% -50%;
+  box-shadow:0 1px 4px rgba(35,56,50,.28)}
+
+.tl-chart{width:100%;height:104px;display:block;margin:14px 0 0;overflow:visible}
+.tl-chart-band{fill:#dcefeb;opacity:.6}
+.tl-chart-fill{opacity:.45}
+.tl-chart-pt{fill:#fffdf9;stroke:#2f7d78;stroke-width:2}
+.tl-chart-pt.is-last{fill:#2f7d78;stroke:#fffdf9;stroke-width:2}
+.tl-chart-x{fill:#a8977c;font-size:10px;font-weight:600;letter-spacing:.06em}
+
+.tl-scan{height:150px;position:relative;display:block;overflow:hidden;margin:14px 0 0;
+  border-radius:12px;background:#091011}
+.tl-scan img{width:200%;height:200%;max-width:none;position:absolute;object-fit:cover}
+.tl-scan em{position:absolute;right:0;bottom:0;left:0;padding:9px 12px;color:#e8f1ef;
+  background:rgba(9,16,17,.82);font-size:11px;font-style:normal;font-weight:600}
+
+/* Where it came from. Muted, but on every card. */
+.tl-src{display:block;margin-top:auto;padding-top:16px;color:#a8977c;font-size:11px}
 
 /* --- the identity card --------------------------------------------------- */
 .tl-face{width:clamp(132px,15vw,210px);height:clamp(158px,18vw,250px);border-radius:24px;
@@ -1072,7 +1065,128 @@ body{display:block;overflow:visible;overflow-x:clip}
    comes back, the artefact is written into the conversation, and the words
    around it are his, not the product's.
    ========================================================================== */
-.reply-scene{--chat:0;--build:0;height:520svh;position:relative;z-index:1;
+/* ==========================================================================
+   The report, in a section of its own.
+
+   It used to assemble over the top of the timeline, which meant the line had
+   to be faded out from underneath it and the two things competed for the same
+   screen. Given its own stage it can be titled, and the record can simply end.
+   ========================================================================== */
+.report-scene{--build:0;height:200svh;position:relative;z-index:1;background:#f3ede2;color:var(--ink)}
+.report-stage{height:var(--stage-h);position:sticky;top:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:clamp(14px,2.4svh,26px);
+  padding:var(--stage-top) var(--stage-x) var(--stage-bottom);overflow:hidden}
+/* A header, and nothing else. It used to be absolutely centred in the same
+   place the report assembled, so the two sat on top of each other and it had
+   to be faded out from underneath - which is what put the title through the
+   card. In the flow it simply stays put and the card arrives below it. */
+.report-head{flex:none;text-align:center;pointer-events:none}
+.report-eyebrow{margin:0 0 10px;color:var(--teal);font-size:13px;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase}
+.report-head h2{margin:0;font-size:clamp(26px,3.4vw,44px);font-weight:400;line-height:1.06;letter-spacing:-.038em}
+.report-sub{margin:10px 0 0;color:#5c6b66;font-size:clamp(15px,1.5vw,19px);font-weight:400}
+
+/* The thinking is the whole of the generation step now - four lines in the
+   same place, one at a time, rather than a report assembling block by block.
+   It is over before the card lands. */
+.rp-think{--out:clamp(0,calc((var(--build) - .40) / .06),1);
+  display:flex;align-items:center;justify-content:center;gap:9px;
+  height:1.5em;margin:0;flex:none;
+  color:var(--teal);font-size:clamp(12px,1.25vw,14px);
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  opacity:calc(clamp(0,calc(var(--build) / .05),1) * (1 - var(--out)))}
+.rp-think .ai-i{width:15px;height:15px;flex:none}
+.rp-think-lines{position:relative;display:block;min-width:min(520px,72vw);height:1.5em}
+.rp-think-lines i{--in:clamp(0,calc((var(--build) - var(--s)) / .035),1);
+  --gone:clamp(0,calc((var(--build) - var(--s) - .07) / .035),1);
+  position:absolute;top:0;right:0;left:0;
+  font-style:normal;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  opacity:calc(var(--in) * (1 - var(--gone)));
+  translate:0 calc((1 - var(--in)) * 5px - var(--gone) * 5px)}
+
+/* The card is the one thing this section is for, so it gets the room. Same
+   composition as the cover on the live n1.care reports page. */
+.rp-card{--in:clamp(0,calc((var(--build) - .38) / .16),1);
+  width:min(760px,94vw);flex:0 1 auto;min-height:0;
+  opacity:var(--in);
+  scale:calc(.965 + .035 * var(--in));
+  translate:0 calc((1 - var(--in)) * 16px)}
+.report-cover{display:flex;flex-direction:column;height:100%;overflow:hidden;
+  border-radius:20px;color:var(--ink);background:#fffdf9;
+  box-shadow:0 38px 70px -38px rgba(35,56,50,.35),0 14px 32px rgba(35,56,50,.12)}
+.report-cover-head{display:flex;flex:none;align-items:center;justify-content:space-between;gap:12px;
+  padding:14px 20px;color:#fffdf9;background:#244b49}
+.report-cover-tag{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.report-cover-no{font-size:10px;letter-spacing:.06em;opacity:.72}
+.report-cover-body{display:flex;flex:1;min-height:0;gap:24px;align-items:stretch;padding:20px}
+.report-cover-text{flex:1;display:flex;flex-direction:column;justify-content:center;text-align:left}
+.report-cover-title{margin:0 0 9px;font-size:21px;font-weight:400;line-height:1.18;letter-spacing:-.02em}
+.report-cover-desc{margin:0;color:#5c6b66;font-size:12.5px;line-height:1.5}
+.report-cover-proof{display:flex;align-items:center;gap:8px;width:fit-content;margin-top:16px;
+  padding:7px 9px;border:1px solid #c7dbd6;border-radius:7px;
+  color:#49625d;background:#eef6f4;font-size:10px;font-weight:600}
+.report-cover-proof i{width:17px;height:17px;display:grid;place-items:center;border-radius:50%;
+  color:#fff;background:#48a987;font-size:8px;font-style:normal}
+.report-cover-foot{flex:none;padding:12px 20px 16px;border-top:1px solid #efe4d2}
+.report-cover-link{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:2px;
+  color:#fffdf9;background:#244b49;font-size:12px;font-weight:600;text-decoration:none;
+  transition:background .2s ease,translate .2s ease}
+.report-cover-link:hover{background:#376361;translate:0 -1px}
+.report-cover-link:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+
+/* The preview page, at the size it is actually read here. */
+.report-thumb{flex:0 0 44%;align-self:stretch;display:flex;overflow:hidden;
+  border:1px solid #efe4d2;border-radius:8px;background:#fff;
+  box-shadow:0 12px 26px -18px rgba(36,33,42,.45)}
+.thumb-body{flex:1;min-height:0;display:flex;flex-direction:column;gap:6px;padding:11px}
+.thumb-kicker{display:flex;align-items:center;justify-content:space-between;gap:8px;
+  margin-bottom:2px;padding-bottom:7px;border-bottom:1px solid #e1e8e5;color:#66736f;font-size:8px}
+.thumb-kicker b{color:#2f7773;font-size:8px}
+.thumb-row{display:flex;align-items:center;gap:8px;color:var(--ink);font-size:10.5px}
+.thumb-row .dot{width:7px;height:7px;flex:none;border-radius:50%}
+.thumb-row .dot.ok{background:#48a9a6}
+.thumb-row .dot.warn{background:#b8684d}
+.thumb-row .nm{flex:1;opacity:.82}
+.thumb-row b{font-size:9.5px;font-weight:600;color:#2a4a47;white-space:nowrap}
+.thumb-biomarker-head{display:flex;align-items:baseline;justify-content:space-between;gap:6px;
+  margin-top:4px;color:#66736f;font-size:8px}
+.thumb-biomarker-head b{color:var(--ink);font-size:12px}
+.thumb-biomarker-head em{font-style:normal;font-size:8px}
+.thumb-spark{width:100%;height:50px;display:block}
+.thumb-spark .sp-band{fill:#dceee9}
+.thumb-spark .sp-bound{fill:none;stroke:#bcd8d2;stroke-width:1}
+.thumb-spark .sp-line{fill:none;stroke:#2a4a47;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.thumb-spark .sp-point{fill:#fff;stroke:#2f7773;stroke-width:2}
+.thumb-spark .sp-point.is-latest{fill:#2f7773;stroke:#fff;stroke-width:2}
+.thumb-meta{margin-top:auto;color:#66736f;font-size:8px}
+
+/* Arriving with the card, not before it: they are what you do next. */
+.report-actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;flex:none;
+  opacity:clamp(0,calc((var(--build) - .54) / .1),1);
+  translate:0 calc((1 - clamp(0,calc((var(--build) - .54) / .1),1)) * 10px);
+  pointer-events:auto}
+.report-cta{display:inline-flex;align-items:center;gap:8px;padding:13px 24px;border-radius:999px;
+  color:#fdfaf6;background:var(--green);font-size:15px;font-weight:600;text-decoration:none;
+  transition:background .2s ease,translate .2s ease}
+.report-cta:hover{background:var(--teal);translate:0 -1px}
+.report-cta.is-quiet{color:var(--green);background:transparent;border:1px solid rgba(40,99,95,.34)}
+.report-cta.is-quiet:hover{background:rgba(40,99,95,.08)}
+.report-cta:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+
+@media (max-width:760px){
+  .report-head h2{font-size:clamp(24px,7vw,34px)}
+  .report-scene{height:200svh}
+  /* Side by side there is no room for either half, so the page stacks and the
+     preview keeps a fixed slice rather than collapsing to nothing. */
+  .report-cover-body{flex-direction:column;gap:14px;padding:14px}
+  .report-thumb{flex:1 1 auto;min-height:0}
+  .report-cover-text{flex:none;text-align:center}
+  .report-cover-proof{margin-inline:auto}
+  .rp-think-lines{min-width:0;width:100%}
+  .rp-think{font-size:11px}
+}
+
+.reply-scene{--chat:0;--build:0;height:300svh;position:relative;z-index:1;
   background:#edf6f4;color:var(--ink)}
 .reply-stage{height:var(--stage-h);position:sticky;top:0;display:flex;flex-direction:column;
   justify-content:center;overflow:hidden;
@@ -1083,7 +1197,7 @@ body{display:block;overflow:visible;overflow-x:clip}
 
 .reply-stage .chat-thread{position:relative;align-items:flex-start;
   transition:none;will-change:translate}
-.reply-stage{justify-content:flex-start}
+.reply-stage{justify-content:center}
 
 
 /* A streaming report grows; it does not sit at full height waiting for its
@@ -1175,32 +1289,6 @@ body{display:block;overflow:visible;overflow-x:clip}
 .ai-think.is-running .cot-dot,.ai-think.is-running .cot-spin,
 .ai-think.is-running .cot-check{animation-play-state:running}
 
-/* ==========================================================================
-   One line, all the way through.
-
-   It is fixed to the centre of the viewport and spans from the doctor's last
-   message in the first conversation to the end of the reply. Nothing about it
-   is per-section, so there is no boundary for it to break across - which is
-   exactly what went wrong with the four segments it replaces.
-   ========================================================================== */
-.thread-line{position:fixed;z-index:4;inset:0;width:100%;height:100%;
-  pointer-events:none;opacity:0}
-/* The timeline's own hairline colour, and drawn to be seen. */
-.thread-path{stroke:#cdbfa8;stroke-width:1.5;stroke-linecap:round}
-.thread-dot{position:fixed;z-index:5;width:10px;height:10px;border-radius:50%;
-  background:var(--teal);translate:-50% -50%;pointer-events:none;opacity:0}
-
-/* Over the cream sections the line takes their hairline instead. */
-.timeline-scene ~ *,.timeline-scene{--line-tint:rgba(205,191,168,.8)}
-
-/* The line passes behind the reading, not through it: a hairline this faint
-   reads as the cards being threaded onto it rather than as a rule drawn over
-   their text. The dot stays solid, because that is the thing you follow. */
-
-.timeline-scene{--x:0}
-/* No halo: the ball has to disappear against the bubble it starts in, and a
-   ring in another colour is exactly what stops it doing that. */
-.thread-dot{box-shadow:none}
 
 /* ==========================================================================
    The markers belong to the line, not to the card.
@@ -1215,6 +1303,18 @@ body{display:block;overflow:visible;overflow-x:clip}
 .tl-entry>time,.tl-entry>.tl-body{opacity:.3;scale:.95;filter:blur(1.5px);
   transition:opacity .45s ease,scale .5s cubic-bezier(.2,.8,.3,1),filter .45s ease}
 .tl-entry.is-active>time,.tl-entry.is-active>.tl-body{opacity:1;scale:1;filter:blur(0)}
+
+/* Streaming past. --rush is how fast the track is moving, so the cards being
+   skipped smear and shrink while it travels and settle the moment it stops.
+   The transitions above are suppressed while rushing: at this speed they lag
+   a frame behind the motion and the blur arrives after the card has gone. */
+.tl-entry:not(.is-active)>time,.tl-entry:not(.is-active)>.tl-body{
+  scale:calc(.95 - var(--rush,0) * .07);
+  filter:blur(calc(1.5px + var(--rush,0) * 5px));
+  opacity:calc(.3 - var(--rush,0) * .12)}
+.timeline-scene[style*="--rush"] .tl-entry:not(.is-active)>time,
+.timeline-scene[style*="--rush"] .tl-entry:not(.is-active)>.tl-body{
+  transition:opacity .2s ease,scale .2s ease,filter .2s ease}
 
 /* The list already carries a -6px nudge that puts these marks on the line, so
    they need no centring of their own - adding it moved them up twice. */
@@ -1246,13 +1346,9 @@ body{display:block;overflow:visible;overflow-x:clip}
 
 /* The identity card belongs to the line, so it clears with it when the report
    takes the stage - it was left sitting on top of the thing being written. */
-.tl-id{opacity:calc((1 - var(--deep,0) * .88) * (1 - clamp(0,calc(var(--build,0) * 16),1)))}
+.tl-id{opacity:1}
 
 /* Nothing behind the report is drawn while the report is the thing on screen. */
-.timeline-scene.is-report .tl-list,
-.timeline-scene.is-report .tl-rail,
-.timeline-scene.is-report .tl-id,
-.timeline-scene.is-report .tl-head{visibility:hidden}
 
 /* The report writes itself rather than appearing. Each word carries the point
    in its block's reveal at which it lands, so the text arrives left to right
