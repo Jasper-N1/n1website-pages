@@ -1460,47 +1460,30 @@
     }
 
 
-    /* The loader stands in for the content rather than sitting in a section of
-       its own: you arrive, N1 is working, and a couple of seconds later the
-       thing it was working on is there instead.
-
-       Two ways out, because the timer alone was not enough. A fast scroll can
-       carry you past a threshold without the observer ever reporting it, and a
-       0.25 threshold made that easy - so it fires on any intersection at all,
-       and the scroll driver below hands over the moment you are actually into
-       the section. Whichever comes first wins; the loader can never outlast the
-       content it is standing in for. */
-    let timelineReady = () => {};
-    document.querySelectorAll('.ai-load').forEach(load => {
-      const host = load.closest('.tl-stage');
-      if (!host) return;
-      host.style.setProperty('--ready', '0');
-      let handoverTimer = 0;
-      let handedOver = false;
-      timelineReady = () => {
-        if (handedOver) return;
-        handedOver = true;
-        clearTimeout(handoverTimer);
-        host.style.setProperty('--ready', '1');
-      };
-      new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) return;
-          observer.disconnect();
-          /* The stream starts when you arrive, not when the page loaded. A
-             CSS animation begins the moment its element is rendered, so left
-             alone the whole chain had already run itself by the time anyone
-             scrolled this far - which is why it read as arriving complete. */
-          load.classList.add('is-running');
-          handoverTimer = setTimeout(timelineReady, reducedMotion.matches ? 0 : 4600);
-        });
-      }, { threshold: 0 }).observe(host);
-    });
-
     const tlScene = document.querySelector('.timeline-scene');
     const tlTrack = document.querySelector('.tl-list');
     const tlItems = [...document.querySelectorAll('.tl-entry')];
     if (tlScene && tlTrack && tlItems.length) {
+      /* The work immediately before the timeline is part of the scroll, not a
+         4.6 second show that plays after the reader arrives. The first short
+         slice scrubs the existing CSS sequence from start to finish; the next
+         slice hands it to the timeline. Stop scrolling and it stops. Scroll
+         back and it reverses. The rest of the section keeps its full range. */
+      const workLoad = tlScene.querySelector('.ai-think');
+      const workHost = workLoad?.closest('.tl-stage');
+      const WORK_END = .09;
+      const HANDOVER_END = .115;
+      const WORK_DURATION = 4300;
+      let workAnimations = [];
+      if (workLoad && workHost) {
+        workHost.style.setProperty('--ready', '0');
+        workLoad.classList.add('is-running');
+        workAnimations = workLoad.getAnimations({ subtree: true });
+        workAnimations.forEach(animation => {
+          animation.pause();
+          animation.currentTime = 0;
+        });
+      }
       let tlFrame = 0;
       let lastActive = -1;
       let settledTo = 0;
@@ -1588,9 +1571,14 @@
       const totalLen = segments.reduce((sum, seg) => sum + seg.len, 0);
 
       const drawTimeline = () => {
-        const progress = trackProgress(tlScene);
-        /* Past the first sliver of the section the line is what you came for. */
-        if (progress > .055) timelineReady();
+        const rawProgress = trackProgress(tlScene);
+        const workProgress = clamp(rawProgress / WORK_END);
+        workAnimations.forEach(animation => {
+          animation.currentTime = workProgress * WORK_DURATION;
+        });
+        const ready = smooth(clamp((rawProgress - WORK_END) / (HANDOVER_END - WORK_END)));
+        workHost?.style.setProperty('--ready', ready.toFixed(4));
+        const progress = clamp((rawProgress - HANDOVER_END) / (1 - HANDOVER_END));
         const at = progress * totalLen;
         let acc = 0;
         let pos = 0;

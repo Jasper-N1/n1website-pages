@@ -445,7 +445,7 @@ body{display:block;overflow:visible;overflow-x:clip}
    ========================================================================== */
 
 .ai-load{position:absolute;z-index:8;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;
-  padding:24px;text-align:center;opacity:calc(1 - var(--ready,1));pointer-events:none;transition:opacity .55s ease}
+  padding:24px;text-align:center;opacity:calc(1 - var(--ready,1));pointer-events:none}
 
 /* The timeline and the report wait behind it. */
 /* The heading steps aside for the report too - it was colliding with it. */
@@ -658,8 +658,8 @@ body{display:block;overflow:visible;overflow-x:clip}
    gone does the veil lift. The content's own opacity is left alone, so it can
    keep tracking scroll without a transition fighting it. */
 .tl-veil{position:absolute;z-index:9;inset:0;background:#f3ede2;pointer-events:none;
-  opacity:calc(1 - var(--ready,1));transition:opacity .5s ease .44s}
-.tl-stage .ai-load{z-index:10;transition:opacity .4s ease}
+  opacity:calc(1 - var(--ready,1))}
+.tl-stage .ai-load{z-index:10}
 
 /* The source is a 960x960 square; the 5:2 box crops a band out of its middle,
    which works on a wide screen and guillotines it on a narrow one. On a phone
