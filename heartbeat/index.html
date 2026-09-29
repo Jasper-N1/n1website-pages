@@ -391,6 +391,43 @@
     </div>
   </section>
 
+  <footer class="site-footer" aria-labelledby="footer-heading">
+    <h2 id="footer-heading" class="sr-only">Footer</h2>
+    <div class="footer-shell">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <span class="footer-logo" aria-hidden="true"></span>
+          <p class="footer-tagline">The whole health story. Every answer traced to its source.</p>
+        </div>
+        <nav class="footer-cols" aria-label="Footer">
+          <div class="footer-col">
+            <h3>For clinicians</h3>
+            <a href="https://n1.care/#features">How it works</a>
+            <a href="https://n1.care/reports">Reports</a>
+            <a href="https://n1.care/pricing">Pricing</a>
+          </div>
+          <div class="footer-col">
+            <h3>For</h3>
+            <a href="https://n1.care/clinicians">For clinicians</a>
+            <a href="https://n1.care/patients">For patients</a>
+          </div>
+          <div class="footer-col">
+            <h3>Explore</h3>
+            <a href="https://n1.care/about">About</a>
+            <a href="https://n1.care/contact">Contact</a>
+            <a href="https://n1.care/compliance">Security &amp; compliance</a>
+            <a href="https://n1.care/privacy">Privacy</a>
+            <a href="https://n1.care/terms">Terms</a>
+            <a href="https://n1.care/patents">Patents</a>
+          </div>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 N1 Research, LLC</p>
+      </div>
+    </div>
+  </footer>
+
   <script>
     /* Every pinned stage is one --stage-h tall, and that is the box the whole
        animation has to fill and be measured against - not innerHeight.
@@ -1112,7 +1149,7 @@
     const themeMeta = document.querySelector('meta[name="theme-color"]');
     if (themeMeta) {
       const tinted = [...document.querySelectorAll(
-        '.zoom-journey, .chat-scene, .timeline-scene, .reply-scene, .cta-scene')]
+        '.zoom-journey, .chat-scene, .timeline-scene, .reply-scene, .cta-scene, .site-footer')]
         .map(el => ({ el, colour: getComputedStyle(el).backgroundColor }));
       let lastTint = '';
       const drawTheme = () => {

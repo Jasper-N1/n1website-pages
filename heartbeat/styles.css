@@ -423,6 +423,43 @@ body{display:block;overflow:visible;overflow-x:clip}
 .cta-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 32%}
 .cta-shade{position:absolute;inset:0;background:linear-gradient(0deg,rgba(6,38,38,.9) 0%,rgba(6,38,38,.62) 46%,rgba(6,38,38,.42) 100%)}
 .cta-scene{background:#062626}
+
+/* The canonical n1.care footer follows the closing image rather than sharing
+   its overlay, giving the page a clear final edge and the full site links. */
+.site-footer{--footer-cream:#f4eddf;--footer-peach:#ef9b77;position:relative;z-index:1;
+  padding:76px 0 34px;color:#dcd3cb;background:var(--ink)}
+.footer-shell{width:min(1180px,calc(100% - var(--stage-x) - var(--stage-x)));margin-inline:auto}
+.footer-top{display:grid;grid-template-columns:1.4fr 2.6fr;gap:64px;padding-bottom:50px;
+  border-bottom:1px solid rgba(244,237,223,.12)}
+.footer-logo{display:block;width:96px;aspect-ratio:258/87;margin-bottom:18px;background:var(--footer-cream);
+  -webkit-mask:url("../assets/n1-care-dark-green.svg") center/contain no-repeat;
+  mask:url("../assets/n1-care-dark-green.svg") center/contain no-repeat}
+.footer-tagline{max-width:360px;margin:0;font-size:14px;line-height:1.6;color:#dcd3cb}
+.footer-cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}
+.footer-col h3{margin:0 0 14px;color:var(--footer-peach);font-size:12px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase}
+.footer-col a{display:block;padding:6px 0;color:#dcd3cb;font-size:14px;text-decoration:none;
+  transition:color .2s ease}
+.footer-col a:hover{color:var(--footer-cream)}
+.footer-col a:focus-visible{outline:3px solid var(--footer-peach);outline-offset:3px}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;gap:24px;padding-top:26px;
+  color:#f3eee6;font-size:13px}
+.footer-bottom p{margin:0}
+@media(max-width:900px){
+  .footer-top{grid-template-columns:1fr;gap:44px}
+  .footer-cols{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:620px){
+  .site-footer{padding:56px 0 28px}
+  .footer-top{gap:38px;padding-bottom:38px}
+  .footer-cols{gap:32px 24px}
+  .footer-col:last-child{grid-column:1/-1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+    column-gap:24px}
+  .footer-col:last-child h3{grid-column:1/-1}
+  .footer-col h3{font-size:11px}
+  .footer-col a{min-height:38px;display:flex;align-items:center;padding:0;font-size:14px}
+  .footer-bottom{align-items:flex-start;flex-direction:column;gap:16px}
+}
 .cta-note{color:rgba(253,250,246,.62)}
 
 /* The closing copy on the header image, sized for a phone. */
