@@ -331,7 +331,7 @@
         <h2 id="trace-title" aria-live="polite">Extract the record.</h2>
         <p class="report-sub">Track a finding from the report back to the page it came from.</p>
       </div>
-      <ol class="trace-flow">
+      <ol class="trace-flow" aria-label="Five steps from a source record to a validated, source-linked report">
         <li><button class="trace-step" type="button" aria-current="step" data-title="Extract the record.">
           <small>01 &middot; Record</small>
           <span class="trace-ui">
@@ -362,10 +362,14 @@
         </button></li>
         <li><button class="trace-step" type="button" data-title="Open the evidence.">
           <small>05 &middot; Evidence</small>
-          <span class="trace-ui">
-            <span class="trace-ev-head"><b>ApoB trend</b><span>5 source-linked readings</span></span>
-            <svg class="thumb-spark" viewBox="0 0 320 92" preserveAspectRatio="none" aria-hidden="true"><rect class="sp-band" x="20" y="17" width="292" height="63" rx="2"></rect><path class="sp-bound" d="M20 17H312M20 80H312"></path><path class="sp-line" d="M20,68 L93,60 L166,51 L239,36 L312,22"></path><circle class="sp-point" cx="20" cy="68" r="4"></circle><circle class="sp-point" cx="93" cy="60" r="4"></circle><circle class="sp-point" cx="166" cy="51" r="4"></circle><circle class="sp-point" cx="239" cy="36" r="4"></circle><circle class="sp-point is-latest" cx="312" cy="22" r="4"></circle></svg>
-            <span class="trace-note">Every reading opens the page it was read from.</span>
+          <span class="trace-ui trace-link-demo">
+            <span class="trace-linked-text">Sarah&rsquo;s <span class="trace-evidence-link">ApoB trend &nearr;</span> has risen across five readings but remains inside the stated range.</span>
+            <span class="trace-evidence-panel">
+              <span class="trace-ev-head"><b>ApoB trend</b><span>5 source-linked readings</span></span>
+              <svg class="thumb-spark trace-evidence-chart" viewBox="0 0 180 58" preserveAspectRatio="none" role="img" aria-label="ApoB rising from 0.71 to 1.15 grams per litre across five source-linked readings"><rect class="sp-band" x="8" y="9" width="164" height="42" rx="2"></rect><path class="sp-bound" d="M8 9H172M8 51H172"></path><g class="sp-grid"><path d="M8 23H172M8 37H172"></path></g><path class="sp-line" d="M8,45 C38,41 63,36 90,31 C120,25 145,17 172,12"></path><circle class="sp-point" cx="8" cy="45" r="1.7"></circle><circle class="sp-point" cx="49" cy="38" r="1.7"></circle><circle class="sp-point" cx="90" cy="31" r="1.7"></circle><circle class="sp-point" cx="131" cy="21" r="1.7"></circle><circle class="sp-point is-latest" cx="172" cy="12" r="2.1"></circle></svg>
+              <span class="trace-evidence-table" role="table" aria-label="Five ApoB source readings"><span class="trace-evidence-row" role="row"><time datetime="2004-05-11">2004-May-11</time><b>0.71 g/L</b><i>Page 1</i></span><span class="trace-evidence-row" role="row"><time datetime="2016-02-09">2016-Feb-09</time><b>0.88 g/L</b><i>Page 4</i></span><span class="trace-evidence-row" role="row"><time datetime="2023-04-06">2023-Apr-06</time><b>1.02 g/L</b><i>Page 3</i></span><span class="trace-evidence-row" role="row"><time datetime="2024-06-20">2024-Jun-20</time><b>1.08 g/L</b><i>Page 5</i></span><span class="trace-evidence-row" role="row"><time datetime="2025-03-14">2025-Mar-14</time><b>1.15 g/L</b><i>Page 1</i></span></span>
+            </span>
+            <span class="trace-link-cursor" aria-hidden="true"><svg viewBox="0 0 18 22"><path d="M2 2v16l4.2-4.2 3.2 6.2 3-1.5-3.1-6.1H15L2 2Z"></path></svg></span>
           </span>
         </button></li>
       </ol>
@@ -1041,28 +1045,65 @@
       drawReply();
     }
 
-    /* The report writes itself in a section of its own, after the line has
-       finished running. It is scrubbed rather than timed: this one is worth
-       watching assemble, and at a fixed speed you would either be waiting for
-       it or have missed it. */
-    /* Traceability: clicking a step promotes its title into the headline.
-       The five titles used to be repeated once per card; as one line that
-       changes they carry the section instead of decorating it. */
+    /* Traceability follows the same five-stage source animation as n1.care.
+       It only runs while visible, pauses while someone explores it, and keeps
+       the manual controls and arrow-key navigation available. */
     const traceFlow = document.querySelector('.trace-flow');
     if (traceFlow) {
       const traceTitle = document.getElementById('trace-title');
       const steps = [...traceFlow.querySelectorAll('.trace-step')];
-      const select = (step) => {
-        steps.forEach(other => other.removeAttribute('aria-current'));
-        step.setAttribute('aria-current', 'step');
-        if (traceTitle) traceTitle.textContent = step.dataset.title;
+      const sourceLink = traceFlow.querySelector('.trace-evidence-link');
+      const sourceDemo = traceFlow.querySelector('.trace-link-demo');
+      const stepDurations = [2400, 2500, 2800, 2800, 4600];
+      let active = 0;
+      let timer = 0;
+      let inView = false;
+      let paused = false;
+
+      const positionLinkCursor = () => {
+        if (!sourceDemo || !sourceLink) return;
+        const demoRect = sourceDemo.getBoundingClientRect();
+        const linkRect = sourceLink.getBoundingClientRect();
+        sourceDemo.style.setProperty('--cursor-home-x', `${Math.round(demoRect.width * .78)}px`);
+        sourceDemo.style.setProperty('--cursor-home-y', `${Math.round(demoRect.height * .82)}px`);
+        sourceDemo.style.setProperty('--cursor-link-x', `${Math.round(linkRect.left - demoRect.left + linkRect.width * .65 - 2)}px`);
+        sourceDemo.style.setProperty('--cursor-link-y', `${Math.round(linkRect.top - demoRect.top + linkRect.height * .55 - 3)}px`);
+      };
+      const render = () => {
+        steps.forEach((step, index) => {
+          const selected = index === active && (inView || reducedMotion.matches);
+          step.toggleAttribute('aria-current', selected);
+          if (selected) step.setAttribute('aria-current', 'step');
+        });
+        if (traceTitle) traceTitle.textContent = steps[active].dataset.title;
+        if (active === steps.length - 1) requestAnimationFrame(positionLinkCursor);
+      };
+      const stop = () => {
+        clearTimeout(timer);
+        timer = 0;
+      };
+      const start = () => {
+        stop();
+        if (reducedMotion.matches || paused || !inView || document.hidden) return;
+        render();
+        timer = setTimeout(function advance() {
+          active = (active + 1) % steps.length;
+          render();
+          timer = setTimeout(advance, stepDurations[active]);
+        }, stepDurations[active]);
+      };
+      const setPaused = value => {
+        paused = value;
+        traceFlow.classList.toggle('is-paused', value);
+        if (value) stop();
+        else start();
       };
       traceFlow.addEventListener('click', event => {
         const step = event.target.closest('.trace-step');
-        if (step) select(step);
+        if (!step) return;
+        active = steps.indexOf(step);
+        render();
       });
-      /* Left and right move between steps once one has been picked, which is
-         what a row of related controls is expected to do. */
       traceFlow.addEventListener('keydown', event => {
         const dir = event.key === 'ArrowRight' ? 1 : event.key === 'ArrowLeft' ? -1 : 0;
         if (!dir) return;
@@ -1070,9 +1111,27 @@
         if (here < 0) return;
         event.preventDefault();
         const next = steps[(here + dir + steps.length) % steps.length];
-        select(next);
+        active = steps.indexOf(next);
+        render();
         next.focus();
       });
+      traceFlow.addEventListener('focusin', () => setPaused(true));
+      traceFlow.addEventListener('focusout', event => {
+        if (!traceFlow.contains(event.relatedTarget)) setPaused(false);
+      });
+      document.addEventListener('visibilitychange', () => document.hidden ? stop() : start());
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(entries => {
+          inView = entries[0].isIntersecting;
+          if (inView) start();
+          else { stop(); render(); }
+        }, { threshold: .12 }).observe(traceFlow);
+      } else {
+        inView = true;
+        start();
+      }
+      addEventListener('resize', positionLinkCursor, { passive: true });
+      render();
     }
 
     const reportScene = document.querySelector('.report-scene');

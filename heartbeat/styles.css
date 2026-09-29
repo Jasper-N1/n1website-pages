@@ -1363,11 +1363,9 @@ body{display:block;overflow:visible;overflow-x:clip}
 /* ==========================================================================
    Traceability, by hand.
 
-   Every other section on this page is driven by scroll. This one is not: the
-   claim is that any finding can be opened back to its source, and a claim
-   about what you can do is better answered by letting you do it. Clicking a
-   step promotes its title into the headline, so the five titles that were
-   repeated once per card become one line that changes.
+   This is the timed, interactive source trace used on n1.care: it advances
+   while visible, then yields to direct selection when someone explores it.
+   The selected step promotes its title into the headline.
    ========================================================================== */
 .trace-scene{position:relative;z-index:1;padding:clamp(64px,11svh,124px) var(--stage-x);
   background:#f3ede2;color:var(--ink)}
@@ -1377,20 +1375,22 @@ body{display:block;overflow:visible;overflow-x:clip}
    as you click between them. */
 .trace-head h2{min-height:1.2em;margin:0;font-size:clamp(26px,3.4vw,44px);font-weight:400;
   line-height:1.06;letter-spacing:-.038em}
-.trace-flow{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;
+.trace-flow{--trace-step-duration:4600ms;display:grid;grid-template-columns:repeat(5,1fr);gap:14px;
   margin:clamp(30px,5svh,52px) 0 0;padding:0;list-style:none}
 .trace-flow li{display:flex}
 
 .trace-step{display:flex;flex-direction:column;gap:12px;width:100%;
   padding:16px 16px 18px;border:1px solid #e7dcc8;border-top:3px solid transparent;
   border-radius:14px;color:inherit;background:#fffdf9;font:inherit;text-align:left;
-  cursor:pointer;transition:border-color .2s ease,background .2s ease,translate .2s ease}
+  cursor:pointer;transition:border-color .45s ease,background .45s ease,translate .2s ease,box-shadow .45s ease}
 .trace-step:hover{border-color:#c7dbd6;translate:0 -2px}
-.trace-step[aria-current="step"]{border-color:#c7dbd6;border-top-color:#244b49;background:#eef6f4}
+.trace-step[aria-current="step"]{border-color:#9fc8c1;border-top-color:#244b49;background:#eef6f4;
+  box-shadow:0 15px 30px -24px rgba(35,90,82,.52)}
 .trace-step:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
 .trace-step small{color:#5c6b66;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
 .trace-step[aria-current="step"] small{color:#244b49}
-.trace-ui{display:flex;flex-direction:column;gap:8px;font-size:11.5px;line-height:1.45}
+.trace-ui{position:relative;display:flex;flex-direction:column;gap:8px;min-height:178px;
+  overflow:hidden;font-size:11.5px;line-height:1.45}
 
 .trace-doc{font-size:12px;font-weight:600}
 .trace-doc-meta{display:flex;justify-content:space-between;gap:8px;
@@ -1414,6 +1414,73 @@ body{display:block;overflow:visible;overflow-x:clip}
 .trace-ev-head span{color:#5c6b66;font-size:10.5px}
 .trace-step .thumb-spark{height:44px}
 
+/* The active stage assembles itself in the same order as the production
+   traceability demo: source fields, analysis, checks, then linked evidence. */
+.trace-step[aria-current="step"] .trace-doc,
+.trace-step[aria-current="step"] .trace-doc-meta,
+.trace-step[aria-current="step"] .trace-counts>span,
+.trace-step[aria-current="step"] .trace-grid>span,
+.trace-step[aria-current="step"] .trace-context,
+.trace-step[aria-current="step"] .trace-note,
+.trace-step[aria-current="step"] .trace-checks>span{animation:trace-item-in .42s ease both}
+.trace-step[aria-current="step"] .trace-doc-meta{animation-delay:.16s}
+.trace-step[aria-current="step"] :is(.trace-counts,.trace-grid)>span:nth-child(1){animation-delay:.34s}
+.trace-step[aria-current="step"] :is(.trace-counts,.trace-grid)>span:nth-child(2){animation-delay:.5s}
+.trace-step[aria-current="step"] :is(.trace-counts,.trace-grid)>span:nth-child(3){animation-delay:.66s}
+.trace-step[aria-current="step"] :is(.trace-counts,.trace-grid)>span:nth-child(4){animation-delay:.82s}
+.trace-step[aria-current="step"] .trace-grid>span:nth-child(5){animation-delay:.98s}
+.trace-step[aria-current="step"] .trace-context{animation-delay:.15s}
+.trace-step[aria-current="step"] .trace-finding{animation:trace-finding-in .55s .62s ease both}
+.trace-step[aria-current="step"] .trace-note{animation-delay:1.08s}
+.trace-step[aria-current="step"] .trace-checks>span:nth-child(1){animation-delay:.15s}
+.trace-step[aria-current="step"] .trace-checks>span:nth-child(2){animation-delay:.36s}
+.trace-step[aria-current="step"] .trace-checks>span:nth-child(3){animation-delay:.57s}
+.trace-step[aria-current="step"] .trace-checks>span:nth-child(4){animation-delay:.78s}
+.trace-step[aria-current="step"] .trace-checks>span:nth-child(5){animation-delay:.99s}
+.trace-step[aria-current="step"] .trace-checks i{animation:trace-check-fill .34s ease both}
+.trace-step[aria-current="step"] .trace-checks>span:nth-child(1) i{animation-delay:.27s}
+.trace-step[aria-current="step"] .trace-checks>span:nth-child(2) i{animation-delay:.48s}
+.trace-step[aria-current="step"] .trace-checks>span:nth-child(3) i{animation-delay:.69s}
+.trace-step[aria-current="step"] .trace-checks>span:nth-child(4) i{animation-delay:.9s}
+.trace-step[aria-current="step"] .trace-checks>span:nth-child(5) i{animation-delay:1.11s}
+@keyframes trace-item-in{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+@keyframes trace-finding-in{from{opacity:0;clip-path:inset(0 100% 0 0)}to{opacity:1;clip-path:inset(0)}}
+@keyframes trace-check-fill{from{color:transparent;background:transparent;transform:scale(.82)}to{color:#fff;background:#48a987;transform:scale(1)}}
+
+.trace-link-demo{display:block}
+.trace-linked-text,.trace-evidence-panel{position:absolute;inset:0}
+.trace-linked-text{display:block;color:#5c6b66;font-size:11px;line-height:1.5;opacity:0;transform:translateY(-4px)}
+.trace-evidence-link{display:inline;border-bottom:1px solid rgba(47,119,115,.65);color:#246d68;font-weight:700}
+.trace-evidence-panel{display:grid;grid-template-rows:auto 58px 1fr;gap:5px;opacity:1;pointer-events:none}
+.trace-evidence-chart{width:100%;height:58px!important;display:block;overflow:visible}
+.trace-evidence-chart .sp-grid{fill:none;stroke:#dce5e2;stroke-width:1;stroke-dasharray:3 3}
+.trace-evidence-chart .sp-line{stroke-dasharray:230;stroke-dashoffset:0}
+.trace-evidence-table{display:grid;align-content:start;border-top:1px solid #d8e3df}
+.trace-evidence-row{display:grid!important;grid-template-columns:1fr auto auto;gap:7px;padding:3px 0;
+  border-bottom:1px solid #e3e9e7;opacity:1}
+.trace-evidence-row time{color:#65736e;font-size:6.5px}
+.trace-evidence-row b{color:#244b49;font-size:7px}
+.trace-evidence-row i{color:#2f7773;font-size:6px;font-style:normal;font-weight:750}
+.trace-link-cursor{position:absolute;z-index:5;top:0;left:0;width:16px;height:20px;opacity:0;color:#244b49;
+  filter:drop-shadow(0 2px 2px rgba(20,45,42,.2));pointer-events:none;
+  transform:translate(var(--cursor-home-x,80px),var(--cursor-home-y,120px));transform-origin:2px 2px}
+.trace-link-cursor svg{width:100%;height:100%;fill:#fff;stroke:currentColor;stroke-width:1.5;stroke-linejoin:round}
+.trace-step[aria-current="step"] .trace-link-cursor{animation:trace-link-cursor-cycle var(--trace-step-duration) ease-in-out both}
+.trace-step[aria-current="step"] .trace-linked-text{animation:trace-linked-text-cycle var(--trace-step-duration) ease both}
+.trace-step[aria-current="step"] .trace-evidence-link{animation:trace-evidence-link-click var(--trace-step-duration) ease both}
+.trace-step[aria-current="step"] .trace-evidence-panel{animation:trace-evidence-open var(--trace-step-duration) ease both}
+.trace-step[aria-current="step"] .trace-evidence-chart .sp-line{animation:trace-evidence-line var(--trace-step-duration) ease both}
+.trace-step[aria-current="step"] .trace-evidence-row{animation:trace-evidence-row-in var(--trace-step-duration) ease both}
+.trace-step[aria-current="step"] .trace-evidence-row:nth-child(2){animation-delay:80ms}
+.trace-step[aria-current="step"] .trace-evidence-row:nth-child(3){animation-delay:160ms}
+.trace-flow.is-paused :is(.trace-link-cursor,.trace-linked-text,.trace-evidence-link,.trace-evidence-panel,.trace-evidence-chart .sp-line,.trace-evidence-row){animation-play-state:paused}
+@keyframes trace-linked-text-cycle{0%,30%{opacity:1;transform:none}38%,100%{opacity:0;transform:translateY(-4px)}}
+@keyframes trace-evidence-link-click{0%,18%{color:#246d68;transform:scale(1)}23%,28%{color:#174e4a;transform:scale(.97)}33%,100%{color:#246d68;transform:scale(1)}}
+@keyframes trace-evidence-open{0%,31%{opacity:0;transform:translateY(5px) scale(.985)}40%,100%{opacity:1;transform:none}}
+@keyframes trace-evidence-line{0%,40%{stroke-dashoffset:230}66%,100%{stroke-dashoffset:0}}
+@keyframes trace-evidence-row-in{0%,60%{opacity:0;transform:translateY(3px)}72%,100%{opacity:1;transform:none}}
+@keyframes trace-link-cursor-cycle{0%{opacity:0;transform:translate(var(--cursor-home-x),var(--cursor-home-y)) scale(1)}8%{opacity:1;transform:translate(var(--cursor-home-x),var(--cursor-home-y)) scale(1)}18%{opacity:1;transform:translate(var(--cursor-link-x),var(--cursor-link-y)) scale(1)}23%{opacity:1;transform:translate(var(--cursor-link-x),var(--cursor-link-y)) scale(.82)}28%{opacity:1;transform:translate(var(--cursor-link-x),var(--cursor-link-y)) scale(1)}36%,100%{opacity:0;transform:translate(var(--cursor-link-x),var(--cursor-link-y)) scale(1)}}
+
 @media (max-width:900px){
   /* Five columns leave nothing readable, so the row becomes something you
      swipe, one card at a time, rather than five slivers. */
@@ -1427,4 +1494,8 @@ body{display:block;overflow:visible;overflow-x:clip}
 @media (prefers-reduced-motion:reduce){
   .trace-step{transition:none}
   .trace-step:hover{translate:none}
+  .trace-step[aria-current="step"] :is(.trace-doc,.trace-doc-meta,.trace-counts>span,.trace-grid>span,.trace-context,.trace-finding,.trace-note,.trace-checks>span,.trace-checks i){animation:none}
+  .trace-linked-text{opacity:0}
+  .trace-evidence-panel{opacity:1;transform:none}
+  .trace-link-cursor{display:none}
 }
