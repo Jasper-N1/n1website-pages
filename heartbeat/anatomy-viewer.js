@@ -12,10 +12,10 @@ if (film && scene) {
   let transitionId = 0;
   let forceFullSequence = false;
   let fullSequenceWaiters = [];
-  let playbackBoost = 0;
+  let holdFinalFrame = false;
 
   const clamp = value => Math.max(0, Math.min(1, value));
-  const videoEnd = () => Math.max(0, film.duration - 1 / 30);
+  const videoEnd = () => Math.max(0, film.duration - 0.4);
   const currentProgress = () => ready && videoEnd() ? film.currentTime / videoEnd() : targetProgress;
   const setFrame = progress => {
     if (!ready || !Number.isFinite(film.duration)) return;
@@ -69,15 +69,10 @@ if (film && scene) {
     const targetTime = next * videoEnd();
     const basePlaybackRate = Math.max(0.25, Math.min(4, (targetTime - film.currentTime) / (duration / 1000)));
     film.playbackRate = basePlaybackRate;
-    let previousStamp = 0;
-    const watchPlayback = stamp => {
+    const watchPlayback = () => {
       if (activeTransition !== transitionId) return;
-      if (previousStamp) playbackBoost = Math.max(0, playbackBoost - (stamp - previousStamp) * .00034);
-      previousStamp = stamp;
-      film.playbackRate = Math.min(4, basePlaybackRate * (1 + playbackBoost));
       if (film.currentTime >= targetTime - 1 / 60) {
         film.pause();
-        setFrame(next);
         finishAt(next);
       } else animationFrame = requestAnimationFrame(watchPlayback);
     };
@@ -88,6 +83,15 @@ if (film && scene) {
     });
   };
   const syncStage = () => {
+    if (holdFinalFrame && scene.classList.contains('is-heart-focused')) {
+      transitionId += 1;
+      cancelAnimationFrame(animationFrame);
+      animationFrame = 0;
+      film.pause();
+      targetProgress = 1;
+      return;
+    }
+    if (!scene.classList.contains('is-decomposed')) holdFinalFrame = false;
     if (forceFullSequence || scene.classList.contains('is-heart-focused')) animateTo(1);
     else if (scene.classList.contains('is-decomposed')) animateTo(decomposedFrame);
     else animateTo(0);
@@ -121,21 +125,17 @@ if (film && scene) {
     playAll: () => new Promise(resolve => {
       fullSequenceWaiters.push(resolve);
       forceFullSequence = true;
-      playbackBoost = 0;
+      holdFinalFrame = false;
       if (ready) animateTo(1);
     }),
-    fastForward: amount => {
-      if (!forceFullSequence || !ready) return;
-      playbackBoost = Math.min(1.5, playbackBoost + Math.min(.42, Math.max(0, amount) / 420));
-    },
     release: () => {
       forceFullSequence = false;
+      holdFinalFrame = true;
       transitionId += 1;
       cancelAnimationFrame(animationFrame);
       animationFrame = 0;
       film.pause();
       targetProgress = 1;
-      setFrame(1);
     }
   };
 

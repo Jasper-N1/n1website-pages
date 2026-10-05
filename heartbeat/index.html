@@ -11,8 +11,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261005-21">
-  <script type="module" src="anatomy-viewer.js?v=20261005-4"></script>
+  <link rel="stylesheet" href="styles.css?v=20261005-22">
+  <script type="module" src="anatomy-viewer.js?v=20261005-5"></script>
 </head>
 <body>
   <svg class="icon-sprite" aria-hidden="true" width="0" height="0" style="position:absolute">
@@ -926,7 +926,6 @@
       </header>
       <div class="heart-wash" aria-hidden="true"></div>
       <video class="anatomy-film" data-anatomy-film muted playsinline preload="auto" aria-hidden="true"></video>
-      <div class="anatomy-gate-cue" aria-hidden="true"><span>&darr;</span> Scroll or swipe to move faster</div>
       <div class="heart-results" aria-labelledby="heart-insight-title">
         <header class="heart-insight-head">
           <h2 id="heart-insight-title"><span>Key cardiology results</span><span>Every source, trackable.</span></h2>
@@ -1988,29 +1987,6 @@
         Promise.race([playback, new Promise(resolve => setTimeout(resolve, 15000))])
           .then(finishAnatomyGate);
       };
-      const accelerateAnatomy = amount => {
-        if (!anatomyGateActive || amount <= 0) return false;
-        window.n1AnatomyFilm?.fastForward(amount);
-        return true;
-      };
-      addEventListener('wheel', event => {
-        const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? stageHeight : 1;
-        if (accelerateAnatomy(event.deltaY * unit)) event.preventDefault();
-      }, { passive: false });
-      let anatomyTouchY = 0;
-      addEventListener('touchstart', event => {
-        anatomyTouchY = event.touches[0]?.clientY || 0;
-      }, { passive: true });
-      addEventListener('touchmove', event => {
-        const nextY = event.touches[0]?.clientY || anatomyTouchY;
-        const distance = anatomyTouchY - nextY;
-        anatomyTouchY = nextY;
-        if (accelerateAnatomy(distance)) event.preventDefault();
-      }, { passive: false });
-      addEventListener('keydown', event => {
-        if (!['ArrowDown', 'PageDown', ' ', 'End'].includes(event.key)) return;
-        if (accelerateAnatomy(220)) event.preventDefault();
-      });
       const drawInsights = () => {
         let progress = trackProgress(insightsScene);
         if (!anatomyGateComplete && progress >= .17) startAnatomyGate();
