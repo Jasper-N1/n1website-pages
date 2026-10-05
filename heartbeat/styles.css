@@ -496,6 +496,9 @@ body{display:block;overflow:visible;overflow-x:clip}
 .closing-message p{max-width:min(620px,76%);margin:0;padding:18px 24px;border-radius:24px;font-size:clamp(17px,1.7vw,21px);line-height:1.42;box-shadow:0 14px 34px -26px rgba(0,78,104,.38)}
 .closing-message.is-doctor p{border-bottom-left-radius:7px;color:#fff;background:var(--bb-blue-800)}
 .closing-message.is-patient p{border-bottom-right-radius:7px;background:#fff}
+.closing-message-cta{min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:14px;padding:0 16px;border-radius:999px;color:var(--bb-blue-900);background:#fff;font-size:14px;font-weight:700;line-height:1;text-decoration:none;transition:translate .2s ease,box-shadow .2s ease}
+.closing-message-cta:hover{box-shadow:0 12px 24px -16px rgba(0,39,55,.55);translate:3px 0}
+.closing-message-cta:focus-visible{outline:3px solid var(--bb-blue-200);outline-offset:3px}
 @media(max-width:620px){
   .closing-conversation{padding-inline:20px}
   .closing-conversation-head{margin-bottom:38px}
