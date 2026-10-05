@@ -1202,7 +1202,7 @@ body{display:block;overflow:visible;overflow-x:clip}
    The loader resolves into an anatomical index before the report itself. The
    body stays calm and diagrammatic; the surrounding cards carry the detail.
    ========================================================================== */
-.insights-scene{--insight:0;--insight-scale:1;--insight-exit:0;--insight-image-out:0;--heart-left:0;--heart-results:0;--heart-evidence:0;
+.insights-scene{--insight:0;--insight-scale:1;--insight-exit:0;--insight-image-out:0;--heart-left:0;--heart-results:0;--heart-evidence:0;--heart-card-turn:0;
   --insight-red:0;--insight-decompose:0;--decompose-cards:0;--anatomy-width:94vw;--anatomy-height:72svh;height:760svh;
   position:relative;z-index:1;background:var(--bb-cream);color:var(--ink)}
 .insights-stage{height:var(--stage-h);position:sticky;top:0;display:flex;flex-direction:column;
@@ -1280,7 +1280,7 @@ body{display:block;overflow:visible;overflow-x:clip}
 .heart-results .heart-insight-head h2 span:first-child{opacity:calc(1 - var(--heart-evidence))}
 .heart-results .heart-insight-head h2 span:last-child{opacity:var(--heart-evidence)}
 .heart-results .heart-trend-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.heart-results .heart-trend-card{--card-in:clamp(0,calc((var(--heart-results) - (.18 + var(--s))) / .2),1);--card-flip:clamp(0,calc((var(--heart-evidence) - var(--s) - var(--s)) / .48),1);min-height:clamp(145px,18svh,176px);position:relative;padding:15px 16px 12px;opacity:var(--card-in);scale:calc(.97 + var(--card-in) * .03);translate:calc((1 - var(--card-in)) * 12px) 0;transform:perspective(1100px) rotateY(calc(var(--card-flip) * 180deg));transform-style:preserve-3d}
+.heart-results .heart-trend-card{--card-in:clamp(0,calc((var(--heart-results) - (.18 + var(--s))) / .2),1);--card-flip:clamp(0,calc((var(--heart-card-turn) - var(--s) - var(--s)) / .48),1);min-height:clamp(145px,18svh,176px);position:relative;padding:15px 16px 12px;opacity:var(--card-in);scale:calc(.97 + var(--card-in) * .03);translate:calc((1 - var(--card-in)) * 12px) 0;transform:perspective(1100px) rotateY(calc(var(--card-flip) * 180deg));transform-style:preserve-3d}
 .heart-results .heart-trend-card>:not(.heart-card-back){opacity:calc(1 - var(--card-flip))}
 .heart-results .heart-card-back{position:absolute;inset:-1px;display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:15px 16px;border:1px solid rgba(0,95,125,.13);border-radius:16px;background:rgba(247,250,251,.98);transform:rotateY(180deg);backface-visibility:hidden;opacity:var(--card-flip)}
 .heart-card-back h3{grid-column:1/-1;margin:0;color:var(--bb-blue-900);font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase}
