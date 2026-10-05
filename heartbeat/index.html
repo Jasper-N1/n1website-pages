@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261005-14">
+  <link rel="stylesheet" href="styles.css?v=20261005-15">
   <script type="module" src="anatomy-viewer.js"></script>
 </head>
 <body>
@@ -1630,6 +1630,7 @@
         snapshots.push({ index, node: snapshot });
         return snapshots;
       }, []);
+      if (savedSnapshots.length) savedSnapshots[savedSnapshots.length - 1].node.classList.add('is-top-saved');
       const finalSnapshot = document.createElement('div');
       finalSnapshot.className = 'tl-final-card';
       finalSnapshot.setAttribute('aria-hidden', 'true');
@@ -1708,6 +1709,7 @@
         const stackProgress = stackBase;
         tlScene.style.setProperty('--stack', stackProgress.toFixed(4));
         savedShelf.style.setProperty('--saved-stack', stackProgress.toFixed(4));
+        savedShelf.style.setProperty('--saved-content', smooth(clamp((stackProgress - .08) / .22)).toFixed(4));
         tlScene.classList.toggle('is-stacking', stackProgress > .001);
         const cardsExit = smooth(clamp((rawProgress - STACK_END) / (TIMELINE_END - STACK_END)));
         tlScene.style.setProperty('--cards-exit', cardsExit.toFixed(4));
@@ -1956,8 +1958,8 @@
         insightsScene.style.setProperty('--insight-image-out', '0');
         insightsScene.style.setProperty('--insight-red', between(.76, .9).toFixed(4));
         insightsScene.style.setProperty('--heart-left', between(.74, .84).toFixed(4));
-        insightsScene.style.setProperty('--heart-results', between(.78, .86).toFixed(4));
-        insightsScene.style.setProperty('--heart-evidence', between(.94, 1).toFixed(4));
+        insightsScene.style.setProperty('--heart-results', between(.77, .85).toFixed(4));
+        insightsScene.style.setProperty('--heart-evidence', between(.91, .95).toFixed(4));
       };
       scenes.push(drawInsights);
       drawInsights();

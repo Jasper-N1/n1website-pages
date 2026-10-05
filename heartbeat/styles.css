@@ -1203,7 +1203,7 @@ body{display:block;overflow:visible;overflow-x:clip}
    body stays calm and diagrammatic; the surrounding cards carry the detail.
    ========================================================================== */
 .insights-scene{--insight:0;--insight-scale:1;--insight-exit:0;--insight-image-out:0;--heart-left:0;--heart-results:0;--heart-evidence:0;
-  --insight-red:0;--insight-decompose:0;--decompose-cards:0;--anatomy-width:94vw;--anatomy-height:72svh;height:640svh;
+  --insight-red:0;--insight-decompose:0;--decompose-cards:0;--anatomy-width:94vw;--anatomy-height:72svh;height:760svh;
   position:relative;z-index:1;background:var(--bb-cream);color:var(--ink)}
 .insights-stage{height:var(--stage-h);position:sticky;top:0;display:flex;flex-direction:column;
   align-items:center;justify-content:center;gap:clamp(18px,3svh,32px);
@@ -1781,12 +1781,12 @@ body{display:block;overflow:visible;overflow-x:clip}
 /* Meaningful stops remain visible after they pass the focal marker. This small
    left-hand pile makes the later full-size stack feel collected rather than
    conjured at the end. */
-.tl-saved-stack{--saved-stack:0;--saved-any:0;--saved-exit:0;--saved-card:min(400px,76vw);--saved-left:calc(var(--saved-card) / 5 - var(--saved-card));width:var(--saved-card);height:var(--stop-card);position:absolute;z-index:4;top:calc(var(--rail-y) + 34px);left:var(--saved-left);opacity:calc(var(--saved-any) * (1 - var(--saved-exit)));translate:calc(var(--saved-stack) * (50vw - var(--saved-card) / 2 - var(--saved-left))) calc(var(--saved-stack) * -8px - var(--saved-exit) * 54px);scale:calc(1 - var(--saved-exit));rotate:calc(var(--saved-exit) * -10deg);pointer-events:none}
+.tl-saved-stack{--saved-stack:0;--saved-content:0;--saved-any:0;--saved-exit:0;--saved-card:min(400px,76vw);--saved-left:calc(var(--saved-card) / 5 - var(--saved-card));width:var(--saved-card);height:var(--stop-card);position:absolute;z-index:4;top:calc(var(--rail-y) + 34px);left:var(--saved-left);opacity:calc(var(--saved-any) * (1 - var(--saved-exit)));translate:calc(var(--saved-stack) * (50vw - var(--saved-card) / 2 - var(--saved-left))) calc(var(--saved-stack) * -8px - var(--saved-exit) * 54px);scale:calc(1 - var(--saved-exit));rotate:calc(var(--saved-exit) * -10deg);pointer-events:none}
 .tl-saved-label{display:none}
 .tl-saved-card{--saved-in:0;width:var(--saved-card);position:absolute;top:calc(var(--saved-i) * 8px);left:calc(var(--saved-i) * 7px - var(--saved-i) * var(--saved-stack) * 14px);z-index:var(--saved-i);opacity:var(--saved-in);transform:translate3d(calc((1 - var(--saved-in)) * 52px),calc((1 - var(--saved-in)) * 8px),0) rotate(calc((var(--saved-i) - 1.5) * .42deg));transform-origin:center;filter:blur(calc((1 - var(--saved-in)) * 2px))}
 .tl-saved-card .tl-body{min-height:var(--stop-card);position:relative;overflow:hidden;padding:clamp(22px,2.4vw,30px);border-radius:18px;box-shadow:0 18px 44px rgba(60,52,38,.14)}
 .tl-saved-card .tl-body>*{visibility:hidden;opacity:0;translate:none}
-.tl-saved-card:last-child .tl-body>*{visibility:visible;opacity:clamp(0,calc((var(--saved-stack) - .12) * 5),1)}
+.tl-saved-card.is-top-saved .tl-body>*{visibility:visible;opacity:var(--saved-content)}
 .tl-final-card{width:min(400px,76vw);position:absolute;z-index:5;top:calc(var(--rail-y) + 29px);left:50%;opacity:calc(clamp(0,calc(var(--stack) * 12),1) * (1 - var(--cards-exit)));translate:-50% calc(var(--cards-exit) * -54px);scale:calc(1 - var(--cards-exit));rotate:calc(var(--cards-exit) * -10deg);filter:blur(calc(var(--cards-exit) * 4px));pointer-events:none}
 .tl-final-card .tl-body{min-height:var(--stop-card);background:#f7fafb;box-shadow:0 18px 44px rgba(60,52,38,.15)}
 
