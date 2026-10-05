@@ -11,8 +11,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261005-19">
-  <script type="module" src="anatomy-viewer.js?v=20261005-2"></script>
+  <link rel="stylesheet" href="styles.css?v=20261005-20">
+  <script type="module" src="anatomy-viewer.js?v=20261005-3"></script>
 </head>
 <body>
   <svg class="icon-sprite" aria-hidden="true" width="0" height="0" style="position:absolute">
@@ -1956,8 +1956,41 @@
     if (insightsScene) {
       let anatomyExpanded = false;
       let heartExpanded = false;
+      let anatomyGateActive = false;
+      let anatomyGateComplete = reducedMotion.matches;
+      const finishAnatomyGate = () => {
+        if (!anatomyGateActive) return;
+        anatomyGateActive = false;
+        anatomyGateComplete = true;
+        document.documentElement.classList.remove('is-anatomy-gated');
+        const box = geometryOf(insightsScene);
+        const travel = Math.max(0, box.height - stageHeight);
+        scrollTo(0, box.top + travel * .74);
+        requestAnimationFrame(() => window.n1AnatomyFilm?.release());
+      };
+      const startAnatomyGate = () => {
+        if (anatomyGateActive || anatomyGateComplete) return;
+        anatomyGateActive = true;
+        const box = geometryOf(insightsScene);
+        const travel = Math.max(0, box.height - stageHeight);
+        scrollTo(0, box.top + travel * .17);
+        document.documentElement.classList.add('is-anatomy-gated');
+        const playback = new Promise(resolve => {
+          const deadline = performance.now() + 1800;
+          const findPlayer = () => {
+            if (window.n1AnatomyFilm?.playAll) resolve(window.n1AnatomyFilm.playAll());
+            else if (performance.now() >= deadline) resolve();
+            else setTimeout(findPlayer, 50);
+          };
+          findPlayer();
+        });
+        Promise.race([playback, new Promise(resolve => setTimeout(resolve, 9500))])
+          .then(finishAnatomyGate);
+      };
       const drawInsights = () => {
-        const progress = trackProgress(insightsScene);
+        let progress = trackProgress(insightsScene);
+        if (!anatomyGateComplete && progress >= .17) startAnatomyGate();
+        if (anatomyGateActive) progress = .17;
         const between = (start, end) => smooth(clamp((progress - start) / (end - start)));
         insightsScene.style.setProperty('--insight', progress.toFixed(4));
         if (progress >= .17) anatomyExpanded = true;

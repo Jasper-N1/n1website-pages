@@ -10,6 +10,8 @@ if (film && scene) {
   let targetProgress = 0;
   let animationFrame = 0;
   let transitionId = 0;
+  let forceFullSequence = false;
+  let fullSequenceWaiters = [];
 
   const clamp = value => Math.max(0, Math.min(1, value));
   const videoEnd = () => Math.max(0, film.duration - 1 / 30);
@@ -24,6 +26,13 @@ if (film && scene) {
     const upper = Math.abs(Math.max(from - decomposedFrame, 0) - Math.max(to - decomposedFrame, 0));
     return Math.max(280, lower / decomposedFrame * 4200 + upper / (1 - decomposedFrame) * 3000);
   };
+  const finishAt = progress => {
+    animationFrame = 0;
+    if (progress < 0.999) return;
+    const waiters = fullSequenceWaiters;
+    fullSequenceWaiters = [];
+    waiters.forEach(resolve => resolve());
+  };
   const seekTo = (from, next, duration) => {
     const startedAt = performance.now();
     const tick = stamp => {
@@ -31,7 +40,7 @@ if (film && scene) {
       const eased = progress * progress * (3 - 2 * progress);
       setFrame(from + (next - from) * eased);
       if (progress < 1) animationFrame = requestAnimationFrame(tick);
-      else animationFrame = 0;
+      else finishAt(next);
     };
     animationFrame = requestAnimationFrame(tick);
   };
@@ -47,6 +56,7 @@ if (film && scene) {
     const from = currentProgress();
     if (reducedMotion.matches || Math.abs(next - from) < 0.002) {
       setFrame(next);
+      finishAt(next);
       return;
     }
     const duration = transitionDuration(from, next);
@@ -60,7 +70,7 @@ if (film && scene) {
       if (film.currentTime >= targetTime - 1 / 60) {
         film.pause();
         setFrame(next);
-        animationFrame = 0;
+        finishAt(next);
       } else animationFrame = requestAnimationFrame(watchPlayback);
     };
     film.play().then(() => {
@@ -70,7 +80,7 @@ if (film && scene) {
     });
   };
   const syncStage = () => {
-    if (scene.classList.contains('is-heart-focused')) animateTo(1);
+    if (forceFullSequence || scene.classList.contains('is-heart-focused')) animateTo(1);
     else if (scene.classList.contains('is-decomposed')) animateTo(decomposedFrame);
     else animateTo(0);
   };
@@ -91,9 +101,23 @@ if (film && scene) {
   const showFrame = () => {
     ready = true;
     film.pause();
-    setFrame(targetProgress);
+    if (forceFullSequence) {
+      targetProgress = 0;
+      setFrame(0);
+    } else setFrame(targetProgress);
     film.classList.add('is-ready');
     syncStage();
+  };
+
+  window.n1AnatomyFilm = {
+    playAll: () => new Promise(resolve => {
+      fullSequenceWaiters.push(resolve);
+      forceFullSequence = true;
+      if (ready) animateTo(1);
+    }),
+    release: () => {
+      forceFullSequence = false;
+    }
   };
 
   film.disablePictureInPicture = true;
