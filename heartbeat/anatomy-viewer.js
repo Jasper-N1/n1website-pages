@@ -12,6 +12,7 @@ if (film && scene) {
   let transitionId = 0;
   let forceFullSequence = false;
   let fullSequenceWaiters = [];
+  let playbackBoost = 0;
 
   const clamp = value => Math.max(0, Math.min(1, value));
   const videoEnd = () => Math.max(0, film.duration - 1 / 30);
@@ -24,7 +25,7 @@ if (film && scene) {
   const transitionDuration = (from, to) => {
     const lower = Math.abs(Math.min(from, decomposedFrame) - Math.min(to, decomposedFrame));
     const upper = Math.abs(Math.max(from - decomposedFrame, 0) - Math.max(to - decomposedFrame, 0));
-    return Math.max(280, lower / decomposedFrame * 4200 + upper / (1 - decomposedFrame) * 3000);
+    return Math.max(280, lower / decomposedFrame * 6500 + upper / (1 - decomposedFrame) * 4500);
   };
   const finishAt = progress => {
     animationFrame = 0;
@@ -33,9 +34,10 @@ if (film && scene) {
     fullSequenceWaiters = [];
     waiters.forEach(resolve => resolve());
   };
-  const seekTo = (from, next, duration) => {
+  const seekTo = (from, next, duration, activeTransition = transitionId) => {
     const startedAt = performance.now();
     const tick = stamp => {
+      if (activeTransition !== transitionId) return;
       const progress = Math.min(1, (stamp - startedAt) / duration);
       const eased = progress * progress * (3 - 2 * progress);
       setFrame(from + (next - from) * eased);
@@ -65,8 +67,14 @@ if (film && scene) {
       return;
     }
     const targetTime = next * videoEnd();
-    film.playbackRate = Math.max(0.25, Math.min(4, (targetTime - film.currentTime) / (duration / 1000)));
-    const watchPlayback = () => {
+    const basePlaybackRate = Math.max(0.25, Math.min(4, (targetTime - film.currentTime) / (duration / 1000)));
+    film.playbackRate = basePlaybackRate;
+    let previousStamp = 0;
+    const watchPlayback = stamp => {
+      if (activeTransition !== transitionId) return;
+      if (previousStamp) playbackBoost = Math.max(0, playbackBoost - (stamp - previousStamp) * .00034);
+      previousStamp = stamp;
+      film.playbackRate = Math.min(4, basePlaybackRate * (1 + playbackBoost));
       if (film.currentTime >= targetTime - 1 / 60) {
         film.pause();
         setFrame(next);
@@ -76,7 +84,7 @@ if (film && scene) {
     film.play().then(() => {
       if (activeTransition === transitionId) animationFrame = requestAnimationFrame(watchPlayback);
     }).catch(() => {
-      if (activeTransition === transitionId) seekTo(from, next, duration);
+      if (activeTransition === transitionId) seekTo(from, next, duration, activeTransition);
     });
   };
   const syncStage = () => {
@@ -113,10 +121,21 @@ if (film && scene) {
     playAll: () => new Promise(resolve => {
       fullSequenceWaiters.push(resolve);
       forceFullSequence = true;
+      playbackBoost = 0;
       if (ready) animateTo(1);
     }),
+    fastForward: amount => {
+      if (!forceFullSequence || !ready) return;
+      playbackBoost = Math.min(1.5, playbackBoost + Math.min(.42, Math.max(0, amount) / 420));
+    },
     release: () => {
       forceFullSequence = false;
+      transitionId += 1;
+      cancelAnimationFrame(animationFrame);
+      animationFrame = 0;
+      film.pause();
+      targetProgress = 1;
+      setFrame(1);
     }
   };
 
