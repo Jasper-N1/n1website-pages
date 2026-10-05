@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261005-17">
+  <link rel="stylesheet" href="styles.css?v=20261005-18">
   <script type="module" src="anatomy-viewer.js?v=20261005-2"></script>
 </head>
 <body>
@@ -1118,6 +1118,28 @@
       </div>
     </div>
   </section>
+  <section class="closing-conversation" aria-labelledby="closing-conversation-title">
+    <div class="closing-conversation-inner">
+      <header class="closing-conversation-head">
+        <span>Ready for the appointment</span>
+        <h2 id="closing-conversation-title">The review is ready.</h2>
+      </header>
+      <div class="closing-thread" aria-label="Conversation between Sarah and her doctor">
+        <article class="closing-message is-doctor">
+          <img src="../assets/avatar-doctor.jpg" alt="" width="48" height="48" loading="lazy" decoding="async">
+          <p>I&rsquo;ve got everything ready. Let&rsquo;s go through it together on Wednesday.</p>
+        </article>
+        <article class="closing-message is-patient">
+          <p>That&rsquo;s intriguing. Can I see it beforehand?</p>
+          <img src="../assets/avatar-patient.jpg" alt="" width="48" height="48" loading="lazy" decoding="async">
+        </article>
+        <article class="closing-message is-doctor">
+          <img src="../assets/avatar-doctor.jpg" alt="" width="48" height="48" loading="lazy" decoding="async">
+          <p>Of course. It&rsquo;s all here&mdash;the timeline, key findings and every source behind them.</p>
+        </article>
+      </div>
+    </div>
+  </section>
   <section class="cta-scene" aria-labelledby="cta-title">
     <img class="cta-photo" src="../assets/closing-mri-patient.jpg" alt="A clinician steadying a patient as he goes into a CT scanner" width="2380" height="1400" loading="lazy" decoding="async">
     <div class="cta-shade" aria-hidden="true"></div>
@@ -1125,8 +1147,8 @@
       <h2 id="cta-title">Arrive prepared.<br>Be present.</h2>
       <p class="cta-sub">Your complete health history, organized for the conversation.</p>
       <div class="cta-actions">
-        <a class="cta-primary" href="https://app.n1.care/signup">Start free trial</a>
-        <a class="cta-secondary" href="https://app.n1.care/login">Log in <span aria-hidden="true">&rarr;</span></a>
+        <a class="cta-primary" href="https://app.n1.care/login">Demo login <span aria-hidden="true">&rarr;</span></a>
+        <a class="cta-secondary" href="https://n1.care">Learn more</a>
       </div>
     </div>
   </section>
@@ -2018,6 +2040,19 @@
       drawReport();
     }
 
+    const closingConversation = document.querySelector('.closing-conversation');
+    if (closingConversation) {
+      if ('IntersectionObserver' in window && !reducedMotion.matches) {
+        const closingObserver = new IntersectionObserver(entries => {
+          if (entries.some(entry => entry.isIntersecting)) {
+            closingConversation.classList.add('is-visible');
+            closingObserver.disconnect();
+          }
+        }, { threshold: .28 });
+        closingObserver.observe(closingConversation);
+      } else closingConversation.classList.add('is-visible');
+    }
+
     /* iOS paints its own status bar and toolbar with theme-color, and this page
        has five different backgrounds under it. One fixed colour matched the
        hero and clashed with everything after it - a dark teal band above and
@@ -2028,7 +2063,7 @@
     const themeMeta = document.querySelector('meta[name="theme-color"]');
     if (themeMeta) {
       const tinted = [...document.querySelectorAll(
-        '.zoom-journey, .chat-scene, .timeline-scene, .reply-scene, .cta-scene, .site-footer')]
+        '.zoom-journey, .chat-scene, .timeline-scene, .reply-scene, .closing-conversation, .cta-scene, .site-footer')]
         .map(el => ({ el, colour: getComputedStyle(el).backgroundColor }));
       let lastTint = '';
       const drawTheme = () => {

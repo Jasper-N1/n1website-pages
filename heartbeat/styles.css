@@ -478,6 +478,34 @@ body{display:block;overflow:visible;overflow-x:clip}
    Arrive prepared. Be present. - the close, on a photograph.
    ========================================================================== */
 
+.closing-conversation{min-height:100svh;position:relative;z-index:1;display:grid;place-items:center;padding:clamp(84px,12svh,140px) var(--stage-x);overflow:hidden;color:var(--ink);background:var(--bb-blue-50)}
+.closing-conversation::before{width:min(62vw,760px);aspect-ratio:1;position:absolute;top:-44%;right:-18%;border-radius:50%;background:rgba(139,220,244,.18);filter:blur(70px);content:"";pointer-events:none}
+.closing-conversation-inner{width:min(900px,100%);position:relative}
+.closing-conversation-head{margin-bottom:clamp(34px,6svh,66px);text-align:center}
+.closing-conversation-head span{color:var(--bb-blue-700);font-family:var(--font-mono);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.closing-conversation-head h2{margin:10px 0 0;color:var(--bb-blue-900);font-family:var(--font-display);font-size:clamp(42px,6vw,72px);font-weight:500;line-height:.98;letter-spacing:-.05em}
+.closing-thread{display:grid;gap:18px}
+.closing-message{display:flex;align-items:end;gap:14px;opacity:0;translate:0 22px;transition:opacity .7s ease,translate .85s cubic-bezier(.2,.75,.25,1)}
+.closing-conversation.is-visible .closing-message{opacity:1;translate:none}
+.closing-conversation.is-visible .closing-message:nth-child(2){transition-delay:.22s}
+.closing-conversation.is-visible .closing-message:nth-child(3){transition-delay:.44s}
+.closing-message img{width:44px;height:44px;flex:0 0 auto;border-radius:50%;object-fit:cover;box-shadow:0 5px 16px rgba(0,78,104,.12)}
+.closing-message.is-doctor img{object-position:center 22%}
+.closing-message.is-patient{justify-content:flex-end}
+.closing-message.is-patient img{object-position:center 30%}
+.closing-message p{max-width:min(620px,76%);margin:0;padding:18px 24px;border-radius:24px;font-size:clamp(17px,1.7vw,21px);line-height:1.42;box-shadow:0 14px 34px -26px rgba(0,78,104,.38)}
+.closing-message.is-doctor p{border-bottom-left-radius:7px;color:#fff;background:var(--bb-blue-800)}
+.closing-message.is-patient p{border-bottom-right-radius:7px;background:#fff}
+@media(max-width:620px){
+  .closing-conversation{padding-inline:20px}
+  .closing-conversation-head{margin-bottom:38px}
+  .closing-thread{gap:15px}
+  .closing-message{gap:9px}
+  .closing-message img{width:34px;height:34px}
+  .closing-message p{max-width:calc(100% - 43px);padding:14px 17px;border-radius:20px;font-size:16px}
+}
+@media(prefers-reduced-motion:reduce){.closing-message{opacity:1;translate:none;transition:none}}
+
 .cta-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 42%}
 .cta-shade{position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,39,55,.94) 0%,rgba(0,39,55,.76) 30%,rgba(0,39,55,.25) 62%,rgba(0,39,55,.08) 100%)}
 .cta-scene{background:var(--bb-blue-900)}
