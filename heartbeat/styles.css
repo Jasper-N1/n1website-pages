@@ -1786,8 +1786,9 @@ body{display:block;overflow:visible;overflow-x:clip}
 .tl-saved-card{--saved-in:0;width:var(--saved-card);position:absolute;top:calc(var(--saved-i) * 8px);left:calc(var(--saved-i) * 7px - var(--saved-i) * var(--saved-stack) * 14px);z-index:var(--saved-i);opacity:var(--saved-in);transform:translate3d(calc((1 - var(--saved-in)) * 52px),calc((1 - var(--saved-in)) * 8px),0) rotate(calc((var(--saved-i) - 1.5) * .42deg));transform-origin:center;filter:blur(calc((1 - var(--saved-in)) * 2px))}
 .tl-saved-card .tl-body{min-height:var(--stop-card);position:relative;overflow:hidden;padding:clamp(22px,2.4vw,30px);border-radius:18px;box-shadow:0 18px 44px rgba(60,52,38,.14)}
 .tl-saved-card .tl-body>*{visibility:hidden;opacity:0;translate:none}
-.tl-final-card{width:min(400px,76vw);position:absolute;z-index:5;top:calc(var(--rail-y) + 29px);left:50%;opacity:calc(var(--stack) * (1 - var(--cards-exit)));translate:-50% calc(var(--cards-exit) * -54px);scale:calc(1 - var(--cards-exit));rotate:calc(var(--cards-exit) * -10deg);filter:blur(calc(var(--cards-exit) * 4px));pointer-events:none}
-.tl-final-card .tl-body{min-height:var(--stop-card);box-shadow:0 18px 44px rgba(60,52,38,.15)}
+.tl-saved-card:last-child .tl-body>*{visibility:visible;opacity:clamp(0,calc((var(--saved-stack) - .12) * 5),1)}
+.tl-final-card{width:min(400px,76vw);position:absolute;z-index:5;top:calc(var(--rail-y) + 29px);left:50%;opacity:calc(clamp(0,calc(var(--stack) * 12),1) * (1 - var(--cards-exit)));translate:-50% calc(var(--cards-exit) * -54px);scale:calc(1 - var(--cards-exit));rotate:calc(var(--cards-exit) * -10deg);filter:blur(calc(var(--cards-exit) * 4px));pointer-events:none}
+.tl-final-card .tl-body{min-height:var(--stop-card);background:#f7fafb;box-shadow:0 18px 44px rgba(60,52,38,.15)}
 
 /* The 11px dots sit on the 1px rail with 5px removed, aligning both centres at
    the same half pixel. The active
