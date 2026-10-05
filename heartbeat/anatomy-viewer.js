@@ -1,155 +1,145 @@
-const film = document.querySelector('[data-anatomy-film]');
-const scene = film?.closest('.insights-scene');
+const layers = [...document.querySelectorAll('.anatomy-film')];
+const scene = layers[0]?.closest('.insights-scene');
 
-if (film && scene) {
+if (layers.length === 2 && scene) {
   const phoneLayout = matchMedia('(max-width: 680px)');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-  const decomposedFrame = 0.55;
-  let ready = false;
-  let source = '';
-  let targetProgress = 0;
-  let animationFrame = 0;
-  let transitionId = 0;
-  let forceFullSequence = false;
-  let fullSequenceWaiters = [];
-  let holdFinalFrame = false;
+  const frameCount = 91;
+  const duration = 11050;
+  const frameDuration = duration / (frameCount - 1);
+  let runId = 0;
+  let activeLayer = 0;
+  let playing = false;
+  let completed = false;
+  let frameCache = new Map();
 
-  const clamp = value => Math.max(0, Math.min(1, value));
-  const videoEnd = () => Math.max(0, film.duration - 0.4);
-  const currentProgress = () => ready && videoEnd() ? film.currentTime / videoEnd() : targetProgress;
-  const setFrame = progress => {
-    if (!ready || !Number.isFinite(film.duration)) return;
-    const target = clamp(progress) * videoEnd();
-    if (Math.abs(film.currentTime - target) > 1 / 120) film.currentTime = target;
+  const frameUrl = index => {
+    const layout = phoneLayout.matches ? 'mobile' : 'desktop';
+    return `./media/anatomy-${layout}-frames/frame-${String(index).padStart(2, '0')}.webp?v=20261005-1`;
   };
-  const transitionDuration = (from, to) => {
-    const lower = Math.abs(Math.min(from, decomposedFrame) - Math.min(to, decomposedFrame));
-    const upper = Math.abs(Math.max(from - decomposedFrame, 0) - Math.max(to - decomposedFrame, 0));
-    return Math.max(280, lower / decomposedFrame * 6500 + upper / (1 - decomposedFrame) * 4500);
+  const finalUrl = () => phoneLayout.matches
+    ? './media/anatomy-mobile-final.webp?v=20261005-1'
+    : './media/anatomy-desktop-final.webp?v=20261005-1';
+
+  const loadFrame = index => {
+    if (frameCache.has(index)) return frameCache.get(index);
+    const pending = new Promise((resolve, reject) => {
+      const image = new Image();
+      image.onload = () => resolve(image.currentSrc || image.src);
+      image.onerror = reject;
+      image.src = frameUrl(index);
+    });
+    frameCache.set(index, pending);
+    return pending;
   };
-  const finishAt = progress => {
-    animationFrame = 0;
-    if (progress < 0.999) return;
-    const waiters = fullSequenceWaiters;
-    fullSequenceWaiters = [];
-    waiters.forEach(resolve => resolve());
-  };
-  const seekTo = (from, next, duration, activeTransition = transitionId) => {
-    const startedAt = performance.now();
-    const tick = stamp => {
-      if (activeTransition !== transitionId) return;
-      const progress = Math.min(1, (stamp - startedAt) / duration);
-      const eased = progress * progress * (3 - 2 * progress);
-      setFrame(from + (next - from) * eased);
-      if (progress < 1) animationFrame = requestAnimationFrame(tick);
-      else finishAt(next);
-    };
-    animationFrame = requestAnimationFrame(tick);
-  };
-  const animateTo = nextProgress => {
-    const next = clamp(nextProgress);
-    if (Math.abs(next - targetProgress) < 0.001 && animationFrame) return;
-    targetProgress = next;
-    if (!ready) return;
-    const activeTransition = ++transitionId;
-    cancelAnimationFrame(animationFrame);
-    animationFrame = 0;
-    film.pause();
-    const from = currentProgress();
-    if (reducedMotion.matches || Math.abs(next - from) < 0.002) {
-      setFrame(next);
-      finishAt(next);
-      return;
+
+  const preloadFrom = index => {
+    for (let next = index; next < Math.min(frameCount, index + 8); next += 1) {
+      loadFrame(next).catch(() => {});
     }
-    const duration = transitionDuration(from, next);
-    if (next < from) {
-      seekTo(from, next, duration);
-      return;
+    for (const cached of frameCache.keys()) {
+      if (cached < index - 2) frameCache.delete(cached);
     }
-    const targetTime = next * videoEnd();
-    const basePlaybackRate = Math.max(0.25, Math.min(4, (targetTime - film.currentTime) / (duration / 1000)));
-    film.playbackRate = basePlaybackRate;
-    const watchPlayback = () => {
-      if (activeTransition !== transitionId) return;
-      if (film.currentTime >= targetTime - 1 / 60) {
-        film.pause();
-        finishAt(next);
-      } else animationFrame = requestAnimationFrame(watchPlayback);
-    };
-    film.play().then(() => {
-      if (activeTransition === transitionId) animationFrame = requestAnimationFrame(watchPlayback);
-    }).catch(() => {
-      if (activeTransition === transitionId) seekTo(from, next, duration, activeTransition);
+  };
+
+  const showFrame = async (index, id) => {
+    const src = await loadFrame(index);
+    if (id !== runId) return false;
+    const nextLayer = 1 - activeLayer;
+    layers[nextLayer].src = src;
+    if (layers[nextLayer].decode) await layers[nextLayer].decode().catch(() => {});
+    if (id !== runId) return false;
+    layers[nextLayer].classList.add('is-visible');
+    layers[activeLayer].classList.remove('is-visible');
+    activeLayer = nextLayer;
+    return true;
+  };
+
+  const showFinal = () => {
+    runId += 1;
+    const nextLayer = 1 - activeLayer;
+    layers[nextLayer].src = finalUrl();
+    layers[nextLayer].classList.add('is-visible');
+    layers[activeLayer].classList.remove('is-visible');
+    activeLayer = nextLayer;
+    playing = false;
+    completed = true;
+  };
+
+  const showInitial = () => {
+    if (playing || scene.classList.contains('is-decomposed')) return;
+    runId += 1;
+    completed = false;
+    frameCache.clear();
+    layers.forEach(layer => {
+      layer.classList.remove('is-visible');
+      layer.removeAttribute('src');
     });
   };
-  const syncStage = () => {
-    if (holdFinalFrame && scene.classList.contains('is-heart-focused')) {
-      transitionId += 1;
-      cancelAnimationFrame(animationFrame);
-      animationFrame = 0;
-      film.pause();
-      targetProgress = 1;
+
+  const playAll = () => new Promise(async resolve => {
+    if (completed) {
+      resolve();
       return;
     }
-    if (!scene.classList.contains('is-decomposed')) holdFinalFrame = false;
-    if (forceFullSequence || scene.classList.contains('is-heart-focused')) animateTo(1);
-    else if (scene.classList.contains('is-decomposed')) animateTo(decomposedFrame);
-    else animateTo(0);
-  };
-  const setSource = () => {
-    const next = phoneLayout.matches
-      ? './media/anatomy-mobile.mp4?v=20261005-2'
-      : './media/anatomy-desktop.mp4?v=20261005-2';
-    if (next === source) return;
-    source = next;
-    ready = false;
-    transitionId += 1;
-    cancelAnimationFrame(animationFrame);
-    animationFrame = 0;
-    film.classList.remove('is-ready');
-    film.src = next;
-    film.load();
-  };
-  const showFrame = () => {
-    ready = true;
-    film.pause();
-    if (forceFullSequence) {
-      targetProgress = 0;
-      setFrame(0);
-    } else setFrame(targetProgress);
-    film.classList.add('is-ready');
-    syncStage();
-  };
+    if (reducedMotion.matches) {
+      showFinal();
+      resolve();
+      return;
+    }
+
+    playing = true;
+    const id = ++runId;
+    preloadFrom(0);
+    try {
+      await showFrame(0, id);
+    } catch {
+      showFinal();
+      resolve();
+      return;
+    }
+    if (id !== runId) return;
+
+    const startedAt = performance.now();
+    let shown = 0;
+    const advance = async stamp => {
+      if (id !== runId) return;
+      const wanted = Math.min(frameCount - 1, Math.floor((stamp - startedAt) / frameDuration));
+      if (wanted > shown) {
+        try {
+          await showFrame(wanted, id);
+          shown = wanted;
+          preloadFrom(wanted + 1);
+        } catch {
+          showFinal();
+          resolve();
+          return;
+        }
+      }
+      if (shown < frameCount - 1) requestAnimationFrame(advance);
+      else {
+        playing = false;
+        completed = true;
+        resolve();
+      }
+    };
+    requestAnimationFrame(advance);
+  });
 
   window.n1AnatomyFilm = {
-    playAll: () => new Promise(resolve => {
-      fullSequenceWaiters.push(resolve);
-      forceFullSequence = true;
-      holdFinalFrame = false;
-      if (ready) animateTo(1);
-    }),
+    playAll,
     release: () => {
-      forceFullSequence = false;
-      holdFinalFrame = true;
-      transitionId += 1;
-      cancelAnimationFrame(animationFrame);
-      animationFrame = 0;
-      film.pause();
-      targetProgress = 1;
+      if (completed) showFinal();
     }
   };
 
-  film.disablePictureInPicture = true;
-  film.addEventListener('loadeddata', showFrame);
-  phoneLayout.addEventListener('change', setSource);
-  new MutationObserver(syncStage).observe(scene, { attributes: true, attributeFilter: ['class'] });
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) {
-      cancelAnimationFrame(animationFrame);
-      animationFrame = 0;
-      film.pause();
-    } else syncStage();
+  new MutationObserver(showInitial).observe(scene, {
+    attributes: true,
+    attributeFilter: ['class']
   });
-  syncStage();
-  setSource();
+  phoneLayout.addEventListener('change', () => {
+    frameCache.clear();
+    if (completed) showFinal();
+    else if (!playing) showInitial();
+  });
 }

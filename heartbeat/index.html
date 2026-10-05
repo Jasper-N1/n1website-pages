@@ -11,8 +11,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261005-22">
-  <script type="module" src="anatomy-viewer.js?v=20261005-5"></script>
+  <link rel="stylesheet" href="styles.css?v=20261005-24">
+  <script type="module" src="anatomy-viewer.js?v=20261005-8"></script>
 </head>
 <body>
   <svg class="icon-sprite" aria-hidden="true" width="0" height="0" style="position:absolute">
@@ -925,7 +925,12 @@
         <h2 id="insights-title">Your health, by system.</h2>
       </header>
       <div class="heart-wash" aria-hidden="true"></div>
-      <video class="anatomy-film" data-anatomy-film muted playsinline preload="auto" aria-hidden="true"></video>
+      <picture class="anatomy-poster" aria-hidden="true">
+        <source media="(max-width: 680px)" srcset="media/anatomy-mobile-poster.webp?v=20261005-1">
+        <img src="media/anatomy-desktop-poster.webp?v=20261005-1" alt="">
+      </picture>
+      <img class="anatomy-film" data-anatomy-film alt="" aria-hidden="true">
+      <img class="anatomy-film" data-anatomy-frame alt="" aria-hidden="true">
       <div class="heart-results" aria-labelledby="heart-insight-title">
         <header class="heart-insight-head">
           <h2 id="heart-insight-title"><span>Key cardiology results</span><span>Every source, trackable.</span></h2>
@@ -1958,6 +1963,14 @@
       let heartExpanded = false;
       let anatomyGateActive = false;
       let anatomyGateComplete = reducedMotion.matches;
+      const gatedScrollKeys = new Set(['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'Home', 'End', ' ']);
+      const holdAnatomyScroll = event => {
+        if (!anatomyGateActive) return;
+        if (event.type !== 'keydown' || gatedScrollKeys.has(event.key)) event.preventDefault();
+      };
+      addEventListener('wheel', holdAnatomyScroll, { passive: false });
+      addEventListener('touchmove', holdAnatomyScroll, { passive: false });
+      addEventListener('keydown', holdAnatomyScroll, { passive: false });
       const finishAnatomyGate = () => {
         if (!anatomyGateActive) return;
         anatomyGateActive = false;
@@ -1984,7 +1997,7 @@
           };
           findPlayer();
         });
-        Promise.race([playback, new Promise(resolve => setTimeout(resolve, 15000))])
+        Promise.race([playback, new Promise(resolve => setTimeout(resolve, 25000))])
           .then(finishAnatomyGate);
       };
       const drawInsights = () => {
