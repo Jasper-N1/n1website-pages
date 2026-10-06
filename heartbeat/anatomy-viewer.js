@@ -343,8 +343,8 @@ if (host) {
 
     const seek = value => {
       scrollProgress = THREE.MathUtils.clamp(Number(value) || 0, 0, 1);
-      explode = smoothRange(scrollProgress, 0.12, 0.58);
-      focusHeart = smoothRange(scrollProgress, 0.58, 0.74);
+      explode = smoothRange(scrollProgress, 0, 0.52);
+      focusHeart = smoothRange(scrollProgress, 0.52, 0.70);
       updateParts(explode);
     };
     window.n1AnatomyFilm = { seek };
@@ -358,16 +358,18 @@ if (host) {
       renderHeart();
     };
     const nearbyTargets = new Set();
+    const beginLoad = () => {
+      if (loadStarted) return;
+      loadStarted = true;
+      load();
+    };
     const proximity = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) nearbyTargets.add(entry.target);
         else nearbyTargets.delete(entry.target);
       });
       const nearby = nearbyTargets.size > 0;
-      if (nearby && !loadStarted) {
-        loadStarted = true;
-        load();
-      }
+      if (nearby) beginLoad();
       if (nearby && !document.hidden && !running) {
         running = true;
         animate();
@@ -377,6 +379,13 @@ if (host) {
     }, { rootMargin: '1000px 0px' });
     proximity.observe(host);
     if (heartHost) proximity.observe(heartHost);
+    const warmAfterPageLoad = () => {
+      const warm = () => beginLoad();
+      if ('requestIdleCallback' in window) requestIdleCallback(warm, { timeout: 1500 });
+      else setTimeout(warm, 300);
+    };
+    if (document.readyState === 'complete') warmAfterPageLoad();
+    else addEventListener('load', warmAfterPageLoad, { once: true });
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
         running = false;
