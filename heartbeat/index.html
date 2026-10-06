@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261006-29">
+  <link rel="stylesheet" href="styles.css?v=20261006-30">
   <script type="module" src="anatomy-viewer.js?v=20261006-7"></script>
 </head>
 <body>
@@ -1370,7 +1370,7 @@
       let limitedInsightProgress = trackProgress(insightsScene);
       let desiredInsightProgress = limitedInsightProgress;
       let lastInsightStamp = performance.now();
-      const insightHoldStart = .5385;
+      const insightHoldStart = .70;
       const drawInsights = () => {
         const rawProgress = trackProgress(insightsScene);
         if (Math.abs(rawProgress - limitedInsightProgress) > .0005) desiredInsightProgress = rawProgress;
@@ -1379,7 +1379,7 @@
         lastInsightStamp = now;
         let progress = desiredInsightProgress;
         if (!reducedMotion.matches) {
-          const maxStep = (.28 * insightHoldStart / .70) * elapsed / 1000;
+          const maxStep = .28 * elapsed / 1000;
           const difference = desiredInsightProgress - limitedInsightProgress;
           if (Math.abs(difference) > maxStep) {
             progress = limitedInsightProgress + Math.sign(difference) * maxStep;
@@ -1395,8 +1395,8 @@
         insightsScene.style.setProperty('--insight', progress.toFixed(4));
         if (progress >= .17) anatomyExpanded = true;
         else if (progress <= .13) anatomyExpanded = false;
-        if (progress >= .64) heartExpanded = true;
-        else if (progress <= .57) heartExpanded = false;
+        if (progress >= .49) heartExpanded = true;
+        else if (progress <= .46) heartExpanded = false;
         const decomposed = anatomyExpanded;
         const heartFocused = heartExpanded;
         const inventoryProgress = decomposed ? 1 : 0;
@@ -1407,13 +1407,13 @@
         insightsScene.style.setProperty('--anatomy-width', `${(innerWidth * .94).toFixed(1)}px`);
         insightsScene.style.setProperty('--anatomy-height', `${(stageHeight * .72).toFixed(1)}px`);
         insightsScene.style.setProperty('--insight-scale', '1');
-        insightsScene.style.setProperty('--insight-exit', between(.67, .82).toFixed(4));
+        insightsScene.style.setProperty('--insight-exit', between(.48, .58).toFixed(4));
         insightsScene.style.setProperty('--insight-image-out', '0');
-        insightsScene.style.setProperty('--insight-red', between(.76, .9).toFixed(4));
-        insightsScene.style.setProperty('--heart-left', between(.74, .84).toFixed(4));
-        insightsScene.style.setProperty('--heart-results', between(.77, .85).toFixed(4));
-        insightsScene.style.setProperty('--heart-evidence', between(.91, .95).toFixed(4));
-        insightsScene.style.setProperty('--heart-card-turn', between(.90, .99).toFixed(4));
+        insightsScene.style.setProperty('--insight-red', between(.50, .60).toFixed(4));
+        insightsScene.style.setProperty('--heart-left', between(.49, .57).toFixed(4));
+        insightsScene.style.setProperty('--heart-results', between(.53, .61).toFixed(4));
+        insightsScene.style.setProperty('--heart-evidence', between(.82, .87).toFixed(4));
+        insightsScene.style.setProperty('--heart-card-turn', between(.76, .90).toFixed(4));
         window.n1AnatomyFilm?.seek(progress);
       };
       sceneObserver?.observe(insightsScene);
