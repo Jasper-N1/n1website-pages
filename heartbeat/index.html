@@ -1367,8 +1367,28 @@
     if (insightsScene) {
       let anatomyExpanded = false;
       let heartExpanded = false;
+      let limitedInsightProgress = trackProgress(insightsScene);
+      let desiredInsightProgress = limitedInsightProgress;
+      let lastInsightStamp = performance.now();
       const drawInsights = () => {
-        const progress = trackProgress(insightsScene);
+        const rawProgress = trackProgress(insightsScene);
+        if (Math.abs(rawProgress - limitedInsightProgress) > .0005) desiredInsightProgress = rawProgress;
+        const now = performance.now();
+        const elapsed = Math.min(40, Math.max(8, now - lastInsightStamp));
+        lastInsightStamp = now;
+        let progress = desiredInsightProgress;
+        if (!reducedMotion.matches) {
+          const maxStep = .14 * elapsed / 1000;
+          const difference = desiredInsightProgress - limitedInsightProgress;
+          if (Math.abs(difference) > maxStep) {
+            progress = limitedInsightProgress + Math.sign(difference) * maxStep;
+            const box = geometryOf(insightsScene);
+            const travel = Math.max(0, box.height - stageHeight);
+            scrollTo(0, box.top + travel * progress);
+            wake();
+          }
+        }
+        limitedInsightProgress = progress;
         const between = (start, end) => smooth(clamp((progress - start) / (end - start)));
         insightsScene.style.setProperty('--insight', progress.toFixed(4));
         if (progress >= .17) anatomyExpanded = true;
@@ -1395,7 +1415,9 @@
         window.n1AnatomyFilm?.seek(progress);
       };
       sceneObserver?.observe(insightsScene);
-      registerScene(drawInsights, insightsScene);
+      /* This scene always participates in a dirty scroll frame so a single
+         large wheel or touch jump cannot leap from before it to after it. */
+      registerScene(drawInsights);
       drawInsights();
     }
 
