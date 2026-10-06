@@ -1272,8 +1272,8 @@ body{display:block;overflow:visible;overflow-x:clip}
 .system-card.is-watch em{color:var(--bb-coral-dark);background:var(--bb-coral-soft)}
 .system-card.is-review em{color:var(--bb-gold);background:var(--bb-gold-soft)}
 .system-card.is-watch .system-icon,.system-card.is-review .system-icon{color:var(--bb-coral-dark);background:var(--bb-coral-soft)}
-.systems-body{--body-in:clamp(0,calc((var(--insight) - .06) / .2),1);width:var(--anatomy-width);height:var(--anatomy-height);position:relative;justify-self:center;flex:0 0 auto;margin:0;text-align:center;
-  z-index:4;opacity:calc(var(--body-in) * (1 - var(--insight-image-out)));
+.systems-body{width:var(--anatomy-width);height:var(--anatomy-height);position:relative;justify-self:center;flex:0 0 auto;margin:0;text-align:center;
+  z-index:4;opacity:calc(1 - var(--insight-image-out));
   scale:var(--insight-scale);
   translate:calc(var(--heart-left) * -24vw) 0;
   transform-origin:40.3% 26%}
