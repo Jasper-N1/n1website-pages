@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=20261006-28">
-  <script type="module" src="anatomy-viewer.js?v=20261006-5"></script>
+  <script type="module" src="anatomy-viewer.js?v=20261006-6"></script>
 </head>
 <body>
   <svg class="icon-sprite" aria-hidden="true" width="0" height="0" style="position:absolute">
@@ -1370,6 +1370,7 @@
       let limitedInsightProgress = trackProgress(insightsScene);
       let desiredInsightProgress = limitedInsightProgress;
       let lastInsightStamp = performance.now();
+      const insightHoldStart = .70;
       const drawInsights = () => {
         const rawProgress = trackProgress(insightsScene);
         if (Math.abs(rawProgress - limitedInsightProgress) > .0005) desiredInsightProgress = rawProgress;
@@ -1389,6 +1390,7 @@
           }
         }
         limitedInsightProgress = progress;
+        progress = clamp(progress / insightHoldStart);
         const between = (start, end) => smooth(clamp((progress - start) / (end - start)));
         insightsScene.style.setProperty('--insight', progress.toFixed(4));
         if (progress >= .17) anatomyExpanded = true;

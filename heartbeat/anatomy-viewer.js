@@ -343,8 +343,8 @@ if (host) {
 
     const seek = value => {
       scrollProgress = THREE.MathUtils.clamp(Number(value) || 0, 0, 1);
-      explode = smoothRange(scrollProgress, 0, 0.52);
-      focusHeart = smoothRange(scrollProgress, 0.52, 0.70);
+      explode = smoothRange(scrollProgress, 0, 0.42);
+      focusHeart = smoothRange(scrollProgress, 0.42, 0.57);
       updateParts(explode);
     };
     window.n1AnatomyFilm = { seek };
