@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261006-33">
+  <link rel="stylesheet" href="styles.css?v=20261006-37">
   <script type="module" src="anatomy-viewer.js?v=20261006-7"></script>
 </head>
 <body>
@@ -447,10 +447,7 @@
           <div class="anatomy-loading" role="status">Building anatomy · 0%</div>
         </figure>
       </div>
-      <div class="heart-results" aria-labelledby="heart-insight-title">
-        <header class="heart-insight-head">
-          <h2 id="heart-insight-title"><span>Key cardiology results</span><span>Every source, trackable.</span></h2>
-        </header>
+      <div class="heart-results" aria-label="Cardiovascular health results">
         <div class="heart-trend-grid" aria-label="Cardiovascular health trends">
           <article class="heart-trend-card is-watch" style="--s:.00">
             <header><span>Apolipoprotein B</span><em>Watch</em></header>
@@ -1366,6 +1363,7 @@
       let heartExpanded = false;
       let limitedInsightProgress = trackProgress(insightsScene);
       let desiredInsightProgress = limitedInsightProgress;
+      let insightCompleted = limitedInsightProgress >= .75;
       let lastInsightStamp = performance.now();
       const insightHoldStart = .75;
       const drawInsights = () => {
@@ -1375,7 +1373,8 @@
         const elapsed = Math.min(40, Math.max(8, now - lastInsightStamp));
         lastInsightStamp = now;
         let progress = desiredInsightProgress;
-        if (!reducedMotion.matches) {
+        const returningToCompletedScene = insightCompleted && desiredInsightProgress < limitedInsightProgress;
+        if (!reducedMotion.matches && !returningToCompletedScene) {
           const maxStep = .55 * elapsed / 1000;
           const difference = desiredInsightProgress - limitedInsightProgress;
           if (Math.abs(difference) > maxStep) {
@@ -1388,6 +1387,8 @@
         }
         limitedInsightProgress = progress;
         progress = clamp(progress / insightHoldStart);
+        if (progress >= .99) insightCompleted = true;
+        if (insightCompleted) progress = 1;
         const between = (start, end) => smooth(clamp((progress - start) / (end - start)));
         insightsScene.style.setProperty('--insight', progress.toFixed(4));
         if (progress >= .17) anatomyExpanded = true;
@@ -1409,7 +1410,6 @@
         insightsScene.style.setProperty('--insight-red', between(.50, .60).toFixed(4));
         insightsScene.style.setProperty('--heart-left', between(.49, .57).toFixed(4));
         insightsScene.style.setProperty('--heart-results', between(.53, .61).toFixed(4));
-        insightsScene.style.setProperty('--heart-evidence', between(.82, .87).toFixed(4));
         insightsScene.style.setProperty('--heart-card-turn', between(.76, .90).toFixed(4));
         window.n1AnatomyFilm?.seek(progress);
       };
