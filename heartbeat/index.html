@@ -11,8 +11,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261006-37">
-  <script type="module" src="anatomy-viewer.js?v=20261006-7"></script>
+  <link rel="stylesheet" href="styles.css?v=20261013-1">
+  <script type="module" src="anatomy-loader.js?v=20261013-3"></script>
 </head>
 <body>
   <svg class="icon-sprite" aria-hidden="true" width="0" height="0" style="position:absolute">
@@ -247,7 +247,7 @@
         </div>
       </div>
     <figure class="tl-patient-summary">
-      <img class="tl-portrait" src="../assets/patient-portrait.jpg" alt="Sarah M." width="980" height="1030" loading="lazy" decoding="async">
+      <img class="tl-portrait" src="../assets/patient-portrait.jpg" srcset="../assets/patient-portrait-240.webp 240w, ../assets/patient-portrait-480.webp 480w, ../assets/patient-portrait.jpg 980w" sizes="(max-width: 760px) 68px, 108px" alt="Sarah M." width="980" height="1030" loading="lazy" decoding="async">
       <figcaption><strong>Sarah M.</strong><span>21 years of records</span></figcaption>
     </figure>
     <ol class="tl-list">
@@ -442,7 +442,7 @@
         <figure class="systems-body" data-anatomy-viewer>
           <picture class="anatomy-poster" aria-hidden="true">
             <source media="(max-width: 680px)" srcset="media/anatomy-mobile-poster.webp?v=20261005-1">
-            <img src="media/anatomy-desktop-poster.webp?v=20261005-1" alt="" fetchpriority="high">
+            <img src="media/anatomy-desktop-poster.webp?v=20261005-1" alt="" loading="lazy" decoding="async">
           </picture>
           <div class="anatomy-loading" role="status">Building anatomy · 0%</div>
         </figure>
@@ -526,7 +526,7 @@
     </div>
   </section>
   <section class="cta-scene" aria-labelledby="cta-title">
-    <img class="cta-photo" src="../assets/closing-mri-patient.jpg" alt="A clinician steadying a patient as he goes into a CT scanner" width="2380" height="1400" loading="lazy" decoding="async">
+    <img class="cta-photo" src="../assets/closing-mri-patient.jpg" srcset="../assets/closing-mri-patient-640.webp 640w, ../assets/closing-mri-patient-1280.webp 1280w, ../assets/closing-mri-patient-1920.webp 1920w, ../assets/closing-mri-patient.jpg 2380w" sizes="100vw" alt="A clinician steadying a patient as he goes into a CT scanner" width="2380" height="1400" loading="lazy" decoding="async">
     <div class="cta-shade" aria-hidden="true"></div>
     <div class="cta-inner">
       <h2 id="cta-title">Arrive prepared.<br>Be present.</h2>
@@ -952,8 +952,9 @@
     easedProgress = targetProgress;
     paint(easedProgress);
     let frame = 0;
+    let cardPointerActive = true;
     const moveCards = event => {
-      if (reducedMotion.matches) return;
+      if (reducedMotion.matches || !cardPointerActive) return;
       const x = event.clientX / innerWidth - .5;
       const y = event.clientY / innerHeight - .5;
       cancelAnimationFrame(frame);
@@ -1359,13 +1360,25 @@
     const reportScene = document.querySelector('.report-scene');
     const insightsScene = document.querySelector('.insights-scene');
     if (insightsScene) {
+      const insightHoldStart = .75;
+      /* The body coming apart and the heart moving to the side run at half
+         speed: that stretch takes twice the scroll (and twice the time under
+         the speed limit below); everything after it keeps its pace. */
+      const insightSlowFactor = 2;
+      const insightSlowEnd = .61 * insightHoldStart;
+      const insightStretch = 1 + (insightSlowFactor - 1) * insightSlowEnd;
+      const toInsightTimeline = raw => {
+        const stretched = raw * insightStretch;
+        return stretched <= insightSlowFactor * insightSlowEnd
+          ? stretched / insightSlowFactor
+          : stretched - (insightSlowFactor - 1) * insightSlowEnd;
+      };
       let anatomyExpanded = false;
       let heartExpanded = false;
       let limitedInsightProgress = trackProgress(insightsScene);
       let desiredInsightProgress = limitedInsightProgress;
-      let insightCompleted = limitedInsightProgress >= .75;
+      let insightCompleted = toInsightTimeline(limitedInsightProgress) >= insightHoldStart;
       let lastInsightStamp = performance.now();
-      const insightHoldStart = .75;
       const drawInsights = () => {
         const rawProgress = trackProgress(insightsScene);
         if (Math.abs(rawProgress - limitedInsightProgress) > .0005) desiredInsightProgress = rawProgress;
@@ -1375,7 +1388,7 @@
         let progress = desiredInsightProgress;
         const returningToCompletedScene = insightCompleted && desiredInsightProgress < limitedInsightProgress;
         if (!reducedMotion.matches && !returningToCompletedScene) {
-          const maxStep = .55 * elapsed / 1000;
+          const maxStep = .55 / insightStretch * elapsed / 1000;
           const difference = desiredInsightProgress - limitedInsightProgress;
           if (Math.abs(difference) > maxStep) {
             progress = limitedInsightProgress + Math.sign(difference) * maxStep;
@@ -1386,7 +1399,7 @@
           }
         }
         limitedInsightProgress = progress;
-        progress = clamp(progress / insightHoldStart);
+        progress = clamp(toInsightTimeline(progress) / insightHoldStart);
         if (progress >= .99) insightCompleted = true;
         if (insightCompleted) progress = 1;
         const between = (start, end) => smooth(clamp((progress - start) / (end - start)));
@@ -1508,7 +1521,13 @@
     const motionSections = document.querySelectorAll('.floating-hero,.cta-scene');
     if ('IntersectionObserver' in window) {
       const motionObserver = new IntersectionObserver(entries => {
-        entries.forEach(entry => entry.target.classList.toggle('is-motion-active', entry.isIntersecting));
+        entries.forEach(entry => {
+          entry.target.classList.toggle('is-motion-active', entry.isIntersecting);
+          if (entry.target.classList.contains('floating-hero')) {
+            cardPointerActive = entry.isIntersecting;
+            if (!cardPointerActive) cancelAnimationFrame(frame);
+          }
+        });
       }, { rootMargin: '10% 0px' });
       motionSections.forEach(section => motionObserver.observe(section));
     } else motionSections.forEach(section => section.classList.add('is-motion-active'));
