@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261006-37">
+  <link rel="stylesheet" href="styles.css?v=20261013-1">
   <script type="module" src="anatomy-loader.js?v=20261013-3"></script>
 </head>
 <body>
@@ -1360,13 +1360,25 @@
     const reportScene = document.querySelector('.report-scene');
     const insightsScene = document.querySelector('.insights-scene');
     if (insightsScene) {
+      const insightHoldStart = .75;
+      /* The body coming apart and the heart moving to the side run at half
+         speed: that stretch takes twice the scroll (and twice the time under
+         the speed limit below); everything after it keeps its pace. */
+      const insightSlowFactor = 2;
+      const insightSlowEnd = .61 * insightHoldStart;
+      const insightStretch = 1 + (insightSlowFactor - 1) * insightSlowEnd;
+      const toInsightTimeline = raw => {
+        const stretched = raw * insightStretch;
+        return stretched <= insightSlowFactor * insightSlowEnd
+          ? stretched / insightSlowFactor
+          : stretched - (insightSlowFactor - 1) * insightSlowEnd;
+      };
       let anatomyExpanded = false;
       let heartExpanded = false;
       let limitedInsightProgress = trackProgress(insightsScene);
       let desiredInsightProgress = limitedInsightProgress;
-      let insightCompleted = limitedInsightProgress >= .75;
+      let insightCompleted = toInsightTimeline(limitedInsightProgress) >= insightHoldStart;
       let lastInsightStamp = performance.now();
-      const insightHoldStart = .75;
       const drawInsights = () => {
         const rawProgress = trackProgress(insightsScene);
         if (Math.abs(rawProgress - limitedInsightProgress) > .0005) desiredInsightProgress = rawProgress;
@@ -1376,7 +1388,7 @@
         let progress = desiredInsightProgress;
         const returningToCompletedScene = insightCompleted && desiredInsightProgress < limitedInsightProgress;
         if (!reducedMotion.matches && !returningToCompletedScene) {
-          const maxStep = .55 * elapsed / 1000;
+          const maxStep = .55 / insightStretch * elapsed / 1000;
           const difference = desiredInsightProgress - limitedInsightProgress;
           if (Math.abs(difference) > maxStep) {
             progress = limitedInsightProgress + Math.sign(difference) * maxStep;
@@ -1387,7 +1399,7 @@
           }
         }
         limitedInsightProgress = progress;
-        progress = clamp(progress / insightHoldStart);
+        progress = clamp(toInsightTimeline(progress) / insightHoldStart);
         if (progress >= .99) insightCompleted = true;
         if (insightCompleted) progress = 1;
         const between = (start, end) => smooth(clamp((progress - start) / (end - start)));
