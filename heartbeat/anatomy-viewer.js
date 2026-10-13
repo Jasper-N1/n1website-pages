@@ -64,6 +64,9 @@ if (host) {
     let loadStarted = false;
     let lastStateExplode = -1;
     let lastStateFocus = -1;
+    let bodyDirty = true;
+    let lastRenderedExplode = -1;
+    let lastRenderedFocus = -1;
     let inventoryLayout;
     const meshes = [];
     const centers = [];
@@ -303,7 +306,12 @@ if (host) {
         const loadChunk = async chunkIndex => {
           const chunk = atlas.chunks[chunkIndex];
           const modelPath = `./models/${chunk.gzip.split('/').pop()}`;
-          const buffer = await decode(await fetch(modelPath), chunk.bytes);
+          const buffer = await decode(await fetch(modelPath, { priority: nearbyTargets.size ? 'high' : 'low' }), chunk.bytes);
+          // While the anatomy is still far away, merge geometry only in idle
+          // time so the build never lands in the middle of a scroll frame.
+          if (!nearbyTargets.size && 'requestIdleCallback' in window) {
+            await new Promise(resolve => requestIdleCallback(resolve, { timeout: 1000 }));
+          }
           const bySystem = new Map();
           atlas.parts.forEach(part => {
             if (part.chunk !== chunkIndex || !visibleSystems.has(part.system)) return;
@@ -338,16 +346,17 @@ if (host) {
         await Promise.all(Array.from({ length: loaderCount }, async () => {
           while (cursor < atlas.chunks.length) await loadChunk(cursor++);
         }));
+        // Compile the shaders and upload the geometry now, while the anatomy is
+        // still off screen, so its first visible frame does not stall.
+        updateParts(explode);
+        await renderer.compileAsync?.(scene, camera);
+        if (heartRenderer && heartScene && heartCamera) await heartRenderer.compileAsync?.(heartScene, heartCamera);
+        renderer.render(scene, camera);
+        renderHeart();
         host.classList.add('is-ready');
         status.textContent = '';
         ready = true;
-        updateParts(explode);
-        renderer.render(scene, camera);
-        renderHeart();
-        if (nearbyTargets.size && !document.hidden && !reducedMotion.matches && !running) {
-          running = true;
-          animate();
-        }
+        startLoop();
       } catch (error) {
         status.textContent = error instanceof Error ? error.message : 'The anatomy could not be loaded.';
         status.classList.add('is-error');
@@ -362,6 +371,7 @@ if (host) {
       renderer.setSize(width, height, false);
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
+      bodyDirty = true;
       if (heartRenderer && heartCamera && heartHost) {
         const heartWidth = Math.max(1, heartHost.clientWidth);
         const heartHeight = Math.max(1, heartHost.clientHeight);
@@ -393,10 +403,20 @@ if (host) {
     const animate = (stamp = performance.now()) => {
       if (!running) return;
       requestAnimationFrame(animate);
-      updateParts(explode, stamp);
-      renderer.render(scene, camera);
-      if (heartGroup) heartGroup.rotation.y = stamp * 0.00012;
-      renderHeart();
+      // Redraw only what changed: the body moves with the scroll and orbits
+      // once the heart is in focus; the heart turns for as long as it is seen.
+      if (visibleTargets.has(host) && (bodyDirty || focusHeart > 0
+        || explode !== lastRenderedExplode || focusHeart !== lastRenderedFocus)) {
+        updateParts(explode, stamp);
+        renderer.render(scene, camera);
+        bodyDirty = false;
+        lastRenderedExplode = explode;
+        lastRenderedFocus = focusHeart;
+      }
+      if (heartGroup && visibleTargets.has(heartHost)) {
+        heartGroup.rotation.y = stamp * 0.00012;
+        renderHeart();
+      }
     };
     const nearbyTargets = new Set();
     const beginLoad = () => {
@@ -409,25 +429,36 @@ if (host) {
         if (entry.isIntersecting) nearbyTargets.add(entry.target);
         else nearbyTargets.delete(entry.target);
       });
-      const nearby = nearbyTargets.size > 0;
-      if (nearby) beginLoad();
-      if (nearby && ready && !document.hidden && !reducedMotion.matches && !running) {
-        running = true;
-        animate();
-      } else if (!nearby) {
-        running = false;
-      }
+      if (nearbyTargets.size) beginLoad();
     }, { rootMargin: '1800px 0px' });
     proximity.observe(host);
     if (heartHost) proximity.observe(heartHost);
+    // Frames only run while a canvas is actually on screen.
+    const visibleTargets = new Set();
+    const startLoop = () => {
+      if (!visibleTargets.size || !ready || document.hidden || reducedMotion.matches || running) return;
+      running = true;
+      animate();
+    };
+    const visibility = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) visibleTargets.add(entry.target);
+        else visibleTargets.delete(entry.target);
+      });
+      bodyDirty = true;
+      if (visibleTargets.size) startLoop();
+      else running = false;
+    }, { rootMargin: '10% 0px' });
+    visibility.observe(host);
+    if (heartHost) visibility.observe(heartHost);
+    // This module is only imported once the page is idle or the anatomy is
+    // near, so either way it is the right moment to start loading.
+    beginLoad();
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
         running = false;
       }
-      else if (nearbyTargets.size && ready && !reducedMotion.matches && !running) {
-        running = true;
-        animate();
-      }
+      else startLoop();
     });
   }
 }
