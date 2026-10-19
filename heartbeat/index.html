@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261013-1">
+  <link rel="stylesheet" href="styles.css?v=20261019-1">
   <script type="module" src="anatomy-loader.js?v=20261013-3"></script>
 </head>
 <body>
@@ -21,6 +21,11 @@
     <g id="i-chevron"><path d="m6 9 6 6 6-6"/></g>
     <g id="i-search"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></g>
     <g id="i-book"><path d="M12 5v16"/><path d="M20.001 19A2 2 0 0 0 22 17V5a2 2 0 0 0-1.999-2L16 3.002A5 5 0 0 0 12 5a5 5 0 0 0-4-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 1.999 2H8a5 5 0 0 1 4 2 5 5 0 0 1 4-2z"/></g>
+    <g id="i-flask"><path d="M14 2v6a2 2 0 0 0 .245.96l5.51 10.08A2 2 0 0 1 18 22H6a2 2 0 0 1-1.755-2.96l5.51-10.08A2 2 0 0 0 10 8V2"/><path d="M6.453 15h11.094"/><path d="M8.5 2h7"/></g>
+    <g id="i-note"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></g>
+    <g id="i-watch"><circle cx="12" cy="12" r="6"/><path d="M12 10v2l1 1"/><path d="m16.13 7.66-.81-4.05a2 2 0 0 0-2-1.61h-2.68a2 2 0 0 0-2 1.61l-.78 4.05"/><path d="m7.88 16.36.8 4a2 2 0 0 0 2 1.61h2.72a2 2 0 0 0 2-1.61l.81-4.05"/></g>
+    <g id="i-shield"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></g>
+    <g id="i-ruler"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z"/><path d="m14.5 12.5 2-2"/><path d="m11.5 9.5 2-2"/><path d="m8.5 6.5 2-2"/><path d="m17.5 15.5 2-2"/></g>
     <g id="i-check"><path d="M20 6 9 17l-5-5"/></g>
     <g id="i-dot"><circle cx="12" cy="12" r="3.4"/></g>
     <g id="i-file"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></g>
@@ -448,6 +453,7 @@
         </figure>
       </div>
       <div class="heart-results" aria-label="Cardiovascular health results">
+        <h2 class="heart-results-title"><span class="is-front">Findings</span><span class="is-back" aria-hidden="true">The facts behind them</span></h2>
         <div class="heart-trend-grid" aria-label="Cardiovascular health trends">
           <article class="heart-trend-card is-watch" style="--s:.00">
             <header><span>Apolipoprotein B</span><em>Watch</em></header>
@@ -455,7 +461,7 @@
             <p>Up 62% across five readings since 2004</p>
             <svg viewBox="0 0 240 38" preserveAspectRatio="none" aria-hidden="true"><path d="M2 31C51 29 87 25 121 21S188 13 238 6"/><circle cx="2" cy="31" r="2.5"/><circle cx="121" cy="21" r="2.5"/><circle cx="238" cy="6" r="3"/></svg>
             <footer><span>2004</span><span>2025</span></footer>
-            <div class="heart-card-back"><h3>Apolipoprotein B</h3><section><b>Source records</b><p>5 laboratory readings · 2004–2025</p><p>Latest report · page 1</p></section><section><b>Literature</b><p>ESC/EAS dyslipidaemia guideline</p><p>ApoB clinical consensus statement</p></section></div>
+            <div class="heart-card-back"><h3>Apolipoprotein B</h3><section class="ev-group is-source"><b>Source data<span>from your records</span></b><ul><li class="ev is-lab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-flask"/></svg><p><small>Lab report</small><span>5 readings · 2004–2025</span></p><em>p. 1</em></li></ul></section><section class="ev-group is-literature"><b>Literature<span>published evidence</span></b><ul><li class="ev is-guideline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-shield"/></svg><p><small>Guideline</small><cite>ESC/EAS dyslipidaemia guideline</cite></p></li></ul></section></div>
           </article>
           <article class="heart-trend-card" style="--s:.05">
             <header><span>Blood pressure</span><em>Stable</em></header>
@@ -463,7 +469,7 @@
             <p>Latest recorded measurement</p>
             <svg viewBox="0 0 240 38" preserveAspectRatio="none" aria-hidden="true"><path d="M2 19 44 17 83 22 123 17 164 19 202 15 238 18"/></svg>
             <footer><span>Within stated range</span><span>18 readings</span></footer>
-            <div class="heart-card-back"><h3>Blood pressure</h3><section><b>Source records</b><p>18 measurements across 8 years</p><p>Annual review · page 2</p></section><section><b>Literature</b><p>ESC hypertension guideline</p><p>ACC/AHA blood-pressure guideline</p></section></div>
+            <div class="heart-card-back"><h3>Blood pressure</h3><section class="ev-group is-source"><b>Source data<span>from your records</span></b><ul><li class="ev is-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-note"/></svg><p><small>Clinical note</small><span>18 measurements across 8 years</span></p><em>p. 2</em></li></ul></section><section class="ev-group is-literature"><b>Literature<span>published evidence</span></b><ul><li class="ev is-guideline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-shield"/></svg><p><small>Guideline</small><cite>ESC hypertension guideline</cite></p></li></ul></section></div>
           </article>
           <article class="heart-trend-card" style="--s:.10">
             <header><span>Resting heart rate</span><em>Stable</em></header>
@@ -471,7 +477,7 @@
             <p>No sustained change across the record</p>
             <svg viewBox="0 0 240 38" preserveAspectRatio="none" aria-hidden="true"><path d="M2 22 43 16 82 21 122 18 162 23 202 17 238 20"/></svg>
             <footer><span>Most recent observation</span><span>12 readings</span></footer>
-            <div class="heart-card-back"><h3>Resting heart rate</h3><section><b>Source records</b><p>12 recorded observations</p><p>Latest clinical note · page 3</p></section><section><b>Literature</b><p>Resting heart-rate risk review</p><p>European prevention guideline</p></section></div>
+            <div class="heart-card-back"><h3>Resting heart rate</h3><section class="ev-group is-source"><b>Source data<span>from your records</span></b><ul><li class="ev is-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-note"/></svg><p><small>Clinical note</small><span>12 recorded observations</span></p><em>p. 3</em></li></ul></section><section class="ev-group is-literature"><b>Literature<span>published evidence</span></b><ul><li class="ev is-review"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-book"/></svg><p><small>Review</small><cite>Resting heart-rate risk review</cite></p></li></ul></section></div>
           </article>
           <article class="heart-trend-card" style="--s:.15">
             <header><span>Heart-rate variability</span><em>Stable</em></header>
@@ -479,7 +485,7 @@
             <p>Thirty-day average remains consistent</p>
             <svg viewBox="0 0 240 38" preserveAspectRatio="none" aria-hidden="true"><path d="M2 25 38 12 72 26 109 15 145 24 183 11 238 18"/></svg>
             <footer><span>30-day range</span><span>Wearable data</span></footer>
-            <div class="heart-card-back"><h3>Heart-rate variability</h3><section><b>Source records</b><p>30-day wearable summary</p><p>Device export · verified</p></section><section><b>Literature</b><p>HRV measurement standards</p><p>Wearable validation review</p></section></div>
+            <div class="heart-card-back"><h3>Heart-rate variability</h3><section class="ev-group is-source"><b>Source data<span>from your records</span></b><ul><li class="ev is-wearable"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-watch"/></svg><p><small>Wearable data</small><span>30-day wearable summary</span></p><em>Verified</em></li></ul></section><section class="ev-group is-literature"><b>Literature<span>published evidence</span></b><ul><li class="ev is-standard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-ruler"/></svg><p><small>Standard</small><cite>HRV measurement standards</cite></p></li></ul></section></div>
           </article>
           <article class="heart-trend-card" style="--s:.20">
             <header><span>VO₂ max</span><em>Stable</em></header>
@@ -487,7 +493,7 @@
             <p>Aerobic capacity is holding steady</p>
             <svg viewBox="0 0 240 38" preserveAspectRatio="none" aria-hidden="true"><path d="M2 25 42 24 81 20 121 21 160 17 199 15 238 14"/></svg>
             <footer><span>Six-month trend</span><span>8 readings</span></footer>
-            <div class="heart-card-back"><h3>VO₂ max</h3><section><b>Source records</b><p>8 estimates over six months</p><p>Fitness assessment · page 2</p></section><section><b>Literature</b><p>Cardiorespiratory fitness statement</p><p>Exercise testing standards</p></section></div>
+            <div class="heart-card-back"><h3>VO₂ max</h3><section class="ev-group is-source"><b>Source data<span>from your records</span></b><ul><li class="ev is-wearable"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-watch"/></svg><p><small>Wearable data</small><span>8 estimates over six months</span></p></li></ul></section><section class="ev-group is-literature"><b>Literature<span>published evidence</span></b><ul><li class="ev is-guideline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-shield"/></svg><p><small>Guideline</small><cite>Cardiorespiratory fitness statement</cite></p></li></ul></section></div>
           </article>
           <article class="heart-trend-card" style="--s:.25">
             <header><span>Diagnosis record</span><em>Checked</em></header>
@@ -495,7 +501,7 @@
             <p>No cardiovascular diagnosis in the supplied record</p>
             <div class="heart-record-check"><span>✓</span> Notes and problem lists checked</div>
             <footer><span>Clinical record</span><span>12 sources</span></footer>
-            <div class="heart-card-back"><h3>Diagnosis record</h3><section><b>Source records</b><p>12 notes and problem lists checked</p><p>No cardiovascular diagnosis found</p></section><section><b>Literature</b><p>Clinical coding standards</p><p>Cardiovascular prevention guideline</p></section></div>
+            <div class="heart-card-back"><h3>Diagnosis record</h3><section class="ev-group is-source"><b>Source data<span>from your records</span></b><ul><li class="ev is-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-note"/></svg><p><small>Clinical note</small><span>12 notes and problem lists checked</span></p><em>None found</em></li></ul></section><section class="ev-group is-literature"><b>Literature<span>published evidence</span></b><ul><li class="ev is-standard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-ruler"/></svg><p><small>Standard</small><cite>Clinical coding standards</cite></p></li></ul></section></div>
           </article>
         </div>
       </div>
@@ -1063,7 +1069,13 @@
         finalBody.querySelector('.tl-skel')?.remove();
         finalSnapshot.append(finalBody);
       }
-      tlStageEl?.append(savedShelf, finalSnapshot);
+      savedShelf.style.setProperty('--saved-n', savedSnapshots.length);
+      const savedSlot = document.createElement('div');
+      savedSlot.className = 'tl-saved-slot';
+      savedSlot.setAttribute('aria-hidden', 'true');
+      savedSlot.style.setProperty('--saved-n', savedSnapshots.length);
+      savedSlot.innerHTML = '<span>Saved records</span>';
+      tlStageEl?.append(savedSlot, savedShelf, finalSnapshot);
       const fitTimeline = () => {
         if (!tlStageEl || !tlHeadEl) return;
         const stageH = tlStageEl.clientHeight;
@@ -1072,6 +1084,14 @@
         const bodyHeight = mainBody?.offsetHeight || tlItems[tlItems.length - 1].offsetHeight;
         const railY = stageH / 2 - bodyTop - bodyHeight / 2 + 6;
         tlScene.style.setProperty('--rail-y', `${Math.round(railY)}px`);
+        /* One deck height for the saved cards and the final card: the final
+           card's natural height, never less than a stop card. */
+        const finalCardBody = finalSnapshot.querySelector('.tl-body');
+        if (finalCardBody) {
+          tlScene.style.removeProperty('--deck-h');
+          const deckH = finalCardBody.offsetHeight;
+          if (deckH) tlScene.style.setProperty('--deck-h', `${deckH}px`);
+        }
       };
       fitTimeline();
       registerLayoutTask(fitTimeline);
@@ -1400,9 +1420,12 @@
         }
         limitedInsightProgress = progress;
         progress = clamp(toInsightTimeline(progress) / insightHoldStart);
+        /* The card turn follows the real scroll position, so scrolling back up
+           turns the cards to their front again even after the scene is done. */
+        const cardTurnProgress = progress;
         if (progress >= .99) insightCompleted = true;
         if (insightCompleted) progress = 1;
-        const between = (start, end) => smooth(clamp((progress - start) / (end - start)));
+        const between = (start, end, value = progress) => smooth(clamp((value - start) / (end - start)));
         insightsScene.style.setProperty('--insight', progress.toFixed(4));
         if (progress >= .17) anatomyExpanded = true;
         else if (progress <= .13) anatomyExpanded = false;
@@ -1423,13 +1446,29 @@
         insightsScene.style.setProperty('--insight-red', between(.50, .60).toFixed(4));
         insightsScene.style.setProperty('--heart-left', between(.49, .57).toFixed(4));
         insightsScene.style.setProperty('--heart-results', between(.53, .61).toFixed(4));
-        insightsScene.style.setProperty('--heart-card-turn', between(.76, .90).toFixed(4));
+        insightsScene.style.setProperty('--heart-card-turn', between(.70, .96, cardTurnProgress).toFixed(4));
         window.n1AnatomyFilm?.seek(progress);
       };
       sceneObserver?.observe(insightsScene);
       /* This scene always participates in a dirty scroll frame so a single
          large wheel or touch jump cannot leap from before it to after it. */
       registerScene(drawInsights);
+      /* A card's back is laid over its front, so it does not size the card.
+         Give each card the height its back needs; the grid row then keeps the
+         pair beside it level. */
+      const fitCardBacks = () => {
+        for (const card of insightsScene.querySelectorAll('.heart-results .heart-trend-card')) {
+          const back = card.querySelector('.heart-card-back');
+          if (!back) continue;
+          card.style.minHeight = '';
+          const last = back.lastElementChild;
+          const need = last ? last.offsetTop + last.offsetHeight + parseFloat(getComputedStyle(back).paddingBottom) + 2 : 0;
+          if (need > card.offsetHeight) card.style.minHeight = `${need}px`;
+        }
+      };
+      fitCardBacks();
+      addEventListener('resize', fitCardBacks, { passive: true });
+      document.fonts?.ready.then(fitCardBacks);
       drawInsights();
     }
 
