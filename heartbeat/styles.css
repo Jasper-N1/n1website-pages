@@ -1238,7 +1238,7 @@ body{display:block;overflow:visible;overflow-x:clip}
    body stays calm and diagrammatic; the surrounding cards carry the detail.
    ========================================================================== */
 .insights-scene{--insight:0;--insight-scale:1;--insight-exit:0;--insight-image-out:0;--heart-left:0;--heart-results:0;--heart-card-turn:0;
-  --insight-red:0;--insight-decompose:0;--decompose-cards:0;--anatomy-width:94vw;--anatomy-height:72svh;height:480svh;
+  --insight-red:0;--insight-decompose:0;--decompose-cards:0;--anatomy-width:94vw;--anatomy-height:72svh;height:654svh;
   position:relative;z-index:1;background:var(--bb-cream);color:var(--ink)}
 .insights-stage{height:var(--stage-h);position:sticky;top:0;display:flex;flex-direction:column;
   align-items:center;justify-content:center;gap:clamp(18px,3svh,32px);
@@ -1274,7 +1274,7 @@ body{display:block;overflow:visible;overflow-x:clip}
 .systems-body{width:var(--anatomy-width);height:var(--anatomy-height);position:relative;top:clamp(20px,3svh,36px);justify-self:center;flex:0 0 auto;margin:0;text-align:center;
   z-index:4;opacity:calc(1 - var(--insight-image-out));
   scale:var(--insight-scale);
-  translate:calc(var(--heart-left) * -24vw) 0;
+  translate:calc(var(--heart-left) * -30vw) 0;
   transform-origin:40.3% 26%}
 .systems-body::before{display:none}
 .systems-body canvas{width:100%;height:100%;position:relative;z-index:2;display:block;opacity:0;filter:drop-shadow(0 16px 24px rgba(0,78,104,.14));transition:opacity .4s ease}
@@ -1285,7 +1285,7 @@ body{display:block;overflow:visible;overflow-x:clip}
 .anatomy-loading.is-error{max-width:180px;color:var(--bb-coral-dark);line-height:1.45;white-space:normal}
 
 @media(max-width:760px){
-  .insights-scene{height:500svh}
+  .insights-scene{height:683svh}
   .insights-stage{gap:12px;padding-inline:14px}
   .systems-overview{grid-template-columns:1fr}
   .systems-list{gap:7px}
@@ -1300,25 +1300,105 @@ body{display:block;overflow:visible;overflow-x:clip}
 
 /* The result panel shares the original anatomical canvas. Once the selected
    heart moves left, the title and six findings resolve on its right. */
-.heart-results{width:min(720px,52vw);position:absolute;z-index:5;top:50%;right:var(--stage-x);translate:0 -47%;pointer-events:none}
+.heart-results{width:min(840px,53vw);position:absolute;z-index:5;top:50%;right:var(--stage-x);translate:0 -47%;pointer-events:none}
 .heart-results .heart-trend-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.heart-results .heart-trend-card{--card-in:clamp(0,calc((var(--heart-results) - (.18 + var(--s))) / .2),1);--card-flip:clamp(0,calc((var(--heart-card-turn) - var(--s) - var(--s)) / .48),1);min-height:clamp(145px,18svh,176px);position:relative;padding:15px 16px 12px;opacity:var(--card-in);scale:calc(.97 + var(--card-in) * .03);translate:calc((1 - var(--card-in)) * 12px) 0;transform:perspective(1100px) rotateY(calc(var(--card-flip) * 180deg));transform-style:preserve-3d}
+.heart-results .heart-trend-card{--card-in:clamp(0,calc((var(--heart-results) - (.18 + var(--s))) / .2),1);--card-flip:clamp(0,calc((var(--heart-card-turn) - var(--s) * 3.2) / .2),1);min-height:clamp(178px,22.5svh,224px);position:relative;padding:17px 19px 14px;opacity:var(--card-in);scale:calc(.97 + var(--card-in) * .03);translate:calc((1 - var(--card-in)) * 12px) 0;transform:perspective(1100px) rotateY(calc(var(--card-flip) * 180deg));transform-style:preserve-3d}
 .heart-results .heart-trend-card>:not(.heart-card-back){opacity:calc(1 - var(--card-flip))}
-.heart-results .heart-card-back{position:absolute;inset:-1px;display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:15px 16px;border:1px solid rgba(0,95,125,.13);border-radius:16px;background:rgba(247,250,251,.98);transform:rotateY(180deg);backface-visibility:hidden;opacity:var(--card-flip)}
-.heart-card-back h3{grid-column:1/-1;margin:0;color:var(--bb-blue-900);font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase}
-.heart-card-back section{min-width:0;padding-top:8px;border-top:1px solid var(--bb-line-soft)}
-.heart-card-back section>b{display:block;margin-bottom:6px;color:var(--bb-blue-800);font-size:9px;letter-spacing:.06em;text-transform:uppercase}
-.heart-card-back section p{margin:4px 0;color:var(--bb-muted);font-size:9px;line-height:1.3}
+.heart-results .heart-trend-card header span{font-size:13px}
+.heart-results .heart-trend-card header em{padding:4px 9px;font-size:10px}
+.heart-results .heart-trend-card>strong{font-size:clamp(32px,2.7vw,44px)}
+.heart-results .heart-trend-card>strong small{font-size:14px}
+.heart-results .heart-trend-card>p{font-size:15.5px;line-height:1.38}
+.heart-results .heart-trend-card>footer{font-size:11.5px}
+/* The panel title names what the cards show: the findings on the front, and
+   once the cards turn, the evidence behind them. */
+.heart-results-title{display:grid;margin:0 0 14px;color:var(--bb-ink);font:400 clamp(30px,2.6vw,44px)/1.05 var(--font-display);letter-spacing:-.02em}
+.heart-results-title span{grid-area:1/1}
+.heart-results-title .is-front{opacity:calc(var(--heart-results) * (1 - clamp(0,calc(var(--heart-card-turn) / .1),1)));translate:0 calc(clamp(0,calc(var(--heart-card-turn) / .1),1) * -8px)}
+.heart-results-title .is-back{opacity:clamp(0,calc((var(--heart-card-turn) - .06) / .12),1);translate:0 calc((1 - clamp(0,calc((var(--heart-card-turn) - .06) / .12),1)) * 8px)}
+.heart-results .heart-card-back{position:absolute;inset:-1px;display:flex;flex-direction:column;gap:7px;padding:15px 17px;border:1px solid rgba(0,95,125,.13);border-radius:16px;background:rgba(247,250,251,.98);transform:rotateY(180deg);backface-visibility:hidden;opacity:var(--card-flip)}
+.heart-card-back h3{margin:0;color:var(--bb-blue-900);font-family:var(--font-mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+/* Back of the card: where the number came from. Source data from the person's
+   own records reads as blue record chips; literature reads as green citations. */
+.ev-group{min-width:0}
+.ev-group>b{display:flex;align-items:baseline;gap:8px;margin-bottom:4px;font:700 11px/1.2 var(--font-sans);letter-spacing:.09em;text-transform:uppercase}
+.ev-group>b span{color:var(--bb-muted);font-weight:500;font-size:12px;letter-spacing:0;text-transform:none}
+.ev-group.is-source>b{color:var(--bb-blue-800)}
+.ev-group.is-literature>b{color:var(--bb-matcha-dark)}
+.ev-group ul{display:grid;gap:5px;margin:0;padding:0;list-style:none}
+.ev{display:grid;grid-template-columns:26px minmax(0,1fr) auto;align-items:center;gap:9px;padding:4px 9px 4px 5px;border:1px solid;border-radius:10px}
+.ev>svg{width:26px;height:26px;padding:6px;border-radius:7px;background:#fff}
+.ev p{min-width:0;margin:0}
+.ev small{display:block;font:500 9.5px/1.2 var(--font-mono);letter-spacing:.09em;text-transform:uppercase}
+.ev p>span,.ev cite{display:block;margin-top:1px;color:var(--bb-ink);font-size:13.5px;line-height:1.28}
+.ev cite{font-family:var(--font-text);font-size:15px;font-style:italic}
+.ev em{padding:3px 8px;border-radius:999px;background:#fff;font:500 10.5px/1.3 var(--font-mono);font-style:normal;white-space:nowrap}
+.is-source .ev{border-color:var(--bb-blue-100);background:var(--bb-blue-50)}
+.is-source .ev>svg,.is-source .ev small,.is-source .ev em{color:var(--bb-blue-800)}
+.is-literature .ev{border-color:var(--bb-matcha-soft);background:var(--bb-matcha-wash)}
+.is-literature .ev>svg,.is-literature .ev small{color:var(--bb-matcha-dark)}
 @media(min-width:1500px){
-  .systems-body{translate:calc(var(--heart-left) * clamp(-380px,-18vw,-280px)) 0}
-  .heart-results{width:min(720px,46vw);right:max(var(--stage-x),calc((100vw - 1520px)/2))}
+  .systems-body{translate:calc(var(--heart-left) * clamp(-470px,-23vw,-350px)) 0}
+  .heart-results{width:min(840px,46vw);right:max(var(--stage-x),calc((100vw - 1520px)/2))}
+}
+/* Short laptop screens: three rows of cards must stay clear of the sign-in
+   button, so the cards keep their type sizes but tighten their spacing. */
+@media(min-width:681px) and (max-height:820px){
+  .heart-results .heart-trend-grid{gap:10px}
+  .heart-results .heart-trend-card{min-height:166px;padding:12px 15px 10px}
+  .heart-results-title{margin-bottom:10px;font-size:clamp(26px,2.3vw,36px)}
+  .heart-results .heart-trend-card>strong{margin-top:8px;font-size:clamp(30px,2.6vw,40px)}
+  .heart-results .heart-trend-card>p{margin:4px 0 6px;font-size:15px}
+  .heart-results .heart-trend-card svg{height:24px;margin-bottom:4px}
+  .heart-results .heart-card-back{gap:6px;padding:12px 16px}
+  .heart-card-back h3{font-size:13px}
+  .ev-group>b{margin-bottom:3px}
+  .ev{grid-template-columns:24px minmax(0,1fr) auto;gap:8px;padding:3px 8px 3px 4px}
+  .ev>svg{width:24px;height:24px;padding:5px}
+  .ev p>span,.ev cite{font-size:13.5px;line-height:1.25}
+  .ev cite{font-size:14.5px}
+}
+@media(min-width:681px) and (max-width:1100px) and (max-height:820px){
+  .heart-results .heart-trend-card{min-height:180px}
+}
+/* Portrait tablets: two cards beside a heart leave each card too narrow to
+   read, so the heart rises and the findings take the full width below it. */
+@media(min-width:681px) and (max-width:900px) and (orientation:portrait){
+  .systems-body{translate:0 calc(var(--heart-left) * -31svh);scale:calc(1 - var(--heart-left) * .42)}
+  .heart-results{width:calc(100% - 48px);top:auto;right:24px;bottom:24px;translate:0 0}
+  .heart-results .heart-trend-card{min-height:214px}
+}
+/* Short phones: the six findings fill the screen, so the heart behind them
+   fades out as they arrive rather than showing through. */
+@media(max-width:680px) and (max-height:720px){
+  .systems-body{opacity:calc(1 - var(--heart-results))}
 }
 @media(max-width:680px){
-  .insights-scene{height:500svh}
-  .systems-body{translate:0 calc(var(--heart-left) * -22svh);scale:calc(1 - var(--heart-left) * .24)}
+  .insights-scene{height:683svh}
+  .systems-body{translate:0 calc(var(--heart-left) * -27svh);scale:calc(1 - var(--heart-left) * .34)}
   .heart-results{width:calc(100% - 28px);top:auto;right:14px;bottom:14px;translate:0 0}
   .heart-results .heart-trend-grid{gap:7px}
-  .heart-results .heart-trend-card{min-height:118px;padding:9px}
+  .heart-results .heart-trend-card{min-height:154px;padding:10px 11px}
+  .heart-results-title{margin-bottom:8px;font-size:22px}
+  .heart-results .heart-trend-card header{gap:6px}
+  .heart-results .heart-trend-card header span{font-size:10px}
+  .heart-results .heart-trend-card header em{padding:3px 6px;font-size:7.5px}
+  .heart-results .heart-trend-card>strong{margin-top:7px;font-size:22px}
+  .heart-results .heart-trend-card>strong small{font-size:11px}
+  .heart-results .heart-trend-card>p{margin:4px 0 6px;font-size:12px;line-height:1.3}
+  .heart-results .heart-trend-card svg{height:18px;margin-bottom:4px}
+  .heart-results .heart-trend-card>footer{font-size:9px}
+  .heart-results .heart-card-back{gap:5px;padding:9px 10px}
+  .heart-card-back h3{font-size:10px}
+  .ev-group>b{margin-bottom:3px;font-size:8.5px}
+  .ev-group>b span{display:none}
+  .ev-group ul{gap:3px}
+  .ev{grid-template-columns:18px minmax(0,1fr);gap:6px;padding:3px 6px 3px 3px;border-radius:7px}
+  .ev>svg{width:18px;height:18px;padding:3px;border-radius:5px}
+  .ev small{font-size:7px}
+  .ev p>span,.ev cite{font-size:10.5px;line-height:1.2}
+  .ev cite{font-size:11px}
+  .ev em{display:none}
 }
 
 /* The anatomical inventory resolves into one organ, then hands that organ to
@@ -1643,17 +1723,27 @@ body{display:block;overflow:visible;overflow-x:clip}
 .timeline-scene .tl-entry>time{opacity:calc((1 - var(--stack)) * .52)}
 .timeline-scene .tl-entry.is-active>time{opacity:calc(1 - var(--stack))}
 
-/* Meaningful stops remain visible after they pass the focal marker. This small
-   left-hand pile makes the later full-size stack feel collected rather than
-   conjured at the end. */
-.tl-saved-stack{--saved-stack:0;--saved-content:0;--saved-any:0;--saved-exit:0;--saved-card:min(400px,76vw);--saved-left:calc(var(--saved-card) / 5 - var(--saved-card));width:var(--saved-card);height:var(--stop-card);position:absolute;z-index:4;top:calc(var(--rail-y) + 34px);left:var(--saved-left);opacity:calc(var(--saved-any) * (1 - var(--saved-exit)));translate:calc(var(--saved-stack) * (50vw - var(--saved-card) / 2 - var(--saved-left))) calc(var(--saved-stack) * -8px - var(--saved-exit) * 54px);scale:calc(1 - var(--saved-exit));rotate:calc(var(--saved-exit) * -10deg);pointer-events:none}
+/* Meaningful stops stay visible after they pass the focal marker. They are
+   kept at half size in a reserved slot on the right, so the full-size stack at
+   the end feels collected rather than conjured. The deck and the final card
+   share one size (--deck-h, measured from the final card), so the deck can
+   grow into place beneath it and read as one clean stack. */
+.tl-saved-slot,.tl-saved-stack{--S:.5;--pad:14px;--label:26px;--saved-card:min(400px,76vw);--deck:var(--deck-h,var(--stop-card));--deck-rise:calc(var(--saved-n,4) * 6px);--slot-right:max(var(--stage-x),40px);--slot-w:calc(var(--saved-card) * var(--S) + var(--deck-rise) * var(--S) + var(--pad) * 2);--slot-top:calc(var(--rail-y) + 29px);--slot-left:calc(100vw - var(--slot-right) - var(--slot-w))}
+.tl-saved-slot{width:var(--slot-w);height:calc(var(--label) + var(--pad) * 2 + var(--deck) * var(--S) + var(--deck-rise) * var(--S));position:absolute;z-index:3;top:var(--slot-top);left:var(--slot-left);border:1.5px dashed var(--bb-line);border-radius:16px;background:rgba(247,250,251,.55);opacity:calc(1 - var(--stack));pointer-events:none}
+.tl-saved-slot span{position:absolute;top:var(--pad);left:var(--pad);color:var(--bb-muted-light);font:500 10px/1 var(--font-mono);letter-spacing:.1em;text-transform:uppercase}
+.tl-saved-stack{--saved-stack:0;--saved-content:0;--saved-any:0;--saved-exit:0;--cx0:calc(var(--slot-left) + var(--pad) + var(--saved-card) * var(--S) / 2);--cy0:calc(var(--slot-top) + var(--label) + var(--pad) + var(--deck-rise) * var(--S) + var(--deck) * var(--S) / 2);--cy1:calc(var(--rail-y) + 29px + var(--deck) / 2);width:var(--saved-card);height:var(--deck);position:absolute;z-index:4;top:calc(var(--cy0) - var(--deck) / 2);left:calc(var(--cx0) - var(--saved-card) / 2);opacity:calc(var(--saved-any) * (1 - var(--saved-exit)));translate:calc(var(--saved-stack) * (50vw - var(--cx0))) calc(var(--saved-stack) * (var(--cy1) - var(--cy0)) - var(--saved-exit) * 54px);scale:calc((var(--S) + (1 - var(--S)) * var(--saved-stack)) * (1 - var(--saved-exit)));rotate:calc(var(--saved-exit) * -10deg);pointer-events:none}
 .tl-saved-label{display:none}
-.tl-saved-card{--saved-in:0;width:var(--saved-card);position:absolute;top:calc(var(--saved-i) * 8px);left:calc(var(--saved-i) * 7px - var(--saved-i) * var(--saved-stack) * 14px);z-index:var(--saved-i);opacity:var(--saved-in);transform:translate3d(calc((1 - var(--saved-in)) * 52px),calc((1 - var(--saved-in)) * 8px),0) rotate(calc((var(--saved-i) - 1.5) * .42deg));transform-origin:center;filter:blur(calc((1 - var(--saved-in)) * 2px))}
-.tl-saved-card .tl-body{min-height:var(--stop-card);position:relative;overflow:hidden;padding:clamp(22px,2.4vw,30px);border-radius:18px;box-shadow:0 18px 44px rgba(60,52,38,.14)}
+.tl-saved-card{--saved-in:0;--k:calc(var(--saved-n,4) - var(--saved-i));width:var(--saved-card);position:absolute;top:calc(var(--k) * -6px);left:calc(var(--k) * 6px);z-index:var(--saved-i);opacity:var(--saved-in);transform:translate3d(calc((1 - var(--saved-in)) * -52px),calc((1 - var(--saved-in)) * 8px),0) rotate(calc((var(--saved-i) - 1.5) * .42deg));transform-origin:center;filter:blur(calc((1 - var(--saved-in)) * 2px))}
+.tl-saved-card .tl-body{height:var(--deck);min-height:0;position:relative;overflow:hidden;padding:clamp(22px,2.4vw,30px);border-radius:18px;box-shadow:0 18px 44px rgba(60,52,38,.14)}
 .tl-saved-card .tl-body>*{visibility:hidden;opacity:0;translate:none}
 .tl-saved-card.is-top-saved .tl-body>*{visibility:visible;opacity:var(--saved-content)}
 .tl-final-card{width:min(400px,76vw);position:absolute;z-index:5;top:calc(var(--rail-y) + 29px);left:50%;opacity:calc(clamp(0,calc(var(--stack) * 12),1) * (1 - var(--cards-exit)));translate:-50% calc(var(--cards-exit) * -54px);scale:calc(1 - var(--cards-exit));rotate:calc(var(--cards-exit) * -10deg);filter:blur(calc(var(--cards-exit) * 4px));pointer-events:none}
-.tl-final-card .tl-body{min-height:var(--stop-card);background:#f7fafb;box-shadow:0 18px 44px rgba(60,52,38,.15)}
+.tl-final-card .tl-body{height:var(--deck-h,auto);min-height:var(--stop-card);overflow:hidden;background:#f7fafb;box-shadow:0 18px 44px rgba(60,52,38,.15)}
+/* Phones: no room beside the focused card, so the slot sits under the card
+   row, on the right, at a smaller scale. */
+@media(max-width:680px){
+  .tl-saved-slot,.tl-saved-stack{--S:.4;--pad:10px;--label:20px;--slot-right:16px;--slot-h:calc(var(--label) + var(--pad) * 2 + var(--deck) * var(--S) + var(--deck-rise) * var(--S));--slot-top:min(calc(var(--rail-y) + 29px + var(--deck) + 22px),calc(100svh - var(--slot-h) - 16px))}
+}
 
 /* The 11px dots sit on the 1px rail with 5px removed, aligning both centres at
    the same half pixel. The active
