@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261019-1">
+  <link rel="stylesheet" href="styles.css?v=20261019-5">
   <script type="module" src="anatomy-loader.js?v=20261013-3"></script>
 </head>
 <body>
@@ -507,26 +507,38 @@
       </div>
     </div>
   </section>
-  <section class="closing-conversation" aria-labelledby="closing-conversation-title">
-    <div class="closing-conversation-inner">
-      <header class="closing-conversation-head">
-        <span>Ready for the appointment</span>
-        <h2 id="closing-conversation-title">The review is ready.</h2>
-      </header>
-      <div class="closing-thread" aria-label="Conversation between Sarah and her doctor">
-        <article class="closing-message is-doctor">
-          <img src="../assets/avatar-doctor.jpg" alt="" width="48" height="48" loading="lazy" decoding="async">
-          <p>I&rsquo;ve got everything ready. Let&rsquo;s go through it together on Wednesday.</p>
-        </article>
-        <article class="closing-message is-patient">
-          <p>That&rsquo;s intriguing. Can I see it beforehand?</p>
-          <img src="../assets/avatar-patient.jpg" alt="" width="48" height="48" loading="lazy" decoding="async">
-        </article>
-        <article class="closing-message is-doctor">
-          <img src="../assets/avatar-doctor.jpg" alt="" width="48" height="48" loading="lazy" decoding="async">
-          <p>Here it is.
-            <a class="closing-message-cta" href="https://app.n1.care/login">See the report <span aria-hidden="true">&rarr;</span></a>
-          </p>
+  <section class="signoff-scene" aria-labelledby="signoff-title">
+    <div class="signoff-stage">
+      <div class="signoff-copy">
+        <p class="signoff-kicker">Cardiology review</p>
+        <h2 id="signoff-title">Prepared by n1.care.<br>Approved by you.</h2>
+        <ul class="signoff-points">
+          <li>Each result stays linked to its source, so you can review it.</li>
+          <li>Check and edit each report before you share it.</li>
+          <li>Only approved reports can be shared.</li>
+        </ul>
+        <div class="signoff-actions">
+          <a class="signoff-cta" href="https://n1.care/reports.html" target="_blank" rel="noopener">See the report <span aria-hidden="true">&rarr;</span></a>
+          <a class="signoff-demo" href="https://app.n1.care/demo" target="_blank" rel="noopener">Or log in to the demo account to explore</a>
+        </div>
+      </div>
+      <div class="signoff-visual">
+        <div class="signoff-deck heart-results" aria-hidden="true"></div>
+        <article class="signoff-report" aria-label="Example cardiology review for Sarah M.">
+          <header class="sr-head">
+            <div><small>n1.care &middot; Cardiology review</small><b>Sarah M.</b><span>Records 2004&ndash;2025 &middot; 12 sources</span></div>
+            <em class="sr-status"><span class="is-draft">Draft for review</span><span class="is-approved">Approved</span></em>
+          </header>
+          <p class="sr-summary">ApoB has risen across five readings since 2004 and is worth discussing. Blood pressure, heart rate, HRV and fitness are stable. No cardiovascular diagnosis is recorded.</p>
+          <ol class="sr-rows">
+            <li style="--r:0"><span>Apolipoprotein B</span><b>1.15 g/L</b><em class="is-watch">Watch</em><i>Lab report &middot; p. 1</i></li>
+            <li style="--r:1"><span>Blood pressure</span><b>124/78 mmHg</b><em>Stable</em><i>Clinical note &middot; p. 2</i></li>
+            <li style="--r:2"><span>Resting heart rate</span><b>68 bpm</b><em>Stable</em><i>Clinical note &middot; p. 3</i></li>
+            <li style="--r:3"><span>Heart-rate variability</span><b>42 ms</b><em>Stable</em><i>Wearable data</i></li>
+            <li style="--r:4"><span>VO&#8322; max</span><b>36.2 mL/kg/min</b><em>Stable</em><i>Wearable data</i></li>
+            <li style="--r:5"><span>Diagnosis record</span><b>None recorded</b><em>Checked</em><i>12 sources</i></li>
+          </ol>
+          <footer class="sr-foot"><span>Prepared by n1.care</span><b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg>Approved by Dr Shah</b></footer>
         </article>
       </div>
     </div>
@@ -538,8 +550,8 @@
       <h2 id="cta-title">Arrive prepared.<br>Be present.</h2>
       <p class="cta-sub">Your complete health history, organized for the conversation.</p>
       <div class="cta-actions">
-        <a class="cta-primary" href="https://app.n1.care/login">Demo login <span aria-hidden="true">&rarr;</span></a>
-        <a class="cta-secondary" href="https://n1.care">Learn more</a>
+        <a class="cta-primary is-outline" href="https://app.n1.care/signup" target="_blank" rel="noopener">Start free trial</a>
+        <a class="cta-primary" href="https://calendly.com/leah-n1/n1-care-discovery-call" target="_blank" rel="noopener noreferrer">Book a call <span aria-hidden="true">&rarr;</span></a>
       </div>
     </div>
   </section>
@@ -1192,11 +1204,17 @@
         }
         tlTrack.style.setProperty('--pos', pos.toFixed(4));
         let savedAny = 0;
+        let topSaved = null;
         savedSnapshots.forEach(({ index, node }) => {
           const savedIn = smooth(clamp((pos - index - .12) / .55));
           node.style.setProperty('--saved-in', savedIn.toFixed(4));
           savedAny = Math.max(savedAny, savedIn);
+          if (savedIn > .001) topSaved = node;
         });
+        /* The newest saved record is the top of the pile and shows its
+           content; the ones under it are only edges. It stays on top while
+           the pile merges into the stack. */
+        savedSnapshots.forEach(({ node }) => node.classList.toggle('is-current', node === topSaved));
         savedShelf.style.setProperty('--saved-any', savedAny.toFixed(4));
         /* Each card is written just before it lands on the focus point, so the
            line reads as the record being assembled rather than retrieved. The
@@ -1407,7 +1425,9 @@
         lastInsightStamp = now;
         let progress = desiredInsightProgress;
         const returningToCompletedScene = insightCompleted && desiredInsightProgress < limitedInsightProgress;
-        if (!reducedMotion.matches && !returningToCompletedScene) {
+        /* Once the scene has played to the end there is nothing left to
+           protect: scrolling on into the next section must not be pulled back. */
+        if (!reducedMotion.matches && !returningToCompletedScene && !insightCompleted) {
           const maxStep = .55 / insightStretch * elapsed / 1000;
           const difference = desiredInsightProgress - limitedInsightProgress;
           if (Math.abs(difference) > maxStep) {
@@ -1512,17 +1532,102 @@
       drawReport();
     }
 
-    const closingConversation = document.querySelector('.closing-conversation');
-    if (closingConversation) {
-      if ('IntersectionObserver' in window && !reducedMotion.matches) {
-        const closingObserver = new IntersectionObserver(entries => {
-          if (entries.some(entry => entry.isIntersecting)) {
-            closingConversation.classList.add('is-visible');
-            closingObserver.disconnect();
-          }
-        }, { threshold: .28 });
-        closingObserver.observe(closingConversation);
-      } else closingConversation.classList.add('is-visible');
+    /* Sign-off. This section starts exactly where the heart scene stops being
+       pinned, and lies over its last screen. At that moment a copy of the
+       finding cards takes over in the same place, showing their backs, and the
+       originals hide - so the cards stay put while the heart scrolls away under
+       them. Then they gather into a stack, and the stack becomes the report the
+       clinician approves. */
+    const signoffScene = document.querySelector('.signoff-scene');
+    if (signoffScene) {
+      const signoffStage = signoffScene.querySelector('.signoff-stage');
+      const deck = signoffScene.querySelector('.signoff-deck');
+      const signoffReport = signoffScene.querySelector('.signoff-report');
+      const signoffCopy = signoffScene.querySelector('.signoff-copy');
+      const insightsStageEl = document.querySelector('.insights-stage');
+      const sourceResults = document.querySelector('.insights-scene .heart-results');
+      const sourceCards = [...(sourceResults?.querySelectorAll('.heart-trend-card') || [])];
+      const sourceTitle = sourceResults?.querySelector('.heart-results-title');
+      const deckTitle = sourceTitle?.cloneNode(true);
+      if (deckTitle) { deckTitle.removeAttribute('id'); deck.append(deckTitle); }
+      const deckCards = sourceCards.map((card, index) => {
+        const copy = card.cloneNode(true);
+        copy.style.minHeight = '';
+        copy.style.setProperty('--k', sourceCards.length - 1 - index);
+        copy.style.zIndex = String(sourceCards.length - index);
+        deck.append(copy);
+        return copy;
+      });
+      /* Read where the originals sit on screen. Only valid while the heart
+         scene holds its final frame, which it does whenever this section is
+         within a screen of the viewport - so this is measured lazily. */
+      const FAN_STEP = 36;
+      let deckMeasured = false;
+      const placeDeck = () => {
+        if (!insightsStageEl || !signoffStage || !signoffReport) return;
+        /* Both stages are pinned to the top of the viewport, so a card keeps
+           its screen position: horizontally as measured, vertically relative
+           to its stage. The deck may sit inside a column, so positions are
+           taken relative to the deck. */
+        const from = insightsStageEl.getBoundingClientRect();
+        const stage = signoffStage.getBoundingClientRect();
+        const deckBox = deck.getBoundingClientRect();
+        const shiftX = -deckBox.left;
+        const shiftY = stage.top - deckBox.top - from.top;
+        const report = signoffReport.getBoundingClientRect();
+        const targetX = report.left + report.width / 2 - deckBox.left;
+        const targetY = report.top + report.height / 2 - deckBox.top;
+        const place = (node, source) => {
+          const box = source.getBoundingClientRect();
+          node.style.setProperty('--x', `${(box.left + shiftX).toFixed(2)}px`);
+          node.style.setProperty('--y', `${(box.top + shiftY).toFixed(2)}px`);
+          node.style.setProperty('--w', `${box.width.toFixed(2)}px`);
+          node.style.setProperty('--h', `${box.height.toFixed(2)}px`);
+          return box;
+        };
+        if (deckTitle && sourceTitle) place(deckTitle, sourceTitle);
+        deckCards.forEach((card, index) => {
+          const box = place(card, sourceCards[index]);
+          const k = sourceCards.length - 1 - index;
+          /* A fanned stack: each card behind sits one title row higher, so
+             every card's name stays readable; the fan is centred on the report. */
+          const fan = FAN_STEP * (k - (sourceCards.length - 1) / 2);
+          card.style.setProperty('--dx', `${Math.round(targetX - (box.left + shiftX + box.width / 2))}px`);
+          card.style.setProperty('--dy', `${Math.round(targetY - (box.top + shiftY + box.height / 2) + fan)}px`);
+        });
+        deckMeasured = true;
+      };
+      registerLayoutTask(() => { deckMeasured = false; });
+      const drawSignoff = () => {
+        const box = geometryOf(signoffScene);
+        const pinned = reducedMotion.matches || scrollY >= box.top - 1;
+        if (!pinned) deckMeasured = false;
+        else if (!deckMeasured) placeDeck();
+        signoffScene.classList.toggle('is-pinned', pinned);
+        sourceResults?.classList.toggle('is-handed-off', pinned && !reducedMotion.matches);
+        const p = reducedMotion.matches ? 1 : trackProgress(signoffScene);
+        const between = (start, end) => smooth(clamp((p - start) / (end - start)));
+        signoffScene.style.setProperty('--bg', between(0, .14).toFixed(4));
+        signoffScene.style.setProperty('--gather', clamp((p - .12) / .26).toFixed(4));
+        /* A card on the move rides above the cards still waiting in the grid,
+           so its title is never covered on the way to the stack. */
+        const gather = clamp((p - .12) / .26);
+        deckCards.forEach(card => {
+          const k = Number(card.style.getPropertyValue('--k')) || 0;
+          const z = String((gather - k * .12 > 0 ? 20 : 0) + k + 1);
+          if (card.style.zIndex !== z) card.style.zIndex = z;
+        });
+        signoffScene.style.setProperty('--flow', between(.38, .55).toFixed(4));
+        signoffScene.style.setProperty('--rows', clamp((p - .46) / .2).toFixed(4));
+        signoffScene.style.setProperty('--copy', between(.44, .6).toFixed(4));
+        signoffScene.style.setProperty('--approve', between(.66, .74).toFixed(4));
+        if (signoffCopy) signoffCopy.inert = p < .5;
+      };
+      /* Before the hand-off, measure from the heart scene's final frame. */
+      if (!reducedMotion.matches) requestAnimationFrame(() => { if (scrollY >= geometryOf(signoffScene).top - 1) placeDeck(); });
+      sceneObserver?.observe(signoffScene);
+      registerScene(drawSignoff, signoffScene);
+      drawSignoff();
     }
 
     /* iOS paints its own status bar and toolbar with theme-color, and this page
@@ -1535,7 +1640,7 @@
     const themeMeta = document.querySelector('meta[name="theme-color"]');
     if (themeMeta) {
       const tinted = [...document.querySelectorAll(
-        '.zoom-journey, .chat-scene, .timeline-scene, .reply-scene, .closing-conversation, .cta-scene, .site-footer')]
+        '.zoom-journey, .chat-scene, .timeline-scene, .reply-scene, .signoff-scene, .cta-scene, .site-footer')]
         .map(el => ({ el, colour: getComputedStyle(el).backgroundColor }));
       let lastTint = '';
       const drawTheme = () => {
