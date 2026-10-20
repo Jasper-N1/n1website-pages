@@ -6,88 +6,53 @@ const anatomy = document.querySelector('[data-anatomy-viewer]');
    the scroll position. The 3D canvas takes over as soon as it is ready. */
 const startFilm = (host, phone) => {
   const FRAMES = 91;
-  const KEEP = 10;
   const folder = phone ? 'media/anatomy-film-mobile' : 'media/anatomy-film-desktop';
   const urls = Array.from({ length: FRAMES }, (_, index) => `${folder}/frame-${String(index).padStart(2, '0')}.webp?v=20261020-1`);
-  /* Frames are drawn on a canvas. Each one is downloaded once and kept
-     encoded; only the few frames around the scroll position are decoded
-     (off the main thread, by createImageBitmap), so a swap never decodes
-     during a scroll frame and memory stays small on a phone. */
-  const canvas = document.createElement('canvas');
-  canvas.className = 'anatomy-film';
-  canvas.setAttribute('aria-hidden', 'true');
-  host.prepend(canvas);
-  const context = canvas.getContext('2d');
-  const blobs = new Array(FRAMES).fill(null);
-  const bitmaps = new Map();
-  const decoding = new Set();
+  /* One <img> shows the frame for the scroll position. Frames are fetched
+     one at a time into the browser cache; nothing keeps extra decoded copies,
+     so iPhone Safari can free memory as it needs to. (A version that held
+     decoded ImageBitmaps ran the tab out of memory on iPhone.) */
+  const film = document.createElement('img');
+  film.className = 'anatomy-film';
+  film.alt = '';
+  film.setAttribute('aria-hidden', 'true');
+  film.decoding = 'async';
+  host.prepend(film);
+  const cached = new Array(FRAMES).fill(false);
   let wanted = 0;
-  let drawn = -1;
+  let shown = -1;
   let frame = 0;
-  const resize = () => {
-    const ratio = Math.min(devicePixelRatio || 1, 2);
-    canvas.width = Math.max(1, Math.round(host.clientWidth * ratio));
-    canvas.height = Math.max(1, Math.round(host.clientHeight * ratio));
-    drawn = -1;
-    schedule();
-  };
-  const draw = () => {
+  const show = () => {
     frame = 0;
     if (host.classList.contains('is-ready')) return;
     let index = -1;
     for (let step = 0; step < FRAMES && index < 0; step += 1) {
-      if (bitmaps.has(wanted - step)) index = wanted - step;
-      else if (bitmaps.has(wanted + step)) index = wanted + step;
+      if (cached[wanted - step]) index = wanted - step;
+      else if (cached[wanted + step]) index = wanted + step;
     }
-    if (index < 0 || index === drawn) return;
-    const bitmap = bitmaps.get(index);
-    const scale = Math.min(canvas.width / bitmap.width, canvas.height / bitmap.height);
-    const width = bitmap.width * scale;
-    const height = bitmap.height * scale;
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    context.drawImage(bitmap, (canvas.width - width) / 2, (canvas.height - height) / 2, width, height);
-    drawn = index;
+    if (index < 0 || index === shown) return;
+    shown = index;
+    film.src = urls[index];
     host.classList.add('has-film');
   };
-  const schedule = () => { if (!frame) frame = requestAnimationFrame(draw); };
-  const decode = index => {
-    if (!blobs[index] || bitmaps.has(index) || decoding.has(index)) return;
-    decoding.add(index);
-    createImageBitmap(blobs[index]).then(bitmap => {
-      decoding.delete(index);
-      bitmaps.set(index, bitmap);
-      /* Keep only the frames nearest the scroll position. */
-      if (bitmaps.size > KEEP) {
-        const far = [...bitmaps.keys()].sort((x, y) => Math.abs(y - wanted) - Math.abs(x - wanted));
-        far.slice(0, bitmaps.size - KEEP).forEach(key => { if (key !== drawn) { bitmaps.get(key).close?.(); bitmaps.delete(key); } });
-      }
-      schedule();
-    }).catch(() => decoding.delete(index));
-  };
-  const decodeAround = () => {
-    for (let step = 0; step <= 3; step += 1) { decode(wanted + step); decode(wanted - step); }
-    if (!bitmaps.size) for (let index = 0; index < FRAMES; index += 10) decode(index);
-  };
+  const schedule = () => { if (!frame) frame = requestAnimationFrame(show); };
   /* Every tenth frame first, so the whole animation is roughly there early;
-     then the frames in between, a few requests at a time. */
+     then the frames in between. */
   const order = [];
   for (let index = 0; index < FRAMES; index += 10) order.push(index);
   for (let index = 0; index < FRAMES; index += 1) if (index % 10) order.push(index);
   let next = 0;
   const fetchNext = () => {
-    if (next >= order.length) return;
+    if (next >= order.length || host.classList.contains('is-ready')) return;
     const index = order[next++];
-    fetch(urls[index]).then(response => response.ok ? response.blob() : null).then(blob => {
-      blobs[index] = blob;
-      if (Math.abs(index - wanted) <= 3 || !bitmaps.size) decode(index);
+    fetch(urls[index]).then(response => {
+      if (response.ok) { cached[index] = true; schedule(); }
+      return response.arrayBuffer();
     }).catch(() => {}).finally(fetchNext);
   };
-  for (let lane = 0; lane < 3; lane += 1) fetchNext();
-  new ResizeObserver(resize).observe(host);
-  resize();
+  fetchNext();
   return value => {
     wanted = Math.round(Math.max(0, Math.min(1, Number(value) || 0)) * (FRAMES - 1));
-    decodeAround();
     schedule();
   };
 };
