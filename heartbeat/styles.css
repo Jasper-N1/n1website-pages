@@ -1210,7 +1210,7 @@ body{display:block;overflow:visible;overflow-x:clip}
    body stays calm and diagrammatic; the surrounding cards carry the detail.
    ========================================================================== */
 .insights-scene{--insight:0;--insight-scale:1;--insight-exit:0;--insight-image-out:0;--heart-left:0;--heart-results:0;--heart-card-turn:0;
-  --insight-red:0;--insight-decompose:0;--decompose-cards:0;--anatomy-width:94vw;--anatomy-height:72svh;height:654svh;
+  --insight-red:0;--insight-decompose:0;--decompose-cards:0;--anatomy-width:94vw;--anatomy-height:72svh;height:calc(654svh + var(--insights-turn-extra) + var(--insights-tail));
   position:relative;z-index:1;background:var(--bb-cream);color:var(--ink)}
 .insights-stage{height:var(--stage-h);position:sticky;top:0;display:flex;flex-direction:column;
   align-items:center;justify-content:center;gap:clamp(18px,3svh,32px);
@@ -1257,7 +1257,7 @@ body{display:block;overflow:visible;overflow-x:clip}
 .anatomy-loading.is-error{max-width:180px;color:var(--bb-coral-dark);line-height:1.45;white-space:normal}
 
 @media(max-width:760px){
-  .insights-scene{height:683svh}
+  .insights-scene{height:calc(683svh + var(--insights-turn-extra) + var(--insights-tail))}
   .insights-stage{gap:12px;padding-inline:14px}
   .systems-overview{grid-template-columns:1fr}
   .systems-list{gap:7px}
@@ -1346,7 +1346,7 @@ body{display:block;overflow:visible;overflow-x:clip}
   .systems-body{opacity:calc(1 - var(--heart-results))}
 }
 @media(max-width:680px){
-  .insights-scene{height:683svh}
+  .insights-scene{height:calc(683svh + var(--insights-turn-extra) + var(--insights-tail))}
   .systems-body{translate:0 calc(var(--heart-left) * -27svh);scale:calc(1 - var(--heart-left) * .34)}
   .heart-results{width:calc(100% - 28px);top:auto;right:14px;bottom:14px;translate:0 0}
   .heart-results .heart-trend-grid{gap:7px}
@@ -1975,8 +1975,15 @@ body,button,input,select,textarea{font-family:var(--font-sans)}
 
 /* Sign-off. The findings gather into a stack and the stack becomes the report
    the clinician approves. Copy on the left, the deck and report on the right. */
-.signoff-scene{--bg:0;--gather:0;--flow:0;--rows:0;--copy:0;--approve:0;height:360svh;position:relative;z-index:2;margin-top:calc(-1 * var(--stage-h));color:var(--ink)}
-.signoff-scene::before{content:"";position:absolute;z-index:-1;inset:var(--stage-h) 0 0;background:linear-gradient(#cbf0fe,var(--bb-blue-50) 60%)}
+/* The heart scene keeps its stage pinned for --insights-tail after its own
+   timeline ends. The sign-off section starts at that point and lies over the
+   tail, so the heart stays in place while the cards become the report; it
+   fades only once the report is approved. */
+:root{--insights-turn-extra:270svh;--insights-tail:410svh}
+.insights-tail-probe,.insights-turn-probe{position:absolute;visibility:hidden;width:0;height:var(--insights-tail);pointer-events:none}
+.insights-turn-probe{height:var(--insights-turn-extra)}
+.signoff-scene{--bg:0;--gather:0;--flow:0;--rows:0;--copy:0;--approve:0;height:620svh;position:relative;z-index:2;margin-top:calc(-1 * var(--stage-h) - var(--insights-tail));color:var(--ink)}
+.signoff-scene::before{content:"";position:absolute;z-index:-1;inset:calc(var(--stage-h) + var(--insights-tail)) 0 0;background:linear-gradient(#cbf0fe,var(--bb-blue-50) 60%)}
 .signoff-stage::before{content:"";position:absolute;z-index:0;inset:0;background:linear-gradient(#cbf0fe,var(--bb-blue-50));opacity:var(--bg);pointer-events:none}
 .signoff-copy,.signoff-visual{position:relative;z-index:1}
 .insights-scene .heart-results.is-handed-off{visibility:hidden}
@@ -2032,7 +2039,6 @@ body,button,input,select,textarea{font-family:var(--font-sans)}
   .signoff-copy{max-width:none}
 }
 @media(max-width:680px){
-  .signoff-scene{height:300svh}
   .signoff-kicker{display:none}
   .signoff-copy h2{font-size:30px}
   .signoff-points{gap:6px;margin-top:14px}
