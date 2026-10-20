@@ -11,8 +11,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261020-8">
-  <script type="module" src="anatomy-loader.js?v=20261020-1"></script>
+  <link rel="stylesheet" href="styles.css?v=20261020-9">
+  <script type="module" src="anatomy-loader.js?v=20261020-2"></script>
 </head>
 <body>
   <svg class="icon-sprite" aria-hidden="true" width="0" height="0" style="position:absolute">
@@ -1437,6 +1437,7 @@
         return stretched / insightStretch;
       };
       const turnStartRaw = rawAtTimeline(.70);
+      const phoneScroll = matchMedia('(max-width: 680px)');
       let limitedInsightProgress = insightRaw();
       let desiredInsightProgress = limitedInsightProgress;
       let insightCompleted = toInsightTimeline(limitedInsightProgress) >= insightHoldStart;
@@ -1451,7 +1452,9 @@
         const returningToCompletedScene = insightCompleted && desiredInsightProgress < limitedInsightProgress;
         /* Once the scene has played to the end there is nothing left to
            protect: scrolling on into the next section must not be pulled back. */
-        if (!reducedMotion.matches && !returningToCompletedScene && !insightCompleted) {
+        /* No speed limit on phones: moving the page with scrollTo fights iOS
+           momentum scrolling and makes it jump. */
+        if (!reducedMotion.matches && !returningToCompletedScene && !insightCompleted && !phoneScroll.matches) {
           const maxStep = .55 / insightStretch * elapsed / 1000;
           const difference = desiredInsightProgress - limitedInsightProgress;
           if (Math.abs(difference) > maxStep) {
@@ -1519,7 +1522,12 @@
         }
       };
       fitCardBacks();
-      addEventListener('resize', fitCardBacks, { passive: true });
+      let cardBackWidth = innerWidth;
+      addEventListener('resize', () => {
+        if (Math.abs(innerWidth - cardBackWidth) < 2) return;
+        cardBackWidth = innerWidth;
+        fitCardBacks();
+      }, { passive: true });
       document.fonts?.ready.then(fitCardBacks);
       drawInsights();
     }
@@ -1718,6 +1726,11 @@
       resizeFrame = requestAnimationFrame(() => {
         resizeFrame = 0;
         const widthChanged = Math.abs(innerWidth - layoutWidth) > 2;
+        /* iOS Safari fires resize every time its address bar slides in or out
+           during a scroll; only the height changes. Section heights are in
+           svh/lvh, which ignore the bar, so nothing needs measuring again -
+           and re-measuring mid-scroll is what made it stutter. */
+        if (!widthChanged && Math.abs(stageProbe.offsetHeight - stageHeight) < 1) return;
         layoutWidth = innerWidth;
         geometry.clear();
         measureStage();
