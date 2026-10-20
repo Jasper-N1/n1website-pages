@@ -2075,3 +2075,18 @@ body,button,input,select,textarea{font-family:var(--font-sans)}
   .signoff-deck{display:none}
   .signoff-stage{height:auto;min-height:var(--stage-h);position:relative}
 }
+
+/* Phones: every element with a blur filter needs its own offscreen image in
+   graphics memory. With 44 timeline cards and large blurred blobs that ran
+   iPhone Safari out of memory, mostly when scrolling back up. Phones keep the
+   fades and scales and drop the blurs. */
+@media(max-width:680px){
+  .tl-entry>time,.tl-entry>.tl-body,.tl-entry.is-active>time,.tl-entry.is-active>.tl-body,
+  .timeline-scene.is-stacking .tl-entry>.tl-body,.tl-saved-card,.tl-final-card{filter:none!important}
+  .focal i{animation:none;filter:blur(24px)}
+  .ambient,.site-footer::before,.site-footer::after{display:none}
+  /* Once the heart has faded, the stack and report sit in the middle of the
+     screen; they move down only as the title comes in above them. */
+  .signoff-report{inset:0 var(--stage-x);margin:auto 0;translate:0 calc(clamp(0,calc(var(--copy) * 2),1) * var(--report-drop,0px))}
+  .signoff-copy{opacity:clamp(0,calc(var(--copy) * 2 - 1),1);translate:0 calc((1 - clamp(0,calc(var(--copy) * 2 - 1),1)) * 18px)}
+}
