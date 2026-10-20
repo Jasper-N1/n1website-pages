@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261020-10">
+  <link rel="stylesheet" href="styles.css?v=20261020-11">
   <script type="module" src="anatomy-loader.js?v=20261020-3"></script>
 </head>
 <body>
@@ -922,10 +922,17 @@
       }
       return box;
     };
+    /* On phones the scroll animations follow a smoothed scroll position
+       rather than the raw one. An iPhone flick can travel several screens in a
+       moment, and a page cannot slow native momentum without fighting it, so
+       the animation eases after it instead (about 0.2s). Desktop is unchanged. */
+    const smoothScroll = matchMedia('(max-width: 680px)');
+    const SMOOTH_MS = 190;
+    let sceneY = scrollY;
     const trackProgress = element => {
       const box = geometryOf(element);
       const travel = box.height - stageHeight;
-      return travel > 0 ? clamp((scrollY - box.top) / travel) : 0;
+      return travel > 0 ? clamp((sceneY - box.top) / travel) : 0;
     };
     const readTarget = () => {
       targetProgress = trackProgress(journey);
@@ -943,6 +950,17 @@
       const dt = lastStamp ? Math.min(64, stamp - lastStamp) : 16;
       lastStamp = stamp;
 
+      let smoothing = false;
+      if (smoothScroll.matches && !reducedMotion.matches) {
+        const gapY = scrollY - sceneY;
+        if (Math.abs(gapY) < .5) sceneY = scrollY;
+        else {
+          sceneY += gapY * (1 - Math.exp(-dt / SMOOTH_MS));
+          smoothing = true;
+          scrollDirty = true;
+        }
+      } else sceneY = scrollY;
+
       if (scrollDirty) {
         scrollDirty = false;
         readTarget();
@@ -957,7 +975,7 @@
         : easedProgress + gap * (1 - Math.exp(-dt / EASE_MS));
       paint(easedProgress);
 
-      loopOn = scrollDirty || easedProgress !== targetProgress;
+      loopOn = scrollDirty || smoothing || easedProgress !== targetProgress;
       if (loopOn) requestAnimationFrame(runFrame);
       else lastStamp = 0;
     };
@@ -1427,7 +1445,7 @@
       });
       /* Extra scroll given to the card turn alone, after the timeline ends. */
       const insightTravel = () => Math.max(1, geometryOf(insightsScene).height - stageHeight - tailPx - turnExtraPx);
-      const insightRaw = () => clamp((scrollY - geometryOf(insightsScene).top) / insightTravel());
+      const insightRaw = () => clamp((sceneY - geometryOf(insightsScene).top) / insightTravel());
       /* Where the card turn starts, in raw scroll: timeline .70 mapped back
          through the half-speed stretch. The turn then runs to the scene's end,
          using the final hold as well, so each card turns slowly. */
@@ -1437,6 +1455,30 @@
         return stretched / insightStretch;
       };
       const turnStartRaw = rawAtTimeline(.70);
+      /* Snap points (phones): whole body, body taken apart, heart beside the
+         findings, and all cards turned. CSS only enables them on phones. */
+      const placeSnaps = (section, offsets) => {
+        offsets.forEach((offset, index) => {
+          let mark = section.querySelector(`.snap-mark[data-i="${index}"]`);
+          if (!mark) {
+            mark = document.createElement('div');
+            mark.className = 'snap-mark';
+            mark.dataset.i = index;
+            mark.setAttribute('aria-hidden', 'true');
+            section.append(mark);
+          }
+          mark.style.top = `${Math.round(offset)}px`;
+        });
+      };
+      window.n1PlaceSnaps = placeSnaps;
+      const placeInsightSnaps = () => placeSnaps(insightsScene, [
+        0,
+        rawAtTimeline(.40) * insightTravel(),
+        rawAtTimeline(.66) * insightTravel(),
+        insightTravel() + turnExtraPx
+      ]);
+      placeInsightSnaps();
+      registerLayoutTask(placeInsightSnaps);
       const phoneScroll = matchMedia('(max-width: 680px)');
       let limitedInsightProgress = insightRaw();
       let desiredInsightProgress = limitedInsightProgress;
@@ -1491,7 +1533,7 @@
         insightsScene.style.setProperty('--heart-left', between(.49, .57).toFixed(4));
         insightsScene.style.setProperty('--heart-results', between(.53, .61).toFixed(4));
         const turnTravel = (1 - turnStartRaw) * insightTravel() + turnExtraPx;
-        const turnScrolled = scrollY - geometryOf(insightsScene).top - turnStartRaw * insightTravel();
+        const turnScrolled = sceneY - geometryOf(insightsScene).top - turnStartRaw * insightTravel();
         /* The first row (two cards) takes 30% less scroll: the first 26.6% of
            the turn scroll covers what used to take 40.5%; the later rows share
            the rest. */
@@ -1673,6 +1715,13 @@
       };
       /* Before the hand-off, measure from the heart scene's final frame. */
       if (!reducedMotion.matches) requestAnimationFrame(() => { if (scrollY >= geometryOf(signoffScene).top - 1) placeDeck(); });
+      /* Snap points (phones): cards readable, stacked, report approved, title. */
+      const placeSignoffSnaps = () => {
+        const travel = Math.max(0, signoffScene.offsetHeight - stageHeight);
+        window.n1PlaceSnaps?.(signoffScene, [.12, .43, .71, .9].map(at => at * travel));
+      };
+      placeSignoffSnaps();
+      registerLayoutTask(placeSignoffSnaps);
       sceneObserver?.observe(signoffScene);
       registerScene(drawSignoff, signoffScene);
       drawSignoff();
