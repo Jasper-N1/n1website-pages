@@ -1489,7 +1489,16 @@
         insightsScene.style.setProperty('--heart-results', between(.53, .61).toFixed(4));
         const turnTravel = (1 - turnStartRaw) * insightTravel() + turnExtraPx;
         const turnScrolled = scrollY - geometryOf(insightsScene).top - turnStartRaw * insightTravel();
-        insightsScene.style.setProperty('--heart-card-turn', smooth(clamp(turnScrolled / turnTravel)).toFixed(4));
+        /* The first row (two cards) takes 30% less scroll: the first 26.6% of
+           the turn scroll covers what used to take 40.5%; the later rows share
+           the rest. */
+        const turnLinear = clamp(turnScrolled / turnTravel);
+        const FIRST_ROW_SCROLL = .266;
+        const FIRST_ROW_TURN = .405;
+        const turnShaped = turnLinear <= FIRST_ROW_SCROLL
+          ? turnLinear * (FIRST_ROW_TURN / FIRST_ROW_SCROLL)
+          : FIRST_ROW_TURN + (turnLinear - FIRST_ROW_SCROLL) * ((1 - FIRST_ROW_TURN) / (1 - FIRST_ROW_SCROLL));
+        insightsScene.style.setProperty('--heart-card-turn', smooth(turnShaped).toFixed(4));
         window.n1AnatomyFilm?.seek(progress);
       };
       sceneObserver?.observe(insightsScene);
