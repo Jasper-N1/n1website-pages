@@ -2090,3 +2090,11 @@ body,button,input,select,textarea{font-family:var(--font-sans)}
   .signoff-report{inset:0 var(--stage-x);margin:auto 0;translate:0 calc(clamp(0,calc(var(--copy) * 2),1) * var(--report-drop,0px))}
   .signoff-copy{opacity:clamp(0,calc(var(--copy) * 2 - 1),1);translate:0 calc((1 - clamp(0,calc(var(--copy) * 2 - 1),1)) * 18px)}
 }
+
+/* Phones: gentle snap points at the key moments of the heart and report
+   sections. Native iOS snapping works with momentum instead of against it. */
+.snap-mark{position:absolute;left:0;width:1px;height:1px;pointer-events:none;opacity:0}
+@media(max-width:680px) and (prefers-reduced-motion:no-preference){
+  html{scroll-snap-type:y proximity}
+  .snap-mark{scroll-snap-align:start;scroll-snap-stop:always}
+}
