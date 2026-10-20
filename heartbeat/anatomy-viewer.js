@@ -398,7 +398,9 @@ if (host) {
         renderHeart();
       }
     };
-    window.n1AnatomyFilm = { seek };
+    /* Keep the frame stand-in in step while the model is still loading. */
+    const seekFilm = window.n1AnatomyFilm?.seek;
+    window.n1AnatomyFilm = { seek: value => { seekFilm?.(value); seek(value); } };
     seek(parseFloat(getComputedStyle(host.closest('.insights-scene')).getPropertyValue('--insight')) || 0);
     const animate = (stamp = performance.now()) => {
       if (!running) return;
