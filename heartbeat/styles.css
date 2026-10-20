@@ -230,12 +230,12 @@ body{display:block;overflow:visible;overflow-x:clip}
 }
 @media(prefers-reduced-motion:reduce){.msg-typing i{animation:none}}
 
-/* Avatars, cut from the consultation photo and the patient portrait. Shown on
+/* Avatars, cut from the consultation photo and the patient portrait (Marcus). Shown on
    the first message of each run only - CSS has no previous-sibling selector,
    but the adjacent one is enough to suppress the repeats. */
 .msg::before{width:38px;height:38px;position:absolute;bottom:0;border-radius:50%;background-color:var(--bb-blue-100);background-size:cover;content:""}
 .msg-in::before{left:-48px;background-image:url("../assets/avatar-doctor.jpg");background-position:center 22%}
-.msg-out::before{right:-48px;background-image:url("../assets/avatar-patient.jpg");background-position:center 30%}
+.msg-out::before{right:-48px;background-image:url("../assets/patient-marcus-240.webp");background-size:165%;background-position:50% 30%}
 .msg-in + .msg-in::before,.msg-out + .msg-out::before{display:none}
 /* The typing bubble collapses away, so its neighbour keeps the avatar. */
 .msg-typing::before{display:none}
