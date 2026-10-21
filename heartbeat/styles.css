@@ -256,7 +256,11 @@ body{display:block;overflow:visible;overflow-x:clip}
 .tl-stage{height:100svh;position:sticky;top:0;overflow:hidden}
 
 .tl-head{position:absolute;z-index:3;top:clamp(28px,5svh,56px);left:max(24px,calc((100vw - 1180px)/2));right:24px}
-.tl-head h2{max-width:min(760px,calc(100% - 190px));margin:0;font-size:clamp(24px,3vw,44px);font-weight:400;line-height:1.05;letter-spacing:-.04em}
+/* Title hierarchy. Display: the big moment titles (first screen, photo
+   screen, closing). Section: one size for every section title (timeline,
+   findings, sign-off). Card: names and titles inside cards. */
+:root{--type-section:clamp(26px,3vw,44px);--type-section-lh:1.05;--type-section-ls:-.035em}
+.tl-head h2{max-width:min(760px,calc(100% - 190px));margin:0;font-family:var(--font-display);font-size:var(--type-section);font-weight:400;line-height:var(--type-section-lh);letter-spacing:var(--type-section-ls)}
 
 /* The rail the entries travel along, and the mark they are read at. */
 .tl-rail{position:absolute;z-index:1;top:var(--rail-y);right:0;left:0;height:1px;
@@ -361,12 +365,14 @@ body{display:block;overflow:visible;overflow-x:clip}
 @keyframes cta-drift-a{0%,100%{transform:translate(0,0)}50%{transform:translate(7vw,5svh)}}
 @keyframes cta-drift-b{0%,100%{transform:translate(0,0)}50%{transform:translate(-6vw,-4vh)}}
 
-.cta-inner{width:min(680px,100%);position:relative}
+.cta-inner{width:min(860px,100%);position:relative}
 .cta-eyebrow{margin:0 0 18px;color:var(--bb-blue-200);font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
-.cta-scene h2{margin:0;font-size:clamp(42px,6vw,84px);font-weight:400;line-height:.94;letter-spacing:-.05em}
+.cta-scene h2{margin:0;font-size:clamp(42px,5.4vw,80px);font-weight:400;line-height:.98;letter-spacing:-.045em;text-wrap:balance}
 .cta-sub{max-width:38ch;margin:clamp(18px,2.5svh,26px) 0 0;color:rgba(241,250,253,.84);font-size:clamp(16px,1.5vw,19px);line-height:1.5}
 
 .cta-actions{display:flex;flex-wrap:wrap;align-items:center;gap:22px;justify-content:flex-start;margin-top:clamp(26px,4svh,38px)}
+.cta-trial-note{margin:16px 0 0;color:rgba(241,250,253,.7);font:500 13px/1.4 var(--font-sans)}
+.cta-secondary{text-decoration:underline;text-decoration-color:rgba(255,255,255,.4);text-underline-offset:4px}
 .cta-primary,.cta-secondary{min-height:54px;display:inline-flex;align-items:center;gap:8px;padding:0 30px;border-radius:999px;font-size:15px;font-weight:600;text-decoration:none;transition:background .2s ease,color .2s ease,translate .2s ease,box-shadow .2s ease}
 .cta-primary{color:var(--bb-blue-900);background:var(--bb-paper)}
 .cta-primary:hover{background:#fff;box-shadow:0 14px 32px -18px rgba(255,255,255,.7);translate:0 -2px}
@@ -485,16 +491,16 @@ body{display:block;overflow:visible;overflow-x:clip}
    ========================================================================== */
 
 
-.cta-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 42%}
+.cta-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 30%}
 .cta-shade{position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,39,55,.94) 0%,rgba(0,39,55,.76) 30%,rgba(0,39,55,.25) 62%,rgba(0,39,55,.08) 100%)}
 .cta-scene{background:var(--bb-blue-900)}
 
 @media(max-width:620px){
   .cta-scene{padding:0 24px calc(52px + env(safe-area-inset-bottom,0px));text-align:left}
-  .cta-photo{object-position:54% center;scale:1}
+  .cta-photo{object-position:68% center;scale:1}
   .cta-shade{background:linear-gradient(0deg,rgba(0,39,55,.96) 0%,rgba(0,39,55,.82) 34%,rgba(0,39,55,.24) 68%,rgba(0,39,55,.06) 100%)}
   .cta-inner{width:100%}
-  .cta-scene h2{font-size:clamp(44px,13vw,64px);line-height:.91}
+  .cta-scene h2{font-size:clamp(36px,10.5vw,52px);line-height:1}
   .cta-sub{max-width:29ch;margin-top:18px;font-size:16px;line-height:1.45}
   .cta-actions{gap:20px;margin-top:26px}
   .cta-primary{min-height:50px;padding:0 24px}
@@ -1277,7 +1283,7 @@ body{display:block;overflow:visible;overflow-x:clip}
 
 /* The result panel shares the original anatomical canvas. Once the selected
    heart moves left, the title and six findings resolve on its right. */
-.heart-results{width:min(840px,53vw);position:absolute;z-index:5;top:50%;right:var(--stage-x);translate:0 -47%;pointer-events:none}
+.heart-results{--results-right:var(--stage-x);width:min(840px,53vw);position:absolute;z-index:5;top:50%;right:var(--results-right);translate:0 -47%;pointer-events:none}
 .heart-results .heart-trend-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .heart-results .heart-trend-card{--card-in:clamp(0,calc((var(--heart-results) - (.18 + var(--s))) / .2),1);--card-flip:clamp(0,calc((var(--heart-card-turn) - var(--s) * 3.2) / .2),1);min-height:clamp(178px,22.5svh,224px);position:relative;padding:17px 19px 14px;opacity:var(--card-in);scale:calc(.97 + var(--card-in) * .03);translate:calc((1 - var(--card-in)) * 12px) 0;transform:perspective(1100px) rotateY(calc(var(--card-flip) * 180deg));transform-style:preserve-3d}
 .heart-results .heart-trend-card>:not(.heart-card-back){opacity:calc(1 - var(--card-flip))}
@@ -1289,10 +1295,14 @@ body{display:block;overflow:visible;overflow-x:clip}
 .heart-results .heart-trend-card>footer{font-size:11.5px}
 /* The panel title names what the cards show: the findings on the front, and
    once the cards turn, the evidence behind them. */
-.heart-results-title{display:grid;margin:0 0 14px;color:var(--bb-ink);font:400 clamp(30px,2.6vw,44px)/1.05 var(--font-display);letter-spacing:-.02em}
-.heart-results-title span{grid-area:1/1}
-.heart-results-title .is-front{opacity:calc(var(--heart-results) * (1 - clamp(0,calc(var(--heart-card-turn) / .1),1)));translate:0 calc(clamp(0,calc(var(--heart-card-turn) / .1),1) * -8px)}
-.heart-results-title .is-back{opacity:clamp(0,calc((var(--heart-card-turn) - .06) / .12),1);translate:0 calc((1 - clamp(0,calc((var(--heart-card-turn) - .06) / .12),1)) * 8px)}
+.heart-results-title{display:block;margin:0 0 14px;color:var(--bb-ink);font:400 var(--type-section)/var(--type-section-lh) var(--font-display);letter-spacing:var(--type-section-ls)}
+.heart-results-title{text-align:center;white-space:nowrap}
+.heart-results-title span{display:inline}
+.heart-results-title .is-back::before{content:" \00b7  ";color:var(--bb-line)}
+/* Findings arrives with the cards and stays; the second line joins it as
+   the cards begin to turn. Its space is reserved, so nothing jumps. */
+.heart-results-title .is-front{opacity:var(--heart-results)}
+.heart-results-title .is-back{color:var(--bb-blue-800);opacity:clamp(0,calc((var(--heart-card-turn) - .02) / .1),1);translate:0 calc((1 - clamp(0,calc((var(--heart-card-turn) - .02) / .1),1)) * 8px)}
 .heart-results .heart-card-back{position:absolute;inset:-1px;display:flex;flex-direction:column;gap:7px;padding:15px 17px;border:1px solid rgba(0,95,125,.13);border-radius:16px;background:rgba(247,250,251,.98);transform:rotateY(180deg);backface-visibility:hidden;opacity:var(--card-flip)}
 .heart-card-back h3{margin:0;color:var(--bb-blue-900);font-family:var(--font-mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase}
 /* Back of the card: where the number came from. Source data from the person's
@@ -1316,14 +1326,14 @@ body{display:block;overflow:visible;overflow-x:clip}
 .is-literature .ev>svg,.is-literature .ev small{color:var(--bb-matcha-dark)}
 @media(min-width:1500px){
   .systems-body{translate:calc(var(--heart-left) * clamp(-470px,-23vw,-350px)) 0}
-  .heart-results{width:min(840px,46vw);right:max(var(--stage-x),calc((100vw - 1520px)/2))}
+  .heart-results{--results-right:max(var(--stage-x),calc((100vw - 1520px)/2));width:min(840px,46vw)}
 }
 /* Short laptop screens: three rows of cards must stay clear of the sign-in
    button, so the cards keep their type sizes but tighten their spacing. */
 @media(min-width:681px) and (max-height:820px){
   .heart-results .heart-trend-grid{gap:10px}
   .heart-results .heart-trend-card{min-height:166px;padding:12px 15px 10px}
-  .heart-results-title{margin-bottom:10px;font-size:clamp(26px,2.3vw,36px)}
+  .heart-results-title{margin-bottom:10px}
   .heart-results .heart-trend-card>strong{margin-top:8px;font-size:clamp(30px,2.6vw,40px)}
   .heart-results .heart-trend-card>p{margin:4px 0 6px;font-size:15px}
   .heart-results .heart-trend-card svg{height:24px;margin-bottom:4px}
@@ -1336,7 +1346,7 @@ body{display:block;overflow:visible;overflow-x:clip}
   .ev cite{font-size:14.5px}
 }
 @media(min-width:681px) and (max-width:1100px) and (max-height:820px){
-  .heart-results .heart-trend-card{min-height:180px}
+  .heart-results .heart-trend-card{min-height:166px}
 }
 /* Portrait tablets: two cards beside a heart leave each card too narrow to
    read, so the heart rises and the findings take the full width below it. */
@@ -1356,7 +1366,7 @@ body{display:block;overflow:visible;overflow-x:clip}
   .heart-results{width:calc(100% - 28px);top:auto;right:14px;bottom:14px;translate:0 0}
   .heart-results .heart-trend-grid{gap:7px}
   .heart-results .heart-trend-card{min-height:154px;padding:10px 11px}
-  .heart-results-title{margin-bottom:8px;font-size:22px}
+  .heart-results-title{margin-bottom:8px}
   .heart-results .heart-trend-card header{gap:6px}
   .heart-results .heart-trend-card header span{font-size:10px}
   .heart-results .heart-trend-card header em{padding:3px 6px;font-size:7.5px}
@@ -1705,12 +1715,12 @@ body{display:block;overflow:visible;overflow-x:clip}
    the end feels collected rather than conjured. The deck and the final card
    share one size (--deck-h, measured from the final card), so the deck can
    grow into place beneath it and read as one clean stack. */
-.tl-saved-slot,.tl-saved-stack{--S:.5;--pad:14px;--label:26px;--saved-card:min(400px,76vw);--deck:var(--deck-h,var(--stop-card));--deck-rise:calc(var(--saved-n,4) * 6px);--slot-right:max(var(--stage-x),40px);--slot-w:calc(var(--saved-card) * var(--S) + var(--deck-rise) * var(--S) + var(--pad) * 2);--slot-top:calc(var(--rail-y) + 29px);--slot-left:calc(100vw - var(--slot-right) - var(--slot-w))}
-.tl-saved-slot{width:var(--slot-w);height:calc(var(--label) + var(--pad) * 2 + var(--deck) * var(--S) + var(--deck-rise) * var(--S));position:absolute;z-index:3;top:var(--slot-top);left:var(--slot-left);border:1.5px dashed var(--bb-line);border-radius:16px;background:rgba(247,250,251,.55);opacity:calc(1 - var(--stack));pointer-events:none}
-.tl-saved-slot span{position:absolute;top:var(--pad);left:var(--pad);color:var(--bb-muted-light);font:500 10px/1 var(--font-mono);letter-spacing:.1em;text-transform:uppercase}
+.tl-saved-slot,.tl-saved-stack{--S:1;--pad:24px;--label:30px;--saved-card:min(400px,76vw);--deck:var(--deck-h,var(--stop-card));--deck-rise:calc(var(--saved-n,4) * 6px);--slot-right:max(var(--stage-x),40px);--slot-w:calc(var(--saved-card) * var(--S) + var(--deck-rise) * var(--S) + var(--pad) * 2);--slot-top:calc(var(--rail-y) + 29px);--slot-left:calc(100vw - var(--slot-right) - var(--slot-w))}
+.tl-saved-slot{width:var(--slot-w);height:calc(var(--label) + var(--pad) * 2 + var(--deck) * var(--S) + var(--deck-rise) * var(--S));position:absolute;z-index:3;top:var(--slot-top);left:var(--slot-left);border:1.5px dashed var(--bb-matcha);border-radius:20px;background:rgba(243,248,231,.7);opacity:calc(1 - var(--stack));pointer-events:none}
+.tl-saved-slot span{position:absolute;top:calc(var(--pad) * .75);left:var(--pad);color:var(--bb-matcha-dark);font:500 10px/1 var(--font-mono);letter-spacing:.1em;text-transform:uppercase}
 .tl-saved-stack{--saved-stack:0;--saved-content:0;--saved-any:0;--saved-exit:0;--cx0:calc(var(--slot-left) + var(--pad) + var(--saved-card) * var(--S) / 2);--cy0:calc(var(--slot-top) + var(--label) + var(--pad) + var(--deck-rise) * var(--S) + var(--deck) * var(--S) / 2);--cy1:calc(var(--rail-y) + 29px + var(--deck) / 2);width:var(--saved-card);height:var(--deck);position:absolute;z-index:4;top:calc(var(--cy0) - var(--deck) / 2);left:calc(var(--cx0) - var(--saved-card) / 2);opacity:calc(var(--saved-any) * (1 - var(--saved-exit)));translate:calc(var(--saved-stack) * (50vw - var(--cx0))) calc(var(--saved-stack) * (var(--cy1) - var(--cy0)) - var(--saved-exit) * 54px);scale:calc((var(--S) + (1 - var(--S)) * var(--saved-stack)) * (1 - var(--saved-exit)));rotate:calc(var(--saved-exit) * -10deg);pointer-events:none}
 .tl-saved-label{display:none}
-.tl-saved-card{--saved-in:0;--k:calc(var(--saved-n,4) - var(--saved-i));width:var(--saved-card);position:absolute;top:calc(var(--k) * -6px);left:calc(var(--k) * 6px);z-index:var(--saved-i);opacity:var(--saved-in);transform:translate3d(calc((1 - var(--saved-in)) * -52px),calc((1 - var(--saved-in)) * 8px),0) rotate(calc((var(--saved-i) - 1.5) * .42deg));transform-origin:center;filter:blur(calc((1 - var(--saved-in)) * 2px))}
+.tl-saved-card{--saved-in:0;--k:calc(var(--saved-n,4) - var(--saved-i));width:var(--saved-card);position:absolute;top:calc(var(--k) * -6px + var(--my,0px) * (1 - var(--saved-stack)));left:calc(var(--k) * 6px + var(--mx,0px) * (1 - var(--saved-stack)));z-index:var(--saved-i);opacity:var(--saved-in);transform:translate3d(calc((1 - var(--saved-in)) * -52px),calc((1 - var(--saved-in)) * 8px),0) rotate(calc(var(--rot,0deg) * (1 - var(--saved-stack) * .6)));transform-origin:center;filter:blur(calc((1 - var(--saved-in)) * 2px))}
 .tl-saved-card .tl-body{height:var(--deck);min-height:0;position:relative;overflow:hidden;padding:clamp(22px,2.4vw,30px);border-radius:18px;box-shadow:0 18px 44px rgba(60,52,38,.14)}
 .tl-saved-card .tl-body>*{visibility:hidden;opacity:0;translate:none}
 .tl-saved-card.is-current .tl-body>*{visibility:visible;opacity:1}
@@ -1995,7 +2005,7 @@ body,button,input,select,textarea{font-family:var(--font-sans)}
 .signoff-stage{height:var(--stage-h);position:sticky;top:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(32px,5vw,88px);align-items:center;padding:var(--stage-top) max(clamp(24px,6vw,110px),calc((100% - 1400px) / 2)) var(--stage-bottom);overflow:hidden}
 .signoff-copy{max-width:540px;opacity:var(--copy);translate:0 calc((1 - var(--copy)) * 18px)}
 .signoff-kicker{margin:0 0 14px;color:var(--bb-blue-800);font:500 11px/1 var(--font-mono);letter-spacing:.12em;text-transform:uppercase}
-.signoff-copy h2{margin:0;font:400 clamp(36px,3.7vw,58px)/1.02 var(--font-display);letter-spacing:-.03em;text-wrap:balance}
+.signoff-copy h2{margin:0;font:400 var(--type-section)/var(--type-section-lh) var(--font-display);letter-spacing:var(--type-section-ls);text-wrap:balance}
 .signoff-points{display:grid;gap:12px;margin:clamp(22px,3.4svh,34px) 0 0;padding:0;list-style:none}
 .signoff-points li{position:relative;padding-left:32px;color:var(--bb-muted);font:400 16px/1.45 var(--font-sans)}
 .signoff-points li::before{content:"";position:absolute;top:1px;left:0;width:20px;height:20px;border:1px solid var(--bb-matcha-soft);border-radius:50%;background:var(--bb-matcha-wash) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234F6922' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 12 4 4 8-8'/%3E%3C/svg%3E") center/12px no-repeat}
@@ -2009,7 +2019,8 @@ body,button,input,select,textarea{font-family:var(--font-sans)}
 .signoff-scene .signoff-deck{--heart-results:1;--heart-card-turn:1;width:auto;position:absolute;z-index:3;inset:0;translate:none;visibility:hidden;pointer-events:none}
 .signoff-scene.is-pinned .signoff-deck{visibility:visible}
 .signoff-deck>*{position:absolute;left:var(--x,0);top:var(--y,0);width:var(--w,auto);margin:0}
-.signoff-deck .heart-results-title{opacity:calc(1 - var(--gather) * 2.5)}
+.signoff-scene .signoff-deck .heart-results-title{top:var(--y,0);left:var(--x,0);right:auto;width:var(--w,auto);opacity:calc(1 - var(--gather) * 2.5)}
+.signoff-scene .signoff-deck{padding-top:0}
 .signoff-scene .signoff-deck .heart-trend-card{position:absolute;left:var(--x,0);top:var(--y,0);width:var(--w,auto);height:var(--h,auto);min-height:0;--g:clamp(0,calc((var(--gather) - var(--k) * .12) / .4),1);opacity:calc(1 - var(--flow));translate:calc(var(--g) * var(--dx,0px)) calc(var(--g) * var(--dy,0px));scale:calc(1 - var(--flow) * .12)}
 .signoff-scene .signoff-deck .heart-card-back{background:#f7fafb}
 .signoff-report{width:min(560px,100%);height:fit-content;position:absolute;z-index:1;inset:0;margin:auto;padding:clamp(20px,2.4vw,30px);border:1px solid var(--bb-line-soft);border-radius:20px;background:#fff;box-shadow:0 26px 60px rgba(0,78,104,.14),0 4px 12px rgba(0,78,104,.06);opacity:var(--flow);scale:calc(.86 + var(--flow) * .14)}
@@ -2045,7 +2056,6 @@ body,button,input,select,textarea{font-family:var(--font-sans)}
 }
 @media(max-width:680px){
   .signoff-kicker{display:none}
-  .signoff-copy h2{font-size:30px}
   .signoff-points{gap:6px;margin-top:14px}
   .signoff-points li{padding-left:26px;font-size:13.5px;line-height:1.35}
   .signoff-points li::before{width:17px;height:17px;background-size:10px}
@@ -2062,7 +2072,6 @@ body,button,input,select,textarea{font-family:var(--font-sans)}
   .sr-foot{padding-top:10px;font-size:11px}
 }
 @media(max-width:680px) and (max-height:720px){
-  .signoff-copy h2{font-size:27px}
   .signoff-points li{font-size:13px}
   .signoff-actions{margin-top:12px}
   .sr-head span{display:none}
@@ -2076,6 +2085,21 @@ body,button,input,select,textarea{font-family:var(--font-sans)}
   .signoff-stage{height:auto;min-height:var(--stage-h);position:relative}
 }
 
+@media(max-width:680px) and (max-height:720px){
+  .heart-results .heart-trend-grid{gap:6px}
+  .heart-results .heart-trend-card{min-height:140px}
+  .heart-results-title{margin-bottom:6px}
+}
+/* Desktop: the findings title is one row centred on the page, not on the
+   panel, and centred vertically between the top of the screen and the cards
+   (--title-top is measured in script). */
+@media(min-width:901px){
+  .heart-results .heart-results-title{position:absolute;top:var(--title-top,-80px);right:calc(-1 * var(--results-right));width:100vw;margin:0}
+}
+/* Phones: one row, sized down only as far as it needs to fit. */
+@media(max-width:680px){
+  .heart-results-title{font-size:min(var(--type-section),6.2vw)}
+}
 /* Phones: every element with a blur filter needs its own offscreen image in
    graphics memory. With 44 timeline cards and large blurred blobs that ran
    iPhone Safari out of memory, mostly when scrolling back up. Phones keep the

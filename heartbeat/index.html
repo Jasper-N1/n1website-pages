@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261020-11">
+  <link rel="stylesheet" href="styles.css?v=20261021-1">
   <script type="module" src="anatomy-loader.js?v=20261020-3"></script>
 </head>
 <body>
@@ -221,7 +221,7 @@
       </div>
 
       <div class="msg msg-in" style="--s:.69">
-        <p>Okay. I&rsquo;ll review your recent results and health data, then come back to you with a short summary of any trends worth discussing.</p>
+        <p>Okay. I&rsquo;ll review your results and share any trends worth discussing.</p>
       </div>
 
       <div class="msg msg-out" style="--s:.89">
@@ -455,7 +455,7 @@
         </figure>
       </div>
       <div class="heart-results" aria-label="Cardiovascular health results">
-        <h2 class="heart-results-title"><span class="is-front">Findings</span><span class="is-back" aria-hidden="true">The facts behind them</span></h2>
+        <h2 class="heart-results-title"><span class="is-front">Findings</span><span class="is-back">The facts behind them</span></h2>
         <div class="heart-trend-grid" aria-label="Cardiovascular health trends">
           <article class="heart-trend-card is-watch" style="--s:.00">
             <header><span>Apolipoprotein B</span><em>Watch</em></header>
@@ -546,15 +546,16 @@
     </div>
   </section>
   <section class="cta-scene" aria-labelledby="cta-title">
-    <img class="cta-photo" src="../assets/closing-mri-patient.jpg" srcset="../assets/closing-mri-patient-640.webp 640w, ../assets/closing-mri-patient-1280.webp 1280w, ../assets/closing-mri-patient-1920.webp 1920w, ../assets/closing-mri-patient.jpg 2380w" sizes="100vw" alt="A clinician steadying a patient as he goes into a CT scanner" width="2380" height="1400" loading="lazy" decoding="async">
+    <img class="cta-photo" src="../assets/closing-marcus.webp" srcset="../assets/closing-marcus-640.webp 640w, ../assets/closing-marcus-1280.webp 1280w, ../assets/closing-marcus.webp 1672w" sizes="100vw" alt="Marcus talking with his doctor during the appointment" width="1672" height="941" loading="lazy" decoding="async">
     <div class="cta-shade" aria-hidden="true"></div>
     <div class="cta-inner">
-      <h2 id="cta-title">Arrive prepared.<br>Be present.</h2>
-      <p class="cta-sub">Your complete health history, organized for the conversation.</p>
+      <h2 id="cta-title">Prepare your next appointment in minutes.</h2>
+      <p class="cta-sub">Upload the records, review a source-linked draft, approve it. Your first report is free.</p>
       <div class="cta-actions">
-        <a class="cta-primary is-outline" href="https://app.n1.care/signup" target="_blank" rel="noopener">Start free trial</a>
         <a class="cta-primary" href="https://calendly.com/leah-n1/n1-care-discovery-call" target="_blank" rel="noopener noreferrer">Book a call <span aria-hidden="true">&rarr;</span></a>
+        <a class="cta-secondary" href="https://app.n1.care/signup" target="_blank" rel="noopener">or start a free trial</a>
       </div>
+      <p class="cta-trial-note">Free trial: 1 report and 50 pages. No card needed.</p>
     </div>
   </section>
 
@@ -1086,6 +1087,12 @@
         const snapshot = document.createElement('div');
         snapshot.className = 'tl-saved-card';
         snapshot.style.setProperty('--saved-i', snapshots.length);
+        /* A loose pile rather than a neat deck: each card keeps its own small
+           turn and offset. Fixed values, so the pile looks the same each visit. */
+        const mess = [[-3.2, -6, 4], [2.6, 8, -3], [-1.4, -3, -6], [3.8, 5, 5], [-2.4, -8, 2], [1.6, 4, -4]][snapshots.length % 6];
+        snapshot.style.setProperty('--rot', `${mess[0]}deg`);
+        snapshot.style.setProperty('--mx', `${mess[1]}px`);
+        snapshot.style.setProperty('--my', `${mess[2]}px`);
         snapshot.append(body);
         savedShelf.append(snapshot);
         snapshots.push({ index, node: snapshot });
@@ -1123,6 +1130,20 @@
           tlScene.style.removeProperty('--deck-h');
           const deckH = finalCardBody.offsetHeight;
           if (deckH) tlScene.style.setProperty('--deck-h', `${deckH}px`);
+        }
+        /* The saved cards keep their real size in the slot whenever the space
+           beside the focused card allows it; on narrower screens they scale
+           down just enough to fit. Phones use their own small slot (CSS). */
+        const cardWidth = finalCardBody?.offsetWidth || 400;
+        if (innerWidth > 680) {
+          const room = (innerWidth - cardWidth) / 2 - Math.max(40, innerWidth * .03) - 24;
+          const need = cardWidth + savedSnapshots.length * 6 + 2 * 24 + 36;
+          const fit = Math.max(.4, Math.min(1, room / need)).toFixed(3);
+          savedSlot.style.setProperty('--S', fit);
+          savedShelf.style.setProperty('--S', fit);
+        } else {
+          savedSlot.style.removeProperty('--S');
+          savedShelf.style.removeProperty('--S');
         }
       };
       fitTimeline();
@@ -1571,6 +1592,20 @@
         fitCardBacks();
       }, { passive: true });
       document.fonts?.ready.then(fitCardBacks);
+      /* Desktop: centre the findings title between the top of the screen and
+         the top of the cards. */
+      const resultsPanel = insightsScene.querySelector('.heart-results');
+      const resultsTitle = resultsPanel?.querySelector('.heart-results-title');
+      const insightsStageEl = insightsScene.querySelector('.insights-stage');
+      const placeResultsTitle = () => {
+        if (!resultsPanel || !resultsTitle || !insightsStageEl) return;
+        const cardsTop = resultsPanel.getBoundingClientRect().top - insightsStageEl.getBoundingClientRect().top;
+        const titleHeight = resultsTitle.offsetHeight;
+        resultsPanel.style.setProperty('--title-top', `${(-(cardsTop + titleHeight) / 2).toFixed(1)}px`);
+      };
+      placeResultsTitle();
+      registerLayoutTask(placeResultsTitle);
+      document.fonts?.ready.then(placeResultsTitle);
       drawInsights();
     }
 
