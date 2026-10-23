@@ -33,8 +33,26 @@
   </defs>
 </svg>
   <a class="skip-link" href="#main">Skip to content</a>
-  <header class="floating-nav">
-    <a class="floating-signin" href="https://app.n1.care/login">Log in</a>
+  <header class="floating-nav site-menu is-clear">
+    <a class="menu-brand" href="https://n1.care/" aria-label="n1.care home"><span class="menu-logo" aria-hidden="true"></span></a>
+    <nav class="menu-links" id="site-menu" aria-label="Primary navigation">
+      <a href="https://n1.care/clinicians">For clinicians</a>
+      <a href="https://n1.care/patients">For patients</a>
+      <a href="https://n1.care/reports">Reports</a>
+      <div class="menu-drop">
+        <button class="menu-drop-toggle" type="button" aria-expanded="false" aria-controls="menu-pricing">Pricing<svg viewBox="0 0 12 8" aria-hidden="true"><path d="m1 1 5 5 5-5"/></svg></button>
+        <div class="menu-drop-panel" id="menu-pricing">
+          <a href="https://n1.care/pricing-patients">Pricing for patients</a>
+          <a href="https://n1.care/pricing">Pricing for doctors</a>
+        </div>
+      </div>
+      <a href="https://n1.care/compliance">Compliance</a>
+      <a href="https://n1.care/about">About</a>
+    </nav>
+    <div class="menu-end">
+      <a class="floating-signin" href="https://app.n1.care/login">Log in</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu">Menu</button>
+    </div>
   </header>
 
   <div class="zoom-journey">
@@ -43,7 +61,6 @@
 
     <div class="heart-act">
       <div class="heart-copy">
-        <p class="heart-kicker">n1.care</p>
         <h1>Years of history.<br>Brought into focus.</h1>
         <p class="heart-sub">n1.care turns a patient&rsquo;s scattered records into one source-linked history, ready before the appointment.</p>
         <a class="heart-cta" href="https://app.n1.care/signup" target="_blank" rel="noopener">Start free trial <span aria-hidden="true">&rarr;</span></a>
@@ -127,7 +144,6 @@
     </div>
 
     <section class="floating-copy" aria-labelledby="floating-title">
-      <p class="floating-kicker">n1.care</p>
       <h1 id="floating-title"><span>The whole picture.</span></h1>
       <p class="floating-perspective">Healthcare, from the first-person perspective.</p>
       <a class="floating-button" href="https://app.n1.care/signup">Start free trial</a>
@@ -457,7 +473,7 @@
         </figure>
       </div>
       <div class="heart-results" aria-label="Cardiovascular health results">
-        <h2 class="heart-results-title"><span class="is-front">Findings</span><span class="is-back">The facts behind them</span></h2>
+        <h2 class="heart-results-title"><span class="is-front">Findings<span class="is-dots" aria-hidden="true">&hellip;</span></span> <span class="is-back">and the facts behind them</span></h2>
         <div class="heart-trend-grid" aria-label="Cardiovascular health trends">
           <article class="heart-trend-card is-watch" style="--s:.00">
             <header><span>Apolipoprotein B</span><em>Watch</em></header>
@@ -514,7 +530,6 @@
   <section class="signoff-scene" aria-labelledby="signoff-title">
     <div class="signoff-stage">
       <div class="signoff-copy">
-        <p class="signoff-kicker">Cardiology review</p>
         <h2 id="signoff-title">Prepared by n1.care.<br>Approved by you.</h2>
         <ul class="signoff-points">
           <li>Each result stays linked to its source, so you can review it.</li>
@@ -529,7 +544,8 @@
         <div class="signoff-deck heart-results" aria-hidden="true"></div>
         <article class="signoff-report" aria-label="Example cardiology review for Marcus J.">
           <header class="sr-head">
-            <div><small>n1.care &middot; Cardiology review</small><b>Marcus J.</b><span>Records 2004&ndash;2025 &middot; 12 sources</span></div>
+            <img class="sr-portrait" src="../assets/patient-marcus-240.webp" alt="" width="240" height="240" loading="lazy" decoding="async">
+            <div class="sr-who"><b>Marcus J.</b><span>Records 2004&ndash;2025 &middot; 12 sources</span></div>
             <em class="sr-status"><span class="is-draft">Draft for review</span><span class="is-approved">Approved</span></em>
           </header>
           <p class="sr-summary">ApoB has risen across five readings since 2004 and is worth discussing. Blood pressure, heart rate, HRV and fitness are stable. No cardiovascular diagnosis is recorded.</p>
@@ -839,6 +855,22 @@
        The opening copy holds the start, the card field fades up behind it,
        and the original gather-and-zoom sequence owns the rest. */
     const SEQUENCE_START = .49;
+    const siteMenu = document.querySelector('.site-menu');
+    /* Pricing opens a small panel; on phones the links sit behind "Menu". */
+    if (siteMenu) {
+      const drop = siteMenu.querySelector('.menu-drop');
+      const dropToggle = siteMenu.querySelector('.menu-drop-toggle');
+      const menuToggle = siteMenu.querySelector('.menu-toggle');
+      const setDrop = open => { drop.classList.toggle('is-open', open); dropToggle.setAttribute('aria-expanded', String(open)); };
+      const setMenu = open => { siteMenu.classList.toggle('is-open', open); menuToggle.setAttribute('aria-expanded', String(open)); if (!open) setDrop(false); };
+      dropToggle.addEventListener('click', () => setDrop(dropToggle.getAttribute('aria-expanded') !== 'true'));
+      menuToggle.addEventListener('click', () => setMenu(menuToggle.getAttribute('aria-expanded') !== 'true'));
+      document.addEventListener('click', event => {
+        if (!drop.contains(event.target)) setDrop(false);
+        if (!siteMenu.contains(event.target)) setMenu(false);
+      });
+      document.addEventListener('keydown', event => { if (event.key === 'Escape') { setDrop(false); setMenu(false); } });
+    }
     const paint = progress => {
       /* Title out, then the three blobs run together into the point, then the
          record field comes up out of it. */
@@ -855,6 +887,13 @@
       cardField.style.setProperty('--intro', String(cardsIn));
 
       renderImageZoom(clamp((progress - SEQUENCE_START) / (1 - SEQUENCE_START)));
+      /* The menu is transparent, in white, while the blue opening is behind
+         it: until the opening photo grows up under the menu bar. */
+      if (siteMenu) {
+        const clear = progress < SEQUENCE_START
+          || (progress < 1 && zoomLayer.getBoundingClientRect().top > siteMenu.offsetHeight);
+        siteMenu.classList.toggle('is-clear', clear);
+      }
 
       /* Before the sequence proper, the field comes OUT of the point: the same
          gather animations, scrubbed backwards. Runs after renderImageZoom
@@ -1117,6 +1156,9 @@
       savedSlot.style.setProperty('--saved-n', savedSnapshots.length);
       savedSlot.innerHTML = '<span>Saved records</span>';
       tlStageEl?.append(savedSlot, savedShelf, finalSnapshot);
+      const patientSummary = tlScene.querySelector('.tl-patient-summary');
+      const summaryHome = document.createComment('patient summary');
+      patientSummary?.before(summaryHome);
       const fitTimeline = () => {
         if (!tlStageEl || !tlHeadEl) return;
         const stageH = tlStageEl.clientHeight;
@@ -1125,6 +1167,9 @@
         const bodyHeight = mainBody?.offsetHeight || tlItems[tlItems.length - 1].offsetHeight;
         const railY = stageH / 2 - bodyTop - bodyHeight / 2 + 6;
         tlScene.style.setProperty('--rail-y', `${Math.round(railY)}px`);
+        /* The final card copy sits exactly on the real last card (the list is
+           raised 5px), so the hand-over to the stack does not move it. */
+        tlScene.style.setProperty('--card-top', `${Math.round(railY - 5 + bodyTop)}px`);
         /* One deck height for the saved cards and the final card: the final
            card's natural height, never less than a stop card. */
         const finalCardBody = finalSnapshot.querySelector('.tl-body');
@@ -1138,14 +1183,18 @@
            down just enough to fit. Phones use their own small slot (CSS). */
         const cardWidth = finalCardBody?.offsetWidth || 400;
         if (innerWidth > 680) {
-          const room = (innerWidth - cardWidth) / 2 - Math.max(40, innerWidth * .03) - 24;
-          const need = cardWidth + savedSnapshots.length * 6 + 2 * 24 + 36;
-          const fit = Math.max(.4, Math.min(1, room / need)).toFixed(3);
-          savedSlot.style.setProperty('--S', fit);
-          savedShelf.style.setProperty('--S', fit);
+          const room = (innerWidth - cardWidth) / 2 - 24 - 24;
+          const pile = cardWidth + savedSnapshots.length * 6;
+          const fit = Math.max(.4, Math.min(1, (room - 2 * 30) / pile));
+          savedSlot.style.setProperty('--S', fit.toFixed(3));
+          savedShelf.style.setProperty('--S', fit.toFixed(3));
+          /* The patient portrait heads the saved-records slot. */
+          if (patientSummary && patientSummary.parentNode !== savedSlot) savedSlot.append(patientSummary);
         } else {
           savedSlot.style.removeProperty('--S');
           savedShelf.style.removeProperty('--S');
+          /* Phones: no slot beside the card, so the portrait goes back next to the title. */
+          if (patientSummary && patientSummary.parentNode === savedSlot) summaryHome.after(patientSummary);
         }
       };
       fitTimeline();
@@ -1604,6 +1653,11 @@
         const cardsTop = resultsPanel.getBoundingClientRect().top - insightsStageEl.getBoundingClientRect().top;
         const titleHeight = resultsTitle.offsetHeight;
         resultsPanel.style.setProperty('--title-top', `${(-(cardsTop + titleHeight) / 2).toFixed(1)}px`);
+        /* "Findings…" starts centred on its own; the hidden second part
+           still takes up its room, so shift by half of the difference. */
+        const back = resultsTitle.querySelector('.is-back');
+        const dots = resultsTitle.querySelector('.is-dots');
+        if (back && dots) resultsTitle.style.setProperty('--title-shift', `${((back.offsetWidth - dots.offsetWidth) / 2).toFixed(1)}px`);
       };
       placeResultsTitle();
       registerLayoutTask(placeResultsTitle);
