@@ -210,9 +210,13 @@
       </ol>
     </aside>
   </section>
-  <div class="zoom-copy" aria-hidden="true">
-    <h2><span>Years of history.</span><span>Brought into focus.</span></h2>
-    <span>n1.care organizes patient records into a clear history and draft reports, with every finding linked to its source.</span>
+  <div class="zoom-copy">
+    <h2 aria-hidden="true"><span>Years of history.</span><span>Brought into focus.</span></h2>
+    <span aria-hidden="true">n1.care organizes patient records into a clear history and draft reports, with every finding linked to its source.</span>
+    <div class="zoom-actions" inert>
+      <a class="heart-cta" data-cta="trial">Get your free report <span aria-hidden="true">&rarr;</span></a>
+      <a class="heart-how" data-cta="demo">Try the live demo <span aria-hidden="true">&rarr;</span></a>
+    </div>
   </div>
   <div class="singularity" aria-hidden="true"><span class="sg-core"></span></div>
   <div class="patient-zoom" aria-hidden="true"><img src="../assets/clinician-hero-doctor-marcus-v2.webp" alt="" width="1672" height="941" decoding="async" fetchpriority="high"></div>
@@ -661,6 +665,7 @@
     let gatherRelease = 0;
     const cardField = document.querySelector('.card-field');
     const zoomCopy = document.querySelector('.zoom-copy');
+    const zoomActions = zoomCopy?.querySelector('.zoom-actions');
     const zoomLayer = document.querySelector('.patient-zoom');
     let zoomStart = null;
     let targetProgress = 0;
@@ -865,6 +870,8 @@
       const copyProgress = smooth(clamp((progress - .7) / .1));
       zoomCopy.style.opacity = String(copyProgress);
       zoomCopy.style.transform = `translateY(${mix(24, 0, copyProgress)}px)`;
+      /* The buttons can be clicked only once the copy is in view. */
+      if (zoomActions) zoomActions.inert = copyProgress < .6;
     };
     prepareZoomTarget();
     const journey = document.querySelector('.zoom-journey');
