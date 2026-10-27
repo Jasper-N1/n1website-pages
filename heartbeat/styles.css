@@ -2320,3 +2320,8 @@ html.show-cta .menu-cta{display:flex}
   .menu-cta .is-long{display:none}
   .menu-cta .is-short{display:inline}
 }
+/* Photo headline: the same two actions as the opening, left-aligned. */
+.zoom-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px 26px;margin-top:clamp(22px,3svh,32px);text-shadow:none;pointer-events:auto}
+.zoom-actions .heart-cta{margin-top:0}
+@media(max-width:680px){.zoom-actions{gap:10px 20px;margin-top:18px}}
+.zoom-actions .heart-how:hover span[aria-hidden]{translate:4px 0}
