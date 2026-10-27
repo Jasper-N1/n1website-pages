@@ -1759,6 +1759,11 @@
       const sourceTitle = sourceResults?.querySelector('.heart-results-title');
       const deckTitle = sourceTitle?.cloneNode(true);
       if (deckTitle) { deckTitle.removeAttribute('id'); deck.append(deckTitle); }
+      /* The demo link rides along too, so it fades out with the title
+         instead of vanishing at the hand-off. */
+      const sourceCta = sourceResults?.querySelector('.heart-results-cta');
+      const deckCta = sourceCta?.cloneNode(true);
+      if (deckCta) { deckCta.inert = true; deck.append(deckCta); }
       const deckCards = sourceCards.map((card, index) => {
         const copy = card.cloneNode(true);
         copy.style.minHeight = '';
@@ -1801,6 +1806,7 @@
           return box;
         };
         if (deckTitle && sourceTitle) place(deckTitle, sourceTitle);
+        if (deckCta && sourceCta) place(deckCta, sourceCta);
         deckCards.forEach((card, index) => {
           const box = place(card, sourceCards[index]);
           const k = sourceCards.length - 1 - index;
@@ -1837,8 +1843,9 @@
         signoffScene.style.setProperty('--rows', clamp((p - .5) / .14).toFixed(4));
         /* The title arrives once the heart has faded, after the report. */
         signoffScene.style.setProperty('--copy', between(.78, .87).toFixed(4));
-        signoffScene.style.setProperty('--approve', between(.65, .7).toFixed(4));
-        signoffStatus?.classList.toggle('is-done', p >= .675);
+        /* Approval lands just before the title arrives on the left. */
+        signoffScene.style.setProperty('--approve', between(.73, .77).toFixed(4));
+        signoffStatus?.classList.toggle('is-done', p >= .745);
         if (signoffCopy) signoffCopy.inert = p < .82;
       };
       /* Before the hand-off, measure from the heart scene's final frame. */
@@ -1846,7 +1853,7 @@
       /* Snap points (phones): cards readable, stacked, report approved, title. */
       const placeSignoffSnaps = () => {
         const travel = Math.max(0, signoffScene.offsetHeight - stageHeight);
-        window.n1PlaceSnaps?.(signoffScene, [.12, .43, .71, .9].map(at => at * travel));
+        window.n1PlaceSnaps?.(signoffScene, [.12, .43, .77, .9].map(at => at * travel));
       };
       placeSignoffSnaps();
       registerLayoutTask(placeSignoffSnaps);
