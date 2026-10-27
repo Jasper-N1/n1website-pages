@@ -48,8 +48,10 @@
       </div>
       <a href="https://n1.care/compliance">Compliance</a>
       <a href="https://n1.care/about">About</a>
+      <a class="menu-login" href="https://app.n1.care/login">Log in</a>
     </nav>
     <div class="menu-end">
+      <a class="menu-cta" data-cta="trial">Start free trial</a>
       <a class="floating-signin" href="https://app.n1.care/login">Log in</a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu">Menu</button>
     </div>
@@ -63,8 +65,11 @@
       <div class="heart-copy">
         <h1>Years of history.<br>Brought into focus.</h1>
         <p class="heart-sub">n1.care turns a patient&rsquo;s scattered records into one source-linked history, ready before the appointment.</p>
-        <a class="heart-cta" href="https://app.n1.care/signup" target="_blank" rel="noopener">Start free trial <span aria-hidden="true">&rarr;</span></a>
-        <p class="heart-cue"><span aria-hidden="true">↓</span> Scroll</p>
+        <div class="heart-actions">
+          <a class="heart-cta" href="https://app.n1.care/signup" target="_blank" rel="noopener">Start free trial <span aria-hidden="true">&rarr;</span></a>
+          <a class="heart-how" data-cta="how">See how it works <span aria-hidden="true">&darr;</span></a>
+        </div>
+        <p class="heart-note">Free trial: 1 report and 50 pages. No card needed.</p>
       </div>
     </div>
 
@@ -454,6 +459,7 @@
     <div class="tl-head">
       <h2 id="timeline-title">21 years of records, analyzed in minutes</h2>
     </div>
+    <p class="tl-cta"><a data-cta="trial">Try it with your own patient&rsquo;s records <span aria-hidden="true">&rarr;</span></a></p>
     <div class="tl-rail" aria-hidden="true"><span class="tl-focus"></span></div>
     
     </div>
@@ -474,6 +480,7 @@
       </div>
       <div class="heart-results" aria-label="Cardiovascular health results">
         <h2 class="heart-results-title"><span class="is-front">Findings<span class="is-dots" aria-hidden="true">&hellip;</span></span> <span class="is-back">and the facts behind them</span></h2>
+        <p class="heart-results-cta"><a data-cta="demo">Explore a live demo <span aria-hidden="true">&rarr;</span></a></p>
         <div class="heart-trend-grid" aria-label="Cardiovascular health trends">
           <article class="heart-trend-card is-watch" style="--s:.00">
             <header><span>Apolipoprotein B</span><em>Watch</em></header>
@@ -538,7 +545,9 @@
         </ul>
         <div class="signoff-actions">
           <a class="signoff-cta" href="https://app.n1.care/demo" target="_blank" rel="noopener">Explore a live demo <span aria-hidden="true">&rarr;</span></a>
+          <a class="signoff-trial" data-cta="trial">Start free trial</a>
         </div>
+        <p class="signoff-note">Look around the real product.</p>
       </div>
       <div class="signoff-visual">
         <div class="signoff-deck heart-results" aria-hidden="true"></div>
@@ -569,7 +578,7 @@
       <h2 id="cta-title">Try it before your next appointment</h2>
       <div class="cta-actions">
         <a class="cta-primary" href="https://calendly.com/leah-n1/n1-care-discovery-call" target="_blank" rel="noopener noreferrer">Book a discovery call <span aria-hidden="true">&rarr;</span></a>
-        <a class="cta-secondary" href="https://app.n1.care/signup" target="_blank" rel="noopener">or start a free trial</a>
+        <a class="cta-secondary" href="https://app.n1.care/signup" target="_blank" rel="noopener">Start free trial</a>
       </div>
       <p class="cta-trial-note">Free trial: 1 report and 50 pages. No card needed.</p>
     </div>
@@ -582,6 +591,10 @@
         <div class="footer-brand">
           <a class="footer-home" href="https://n1.care" aria-label="N1 Care home"><span class="footer-logo" aria-hidden="true"></span></a>
           <p class="footer-tagline">The whole health story. Every answer traced to its source.</p>
+          <div class="footer-ctas">
+            <a class="footer-cta" data-cta="trial">Start free trial</a>
+            <a class="footer-cta-call" data-cta="call">Book a discovery call</a>
+          </div>
         </div>
         <nav class="footer-cols" aria-label="Footer">
           <div class="footer-col">
@@ -616,6 +629,12 @@
   </footer>
 
   <script>
+    /* Always open at the header. The browser would otherwise restore the old
+       scroll position on a reload or back navigation, which lands in the
+       middle of a scroll-driven scene. Links to a #section still work. */
+    history.scrollRestoration = 'manual';
+    addEventListener('pageshow', () => { if (!location.hash) scrollTo(0, 0); });
+
     /* Every pinned stage is one --stage-h tall, and that is the box the whole
        animation has to fill and be measured against - not innerHeight.
 
@@ -857,6 +876,13 @@
     const SEQUENCE_START = .49;
     const siteMenu = document.querySelector('.site-menu');
     /* Pricing opens a small panel; on phones the links sit behind "Menu". */
+    /* The closing section has its own buttons, so the menu CTA steps aside. */
+    const closingScene = document.querySelector('.cta-scene');
+    if (closingScene && 'IntersectionObserver' in window) {
+      new IntersectionObserver(entries => {
+        document.documentElement.classList.toggle('in-closing', entries[0].isIntersecting);
+      }, { threshold: .35 }).observe(closingScene);
+    }
     if (siteMenu) {
       const drop = siteMenu.querySelector('.menu-drop');
       const dropToggle = siteMenu.querySelector('.menu-drop-toggle');
@@ -879,6 +905,7 @@
       heartAct.style.transform = `translateY(${mix(0, -28, titleOut)}px)`;
       /* Once the opening fades, its button can no longer be clicked or tabbed to. */
       heartAct.inert = titleOut > .6;
+      document.documentElement.classList.toggle('show-cta', titleOut > .6);
 
       const pull = smooth(clamp((progress - .055) / .185));
       focal.style.setProperty('--pull', pull.toFixed(4));
@@ -1167,6 +1194,9 @@
         const bodyHeight = mainBody?.offsetHeight || tlItems[tlItems.length - 1].offsetHeight;
         const railY = stageH / 2 - bodyTop - bodyHeight / 2 + 6;
         tlScene.style.setProperty('--rail-y', `${Math.round(railY)}px`);
+        /* The title sits halfway between the menu bar and the timeline line. */
+        const menuH = document.querySelector('.site-menu')?.offsetHeight || 0;
+        tlScene.style.setProperty('--tl-head-top', `${Math.round((menuH + railY - tlHeadEl.offsetHeight) / 2)}px`);
         /* The final card copy sits exactly on the real last card (the list is
            raised 5px), so the hand-over to the stack does not move it. */
         tlScene.style.setProperty('--card-top', `${Math.round(railY - 5 + bodyTop)}px`);
