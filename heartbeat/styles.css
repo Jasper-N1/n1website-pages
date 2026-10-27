@@ -160,9 +160,7 @@ body{display:block;overflow:visible;overflow-x:clip}
 .heart-copy{max-width:min(900px,90vw)}
 .heart-kicker{margin:0 0 16px;color:rgba(255,255,255,.66);font-size:var(--fs-xs);font-weight:600;letter-spacing:.12em;text-transform:uppercase}
 .heart-copy h1{margin:0;color:var(--bb-paper);font-size:var(--fs-display);font-weight:400;line-height:1.02;letter-spacing:0;text-shadow:0 8px 34px rgba(0,48,68,.28)}
-.heart-sub{max-width:34ch;margin:clamp(18px,2.6svh,26px) auto 0;color:rgba(255,255,255,.78);font:400 var(--fs-xl)/1.35 var(--font-text);text-wrap:balance}
 /* Phones: two steps up from body (16px) is --fs-lg; --fs-xl would crowd the headline. */
-@media(max-width:680px){.heart-sub{font-size:var(--fs-lg)}}
 .heart-cta{min-height:48px;display:inline-flex;align-items:center;gap:8px;margin-top:clamp(22px,3.2svh,32px);padding:0 24px;border-radius:999px;color:var(--bb-blue-900);background:var(--bb-paper);font:600 var(--fs-md)/1 var(--font-sans);text-decoration:none;pointer-events:auto;box-shadow:0 14px 32px -18px rgba(0,48,68,.5);transition:translate .2s ease,background .2s ease}
 .heart-cta:hover{background:#fff;translate:0 -2px}
 .heart-cta:focus-visible{outline:3px solid var(--bb-blue-200);outline-offset:3px}
