@@ -2340,10 +2340,10 @@ html.show-cta .menu-cta{display:flex}
 .heart-results .ev{padding:0;border:0;border-radius:0;background:none}
 .heart-results .is-source .ev>svg{background:var(--bb-blue-50)}
 .heart-results .is-literature .ev>svg{background:var(--bb-matcha-wash)}
-/* Desktop: the heart and the cards are two columns of the same size, each
-   centred in its half of the screen. Script sets the heart scale and its
-   vertical offset to match the cards. */
+/* Desktop: the heart and the cards sit side by side with a fixed gap,
+   centred as one group. Script sets the heart scale, its position and the
+   panel position to match the cards. */
 @media(min-width:901px){
-  .heart-results{--col-w:clamp(460px,40vw,640px);--results-right:calc(25vw - var(--col-w) / 2);width:var(--col-w)}
-  .systems-body{transform-origin:50% 50%;translate:calc(var(--heart-left) * -25vw) calc(var(--heart-left) * var(--heart-y,0px));scale:calc(1 + var(--heart-left) * (var(--heart-fit,1) - 1))}
+  .heart-results{width:clamp(460px,40vw,640px)}
+  .systems-body{transform-origin:50% 50%;translate:calc(var(--heart-left) * var(--heart-x,-25vw)) calc(var(--heart-left) * var(--heart-y,0px));scale:calc(1 + var(--heart-left) * (var(--heart-fit,1) - 1))}
 }
