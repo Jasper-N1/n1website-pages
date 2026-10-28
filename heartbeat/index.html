@@ -34,25 +34,25 @@
 </svg>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="floating-nav site-menu is-clear">
-    <a class="menu-brand" href="https://n1.care/" aria-label="n1.care home"><span class="menu-logo" aria-hidden="true"></span></a>
+    <a class="menu-brand" aria-label="n1.care home"><span class="menu-logo" aria-hidden="true"></span></a>
     <nav class="menu-links" id="site-menu" aria-label="Primary navigation">
-      <a href="https://n1.care/clinicians">For clinicians</a>
-      <a href="https://n1.care/patients">For patients</a>
-      <a href="https://n1.care/reports">Reports</a>
+      <a>For clinicians</a>
+      <a>For patients</a>
+      <a>Reports</a>
       <div class="menu-drop">
-        <button class="menu-drop-toggle" type="button" aria-expanded="false" aria-controls="menu-pricing">Pricing<svg viewBox="0 0 12 8" aria-hidden="true"><path d="m1 1 5 5 5-5"/></svg></button>
+        <button class="menu-drop-toggle" type="button" disabled aria-expanded="false" aria-controls="menu-pricing">Pricing<svg viewBox="0 0 12 8" aria-hidden="true"><path d="m1 1 5 5 5-5"/></svg></button>
         <div class="menu-drop-panel" id="menu-pricing">
-          <a href="https://n1.care/pricing-patients">Pricing for patients</a>
-          <a href="https://n1.care/pricing">Pricing for doctors</a>
+          <a>Pricing for patients</a>
+          <a>Pricing for doctors</a>
         </div>
       </div>
-      <a href="https://n1.care/compliance">Compliance</a>
-      <a href="https://n1.care/about">About</a>
-      <a class="menu-login" href="https://app.n1.care/login">Log in</a>
+      <a>Compliance</a>
+      <a>About</a>
+      <a class="menu-login">Log in</a>
     </nav>
     <div class="menu-end">
       <a class="menu-cta" data-cta="trial"><span class="is-long">Get your free report</span><span class="is-short">Free report</span></a>
-      <a class="floating-signin" href="https://app.n1.care/login">Log in</a>
+      <a class="floating-signin">Log in</a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu">Menu</button>
     </div>
   </header>
@@ -1328,7 +1328,7 @@
         gliding = true;
         const from = scrollY;
         const span = Math.abs(target - from);
-        const duration = Math.min(850, 480 + span * .4);
+        const duration = Math.min(620, 360 + span * .28);
         const start = performance.now();
         const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
         const step = now => {
@@ -1364,8 +1364,8 @@
         const delta = Math.abs(event.deltaY);
         /* A new gesture: after a pause, a swipe stronger than the fading
            momentum of the last one, or scrolling that speeds up again more
-           than a third of a second after landing on a card. */
-        const fresh = now - lastWheelAt > 180 || delta > lastWheelDelta * 1.6 + 4 || (now - glideEndAt > 350 && delta > lastWheelDelta + 2);
+           than a fifth of a second after landing on a card. */
+        const fresh = now - lastWheelAt > 180 || delta > lastWheelDelta * 1.6 + 4 || (now - glideEndAt > 220 && delta > lastWheelDelta + 2);
         lastWheelAt = now;
         lastWheelDelta = delta;
         const dir = Math.sign(event.deltaY);
@@ -1701,6 +1701,8 @@
       let desiredInsightProgress = limitedInsightProgress;
       let insightCompleted = toInsightTimeline(limitedInsightProgress) >= insightHoldStart;
       let lastInsightStamp = performance.now();
+      const liveResultsTitle = insightsScene.querySelector('.insights-stage .heart-results-title');
+      liveResultsTitle?.classList.add('is-timed');
       const drawInsights = () => {
         const rawProgress = insightRaw();
         if (Math.abs(rawProgress - limitedInsightProgress) > .0005) desiredInsightProgress = rawProgress;
@@ -1761,6 +1763,9 @@
           ? turnLinear * (FIRST_ROW_TURN / FIRST_ROW_SCROLL)
           : FIRST_ROW_TURN + (turnLinear - FIRST_ROW_SCROLL) * ((1 - FIRST_ROW_TURN) / (1 - FIRST_ROW_SCROLL));
         insightsScene.style.setProperty('--heart-card-turn', smooth(turnShaped).toFixed(4));
+        /* The findings title plays its change on a timer once the cards start
+           to turn, so it is smooth at any scroll speed (see .is-timed). */
+        liveResultsTitle?.classList.toggle('is-turned', smooth(turnShaped) > .03);
         window.n1AnatomyFilm?.seek(progress);
       };
       sceneObserver?.observe(insightsScene);
@@ -1891,7 +1896,7 @@
       const sourceCards = [...(sourceResults?.querySelectorAll('.heart-trend-card') || [])];
       const sourceTitle = sourceResults?.querySelector('.heart-results-title');
       const deckTitle = sourceTitle?.cloneNode(true);
-      if (deckTitle) { deckTitle.removeAttribute('id'); deck.append(deckTitle); }
+      if (deckTitle) { deckTitle.removeAttribute('id'); deckTitle.classList.remove('is-timed', 'is-turned'); deck.append(deckTitle); }
       /* The demo link rides along too, so it fades out with the title
          instead of vanishing at the hand-off. */
       const sourceCta = sourceResults?.querySelector('.heart-results-cta');
