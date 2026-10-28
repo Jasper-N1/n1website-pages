@@ -1678,7 +1678,13 @@
         const grid = resultsPanel.querySelector('.heart-trend-grid');
         if (body && grid) {
           const gridTop = menuH + gap * 2 + titleHeight;
-          insightsScene.style.setProperty('--heart-fit', (Math.min(grid.offsetHeight, resultsPanel.offsetWidth / 1.08) / (body.offsetHeight / 1.62)).toFixed(4));
+          const heartH = Math.min(grid.offsetHeight, resultsPanel.offsetWidth / 1.08);
+          insightsScene.style.setProperty('--heart-fit', (heartH / (body.offsetHeight / 1.62)).toFixed(4));
+          /* Centre the heart, the gap and the cards as one group. */
+          const colGap = Math.min(128, Math.max(64, innerWidth * .08));
+          const groupLeft = (innerWidth - heartH * 1.04 - colGap - resultsPanel.offsetWidth) / 2;
+          insightsScene.style.setProperty('--heart-x', `${(groupLeft + heartH * .52 - innerWidth / 2).toFixed(1)}px`);
+          resultsPanel.style.setProperty('--results-right', `${groupLeft.toFixed(1)}px`);
           insightsScene.style.setProperty('--heart-y', `${(gridTop + grid.offsetHeight / 2 - body.offsetTop - body.offsetHeight / 2).toFixed(1)}px`);
         }
         /* "Findings…" starts centred on its own; the hidden second part
