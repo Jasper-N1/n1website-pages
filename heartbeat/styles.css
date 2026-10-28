@@ -2417,3 +2417,17 @@ body,button,input,select,textarea{font-family:var(--font-sans)}
 @media(prefers-reduced-motion:reduce){.tl-body :is(.tl-flag,.tl-metric-v),.tl-scan video{transition:none}}
 .tl-lane-due{fill:none;stroke:var(--bb-gold);stroke-width:1.6;stroke-dasharray:2 2;transition:opacity .4s ease .9s}
 .is-undrawn .tl-lane-due{opacity:0;transition:none}
+/* The live findings title: "Findings…" eases left, the dots fade, and the
+   second part fades in after it. Timed transitions, started by .is-turned,
+   so the change is smooth however fast the page scrolls. */
+.heart-results-title.is-timed>span{translate:var(--title-shift,0px) 0;transition:translate .75s cubic-bezier(.22,1,.36,1)}
+.heart-results-title.is-timed .is-dots{opacity:1;transition:opacity .3s ease}
+.heart-results-title.is-timed .is-back{opacity:0;transition:translate .75s cubic-bezier(.22,1,.36,1),opacity .6s ease}
+.heart-results-title.is-timed.is-turned>span{translate:0 0}
+.heart-results-title.is-timed.is-turned .is-dots{opacity:0}
+.heart-results-title.is-timed.is-turned .is-back{opacity:1;transition-delay:.25s}
+.heart-results-title.is-timed .is-front{transition:translate .75s cubic-bezier(.22,1,.36,1),opacity .2s linear}
+@media(prefers-reduced-motion:reduce){.heart-results-title.is-timed :is(span,.is-dots,.is-back){transition:none}}
+/* Demo: the menu bar links go nowhere. */
+.site-menu a:not([href]),.site-menu .menu-drop-toggle:disabled{cursor:default}
+.site-menu .menu-drop-toggle:disabled{color:inherit;opacity:.88}
