@@ -12,11 +12,35 @@ const startFilm = (host, phone) => {
      one at a time into the browser cache; nothing keeps extra decoded copies,
      so iPhone Safari can free memory as it needs to. (A version that held
      decoded ImageBitmaps ran the tab out of memory on iPhone.) */
-  const film = document.createElement('img');
-  film.className = 'anatomy-film';
-  film.alt = '';
+  /* Phones draw each frame into one canvas and free the decoded frame at
+     once. With an <img>, iPhone Safari kept the decoded pixels of every frame
+     it had shown (about 2 MB each, 91 frames) and the tab could run out of
+     memory at the body. */
+  const drawn = phone && 'createImageBitmap' in window;
+  const film = document.createElement(drawn ? 'canvas' : 'img');
+  film.className = drawn ? 'anatomy-film is-drawn' : 'anatomy-film';
   film.setAttribute('aria-hidden', 'true');
-  film.decoding = 'async';
+  if (!drawn) {
+    film.alt = '';
+    film.decoding = 'async';
+  }
+  const context = drawn ? film.getContext('2d') : null;
+  let drawToken = 0;
+  const drawFrame = url => {
+    const token = ++drawToken;
+    fetch(url).then(response => response.blob()).then(blob => createImageBitmap(blob)).then(bitmap => {
+      if (token === drawToken) {
+        if (film.width !== bitmap.width || film.height !== bitmap.height) {
+          film.width = bitmap.width;
+          film.height = bitmap.height;
+        }
+        context.clearRect(0, 0, film.width, film.height);
+        context.drawImage(bitmap, 0, 0);
+        host.classList.add('has-film');
+      }
+      bitmap.close();
+    }).catch(() => {});
+  };
   host.prepend(film);
   const cached = new Array(FRAMES).fill(false);
   let wanted = 0;
@@ -32,8 +56,11 @@ const startFilm = (host, phone) => {
     }
     if (index < 0 || index === shown) return;
     shown = index;
-    film.src = urls[index];
-    host.classList.add('has-film');
+    if (drawn) drawFrame(urls[index]);
+    else {
+      film.src = urls[index];
+      host.classList.add('has-film');
+    }
   };
   const schedule = () => { if (!frame) frame = requestAnimationFrame(show); };
   /* Every tenth frame first, so the whole animation is roughly there early;
