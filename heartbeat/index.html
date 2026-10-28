@@ -1289,30 +1289,24 @@
 
       const segments = [];
       marks.forEach((index, n) => {
-        /* Each stop holds for most of the scroll and the moves between them
-           are quick, so wherever a scroll comes to rest, it is almost always on
-           a stop card. The appointment at the end gets a shorter hold. */
-        segments.push({ kind: 'hold', index, len: n === marks.length - 1 ? 1.5 : 3 });
+        /* Each stop holds for a beat; the scroll stop below makes sure every
+           scroll lands on it. The moves between stops are long enough for the
+           routine entries to be seen streaming past. */
+        segments.push({ kind: 'hold', index, len: 1.5 });
         const next = marks[n + 1];
         if (next !== undefined) {
           /* A move across four skipped cards costs more than one across none,
              but nowhere near four times as much - that is where the time goes. */
-          segments.push({ kind: 'move', index, to: next, len: .7 + (next - index - 1) * .03 });
+          segments.push({ kind: 'move', index, to: next, len: 1 + (next - index - 1) * .085 });
         }
       });
       const totalLen = segments.reduce((sum, seg) => sum + seg.len, 0);
-      /* Every stop card stops the scroll for a moment, at any speed and in
-         both directions. A scroll that reaches or jumps past a card's middle
-         is set back on that middle, and wheel, touch and key scrolling are
-         ignored for STOP_MS and until the flick's momentum has died down (no
-         input for INPUT_GAP_MS). The card just released is skipped until the
-         scroll leaves it, so the next scroll gesture moves on. */
-      const INPUT_GAP_MS = 140;
-      let lastInputAt = 0;
-      /* Only scrolls the reader makes stop: a restored scroll position on a
-         reload or a jump to a link is left alone. */
-      let lastUserScrollAt = 0;
-      const STOP_MS = 650;
+      /* Desktop: one scroll gesture, one card. Inside the timeline a wheel or
+         key scroll glides to the next (or previous) stop card, so every card
+         is landed on and the entries between them stream past. The rest of
+         the gesture's momentum is ignored; a new gesture moves on. Before the
+         first card and after the last one the page scrolls as normal. Phones
+         keep native scrolling. */
       let stopMids = [];
       const placeTimelineStops = () => {
         const travel = tlScene.offsetHeight - stageHeight;
@@ -1320,59 +1314,79 @@
         stopMids = [];
         let acc = 0;
         segments.forEach(seg => {
-          if (seg.kind === 'hold') stopMids.push(top + (acc + seg.len / 2) / totalLen * TIMELINE_TRAVEL_END * travel);
+          if (seg.kind === 'hold') stopMids.push(Math.round(top + (acc + seg.len / 2) / totalLen * TIMELINE_TRAVEL_END * travel));
           acc += seg.len;
         });
       };
       placeTimelineStops();
       registerLayoutTask(placeTimelineStops);
-      let stopY = null;
-      let stopUntil = 0;
-      let released = null;
-      let lastStopCheckY = scrollY;
-      const stopped = () => {
-        const now = performance.now();
-        return now < stopUntil || now - lastInputAt < INPUT_GAP_MS;
-      };
-      const holdStop = mid => {
-        stopY = Math.round(mid);
-        stopUntil = performance.now() + STOP_MS;
-        lastInputAt = performance.now();
-        released = mid;
-        scrollTo({ top: stopY, behavior: 'instant' });
-      };
-      addEventListener('scroll', () => {
-        const y = scrollY;
-        if (stopY !== null) {
-          if (stopped()) {
-            if (Math.abs(y - stopY) > 1) scrollTo({ top: stopY, behavior: 'instant' });
-            lastStopCheckY = stopY;
-            return;
+      let gliding = false;
+      let lastWheelAt = 0;
+      let lastWheelDelta = 0;
+      let glideEndAt = 0;
+      const glideTo = target => {
+        gliding = true;
+        const from = scrollY;
+        const span = Math.abs(target - from);
+        const duration = Math.min(850, 480 + span * .4);
+        const start = performance.now();
+        const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        const step = now => {
+          const t = Math.min(1, (now - start) / duration);
+          scrollTo({ top: from + (target - from) * ease(t), behavior: 'instant' });
+          if (t < 1) requestAnimationFrame(step);
+          else {
+            gliding = false;
+            glideEndAt = performance.now();
           }
-          stopY = null;
-        }
-        const from = lastStopCheckY;
-        lastStopCheckY = y;
-        if (y === from || performance.now() - lastUserScrollAt > 1200) return;
-        const lo = Math.min(from, y);
-        const hi = Math.max(from, y);
-        const crossed = stopMids.filter(mid => mid !== released && mid >= lo && mid <= hi);
-        if (released !== null && Math.abs(y - released) > 40) released = null;
-        if (!crossed.length) return;
-        holdStop(y > from ? crossed[0] : crossed[crossed.length - 1]);
-      }, { passive: true });
-      const blockWhileStopped = event => {
-        lastUserScrollAt = performance.now();
-        if (stopY === null) return;
-        if (stopped()) {
-          lastInputAt = performance.now();
-          event.preventDefault();
-        } else stopY = null;
+        };
+        requestAnimationFrame(step);
       };
-      addEventListener('wheel', blockWhileStopped, { passive: false });
-      addEventListener('touchmove', blockWhileStopped, { passive: false });
+      /* The stop to glide to for a scroll in direction dir from y, or null to
+         let the page scroll on its own. */
+      const nextStop = (y, dir) => {
+        if (stopMids.length < 2) return null;
+        const first = stopMids[0];
+        const last = stopMids[stopMids.length - 1];
+        if (dir > 0) {
+          if (y >= last - 2) return null;
+          if (y < first - stageHeight) return null;
+          return stopMids.find(mid => mid > y + 2);
+        }
+        if (y <= first + 2) return null;
+        if (y > last + stageHeight) return null;
+        return [...stopMids].reverse().find(mid => mid < y - 2);
+      };
+      const timelineSteps = () => !reducedMotion.matches && !smoothScroll.matches;
+      addEventListener('wheel', event => {
+        if (!timelineSteps() || event.ctrlKey || Math.abs(event.deltaY) < Math.abs(event.deltaX)) return;
+        const now = performance.now();
+        const delta = Math.abs(event.deltaY);
+        /* A new gesture: after a pause, a swipe stronger than the fading
+           momentum of the last one, or scrolling that speeds up again more
+           than a third of a second after landing on a card. */
+        const fresh = now - lastWheelAt > 180 || delta > lastWheelDelta * 1.6 + 4 || (now - glideEndAt > 350 && delta > lastWheelDelta + 2);
+        lastWheelAt = now;
+        lastWheelDelta = delta;
+        const dir = Math.sign(event.deltaY);
+        const target = nextStop(scrollY, dir);
+        if (target === null || target === undefined) {
+          if (gliding) event.preventDefault();
+          return;
+        }
+        event.preventDefault();
+        if (gliding || !fresh) return;
+        glideTo(target);
+      }, { passive: false });
       addEventListener('keydown', event => {
-        if (['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', ' ', 'Home', 'End'].includes(event.key)) blockWhileStopped(event);
+        if (!timelineSteps() || event.target.closest?.('input, textarea, select, [contenteditable]')) return;
+        const dir = ['ArrowDown', 'PageDown', ' '].includes(event.key) ? (event.shiftKey && event.key === ' ' ? -1 : 1)
+          : ['ArrowUp', 'PageUp'].includes(event.key) ? -1 : 0;
+        if (!dir) return;
+        const target = nextStop(scrollY, dir);
+        if (target === null || target === undefined) return;
+        event.preventDefault();
+        if (!gliding) glideTo(target);
       });
 
       const drawTimeline = () => {
