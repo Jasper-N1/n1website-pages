@@ -1671,6 +1671,16 @@
         resultsPanel.style.setProperty('--results-top', `${(menuH + gap * 2 + titleHeight).toFixed(1)}px`);
         resultsPanel.style.setProperty('--results-shift', '0%');
         resultsPanel.style.setProperty('--title-top', `${(-(gap + titleHeight)).toFixed(1)}px`);
+        /* Scale the heart to the height of the cards, but no wider than their
+           column, and centre it on them. The camera frames the heart at 1/1.62
+           of the canvas height, centred; it turns up to about 1.08 times as wide. */
+        const body = insightsScene.querySelector('.systems-body');
+        const grid = resultsPanel.querySelector('.heart-trend-grid');
+        if (body && grid) {
+          const gridTop = menuH + gap * 2 + titleHeight;
+          insightsScene.style.setProperty('--heart-fit', (Math.min(grid.offsetHeight, resultsPanel.offsetWidth / 1.08) / (body.offsetHeight / 1.62)).toFixed(4));
+          insightsScene.style.setProperty('--heart-y', `${(gridTop + grid.offsetHeight / 2 - body.offsetTop - body.offsetHeight / 2).toFixed(1)}px`);
+        }
         /* "Findings…" starts centred on its own; the hidden second part
            still takes up its room, so shift by half of the difference. */
         const back = resultsTitle.querySelector('.is-back');
