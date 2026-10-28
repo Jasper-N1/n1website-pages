@@ -2431,3 +2431,9 @@ body,button,input,select,textarea{font-family:var(--font-sans)}
 /* Demo: the menu bar links go nowhere. */
 .site-menu a:not([href]),.site-menu .menu-drop-toggle:disabled{cursor:default}
 .site-menu .menu-drop-toggle:disabled{color:inherit;opacity:.88}
+/* Phones: the film is a canvas sized to its frame; keep it contained and
+   centred like the <img> it replaces. */
+.anatomy-film.is-drawn{width:auto;height:auto;max-width:100%;max-height:100%;inset:0;margin:auto;object-fit:initial}
+/* Phones: the poster that stands in for a clip in the card copies. */
+.tl-scan>img.is-still,.hc-scan>img.is-still{width:100%;height:100%;position:static;display:block;object-fit:cover}
+.hc-scan>img.is-still{object-position:50% 45%}
