@@ -1331,7 +1331,6 @@ body{display:block;overflow:visible;overflow-x:clip}
    own records reads as blue record chips; literature reads as green citations. */
 .ev-group{min-width:0}
 .ev-group>b{display:flex;align-items:baseline;gap:8px;margin-bottom:4px;font:700 var(--fs-xs)/1.2 var(--font-sans);letter-spacing:.09em;text-transform:uppercase}
-.ev-group>b span{color:var(--bb-muted);font-weight:500;font-size:var(--fs-sm);letter-spacing:0;text-transform:none}
 .ev-group.is-source>b{color:var(--bb-blue-800)}
 .ev-group.is-literature>b{color:var(--bb-matcha-dark)}
 .ev-group ul{display:grid;gap:5px;margin:0;padding:0;list-style:none}
@@ -1400,7 +1399,6 @@ body{display:block;overflow:visible;overflow-x:clip}
   .heart-results .heart-card-back{gap:5px;padding:9px 10px}
   .heart-card-back h3{font-size:var(--fs-xs)}
   .ev-group>b{margin-bottom:3px;font-size:var(--fs-mini)}
-  .ev-group>b span{display:none}
   .ev-group ul{gap:3px}
   .ev{grid-template-columns:18px minmax(0,1fr);gap:6px;padding:3px 6px 3px 3px;border-radius:7px}
   .ev>svg{width:18px;height:18px;padding:3px;border-radius:5px}
@@ -2337,3 +2335,8 @@ html.show-cta .menu-cta{display:flex}
 @media(prefers-reduced-motion:reduce){
   .sr-status.is-done .is-approved::before,.signoff-report:has(.sr-status.is-done){animation:none}
 }
+/* Lighter card backs: no box around each source; the tinted icon keeps the
+   source and literature colours apart. */
+.heart-results .ev{padding:0;border:0;border-radius:0;background:none}
+.heart-results .is-source .ev>svg{background:var(--bb-blue-50)}
+.heart-results .is-literature .ev>svg{background:var(--bb-matcha-wash)}
