@@ -887,7 +887,6 @@
       heartAct.style.transform = `translateY(${mix(0, -28, titleOut)}px)`;
       /* Once the opening fades, its button can no longer be clicked or tabbed to. */
       heartAct.inert = titleOut > .6;
-      document.documentElement.classList.toggle('show-cta', titleOut > .6);
 
       const pull = smooth(clamp((progress - .055) / .185));
       focal.style.setProperty('--pull', pull.toFixed(4));
@@ -951,6 +950,22 @@
     }, { rootMargin: '100% 0px' }) : null;
     const layoutTasks = [];
     const registerLayoutTask = task => layoutTasks.push(task);
+    /* Desktop: the timeline uses the layout of the findings, so their titles
+       and the tops of their content sit at the same height on the screen. The
+       findings set three equal gaps: menu to title, title to the heart and
+       cards, the link under the cards to the bottom of the screen. Until the
+       findings are measured, the timeline uses its own content height. */
+    const sharedContent = { timeline: 0, findings: 0 };
+    const sharedRefit = {};
+    const sharedLayout = (stageH, menuH, titleH) => {
+      const gap = Math.max(12, (stageH - menuH - titleH - (sharedContent.findings || sharedContent.timeline)) / 3);
+      return { titleTop: menuH + gap, contentTop: menuH + gap * 2 + titleH };
+    };
+    const reportContent = (section, height) => {
+      if (sharedContent[section] === height) return;
+      sharedContent[section] = height;
+      if (section === 'findings') sharedRefit.timeline?.();
+    };
     let scrollDirty = true;
     let loopOn = false;
     let lastStamp = 0;
@@ -1174,14 +1189,16 @@
         const mainBody = tlItems[tlItems.length - 1].querySelector('.tl-body');
         const bodyTop = mainBody?.offsetTop || 0;
         const bodyHeight = mainBody?.offsetHeight || tlItems[tlItems.length - 1].offsetHeight;
-        const railY = stageH / 2 - bodyTop - bodyHeight / 2 + 6;
-        tlScene.style.setProperty('--rail-y', `${Math.round(railY)}px`);
-        /* The title sits halfway between the menu bar and the timeline line. */
         const menuH = document.querySelector('.site-menu')?.offsetHeight || 0;
-        tlScene.style.setProperty('--tl-head-top', `${Math.round((menuH + railY - tlHeadEl.offsetHeight) / 2)}px`);
-        /* The final card copy sits exactly on the real last card (the list is
-           raised 5px), so the hand-over to the stack does not move it. */
-        tlScene.style.setProperty('--card-top', `${Math.round(railY - 5 + bodyTop)}px`);
+        const placeRail = railY => {
+          tlScene.style.setProperty('--rail-y', `${Math.round(railY)}px`);
+          /* The title sits halfway between the menu bar and the timeline line. */
+          tlScene.style.setProperty('--tl-head-top', `${Math.round((menuH + railY - 8 - tlHeadEl.offsetHeight) / 2)}px`);
+          /* The final card copy sits exactly on the real last card (the list is
+             raised 5px), so the hand-over to the stack does not move it. */
+          tlScene.style.setProperty('--card-top', `${Math.round(railY - 5 + bodyTop)}px`);
+        };
+        placeRail(stageH / 2 - bodyTop - bodyHeight / 2 + 6);
         /* One deck height for the saved cards and the final card: the final
            card's natural height, never less than a stop card. */
         const finalCardBody = finalSnapshot.querySelector('.tl-body');
@@ -1200,6 +1217,8 @@
           const fit = Math.max(.4, Math.min(1, (room - 2 * 30) / pile));
           savedSlot.style.setProperty('--S', fit.toFixed(3));
           savedShelf.style.setProperty('--S', fit.toFixed(3));
+          savedSlot.style.removeProperty('--Sw');
+          savedShelf.style.removeProperty('--Sw');
           /* The patient portrait heads the saved-records slot. */
           if (patientSummary && patientSummary.parentNode !== savedSlot) savedSlot.append(patientSummary);
         } else {
@@ -1208,7 +1227,35 @@
           /* Phones: no slot beside the card, so the portrait goes back next to the title. */
           if (patientSummary && patientSummary.parentNode === savedSlot) summaryHome.after(patientSummary);
         }
+        /* Desktop: the shared layout with the findings. The content starts at
+           the top of the line's dot, 8px above the line, and ends at the lowest
+           of the card with the link under it and the saved records. */
+        if (innerWidth > 900) {
+          const cta = tlScene.querySelector('.tl-cta');
+          const below = Math.max(
+            bodyTop - 5 + (finalCardBody?.offsetHeight || bodyHeight) + (cta?.offsetHeight ? cta.offsetHeight + 30 : 0),
+            29 + savedSlot.offsetHeight);
+          const titleEl = tlHeadEl.querySelector('h2') || tlHeadEl;
+          reportContent('timeline', 8 + below);
+          const { titleTop, contentTop } = sharedLayout(stageH, menuH, titleEl.offsetHeight);
+          placeRail(contentTop + 8);
+          tlScene.style.setProperty('--tl-head-top', `${Math.round(titleTop - titleEl.offsetTop)}px`);
+          /* The saved records also scale down to end one gap above the bottom
+             of the screen, the same space the findings leave under their link. */
+          const S = parseFloat(savedSlot.style.getPropertyValue('--S')) || 1;
+          const deckPart = ((finalCardBody?.offsetHeight || 0) + savedSnapshots.length * 6) * S;
+          const room = stageH - (titleTop - menuH) - (contentTop + 8 + 29);
+          if (deckPart && savedSlot.offsetHeight > room) {
+            const fitV = Math.max(.4, S * (room - (savedSlot.offsetHeight - deckPart)) / deckPart);
+            /* Only the cards shrink; the slot keeps its width for the patient header. */
+            savedSlot.style.setProperty('--Sw', S.toFixed(3));
+            savedShelf.style.setProperty('--Sw', S.toFixed(3));
+            savedSlot.style.setProperty('--S', fitV.toFixed(3));
+            savedShelf.style.setProperty('--S', fitV.toFixed(3));
+          }
+        }
       };
+      sharedRefit.timeline = fitTimeline;
       fitTimeline();
       registerLayoutTask(fitTimeline);
       if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitTimeline);
@@ -1663,21 +1710,21 @@
         if (!resultsPanel || !resultsTitle || !insightsStageEl) return;
         const titleHeight = resultsTitle.offsetHeight;
         const menuH = document.querySelector('.site-menu')?.offsetHeight || 0;
-        /* Three equal gaps: menu to title, title to cards, demo link under
-           the cards to the bottom of the screen. */
+        /* The shared layout with the timeline (see sharedLayout). */
         const cta = resultsPanel.querySelector('.heart-results-cta');
         const ctaH = cta?.offsetHeight ? cta.offsetHeight + 22 : 0;
-        const gap = Math.max(12, (insightsStageEl.clientHeight - menuH - titleHeight - resultsPanel.offsetHeight - ctaH) / 3);
-        resultsPanel.style.setProperty('--results-top', `${(menuH + gap * 2 + titleHeight).toFixed(1)}px`);
+        reportContent('findings', resultsPanel.offsetHeight + ctaH);
+        const { titleTop, contentTop } = sharedLayout(insightsStageEl.clientHeight, menuH, titleHeight);
+        resultsPanel.style.setProperty('--results-top', `${contentTop.toFixed(1)}px`);
         resultsPanel.style.setProperty('--results-shift', '0%');
-        resultsPanel.style.setProperty('--title-top', `${(-(gap + titleHeight)).toFixed(1)}px`);
+        resultsPanel.style.setProperty('--title-top', `${(titleTop - contentTop).toFixed(1)}px`);
         /* Scale the heart to the height of the cards, but no wider than their
            column, and centre it on them. The camera frames the heart at 1/1.62
            of the canvas height, centred; it turns up to about 1.08 times as wide. */
         const body = insightsScene.querySelector('.systems-body');
         const grid = resultsPanel.querySelector('.heart-trend-grid');
         if (body && grid) {
-          const gridTop = menuH + gap * 2 + titleHeight;
+          const gridTop = contentTop;
           const heartH = Math.min(grid.offsetHeight, resultsPanel.offsetWidth / 1.08);
           insightsScene.style.setProperty('--heart-fit', (heartH / (body.offsetHeight / 1.62)).toFixed(4));
           /* Centre the heart, the gap and the cards as one group. */
@@ -1693,6 +1740,7 @@
         const dots = resultsTitle.querySelector('.is-dots');
         if (back && dots) resultsTitle.style.setProperty('--title-shift', `${((back.offsetWidth - dots.offsetWidth) / 2).toFixed(1)}px`);
       };
+      sharedRefit.findings = placeResultsTitle;
       placeResultsTitle();
       registerLayoutTask(placeResultsTitle);
       document.fonts?.ready.then(placeResultsTitle);
