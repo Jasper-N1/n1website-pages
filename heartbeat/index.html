@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261029-2">
+  <link rel="stylesheet" href="styles.css?v=20261029-3">
   <script type="module" src="anatomy-loader.js?v=20261029-1"></script>
 </head>
 <body>
@@ -1932,7 +1932,11 @@
         const dropTo = stage.bottom - parseFloat(stageStyle.paddingBottom);
         signoffReport.style.setProperty('--report-drop', '0px');
         const report = signoffReport.getBoundingClientRect();
-        signoffReport.style.setProperty('--report-drop', `${Math.max(0, dropTo - report.bottom).toFixed(1)}px`);
+        /* It lands midway between the title block and the bottom of the
+           screen, not on the bottom edge. */
+        const copyBottom = signoffCopy ? signoffCopy.getBoundingClientRect().bottom : stage.top;
+        const landTop = copyBottom + Math.max(16, (dropTo - copyBottom - report.height) / 2);
+        signoffReport.style.setProperty('--report-drop', `${Math.max(0, landTop - report.top).toFixed(1)}px`);
         const targetX = report.left + report.width / 2 - deckBox.left;
         const targetY = report.top + report.height / 2 - deckBox.top;
         const place = (node, source) => {
