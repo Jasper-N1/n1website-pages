@@ -2437,3 +2437,9 @@ body,button,input,select,textarea{font-family:var(--font-sans)}
 /* Phones: the poster that stands in for a clip in the card copies. */
 .tl-scan>img.is-still,.hc-scan>img.is-still{width:100%;height:100%;position:static;display:block;object-fit:cover}
 .hc-scan>img.is-still{object-position:50% 45%}
+/* Phones: the heart stays larger and lower, so it fills the space above the
+   findings; the hand-off title fades before the cards fly over it. */
+@media(max-width:680px){
+  .systems-body{translate:0 calc(var(--heart-left) * -21svh);scale:calc(1 - var(--heart-left) * .12)}
+  .signoff-scene .signoff-deck .heart-results-title{opacity:calc(1 - var(--gather) * 5)}
+}
