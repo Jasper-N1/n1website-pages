@@ -2307,8 +2307,18 @@ body,button,input,select,textarea{font-family:var(--font-sans)}
 .heart-how:hover span[aria-hidden]{translate:0 3px}
 :is(.tl-cta a,.heart-results-cta a,.signoff-trial,.footer-cta-call,.heart-how){display:inline-block;cursor:pointer;transition:scale .15s ease,text-decoration-color .2s ease}
 .tl-cta a:hover,.heart-results-cta a:hover{text-decoration-color:currentColor}
+/* At rest: every 8s a faint sweep crosses each filled button and its arrow
+   leans forward once. Hover stops it and plays the stronger sweep. */
+:is(.menu-cta,.heart-cta,.floating-button,.signoff-cta,.cta-primary,.footer-cta)::after{animation:cta-idle-shine 8s ease-in-out 2s infinite}
+:is(.heart-cta,.signoff-cta,.cta-primary) span[aria-hidden]{animation:cta-idle-arrow 8s ease-in-out 2s infinite}
+.menu-cta::after{animation-delay:6s}
+:is(.menu-cta,.heart-cta,.floating-button,.signoff-cta,.cta-primary,.footer-cta):hover::after,
+:is(.heart-cta,.signoff-cta,.cta-primary):hover span[aria-hidden]{animation:none}
+@keyframes cta-idle-shine{0%,80%{translate:-120% 0;opacity:.7}96%,100%{translate:120% 0;opacity:.7}}
+@keyframes cta-idle-arrow{0%,84%,100%{translate:0 0}90%{translate:3px 0}}
 @media(prefers-reduced-motion:reduce){
   :is(.menu-cta,.heart-cta,.floating-button,.signoff-cta,.cta-primary,.footer-cta)::after{display:none}
+  :is(.heart-cta,.signoff-cta,.cta-primary) span[aria-hidden]{animation:none}
 }
 /* Narrow phones: the menu CTA uses its short label so it stays on one line. */
 .menu-cta{white-space:nowrap}
@@ -2479,11 +2489,9 @@ body,button,input,select,textarea{font-family:var(--font-sans)}
 /* Closing CTA entrance: heading rises, the button pops, its arrow nudges,
    then the quieter link and the note follow. Plays once (.is-in). */
 .cta-inner.is-waiting :is(h2,.cta-primary,.cta-secondary,.cta-trial-note){opacity:0}
-.cta-inner.is-in h2{animation:cta-rise .7s cubic-bezier(.2,.7,.2,1) backwards}
-.cta-inner.is-in .cta-primary{animation:cta-pop .6s cubic-bezier(.34,1.56,.64,1) .3s backwards}
-.cta-inner.is-in .cta-primary span{display:inline-block;animation:cta-nudge .9s ease-in-out .95s}
-.cta-inner.is-in .cta-secondary{animation:cta-rise .5s ease .5s backwards}
-.cta-inner.is-in .cta-trial-note{animation:cta-rise .5s ease .65s backwards}
-@keyframes cta-rise{from{opacity:0;translate:0 14px}to{opacity:1;translate:0 0}}
-@keyframes cta-pop{from{opacity:0;scale:.82}to{opacity:1;scale:1}}
-@keyframes cta-nudge{0%,100%{translate:0 0}25%,75%{translate:5px 0}50%{translate:0 0}}
+.cta-inner.is-in h2{animation:cta-rise .8s cubic-bezier(.2,.7,.2,1) backwards}
+.cta-inner.is-in .cta-primary{animation:cta-pop .7s cubic-bezier(.2,.9,.3,1.15) .35s backwards}
+.cta-inner.is-in .cta-secondary{animation:cta-rise .6s ease .55s backwards}
+.cta-inner.is-in .cta-trial-note{animation:cta-rise .6s ease .7s backwards}
+@keyframes cta-rise{from{opacity:0;translate:0 10px}to{opacity:1;translate:0 0}}
+@keyframes cta-pop{from{opacity:0;scale:.94}to{opacity:1;scale:1}}
