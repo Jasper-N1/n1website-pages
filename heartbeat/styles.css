@@ -2389,29 +2389,29 @@ body,button,input,select,textarea{font-family:var(--font-sans)}
 }
 /* Findings cards: one per record type. Charts draw in as each card arrives
    (--card-in). */
-.heart-trend-card .hc-line{stroke-dasharray:1;stroke-dashoffset:calc(1 - clamp(0,(var(--card-in,1) - .35) / .65,1))}
-.heart-trend-card svg:has(.hc-line) circle{opacity:clamp(0,(var(--card-in,1) - .6) * 4,1)}
-.heart-trend-card .hc-gene .hc-chr{fill:var(--bb-blue-100);stroke:var(--bb-blue-200);stroke-width:1;vector-effect:none}
-.heart-trend-card .hc-bands rect{fill:var(--bb-blue-300);opacity:clamp(0,(var(--card-in,1) - .3) * 2,1)}
-.heart-trend-card .hc-mark path{stroke:var(--bb-coral-dark);stroke-width:1.5;stroke-dasharray:3 3;vector-effect:none}
-.heart-trend-card .hc-mark circle{fill:var(--bb-coral);stroke:var(--bb-paper);stroke-width:2;vector-effect:none}
-.heart-trend-card .hc-mark{opacity:clamp(0,(var(--card-in,1) - .7) * 4,1);translate:0 calc((1 - clamp(0,(var(--card-in,1) - .7) * 4,1)) * -6px)}
-.heart-trend-card .hc-lanes text{fill:var(--bb-muted);font:600 var(--fs-xs)/1 var(--font-sans)}
-.heart-trend-card .hc-lane{stroke:var(--bb-line-soft);stroke-width:1;vector-effect:none}
-.heart-trend-card .hc-bar{fill:var(--bb-blue-700);transform-box:fill-box;transform-origin:left center;transform:scaleX(clamp(0,(var(--card-in,1) - .4) / .5,1))}
-.heart-trend-card .hc-bar.is-d{fill:var(--bb-matcha-dark)}
-.hc-scan{height:58px;position:relative;overflow:hidden;margin:auto 0 7px;border-radius:9px;background:var(--bb-ink)}
-.hc-scan video{width:100%;height:100%;display:block;object-fit:cover;object-position:50% 45%}
-.hc-scan small{position:absolute;right:5px;bottom:5px;padding:2px 5px;border-radius:4px;background:rgba(0,30,42,.72);color:rgba(230,244,250,.8);font:500 var(--fs-mini)/1 var(--font-sans)}
-@media(min-width:681px) and (max-height:820px){.hc-scan{height:44px}}
-@media(max-width:680px){.hc-scan{height:36px}.hc-scan small{font-size:7px}}
-.heart-trend-card .hc-tick{fill:var(--bb-blue-800);transform-box:fill-box;transform-origin:center bottom;transform:scaleY(clamp(0,(var(--card-in,1) - .5 - var(--k,0) * .1) * 4,1))}
+.heart-trend-card .hc-line{stroke-dasharray:1;stroke-dashoffset:0;transition:stroke-dashoffset 1s cubic-bezier(.4,0,.2,1) .15s}
+.heart-trend-card svg:has(.hc-line) circle{transform-box:fill-box;transform-origin:center;transition:opacity .25s ease .8s,scale .45s cubic-bezier(.34,1.56,.64,1) .8s}
+/* Lp(a): reference zones, the cutoff, and a pin that slides to the result. */
+.heart-trend-card .hc-zone{transition:opacity .4s ease .1s}
+.heart-trend-card .hc-zone.is-low{fill:var(--bb-blue-100)}
+.heart-trend-card .hc-zone.is-mid{fill:var(--bb-gold-soft)}
+.heart-trend-card .hc-zone.is-high{fill:var(--bb-coral-soft)}
+.heart-trend-card .hc-cut{stroke:var(--bb-muted);stroke-width:1;stroke-dasharray:3 3;opacity:.6}
+.heart-trend-card .hc-pin{stroke:var(--bb-coral-dark);stroke-width:3;stroke-linecap:round;transition:translate .9s cubic-bezier(.3,.7,.2,1) .35s,opacity .2s ease .35s}
+/* Blood pressure: systolic and diastolic lines under the 140 limit. */
+.heart-trend-card .hc-line.is-dia{stroke:var(--bb-blue-300)}
+.heart-trend-card .hc-dot{stroke:var(--bb-blue-700);stroke-width:6;stroke-linecap:round;transition:opacity .25s ease calc(.45s + var(--k,0) * .15s)}
+.heart-trend-card .hc-line.is-dia+.hc-dot,.heart-trend-card .hc-line.is-dia~.hc-dot{stroke:var(--bb-blue-300)}
+/* ECG: the trace draws in, then a bright segment sweeps along it. */
+.heart-trend-card .hc-sweep{stroke:var(--bb-coral);stroke-width:2.4;stroke-dasharray:.07 .93;animation:hc-sweep 2.647s linear infinite;transition:opacity .3s ease 1.15s}
+@keyframes hc-sweep{from{stroke-dashoffset:.07}to{stroke-dashoffset:-.93}}
+@media(prefers-reduced-motion:reduce){.heart-trend-card .hc-sweep{animation:none;opacity:0}}
 /* Micro-animations on the timeline cards: the flag pops, the value rises,
    the scan fades up. */
 .tl-body .tl-flag{transition:opacity .3s ease .35s,scale .45s cubic-bezier(.34,1.56,.64,1) .35s}
 .tl-body .tl-metric-v{display:inline-block;transition:opacity .4s ease .2s,translate .5s cubic-bezier(.3,.7,.2,1) .2s}
 .tl-scan video{transition:opacity .6s ease .2s,scale 1.2s cubic-bezier(.3,.7,.2,1) .2s}
-.is-undrawn .tl-flag{opacity:0;scale:.7;transition:none}
+.is-undrawn .tl-flag{opacity:0;scale:.5;transition:none}
 .is-undrawn .tl-metric-v{opacity:0;translate:0 6px;transition:none}
 .is-undrawn .tl-scan video{opacity:0;scale:1.08;transition:none}
 @media(prefers-reduced-motion:reduce){.tl-body :is(.tl-flag,.tl-metric-v),.tl-scan video{transition:none}}
@@ -2435,11 +2435,55 @@ body,button,input,select,textarea{font-family:var(--font-sans)}
    centred like the <img> it replaces. */
 .anatomy-film.is-drawn{width:auto;height:auto;max-width:100%;max-height:100%;inset:0;margin:auto;object-fit:initial}
 /* Phones: the poster that stands in for a clip in the card copies. */
-.tl-scan>img.is-still,.hc-scan>img.is-still{width:100%;height:100%;position:static;display:block;object-fit:cover}
-.hc-scan>img.is-still{object-position:50% 45%}
+.tl-scan>img.is-still{width:100%;height:100%;position:static;display:block;object-fit:cover}
 /* Phones: the heart stays larger and lower, so it fills the space above the
    findings; the hand-off title fades before the cards fly over it. */
 @media(max-width:680px){
   .systems-body{translate:0 calc(var(--heart-left) * -21svh);scale:calc(1 - var(--heart-left) * .12)}
   .signoff-scene .signoff-deck .heart-results-title{opacity:calc(1 - var(--gather) * 5)}
 }
+
+/* Findings micro-animations. The heart beats at 68 bpm, in step with the ECG
+   card (three beats per sweep), and only once the findings are on screen. */
+@property --beat{syntax:"<number>";inherits:false;initial-value:0}
+@keyframes heart-beat{0%,30%{--beat:0}40%{--beat:1}52%{--beat:.25}62%{--beat:.6}80%,100%{--beat:0}}
+.insights-scene .systems-body :is(canvas,.anatomy-film){animation:heart-beat .882s linear infinite;scale:calc(1 + var(--beat) * .022 * var(--heart-results,0))}
+.heart-trend-card .hc-num{font-variant-numeric:tabular-nums}
+/* The badge pops in once the chart has drawn. */
+.heart-trend-card header em{transition:opacity .25s ease 1s,scale .45s cubic-bezier(.34,1.56,.64,1) 1s}
+@media(prefers-reduced-motion:reduce){.insights-scene .systems-body :is(canvas,.anatomy-film){animation:none}}
+
+/* Timeline tags: a light shine crosses the tag when its card becomes active. */
+.tl-flag{position:relative;overflow:hidden}
+.tl-flag::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.8) 50%,transparent 70%);translate:-130% 0;pointer-events:none}
+.tl-entry.is-active .tl-flag::after{translate:130% 0;transition:translate .9s cubic-bezier(.4,0,.2,1) .5s}
+/* The focus marker: a ring ripples out and the centre dot pops. */
+.tl-focus::before{content:"";position:absolute;inset:-1.5px;border:1.5px solid var(--teal);border-radius:50%;opacity:0;pointer-events:none}
+.tl-focus.is-ping-a::before{animation:tl-ring-a .7s cubic-bezier(.2,.7,.3,1)}
+.tl-focus.is-ping-b::before{animation:tl-ring-b .7s cubic-bezier(.2,.7,.3,1)}
+.tl-focus.is-ping-a::after{animation:tl-core-a .45s cubic-bezier(.34,1.56,.64,1)}
+.tl-focus.is-ping-b::after{animation:tl-core-b .45s cubic-bezier(.34,1.56,.64,1)}
+@keyframes tl-ring-a{from{opacity:.7;scale:1}to{opacity:0;scale:2.6}}
+@keyframes tl-ring-b{from{opacity:.7;scale:1}to{opacity:0;scale:2.6}}
+@keyframes tl-core-a{0%{scale:1}40%{scale:2.2}100%{scale:1}}
+@keyframes tl-core-b{0%{scale:1}40%{scale:2.2}100%{scale:1}}
+@media(prefers-reduced-motion:reduce){.tl-focus::before,.tl-focus::after{animation:none!important}.tl-entry.is-active .tl-flag::after{transition:none;translate:-130% 0}}
+/* The findings charts play on a timer once each card is in (.is-drawn, set
+   by the scroll code), so they never freeze half-drawn when scrolling stops. */
+.insights-scene .heart-trend-card:not(.is-drawn) .hc-line{stroke-dashoffset:1;transition:none}
+.insights-scene .heart-trend-card:not(.is-drawn) svg:has(.hc-line) circle{opacity:0;scale:.3;transition:none}
+.insights-scene .heart-trend-card:not(.is-drawn) :is(.hc-zone,.hc-dot,.hc-sweep){opacity:0;transition:none}
+.insights-scene .heart-trend-card:not(.is-drawn) .hc-pin{opacity:0;translate:-150px 0;transition:none}
+.insights-scene .heart-trend-card:not(.is-drawn) header em{opacity:0;scale:.6;transition:none}
+@media(prefers-reduced-motion:reduce){.heart-trend-card :is(.hc-line,.hc-zone,.hc-pin,.hc-dot,.hc-sweep,header em),.heart-trend-card svg circle{transition:none!important}}
+/* Closing CTA entrance: heading rises, the button pops, its arrow nudges,
+   then the quieter link and the note follow. Plays once (.is-in). */
+.cta-inner.is-waiting :is(h2,.cta-primary,.cta-secondary,.cta-trial-note){opacity:0}
+.cta-inner.is-in h2{animation:cta-rise .7s cubic-bezier(.2,.7,.2,1) backwards}
+.cta-inner.is-in .cta-primary{animation:cta-pop .6s cubic-bezier(.34,1.56,.64,1) .3s backwards}
+.cta-inner.is-in .cta-primary span{display:inline-block;animation:cta-nudge .9s ease-in-out .95s}
+.cta-inner.is-in .cta-secondary{animation:cta-rise .5s ease .5s backwards}
+.cta-inner.is-in .cta-trial-note{animation:cta-rise .5s ease .65s backwards}
+@keyframes cta-rise{from{opacity:0;translate:0 14px}to{opacity:1;translate:0 0}}
+@keyframes cta-pop{from{opacity:0;scale:.82}to{opacity:1;scale:1}}
+@keyframes cta-nudge{0%,100%{translate:0 0}25%,75%{translate:5px 0}50%{translate:0 0}}
