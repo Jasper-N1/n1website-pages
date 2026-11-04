@@ -703,6 +703,26 @@ footer .wordmark{color:var(--paper)}
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
+/* Logo kit downloads. On a normal web page the links download directly.
+   Inside the claude.ai artifact viewer, plain download links are blocked,
+   so the click goes through the downloads capability instead. */
+(function(){
+  if(!window.claude||typeof window.claude.use!=='function')return;
+  window.claude.use('downloads').then(function(dl){
+    if(!dl)return;
+    document.querySelectorAll('.kit-dl a').forEach(function(a){
+      a.addEventListener('click',function(e){
+        e.preventDefault();
+        var href=a.getAttribute('href');
+        fetch(href).then(function(r){if(!r.ok)throw new Error(r.status);return r.blob()})
+          .then(function(b){return dl.save({filename:href.split('/').pop(),data:b})})
+          .catch(function(err){if(err&&err.code==='rate_limited')return;});
+      });
+    });
+  });
+})();
+</script>
+<script>
 (function(){
   const blues=[["950","#003044","Deepest, shadow tint"],["900","#004E68","Button text on paper"],["800","#005F7D","Deep accents"],["700","#00769D","Blue text on light"],["600","#008FC1","Hover"],["primary","#008FCB","Exact brand blue",1],["500","#00A9E0","Canvas",1],["300","#55C4EA","Gradient, glows"],["200","#8BDCF4","Labels on blue"],["100","#D8F1FA","Light tints"],["50","#F1FAFD","Card tint"]];
   const neutrals=[["Ink","#142830","Body text, headings"],["Muted","#4D5E65","Secondary text"],["Muted light","#5C6C72","Captions"],["Slate","#45677F","Data labels, icons"],["Slate light","#9DB5C8","Inactive data"],["Line","#BCCAD1","Borders"],["Line soft","#D4DEE3","Dividers"],["Concrete","#DCE5EA","Muted surfaces"],["Paper","#F7FAFB","Page, cards"],["On dark","#E6F5FA","Text on blue"]];
