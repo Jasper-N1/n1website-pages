@@ -1,1 +1,308 @@
-/Users/jaspermiddendorp/n1.healthcare/Codebase/n1care-website-heartbeat-brand/static/heartbeat-brand.css
+/* ==========================================================================
+   Heartbeat brand layer.
+
+   Loaded last on every marketing page. The literal colours in the site CSS
+   are already on the Heartbeat palette; this file sets the parts that live
+   in shared tokens: the three typefaces, pill buttons and blue-tinted depth.
+   Source: the Heartbeat brand guidelines (blue canvas, Newsreader headlines,
+   DM Sans interface, DM Mono labels).
+   ========================================================================== */
+
+:root,
+.tonal {
+  --serif: "Newsreader", "Iowan Old Style", Baskerville, Georgia, serif;
+  --sans: "DM Sans", Inter, ui-sans-serif, system-ui, sans-serif;
+  --mono: "DM Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --n1-font-serif: var(--serif);
+  --n1-font-sans: var(--sans);
+  --n1-font-mono: var(--mono);
+
+  --n1-elev-1: 0 1px 2px rgba(0, 48, 68, 0.05);
+  --n1-elev-2: 0 4px 18px rgba(0, 70, 94, 0.10);
+  --n1-elev-3: 0 8px 20px rgba(20, 40, 48, 0.16);
+  --n1-elev-4: 0 30px 56px rgba(0, 78, 104, 0.20), 0 6px 16px rgba(0, 78, 104, 0.08);
+  --n1-elev-5: 0 34px 100px rgba(0, 48, 68, 0.24);
+}
+
+body {
+  font-family: var(--sans);
+}
+
+/* Headlines in Newsreader. It is a text serif: it needs no negative tracking
+   and reads best at a medium weight. The body prefix outranks the page rules
+   such as `.heart-copy h1` that set Inter-style tight tracking. */
+body.tonal :is(h1, h2) {
+  font-family: var(--serif);
+  font-weight: 500;
+  letter-spacing: -0.005em;
+}
+
+/* The homepage hero: the Heartbeat canvas, bright brand blue with the
+   blobs in the blue ramp. */
+.zoom-journey {
+  --canvas: #00A9E0;
+  --teal: #00769D;
+  --ink: #142830;
+  --green: #005F7D;
+  --paper: #F7FAFB;
+  --care-500: #008FCB;
+  --azure-600: #55C4EA;
+  --moss-600: #00769D;
+}
+
+/* Pill buttons, one primary per view. */
+.tonal .button {
+  border-radius: 999px;
+  padding-inline: 24px;
+}
+
+/* Small uppercase labels: DM Mono with wide tracking. */
+.eyebrow,
+.kicker,
+.section-kicker,
+.page-kicker {
+  font-family: var(--mono);
+  letter-spacing: 0.14em;
+}
+
+/* The workflow section ground is set in the mockup stylesheet; give it the
+   cool paper tint like the other sections. */
+.tonal-patterns {
+  background: #EEF3F5;
+}
+
+/* ==========================================================================
+   The bright side of the palette. The brand guide gives the blue canvas
+   about 22% of a page: hero, story and CTA scenes. Content sections sit on
+   paper or the light blue tints, never on grey concrete.
+   ========================================================================== */
+
+/* Closing CTA scenes, built like the Heartbeat page CTA: Marcus with his
+   doctor, full screen, under a deep-blue shade (never black). The headline
+   sits at the bottom left of the 1180 px column, with one paper pill and
+   one text link. The homepage sets its band with !important, so these
+   rules do too. */
+body .tonal-close,
+body .page-close {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  padding: clamp(72px, 10svh, 112px) 0 calc(clamp(72px, 10svh, 112px) + env(safe-area-inset-bottom, 0px));
+  color: #F7FAFB !important;
+  background:
+    linear-gradient(0deg, rgba(0, 39, 55, 0.94) 0%, rgba(0, 39, 55, 0.76) 30%, rgba(0, 39, 55, 0.25) 62%, rgba(0, 39, 55, 0.08) 100%),
+    url("assets/closing-marcus.webp") 62% 30% / cover no-repeat,
+    #004E68 !important;
+  text-align: left !important;
+}
+@media (max-width: 1100px) {
+  body .tonal-close,
+  body .page-close {
+    background:
+      linear-gradient(0deg, rgba(0, 39, 55, 0.94) 0%, rgba(0, 39, 55, 0.76) 30%, rgba(0, 39, 55, 0.25) 62%, rgba(0, 39, 55, 0.08) 100%),
+      url("assets/closing-marcus-1280.webp") 62% 30% / cover no-repeat,
+      #004E68 !important;
+  }
+}
+@media (max-width: 620px) {
+  body .tonal-close,
+  body .page-close {
+    background:
+      linear-gradient(0deg, rgba(0, 39, 55, 0.96) 0%, rgba(0, 39, 55, 0.82) 34%, rgba(0, 39, 55, 0.24) 68%, rgba(0, 39, 55, 0.06) 100%),
+      url("assets/closing-marcus-1280.webp") 68% center / cover no-repeat,
+      #004E68 !important;
+  }
+}
+
+body :is(.tonal-close, .page-close) > .shell { width: min(1180px, calc(100% - 48px)); }
+body :is(.tonal-close, .page-close) h2 {
+  max-width: 860px;
+  margin: 0 !important;
+  color: #F7FAFB !important;
+  font-family: var(--serif);
+  font-size: clamp(40px, 6vw, 88px);
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: 0;
+  text-align: left;
+  text-wrap: pretty;
+  text-shadow: none !important;
+}
+body .tonal-close .eyebrow {
+  margin: 0 0 18px;
+  color: #8BDCF4 !important;
+  text-align: left;
+}
+body :is(.tonal-close, .page-close) p:not(.eyebrow) {
+  max-width: 38ch;
+  margin: 20px 0 0;
+  color: rgba(247, 250, 251, 0.86) !important;
+  font-size: clamp(16px, 1.4vw, 19px);
+  line-height: 1.5;
+  text-align: left;
+}
+body :is(.tonal-close .close-actions, .page-close .page-actions) {
+  justify-content: flex-start;
+  align-items: center;
+  gap: 22px;
+  margin-top: clamp(26px, 4svh, 38px);
+}
+
+/* The one primary pill: paper, Blue 900 text, a light sweep and an arrow nudge. */
+body :is(.tonal-close, .page-close) .button:not(.secondary) {
+  position: relative;
+  min-height: 54px;
+  overflow: hidden;
+  isolation: isolate;
+  padding: 0 30px !important;
+  border: 0 !important;
+  border-radius: 999px;
+  color: #004E68 !important;
+  background: #F7FAFB !important;
+  font-size: 16px;
+  font-weight: 600 !important;
+  box-shadow: none !important;
+  transition: translate 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), scale 0.15s ease, box-shadow 0.3s ease, background 0.2s ease;
+}
+body :is(.tonal-close, .page-close) .button:not(.secondary)::after {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 30%, rgba(255, 255, 255, 0.35) 50%, transparent 70%);
+  translate: -120% 0;
+  animation: hb-cta-shine 8s ease-in-out 2s infinite;
+  content: "";
+}
+body :is(.tonal-close, .page-close) .button:not(.secondary):hover {
+  color: #004E68 !important;
+  background: #FFFFFF !important;
+  box-shadow: 0 14px 32px -18px rgba(255, 255, 255, 0.7) !important;
+  translate: 0 -2px;
+}
+body :is(.tonal-close, .page-close) .button span[aria-hidden] {
+  display: inline-block;
+  animation: hb-cta-arrow 8s ease-in-out 2s infinite;
+  transition: translate 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+body :is(.tonal-close, .page-close) .button:hover span[aria-hidden] { animation: none; translate: 4px 0; }
+
+/* Secondary actions are text links, as on the Heartbeat page. */
+body :is(.tonal-close, .page-close) .button.secondary,
+body .tonal-close .close-actions .button.secondary,
+body .tonal-close .close-link {
+  min-height: auto;
+  padding: 10px 0 !important;
+  border: 0 !important;
+  border-radius: 0;
+  color: rgba(255, 255, 255, 0.82) !important;
+  background: transparent !important;
+  font-size: 16px;
+  font-weight: 600 !important;
+  opacity: 1;
+  box-shadow: none !important;
+  backdrop-filter: none;
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 255, 255, 0.4);
+  text-underline-offset: 4px;
+  transition: translate 0.2s ease, text-decoration-color 0.2s ease;
+}
+body :is(.tonal-close, .page-close) .button.secondary:hover,
+body .tonal-close .close-actions .button.secondary:hover,
+body .tonal-close .close-link:hover {
+  color: #FFFFFF !important;
+  background: transparent !important;
+  text-decoration-color: rgba(255, 255, 255, 0.7);
+  translate: 4px 0;
+}
+body :is(.tonal-close, .page-close) :is(.button, .close-link):active { scale: 0.96; }
+body :is(.tonal-close, .page-close) :is(.button, .close-link):focus-visible {
+  outline: 3px solid #8BDCF4;
+  outline-offset: 3px;
+}
+
+@keyframes hb-cta-shine { 0%, 80% { translate: -120% 0; opacity: 0.7; } 96%, 100% { translate: 120% 0; opacity: 0.7; } }
+@keyframes hb-cta-arrow { 0%, 84%, 100% { translate: 0 0; } 90% { translate: 3px 0; } }
+
+@media (max-width: 620px) {
+  body .tonal-close,
+  body .page-close { padding: 96px 0 calc(52px + env(safe-area-inset-bottom, 0px)); }
+  body :is(.tonal-close, .page-close) > .shell { width: calc(100% - 44px); }
+  body :is(.tonal-close .close-actions, .page-close .page-actions) { gap: 18px; margin-top: 26px; }
+  body :is(.tonal-close, .page-close) .button:not(.secondary) { min-height: 50px; padding: 0 24px !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body :is(.tonal-close, .page-close) .button span[aria-hidden] { animation: none; }
+  body :is(.tonal-close, .page-close) .button:not(.secondary)::after { display: none; }
+}
+
+/* Content grounds: blue 50 and blue 100 in place of grey concrete. */
+body .patient-gather-section,
+body .clinician-whitelabel,
+body .reports-library,
+body .tonal-patterns,
+body .pricing-faq { background: #F1FAFD; }
+body .clinician-voices,
+body .privacy-choice { background: #D8F1FA; }
+body .report-carousel {
+  background: linear-gradient(180deg, #D8F1FA 0%, #F1FAFD 52%, #E8F6FB 100%) !important;
+}
+
+/* Media frames inside those sections take the same light blue. */
+body .tonal-patterns-media,
+body .whitelabel-preview { background: linear-gradient(160deg, #D8F1FA 0%, #F1FAFD 100%); }
+body .clinician-prepared-block .prepared-story-frame { background: #E8F6FB; border-color: #BFE6F5; }
+body .clinician-prepared-block .prepared-story-media {
+  background: linear-gradient(135deg, #F1FAFD 0%, #E8F6FB 56%, #D8F1FA 100%);
+}
+
+/* Photo overlays shade to deep blue, never green-black. */
+body .patient-hero-media::after {
+  background:
+    linear-gradient(180deg, rgba(0, 40, 56, 0.16) 0, transparent 32%, rgba(0, 40, 56, 0.08) 52%, rgba(0, 40, 56, 0.72) 100%),
+    linear-gradient(90deg, rgba(0, 40, 56, 0.25), transparent 48%);
+}
+
+/* Clinicians product tour: canvas glows over a paper-to-blue-50 ground. */
+body .product-page .product-hero {
+  background:
+    radial-gradient(circle at 10% 92%, rgba(0, 169, 224, 0.18), transparent 31%),
+    radial-gradient(circle at 90% 78%, rgba(85, 196, 234, 0.16), transparent 30%),
+    linear-gradient(180deg, #F7FAFB 0%, #E8F6FB 100%);
+}
+
+/* Nav actions as on the Heartbeat page: an ink pill for the one CTA, with
+   the same light sweep, and a pill outline for "Book a call". */
+body .site-nav-v2 .nav-actions .button,
+body.tonal-motion .site-nav-v2.nav .nav-actions .button,
+body.tonal-motion .site-nav-v2.nav.is-light-phase .nav-actions .button,
+body.tonal-motion .site-nav-v2.nav.is-past-hero.is-light-phase .nav-actions .button,
+body.pricing-page .site-nav-v2.nav:not(.is-past-hero) .nav-actions .button {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border-color: #142830 !important;
+  border-radius: 999px;
+  color: #FFFFFF !important;
+  background: #142830 !important;
+  box-shadow: 0 4px 18px rgba(0, 70, 94, 0.12);
+  transition: translate 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), scale 0.15s ease, background 0.2s ease;
+}
+body .site-nav-v2 .nav-actions .button::after {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 30%, rgba(255, 255, 255, 0.35) 50%, transparent 70%);
+  translate: -120% 0;
+  transition: translate 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  content: "";
+}
+body .site-nav-v2 .nav-actions .button:hover { background: #003044 !important; translate: 0 -2px; }
+body .site-nav-v2 .nav-actions .button:hover::after { translate: 120% 0; }
+body .site-nav-v2 .nav-actions .button:active { scale: 0.96; }
+body .site-nav-v2 .nav-actions .call { border-radius: 999px; }
+@media (prefers-reduced-motion: reduce) {
+  body .site-nav-v2 .nav-actions .button::after { display: none; }
+}
