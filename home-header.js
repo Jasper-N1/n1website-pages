@@ -435,8 +435,7 @@
       }, { threshold: 0 }).observe(host);
     });
 
-    /* The ported timeline (.is-port) runs on heartbeat-timeline.js. */
-    const tlScene = document.querySelector('.timeline-scene:not(.is-port)');
+    const tlScene = document.querySelector('.timeline-scene');
     const tlTrack = document.querySelector('.tl-list');
     const tlItems = [...document.querySelectorAll('.tl-entry')];
     if (tlScene && tlTrack && tlItems.length) {
