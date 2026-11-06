@@ -8,37 +8,37 @@
 
 :root,
 .tonal {
-  --wine: #2a2b2a;
-  --berry: #376361;
-  --peach: #48a9a6;
-  --blush: #d3e7e3;
-  --cream: #f3ede2;
-  --paper: #fbf9f5;
-  --ink: #171817;
-  --line: #c7c2b9;
-  --muted: #6a6864;
-  --green: #d4b483;
-  --control-line: #96938c;
+  --wine: #142830;
+  --berry: #176583;
+  --peach: #00A9E0;
+  --blush: #D4DEE3;
+  --cream: #E7ECEE;
+  --paper: #FFFFFF;
+  --ink: #142830;
+  --line: #BCCAD1;
+  --muted: #5C6C72;
+  --green: #CDB68A;
+  --control-line: #8297A0;
 
-  --n1-sand-25: #fbf9f5;
-  --n1-sand-50: #f3ede2;
-  --n1-sand-100: #d3e7e3;
-  --n1-sand-200: #c7c2b9;
-  --n1-sand-300: #b5b0a7;
-  --n1-sand-400: #a29e96;
-  --n1-sand-500: #96938c;
-  --n1-sand-600: #6a6864;
-  --n1-sand-700: #52514e;
-  --n1-sand-800: #3b3c3a;
-  --n1-sand-900: #2a2b2a;
-  --n1-sand-950: #171817;
-  --n1-sand-975: #111211;
+  --n1-sand-25: #FFFFFF;
+  --n1-sand-50: #E7ECEE;
+  --n1-sand-100: #D4DEE3;
+  --n1-sand-200: #BCCAD1;
+  --n1-sand-300: #9DB5C8;
+  --n1-sand-400: #8EA2AA;
+  --n1-sand-500: #8297A0;
+  --n1-sand-600: #5C6C72;
+  --n1-sand-700: #4D5E65;
+  --n1-sand-800: #264350;
+  --n1-sand-900: #142830;
+  --n1-sand-950: #142830;
+  --n1-sand-975: #0B1418;
 }
 
 html,
 body.marketing-page {
-  color: #171817;
-  background: #f3ede2;
+  color: #142830;
+  background: #E7ECEE;
 }
 
 .marketing-nav {
@@ -46,22 +46,22 @@ body.marketing-page {
 }
 
 .marketing-nav-inner {
-  background: #376361;
-  box-shadow: 0 18px 35px rgba(23, 24, 23, 0.16);
+  background: #176583;
+  box-shadow: 0 18px 35px rgba(0,48,68,0.16);
 }
 
 .marketing-nav.is-open .marketing-menu {
-  background: #376361;
-  box-shadow: 0 18px 35px rgba(23, 24, 23, 0.16);
+  background: #176583;
+  box-shadow: 0 18px 35px rgba(0,48,68,0.16);
 }
 
-.marketing-links a[aria-current="page"] { color: #d3e7e3; }
-.marketing-nav.is-over-dark .marketing-links a[aria-current="page"] { color: #2f7773; }
+.marketing-links a[aria-current="page"] { color: #D4DEE3; }
+.marketing-nav.is-over-dark .marketing-links a[aria-current="page"] { color: #00769D; }
 
 .page-media::after {
   background:
-    linear-gradient(92deg, rgba(23, 24, 23, 0.90), rgba(23, 24, 23, 0.16) 62%),
-    linear-gradient(0deg, rgba(23, 24, 23, 0.82), transparent 56%);
+    linear-gradient(92deg, rgba(20,40,48,0.90), rgba(0,48,68,0.16) 62%),
+    linear-gradient(0deg, rgba(20,40,48,0.82), transparent 56%);
 }
 
 .page-media video,
@@ -78,13 +78,13 @@ body.marketing-page {
 .contact-field input,
 .contact-field select,
 .contact-field textarea {
-  background: #fbf9f5;
+  background: #FFFFFF;
 }
 
 .workflow-visual.fields i,
 .source-page mark {
-  color: #2a2b2a;
-  background: #d3e7e3;
+  color: #142830;
+  background: #D4DEE3;
 }
 
 .workflow-visual.timeline::before,
@@ -98,66 +98,66 @@ body.marketing-page {
 .pricing-flag,
 .plan-card.is-featured,
 .plan-card.is-featured .plan-included {
-  border-color: #c7c2b9;
+  border-color: #BCCAD1;
 }
 
 .product-stage-visual,
 .clinician-report,
 .patient-report-preview,
 .case-artifact {
-  background: radial-gradient(circle at 50% 42%, #d3e7e3, #f3ede2 72%);
+  background: radial-gradient(circle at 50% 42%, #D4DEE3, #E7ECEE 72%);
 }
 
 .workflow-visual.report b {
-  color: #376361;
-  background: #d3e7e3;
+  color: #176583;
+  background: #D4DEE3;
 }
 
 .dark,
 .page-close {
-  color: #f3ede2;
-  background: #376361;
+  color: #E7ECEE;
+  background: #176583;
 }
 
 .dark .section-head > p,
 .dark .section-head > div:last-child > p,
 .page-close p {
-  color: #d3e7e3;
+  color: #D4DEE3;
 }
 
 .page-close h2 { color: #fff; }
 
 .marketing-footer {
-  color: #f3ede2;
-  background: #171817;
+  color: #E7ECEE;
+  background: #142830;
 }
 
 .marketing-footer-brand p,
 .marketing-footer-links a,
 .marketing-footer-bottom {
-  color: #c7c2b9;
+  color: #BCCAD1;
 }
 
-.marketing-footer-bottom { border-color: rgba(199, 194, 185, .28); }
+.marketing-footer-bottom { border-color: rgba(188,202,209,.28); }
 
 .compliance-finding {
-  color: #f3ede2;
-  background: #2a2b2a;
+  color: #E7ECEE;
+  background: #142830;
 }
 
 .lab-proof-link,
 .sharing-panel button {
-  color: #f3ede2;
-  background: #2a2b2a;
+  color: #E7ECEE;
+  background: #142830;
 }
 
 .team-member img,
 .team-photo img,
 .practice-strip img {
-  border-color: #c7c2b9;
+  border-color: #BCCAD1;
 }
 
 ::selection {
-  color: #171817;
-  background: #48a9a6;
+  color: #142830;
+  background: #00A9E0;
 }
