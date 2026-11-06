@@ -29,6 +29,7 @@
     let gatherRelease = 0;
     const cardField = document.querySelector('.card-field');
     const zoomCopy = document.querySelector('.zoom-copy');
+    const zoomActions = zoomCopy.querySelector('.zoom-actions');
     const zoomLayer = document.querySelector('.patient-zoom');
     let zoomStart = null;
     let targetProgress = 0;
@@ -214,6 +215,7 @@
       const copyProgress = smooth(clamp((progress - .7) / .1));
       zoomCopy.style.opacity = String(copyProgress);
       zoomCopy.style.transform = `translateY(${mix(24, 0, copyProgress)}px)`;
+      zoomActions.inert = copyProgress < .6;
     };
     prepareZoomTarget();
     const journey = document.querySelector('.zoom-journey');
@@ -228,6 +230,7 @@
       const titleOut = smooth(clamp((progress - .04) / .11));
       heartAct.style.opacity = String(1 - titleOut);
       heartAct.style.transform = `translateY(${mix(0, -28, titleOut)}px)`;
+      heartAct.inert = titleOut > .6;
 
       const pull = smooth(clamp((progress - .055) / .185));
       focal.style.setProperty('--pull', pull.toFixed(4));
@@ -432,7 +435,8 @@
       }, { threshold: 0 }).observe(host);
     });
 
-    const tlScene = document.querySelector('.timeline-scene');
+    /* The ported timeline (.is-port) runs on heartbeat-timeline.js. */
+    const tlScene = document.querySelector('.timeline-scene:not(.is-port)');
     const tlTrack = document.querySelector('.tl-list');
     const tlItems = [...document.querySelectorAll('.tl-entry')];
     if (tlScene && tlTrack && tlItems.length) {

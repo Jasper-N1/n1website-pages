@@ -11,6 +11,10 @@
       ? 'doctor'
       : null;
   const signupHref = `https://app.n1.care/signup${signupRole ? `?role=${signupRole}` : ''}`;
+  // Patients rarely book sales calls, so their pages keep only log in and the trial.
+  const callMarkup = signupRole === 'patient'
+    ? ''
+    : '<a class="call" href="https://calendly.com/leah-n1/n1-care-discovery-call" target="_blank" rel="noopener noreferrer">Book a call</a>';
   const links = [
     ['clinicians.html', 'For clinicians'],
     ['patients.html', 'For patients'],
@@ -37,10 +41,11 @@
   nav.innerHTML = `
     <div class="nav-inner">
       <a href="index.html" aria-label="n1.care home"><span class="logo" aria-hidden="true"></span></a>
+      <div class="nav-actions nav-trial"><a class="button" href="${signupHref}" target="_blank" rel="noopener">Start free trial</a></div>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-menu" aria-label="Open navigation"><span></span></button>
       <div class="nav-menu" id="primary-menu">
         <div class="nav-links">${linkMarkup}</div>
-        <div class="nav-actions"><a class="login" href="https://app.n1.care/login">Log in</a><a class="button" href="${signupHref}">Start free trial</a></div>
+        <div class="nav-actions"><a class="login" href="https://app.n1.care/login" target="_blank" rel="noopener">Log in</a>${callMarkup}<a class="button" href="${signupHref}" target="_blank" rel="noopener">Start free trial</a></div>
       </div>
     </div>`;
   script.insertAdjacentElement('afterend', nav);

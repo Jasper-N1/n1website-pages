@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#376361">
+<meta name="theme-color" content="#008FCB">
 <title>Patient pricing — n1.care</title>
 <meta name="description" content="Patient plans for processing personal health records and creating reports to prepare for care.">
+<link rel="canonical" href="https://n1.care/pricing-patients">
 <meta property="og:title" content="Patient pricing — n1.care">
 <meta property="og:description" content="Patient plans for processing personal health records and creating reports to prepare for care.">
 <link rel="icon" href="assets/n1-logo.svg" type="image/svg+xml">
@@ -19,26 +19,26 @@
 .pricing-page { background: var(--paper); }
 .pricing-hero { padding: clamp(120px,9vw,142px) 0 clamp(38px,3vw,48px); background: var(--paper); text-align: center; }
 .pricing-hero-inner { max-width: 1040px; margin: 0 auto; }
-.pricing-hero .page-kicker { margin-bottom: 22px; color: #2f7773; }
-.pricing-hero h1 { margin: 0; color: #202523; font: 400 clamp(52px,5.35vw,76px)/.98 var(--serif); letter-spacing: -.045em; text-wrap: balance; }
-.pricing-hero-copy { max-width: 620px; margin: 20px auto 0; color: #747b77; font-size: clamp(16px,1.25vw,18px); line-height: 1.5; text-wrap: pretty; }
+.pricing-hero .page-kicker { margin-bottom: 22px; color: #00769D; }
+.pricing-hero h1 { margin: 0; color: #142830; font: 400 clamp(52px,5.35vw,76px)/.98 var(--serif); letter-spacing: -.045em; text-wrap: balance; }
+.pricing-hero-copy { max-width: 620px; margin: 20px auto 0; color: #677E88; font-size: clamp(16px,1.25vw,18px); line-height: 1.5; text-wrap: pretty; }
 .pricing-plan-panel { padding: 0 0 clamp(88px,9vw,132px); background: var(--paper); }
-.pricing-page .plan-grid { grid-template-columns: repeat(4,minmax(0,1fr)); gap: 0; overflow: hidden; border: 1px solid #d6ddda; border-radius: 16px; }
-.pricing-page .plan-card { min-height: 430px; padding: 26px; border: 0; border-left: 1px solid #d6ddda; border-radius: 0; background: #fff; }
+.pricing-page .plan-grid { grid-template-columns: repeat(4,minmax(0,1fr)); gap: 0; overflow: hidden; border: 1px solid #D4DEE3; border-radius: 16px; }
+.pricing-page .plan-card { min-height: 430px; padding: 26px; border: 0; border-left: 1px solid #D4DEE3; border-radius: 0; background: #fff; }
 .pricing-page .plan-card:first-child { border-left: 0; }
-.pricing-page .plan-card.is-featured { background: #f3f7f5; }
-.pricing-page .plan-card > span { color: #2f7773; }
-.pricing-page .plan-card h3 { margin-top: 32px; color: #2b302d; }
+.pricing-page .plan-card.is-featured { background: #F7FAFB; }
+.pricing-page .plan-card > span { color: #00769D; }
+.pricing-page .plan-card h3 { margin-top: 32px; color: #142830; }
 .pricing-page .plan-included { margin-top: 22px; padding-top: 20px; }
-.pricing-page .plan-included li::before { background: #7fa69d; }
-.pricing-page .plan-included b { color: #244b49; }
-.pricing-page .plan-card .text-link { min-height: 44px; display: flex; align-items: center; justify-content: center; margin-top: auto; padding: 0 14px; border-radius: 999px; color: #fff; background: #244b49; text-decoration: none; }
-.pricing-page .plan-card .text-link:hover { background: #173c39; }
-.pricing-page .plan-footnote { max-width: 760px; margin: 24px auto 0; color: #747b77; text-align: center; line-height: 1.6; }
-.pricing-page .pricing-estimate-callout { border-color: #d6ddda; background: #f7f9f8; }
+.pricing-page .plan-included li::before { background: #58ACCD; }
+.pricing-page .plan-included b { color: #004E68; }
+.pricing-page .plan-card .text-link { min-height: 44px; display: flex; align-items: center; justify-content: center; margin-top: auto; padding: 0 14px; border-radius: 999px; color: #fff; background: #004E68; text-decoration: none; }
+.pricing-page .plan-card .text-link:hover { background: #003044; }
+.pricing-page .plan-footnote { max-width: 760px; margin: 24px auto 0; color: #677E88; text-align: center; line-height: 1.6; }
+.pricing-page .pricing-estimate-callout { border-color: #D4DEE3; background: #f7f9f8; }
 @media (max-width:1120px) {
   .pricing-page .plan-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px; overflow: visible; border: 0; border-radius: 0; }
-  .pricing-page .plan-card,.pricing-page .plan-card:first-child { min-height: 430px; border: 1px solid #d6ddda; border-radius: 14px; }
+  .pricing-page .plan-card,.pricing-page .plan-card:first-child { min-height: 430px; border: 1px solid #D4DEE3; border-radius: 14px; }
 }
 @media (max-width:620px) {
   .pricing-hero { padding-top: 124px; }
@@ -48,6 +48,23 @@
 }
 </style>
 <script defer src="marketing-pages.js"></script>
+  <!-- Google tag (gtag.js) — config queued immediately, the script itself is
+       loaded after window load so it stays off the critical render path.
+       Ported from the retired Eleventy site to keep property G-YWZHTLLT3Z
+       measuring n1.care without a gap across the cutover. -->
+  <script>
+    window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+    gtag('js',new Date());gtag('config','G-YWZHTLLT3Z');
+    window.addEventListener('load',function(){
+      var s=document.createElement('script');s.async=true;
+      s.src='https://www.googletagmanager.com/gtag/js?id=G-YWZHTLLT3Z';
+      document.head.appendChild(s);
+    });
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&amp;display=swap">
+  <link rel="stylesheet" href="heartbeat-brand.css?v=20261104-2">
 </head>
 <body class="tonal marketing-page pricing-page">
 <a class="skip-link" href="#main">Skip to content</a>
@@ -56,7 +73,7 @@
 <header class="pricing-hero">
 <div class="shell pricing-hero-inner">
 <span class="page-kicker">For patients</span>
-<h1>Patient pricing.</h1>
+<h1>Patient pricing</h1>
 </div>
 </header>
 <section class="pricing-plan-panel" id="patient-plans" aria-label="Patient plans">
@@ -68,31 +85,31 @@
 <p class="plan-price">Free</p>
 <p>See your own records organized without entering a credit card.</p>
 <ul class="plan-included"><li><b>50 pages</b> in total</li><li><b>1 report</b> in total</li><li>Full source-linking and review</li></ul>
-<a class="text-link" href="https://app.n1.care/signup?role=patient">Start the trial →</a>
+<a class="text-link" href="https://app.n1.care/signup?role=patient" target="_blank" rel="noopener">Start the trial →</a>
 </article>
 <article class="plan-card">
 <span>Standard</span>
 <h3>Standard</h3>
 <p class="plan-price">$10<small>per month</small></p>
 <p>For keeping a personal record current.</p>
-<ul class="plan-included"><li><b>100 pages</b> processed each month</li><li><b>1 report</b> generated each month</li></ul>
-<a class="text-link" href="https://app.n1.care/signup?role=patient">Choose Standard →</a>
+<ul class="plan-included"><li><b>100 pages</b> processed each month</li><li><b>1 report</b> generated each month</li><li>Overage <b>$0.15</b> per page · <b>$12</b> per report</li></ul>
+<a class="text-link" href="https://app.n1.care/signup?role=patient" target="_blank" rel="noopener">Choose Standard →</a>
 </article>
 <article class="plan-card is-featured">
 <span>Plus</span>
 <h3>Plus</h3>
-<p class="plan-price">$29<small>per month</small></p>
+<p class="plan-price">$25<small>per month</small></p>
 <p>More room for a longer or more active history.</p>
-<ul class="plan-included"><li><b>500 pages</b> processed each month</li><li><b>5 reports</b> generated each month</li></ul>
-<a class="text-link" href="https://app.n1.care/signup?role=patient">Choose Plus →</a>
+<ul class="plan-included"><li><b>500 pages</b> processed each month</li><li><b>5 reports</b> generated each month</li><li>Overage <b>$0.10</b> per page · <b>$8</b> per report</li></ul>
+<a class="text-link" href="https://app.n1.care/signup?role=patient" target="_blank" rel="noopener">Choose Plus →</a>
 </article>
 <article class="plan-card">
 <span>Premium</span>
 <h3>Premium</h3>
-<p class="plan-price">$59<small>per month</small></p>
+<p class="plan-price">$49<small>per month</small></p>
 <p>For a large or complex personal record.</p>
-<ul class="plan-included"><li><b>1,000 pages</b> processed each month</li><li><b>10 reports</b> generated each month</li></ul>
-<a class="text-link" href="https://app.n1.care/signup?role=patient">Choose Premium →</a>
+<ul class="plan-included"><li><b>1,000 pages</b> processed each month</li><li><b>10 reports</b> generated each month</li><li>Overage <b>$0.08</b> per page · <b>$6</b> per report</li></ul>
+<a class="text-link" href="https://app.n1.care/signup?role=patient" target="_blank" rel="noopener">Choose Premium →</a>
 </article>
 </div>
 <p class="plan-footnote">Your plan is separate from your doctor’s. Work done in their account will not use your allowance.</p>
@@ -102,21 +119,21 @@
 <div class="shell pricing-faq-layout">
 <header class="pricing-faq-head">
 <span class="page-kicker">Pricing FAQ</span>
-<h2 id="patient-pricing-faq-title">Questions about patient pricing.</h2>
+<h2 id="patient-pricing-faq-title">Questions about patient pricing</h2>
 <a class="text-link" href="contact.html?intent=patient-pricing">Ask us another question →</a>
 </header>
 <div class="pricing-faq-list">
 <details>
-<summary><span>Can I try n1 before choosing a plan?</span><i aria-hidden="true"></i></summary>
+<summary><span>Can I try n1.care before choosing a plan?</span><i aria-hidden="true"></i></summary>
 <p>Yes. The free trial includes up to 50 processed pages and one generated report, with no payment card required. Use it to process records, inspect source-linked information, and create a report before selecting a paid plan.</p>
 </details>
 <details>
 <summary><span>What counts as a processed page?</span><i aria-hidden="true"></i></summary>
-<p>A page counts toward your allowance when you confirm that n1 should begin extracting information from it. Uploading a health file by itself does not consume pages. n1 shows the detected page count before processing begins, giving you an opportunity to review the expected usage or remove files you do not want processed.</p>
+<p>A page counts toward your allowance when you confirm that n1.care should begin extracting information from it. Uploading a health file by itself does not consume pages. n1.care shows the detected page count before processing begins, giving you an opportunity to review the expected usage or remove files you do not want processed.</p>
 </details>
 <details>
 <summary><span>What counts as a generated report?</span><i aria-hidden="true"></i></summary>
-<p>One report is counted when n1 generates a new full or focused report using the records and instructions you selected. Opening, reading, or sharing a report that has already been generated does not use another report. Creating a separate report for a different purpose, audience, or record selection counts as a new generation.</p>
+<p>One report is counted when n1.care generates a new full or focused report using the records and instructions you selected. Opening, reading, or sharing a report that has already been generated does not use another report. Creating a separate report for a different purpose, audience, or record selection counts as a new generation.</p>
 </details>
 <details>
 <summary><span>Do I pay for work my doctor does?</span><i aria-hidden="true"></i></summary>
@@ -128,16 +145,16 @@
 </details>
 <details>
 <summary><span>Which plan should I choose?</span><i aria-hidden="true"></i></summary>
-<p>Start by estimating how many pages of health records you expect n1 to process, including older records you may add during initial setup. Then consider how often you expect to create a new full or focused report, rather than simply reopen an existing one. A lighter plan may suit occasional updates, while a larger allowance may fit an extensive history or regular reporting. If you are unsure, <a href="contact.html?intent=patient-pricing">we can help estimate your likely usage</a>.</p>
+<p>Start by estimating how many pages of health records you expect n1.care to process, including older records you may add during initial setup. Then consider how often you expect to create a new full or focused report, rather than simply reopen an existing one. A lighter plan may suit occasional updates, while a larger allowance may fit an extensive history or regular reporting. If you are unsure, <a href="contact.html?intent=patient-pricing">we can help estimate your likely usage</a>.</p>
 </details>
 <details>
-<summary><span>Are the displayed prices and terms final?</span><i aria-hidden="true"></i></summary>
-<p>Yes. The prices and monthly page and report allowances shown on this page are the patient plan terms. Taxes are calculated where applicable. You can review the billing period, renewal terms, and plan-change or cancellation controls when selecting your subscription.</p>
+<summary><span>Are the displayed prices and terms current?</span><i aria-hidden="true"></i></summary>
+<p>Yes. The prices and monthly page and report allowances shown on this page are the current patient plan terms. Taxes are calculated where applicable. Price changes take effect at renewal with at least 30 days’ notice. You can review the billing period, renewal terms, and plan-change or cancellation controls when selecting your subscription.</p>
 </details>
 </div>
 </div>
 </section>
 </main>
-<footer class="marketing-footer"><div class="shell"><div class="marketing-footer-top"><div class="marketing-footer-brand"><a href="index.html" aria-label="n1.care home"><span class="logo" aria-hidden="true"></span></a><p>The whole health story. Every answer traced to its source.</p></div><div class="marketing-footer-links"><div><strong>Product</strong><a href="index.html#features">How it works</a><a href="reports.html">Reports</a><a href="pricing.html">Pricing</a></div><div><strong>Solutions</strong><a href="clinicians.html">For clinicians</a><a href="patients.html">For patients</a></div><div><strong>Company</strong><a href="about.html">About</a><a href="contact.html">Contact</a></div><div><strong>Trust &amp; legal</strong><a href="compliance.html">Security &amp; compliance</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="patents.html">Patents</a></div></div></div></div><div class="marketing-footer-bottom">© 2026 N1 Research, LLC</div></div></footer>
+<footer class="marketing-footer"><div class="shell"><div class="marketing-footer-top"><div class="marketing-footer-brand"><a href="index.html" aria-label="n1.care home"><span class="logo" aria-hidden="true"></span></a><p>The whole health story. Every answer traced to its source.</p></div><div class="marketing-footer-links"><div><strong>Product</strong><a href="index.html#features">How it works</a><a href="reports.html">Reports</a><a href="pricing.html">Pricing</a></div><div><strong>Solutions</strong><a href="clinicians.html">For clinicians</a><a href="patients.html">For patients</a></div><div><strong>Company</strong><a href="about.html">About</a><a href="contact.html">Contact</a></div><div><strong>Trust &amp; legal</strong><a href="compliance.html">Security &amp; compliance</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="patents.html">Patents</a></div></div></div><div class="marketing-footer-bottom">© 2026 N1 Research, LLC</div></div></footer>
 </body>
 </html>

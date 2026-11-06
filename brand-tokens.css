@@ -10,8 +10,8 @@
    reads as the same weight across families. The brand colors are steps
    in these ramps, not exceptions to them:
 
-       wine  #852f48 -> rose-800     berry #a54559 -> rose-600
-       peach #ef9b77 -> apricot-300  green #17674f -> moss-600
+       wine  #754232 -> rose-800     berry #9A5C45 -> rose-600
+       peach #ef9b77 -> apricot-300  green #005F7D -> moss-600
 
    Generated. Edit the generator, not this file.
    ========================================================================== */
@@ -20,79 +20,79 @@
 
   /* Rose — brand. wine = 800, berry = 600. */
   --n1-rose-50: #fdf2f4;
-  --n1-rose-100: #fde4e8;
-  --n1-rose-200: #f6cad2;
-  --n1-rose-300: #e7a6b2;
-  --n1-rose-400: #cb7487;
-  --n1-rose-500: #b7576d;
-  --n1-rose-600: #a5455d;
-  --n1-rose-700: #943850;
-  --n1-rose-800: #852f46;
-  --n1-rose-900: #662134;
-  --n1-rose-950: #451723;
+  --n1-rose-100: #EEF1F3;
+  --n1-rose-200: #DCE5EA;
+  --n1-rose-300: #DEBCAF;
+  --n1-rose-400: #C58C72;
+  --n1-rose-500: #B77257;
+  --n1-rose-600: #9A5C45;
+  --n1-rose-700: #9A5C45;
+  --n1-rose-800: #754232;
+  --n1-rose-900: #603727;
+  --n1-rose-950: #41261B;
 
   /* Apricot — warm accent. peach = 300, blush = 100. */
-  --n1-apricot-50: #fff3ee;
-  --n1-apricot-100: #ebdbd4;
-  --n1-apricot-200: #eec3b1;
-  --n1-apricot-300: #ef9b77;
+  --n1-apricot-50: #F7FAFB;
+  --n1-apricot-100: #DCE5EA;
+  --n1-apricot-200: #E1D0C7;
+  --n1-apricot-300: #C58C72;
   --n1-apricot-400: #de835b;
   --n1-apricot-500: #c96c43;
   --n1-apricot-600: #ac562e;
   --n1-apricot-700: #8b4422;
   --n1-apricot-800: #6b3319;
-  --n1-apricot-900: #4b2412;
+  --n1-apricot-900: #42261B;
 
   /* Sand — the single warm neutral ramp. paper = 25, cream = 50,
      line = 200, border = 500, muted = 600, ink = 950. */
-  --n1-sand-25: #fffaf4;
-  --n1-sand-50: #f7ece0;
-  --n1-sand-100: #e9ddd0;
-  --n1-sand-200: #d7cabc;
-  --n1-sand-300: #bcafa0;
-  --n1-sand-400: #9e8f7f;
-  --n1-sand-500: #897a69;
-  --n1-sand-600: #675a4b;
-  --n1-sand-700: #53483c;
-  --n1-sand-800: #3c342a;
-  --n1-sand-900: #2f271f;
-  --n1-sand-950: #28221b;
-  --n1-sand-975: #1d1711;
+  --n1-sand-25: #FFFFFF;
+  --n1-sand-50: #E8EDEF;
+  --n1-sand-100: #D4DEE3;
+  --n1-sand-200: #DED4B8;
+  --n1-sand-300: #BCB2A0;
+  --n1-sand-400: #7F959E;
+  --n1-sand-500: #68808A;
+  --n1-sand-600: #675D4B;
+  --n1-sand-700: #2E5261;
+  --n1-sand-800: #213A45;
+  --n1-sand-900: #142830;
+  --n1-sand-950: #142830;
+  --n1-sand-975: #142830;
 
   /* Moss — status: in range. */
-  --n1-moss-50: #eaf7f1;
-  --n1-moss-100: #d2ebe1;
-  --n1-moss-200: #afd9c7;
-  --n1-moss-400: #71b199;
-  --n1-moss-600: #16674f;
-  --n1-moss-700: #09523d;
-  --n1-moss-800: #093e2e;
+  --n1-moss-50: #EEF1F3;
+  --n1-moss-100: #D4DEE3;
+  --n1-moss-200: #8BDCF4;
+  --n1-moss-400: #42B3E0;
+  --n1-moss-600: #005F7D;
+  --n1-moss-700: #004E68;
+  --n1-moss-800: #003044;
 
   /* Amber — status: borderline. */
-  --n1-amber-50: #fdf3e6;
-  --n1-amber-100: #f8e5cb;
-  --n1-amber-200: #eccb9e;
-  --n1-amber-400: #c89852;
+  --n1-amber-50: #EFF2F4;
+  --n1-amber-100: #DCE5EA;
+  --n1-amber-200: #DED4B8;
+  --n1-amber-400: #BB9B5F;
   --n1-amber-600: #a97416;
   --n1-amber-700: #895c07;
-  --n1-amber-800: #4d2c00;
+  --n1-amber-800: #362B17;
 
   /* Clay — status: out of range / destructive. */
-  --n1-clay-50: #fff1ee;
-  --n1-clay-100: #fee0da;
-  --n1-clay-200: #f7c5ba;
+  --n1-clay-50: #F7FAFB;
+  --n1-clay-100: #E9EDEF;
+  --n1-clay-200: #E1D0C7;
   --n1-clay-400: #e08672;
   --n1-clay-600: #b3452f;
   --n1-clay-700: #8e3321;
   --n1-clay-800: #601d10;
 
   /* Azure — status: informational. */
-  --n1-azure-50: #ecf5fd;
-  --n1-azure-100: #d6e9f9;
-  --n1-azure-200: #b2d4f2;
-  --n1-azure-400: #6aa8dc;
-  --n1-azure-600: #266ea4;
-  --n1-azure-700: #175785;
+  --n1-azure-50: #F7FAFB;
+  --n1-azure-100: #D8F1FA;
+  --n1-azure-200: #A5E5FF;
+  --n1-azure-400: #47CBFF;
+  --n1-azure-600: #008FCB;
+  --n1-azure-700: #00769D;
   --n1-azure-800: #02375a;
 
   /* Spacing — 4px base. Anything off this scale is a bug. */
@@ -161,11 +161,11 @@
   /* Elevation — one warm shadow color, derived from sand-950. In dark mode
      depth comes from stepping the surface up the ramp, not from shadow. */
   --n1-elev-0: none;
-  --n1-elev-1: 0 1px 2px rgba(40, 34, 27, 0.05);
-  --n1-elev-2: 0 2px 6px -1px rgba(40, 34, 27, 0.07);
-  --n1-elev-3: 0 8px 20px -6px rgba(40, 34, 27, 0.1);
-  --n1-elev-4: 0 18px 40px -14px rgba(40, 34, 27, 0.14);
-  --n1-elev-5: 0 40px 70px -30px rgba(40, 34, 27, 0.22);
+  --n1-elev-1: 0 1px 2px rgba(0,48,68,0.05);
+  --n1-elev-2: 0 2px 6px -1px rgba(0,48,68,0.07);
+  --n1-elev-3: 0 8px 20px -6px rgba(0,48,68,0.1);
+  --n1-elev-4: 0 18px 40px -14px rgba(0,48,68,0.14);
+  --n1-elev-5: 0 40px 70px -30px rgba(0,48,68,0.22);
 
   /* Motion */
   --n1-duration-fast: 120ms;
