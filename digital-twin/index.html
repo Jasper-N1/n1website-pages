@@ -747,14 +747,19 @@ const RIG = {}; // Quaternius Regular Male + Universal Animation Library walk (b
   // ================= line versions of the live twin =================
   const LABELS = ["RHR 53", "LDL 3.61", "HRV 68 ms", "SpO₂ 98%", "Sleep 6 h 22", "VO₂ max 44", "Steps 9,412", "Glucose 5.1", "BP 121/76", "Vit D 98", "HbA1c 36", "hs-CRP 0.8", "eGFR 82", "Temp 36.6", "Weight 82.3"];
   // shared data model: fill levels per vertex, packets flying along rows, landings with value markers
+  // vertices near vertex k (rest pose), via a coarse 3D grid built once per mesh
+  function near(M, k, rad, cb) { const C = .09;
+    if (!M.bins) { const V = M.V0 = Float32Array.from(M.VT), mp = new Map(); for (let i = 0; i < M.NV; i++) { const key = ((Math.floor(V[i * 3] / C) + 512) * 1024 + (Math.floor(V[i * 3 + 1] / C) + 512)) * 1024 + (Math.floor(V[i * 3 + 2] / C) + 512); let a = mp.get(key); if (!a) mp.set(key, a = []); a.push(i); } M.bins = mp; }
+    const V = M.V0, x0 = V[k * 3], y0 = V[k * 3 + 1], z0 = V[k * 3 + 2], cx = Math.floor(x0 / C), cy = Math.floor(y0 / C), cz = Math.floor(z0 / C), r2 = rad * rad;
+    for (let i = -1; i <= 1; i++) for (let j = -1; j <= 1; j++) for (let l = -1; l <= 1; l++) { const a = M.bins.get(((cx + i + 512) * 1024 + (cy + j + 512)) * 1024 + (cz + l + 512)); if (!a) continue;
+      for (const m of a) { const dx = V[m * 3] - x0, dy = V[m * 3 + 1] - y0, dz = V[m * 3 + 2] - z0, d2 = dx * dx + dy * dy + dz * dz; if (d2 < r2) cb(m, 1 - Math.sqrt(d2) / rad); } } }
   function dataStep(S, F, t, dt, rh) { const { H } = S, rows = Math.ceil(H / rh) + 1;
     if (!S.pk) { S.pk = []; S.hits = []; S.count = 12480; S.next = 0; S.r = (() => { let s = 17; return () => (s = s * 16807 % 2147483647) / 2147483647; })(); }
     const R = S.r, M = F.M, NVv = M.NV, VTm = M.VT;
     if (!S.fill) { S.fill = new Float32Array(NVv); S.thr = new Float32Array(NVv); S.fresh = new Float32Array(NVv); S.va = new Float32Array(NVv); for (let i = 0; i < NVv; i++) S.thr[i] = 0.15 + R() * 0.8; }
     const fill = S.fill, fresh = S.fresh, va = S.va;
     let avg = 0; for (let i = 0; i < NVv; i += 7) avg += fill[i]; avg /= Math.ceil(NVv / 7);
-    const patch = (k, rad, f) => { const x0 = VTm[k * 3], y0 = VTm[k * 3 + 1], z0 = VTm[k * 3 + 2];
-      for (let i = 0; i < NVv; i++) { const dx = VTm[i * 3] - x0, dy = VTm[i * 3 + 1] - y0, dz = VTm[i * 3 + 2] - z0, d2 = dx * dx + dy * dy + dz * dz; if (d2 > rad * rad) continue; f(i, 1 - Math.sqrt(d2) / rad); } };
+    const patch = (k, rad, f) => near(M, k, rad, f);
     S.scanT = (S.scanT || 0) - dt; if (!S.done && S.scanT <= 0) { S.scanT = 0.25; S.miss = [];
       for (let i = 0; i < NVv; i += 3) { if (fill[i] - S.thr[i] > 0.02) continue; const px = F.P[i * 3], py = F.P[i * 3 + 1]; if (py < 0 || py > H || F.at(px, py) - F.P[i * 3 + 2] > 0.02) continue; S.miss.push(i); }
       if (S.miss.length < 12) { S.empty = (S.empty || 0) + 0.25; if (S.empty > 0.8) { S.done = true; for (let i = 0; i < NVv; i++) fill[i] = 1; } } else S.empty = 0; }
@@ -898,12 +903,14 @@ const RIG = {}; // Quaternius Regular Male + Universal Animation Library walk (b
       const xa = P[a * 3], xb = P[b * 3], xd = P[d * 3], pa = P[a * 3 + 1], pb = P[b * 3 + 1], pd = P[d * 3 + 1];
       if (Math.max(xa, xb, xd) < -4 || Math.min(xa, xb, xd) > W + 4 || Math.max(pa, pb, pd) < -4 || Math.min(pa, pb, pd) > H + 4) continue; // off screen
       const lo = Math.min(ya, yb, yd), hi = Math.max(ya, yb, yd); const l0 = Math.ceil(lo / gap), l1 = Math.floor(hi / gap); if (l1 < l0) continue;
-      for (let l = l0; l <= l1; l++) { const L = l * gap, pts = [];
-        const e = (u, v, yu, yv) => { if ((yu < L) !== (yv < L)) { const f = (L - yu) / (yv - yu); pts.push([P[u * 3] + (P[v * 3] - P[u * 3]) * f, P[u * 3 + 1] + (P[v * 3 + 1] - P[u * 3 + 1]) * f, P[u * 3 + 2] + (P[v * 3 + 2] - P[u * 3 + 2]) * f]); } };
-        e(a, b, ya, yb); e(b, d, yb, yd); e(d, a, yd, ya); if (pts.length < 2) continue;
-        const mx = (pts[0][0] + pts[1][0]) / 2, my = (pts[0][1] + pts[1][1]) / 2, mz = (pts[0][2] + pts[1][2]) / 2; if (F.at(mx, my) - mz > 0.012) continue; // hidden side
-        const have = (va[a] + va[b] + va[d]) / 3, fr = (vb[a] + vb[b] + vb[d]) / 3, lam = (N[a] + N[b] + N[d]) / 3;
-        const s = fr > 1.6 ? 6 : fr > 0.35 ? 5 : have <= 0 ? 1 : lam > 0.72 ? 2 : lam > 0.45 ? 3 : 4; paths[s].moveTo(pts[0][0], pts[0][1]); paths[s].lineTo(pts[1][0], pts[1][1]); } }
+      const za = P[a * 3 + 2], zb = P[b * 3 + 2], zd = P[d * 3 + 2], have = (va[a] + va[b] + va[d]) / 3, fr = (vb[a] + vb[b] + vb[d]) / 3, lam = (N[a] + N[b] + N[d]) / 3;
+      const st = fr > 1.6 ? 6 : fr > 0.35 ? 5 : have <= 0 ? 1 : lam > 0.72 ? 2 : lam > 0.45 ? 3 : 4, path = paths[st];
+      for (let l = l0; l <= l1; l++) { const L = l * gap; let n = 0, X0 = 0, Y0 = 0, Z0 = 0, X1 = 0, Y1 = 0, Z1 = 0, f;
+        if ((ya < L) !== (yb < L)) { f = (L - ya) / (yb - ya); X0 = xa + (xb - xa) * f; Y0 = pa + (pb - pa) * f; Z0 = za + (zb - za) * f; n = 1; }
+        if ((yb < L) !== (yd < L)) { f = (L - yb) / (yd - yb); const x = xb + (xd - xb) * f, y = pb + (pd - pb) * f, z = zb + (zd - zb) * f; if (n) { X1 = x; Y1 = y; Z1 = z; n = 2; } else { X0 = x; Y0 = y; Z0 = z; n = 1; } }
+        if (n < 2 && (yd < L) !== (ya < L)) { f = (L - yd) / (ya - yd); X1 = xd + (xa - xd) * f; Y1 = pd + (pa - pd) * f; Z1 = zd + (za - zd) * f; n++; }
+        if (n < 2) continue; if (F.at((X0 + X1) / 2, (Y0 + Y1) / 2) - (Z0 + Z1) / 2 > 0.012) continue; // hidden side
+        path.moveTo(X0, Y0); path.lineTo(X1, Y1); } }
     return paths; }
   function pinLive(S, F, t, dt) {
     const { g, W, H } = S, sp = Math.max(5, W / 215), rh = sp * 0.9; F.raster(4); softHalo(S, F);
@@ -1167,8 +1174,7 @@ const RIG = {}; // Quaternius Regular Male + Universal Animation Library walk (b
   const anchor = (S, F, rx) => { S.anc = S.anc || {}; const c = S.anc[rx]; if (c && c.t === S.fr) return c.p; let x = 0, y = 0, n = 0;
     if (ready(S)) for (const L of rIdx(rx)) { const G = S.reg.grp[L]; for (let q = 0; q < G.length; q += Math.max(1, (G.length / 30) | 0)) { const k = G[q]; if (!vis(F, k)) continue; x += F.P[k * 3]; y += F.P[k * 3 + 1]; n++; } }
     const p = n ? [x / n, y / n] : [F.cx, F.cy]; S.anc[rx] = { t: S.fr, p }; return p; };
-  const patch = (S, F, k, rad = .035) => { if (!S.fill) return; const V = F.M.VT, x0 = V[k * 3], y0 = V[k * 3 + 1], z0 = V[k * 3 + 2];
-    for (let m = 0; m < F.M.NV; m++) { const dx = V[m * 3] - x0, dy = V[m * 3 + 1] - y0, dz = V[m * 3 + 2] - z0, d = dx * dx + dy * dy + dz * dz; if (d < rad * rad) S.fill[m] = Math.min(1, S.fill[m] + (1 - Math.sqrt(d) / rad) * 1.3); } };
+  const patch = (S, F, k, rad = .035) => { if (!S.fill) return; near(F.M, k, rad, (m, w) => { S.fill[m] = Math.min(1, S.fill[m] + w * 1.3); }); };
   const full = S => { if (S.fill && !S.fullSet) { S.fill.fill(1); S.done = true; S.fullSet = 1; } };
   // a landing: fill while the twin is incomplete, then light the region the reading belongs to
   const land = (S, F, f) => { S.count = (S.count || 12480) + 1; patch(S, F, f.k, S.done ? .045 : .034); if (f.rx && S.done && performance.now() - (S.lit || 0) > 420) { S.lit = performance.now(); S.hot = { rx: f.rx, t: performance.now() }; } };
@@ -1295,7 +1301,7 @@ const RIG = {}; // Quaternius Regular Male + Universal Animation Library walk (b
       S.F = Face(S, BODY_M); S.F.place = () => { const F = S.F; F.size = Math.min(S.H * .86, S.W * .75); F.cx = S.W * (STEP_CX[S.si || 0] || .5); F.cy = S.H * .52; S.baseSize = F.size; }; st.addEventListener("pointermove", e => { const r = st.getBoundingClientRect(); S.mouse = { x: e.clientX - r.left, y: e.clientY - r.top, t: performance.now() / 1000 }; }); SS.push(S); io.observe(st); } }
   document.querySelectorAll('canvas[data-mini="build"]').forEach(cv => { const st = cv.parentElement;
     const S = { v: { frame: (S, F, t, dt) => { rings(S, F, t, dt); if (S.done) { S.hold2 = (S.hold2 || 0) + dt; if (S.hold2 > 2.4) { S.fill = null; S.done = false; S.hold2 = 0; S.miss = null; S.empty = 0; S.pk = []; } } }, mesh: () => BODY_M },
-      sec: st, cv, vis: false, ready: false, mouse: null, noText: true, minPx: 2.4, every: 2 };
+      sec: st, cv, vis: false, ready: false, mouse: null, noText: true, minPx: 3, every: 3 };
     S.F = Face(S, BODY_M); S.F.place = () => { S.F.size = S.H * .94; S.F.cx = S.W * .5; S.F.cy = S.H * .5; }; SS.push(S); io.observe(st); });
   addEventListener("resize", () => { SS.forEach(S => S.ready = false); SS.filter(S => S.vis).forEach(size); });
   const ML = document.createElement("canvas"); ML.id = "modelLayer"; ML.setAttribute("aria-hidden", "true"); document.body.appendChild(ML); const mg = ML.getContext("2d");
@@ -1307,8 +1313,9 @@ const RIG = {}; // Quaternius Regular Male + Universal Animation Library walk (b
   function modelLayer(t, dt) { const F = hero.F, W = innerWidth, H = innerHeight; if (!hero.ready) return;
     const r3 = document.getElementById("s3").getBoundingClientRect(), r2 = document.getElementById("s2").getBoundingClientRect(), inSteps = r3.top < H * .5;
     mg.clearRect(0, 0, W, H); if (r3.bottom <= 0) return;
-    F.update(t, dt); if (inSteps && stepsS && stepsS.ready) stepsPlace(stepsS, F, dt); else heroPlace(F, dt); F.raster(3);
-    const off = Math.min(0, r3.bottom - H), gap = 0.0029 * (H * 0.86) / Math.max(1, F.size), paths = modelPaths(F, gap), FZ = H * .22;
+    ML.acc = (ML.acc || 0) + dt; ML.fc = (ML.fc || 0) + 1;
+    if (!ML.paths || ML.fc % 2 === 0) { const d2 = ML.acc; ML.acc = 0; F.update(t, d2); if (inSteps && stepsS && stepsS.ready) stepsPlace(stepsS, F, d2); else heroPlace(F, d2); F.raster(4); ML.paths = modelPaths(F, 0.0029 * (H * 0.86) / Math.max(1, F.size)); }
+    const off = Math.min(0, r3.bottom - H), paths = ML.paths, FZ = H * .22;
     mg.save(); mg.translate(0, off); mg.lineCap = "round"; mg.lineJoin = "round";
     for (let k = 1; k < paths.length; k++) { const blue = k >= 5, ink = blue ? (k === 6 ? "#8FDCFF" : "rgba(0,150,214,1)") : `rgba(28,27,23,${SAL[k]})`, wh = `rgba(255,255,255,${blue ? 1 : Math.min(1, SAL[k] + .15)})`;
       const a0 = (r2.top - off) / H, a1 = (r2.top + FZ - off) / H, b0 = (r2.bottom - FZ - off) / H, b1 = (r2.bottom - off) / H, gr = mg.createLinearGradient(0, 0, 0, H), cl = v => Math.max(0, Math.min(1, v));
